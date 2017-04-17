@@ -1,0 +1,11 @@
+## Interface: 70000 
+## Title: Mount Journal Enhanced
+## Notes: Extends the default Mount Journal
+## Author: lqpbgjuc
+## Version: 1.3.5
+## SavedVariables: MountJournalEnhancedSettings
+
+CoreFramework\CoreFramework.xml
+Locals\Locals.xml
+Database.lua
+MountJournalEnhanced.lua
