@@ -33,6 +33,7 @@ L["Black Market"] = "Black Market";
 L["Promotion"] = "Promotion";
 
 -- Family
+L["Basilisk"] = "Basilisk";
 L["Bats"] = "Bats";
 L["Bears"] = "Bears";
 L["Birds"] = "Birds";

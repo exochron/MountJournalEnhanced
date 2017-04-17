@@ -72,6 +72,7 @@ MountJournalEnhancedSource = {
             [127154] = "Onyx Cloud Serpent", -- Quest Surprise Attack!, needs reputation to be able to accept the quest
             [138640] = "Bone-White Primal Raptor", -- A Mountain of Giant Dinosaur Bones
             [171850] = "Llothien Prowler", -- Volpin the Elusive
+            [230987] = "Arcanist's Manasaber", -- Fate of the Nightborne
 
             ------------------------------
             -- Alliance ------------------
@@ -105,7 +106,8 @@ MountJournalEnhancedSource = {
             [213115] = "Bloodfang Widow", -- The Mad Merchant
             [227956] = "Arcadian War Turtle", -- Xur'ios
             [214791] = "Brinedeep Bottom-Feeder", -- Conjurer Margoss
-            
+            [230844] = "Brawler's Burly Basilisk", -- brawler guild mount (season 2)
+
             ------------------------------
             -- Alliance ------------------
             ------------------------------
@@ -243,6 +245,8 @@ MountJournalEnhancedSource = {
             [88746] = "Vitreous Stone Drake", -- The Stonecore, Slabhide
             [96491] = "Armored Razzashi Raptor", -- Zul'Gurub, Bloodlord Mandokir
             [96499] = "Swift Zulian Panther", -- Zul'Gurub, High Priestess Kilnara
+            [231428] = "Smoldering Ember Wyrm", -- Return to Karazhan timerun
+            [229499] = "Midnight", -- Return to Karazhan
 
             -- Raid
             [25953] = "Blue Qiraji Battle Tank", -- Temple of Ahn'Qiraj
@@ -396,7 +400,10 @@ MountJournalEnhancedSource = {
 
             -- Vol'jin's Headhunters, Hand of the Prophet
             [190977] = "Deathtusk Felboar",
-            
+
+            -- Talon's Vengeance
+            [230401] = "Ivory Hawkstrider",
+
             ------------------------------
             -- Alliance ------------------
             ------------------------------
@@ -652,7 +659,7 @@ MountJournalEnhancedSource = {
             [225765] = "Leyfeather Hippogryph", -- Glory of the Legion Hero
             [215558] = "Ratstallion", -- Underbelly Tycoon
             [193007] = "Grove Defiler", -- Glory of the Legion Raider
-            
+
             ------------------------------
             -- Alliance ------------------
             ------------------------------
@@ -665,7 +672,7 @@ MountJournalEnhancedSource = {
             [61996] = "Blue Dragonhawk", -- Mountain o' Mounts, Alliance
             [142478] = "Armored Blue Dragonhawk", -- Mount Parade, Alliance
             [179245] = "Chauffeur", -- Heirloom Hoarder, Alliance
-            
+
             ------------------------------
             -- Horde ---------------------
             ------------------------------
@@ -790,6 +797,7 @@ MountJournalEnhancedSource = {
             [183889] = "Vicious War Mechanostrider",
             [223578] = "Vicious War Elekk",
             [223341] = "Vicious Gilnean Warhorse",
+            [193695] = "Prestigious War Steed", -- Free For All, More For Me, Alliance
 
             -- Achievement
             [60118] = "Black War Bear", -- For The Alliance!
@@ -822,7 +830,8 @@ MountJournalEnhancedSource = {
             [185052] = "Vicious War Kodo",
             [223354] = "Vicious War Trike",
             [223363] = "Vicious Warstrider",
-            
+            [204166] = "Prestigious War Wolf", -- Free For All, More For Me, Horde
+
             -- Achievement
             [60119] = "Black War Bear", -- For The Horde!
             [100333] = "Vicious War Wolf", -- Veteran of the Horde
@@ -911,7 +920,8 @@ MountJournalEnhancedSource = {
             -- Darkmoon Faire
             [103081] = "Darkmoon Dancing Bear",
             [102346] = "Swift Forest Strider",
-            
+            [228919] = "Darkwater Skate",
+
             -- Timewalking
             [142910] = "Ironbound Wraithcharger",
             [194464] = "Eclipse Dragonhawk",
@@ -1031,6 +1041,10 @@ MountJournalEnhancedFamily = {
         [134573] = "Swift Windsteed",
     },
 
+    ["Basilisk"] = {
+        [230844] = "Brawler's Burly Basilisk",
+    },
+
     ["Bats"] = {
         [139595] = "Armored Bloodwing",
     },
@@ -1101,6 +1115,7 @@ MountJournalEnhancedFamily = {
         [121820] = "Obsidian Nightwing",
         [98727] = "Winged Guardian",
         [180545] = "Mystischer Runensäbler",
+        [230987] = "Arcanist's Manasaber",
     },
 
     ["Clefthooves"] = {
@@ -1242,6 +1257,7 @@ MountJournalEnhancedFamily = {
         [227988] = "Fearless Gladiator's Storm Dragon", -- Gladiator: Legion Season 2
         [227989] = "Cruel Gladiator's Storm Dragon", -- Gladiator: Legion Season 3
         [227991] = "Ferocious Gladiator's Storm Dragon", -- Gladiator: Legion Season 4
+        [231428] = "Smoldering Ember Wyrm",
     },
 
     ["Elekks"] = {
@@ -1271,6 +1287,7 @@ MountJournalEnhancedFamily = {
     
     ["Fishes"] = {
         [214791] = "Brinedeep Bottom-Feeder",
+        [228919] = "Darkwater Skate",
     },
     
     ["Foxes"] = {
@@ -1332,6 +1349,7 @@ MountJournalEnhancedFamily = {
         [65639] = "Swift Red Hawkstrider",
         [63642] = "Silvermoon Hawkstrider",
         [223363] = "Vicious Warstrider",
+        [230401] = "Ivory Hawkstrider",
     },
 
     ["Hippogryphs"] = {
@@ -1402,6 +1420,7 @@ MountJournalEnhancedFamily = {
         [142910] = "Ironbound Wraithcharger",
         [223341] = "Vicious Gilnean Warhorse",
         [193695] = "Prestigious War Steed",
+        [229499] = "Midnight",
     },
 
     ["Hounds"] = {
@@ -2280,6 +2299,12 @@ MountJournalEnhancedExpansion = {
         [193007] = "Grove Defiler",
         [171850] = "Llothien Prowler",
         [213158] = "Predatory Bloodgazer",
+        [230987] = "Arcanist's Manasaber",
+        [231428] = "Smoldering Ember Wyrm",
+        [230844] = "Brawler's Burly Basilisk",
+        [229499] = "Midnight",
+        [228919] = "Darkwater Skate",
+        [230401] = "Ivory Hawkstrider",
     },
 };
 
@@ -2349,8 +2374,6 @@ MountJournalEnhancedIgnored = {
     
     -- Legion Unknown Source
     [213164] = "Brilliant Direbeak",
-    [204166] = "Prestigious War Wolf",
-    [193695] = "Prestigious War Steed",
     [222236] = "Prestigious Royal Courser",
     [222237] = "Prestigious Forest Courser",
     [222240] = "Prestigious Azure Courser",
