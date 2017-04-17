@@ -76,6 +76,11 @@ MountJournalEnhancedSource = {
             [127154] = "Onyx Cloud Serpent", -- Quest Surprise Attack!, needs reputation to be able to accept the quest
             [138640] = "Bone-White Primal Raptor", -- A Mountain of Giant Dinosaur Bones
             [171850] = "Llothien Prowler", -- Volpin the Elusive
+            [213164] = "Brilliant Direbeak", -- Direbeak Reunion
+            [213165] = "Viridian Sharptalon", -- Sharptalon Reunion
+            [213163] = "Snowfeather Hunter", -- Snowfeather Reunion
+            [213158] = "Predatory Bloodgazer", -- Bloodgazer Reunion
+            [215159] = "Long-Forgotten Hippogryph", -- Ephemeral Crystal x5
             [230987] = "Arcanist's Manasaber", -- Fate of the Nightborne
 
             ------------------------------
@@ -804,13 +809,13 @@ MountJournalEnhancedSource = {
             [183889] = "Vicious War Mechanostrider",
             [223578] = "Vicious War Elekk",
             [223341] = "Vicious Gilnean Warhorse",
-            [193695] = "Prestigious War Steed", -- Free For All, More For Me, Alliance
 
             -- Achievement
             [60118] = "Black War Bear", -- For The Alliance!
             [100332] = "Vicious War Steed", -- Veteran of the Alliance
             [146615] = "Vicious Warsaber", -- Grievous Combatant
             [171834] = "Vicious War Ram", -- Primal Combatant
+            [193695] = "Prestigious War Steed", -- Free For All, More For Me
 
             -- Stormpike Guard
             [23510] = "Stormpike Battle Charger",
@@ -837,13 +842,13 @@ MountJournalEnhancedSource = {
             [185052] = "Vicious War Kodo",
             [223354] = "Vicious War Trike",
             [223363] = "Vicious Warstrider",
-            [204166] = "Prestigious War Wolf", -- Free For All, More For Me, Horde
 
             -- Achievement
             [60119] = "Black War Bear", -- For The Horde!
             [100333] = "Vicious War Wolf", -- Veteran of the Horde
             [146622] = "Vicious Skeletal Warhorse", -- Grievous Combatant
             [171835] = "Vicious War Raptor", -- Primal Combatant
+            [204166] = "Prestigious War Wolf", -- Free For All, More For Me
 
             -- Frostwolf Clan
             [23509] = "Frostwolf Howler",
@@ -970,6 +975,7 @@ MountJournalEnhancedSource = {
             [142910] = "Ironbound Wraithcharger",
             [194464] = "Eclipse Dragonhawk",
             [201098] = "Infinite Timereaver",
+			[127165] = "Yu'lei, Daughter of Jade",
         },
     },
 
@@ -1163,7 +1169,7 @@ MountJournalEnhancedFamily = {
         [121839] = "Sunstone Panther",
         [121820] = "Obsidian Nightwing",
         [98727] = "Winged Guardian",
-        [180545] = "Mystischer Runensäbler",
+        [180545] = "Mystic Runesaber",
         [230987] = "Arcanist's Manasaber",
         [232405] = "Primal Flamesaber",
         [229385] = "Ban-Lu, Grandmaster's Companion",
@@ -1697,6 +1703,7 @@ MountJournalEnhancedFamily = {
         [127169] = "Heavenly Azure Cloud Serpent",
         [232519] = "Abyss Worm",
         [243025] = "Riddler's Mind-Worm",
+        [127165] = "Yu'lei, Daughter of Jade",
     },
 
     ["Silithids"] = {
@@ -2371,6 +2378,7 @@ MountJournalEnhancedExpansion = {
         [193007] = "Grove Defiler",
         [171850] = "Llothien Prowler",
         [213158] = "Predatory Bloodgazer",
+        [127165] = "Yu'lei, Daughter of Jade",
         [230987] = "Arcanist's Manasaber",
         [231428] = "Smoldering Ember Wyrm",
         [232405] = "Primal Flamesaber",
@@ -2453,7 +2461,6 @@ MountJournalEnhancedIgnored = {
     [66124] = "Magic Rooster",
     [66907] = "Argent Warhorse",
     [123182] = "White Riding Yak",
-    [127165] = "Heavenly Jade Cloud Serpent",
     [127209] = "Black Riding Yak",
     [127213] = "Brown Riding Yak",
     [148970] = "Felsteed",
@@ -2470,14 +2477,8 @@ MountJournalEnhancedIgnored = {
     [215545] = "Fel Bat (Test)",
     
     -- Legion Unknown Source
-    [213164] = "Brilliant Direbeak",
     [222236] = "Prestigious Royal Courser",
     [222237] = "Prestigious Forest Courser",
     [222240] = "Prestigious Azure Courser",
     [222241] = "Prestigious Midnight Courser",
-    [215159] = "Long-Forgotten Hippogryph",
-    [213165] = "Viridian Sharptalon",
-    [213163] = "Snowfeather Hunter",
-    [213158] = "Predatory Bloodgazer",
-    [239363] = "Swift Spectral Hippogryph",
 };
