@@ -53,8 +53,12 @@ MountJournalEnhancedSource = {
             
             -- Legion
             [223018] = "Fathom Dweller", -- World Boss, Kosumoth the Hungering
-            [213134] = "Felblaze Infernal", -- The Nighthold, Gul'dan
-            [171827] = "Hellfire Infernal", -- The Nighthold, Gul'dan (Mythic)
+            [243025] = "Riddler's Mind-Worm",
+            [242881] = "Cloudwing Hippogryph", -- Farondis cache (paragon)
+            [242874] = "Highmountain Elderhorn", -- Highmountain Supplies (paragon)
+            [233364] = "Leywoven Flying Carpet", -- Nightfallen Cache (paragon)
+            [242882] = "Valarjar Stormwing", -- Valarjar Strongbox (paragon)
+            [242882] = "Wild Dreamrunner", -- Dreamweaver Cache (paragon)
         },
     },
 
@@ -274,6 +278,9 @@ MountJournalEnhancedSource = {
             [148417] = "Kor'kron Juggernaut", -- Siege of Orgrimmar, Garrosh Hellscream
             [171621] = "Ironhoof Destroyer", -- Blackrock Foundry, Blackhand
             [182912] = "Felsteel Annihilator", -- Hellfire Citadel, Archimonde
+            [213134] = "Felblaze Infernal", -- The Nighthold, Gul'dan
+            [171827] = "Hellfire Infernal", -- The Nighthold, Gul'dan (Mythic)
+            [232519] = "Abyss Worm", -- Tomb of Sargeras, Mistress Sassz'ine
 
             ------------------------------
             -- Alliance ------------------
@@ -402,7 +409,7 @@ MountJournalEnhancedSource = {
             [190977] = "Deathtusk Felboar",
 
             -- Talon's Vengeance
-            [230401] = "Ivory Hawkstrider",
+            [230401] = "White Hawkstrider",
 
             ------------------------------
             -- Alliance ------------------
@@ -783,7 +790,7 @@ MountJournalEnhancedSource = {
             -- Prestige Reward
             [222202] = "Prestigious Bronze Courser",
             [222238] = "Prestigious Ivory Courser",
-            
+
             ------------------------------
             -- Alliance ------------------
             ------------------------------
@@ -862,17 +869,54 @@ MountJournalEnhancedSource = {
             --Warlock
             [5784] = "Felsteed",
             [23161] = "Dreadsteed",
+            [232412] = "Netherlord's Chaotic Wrathsteed",
+            [238452] = "Netherlord's Brimstone Wrathsteed",
+            [238454] = "Netherlord's Accursed Wrathsteed",
 
             -- Death Knight
             [48778] = "Acherus Deathcharger",
             [54729] = "Winged Steed of the Ebon Blade",
+            [229387] = "Deathlord's Vilebrood Vanquisher",
 
             -- Paladin
             [66906] = "Argent Charger",
 
             -- Demon Hunter
             [200175] = "Felsaber",
-            
+            [229417] = "Slayer's Felbroken Shrieker",
+
+            -- Mage
+            [229376] = "Archmage's Prismatic Disc",
+
+            -- Paladin
+            [231435] = "Highlord's Golden Charger",
+            [231587] = "Highlord's Vengeful Charger",
+            [231588] = "Highlord's Vigilant Charger",
+            [231589] = "Highlord's Valorous Charger",
+
+            -- Priest
+            [229377] = "High Priest's Lightsworn Seeker",
+
+            -- Monk
+            [229385] = "Ban-Lu, Grandmaster's Companion",
+
+            --Hunter
+            [229438] = "Huntmaster's Fierce Wolfhawk",
+            [229439] = "Huntmaster's Dire Wolfhawk",
+            [229386] = "Huntmaster's Loyal Wolfhawk",
+
+            -- Warrior
+            [229388] = "Battlelord's Bloodthirsty War Wyrm",
+
+            -- Shaman
+            [231442] = "Farseer's Raging Tempest",
+
+            -- Rogue
+            [231434] = "Shadowblade's Murderous Omen",
+            [231523] = "Shadowblade's Lethal Omen",
+            [231524] = "Shadowblade's Baneful Omen",
+            [231525] = "Shadowblade's Crimson Omen",
+
             ------------------------------
             -- Alliance ------------------
             ------------------------------
@@ -1008,6 +1052,7 @@ MountJournalEnhancedSource = {
             [58983] = "Big Blizzard Bear", -- BlizzCon
             [107203] = "Tyrael's Charger", -- no longer available, Diablo III Annual Pass
             [142073] = "Hearthsteed", -- Hearthstone
+            [232405] = "Primal Flamesaber", -- Heroes of the Storm
 
             -- Collector's Edition
             [124659] = "Imperial Quilen", -- Mists of Pandaria Collector's Edition
@@ -1035,6 +1080,10 @@ MountJournalEnhancedFamily = {
         [153489] = "Iron Skyreaver",
         [124659] = "Imperial Quilen",
         [191633] = "Soaring Skyterror",
+        [229377] = "High Priest's Lightsworn Seeker",
+        [229438] = "Huntmaster's Fierce Wolfhawk",
+        [229439] = "Huntmaster's Dire Wolfhawk",
+        [229386] = "Huntmaster's Loyal Wolfhawk",
     },
 
     ["Kirin"] = {
@@ -1116,6 +1165,8 @@ MountJournalEnhancedFamily = {
         [98727] = "Winged Guardian",
         [180545] = "Mystischer Runensäbler",
         [230987] = "Arcanist's Manasaber",
+        [232405] = "Primal Flamesaber",
+        [229385] = "Ban-Lu, Grandmaster's Companion",
     },
 
     ["Clefthooves"] = {
@@ -1125,28 +1176,6 @@ MountJournalEnhancedFamily = {
         --[171618] = "Ancient Leatherhide",
         [171619] = "Tundra Icehoof",
         [171620] = "Bloodhoof Bull",
-    },
-
-    ["Cloud Serpents"] = {
-        [127154] = "Onyx Cloud Serpent",
-        [123992] = "Azure Cloud Serpent",
-        [113199] = "Jade Cloud Serpent",
-        [127156] = "Crimson Cloud Serpent",
-        [123993] = "Golden Cloud Serpent",
-        [148476] = "Thundering Onyx Cloud Serpent",
-        [139442] = "Thundering Cobalt Cloud Serpent",
-        [124408] = "Thundering Jade Cloud Serpent",
-        [132036] = "Thundering Ruby Cloud Serpent",
-        [129918] = "Thundering August Cloud Serpent",
-        [148618] = "Tyrannical Gladiator's Cloud Serpent",
-        [148620] = "Prideful Gladiator's Cloud Serpent",
-        [139407] = "Malevolent Gladiator's Cloud Serpent",
-        [148619] = "Grievous Gladiator's Cloud Serpent",
-        [127158] = "Heavenly Onyx Cloud Serpent",
-        [127161] = "Heavenly Crimson Cloud Serpent",
-        [127164] = "Heavenly Golden Cloud Serpent",
-        [127170] = "Astral Cloud Serpent",
-        [127169] = "Heavenly Azure Cloud Serpent",
     },
 
     ["Coursers"] = {
@@ -1173,6 +1202,8 @@ MountJournalEnhancedFamily = {
         [133023] = "Jade Pandaren Kite",
         [118737] = "Pandaren Kite (Horde)",
         [130092] = "Red Flying Cloud",
+        [229376] = "Archmage's Prismatic Disc",
+        [233364] = "Leywoven Flying Carpet",
     },
 
     ["Direhorns"] = {
@@ -1258,6 +1289,9 @@ MountJournalEnhancedFamily = {
         [227989] = "Cruel Gladiator's Storm Dragon", -- Gladiator: Legion Season 3
         [227991] = "Ferocious Gladiator's Storm Dragon", -- Gladiator: Legion Season 4
         [231428] = "Smoldering Ember Wyrm",
+        [229387] = "Deathlord's Vilebrood Vanquisher",
+        [229388] = "Battlelord's Bloodthirsty War Wyrm",
+        [242882] = "Valarjar Stormwing",
     },
 
     ["Elekks"] = {
@@ -1349,7 +1383,7 @@ MountJournalEnhancedFamily = {
         [65639] = "Swift Red Hawkstrider",
         [63642] = "Silvermoon Hawkstrider",
         [223363] = "Vicious Warstrider",
-        [230401] = "Ivory Hawkstrider",
+        [230401] = "White Hawkstrider",
     },
 
     ["Hippogryphs"] = {
@@ -1362,6 +1396,7 @@ MountJournalEnhancedFamily = {
         [149801] = "Emerald Hippogryph",
         [225765] = "Leyfeather Hippogryph",
         [215159] = "Long-Forgotten Hippogryph",
+        [239363] = "Swift Spectral Hippogryph",
     },
 
     ["Horses"] = {
@@ -1421,6 +1456,14 @@ MountJournalEnhancedFamily = {
         [223341] = "Vicious Gilnean Warhorse",
         [193695] = "Prestigious War Steed",
         [229499] = "Midnight",
+        [231435] = "Highlord's Golden Charger",
+        [231587] = "Highlord's Vengeful Charger",
+        [231588] = "Highlord's Vigilant Charger",
+        [231589] = "Highlord's Valorous Charger",
+        [232412] = "Netherlord's Chaotic Wrathsteed",
+        [238452] = "Netherlord's Brimstone Wrathsteed",
+        [238454] = "Netherlord's Accursed Wrathsteed",
+        [242882] = "Wild Dreamrunner",
     },
 
     ["Hounds"] = {
@@ -1516,6 +1559,7 @@ MountJournalEnhancedFamily = {
         [196681] = "Spirit of Eche'ro",
         [193007] = "Grove Defiler",
         [213339] = "Great Northern Elderhorn",
+        [242874] = "Highmountain Elderhorn",
     },
     
     ["Mushan"] = {
@@ -1603,6 +1647,10 @@ MountJournalEnhancedFamily = {
         [213163] = "Snowfeather Hunter",
         [213158] = "Predatory Bloodgazer",
         [213164] = "Brilliant Direbeak",
+        [231434] = "Shadowblade's Murderous Omen",
+        [231523] = "Shadowblade's Lethal Omen",
+        [231524] = "Shadowblade's Baneful Omen",
+        [231525] = "Shadowblade's Crimson Omen",
     },
 
     ["Rhinos"] = {
@@ -1625,6 +1673,30 @@ MountJournalEnhancedFamily = {
     ["Seahorses"] = {
         [98718] = "Subdued Seahorse",
         [75207] = "Abyssal Seahorse",
+    },
+
+    ["Serpents"] = {
+        [127154] = "Onyx Cloud Serpent",
+        [123992] = "Azure Cloud Serpent",
+        [113199] = "Jade Cloud Serpent",
+        [127156] = "Crimson Cloud Serpent",
+        [123993] = "Golden Cloud Serpent",
+        [148476] = "Thundering Onyx Cloud Serpent",
+        [139442] = "Thundering Cobalt Cloud Serpent",
+        [124408] = "Thundering Jade Cloud Serpent",
+        [132036] = "Thundering Ruby Cloud Serpent",
+        [129918] = "Thundering August Cloud Serpent",
+        [148618] = "Tyrannical Gladiator's Cloud Serpent",
+        [148620] = "Prideful Gladiator's Cloud Serpent",
+        [139407] = "Malevolent Gladiator's Cloud Serpent",
+        [148619] = "Grievous Gladiator's Cloud Serpent",
+        [127158] = "Heavenly Onyx Cloud Serpent",
+        [127161] = "Heavenly Crimson Cloud Serpent",
+        [127164] = "Heavenly Golden Cloud Serpent",
+        [127170] = "Astral Cloud Serpent",
+        [127169] = "Heavenly Azure Cloud Serpent",
+        [232519] = "Abyss Worm",
+        [243025] = "Riddler's Mind-Worm",
     },
 
     ["Silithids"] = {
@@ -2301,10 +2373,35 @@ MountJournalEnhancedExpansion = {
         [213158] = "Predatory Bloodgazer",
         [230987] = "Arcanist's Manasaber",
         [231428] = "Smoldering Ember Wyrm",
+        [232405] = "Primal Flamesaber",
         [230844] = "Brawler's Burly Basilisk",
         [229499] = "Midnight",
         [228919] = "Darkwater Skate",
-        [230401] = "Ivory Hawkstrider",
+        [230401] = "White Hawkstrider",
+        [229376] = "Archmage's Prismatic Disc",
+        [229377] = "High Priest's Lightsworn Seeker",
+        [229385] = "Ban-Lu, Grandmaster's Companion",
+        [229438] = "Huntmaster's Fierce Wolfhawk",
+        [229439] = "Huntmaster's Dire Wolfhawk",
+        [229386] = "Huntmaster's Loyal Wolfhawk",
+        [229387] = "Deathlord's Vilebrood Vanquisher",
+        [229388] = "Battlelord's Bloodthirsty War Wyrm",
+        [232519] = "Abyss Worm",
+        [231442] = "Farseer's Raging Tempest",
+        [231435] = "Highlord's Golden Charger",
+        [231587] = "Highlord's Vengeful Charger",
+        [231588] = "Highlord's Vigilant Charger",
+        [231589] = "Highlord's Valorous Charger",
+        [242874] = "Highmountain Elderhorn",
+        [233364] = "Leywoven Flying Carpet",
+        [243025] = "Riddler's Mind-Worm",
+        [231434] = "Shadowblade's Murderous Omen",
+        [231523] = "Shadowblade's Lethal Omen",
+        [231524] = "Shadowblade's Baneful Omen",
+        [231525] = "Shadowblade's Crimson Omen",
+        [239363] = "Swift Spectral Hippogryph",
+        [242882] = "Valarjar Stormwing",
+        [242882] = "Wild Dreamrunner",
     },
 };
 
@@ -2382,4 +2479,5 @@ MountJournalEnhancedIgnored = {
     [213165] = "Viridian Sharptalon",
     [213163] = "Snowfeather Hunter",
     [213158] = "Predatory Bloodgazer",
+    [239363] = "Swift Spectral Hippogryph",
 };
