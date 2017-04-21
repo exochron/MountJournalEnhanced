@@ -7,5 +7,6 @@
 
 CoreFramework\CoreFramework.xml
 Locals\Locals.xml
+LibIconPath\Core.lua
 Database.lua
 MountJournalEnhanced.lua

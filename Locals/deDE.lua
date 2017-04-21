@@ -33,7 +33,7 @@ L["Black Market"] = "Schwarzmarkt";
 L["Promotion"] = "Promotion";
 
 -- Family
-L["Basilisk"] = "Basilisken";
+L["Basilisks"] = "Basilisken";
 L["Bats"] = "Fledermäuse";
 L["Bears"] = "Bären";
 L["Birds"] = "Vögel";
@@ -49,6 +49,7 @@ L["Direhorns"] = "Terrorhörner";
 L["Dragonhawks"] = "Drachenfalken";
 L["Drakes"] = "Drachen";
 L["Elekks"] = "Elekks";
+L["Elementals"] = "Elementare";
 L["Felstalker"] = "Teufelspirscher";
 L["Fishes"] = "Fische";
 L["Foxes"] = "Füchse";
@@ -79,6 +80,7 @@ L["Ravagers"] = "Felshetzer";
 L["Ravens"] = "Raben";
 L["Rhinos"] = "Rhinozerose";
 L["Riverbeasts"] = "Flussbestien";
+L["Sea Dwellers"] = "Meeresbewohner";
 L["Seahorses"] = "Seepferde";
 L["Scorpions"] = "Skorpione";
 L["Serpents"] = "Schlangen";

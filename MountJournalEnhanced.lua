@@ -4,6 +4,7 @@ local COLLECTION_ACHIEVEMENT_CATEGORY = 15246;
 local MOUNT_ACHIEVEMENT_CATEGORY = 15248;
 local MOUNT_COUNT_STATISTIC = 339;
 local EXPANSIONS = { "Classic", "The Burning Crusade", "Wrath of the Lich King", "Cataclysm", "Mists of Pandaria", "Warlords of Draenor", "Legion" };
+local SOURCE_INDEX_ORDER = { "Drop", "Quest", "Vendor", "Profession", "Instance", "Reputation", "Achievement", "Garrison", "PVP", "Class", "World Event", "Black Market", "Promotion"}
 
 local L = CoreFramework:GetModule("Localization", "1.1"):GetLocalization(ADDON_NAME);
 
@@ -17,9 +18,6 @@ local initialState = {
             onlyFavorites = false,
             onlyUsable = false,
             source = { },
-            additionalSource = {
-                pvp = true,
-            },
             faction = {
                 alliance = true,
                 horde = true,
@@ -40,8 +38,8 @@ local initialState = {
         },
     },
 };
-for _, category in pairs(MountJournalEnhancedSource) do
-    initialState.settings.filter.source[category.Name] = true;
+for categoryName, _ in pairs(MountJournalEnhancedSource) do
+    initialState.settings.filter.source[categoryName] = true;
 end
 for categoryName, _ in pairs(MountJournalEnhancedFamily) do
     initialState.settings.filter.family[categoryName] = true;
@@ -79,15 +77,12 @@ function private:LoadUI()
     hooksecurefunc(MountJournal.mountOptionsMenu, "initialize", function(sender, level) UIDropDownMenu_InitializeHelper(sender); self:MountOptionsMenu_Init(sender, level); end);
     hooksecurefunc(MountJournalFilterDropDown, "initialize", function(sender, level) UIDropDownMenu_InitializeHelper(sender); self:MountJournalFilterDropDown_Initialize(sender, level); end);
 
-    self:Hook(nil, "MountListItem_OnClick", function(sender, button) self:MountListItem_OnClick(sender, button); end);
-    self:Hook(nil, "MountListDragButton_OnClick", function(sender, button) self:MountListDragButton_OnClick(sender, button); end);
-    
     local buttons = MountJournal.ListScrollFrame.buttons;
     for buttonIndex = 1, #buttons do
         local button = buttons[buttonIndex];
-        button:SetScript("OnClick", function(sender, mouseButton) self:MountListItem_OnClick(sender, mouseButton); end);
+        button:HookScript("OnClick", function(sender, mouseButton) self:MountListItem_OnClick(sender, sender, mouseButton) end);
         button:SetScript("OnDoubleClick", function(sender, mouseButton) self:MountListItem_OnDoubleClick(sender, mouseButton); end);
-        button.DragButton:SetScript("OnClick", function(sender, mouseButton) self:MountListDragButton_OnClick(sender, mouseButton); end);
+        button.DragButton:HookScript("OnClick", function(sender, mouseButton) self:MountListItem_OnClick(sender:GetParent(), sender, mouseButton); end);
         button.DragButton.IsHidden = button.DragButton:CreateTexture(nil, "OVERLAY");
         button.DragButton.IsHidden:SetTexture("Interface\\BUTTONS\\UI-GroupLoot-Pass-Up");
         button.DragButton.IsHidden:SetSize(36, 36);
@@ -215,40 +210,15 @@ function private:LoadDebugMode()
         end
         
         for id, name in pairs(mounts) do
-            if (not MountJournalEnhancedIgnored[id]) then
-                local contained = self:ContainsItem(MountJournalEnhancedSource, id);
-                if (not contained) then
+            if not MountJournalEnhancedIgnored[id] then
+                if (not self:ContainsItem(MountJournalEnhancedSource, id)) then
                     print("New mount: " .. name .. " (" .. id .. ")");
-                end
-            end
-        end
-
-        for id, name in pairs(mounts) do
-            if (not MountJournalEnhancedIgnored[id]) then
-                local contained = false;
-                for _, familyMounts in pairs(MountJournalEnhancedFamily) do
-                    if (familyMounts[id]) then
-                        contained = true;
-                        break;
+                else
+                    if (not self:ContainsItem(MountJournalEnhancedFamily, id)) then
+                        print("No family info for mount: " .. name .. " (" .. id .. ")");
+                    elseif (not self:ContainsItem(MountJournalEnhancedExpansion, id)) then
+                        print("No expansion info for mount: " .. name .. " (" .. id .. ")");
                     end
-                end
-                if (not contained) then
-                    print("No family info for mount: " .. name .. " (" .. id .. ")");
-                end
-            end
-        end
-
-        for id, name in pairs(mounts) do
-            if (not MountJournalEnhancedIgnored[id]) then
-                local contained = false;
-                for _, expansionMounts in pairs(MountJournalEnhancedExpansion) do
-                    if (expansionMounts[id]) then
-                        contained = true;
-                        break;
-                    end
-                end
-                if (not contained) then
-                    print("No expansion info for mount: " .. name .. " (" .. id .. ")");
                 end
             end
         end
@@ -274,8 +244,8 @@ function private:LoadDebugMode()
         end
 
         local names = { };
-        for _, category in pairs(MountJournalEnhancedSource) do
-            for id, name in pairs(category.Data) do
+        for _, data in pairs(MountJournalEnhancedSource) do
+            for id, name in pairs(data) do
                 if (names[id] and names[id] ~= name) then
                     print("Invalide mount info for mount: " .. name .. " (" .. id .. ")");
                 end
@@ -286,22 +256,13 @@ function private:LoadDebugMode()
 end
 
 function private:ContainsItem(data, spellId)
-    local contained = false;
-
-    for _, category in pairs(data) do
-        for id, name in pairs(category.Data) do
-            if (spellId == id) then
-                contained = true;
-                break;
-            end
-        end
-
-        if (contained) then
-            break;
+    for _, categoryData in pairs(data) do
+        if categoryData[spellId] then
+            return true
         end
     end
 
-    return contained;
+    return false
 end
 
 --region Hooks
@@ -481,8 +442,8 @@ function private:MountJournalFilterDropDown_Initialize(sender, level)
             self.settings.filter.onlyUsable = false;
             self.settings.filter.hidden = false;
         
-            for _, category in pairs(MountJournalEnhancedSource) do
-                self.settings.filter.source[category.Name] = true;
+            for categoryName, _ in pairs(MountJournalEnhancedSource) do
+                self.settings.filter.source[categoryName] = true;
             end
             
             for k, v in pairs(self.settings.filter.mountType) do
@@ -513,8 +474,8 @@ function private:MountJournalFilterDropDown_Initialize(sender, level)
 
             info.text = CHECK_ALL
             info.func = function()
-                for _, category in pairs(MountJournalEnhancedSource) do
-                    self.settings.filter.source[category.Name] = true;
+                for categoryName, _ in pairs(MountJournalEnhancedSource) do
+                    self.settings.filter.source[categoryName] = true;
                 end
 
                 UIDropDownMenu_Refresh(MountJournalFilterDropDown, 1, 2);
@@ -525,8 +486,8 @@ function private:MountJournalFilterDropDown_Initialize(sender, level)
 
             info.text = UNCHECK_ALL
             info.func = function()
-                for _, category in pairs(MountJournalEnhancedSource) do
-                    self.settings.filter.source[category.Name] = false;
+                for categoryName, _ in pairs(MountJournalEnhancedSource) do
+                    self.settings.filter.source[categoryName] = false;
                 end
 
                 UIDropDownMenu_Refresh(MountJournalFilterDropDown, 1, 2);
@@ -535,14 +496,14 @@ function private:MountJournalFilterDropDown_Initialize(sender, level)
             end
             UIDropDownMenu_AddButton(info, level)
 
-            for _, category in pairs(MountJournalEnhancedSource) do
-                info.text = L[category.Name] or category.Name;
+            for _,categoryName in pairs(SOURCE_INDEX_ORDER) do
+                info.text = L[categoryName] or categoryName;
                 info.func = function(_, _, _, value)
-                    self.settings.filter.source[category.Name] = value;
+                    self.settings.filter.source[categoryName] = value;
                     self:UpdateMountInfoCache();
                     MountJournal_UpdateMountList();
                 end
-                info.checked = function() return self.settings.filter.source[category.Name] ~= false; end;
+                info.checked = function() return self.settings.filter.source[categoryName] ~= false; end;
                 info.isNotRadio = true;
                 info.notCheckable = false;
                 info.hasArrow = false;
@@ -928,250 +889,176 @@ function private:MountJournal_UpdateMountList()
         else
             buttons[i].DragButton.IsHidden:SetShown(false);
         end
+        buttons[i].DragButton:SetEnabled(true)
     end
 end
 
-function private:FilterMountsByName(name)
-    local searchString = self:GetSearchText();
-    if (not searchString or string.len(searchString) == 0) then
-        return true;
-    end
-    
-    return string.find(string.lower(name), searchString, 1, true);
+--region filter functions
+
+function private:FilterMountsByName(name, searchString)
+    return string.find(string.lower(name), searchString, 1, true)
 end
 
-function private:GetSearchText()
-    return MountJournal.searchBox:GetText();
+function private:FilterHiddenMounts(spellId)
+    return self.settings.filter.hidden or not self.settings.hiddenMounts[spellId]
 end
 
-function private:FilterHiddenMounts(name, spellId)
-    local searchString = self:GetSearchText();
-    if (searchString and string.len(searchString) > 0) then
-        return self:FilterMountsByName(name);
-    end
-
-    if (self.settings.filter.hidden) then
-        return true;
-    end
-
-    return not self.settings.hiddenMounts[spellId];
+function private:FilterFavoriteMounts(isFavorite)
+    return isFavorite or not self.settings.filter.onlyFavorites or not self.settings.filter.collected
 end
 
-function private:FilterFavoriteMounts(name, isFavorite)
-    local searchString = self:GetSearchText();
-    if (searchString and string.len(searchString) > 0) then
-        return self:FilterMountsByName(name);
-    end
-
-    if (not self.settings.filter.onlyFavorites) then
-        return true;
-    end
-
-    return isFavorite or not self.settings.filter.collected;
+function private:FilterUsableMounts(isUsable)
+    return not self.settings.filter.onlyUsable or isUsable
 end
 
-function private:FilterUsableMounts(name, isUsable)
-    local searchString = self:GetSearchText();
-    if (searchString and string.len(searchString) > 0) then
-        return self:FilterMountsByName(name);
-    end
-
-    if (not self.settings.filter.onlyUsable) then
-        return true;
-    end
-
-    return isUsable;
+function private:FilterCollectedMounts(collected)
+    return (self.settings.filter.collected and collected) or (self.settings.filter.notCollected and not collected)
 end
 
-function private:FilterMountsBySource(name, spellId, collected, sourceType)
-    local searchString = self:GetSearchText();
-    if (searchString and string.len(searchString) > 0) then
-        return self:FilterMountsByName(name);
-    end
-
-    if (not self.settings.filter.collected and collected) then
-        return false;
-    end
-
-    if (not self.settings.filter.notCollected and not collected) then
-        return false;
-    end
-
-    local notContainded = true;
-
-    local allDisabled = true;
-    local allEnabled = true;
-    for k, value in pairs(self.settings.filter.source) do
+function private:CheckAllSettings(settings)
+    local allDisabled = true
+    local allEnabled = true
+    for _, value in pairs(settings) do
         if (value) then
-            allDisabled = false;
+            allDisabled = false
         else
-            allEnabled = false;
+            allEnabled = false
         end
     end
 
-    if (allEnabled) then
-        return true;
+    if allEnabled then
+        return true
+    elseif allDisabled then
+        return false
     end
 
-    for source, value in pairs(self.settings.filter.source) do
-        for _, category in pairs(MountJournalEnhancedSource) do
-            if (category.Name == source) then
-                if (category.Data[spellId]) then
-                    if (value) then
-                        return true;
-                    else
-                        notContainded = false;
-                    end
-                end
-                break;
+    return nil
+end
+
+function private:CheckMountInList(settings, sourceData, spellId)
+    local isInList = false
+
+    for setting, value in pairs(settings) do
+        if sourceData[setting] and sourceData[setting][spellId] then
+            if (value) then
+                return true
+            else
+                isInList = true
             end
         end
     end
 
-    return notContainded and (allDisabled or allEnabled);
-end
-
-function private:FilterMountsByFaction(name, isFaction, faction)
-    local searchString = self:GetSearchText();
-    if (searchString and string.len(searchString) > 0) then
-        return self:FilterMountsByName(name);
+    if isInList then
+        return false
     end
 
+    return nil
+end
+
+function private:FilterMountsBySource(spellId, sourceType)
+
+    local settingsResult = self:CheckAllSettings(self.settings.filter.source)
+    if settingsResult then
+        return true
+    end
+
+    local mountResult = self:CheckMountInList(self.settings.filter.source, MountJournalEnhancedSource, spellId)
+    if mountResult ~= nil then
+        return mountResult
+    end
+
+    return true
+end
+
+function private:FilterMountsByFaction(isFaction, faction)
     return (self.settings.filter.faction.noFaction and not isFaction or self.settings.filter.faction.alliance and faction == 1 or self.settings.filter.faction.horde and faction == 0);
 end
 
-function private:FilterMountsByFamily(name, spellId)
-    local searchString = self:GetSearchText();
-    if (searchString and string.len(searchString) > 0) then
-        return self:FilterMountsByName(name);
-    end
-
-    local notContainded = true;
-
-    local allDisabled = true;
-    local allEnabled = true;
-    for _, value in pairs(self.settings.filter.family) do
-        if (value) then
-            allDisabled = false;
-        else
-            allEnabled = false;
-        end
-    end
-
-    if (allEnabled) then
-        return true;
-    end
-
-    for family, value in pairs(self.settings.filter.family) do
-        if (MountJournalEnhancedFamily[family]) then
-            if (MountJournalEnhancedFamily[family][spellId]) then
-                if (value) then
-                    return true;
-                else
-                    notContainded = false;
-                end
+function private:SearchInList(searchTerms, text)
+    if searchTerms then
+        for _, searchTerm in pairs(searchTerms) do
+            if string.find(text, searchTerm, 1, true) then
+                return true
             end
         end
     end
 
-    return notContainded and (allDisabled or allEnabled);
+    return false
 end
 
-function private:FilterMountsByExpansion(name, spellId)
-    local searchString = self:GetSearchText();
-    if (searchString and string.len(searchString) > 0) then
-        return self:FilterMountsByName(name);
+function private:FilterMountsByFamily(spellId, icon)
+
+    local settingsResult = self:CheckAllSettings(self.settings.filter.family)
+    if settingsResult then
+        return true
     end
 
-    local notContainded = true;
+    local mountResult = self:CheckMountInList(self.settings.filter.family, MountJournalEnhancedFamily, spellId)
+    if mountResult then
+        return true
+    end
 
-    local allDisabled = true;
-    local allEnabled = true;
-    for _, value in pairs(self.settings.filter.expansion) do
-        if (value) then
-            allDisabled = false;
-        else
-            allEnabled = false;
+    local isInList = false
+    local iconName = string.lower(LibIconPath_getName(icon))
+    for family, value in pairs(self.settings.filter.family) do
+        if MountJournalEnhancedFamily[family] and self:SearchInList(MountJournalEnhancedFamily[family]["keywords"], iconName) then
+            if (value) then
+                return true
+            end
+            isInList = true
         end
     end
 
-    if (allEnabled) then
-        return true;
+    return not isInList and mountResult == nil
+end
+
+function private:FilterMountsByExpansion(spellId)
+
+    local settingsResult = self:CheckAllSettings(self.settings.filter.expansion)
+    if settingsResult then
+        return true
+    end
+
+    local mountResult = self:CheckMountInList(self.settings.filter.expansion, MountJournalEnhancedExpansion, spellId)
+    if mountResult ~= nil then
+        return mountResult
     end
 
     for expansion, value in pairs(self.settings.filter.expansion) do
-        if (MountJournalEnhancedExpansion[expansion]) then
-            if (MountJournalEnhancedExpansion[expansion][spellId]) then
-                if (value) then
-                    return true;
-                else
-                    notContainded = false;
-                end
-            end
+        if MountJournalEnhancedExpansion[expansion] and
+                MountJournalEnhancedExpansion[expansion]["minID"] <= spellId and
+                spellId <= MountJournalEnhancedExpansion[expansion]["maxID"]
+        then
+            return value
         end
     end
 
-    return notContainded and (allDisabled or allEnabled);
+    return false
 end
 
 function private:FilterMountsByType(name, spellId, mountID)
-    local searchString = self:GetSearchText();
-    if (searchString and string.len(searchString) > 0) then
-        return self:FilterMountsByName(name);
+    local settingsResult = self:CheckAllSettings(self.settings.filter.mountType)
+    if settingsResult then
+        return true
     end
 
-    local notContainded = true;
-
-    local allDisabled = true;
-    local allEnabled = true;
-    for _, value in pairs(self.settings.filter.mountType) do
-        if (value) then
-            allDisabled = false;
-        else
-            allEnabled = false;
-        end
-    end
-
-    if (allEnabled) then
-        return true;
-    end
-
-    for mountType, value in pairs(MountJournalEnhancedType) do
-        if (self.settings.filter.mountType[mountType]) then
-            if (MountJournalEnhancedType[mountType]) then
-                if (MountJournalEnhancedType[mountType][spellId]) then
-                    if (value) then
-                        return true;
-                    else
-                        notContainded = false;
-                    end
-                end
-            end
-        end
+    local mountResult = self:CheckMountInList(self.settings.filter.mountType, MountJournalEnhancedType, spellId)
+    if mountResult == true then
+        return true
     end
 
     local _, _, _, isSelfMount, mountType = C_MountJournal.GetMountInfoExtraByID(mountID);
-    
-    -- 284: Chauffeur
-    if (self.settings.filter.mountType.ground and (mountType == 230 or mountType == 231 or mountType == 241 or mountType == 269 or mountType == 284)) then
-        return true;
-    end
-
-    if (self.settings.filter.mountType.flying and (mountType == 247 or mountType == 248)) then
-        return true;
-    end
-
-    if (self.settings.filter.mountType.waterWalking and mountType == 269) then
-        return true;
-    end
-
-    -- 64731 Sea Turtle, 30174 Riding Turtle
-    if (self.settings.filter.mountType.underwater and (mountType == 232 or mountType == 254 or spellId == 64731 or spellId == 30174)) then
-        return true;
-     end
 
     if (self.settings.filter.mountType.transform and isSelfMount) then
         return true;
+    end
+
+    for category, value in pairs(self.settings.filter.mountType) do
+        if MountJournalEnhancedType[category] and
+                MountJournalEnhancedType[category].typeIDs and
+                tContains(MountJournalEnhancedType[category].typeIDs, mountType) then
+            return value
+        end
     end
 
     if (mountType ~= 230 and mountType ~= 231 and mountType ~= 241 and mountType ~= 269 and mountType ~= 247 and mountType ~= 248 and mountType ~= 232 and mountType ~= 254 and mountType ~= 284) then
@@ -1179,37 +1066,44 @@ function private:FilterMountsByType(name, spellId, mountID)
             print("New mount type " .. tostring(mountType) .. " for mount \"" .. name .. "\" (" .. spellId .. ")");
         end
 
-        return true;
+        return true
     end
 
-    if (mountType == 230 or mountType == 231 or mountType == 241 or mountType == 269 or mountType == 247 or mountType == 248 or mountType == 232 or mountType == 254 or mountType == 284) then
-        notContainded = false;
-    end
-    
-    return notContainded and (allDisabled or allEnabled);
+    return false
 end
+
+--endregion
 
 function private:UpdateMountInfoCache()
     local mountInfoCache = { };
     local indexMap = { };
     indexMap[0] = 0;
-    
+
+    local searchString = MountJournal.searchBox:GetText();
+    if (not searchString or string.len(searchString) == 0) then
+        searchString = nil
+    else
+        searchString = string.lower(searchString)
+    end
+
     for i=1, self.hooks["GetNumDisplayedMounts"]() do
         local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID = self.hooks["GetDisplayedMountInfo"](i);
     
         isUsable = isUsable and IsUsableSpell(spellId);
 
         if (hideOnChar ~= true and
-            not MountJournalEnhancedIgnored[spellId] and
-            self:FilterHiddenMounts(creatureName, spellId) and
-            self:FilterFavoriteMounts(creatureName, isFavorite) and
-            self:FilterUsableMounts(creatureName, isUsable) and
-            self:FilterMountsBySource(creatureName, spellId, isCollected, sourceType) and
-            self:FilterMountsByFaction(creatureName, isFaction, faction) and
-            self:FilterMountsByType(creatureName, spellId, mountID) and
-            self:FilterMountsByFamily(creatureName, spellId) and 
-			self:FilterMountsByExpansion(creatureName, spellId))
-        then
+                not MountJournalEnhancedIgnored[spellId] and
+                (searchString and self:FilterMountsByName(creatureName, searchString) or
+                        (not searchString and
+                        self:FilterHiddenMounts(spellId) and
+                        self:FilterFavoriteMounts(isFavorite) and
+                        self:FilterUsableMounts(isUsable) and
+                        self:FilterCollectedMounts(isCollected) and
+                        self:FilterMountsBySource(spellId, sourceType) and
+                        self:FilterMountsByFaction(isFaction, faction) and
+                        self:FilterMountsByType(creatureName, spellId, mountID) and
+                        self:FilterMountsByFamily(spellId, icon) and
+                        self:FilterMountsByExpansion(spellId)))) then
             mountInfoCache[#mountInfoCache + 1] = { creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID };
             indexMap[#mountInfoCache] = i;
         end
@@ -1219,38 +1113,12 @@ function private:UpdateMountInfoCache()
     self.indexMap = indexMap;
 end
 
-function private:MountListDragButton_OnClick(sender, button)
-    local parent = sender:GetParent();
+function private:MountListItem_OnClick(sender, anchor, button)
     if ( button ~= "LeftButton" ) then
-        MountJournal_ShowMountDropdown(parent.index, sender, 0, 0);
-    elseif ( IsModifiedClick("CHATLINK") ) then
-        local id = parent.spellID;
-        if ( MacroFrame and MacroFrame:IsShown() ) then
-            local spellName = GetSpellInfo(id);
-            ChatEdit_InsertLink(spellName);
-        else
-            local spellLink = GetSpellLink(id)
-            ChatEdit_InsertLink(spellLink);
+        local _, _, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetDisplayedMountInfo(sender.index);
+        if not isCollected then
+            MountJournal_ShowMountDropdown(sender.index, anchor, 0, 0)
         end
-    else
-        C_MountJournal.Pickup(parent.index);
-    end
-end
-
-function private:MountListItem_OnClick(sender, button)
-    if ( button ~= "LeftButton" ) then
-        MountJournal_ShowMountDropdown(sender.index, sender, 0, 0);
-    elseif ( IsModifiedClick("CHATLINK") ) then
-        local id = sender.spellID;
-        if ( MacroFrame and MacroFrame:IsShown() ) then
-            local spellName = GetSpellInfo(id);
-            ChatEdit_InsertLink(spellName);
-        else
-            local spellLink = GetSpellLink(id)
-            ChatEdit_InsertLink(spellLink);
-        end
-    elseif ( sender.spellID ~= MountJournal.selectedSpellID ) then
-        MountJournal_Select(sender.index);
     end
 end
 
@@ -1304,8 +1172,8 @@ end
 function private:SettingsCleanup()
     for source, value in pairs(self.settings.filter.source) do
         local contained = false;
-        for _, category in pairs(MountJournalEnhancedSource) do
-            if (category.Name == source) then
+        for name,_ in pairs(MountJournalEnhancedSource) do
+            if (name == source) then
                 contained = true;
                 break;
             end
