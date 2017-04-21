@@ -47,6 +47,7 @@ end
 for expansionName, _ in pairs(MountJournalEnhancedExpansion) do
     initialState.settings.filter.expansion[expansionName] = true;
 end
+local defaultFilterStates = CopyTable(initialState.settings.filter)
 local dependencies = {
     function() return MountJournal or LoadAddOn("Blizzard_Collections"); end,
 };
@@ -68,9 +69,8 @@ function private:LoadUI()
     self:Hook(C_MountJournal, "SetIsFavorite", function(index, isFavorited) self:C_MountJournal_SetIsFavorite(index, isFavorited); end);
     self:Hook(C_MountJournal, "GetIsFavorite", function(index) return self:C_MountJournal_GetIsFavorite(index); end);
     self:Hook(C_MountJournal, "GetDisplayedMountInfoExtra", function(index) return self:C_MountJournal_GetDisplayedMountInfoExtra(index); end);
-    
-    self:Hook(nil, "MountJournal_UpdateMountList", function() self:MountJournal_UpdateMountList(); end);
-    MountJournal.ListScrollFrame.update = function() self:MountJournal_UpdateMountList() end;
+
+    hooksecurefunc("MountJournal_UpdateMountList", function() self:MountJournal_UpdateMountList(); end)
 
     MountJournalSearchBox:SetScript("OnTextChanged", function(sender) self:MountJournal_OnSearchTextChanged(sender); end);
     
@@ -214,35 +214,35 @@ function private:LoadDebugMode()
                 if (not self:ContainsItem(MountJournalEnhancedSource, id)) then
                     print("New mount: " .. name .. " (" .. id .. ")");
                 else
-                    if (not self:ContainsItem(MountJournalEnhancedFamily, id)) then
-                        print("No family info for mount: " .. name .. " (" .. id .. ")");
-                    elseif (not self:ContainsItem(MountJournalEnhancedExpansion, id)) then
-                        print("No expansion info for mount: " .. name .. " (" .. id .. ")");
-                    end
+--                    if (not self:ContainsItem(MountJournalEnhancedFamily, id)) then
+--                        print("No family info for mount: " .. name .. " (" .. id .. ")");
+--                    elseif (not self:ContainsItem(MountJournalEnhancedExpansion, id)) then
+--                        print("No expansion info for mount: " .. name .. " (" .. id .. ")");
+--                    end
                 end
             end
         end
 		
-        for _, familyMounts in pairs(MountJournalEnhancedFamily) do
-            for id, name in pairs(familyMounts) do
-                if (not MountJournalEnhancedIgnored[id]) then
-                    if (not mounts[id]) then
-                        print("Old family info for mount: " .. name .. " (" .. id .. ")");
-                    end
-                end
-            end
-        end
-		
-        for _, expansionMounts in pairs(MountJournalEnhancedExpansion) do
-            for id, name in pairs(expansionMounts) do
-                if (not MountJournalEnhancedIgnored[id]) then
-                    if (not mounts[id]) then
-                        print("Old expansion info for mount: " .. name .. " (" .. id .. ")");
-                    end
-                end
-            end
-        end
-
+--        for _, familyMounts in pairs(MountJournalEnhancedFamily) do
+--            for id, name in pairs(familyMounts) do
+--                if (not MountJournalEnhancedIgnored[id]) then
+--                    if (not mounts[id]) then
+--                        print("Old family info for mount: " .. name .. " (" .. id .. ")");
+--                    end
+--                end
+--            end
+--        end
+--
+--        for _, expansionMounts in pairs(MountJournalEnhancedExpansion) do
+--            for id, name in pairs(expansionMounts) do
+--                if (not MountJournalEnhancedIgnored[id]) then
+--                    if (not mounts[id]) then
+--                        print("Old expansion info for mount: " .. name .. " (" .. id .. ")");
+--                    end
+--                end
+--            end
+--        end
+--
         local names = { };
         for _, data in pairs(MountJournalEnhancedSource) do
             for id, name in pairs(data) do
@@ -331,427 +331,176 @@ end
 
 --endregion Hooks
 
-function private:MountJournalFilterDropDown_Initialize(sender, level)
-    local info = UIDropDownMenu_CreateInfo();
-    info.keepShownOnClick = true;
-    info.isNotRadio = true;
-        
-    if (level == 1) then
-        info.text = COLLECTED
-        info.func = function(_, _, _, value)
-            self.settings.filter.collected = value;
-            self:UpdateMountInfoCache();
-            MountJournal_UpdateMountList();
+function private:CreateFilterInfo(text, filterKey, subfilterKey, callback)
+    local info = UIDropDownMenu_CreateInfo()
+    info.keepShownOnClick = true
+    info.isNotRadio = true
+    info.text = text
 
+    if filterKey then
+        info.hasArrow = false
+        info.notCheckable = false
+        if subfilterKey then
+            info.checked = function() return self.settings.filter[filterKey][subfilterKey]; end;
+        else
+            info.checked = self.settings.filter[filterKey]
+        end
+        info.func = function(_, _, _, value)
+            if subfilterKey then
+                self.settings.filter[filterKey][subfilterKey] = value
+            else
+                self.settings.filter[filterKey] = value
+            end
+            self:UpdateMountInfoCache()
+            MountJournal_UpdateMountList()
+
+            if callback then
+                callback(value)
+            end
+        end
+    else
+        info.hasArrow = true
+        info.notCheckable = true
+    end
+
+    return info
+end
+
+function private:AddCheckAllAndNoneInfo(filterKey, level, dropdownLevel)
+    local info = self:CreateFilterInfo(CHECK_ALL)
+    info.hasArrow = false
+    info.func = function()
+        for key, _ in pairs(self.settings.filter[filterKey]) do
+            self.settings.filter[filterKey][key] = true
+        end
+
+        UIDropDownMenu_Refresh(MountJournalFilterDropDown, dropdownLevel, 2)
+        self:UpdateMountInfoCache()
+        MountJournal_UpdateMountList()
+    end
+    UIDropDownMenu_AddButton(info, level)
+
+    info = self:CreateFilterInfo(UNCHECK_ALL)
+    info.hasArrow = false
+    info.func = function()
+        for key, _ in pairs(self.settings.filter[filterKey]) do
+            self.settings.filter[filterKey][key] = false
+        end
+
+        UIDropDownMenu_Refresh(MountJournalFilterDropDown, dropdownLevel, 2)
+        self:UpdateMountInfoCache()
+        MountJournal_UpdateMountList()
+    end
+    UIDropDownMenu_AddButton(info, level)
+end
+
+function private:MountJournalFilterDropDown_Initialize(sender, level)
+    local info
+
+    if (level == 1) then
+        info = self:CreateFilterInfo(COLLECTED, "collected", nil,  function(value)
             if (value) then
                 UIDropDownMenu_EnableButton(1,2);
             else
                 UIDropDownMenu_DisableButton(1,2);
             end;
-        end
-        info.checked = self.settings.filter.collected;
+        end)
         UIDropDownMenu_AddButton(info, level)
 
-        info.text = FAVORITES_FILTER;
+        info = self:CreateFilterInfo(FAVORITES_FILTER, "onlyFavorites")
         info.leftPadding = 16;
         info.disabled = not self.settings.filter.collected;
-        info.checked = self.settings.filter.onlyFavorites;
-        info.notCheckable = false;
-        info.hasArrow = false;
-        info.func = function(_, _, _, value)
-            self.settings.filter.onlyFavorites = value;
-            self:UpdateMountInfoCache();
-            MountJournal_UpdateMountList();
-         end
         UIDropDownMenu_AddButton(info, level);
 
-        info.leftPadding = 0;
-        info.disabled = false;
-
-        info.text = NOT_COLLECTED
-        info.func = function(_, _, _, value)
-             self.settings.filter.notCollected = value;
-             self:UpdateMountInfoCache();
-             MountJournal_UpdateMountList();
-         end
-        info.checked = self.settings.filter.notCollected;
+        info = self:CreateFilterInfo(NOT_COLLECTED, "notCollected")
         UIDropDownMenu_AddButton(info, level)
 
-        info.text = L["Only usable"];
-        info.func = function(_, _, _, value)
-            self.settings.filter.onlyUsable = value;
-            self:UpdateMountInfoCache();
-            MountJournal_UpdateMountList();
-        end
-        info.checked = self.settings.filter.onlyUsable;
-        info.notCheckable = false;
-        info.hasArrow = false;
+        info = self:CreateFilterInfo(L["Only usable"], "onlyUsable")
         UIDropDownMenu_AddButton(info, level);
 
-        info.text = SOURCES;
-        info.checked = nil;
-        info.func =  nil;
-        info.hasArrow = true;
-        info.notCheckable = true;
+        info = self:CreateFilterInfo(SOURCES)
         info.value = 1;
         UIDropDownMenu_AddButton(info, level)
 
-        info.text = TYPE;
-        info.notCheckable = true;
-        info.hasArrow = true;
+        info = self:CreateFilterInfo(TYPE)
         info.value = 2;
         UIDropDownMenu_AddButton(info, level);
 
-        info.text = FACTION;
-        info.notCheckable = true;
-        info.hasArrow = true;
+        info = self:CreateFilterInfo(FACTION)
         info.value = 3;
         UIDropDownMenu_AddButton(info, level);
 
-        info.text = L["Family"];
-        info.notCheckable = true;
-        info.hasArrow = true;
+        info = self:CreateFilterInfo(L["Family"])
         info.value = 4;
         UIDropDownMenu_AddButton(info, level);
 
-        info.text = L["Expansion"];
-        info.notCheckable = true;
-        info.hasArrow = true;
+        info = self:CreateFilterInfo(L["Expansion"])
         info.value = 5;
         UIDropDownMenu_AddButton(info, level);
-		
-        info.text = L["Hidden"];
-        info.checked = self.settings.filter.hidden;
-        info.notCheckable = false;
-        info.hasArrow = false;
-        info.func = function(_, _, _, value)
-            self.settings.filter.hidden = value;
-            self:UpdateMountInfoCache();
-            MountJournal_UpdateMountList();
-        end
+
+        info = self:CreateFilterInfo(L["Hidden"], "hidden")
         UIDropDownMenu_AddButton(info, level);
-        
-        info.text = L["Reset filters"];
+
+        info = self:CreateFilterInfo(L["Reset filters"])
         info.keepShownOnClick = false;
-        info.notCheckable = true;
         info.hasArrow = false;
         info.func = function(_, _, _, value)
-            self.settings.filter.collected = true;
-            self.settings.filter.onlyFavorites = false;
-            self.settings.filter.notCollected = true;
-            self.settings.filter.onlyUsable = false;
-            self.settings.filter.hidden = false;
-        
-            for categoryName, _ in pairs(MountJournalEnhancedSource) do
-                self.settings.filter.source[categoryName] = true;
-            end
-            
-            for k, v in pairs(self.settings.filter.mountType) do
-                self.settings.filter.mountType[k] = true;
-            end
-                
-            self.settings.filter.faction.alliance = true;
-            self.settings.filter.faction.horde = true;
-            self.settings.filter.faction.noFaction = true;
-            
-            for k, v in pairs(self.settings.filter.family) do
-                self.settings.filter.family[k] = true;
-            end
-            
-            for k, v in pairs(self.settings.filter.expansion) do
-                self.settings.filter.expansion[k] = true;
-            end
-            
+            self.settings.filter = CopyTable(defaultFilterStates)
             self:UpdateMountInfoCache();
             MountJournal_UpdateMountList();
         end
         UIDropDownMenu_AddButton(info, level);
-    else
-        if (UIDROPDOWNMENU_MENU_VALUE == 1) then
-            info.hasArrow = false;
-            info.isNotRadio = true;
-            info.notCheckable = true;
-
-            info.text = CHECK_ALL
-            info.func = function()
-                for categoryName, _ in pairs(MountJournalEnhancedSource) do
-                    self.settings.filter.source[categoryName] = true;
-                end
-
-                UIDropDownMenu_Refresh(MountJournalFilterDropDown, 1, 2);
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            UIDropDownMenu_AddButton(info, level)
-
-            info.text = UNCHECK_ALL
-            info.func = function()
-                for categoryName, _ in pairs(MountJournalEnhancedSource) do
-                    self.settings.filter.source[categoryName] = false;
-                end
-
-                UIDropDownMenu_Refresh(MountJournalFilterDropDown, 1, 2);
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            UIDropDownMenu_AddButton(info, level)
-
-            for _,categoryName in pairs(SOURCE_INDEX_ORDER) do
-                info.text = L[categoryName] or categoryName;
-                info.func = function(_, _, _, value)
-                    self.settings.filter.source[categoryName] = value;
-                    self:UpdateMountInfoCache();
-                    MountJournal_UpdateMountList();
-                end
-                info.checked = function() return self.settings.filter.source[categoryName] ~= false; end;
-                info.isNotRadio = true;
-                info.notCheckable = false;
-                info.hasArrow = false;
-                UIDropDownMenu_AddButton(info, level);
-            end
+    elseif (UIDROPDOWNMENU_MENU_VALUE == 1) then
+        self:AddCheckAllAndNoneInfo("source", level, 1)
+        for _,categoryName in pairs(SOURCE_INDEX_ORDER) do
+            info = self:CreateFilterInfo(L[categoryName] or categoryName, "source", categoryName)
+            UIDropDownMenu_AddButton(info, level);
         end
+    elseif (UIDROPDOWNMENU_MENU_VALUE == 2) then
+        self:AddCheckAllAndNoneInfo("mountType", level, 2)
 
-        if (UIDROPDOWNMENU_MENU_VALUE == 2) then
-            info.hasArrow = false;
-            info.isNotRadio = true;
-            info.notCheckable = true;
+        info = self:CreateFilterInfo(L["Ground"], "mountType", "ground")
+        UIDropDownMenu_AddButton(info, level);
+        info = self:CreateFilterInfo(L["Flying"], "mountType", "flying")
+        UIDropDownMenu_AddButton(info, level);
+        info = self:CreateFilterInfo(L["Water Walking"], "mountType", "waterWalking")
+        UIDropDownMenu_AddButton(info, level);
+        info = self:CreateFilterInfo(L["Underwater"], "mountType", "underwater")
+        UIDropDownMenu_AddButton(info, level);
+        info = self:CreateFilterInfo(L["Transform"], "mountType", "transform")
+        UIDropDownMenu_AddButton(info, level);
+        info = self:CreateFilterInfo(L["Repair"], "mountType", "repair")
+        UIDropDownMenu_AddButton(info, level);
+        info = self:CreateFilterInfo(L["Passenger"], "mountType", "passenger")
+        UIDropDownMenu_AddButton(info, level);
+    elseif (UIDROPDOWNMENU_MENU_VALUE == 3) then
+        info = self:CreateFilterInfo(FACTION_ALLIANCE, "faction", "alliance")
+        UIDropDownMenu_AddButton(info, level);
+        info = self:CreateFilterInfo(FACTION_HORDE, "faction", "horde")
+        UIDropDownMenu_AddButton(info, level);
+        info = self:CreateFilterInfo(NPC_NAMES_DROPDOWN_NONE, "faction", "noFaction")
+        UIDropDownMenu_AddButton(info, level);
+    elseif (UIDROPDOWNMENU_MENU_VALUE == 4) then
+        self:AddCheckAllAndNoneInfo("family", level, 4)
 
-            info.text = CHECK_ALL
-            info.func = function()
-                for k, v in pairs(self.settings.filter.mountType) do
-                    self.settings.filter.mountType[k] = true;
-                end
-                UIDropDownMenu_Refresh(MountJournalFilterDropDown, 2, 2);
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            UIDropDownMenu_AddButton(info, level)
+        local sortedFamilies = {};
+        for family, _ in pairs(self.settings.filter.family) do
+            table.insert(sortedFamilies, family);
+        end
+        table.sort(sortedFamilies, function(a, b) return (L[a] or a) < (L[b] or b); end);
 
-            info.text = UNCHECK_ALL
-            info.func = function()
-                for k, v in pairs(self.settings.filter.mountType) do
-                    self.settings.filter.mountType[k] = false;
-                end
-                UIDropDownMenu_Refresh(MountJournalFilterDropDown, 2, 2);
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            UIDropDownMenu_AddButton(info, level)
-
-            info.text = L["Ground"];
-            info.func = function(_, _, _, value)
-                self.settings.filter.mountType.ground = value;
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            info.checked = function() return self.settings.filter.mountType.ground; end;
-            info.isNotRadio = true;
-            info.notCheckable = false;
-            info.hasArrow = false;
-            UIDropDownMenu_AddButton(info, level);
-
-            info.text = L["Flying"];
-            info.func = function(_, _, _, value)
-                self.settings.filter.mountType.flying = value;
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            info.checked = function() return self.settings.filter.mountType.flying; end;
-            info.isNotRadio = true;
-            info.notCheckable = false;
-            info.hasArrow = false;
-            UIDropDownMenu_AddButton(info, level);
-
-            info.text = L["Water Walking"];
-            info.func = function(_, _, _, value)
-                self.settings.filter.mountType.waterWalking = value;
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            info.checked = function() return self.settings.filter.mountType.waterWalking; end;
-            info.isNotRadio = true;
-            info.notCheckable = false;
-            info.hasArrow = false;
-            UIDropDownMenu_AddButton(info, level);
-
-            info.text = L["Underwater"];
-            info.func = function(_, _, _, value)
-                self.settings.filter.mountType.underwater = value;
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            info.checked = function() return self.settings.filter.mountType.underwater; end;
-            info.isNotRadio = true;
-            info.notCheckable = false;
-            info.hasArrow = false;
-            UIDropDownMenu_AddButton(info, level);
-
-            info.text = L["Transform"];
-            info.func = function(_, _, _, value)
-                self.settings.filter.mountType.transform = value;
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            info.checked = function() return self.settings.filter.mountType.transform; end;
-            info.isNotRadio = true;
-            info.notCheckable = false;
-            info.hasArrow = false;
-            UIDropDownMenu_AddButton(info, level);
-
-            info.text = L["Repair"];
-            info.func = function(_, _, _, value)
-                self.settings.filter.mountType.repair = value;
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            info.checked = function() return self.settings.filter.mountType.repair; end;
-            info.isNotRadio = true;
-            info.notCheckable = false;
-            info.hasArrow = false;
-            UIDropDownMenu_AddButton(info, level);
-
-            info.text = L["Passenger"];
-            info.func = function(_, _, _, value)
-                self.settings.filter.mountType.passenger = value;
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            info.checked = function() return self.settings.filter.mountType.passenger; end;
-            info.isNotRadio = true;
-            info.notCheckable = false;
-            info.hasArrow = false;
+        for _, family in pairs(sortedFamilies) do
+            info = self:CreateFilterInfo(L[family] or family, "family", family)
             UIDropDownMenu_AddButton(info, level);
         end
 
-        if (UIDROPDOWNMENU_MENU_VALUE == 3) then
-            info.text = FACTION_ALLIANCE;
-            info.func = function(_, _, _, value)
-                self.settings.filter.faction.alliance = value;
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            info.checked = self.settings.filter.faction.alliance;
-            info.isNotRadio = true;
-            info.notCheckable = false;
-            info.hasArrow = false;
+        self:MakeMultiColumnMenu(level, 20);
+    elseif (UIDROPDOWNMENU_MENU_VALUE == 5) then
+        self:AddCheckAllAndNoneInfo("expansion", level, 5)
+
+        for _, expansion in pairs(EXPANSIONS) do
+            info = self:CreateFilterInfo(L[expansion] or expansion, "expansion", expansion)
             UIDropDownMenu_AddButton(info, level);
-
-            info.text = FACTION_HORDE;
-            info.func = function(_, _, _, value)
-                self.settings.filter.faction.horde = value;
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            info.checked = self.settings.filter.faction.horde;
-            info.isNotRadio = true;
-            info.notCheckable = false;
-            info.hasArrow = false;
-            UIDropDownMenu_AddButton(info, level);
-
-            info.text = NPC_NAMES_DROPDOWN_NONE;
-            info.func = function(_, _, _, value)
-                self.settings.filter.faction.noFaction = value;
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            info.checked = self.settings.filter.faction.noFaction;
-            info.isNotRadio = true;
-            info.notCheckable = false;
-            info.hasArrow = false;
-            UIDropDownMenu_AddButton(info, level);
-        end
-
-        if (UIDROPDOWNMENU_MENU_VALUE == 4) then
-            info.hasArrow = false;
-            info.isNotRadio = true;
-            info.notCheckable = true;
-
-            info.text = CHECK_ALL
-            info.func = function()
-                for k, v in pairs(self.settings.filter.family) do
-                    self.settings.filter.family[k] = true;
-                end
-                UIDropDownMenu_Refresh(MountJournalFilterDropDown, 4, 2);
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            UIDropDownMenu_AddButton(info, level)
-
-            info.text = UNCHECK_ALL
-            info.func = function()
-                for k, v in pairs(self.settings.filter.family) do
-                    self.settings.filter.family[k] = false;
-                end
-                UIDropDownMenu_Refresh(MountJournalFilterDropDown, 4, 2);
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            UIDropDownMenu_AddButton(info, level)
-
-            local sortedFamilies = {};
-            for family, _ in pairs(MountJournalEnhancedFamily) do
-                table.insert(sortedFamilies, family);
-            end
-            table.sort(sortedFamilies, function(a, b) return (L[a] or a) < (L[b] or b); end);
-
-            for _, family in pairs(sortedFamilies) do
-                info.text = L[family] or family;
-                info.func = function(_, _, _, value)
-                    self.settings.filter.family[family] = value;
-                    self:UpdateMountInfoCache();
-                    MountJournal_UpdateMountList();
-                end
-                info.checked = function() return self.settings.filter.family[family] end;
-                info.isNotRadio = true;
-                info.notCheckable = false;
-                info.hasArrow = false;
-                UIDropDownMenu_AddButton(info, level);
-            end
-
-            self:MakeMultiColumnMenu(level, 20);
-        end
-		
-        if (UIDROPDOWNMENU_MENU_VALUE == 5) then
-            info.hasArrow = false;
-            info.isNotRadio = true;
-            info.notCheckable = true;
-
-            info.text = CHECK_ALL
-            info.func = function()
-                for k, v in pairs(self.settings.filter.expansion) do
-                    self.settings.filter.expansion[k] = true;
-                end
-                UIDropDownMenu_Refresh(MountJournalFilterDropDown, 5, 2);
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            UIDropDownMenu_AddButton(info, level)
-
-            info.text = UNCHECK_ALL
-            info.func = function()
-                for k, v in pairs(self.settings.filter.expansion) do
-                    self.settings.filter.expansion[k] = false;
-                end
-                UIDropDownMenu_Refresh(MountJournalFilterDropDown, 5, 2);
-                self:UpdateMountInfoCache();
-                MountJournal_UpdateMountList();
-            end
-            UIDropDownMenu_AddButton(info, level)
-
-			-- MountJournalEnhancedExpansion
-            for _, expansion in pairs(EXPANSIONS) do
-                info.text = L[expansion] or expansion;
-                info.func = function(_, _, _, value)
-                    self.settings.filter.expansion[expansion] = value;
-                    self:UpdateMountInfoCache();
-                    MountJournal_UpdateMountList();
-                end
-                info.checked = function() return self.settings.filter.expansion[expansion] end;
-                info.isNotRadio = true;
-                info.notCheckable = false;
-                info.hasArrow = false;
-                UIDropDownMenu_AddButton(info, level);
-            end
         end
     end
 end
@@ -791,6 +540,7 @@ function private:MountOptionsMenu_Init(sender, level)
     local info = UIDropDownMenu_CreateInfo();
     info.notCheckable = true;
 
+    local active = select(4, C_MountJournal.GetMountInfoByID(MountJournal.menuMountID));
     local needsFanfare = C_MountJournal.NeedsFanfare(MountJournal.menuMountID);
     
 	if (needsFanfare) then
@@ -878,10 +628,6 @@ function private:MountOptionsMenu_Init(sender, level)
 end
 
 function private:MountJournal_UpdateMountList()
-    --self:UpdateMountInfoCache();
-
-    self.hooks["MountJournal_UpdateMountList"]();
-
     local buttons = MountJournal.ListScrollFrame.buttons;
     for i = 1, #buttons do
         if (self.settings.hiddenMounts[buttons[i].spellID]) then
@@ -1169,24 +915,7 @@ function private:Unhook(obj, name)
     return true;
 end
 
-function private:SettingsCleanup()
-    for source, value in pairs(self.settings.filter.source) do
-        local contained = false;
-        for name,_ in pairs(MountJournalEnhancedSource) do
-            if (name == source) then
-                contained = true;
-                break;
-            end
-        end
-        
-        if (not contained) then
-            self.settings.filter.source[source] = nil;
-        end
-    end
-end
-
 function private:Load()
-    self:SettingsCleanup();
     self:LoadUI();
     self:LoadDebugMode();
 
@@ -1228,8 +957,8 @@ function private:OnSlashCommand(command, parameter1, parameter2)
             print("MountJournalEnhanced: Debug mode deactivated.");
             return;
         end
+    else
+        print("Syntax:");
+        print("/mje debug (on | off)");
     end
-
-    print("Syntax:");
-    print("/mje debug (on | off)");
 end
