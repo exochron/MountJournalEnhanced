@@ -269,6 +269,7 @@ MountJournalEnhancedSource = {
         [148417] = "Kor'kron Juggernaut", -- Siege of Orgrimmar, Garrosh Hellscream
         [171621] = "Ironhoof Destroyer", -- Blackrock Foundry, Blackhand
         [182912] = "Felsteel Annihilator", -- Hellfire Citadel, Archimonde
+        [189999] = "Grove Warden", -- Hellfire Citadel, Archimonde
         [213134] = "Felblaze Infernal", -- The Nighthold, Gul'dan
         [171827] = "Hellfire Infernal", -- The Nighthold, Gul'dan (Mythic)
         [232519] = "Abyss Worm", -- Tomb of Sargeras, Mistress Sassz'ine
@@ -767,7 +768,11 @@ MountJournalEnhancedSource = {
 
         -- Prestige Reward
         [222202] = "Prestigious Bronze Courser",
+        [222236] = "Prestigious Royal Courser",
+        [222237] = "Prestigious Forest Courser",
         [222238] = "Prestigious Ivory Courser",
+        [222240] = "Prestigious Azure Courser",
+        [222241] = "Prestigious Midnight Courser",
 
         ------------------------------
         -- Alliance ------------------
@@ -969,12 +974,22 @@ MountJournalEnhancedSource = {
         [63963] = "Rusted Proto-Drake",
         [69395] = "Onyxian Drake",
         [72286] = "Invincible",
+        [74918] = "Wooly White Rhino",
         [88742] = "Drake of the North Wind",
         [88744] = "Drake of the South Wind",
         [88746] = "Vitreous Stone Drake",
         [97493] = "Pureblood Fire Hawk",
         [101542] = "Flametalon of Alysrazor",
         [107842] = "Blazing Drake",
+        [107845] = "Life-Binder's Handmaiden",
+        [110039] = "Experiment 12-B",
+        [127170] = "Astral Cloud Serpent",
+        [127158] = "Heavenly Onyx Cloud Serpent",
+        [130965] = "Son of Galleon",
+        [132036] = "Thundering Ruby Cloud Serpent",
+        [139442] = "Thundering Cobalt Cloud Serpent",
+        [139448] = "Clutch of Ji-Kun",
+        [148476] = "Thundering Onyx Cloud Serpent",
     },
 
     ["Promotion"] = {
@@ -1044,7 +1059,7 @@ MountJournalEnhancedSource = {
 
         [107517] = "Spectral Wind Rider", -- Scroll of Resurrection
     },
-};
+}
 
 -- family based on http://www.warcraftmounts.com/gallery.php
 -- keywords are unique(!) text snippets from mount icon names
@@ -1059,9 +1074,7 @@ MountJournalEnhancedFamily = {
     },
 
     ["Bears"] = {
-        ['keywords'] = {"bear"},
-        [98204] = "Amani Battle Bear",
-        [43688] = "Amani War Bear",
+        ['keywords'] = {"bear", "druid_challangingroar"},
     },
 
     ["Boars"] = {
@@ -1164,7 +1177,7 @@ MountJournalEnhancedFamily = {
     },
 
     ["Hawkstriders"] = {
-        ['keywords'] = {"cockatrice"},
+        ['keywords'] = {"cockatrice", "hawkstrider"},
     },
 
     ["Hippogryphs"] = {
@@ -1318,6 +1331,7 @@ MountJournalEnhancedFamily = {
 
     ["Scorpions"] = {
         ['keywords'] = {"scorpion"},
+        [230988] = "Vicious War Scorpion",
     },
 
     ["Sea Dwellers"] = {
@@ -1378,7 +1392,7 @@ MountJournalEnhancedFamily = {
         [171848] = "Challenger's War Yeti",
         [191314] = "Minion of Grumpus",
     },
-};
+}
 
 MountJournalEnhancedExpansion = {
 
@@ -1430,7 +1444,7 @@ MountJournalEnhancedExpansion = {
         [127165] = "Yu'lei, Daughter of Jade",
         [189998] = "Illidari Felstalker", -- Legion Collector's Edition
     },
-};
+}
 
 MountJournalEnhancedType = {
     ground = {
@@ -1464,7 +1478,7 @@ MountJournalEnhancedType = {
         [60424] = "Mekgineer's Chopper",
         [75973] = "X-53 Touring Rocket",
     },
-};
+}
 
 MountJournalEnhancedIgnored = {
     [459] = "Gray Wolf",
@@ -1483,7 +1497,6 @@ MountJournalEnhancedIgnored = {
     [33630] = "Blue Mechanostrider",
     [44317] = "Merciless Nether Drake",
     [48954] = "Swift Zhevra",
-    [58819] = "Swift Brown Steed",
     [59572] = "Black Polar Bear",
     [60136] = "Grand Caravan Mammoth",
     [60140] = "Grand Caravan Mammoth",
@@ -1492,26 +1505,14 @@ MountJournalEnhancedIgnored = {
     [66122] = "Magic Rooster",
     [66123] = "Magic Rooster",
     [66124] = "Magic Rooster",
-    [66907] = "Argent Warhorse",
     [123182] = "White Riding Yak",
     [127209] = "Black Riding Yak",
     [127213] = "Brown Riding Yak",
-    [148970] = "Felsteed",
-    [148972] = "Dreadsteed",
 
-    -- item effect
-    [148626] = "Furious Ashhide Mushan",
-    
     -- ghost
     [55164] = "Swift Spectral Gryphon",
     [194046] = "Swift Spectral Rylak",
     
-    -- Test
-    [215545] = "Fel Bat (Test)",
-    
     -- Legion Unknown Source
-    [222236] = "Prestigious Royal Courser",
-    [222237] = "Prestigious Forest Courser",
-    [222240] = "Prestigious Azure Courser",
-    [222241] = "Prestigious Midnight Courser",
-};
+    [239363] = "Swift Spectral Hippogryph",
+}
