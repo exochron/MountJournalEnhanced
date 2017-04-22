@@ -1,0 +1,5 @@
+ignore:
+    - LICENSE
+    - README.md
+
+license-output: LICENSE

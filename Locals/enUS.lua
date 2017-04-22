@@ -33,7 +33,7 @@ L["Black Market"] = "Black Market";
 L["Promotion"] = "Promotion";
 
 -- Family
-L["Basilisk"] = "Basilisk";
+L["Basilisks"] = "Basilisks";
 L["Bats"] = "Bats";
 L["Bears"] = "Bears";
 L["Birds"] = "Birds";
@@ -49,6 +49,7 @@ L["Direhorns"] = "Direhorns";
 L["Dragonhawks"] = "Dragonhawks";
 L["Drakes"] = "Drakes";
 L["Elekks"] = "Elekks";
+L["Elementals"] = "Elementals";
 L["Felstalker"] = "Felstalker";
 L["Fishes"] = "Fishes";
 L["Foxes"] = "Foxes";
@@ -79,6 +80,7 @@ L["Ravagers"] = "Ravagers";
 L["Ravens"] = "Ravens";
 L["Rhinos"] = "Rhinos";
 L["Riverbeasts"] = "Riverbeasts";
+L["Sea Dwellers"] = "Sea Dwellers";
 L["Seahorses"] = "Seahorses";
 L["Scorpions"] = "Scorpions";
 L["Serpents"] = "Serpents";
