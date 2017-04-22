@@ -1514,5 +1514,5 @@ MountJournalEnhancedIgnored = {
     [194046] = "Swift Spectral Rylak",
     
     -- Legion Unknown Source
-    [239363] = "Swift Spectral Hippogryph",
+--    [239363] = "Swift Spectral Hippogryph",
 }

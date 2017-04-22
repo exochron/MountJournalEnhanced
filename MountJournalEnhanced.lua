@@ -198,96 +198,82 @@ function private:CreateAchievementFrame()
     self.achievementFrame = frame
 end
 
-function private:LoadDebugMode()
-    if (self.settings.debugMode) then
-        print("MountJournalEnhanced: Debug mode activated")
+function private:RunDebugMode()
+    local mounts = {}
+    local mountIDs = C_MountJournal.GetMountIDs()
+    for i, mountID in ipairs(mountIDs) do
+        local name, spellID, icon, active, isUsable, sourceType = C_MountJournal.GetMountInfoByID(mountID)
+        mounts[spellID] = {
+            name=name,
+            icon=icon,
+            mountID=mountID,
+        }
+    end
 
-        local mounts = {}
-        local mountIDs = C_MountJournal.GetMountIDs()
-        for i, mountID in ipairs(mountIDs) do
-            local name, spellID, icon, active, isUsable, sourceType = C_MountJournal.GetMountInfoByID(mountID)
-            mounts[spellID] = {
-                name=name,
-                icon=icon,
-                mountID=mountID,
-            }
-        end
+    local filterSettingsBackup = CopyTable(self.settings.filter)
+    for key, _ in pairs(self.settings.filter.source) do
+        self.settings.filter.source[key] = false
+    end
+    for key, _ in pairs(self.settings.filter.family) do
+        self.settings.filter.family[key] = false
+    end
+    for key, _ in pairs(self.settings.filter.expansion) do
+        self.settings.filter.expansion[key] = false
+    end
+    for key, _ in pairs(self.settings.filter.mountType) do
+        self.settings.filter.mountType[key] = false
+    end
 
-        local filterSettingsBackup = CopyTable(self.settings.filter)
-        for key, _ in pairs(self.settings.filter.source) do
-            self.settings.filter.source[key] = false
-        end
-        for key, _ in pairs(self.settings.filter.family) do
-            self.settings.filter.family[key] = false
-        end
-        for key, _ in pairs(self.settings.filter.expansion) do
-            self.settings.filter.expansion[key] = false
-        end
-        for key, _ in pairs(self.settings.filter.mountType) do
-            self.settings.filter.mountType[key] = false
-        end
-
-        for spellID, data in pairs(mounts) do
-            if not MountJournalEnhancedIgnored[spellID] then
-                if self:FilterMountsBySource(spellID) then
-                    print("New mount: " .. data.name .. " (" .. spellID .. ")")
-                end
-                if self:FilterMountsByFamily(spellID, data.icon) then
-                    print("No family info for mount: " .. data.name .. " (" .. spellID .. ")")
-                end
-                if self:FilterMountsByExpansion(spellID) then
-                    print("No expansion info for mount: " .. data.name .. " (" .. spellID .. ")")
-                end
-                if self:FilterMountsByType(spellID, data.mountID) then
-                    print("New mount type for mount \"" .. data.name .. "\" (" .. spellID .. ")")
-                end
+    for spellID, data in pairs(mounts) do
+        if not MountJournalEnhancedIgnored[spellID] then
+            if self:FilterMountsBySource(spellID) then
+                print("[MJE] New mount: " .. data.name .. " (" .. spellID .. ")")
             end
-        end
-
-        self.settings.filter = CopyTable(filterSettingsBackup)
-
-        for _, familyMounts in pairs(MountJournalEnhancedFamily) do
-            for id, name in pairs(familyMounts) do
-                if id ~= "keywords" and not MountJournalEnhancedIgnored[id] and not mounts[id] then
-                    print("Old family info for mount: " .. name .. " (" .. id .. ")")
-                end
+            if self:FilterMountsByFamily(spellID, data.icon) then
+                print("[MJE] No family info for mount: " .. data.name .. " (" .. spellID .. ")")
             end
-        end
-
-        for _, expansionMounts in pairs(MountJournalEnhancedExpansion) do
-            for id, name in pairs(expansionMounts) do
-                if id ~= "minID" and id ~= "maxID" and not MountJournalEnhancedIgnored[id] and not mounts[id] then
-                    print("Old expansion info for mount: " .. name .. " (" .. id .. ")")
-                end
+            if self:FilterMountsByExpansion(spellID) then
+                print("[MJE] No expansion info for mount: " .. data.name .. " (" .. spellID .. ")")
             end
-        end
-
-        local names = { }
-        for _, data in pairs(MountJournalEnhancedSource) do
-            for id, name in pairs(data) do
-                if (names[id] and names[id] ~= name) then
-                    print("Invalide mount info for mount: " .. name .. " (" .. id .. ")")
-                end
-                names[id] = name
-            end
-        end
-
-        for id, name in pairs(MountJournalEnhancedIgnored) do
-            if not mounts[id] then
-                print("Old ignore entry for mount: " .. name .. " (" .. id .. ")")
+            if self:FilterMountsByType(spellID, data.mountID) then
+                print("[MJE] New mount type for mount \"" .. data.name .. "\" (" .. spellID .. ")")
             end
         end
     end
-end
 
-function private:ContainsItem(data, spellId)
-    for _, categoryData in pairs(data) do
-        if categoryData[spellId] then
-            return true
+    self.settings.filter = CopyTable(filterSettingsBackup)
+
+    for _, familyMounts in pairs(MountJournalEnhancedFamily) do
+        for id, name in pairs(familyMounts) do
+            if id ~= "keywords" and not MountJournalEnhancedIgnored[id] and not mounts[id] then
+                print("[MJE] Old family info for mount: " .. name .. " (" .. id .. ")")
+            end
         end
     end
 
-    return false
+    for _, expansionMounts in pairs(MountJournalEnhancedExpansion) do
+        for id, name in pairs(expansionMounts) do
+            if id ~= "minID" and id ~= "maxID" and not MountJournalEnhancedIgnored[id] and not mounts[id] then
+                print("[MJE] Old expansion info for mount: " .. name .. " (" .. id .. ")")
+            end
+        end
+    end
+
+    local names = { }
+    for _, data in pairs(MountJournalEnhancedSource) do
+        for id, name in pairs(data) do
+            if (names[id] and names[id] ~= name) then
+                print("[MJE] Invalide mount info for mount: " .. name .. " (" .. id .. ")")
+            end
+            names[id] = name
+        end
+    end
+
+    for id, name in pairs(MountJournalEnhancedIgnored) do
+        if not mounts[id] then
+            print("[MJE] Old ignore entry for mount: " .. name .. " (" .. id .. ")")
+        end
+    end
 end
 
 --region Hooks
@@ -835,11 +821,7 @@ function private:FilterMountsByType(spellId, mountID)
         end
     end
 
-    if (mountType ~= 230 and mountType ~= 231 and mountType ~= 241 and mountType ~= 269 and mountType ~= 247 and mountType ~= 248 and mountType ~= 232 and mountType ~= 254 and mountType ~= 284) then
-        return true
-    end
-
-    return false
+    return true
 end
 
 --endregion
@@ -941,7 +923,9 @@ end
 
 function private:Load()
     self:LoadUI()
-    self:LoadDebugMode()
+    if self.settings.debugMode then
+        self:RunDebugMode()
+    end
 
     self:AddEventHandler("COMPANION_LEARNED", function() self:OnMountsUpdated() end)
     self:AddEventHandler("ACHIEVEMENT_EARNED", function() self:OnMountsUpdated() end)
@@ -973,6 +957,7 @@ function private:OnSlashCommand(command, parameter1, parameter2)
         if (parameter1 == "on") then
             self.settings.debugMode = true
             print("MountJournalEnhanced: Debug mode activated.")
+            self:RunDebugMode()
         elseif (parameter1 == "off") then
             self.settings.debugMode = false
             print("MountJournalEnhanced: Debug mode deactivated.")
