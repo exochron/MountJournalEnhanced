@@ -1035,6 +1035,7 @@ MountJournalEnhancedSource = {
         [163025] = "Grinning Reaver",
         [180545] = "Mystic Runesaber",
         [189999] = "Grove Warden",
+        [243512] = "Luminous Starseeker",
 
         -- Promotion
         [58983] = "Big Blizzard Bear", -- BlizzCon
@@ -1514,5 +1515,5 @@ MountJournalEnhancedIgnored = {
     [194046] = "Swift Spectral Rylak",
     
     -- Legion Unknown Source
---    [239363] = "Swift Spectral Hippogryph",
+    [239363] = "Swift Spectral Hippogryph",
 }
