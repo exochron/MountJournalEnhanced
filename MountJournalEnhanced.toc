@@ -6,7 +6,7 @@
 ## SavedVariables: MountJournalEnhancedSettings
 
 CoreFramework\CoreFramework.xml
-Locals\Locals.xml
 LibIconPath\Core.lua
+Locals\Locals.xml
 Database.lua
 MountJournalEnhanced.lua

@@ -1,5 +1,6 @@
 MountJournalEnhancedSource = {
     ["Drop"] = {
+        -- sourceType = 1
         ------------------------------
         -- Alliance & Horde ----------
         ------------------------------
@@ -60,6 +61,7 @@ MountJournalEnhancedSource = {
     },
 
     ["Quest"] = {
+        -- sourceType = 2
         ------------------------------
         -- Alliance & Horde ----------
         ------------------------------
@@ -94,6 +96,7 @@ MountJournalEnhancedSource = {
     },
 
     ["Vendor"] = {
+        -- sourceType = 3
         ------------------------------
         -- Alliance & Horde ----------
         ------------------------------
@@ -169,6 +172,7 @@ MountJournalEnhancedSource = {
     },
 
     ["Profession"] = {
+        -- sourceType = 4
         ------------------------------
         -- Alliance & Horde ----------
         ------------------------------
@@ -594,6 +598,7 @@ MountJournalEnhancedSource = {
     },
 
     ["Achievement"] = {
+        -- sourceType = 6
         ------------------------------
         -- Alliance & Horde ----------
         ------------------------------
@@ -925,6 +930,7 @@ MountJournalEnhancedSource = {
     },
 
     ["World Event"] = {
+        -- sourcetype = 7
         -- Love is in the Air
         [71342] = "Big Love Rocket",
         [102350] = "Swift Lovebird",
