@@ -496,7 +496,7 @@ function private:MountJournalFilterDropDown_Initialize(sender, level)
         self:AddCheckAllAndNoneInfo("family", level, 4)
 
         local sortedFamilies = {}
-        for family, _ in pairs(self.settings.filter.family) do
+        for family, _ in pairs(MountJournalEnhancedFamily) do
             table.insert(sortedFamilies, family)
         end
         table.sort(sortedFamilies, function(a, b) return (L[a] or a) < (L[b] or b) end)

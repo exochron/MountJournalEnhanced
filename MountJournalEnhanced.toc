@@ -1,8 +1,8 @@
-## Interface: 70200
+## Interface: 70300
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron
-## Version: 1.5.1
+## Version: 1.6
 ## SavedVariables: MountJournalEnhancedSettings
 
 CoreFramework\CoreFramework.xml

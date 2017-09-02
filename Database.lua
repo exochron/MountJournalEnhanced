@@ -58,6 +58,20 @@ MountJournalEnhancedSource = {
         [233364] = "Leywoven Flying Carpet", -- Nightfallen Cache (paragon)
         [242882] = "Valarjar Stormwing", -- Valarjar Strongbox (paragon)
         [242875] = "Wild Dreamrunner", -- Dreamweaver Cache (paragon)
+        [254258] = "Blessed Felcrusher", -- Army of the Light Cache (paragon)
+        [254259] = "Avenging Felcrusher", -- Army of the Light Cache (paragon)
+        [254069] = "Glorious Felcrusher", -- Army of the Light Cache (paragon)
+        [253058] = "Maddened Chaosrunner",
+        [243652] = "Vile Fiend",
+        [253661] = "Crimson Slavermaw",
+        [253662] = "Acid Belcher",
+        [253660] = "Biletooth Gnasher",
+        [253106] = "Vibrant Mana Ray",
+        [253107] = "Lambent Mana Ray",
+        [253108] = "Felglow Mana Ray",
+        [253109] = "Scintillating Mana Ray",
+        [235764] = "Darkspore Mana Ray",
+        [247402] = "Lucid Nightmare",
     },
 
     ["Quest"] = {
@@ -193,6 +207,7 @@ MountJournalEnhancedSource = {
         -- Fishing
         [30174] = "Riding Turtle",
         [64731] = "Sea Turtle",
+        [253711] = "Pond Nettle",
 
         -- Archaeology
         [84751] = "Fossilized Raptor",
@@ -277,6 +292,9 @@ MountJournalEnhancedSource = {
         [213134] = "Felblaze Infernal", -- The Nighthold, Gul'dan
         [171827] = "Hellfire Infernal", -- The Nighthold, Gul'dan (Mythic)
         [232519] = "Abyss Worm", -- Tomb of Sargeras, Mistress Sassz'ine
+        [253088] = "Antoran Charhound", -- Antorus, Shatug
+        [253639] = "Violet Spellwing", -- Antorus, Argus
+        [243651] = "Shackled Ur'zul", -- Antorus, Argus Mythic
 
         ------------------------------
         -- Alliance ------------------
@@ -403,6 +421,17 @@ MountJournalEnhancedSource = {
 
         -- Talon's Vengeance
         [230401] = "White Hawkstrider",
+
+        -- Argussian Reach
+        [242305] = "Sable Ruinstrider",
+        [253004] = "Amethyst Ruinstrider",
+        [253005] = "Beryl Ruinstrider",
+        [253006] = "Russet Ruinstrider",
+        [253007] = "Cerulean Ruinstrider",
+        [253008] = "Umber Ruinstrider",
+
+        -- Army of the Light
+        [239013] = "Lightforged Warframe",
 
         ------------------------------
         -- Alliance ------------------
@@ -657,6 +686,8 @@ MountJournalEnhancedSource = {
         [225765] = "Leyfeather Hippogryph", -- Glory of the Legion Hero
         [215558] = "Ratstallion", -- Underbelly Tycoon
         [193007] = "Grove Defiler", -- Glory of the Legion Raider
+        [254260] = "Bleakhoof Ruinstrider", -- ...And Chew Mana Buns
+        [253087] = "Antoran Gloomhound", -- Glory of the Argus Raider
 
         ------------------------------
         -- Alliance ------------------
@@ -769,7 +800,8 @@ MountJournalEnhancedSource = {
         [227989] = "Cruel Gladiator's Storm Dragon", -- Gladiator: Legion Season 3
         [227991] = "Ferocious Gladiator's Storm Dragon", -- Gladiator: Legion Season 4
         [227994] = "Fierce Gladiator's Storm Dragon",
-        [227995] = "Demonic Gladiator's Storm Dragon",
+        [227995] = "Dominating Gladiator's Storm Dragon",
+        [243201] = "Demonic Gladiator's Storm Dragon",
 
         -- Prestige Reward
         [222202] = "Prestigious Bronze Courser",
@@ -795,6 +827,7 @@ MountJournalEnhancedSource = {
         [229487] = "Vicious War Bear",
         [229512] = "Vicious War Lion",
         [232523] = "Vicious War Turtle",
+        [242896] = "Vicious War Fox",
 
         -- Achievement
         [60118] = "Black War Bear", -- For The Alliance!
@@ -831,6 +864,7 @@ MountJournalEnhancedSource = {
         [229486] = "Vicious War Bear",
         [232525] = "Vicious War Turtle",
         [230988] = "Vicious War Scorpion",
+        [242897] = "Vicious War Fox",
 
         -- Achievement
         [60119] = "Black War Bear", -- For The Horde!
@@ -954,6 +988,7 @@ MountJournalEnhancedSource = {
         [103081] = "Darkmoon Dancing Bear",
         [102346] = "Swift Forest Strider",
         [228919] = "Darkwater Skate",
+        [247448] = "Darkmoon Dirigible",
 
         -- Timewalking
         [142910] = "Ironbound Wraithcharger",
@@ -1118,6 +1153,10 @@ MountJournalEnhancedFamily = {
     ["Cranes"] = {
         ['keywords'] = {"crane"},
     },
+
+    ["Demonic Hounds"] = {
+        ['keywords'] = {"felstalker", "dhmount", "felhound", "soulhound"},
+    },
     
     ["Devices"] = {
         ['keywords'] = {"carpet", "kite"},
@@ -1161,10 +1200,6 @@ MountJournalEnhancedFamily = {
         [231442] = "Farseer's Raging Tempest",
     },
 
-    ["Felstalker"] = {
-        ['keywords'] = {"felstalker", "dhmount"},
-    },
-    
     ["Foxes"] = {
         ['keywords'] = {"fox"},
     },
@@ -1269,6 +1304,8 @@ MountJournalEnhancedFamily = {
             "goblintrike",
             "steelwarhorse",
             "clockworkhorse",
+            "mechsuit",
+            "zeppelin",
         },
         [63796] = "Mimiron's Head",
         [182912] = "Felsteel Annihilator",
@@ -1288,10 +1325,6 @@ MountJournalEnhancedFamily = {
     
     ["Mushan"] = {
         ['keywords'] = {"mushan"},
-    },
-
-    ["Nether Rays"] = {
-        ['keywords'] = {"netherray"},
     },
 
     ["Phoenixes"] = {
@@ -1328,6 +1361,10 @@ MountJournalEnhancedFamily = {
         ['keywords'] = {"raven", "roguemount"},
     },
 
+    ["Rays"] = {
+        ['keywords'] = {"netherray", "manaray"},
+    },
+
     ["Rhinos"] = {
         [74918] = "Wooly White Rhino",
     },
@@ -1343,6 +1380,7 @@ MountJournalEnhancedFamily = {
 
     ["Sea Dwellers"] = {
         ['keywords'] = {"stingray", "fish", "seahorse"},
+        [253711] = "Pond Nettle",
     },
 
     ["Serpents"] = {
