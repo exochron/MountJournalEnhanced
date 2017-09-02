@@ -3,3 +3,12 @@ ignore:
     - README.md
 
 license-output: LICENSE
+
+externals:
+  LibIconPath:
+    url: git://github.com/Ignifazius/libiconpath.git
+
+enable-nolib-creation: no
+
+move-folders:
+  LibIconPath/LibIconPath: LibIconPath
