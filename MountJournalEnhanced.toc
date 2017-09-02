@@ -2,11 +2,11 @@
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron
-## Version: 1.6
+## Version: 1.6.1
 ## SavedVariables: MountJournalEnhancedSettings
 
 CoreFramework\CoreFramework.xml
-LibIconPath\Core.lua
+LibIconPath\LibIconPath\Core.lua
 Locals\Locals.xml
 Database.lua
 MountJournalEnhanced.lua
