@@ -1094,12 +1094,14 @@ MountJournalEnhancedSource = {
         ------------------------------
 
         [107516] = "Spectral Gryphon", -- Scroll of Resurrection
+        [245723] = "Stormwind Skychaser", -- Blizzcon 2017
 
         ------------------------------
         -- Horde ---------------------
         ------------------------------
 
         [107517] = "Spectral Wind Rider", -- Scroll of Resurrection
+        [245725] = "Orgrimmar Interceptor", -- Blizzcon 2017
     },
 }
 
@@ -1162,6 +1164,8 @@ MountJournalEnhancedFamily = {
         ['keywords'] = {"carpet", "kite"},
         [130092] = "Red Flying Cloud",
         [229376] = "Archmage's Prismatic Disc",
+        [245723] = "Stormwind Skychaser", -- Blizzcon 2017
+        [245725] = "Orgrimmar Interceptor", -- Blizzcon 2017
     },
 
     ["Direhorns"] = {
