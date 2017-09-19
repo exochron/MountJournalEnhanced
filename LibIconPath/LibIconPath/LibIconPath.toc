@@ -1,0 +1,7 @@
+## Interface: 70300
+## Title: Lib: IconPath
+## Notes: Database of IconPaths
+## Version: 1.6
+## Author: Ignifazius
+
+Core.lua

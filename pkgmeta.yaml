@@ -4,8 +4,8 @@ ignore:
 
 license-output: LICENSE
 
-externals:
-  LibIconPath:
-    url: git://github.com/Ignifazius/libiconpath.git
-
-enable-nolib-creation: no
+#externals:
+#  LibIconPath:
+#    url: git://github.com/Ignifazius/libiconpath.git
+#
+#enable-nolib-creation: no

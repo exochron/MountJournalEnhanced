@@ -1366,7 +1366,7 @@ MountJournalEnhancedFamily = {
     },
 
     ["Rays"] = {
-        ['keywords'] = {"netherray", "manaray"},
+        ['keywords'] = {"netherray", "manaray", "stingray"},
     },
 
     ["Rhinos"] = {
@@ -1383,7 +1383,7 @@ MountJournalEnhancedFamily = {
     },
 
     ["Sea Dwellers"] = {
-        ['keywords'] = {"stingray", "fish", "seahorse"},
+        ['keywords'] = {"fish", "seahorse"},
         [253711] = "Pond Nettle",
     },
 
@@ -1526,6 +1526,8 @@ MountJournalEnhancedType = {
         [55531] = "Mechano-Hog",
         [60424] = "Mekgineer's Chopper",
         [75973] = "X-53 Touring Rocket",
+        [245723] = "Stormwind Skychaser", -- Blizzcon 2017
+        [245725] = "Orgrimmar Interceptor", -- Blizzcon 2017
     },
 }
 
