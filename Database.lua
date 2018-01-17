@@ -93,6 +93,7 @@ MountJournalEnhancedSource = {
         [213158] = "Predatory Bloodgazer", -- Bloodgazer Reunion
         [215159] = "Long-Forgotten Hippogryph", -- Ephemeral Crystal x5
         [230987] = "Arcanist's Manasaber", -- Fate of the Nightborne
+        [239770] = "Black Qiraji War Tank", -- newer high res version of the Black Qiraji Battle Tank
 
         ------------------------------
         -- Alliance ------------------
@@ -688,6 +689,10 @@ MountJournalEnhancedSource = {
         [193007] = "Grove Defiler", -- Glory of the Legion Raider
         [254260] = "Bleakhoof Ruinstrider", -- ...And Chew Mana Buns
         [253087] = "Antoran Gloomhound", -- Glory of the Argus Raider
+        [258022] = "Lightforged Felcrusher", -- Allied Races: Lightforged Draenei
+        [258060] = "Highmountain Thunderhoof", -- Allied Races: Highmountain Tauren
+        [258845] = "Nightborne Manasaber", -- Allied Races: Nightborne
+        [259202] = "Starcursed Voidstrider", -- Allied Races: Void Elf
 
         ------------------------------
         -- Alliance ------------------
@@ -995,6 +1000,10 @@ MountJournalEnhancedSource = {
         [194464] = "Eclipse Dragonhawk",
         [201098] = "Infinite Timereaver",
         [127165] = "Yu'lei, Daughter of Jade",
+
+        -- Call of the Scarab (Micro)
+        [239766] = "Blue Qiraji War Tank",
+        [239767] = "Red Qiraji War Tank",
     },
 
     ["Black Market"] = {
@@ -1142,6 +1151,7 @@ MountJournalEnhancedFamily = {
         [121820] = "Obsidian Nightwing",
         [232405] = "Primal Flamesaber",
         [229385] = "Ban-Lu, Grandmaster's Companion",
+        [258845] = "Nightborne Manasaber", -- Allied Races: Nightborne
     },
 
     ["Chimeras"] = {
@@ -1325,6 +1335,7 @@ MountJournalEnhancedFamily = {
 
     ["Moose"] = {
         ['keywords'] = {"moose"},
+        [258060] = "Highmountain Thunderhoof", -- Allied Races: Highmountain Tauren
     },
     
     ["Mushan"] = {
@@ -1393,9 +1404,10 @@ MountJournalEnhancedFamily = {
     },
 
     ["Silithids"] = {
-        ['keywords'] = {"qiraji"},
+        ['keywords'] = {"qiraji", "silithid"},
         [92155] = "Ultramarine Qiraji Battle Tank",
         [26656] = "Black Qiraji Battle Tank",
+        [239770] = "Black Qiraji War Tank", -- newer high res version of the Black Qiraji Battle Tank
     },
 
     ["Spiders"] = {
@@ -1409,6 +1421,7 @@ MountJournalEnhancedFamily = {
     ["Tallstriders"] = {
         ['keywords'] = {"tallstrider"},
         [65917] = "Magic Rooster",
+        [259202] = "Starcursed Voidstrider", -- Allied Races: Void Elf
     },
 
     ["Turtles"] = {
