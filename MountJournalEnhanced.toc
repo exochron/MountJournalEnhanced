@@ -2,7 +2,7 @@
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron
-## Version: 1.6.4
+## Version: 1.6.5
 ## SavedVariables: MountJournalEnhancedSettings
 
 CoreFramework\CoreFramework.xml

@@ -1104,6 +1104,7 @@ MountJournalEnhancedSource = {
 
         [107516] = "Spectral Gryphon", -- Scroll of Resurrection
         [245723] = "Stormwind Skychaser", -- Blizzcon 2017
+        [255695] = "Seabraid Stallion", -- BoA CE
 
         ------------------------------
         -- Horde ---------------------
@@ -1111,6 +1112,7 @@ MountJournalEnhancedSource = {
 
         [107517] = "Spectral Wind Rider", -- Scroll of Resurrection
         [245725] = "Orgrimmar Interceptor", -- Blizzcon 2017
+        [255696] = "Gilded Ravasaurn", -- BoA CE
     },
 }
 
@@ -1284,6 +1286,8 @@ MountJournalEnhancedFamily = {
         -- undead steeds
         [146622] = "Vicious Skeletal Warhorse",
         [92231] = "Spectral Steed",
+
+        [255695] = "Seabraid Stallion", -- BoA CE
     },
 
     ["Hounds"] = {
@@ -1362,6 +1366,7 @@ MountJournalEnhancedFamily = {
 
     ["Raptors"] = {
         ['keywords'] = {"raptor", "falcosauros"},
+        [255696] = "Gilded Ravasaurn", -- BoA CE
     },
 
     ["Rats"] = {
