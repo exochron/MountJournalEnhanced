@@ -1086,6 +1086,7 @@ MountJournalEnhancedSource = {
         [180545] = "Mystic Runesaber",
         [189999] = "Grove Warden",
         [243512] = "Luminous Starseeker",
+        [259395] = "Shu-zen, the Divine Sentinel",
 
         -- Promotion
         [58983] = "Big Blizzard Bear", -- BlizzCon
@@ -1292,6 +1293,7 @@ MountJournalEnhancedFamily = {
 
     ["Hounds"] = {
         ['keywords'] = {"corehound"},
+        [259395] = "Shu-zen, the Divine Sentinel",
     },
 
     ["Infernals"] = {
