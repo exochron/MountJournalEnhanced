@@ -205,7 +205,6 @@ function private:RunDebugMode()
         local name, spellID, icon, active, isUsable, sourceType = C_MountJournal.GetMountInfoByID(mountID)
         mounts[spellID] = {
             name=name,
-            icon=icon,
             mountID=mountID,
         }
     end
@@ -229,7 +228,7 @@ function private:RunDebugMode()
             if self:FilterMountsBySource(spellID) then
                 print("[MJE] New mount: " .. data.name .. " (" .. spellID .. ")")
             end
-            if self:FilterMountsByFamily(spellID, data.icon) then
+            if self:FilterMountsByFamily(spellID) then
                 print("[MJE] No family info for mount: " .. data.name .. " (" .. spellID .. ")")
             end
             if self:FilterMountsByExpansion(spellID) then
@@ -746,7 +745,7 @@ function private:SearchInList(searchTerms, text)
     return false
 end
 
-function private:FilterMountsByFamily(spellId, icon)
+function private:FilterMountsByFamily(spellId)
 
     local settingsResult = self:CheckAllSettings(self.settings.filter.family)
     if settingsResult then
@@ -758,18 +757,7 @@ function private:FilterMountsByFamily(spellId, icon)
         return true
     end
 
-    local isInList = false
-    local iconName = string.lower(LibIconPath_getName(icon))
-    for family, value in pairs(self.settings.filter.family) do
-        if MountJournalEnhancedFamily[family] and self:SearchInList(MountJournalEnhancedFamily[family]["keywords"], iconName) then
-            if (value) then
-                return true
-            end
-            isInList = true
-        end
-    end
-
-    return not isInList and mountResult == nil
+    return mountResult == nil
 end
 
 function private:FilterMountsByExpansion(spellId)
@@ -854,7 +842,7 @@ function private:UpdateMountInfoCache()
                         self:FilterMountsBySource(spellId, sourceType) and
                         self:FilterMountsByFaction(isFaction, faction) and
                         self:FilterMountsByType(spellId, mountID) and
-                        self:FilterMountsByFamily(spellId, icon) and
+                        self:FilterMountsByFamily(spellId) and
                         self:FilterMountsByExpansion(spellId)))) then
             mountInfoCache[#mountInfoCache + 1] = { creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID }
             indexMap[#mountInfoCache] = i
