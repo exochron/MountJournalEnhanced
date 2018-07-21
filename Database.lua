@@ -72,6 +72,19 @@ MountJournalEnhancedSource = {
         [253109] = "Scintillating Mana Ray",
         [235764] = "Darkspore Mana Ray",
         [247402] = "Lucid Nightmare",
+
+        -- Battle for Azeroth
+        [237286] = "Dune Scavenger",
+        [243795] = "Leaping Veinseeker",
+        [279868] = "Witherbark Direwing", -- Nimar the Slayer Nimar the Slayer
+        [279569] = "Swift Albino Raptor", -- Beastrider Kama
+        [279611] = "Skullripper", -- Skullripper
+        [275623] = "Nazjatar Blood Serpent", -- Adherent of the Abyss
+        [279608] = "Lil' Donkey", -- Overseer Krix
+        [279457] = "Broken Highland Mustang", -- Knight-Captain Aldrin
+        [260174] = "Terrified Pack Mule",
+        [279456] = "Highland Mustang", --Doomrider Helgrim
+        [260175] = "Goldenmane",
     },
 
     ["Quest"] = {
@@ -99,15 +112,16 @@ MountJournalEnhancedSource = {
         -- Alliance ------------------
         ------------------------------
 
-        -- Operation: Shieldwall
-        [136163] = "Grand Gryphon", -- The Silence
+        [136163] = "Grand Gryphon", -- Operation: Shieldwall; The Silence
+        [274610] = "Teldrassil Hippogryph", -- From the Ashes... (BfA PreQuest)
 
         ------------------------------
         -- Horde ---------------------
         ------------------------------
 
-        -- Dominance Offensive
-        [136164] = "Grand Wyvern", -- Breath of Darkest Shadow
+        [136164] = "Grand Wyvern", -- Dominance Offensive; Breath of Darkest Shadow
+        [272472] = "Undercity Plaguebat", -- Killer Queen (BfA PreQuest)
+        [267270] = "Kua'fon", -- Down, But Not Out
     },
 
     ["Vendor"] = {
@@ -126,6 +140,8 @@ MountJournalEnhancedSource = {
         [227956] = "Arcadian War Turtle", -- Xur'ios
         [214791] = "Brinedeep Bottom-Feeder", -- Conjurer Margoss
         [230844] = "Brawler's Burly Basilisk", -- brawler guild mount (season 2)
+        [264058] = "Mighty Caravan Brutosaur",
+        [279474] = "Palehide Direhorn",
 
         ------------------------------
         -- Alliance ------------------
@@ -209,6 +225,7 @@ MountJournalEnhancedSource = {
         [30174] = "Riding Turtle",
         [64731] = "Sea Turtle",
         [253711] = "Pond Nettle",
+        [278803] = "Great Sea Ray",
 
         -- Archaeology
         [84751] = "Fossilized Raptor",
@@ -262,6 +279,9 @@ MountJournalEnhancedSource = {
         [96499] = "Swift Zulian Panther", -- Zul'Gurub, High Priestess Kilnara
         [231428] = "Smoldering Ember Wyrm", -- Return to Karazhan timerun
         [229499] = "Midnight", -- Return to Karazhan
+        [254813] = "Sharkbait", -- Freehold (Mythic)
+        [266058] = "Tomb Stalker", -- Kings' Rest (Mythic)
+        [273541] = "Underrot Crawg", -- The Underrot (Mythic)
 
         -- Raid
         [25953] = "Blue Qiraji Battle Tank", -- Temple of Ahn'Qiraj
@@ -530,6 +550,15 @@ MountJournalEnhancedSource = {
         -- Council of Exarchs
         [171625] = "Dusty Rockhide",
 
+        -- Order of Embers
+        [260173] = "Smoky Charger",
+
+        -- Proudmoore Admiralty
+        [259213] = "Admiralty Stallion",
+
+        -- Storm's Wake
+        [260172] = "Dapple Gray",
+
         ------------------------------
         -- Horde ---------------------
         ------------------------------
@@ -625,6 +654,15 @@ MountJournalEnhancedSource = {
 
         -- Frostwolf Orcs
         [171842] = "Swift Frostwolf",
+
+        -- Talanji's Expedition
+        [275841] = "Expedition Bloodswarmer",
+
+        -- Voldunai
+        [237287] = "Alabaster Hyena",
+
+        -- Zandalari Empire
+        [275837] = "Cobalt Pterrordax",
     },
 
     ["Achievement"] = {
@@ -694,6 +732,17 @@ MountJournalEnhancedSource = {
         [258845] = "Nightborne Manasaber", -- Allied Races: Nightborne
         [259202] = "Starcursed Voidstrider", -- Allied Races: Void Elf
 
+        -- Battle for Azeroth
+        [213350] = "Frostshard Infernal", -- No Stable Big Enough
+        [280729] = "Frenzied Feltalon", -- A Horde of Hoofbeats
+        [263707] = "Zandalari Direhorn", -- Allied Races: Zandalari Troll
+        [267274] = "Mag'har Direwolf", -- Allied Races: Mag'har Orc
+        [271646] = "Dark Iron Core Hound", -- Allied Races: Dark Iron Dwarf
+        [239049] = "Obsidian Krolusk", -- Glory of the Wartorn Hero
+        [250735] = "Bloodgorged Crawg", -- Glory of the Uldir Raider
+        [279454] = "Conquerer's Scythemaw", -- Conqueror of Azeroth
+        [280730] = "Pureheart Courser", -- 100 Exalted Reputations
+
         ------------------------------
         -- Alliance ------------------
         ------------------------------
@@ -720,6 +769,14 @@ MountJournalEnhancedSource = {
 
         [61997] = "Red Dragonhawk", -- Mountain o' Mounts, Horde
         [142266] = "Armored Red Dragonhawk", -- Mount Parade, Horde
+    },
+
+    ["Island Expedition"] = {
+        [254811] = "Squawks",
+        [278979] = "Surf Jelly",
+        [279466] = "Twilight Avenger",
+        [279469] = "Qinsho's Eternal Hound",
+        [279467] = "Craghorn Chasm-Leaper",
     },
 
     ["Garrison"] = {
@@ -807,6 +864,7 @@ MountJournalEnhancedSource = {
         [227994] = "Fierce Gladiator's Storm Dragon",
         [227995] = "Dominating Gladiator's Storm Dragon",
         [243201] = "Demonic Gladiator's Storm Dragon",
+        [262022] = "Dread Gladiator's Proto-Drake", -- Gladiator: Battle for Azeroth Season 1
 
         -- Prestige Reward
         [222202] = "Prestigious Bronze Courser",
@@ -815,6 +873,7 @@ MountJournalEnhancedSource = {
         [222238] = "Prestigious Ivory Courser",
         [222240] = "Prestigious Azure Courser",
         [222241] = "Prestigious Midnight Courser",
+        [281044] = "Prestigious Bloodforged Courser",
 
         ------------------------------
         -- Alliance ------------------
@@ -833,6 +892,8 @@ MountJournalEnhancedSource = {
         [229512] = "Vicious War Lion",
         [232523] = "Vicious War Turtle",
         [242896] = "Vicious War Fox",
+        [261433] = "Vicious War Basilisk",
+        [272481] = "Vicious War Riverbeast",
 
         -- Achievement
         [60118] = "Black War Bear", -- For The Alliance!
@@ -870,6 +931,8 @@ MountJournalEnhancedSource = {
         [232525] = "Vicious War Turtle",
         [230988] = "Vicious War Scorpion",
         [242897] = "Vicious War Fox",
+        [261434] = "Vicious War Basilisk",
+        [270560] = "Vicious War Clefthoof",
 
         -- Achievement
         [60119] = "Black War Bear", -- For The Horde!
@@ -908,9 +971,6 @@ MountJournalEnhancedSource = {
         [54729] = "Winged Steed of the Ebon Blade",
         [229387] = "Deathlord's Vilebrood Vanquisher",
 
-        -- Paladin
-        [66906] = "Argent Charger",
-
         -- Demon Hunter
         [200175] = "Felsaber",
         [229417] = "Slayer's Felbroken Shrieker",
@@ -919,10 +979,13 @@ MountJournalEnhancedSource = {
         [229376] = "Archmage's Prismatic Disc",
 
         -- Paladin
+        [66906] = "Argent Charger",
         [231435] = "Highlord's Golden Charger",
         [231587] = "Highlord's Vengeful Charger",
         [231588] = "Highlord's Vigilant Charger",
         [231589] = "Highlord's Valorous Charger",
+        [270564] = "Dawnforge Ram",
+        [270562] = "Darkforge Ram",
 
         -- Priest
         [229377] = "High Priest's Lightsworn Seeker",
@@ -1098,6 +1161,8 @@ MountJournalEnhancedSource = {
         [124659] = "Imperial Quilen", -- Mists of Pandaria Collector's Edition
         [155741] = "Dread Raven", -- Warlords of Draenor Collector's Edition
         [189998] = "Illidari Felstalker", -- Legion Collector's Edition
+        [255695] = "Seabraid Stallion", -- Battle for Azeroth CE
+        [255696] = "Gilded Ravasaurn", -- Battle for Azeroth CE
 
         ------------------------------
         -- Alliance ------------------
@@ -1161,12 +1226,25 @@ MountJournalEnhancedExpansion = {
 
     ["Legion"] = {
         ["minID"] = 193001,
-        ["maxID"] = 999999,
+        ["maxID"] = 254500,
         [171827] = "Hellfire Infernal",
         [171850] = "Llothien Prowler",
         [127165] = "Yu'lei, Daughter of Jade",
         [189998] = "Illidari Felstalker", -- Legion Collector's Edition
+        [259395] = "Shu-zen, the Divine Sentinel",
     },
+
+    ["Battle for Azeroth"] = {
+        ["minID"] = 254501,
+        ["maxID"] = 999999,
+        [213350] = "Frostshard  Infernal",
+        [237286] = "Dune Scavenger",
+        [239049] = "Obsidian Krolusk",
+        [243795] = "Leaping Veinseeker",
+        [250735] = "Bloodgorged Crawg",
+        [255695] = "Seabraid Stallion", -- Battle for Azeroth CE
+        [255696] = "Gilded Ravasaurn", -- Battle for Azeroth CE
+    }
 }
 
 MountJournalEnhancedType = {
@@ -1177,8 +1255,9 @@ MountJournalEnhancedType = {
         typeIDs = {247, 248}
     },
     waterWalking = {
-        typeIDs = {269}
-    },
+        typeIDs = {269},
+        [118089] = "Azure Water Strider",
+},
     underwater = {
         typeIDs = {232, 254},
         [30174] = "Riding Turtle",
@@ -1187,6 +1266,7 @@ MountJournalEnhancedType = {
     repair = {
         [61425] = "Traveler's Tundra Mammoth",
         [122708] = "Grand Expedition Yak",
+        [264058] = "Mighty Caravan Brutosaur",
     },
     passenger = {
         [61425] = "Traveler's Tundra Mammoth",
@@ -1202,6 +1282,7 @@ MountJournalEnhancedType = {
         [75973] = "X-53 Touring Rocket",
         [245723] = "Stormwind Skychaser", -- Blizzcon 2017
         [245725] = "Orgrimmar Interceptor", -- Blizzcon 2017
+        [264058] = "Mighty Caravan Brutosaur",
     },
 }
 
@@ -1240,4 +1321,6 @@ MountJournalEnhancedIgnored = {
     
     -- Legion Unknown Source
     [239363] = "Swift Spectral Hippogryph",
+
+    [244457] = "?",
 }

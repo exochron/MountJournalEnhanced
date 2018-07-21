@@ -1,8 +1,12 @@
 MountJournalEnhancedFamily = {
 ["Basilisks"] = {
+	[261434] = true, -- Vicious War Basilisk
+	[261433] = true, -- Vicious War Basilisk
 	[230844] = true, -- Brawler's Burly Basilisk
 },
 ["Bats"] = {
+	[272472] = true, -- Undercity Plaguebat
+	[279868] = true, -- Witherbark Direwing
 	[139595] = true, -- Armored Bloodwing
 },
 ["Bears"] = {
@@ -33,6 +37,9 @@ MountJournalEnhancedFamily = {
 	[171633] = true, -- Wild Goretusk
 	[171636] = true, -- Great Greytusk
 	[171637] = true, -- Trained Rocktusk
+},
+["Brontosaurus"] = {
+	[264058] = true, -- Mighty Caravan Brutosaur
 },
 ["Camels"] = {
 	[102488] = true, -- White Riding Camel
@@ -87,8 +94,10 @@ MountJournalEnhancedFamily = {
 	[194046] = true, -- Swift Spectral Rylak
 	[124659] = true, -- Imperial Quilen
 	[153489] = true, -- Iron Skyreaver
+	[279469] = true, -- Qinsho's Eternal Hound
 },
 ["Clefthooves"] = {
+	[270560] = true, -- Vicious War Clefthoof
 	[171619] = true, -- Tundra Icehoof
 	[171616] = true, -- Witherhide Cliffstomper
 	[171617] = true, -- Trained Icehoof
@@ -99,6 +108,10 @@ MountJournalEnhancedFamily = {
 	[127174] = true, -- Azure Riding Crane
 	[127177] = true, -- Regal Riding Crane
 	[127176] = true, -- Golden Riding Crane
+},
+["Crawgs"] = {
+	[273541] = true, -- Underrot Crawg
+	[250735] = true, -- Bloodgorged Crawg
 },
 ["Demonic Hounds"] = {
 	[229417] = true, -- Slayer's Felbroken Shrieker
@@ -129,6 +142,8 @@ MountJournalEnhancedFamily = {
 	[138424] = true, -- Amber Primordial Direhorn
 	[138425] = true, -- Slate Primordial Direhorn
 	[136471] = true, -- Spawn of Horridon
+	[263707] = true, -- Zandalari Direhorn
+	[279474] = true, -- Palehide Direhorn
 	[140250] = true, -- Crimson Primal Direhorn
 	[140249] = true, -- Golden Primal Direhorn
 },
@@ -208,9 +223,11 @@ MountJournalEnhancedFamily = {
 	[67336] = true, -- Relentless Gladiator's Frost Wyrm
 	[69395] = true, -- Onyxian Drake
 	[61294] = true, -- Green Proto-Drake
+	[262022] = true, -- Dread Gladiator's Proto-Drake
 	[65439] = true, -- Furious Gladiator's Frost Wyrm
 	[101282] = true, -- Vicious Gladiator's Twilight Drake
 	[148392] = true, -- Spawn of Galakras
+	[279466] = true, -- Twilight Avenger
 },
 ["Elekks"] = {
 	[65637] = true, -- Great Red Elekk
@@ -293,6 +310,7 @@ MountJournalEnhancedFamily = {
 	[74856] = true, -- Blazing Hippogryph
 	[102514] = true, -- Corrupted Hippogryph
 	[215159] = true, -- Long-Forgotten Hippogryph
+	[274610] = true, -- Teldrassil Hippogryph
 	[242881] = true, -- Cloudwing Hippogryph
 	[149801] = true, -- Emerald Hippogryph
 	[63844] = true, -- Argent Hippogryph
@@ -312,15 +330,22 @@ MountJournalEnhancedFamily = {
 	[17463] = true, -- Blue Skeletal Horse
 	[17464] = true, -- Brown Skeletal Horse
 	[17465] = true, -- Green Skeletal Warhorse
+	[279608] = true, -- Lil' Donkey
 	[92231] = true, -- Spectral Steed
 	[17481] = true, -- Rivendare's Deathcharger
+	[260175] = true, -- Goldenmane
+	[260174] = true, -- Terrified Pack Mule
+	[260173] = true, -- Smoky Charger
+	[260172] = true, -- Dapple Gray
 	[65640] = true, -- Swift Gray Steed
 	[65645] = true, -- White Skeletal Warhorse
 	[223341] = true, -- Vicious Gilnean Warhorse
 	[229499] = true, -- Midnight
+	[259213] = true, -- Admiralty Stallion
 	[64656] = true, -- Blue Skeletal Warhorse
 	[63643] = true, -- Forsaken Warhorse
 	[193695] = true, -- Prestigious War Steed
+	[280730] = true, -- Pureheart Courser
 	[231587] = true, -- Highlord's Vengeful Charger
 	[231589] = true, -- Highlord's Valorous Charger
 	[231588] = true, -- Highlord's Vigilant Charger
@@ -334,6 +359,7 @@ MountJournalEnhancedFamily = {
 	[136505] = true, -- Ghastly Charger
 	[66906] = true, -- Argent Charger
 	[458] = true, -- Brown Horse
+	[281044] = true, -- Prestigious Bloodforged Courser
 	[64977] = true, -- Black Skeletal Horse
 	[468] = true, -- White Stallion
 	[470] = true, -- Black Stallion
@@ -365,6 +391,7 @@ MountJournalEnhancedFamily = {
 	[8980] = true, -- Skeletal Horse
 	[103195] = true, -- Mountain Horse
 	[103196] = true, -- Swift Mountain Horse
+	[48954] = true, -- Swift Zhevra
 	[171847] = true, -- Cindermane Charger
 	[36702] = true, -- Fiery Warhorse
 	[75614] = true, -- Celestial Steed
@@ -372,6 +399,8 @@ MountJournalEnhancedFamily = {
 	[238452] = true, -- Netherlord's Brimstone Wrathsteed
 	[67466] = true, -- Argent Warhorse
 	[48025] = true, -- Headless Horseman's Mount
+	[279456] = true, -- Highland Mustang
+	[279457] = true, -- Broken Highland Mustang
 	[34767] = true, -- Thalassian Charger
 	[34769] = true, -- Thalassian Warhorse
 	[232412] = true, -- Netherlord's Chaotic Wrathsteed
@@ -380,11 +409,17 @@ MountJournalEnhancedFamily = {
 },
 ["Hounds"] = {
 	[213209] = true, -- Steelbound Devourer
-	[259395] = true, -- Shu-zen, the Divine Sentinel
+	[271646] = true, -- Dark Iron Core Hound
+	[259395] = true, -- Shu-Zen, the Divine Sentinel
 	[170347] = true, -- Core Hound
+},
+["Hyena"] = {
+	[237287] = true, -- Alabaster Hyena
+	[237286] = true, -- Dune Scavenger
 },
 ["Infernals"] = {
 	[213134] = true, -- Felblaze Infernal
+	[213350] = true, -- Frostshard Infernal
 	[171827] = true, -- Hellfire Infernal
 },
 ["Kirin"] = {
@@ -407,6 +442,7 @@ MountJournalEnhancedFamily = {
 	[23248] = true, -- Great Gray Kodo
 	[23249] = true, -- Great Brown Kodo
 	[185052] = true, -- Vicious War Kodo
+	[18363] = true, -- Riding Kodo
 },
 ["Mammoths"] = {
 	[61447] = true, -- Traveler's Tundra Mammoth
@@ -482,6 +518,14 @@ MountJournalEnhancedFamily = {
 	[130965] = true, -- Son of Galleon
 	[148428] = true, -- Ashhide Mushan Beast
 },
+["Parasites"] = {
+	[243795] = true, -- Leaping Veinseeker
+	[275841] = true, -- Expedition Bloodswarmer
+},
+["Parrots"] = {
+	[254811] = true, -- Squawks
+	[254813] = true, -- Sharkbait
+},
 ["Phoenixes"] = {
 	[132118] = true, -- Emerald Pandaren Phoenix
 	[132119] = true, -- Violet Pandaren Phoenix
@@ -496,7 +540,9 @@ MountJournalEnhancedFamily = {
 	[88990] = true, -- Dark Phoenix
 },
 ["Pterodactyl"] = {
+	[267270] = true, -- Kua'fon
 	[136400] = true, -- Armored Skyscreamer
+	[275837] = true, -- Cobalt Pterrordax
 },
 ["Rams"] = {
 	[17460] = true, -- Frost Ram
@@ -504,6 +550,8 @@ MountJournalEnhancedFamily = {
 	[65643] = true, -- Swift Violet Ram
 	[63636] = true, -- Ironforge Ram
 	[22720] = true, -- Black War Ram
+	[270564] = true, -- Dawnforge Ram
+	[270562] = true, -- Darkforge Ram
 	[6777] = true, -- Gray Ram
 	[23238] = true, -- Swift Brown Ram
 	[23239] = true, -- Swift Gray Ram
@@ -517,7 +565,9 @@ MountJournalEnhancedFamily = {
 	[23510] = true, -- Stormpike Battle Charger
 },
 ["Raptors"] = {
+	[279569] = true, -- Swift Albino Raptor
 	[17450] = true, -- Ivory Raptor
+	[279611] = true, -- Skullripper
 	[65644] = true, -- Swift Purple Raptor
 	[63635] = true, -- Darkspear Raptor
 	[64659] = true, -- Venomhide Ravasaur
@@ -544,6 +594,7 @@ MountJournalEnhancedFamily = {
 	[16084] = true, -- Mottled Red Raptor
 	[84751] = true, -- Fossilized Raptor
 	[171835] = true, -- Vicious War Raptor
+	[266058] = true, -- Tomb Stalker
 },
 ["Rats"] = {
 	[215558] = true, -- Ratstallion
@@ -557,6 +608,7 @@ MountJournalEnhancedFamily = {
 	[231523] = true, -- Shadowblade's Lethal Omen
 	[231525] = true, -- Shadowblade's Crimson Omen
 	[231524] = true, -- Shadowblade's Baneful Omen
+	[280729] = true, -- Frenzied Feltalon
 	[101542] = true, -- Flametalon of Alysrazor
 	[179478] = true, -- Voidtalon of the Dark Star
 	[41252] = true, -- Raven Lord
@@ -569,6 +621,7 @@ MountJournalEnhancedFamily = {
 	[253109] = true, -- Scintillating Mana Ray
 	[253108] = true, -- Felglow Mana Ray
 	[235764] = true, -- Darkspore Mana Ray
+	[278803] = true, -- Great Sea Ray
 	[228919] = true, -- Darkwater Skate
 	[39798] = true, -- Green Riding Nether Ray
 	[39800] = true, -- Red Riding Nether Ray
@@ -580,6 +633,7 @@ MountJournalEnhancedFamily = {
 	[74918] = true, -- Wooly White Rhino
 },
 ["Riverbeasts"] = {
+	[272481] = true, -- Vicious War Riverbeast
 	[171638] = true, -- Trained Riverwallow
 	[171826] = true, -- Mudback Riverbeast
 	[171824] = true, -- Sapphire Riverbeast
@@ -594,6 +648,7 @@ MountJournalEnhancedFamily = {
 	[64731] = true, -- Sea Turtle
 	[98718] = true, -- Subdued Seahorse
 	[75207] = true, -- Vashj'ir Seahorse
+	[278979] = true, -- Surf Jelly
 	[214791] = true, -- Brinedeep Bottom-Feeder
 	[253711] = true, -- Pond Nettle
 	[223018] = true, -- Fathom Dweller
@@ -606,6 +661,7 @@ MountJournalEnhancedFamily = {
 	[148619] = true, -- Grievous Gladiator's Cloud Serpent
 	[139407] = true, -- Malevolent Gladiator's Cloud Serpent
 	[148620] = true, -- Prideful Gladiator's Cloud Serpent
+	[275623] = true, -- Nazjatar Blood Serpent
 	[139442] = true, -- Thundering Cobalt Cloud Serpent
 	[127154] = true, -- Onyx Cloud Serpent
 	[127156] = true, -- Crimson Cloud Serpent
@@ -667,9 +723,16 @@ MountJournalEnhancedFamily = {
 	[259202] = true, -- Starcursed Voidstrider
 	[101573] = true, -- Swift Shorestrider
 	[65917] = true, -- Magic Rooster
+	[66123] = true, -- Magic Rooster
+	[66122] = true, -- Magic Rooster
+	[66124] = true, -- Magic Rooster
 	[102346] = true, -- Swift Forest Strider
 	[102349] = true, -- Swift Springstrider
 	[102350] = true, -- Swift Lovebird
+},
+["Trilobites"] = {
+	[239049] = true, -- Obsidian Krolusk
+	[279454] = true, -- Conquerer's Scythemaw
 },
 ["Turtles"] = {
 	[232523] = true, -- Vicious War Turtle
@@ -694,6 +757,7 @@ MountJournalEnhancedFamily = {
 	[118089] = true, -- Azure Water Strider
 },
 ["Wolves"] = {
+	[267274] = true, -- Mag'har Direwolf
 	[92232] = true, -- Spectral Wolf
 	[65646] = true, -- Swift Burgundy Wolf
 	[64658] = true, -- Black Wolf
@@ -749,12 +813,8 @@ MountJournalEnhancedFamily = {
 	[122708] = true, -- Grand Expedition Yak
 },
 ["Yeti"] = {
-	[66123] = true, -- Magic Rooster
-	[66122] = true, -- Magic Rooster
-	[66124] = true, -- Magic Rooster
-	[48954] = true, -- Swift Zhevra
 	[171848] = true, -- Challenger's War Yeti
 	[191314] = true, -- Minion of Grumpus
-	[18363] = true, -- Riding Kodo
+	[279467] = true, -- Craghorn Chasm-Leaper
 },
 }

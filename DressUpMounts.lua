@@ -1,27 +1,15 @@
-
-local function findMountIdOfSpellId(spellId)
-    local mountIds = C_MountJournal.GetMountIDs()
-    for i, mountId in ipairs(mountIds) do
-        local _, mountSpellId = C_MountJournal.GetMountInfoByID(mountId)
-        if spellId == mountSpellId then
-            return mountId
+local function handleDressUpItem(itemLink)
+    local itemId = GetItemInfoInstant(itemLink)
+    if itemId then
+        local spellId = MountJournalEnhancedItems[itemId]
+        if spellId then
+            local mountId = C_MountJournal.GetMountFromSpell(spellId);
+            if mountId then
+                local creatureDisplayID = C_MountJournal.GetMountInfoExtraByID(mountId);
+                return DressUpMount(creatureDisplayID);
+            end
         end
     end
 end
 
-local function openMountBySpellId(spellId)
-    local mountId = findMountIdOfSpellId(spellId)
-    if mountId then
-        SetCollectionsJournalShown(true, COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS);
-        MountJournal_SelectByMountID(mountId, spellId)
-    end
-end
-
-local function handleDressUp(itemLink)
-    local itemId = GetItemInfoInstant(itemLink)
-    if itemId and MountJournalEnhancedItems[itemId] then
-        openMountBySpellId( MountJournalEnhancedItems[itemId])
-    end
-end
-
-hooksecurefunc("DressUpItemLink", handleDressUp)
+hooksecurefunc("DressUpItemLink", handleDressUpItem)
