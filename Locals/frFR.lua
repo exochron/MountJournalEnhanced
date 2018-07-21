@@ -109,3 +109,4 @@ L["Wrath of the Lich King"] = "Wrath of the Lich King"
 L["Wyverns"] = "Wyvernes"
 L["Yaks"] = "Yacks"
 L["Yeti"] = "Yétis"
+
