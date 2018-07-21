@@ -3,8 +3,8 @@ local ADDON_NAME = ...
 local COLLECTION_ACHIEVEMENT_CATEGORY = 15246
 local MOUNT_ACHIEVEMENT_CATEGORY = 15248
 local MOUNT_COUNT_STATISTIC = 339
-local EXPANSIONS = { "Classic", "The Burning Crusade", "Wrath of the Lich King", "Cataclysm", "Mists of Pandaria", "Warlords of Draenor", "Legion" }
-local SOURCE_INDEX_ORDER = { "Drop", "Quest", "Vendor", "Profession", "Instance", "Reputation", "Achievement", "Garrison", "PVP", "Class", "World Event", "Black Market", "Promotion"}
+local EXPANSIONS = { "Classic", "The Burning Crusade", "Wrath of the Lich King", "Cataclysm", "Mists of Pandaria", "Warlords of Draenor", "Legion", "Battle for Azeroth" }
+local SOURCE_INDEX_ORDER = { "Drop", "Quest", "Vendor", "Profession", "Instance", "Reputation", "Achievement", "Island Expedition", "Garrison", "PVP", "Class", "World Event", "Black Market", "Promotion"}
 
 local L = CoreFramework:GetModule("Localization", "1.1"):GetLocalization(ADDON_NAME)
 

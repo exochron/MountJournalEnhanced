@@ -2,5 +2,6 @@
 ..\FrameXML\UI.xsd">
 	<Script file="deDE.lua" />
 	<Script file="enUS.lua" />
+	<Script file="frFR.lua" />
     <Script file="ruRU.lua" />
 </Ui>

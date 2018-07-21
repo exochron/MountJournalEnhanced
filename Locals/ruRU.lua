@@ -96,3 +96,4 @@ L["Cataclysm"] = "Cataclysm";
 L["Mists of Pandaria"] = "Mists of Pandaria";
 L["Warlords of Draenor"] = "Warlords of Draenor";
 L["Legion"] = "Legion";
+L["Battle for Azeroth"] = "Battle for Azeroth";
