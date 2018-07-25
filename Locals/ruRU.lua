@@ -87,13 +87,3 @@ L["Yaks"] = "Яки" -- Needs review
 L["Yeti"] = "Йети" -- Needs review
 
 --L["Expansion"] = "Erweiterung";
-
--- Expansion
-L["Classic"] = "Classic";
-L["The Burning Crusade"] = "The Burning Crusade";
-L["Wrath of the Lich King"] = "Wrath of the Lich King";
-L["Cataclysm"] = "Cataclysm";
-L["Mists of Pandaria"] = "Mists of Pandaria";
-L["Warlords of Draenor"] = "Warlords of Draenor";
-L["Legion"] = "Legion";
-L["Battle for Azeroth"] = "Battle for Azeroth";
