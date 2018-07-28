@@ -6,10 +6,9 @@
 ## SavedVariables: MountJournalEnhancedSettings
 
 Locals\Locals.xml
-
-Database.lua
-families.db.lua
-items.db.lua
+Database\Database.lua
+Database\families.db.lua
+Database\items.db.lua
 
 Settings.lua
 UI\AchievementPoints.lua

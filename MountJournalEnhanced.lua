@@ -57,6 +57,15 @@ function ADDON:LoadUI()
 
     self:UpdateMountInfoCache()
     MountJournal_UpdateMountList()
+
+    local frame = CreateFrame("frame");
+    frame:RegisterEvent("SPELL_UPDATE_USABLE")
+    frame:SetScript("OnEvent", function(sender, ...)
+        if (CollectionsJournal:IsShown()) then
+            ADDON:UpdateMountInfoCache()
+            MountJournal_UpdateMountList()
+        end
+    end);
 end
 
 --region Hooks
@@ -700,26 +709,16 @@ function ADDON:Unhook(obj, name)
     return true
 end
 
-function ADDON:Load()
-    if not self.initialized then
-        self:LoadSettings()
-        self:LoadUI()
-        if self.settings.debugMode then
+local function Load()
+    if not ADDON.initialized then
+        ADDON.initialized = true
+        ADDON:LoadSettings()
+        ADDON:LoadUI()
+        if ADDON.settings.debugMode then
             ADDON:RunDebugTest()
         end
-
-        local frame = CreateFrame("frame");
-        frame:RegisterEvent("SPELL_UPDATE_USABLE")
-        frame:SetScript("OnEvent", function(sender, ...)
-            if (CollectionsJournal:IsShown()) then
-                self:UpdateMountInfoCache()
-                MountJournal_UpdateMountList()
-            end
-        end);
-
-        self.initialized = true
     end
 end
 
-hooksecurefunc("CollectionsJournal_LoadUI", function() ADDON:Load() end)
-hooksecurefunc("SetCollectionsJournalShown", function() ADDON:Load() end)
+hooksecurefunc("CollectionsJournal_LoadUI", Load)
+hooksecurefunc("SetCollectionsJournalShown", Load)

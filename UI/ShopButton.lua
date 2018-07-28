@@ -22,6 +22,7 @@ function ADDON:CreateShopButton()
     end)
 end
 
+-- also called from SlashCommand
 function ADDON:ToggleShopButton()
     if (MountJournal) then
         local frame = MountJournal.MountDisplay.InfoButton.Shop
