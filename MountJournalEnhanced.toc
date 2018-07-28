@@ -5,10 +5,19 @@
 ## Version: 1.9
 ## SavedVariables: MountJournalEnhancedSettings
 
-CoreFramework\CoreFramework.xml
 Locals\Locals.xml
+
 Database.lua
 families.db.lua
 items.db.lua
+
+Settings.lua
+UI\AchievementPoints.lua
+UI\MountCount.lua
+UI\ShopButton.lua
+
+DebugTest.lua
 MountJournalEnhanced.lua
 DressUpMounts.lua
+Favorite.lua
+SlashCommand.lua

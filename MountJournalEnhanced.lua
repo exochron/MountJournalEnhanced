@@ -1,8 +1,5 @@
 local ADDON_NAME, ADDON = ...
 
-local COLLECTION_ACHIEVEMENT_CATEGORY = 15246
-local MOUNT_ACHIEVEMENT_CATEGORY = 15248
-local MOUNT_COUNT_STATISTIC = 339
 local EXPANSIONS = { "Classic", "The Burning Crusade", "Wrath of the Lich King", "Cataclysm", "Mists of Pandaria", "Warlords of Draenor", "Legion", "Battle for Azeroth" }
 local SOURCE_INDEX_ORDER = { "Drop", "Quest", "Vendor", "Profession", "Instance", "Reputation", "Achievement", "Island Expedition", "Garrison", "PVP", "Class", "World Event", "Black Market", "Shop", "Promotion"}
 
@@ -13,59 +10,11 @@ local MountJournalEnhancedExpansion = ADDON.MountJournalEnhancedExpansion
 local MountJournalEnhancedType = ADDON.MountJournalEnhancedType
 local MountJournalEnhancedIgnored = ADDON.MountJournalEnhancedIgnored
 
-local initialState = {
-    settings = {
-        debugMode = false,
-        showShopButton = false,
-        favoritePerCharacter = true,
-        favoredMounts = {},
-        hiddenMounts = { },
-        filter = {
-            collected = true,
-            notCollected = true,
-            onlyFavorites = false,
-            onlyUsable = false,
-            source = { },
-            faction = {
-                alliance = true,
-                horde = true,
-                noFaction = true,
-            },
-            mountType = {
-                ground = true,
-                flying = true,
-                waterWalking = true,
-                underwater = true,
-                transform = true,
-                repair = true,
-                passenger = true,
-            },
-            family = { },
-			expansion = { },
-            hidden = false,
-        },
-    },
-}
-for categoryName, _ in pairs(MountJournalEnhancedSource) do
-    initialState.settings.filter.source[categoryName] = true
-end
-for categoryName, _ in pairs(MountJournalEnhancedFamily) do
-    initialState.settings.filter.family[categoryName] = true
-end
-for expansionName, _ in pairs(MountJournalEnhancedExpansion) do
-    initialState.settings.filter.expansion[expansionName] = true
-end
-local defaultFilterStates = CopyTable(initialState.settings.filter)
-local dependencies = {
-    function() return MountJournal or LoadAddOn("Blizzard_Collections") end,
-}
-local private = CoreFramework:GetModule("Addon", "1.0"):NewAddon(ADDON_NAME, initialState, dependencies)
+ADDON.hooks = { }
+ADDON.mountInfoCache = nil
+ADDON.indexMap = { }
 
-private.hooks = { }
-private.mountInfoCache = nil
-private.indexMap = { }
-
-function private:LoadUI()
+function ADDON:LoadUI()
     -- reset default filter settings
 	C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true)
 	C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, true)
@@ -87,7 +36,6 @@ function private:LoadUI()
     
     hooksecurefunc(MountJournal.mountOptionsMenu, "initialize", function(sender, level) UIDropDownMenu_InitializeHelper(sender) self:MountOptionsMenu_Init(sender, level) end)
     hooksecurefunc(MountJournalFilterDropDown, "initialize", function(sender, level) UIDropDownMenu_InitializeHelper(sender) self:MountJournalFilterDropDown_Initialize(sender, level) end)
-    hooksecurefunc("MountJournal_UpdateMountDisplay", function(sender, level) self:ToggleShopButton() end)
 
     local buttons = MountJournal.ListScrollFrame.buttons
     for buttonIndex = 1, #buttons do
@@ -102,231 +50,18 @@ function private:LoadUI()
         button.DragButton.IsHidden:SetDrawLayer("OVERLAY", 1)
         button.DragButton.IsHidden:SetShown(false)
     end
-   
-    self:CreateCharacterMountCountFrame()
-    self:CreateAchievementFrame()
+
+    self:CreateCharacterMountCount()
+    self:CreateAchievementPoints()
     self:CreateShopButton()
 
     self:UpdateMountInfoCache()
     MountJournal_UpdateMountList()
 end
 
-function private:CreateCharacterMountCountFrame()
-    local frame = CreateFrame("frame", nil, MountJournal, "InsetFrameTemplate3")
-
-    frame:ClearAllPoints()
-    frame:SetPoint("TOPLEFT", MountJournal, 70, -42)
-    frame:SetSize(130, 18)
-
-    frame.staticText = frame:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
-    frame.staticText:ClearAllPoints()
-    frame.staticText:SetPoint("LEFT", frame, 10, 0)
-    frame.staticText:SetText(CHARACTER)
-
-    frame.uniqueCount = frame:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-    frame.uniqueCount:ClearAllPoints()
-    frame.uniqueCount:SetPoint("RIGHT", frame, -10, 0)
-    --frame.uniqueCount:SetText(GetNumCompanions("MOUNT"))
-	local _, _, _, mountCount = GetAchievementCriteriaInfo(MOUNT_COUNT_STATISTIC, 1)
-	frame.uniqueCount:SetText(mountCount)
-
-    MountJournal.MountCount:SetPoint("TopLeft", 70, -22)
-    MountJournal.MountCount:SetSize(130, 18)
-    
-    self.characterMountCountFrame = frame
-end
-
-function private:CreateAchievementFrame()
-    local frame = CreateFrame("Button", nil, MountJournal)
-
-    frame:ClearAllPoints()
-    frame:SetPoint("TOP", MountJournal, 0, -21)
-    frame:SetSize(60, 40)
-
-    frame.bgLeft = frame:CreateTexture(nil, "BACKGROUND")
-    frame.bgLeft:SetAtlas("PetJournal-PetBattleAchievementBG")
-    frame.bgLeft:ClearAllPoints()
-    frame.bgLeft:SetSize(46, 18)
-    frame.bgLeft:SetPoint("Top", -56, -12)
-    frame.bgLeft:SetVertexColor(1, 1, 1, 1)
-
-    frame.bgRight = frame:CreateTexture(nil, "BACKGROUND")
-    frame.bgRight:SetAtlas("PetJournal-PetBattleAchievementBG")
-    frame.bgRight:ClearAllPoints()
-    frame.bgRight:SetSize(46, 18)
-    frame.bgRight:SetPoint("Top", 55, -12)
-    frame.bgRight:SetVertexColor(1, 1, 1, 1)
-    frame.bgRight:SetTexCoord(1, 0, 0, 1)
-
-    frame.highlight = frame:CreateTexture(nil)
-    frame.highlight:SetDrawLayer("BACKGROUND", 1)
-    frame.highlight:SetAtlas("PetJournal-PetBattleAchievementGlow")
-    frame.highlight:ClearAllPoints()
-    frame.highlight:SetSize(210, 40)
-    frame.highlight:SetPoint("CENTER", 0, 0)
-    frame.highlight:SetShown(false)
-
-    frame.icon = frame:CreateTexture(nil, "OVERLAY")
-    frame.icon:SetTexture("Interface\\AchievementFrame\\UI-Achievement-Shields-NoPoints")
-    frame.icon:ClearAllPoints()
-    frame.icon:SetSize(30, 30)
-    frame.icon:SetPoint("RIGHT", 0, -5)
-    frame.icon:SetTexCoord(0, 0.5, 0, 0.5)
-
-    frame.staticText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
-    frame.staticText:ClearAllPoints()
-    frame.staticText:SetPoint("RIGHT", frame.icon, "LEFT", -4, 4)
-    frame.staticText:SetSize(0, 0)
-    frame.staticText:SetText(GetCategoryAchievementPoints(MOUNT_ACHIEVEMENT_CATEGORY, true))
-
-    frame:SetScript("OnClick", function()
-        ToggleAchievementFrame()
-        local i = 1
-        local button = _G["AchievementFrameCategoriesContainerButton" .. i]
-        while button do
-            if (button.element.id == COLLECTION_ACHIEVEMENT_CATEGORY) then
-                button:Click()
-                button = nil
-            else
-                i = i + 1
-                button = _G["AchievementFrameCategoriesContainerButton" .. i]
-            end
-        end
-
-        i = 1
-        button = _G["AchievementFrameCategoriesContainerButton" .. i]
-        while button do
-            if (button.element.id == MOUNT_ACHIEVEMENT_CATEGORY) then
-                button:Click()
-                return
-            end
-
-            i = i + 1
-            button = _G["AchievementFrameCategoriesContainerButton" .. i]
-        end
-    end)
-    frame:SetScript("OnEnter", function() frame.highlight:SetShown(true) end)
-    frame:SetScript("OnLeave", function() frame.highlight:SetShown(false) end)
-
-    self.achievementFrame = frame
-end
-
-function private:CreateShopButton()
-    local frame = CreateFrame("Button", nil, MountJournal.MountDisplay.InfoButton)
-
-    frame:ClearAllPoints()
-    frame:SetPoint("BOTTOMRIGHT", MountJournal.MountDisplay, -14, 14)
-    frame:SetSize(28, 36)
-    frame:SetNormalAtlas('hud-microbutton-BStore-Up', true)
-    frame:SetPushedAtlas('hud-microbutton-BStore-Down', true)
-    frame:SetDisabledAtlas('hud-microbutton-BStore-Disabled', true)
-    frame:SetHighlightAtlas('hud-microbutton-highlight', true)
-
-    frame:SetScript("OnClick", function()
-        SetStoreUIShown(true)
-    end)
-
-    MountJournal.MountDisplay.InfoButton.Shop = frame
-end
-
-function private:ToggleShopButton()
-    local frame = MountJournal.MountDisplay.InfoButton.Shop
-    if (frame) then
-        if (self.settings.showShopButton and MountJournal.selectedMountID) then
-            local _, _, _, _, _, sourceType, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(MountJournal.selectedMountID)
-            if not isCollected and sourceType == 10 then
-                frame:Show()
-                return
-            end
-        end
-
-        frame:Hide()
-    end
-end
-
-function private:RunDebugMode()
-    local mounts = {}
-    local mountIDs = C_MountJournal.GetMountIDs()
-    for i, mountID in ipairs(mountIDs) do
-        local name, spellID, icon, active, isUsable, sourceType = C_MountJournal.GetMountInfoByID(mountID)
-        mounts[spellID] = {
-            name=name,
-            mountID=mountID,
-            sourceType=sourceType,
-        }
-    end
-
-    local filterSettingsBackup = CopyTable(self.settings.filter)
-    for key, _ in pairs(self.settings.filter.source) do
-        self.settings.filter.source[key] = false
-    end
-    for key, _ in pairs(self.settings.filter.family) do
-        self.settings.filter.family[key] = false
-    end
-    for key, _ in pairs(self.settings.filter.expansion) do
-        self.settings.filter.expansion[key] = false
-    end
-    for key, _ in pairs(self.settings.filter.mountType) do
-        self.settings.filter.mountType[key] = false
-    end
-
-    for spellID, data in pairs(mounts) do
-        if not MountJournalEnhancedIgnored[spellID] then
-            if self:FilterMountsBySource(spellID, data.sourceType) then
-                print("[MJE] New mount: " .. data.name .. " (" .. spellID .. ")")
-            end
-            if self:FilterMountsByFamily(spellID) then
-                print("[MJE] No family info for mount: " .. data.name .. " (" .. spellID .. ")")
-            end
-            if self:FilterMountsByExpansion(spellID) then
-                print("[MJE] No expansion info for mount: " .. data.name .. " (" .. spellID .. ")")
-            end
-            if self:FilterMountsByType(spellID, data.mountID) then
-                print("[MJE] New mount type for mount \"" .. data.name .. "\" (" .. spellID .. ")")
-            end
-        end
-    end
-
-    self.settings.filter = CopyTable(filterSettingsBackup)
-
-    for _, familyMounts in pairs(MountJournalEnhancedFamily) do
-        for id, name in pairs(familyMounts) do
-            if id ~= "keywords" and not MountJournalEnhancedIgnored[id] and not mounts[id] then
-                print("[MJE] Old family info for mount: " .. name .. " (" .. id .. ")")
-            end
-        end
-    end
-
-    for _, expansionMounts in pairs(MountJournalEnhancedExpansion) do
-        for id, name in pairs(expansionMounts) do
-            if id ~= "minID" and id ~= "maxID" and not MountJournalEnhancedIgnored[id] and not mounts[id] then
-                print("[MJE] Old expansion info for mount: " .. name .. " (" .. id .. ")")
-            end
-        end
-    end
-
-    local names = { }
-    for _, data in pairs(MountJournalEnhancedSource) do
-        for id, name in pairs(data) do
-            if id ~= "sourceType" then
-                if (names[id] and names[id] ~= name) then
-                    print("[MJE] Invalide mount info for mount: " .. name .. " (" .. id .. ")")
-                end
-                names[id] = name
-            end
-        end
-    end
-
-    for id, name in pairs(MountJournalEnhancedIgnored) do
-        if not mounts[id] then
-            print("[MJE] Old ignore entry for mount: " .. name .. " (" .. id .. ")")
-        end
-    end
-end
-
 --region Hooks
 
-function private:C_MountJournal_GetNumDisplayedMounts()
+function ADDON:C_MountJournal_GetNumDisplayedMounts()
     if (not self.mountInfoCache) then
         self:UpdateMountInfoCache()
     end
@@ -334,7 +69,7 @@ function private:C_MountJournal_GetNumDisplayedMounts()
     return #self.mountInfoCache
 end
 
-function private:C_MountJournal_GetDisplayedMountInfo(index)
+function ADDON:C_MountJournal_GetDisplayedMountInfo(index)
     if (not self.mountInfoCache) then
         self:UpdateMountInfoCache()
     end
@@ -347,7 +82,7 @@ function private:C_MountJournal_GetDisplayedMountInfo(index)
     return unpack(mountInfo)
 end
 
-function private:C_MountJournal_Pickup(index)
+function ADDON:C_MountJournal_Pickup(index)
     if (not self.mountInfoCache) then
         self:UpdateMountInfoCache()
     end
@@ -356,7 +91,7 @@ function private:C_MountJournal_Pickup(index)
     self.hooks["Pickup"](displayedIndex)
 end
 
-function private:C_MountJournal_GetDisplayedMountInfoExtra(index)
+function ADDON:C_MountJournal_GetDisplayedMountInfoExtra(index)
     if (not self.mountInfoCache) then
         self:UpdateMountInfoCache()
     end
@@ -370,7 +105,7 @@ function private:C_MountJournal_GetDisplayedMountInfoExtra(index)
     return C_MountJournal.GetMountInfoExtraByID(mountID)
 end
 
-function private:C_MountJournal_SetIsFavorite(index, isFavorited)
+function ADDON:C_MountJournal_SetIsFavorite(index, isFavorited)
     if (not self.mountInfoCache) then
         self:UpdateMountInfoCache()
     end
@@ -379,7 +114,7 @@ function private:C_MountJournal_SetIsFavorite(index, isFavorited)
     self.hooks["SetIsFavorite"](displayedIndex, isFavorited)
 end
 
-function private:C_MountJournal_GetIsFavorite(index)
+function ADDON:C_MountJournal_GetIsFavorite(index)
     if (not self.mountInfoCache) then
         self:UpdateMountInfoCache()
     end
@@ -391,7 +126,7 @@ end
 --endregion Hooks
 
 --region dropdown menus
-function private:CreateFilterInfo(text, filterKey, subfilterKey, callback)
+function ADDON:CreateFilterInfo(text, filterKey, subfilterKey, callback)
     local info = UIDropDownMenu_CreateInfo()
     info.keepShownOnClick = true
     info.isNotRadio = true
@@ -426,7 +161,7 @@ function private:CreateFilterInfo(text, filterKey, subfilterKey, callback)
     return info
 end
 
-function private:AddCheckAllAndNoneInfo(filterKey, level, dropdownLevel)
+function ADDON:AddCheckAllAndNoneInfo(filterKey, level, dropdownLevel)
     local info = self:CreateFilterInfo(CHECK_ALL)
     info.hasArrow = false
     info.func = function()
@@ -454,7 +189,7 @@ function private:AddCheckAllAndNoneInfo(filterKey, level, dropdownLevel)
     UIDropDownMenu_AddButton(info, level)
 end
 
-function private:MountJournalFilterDropDown_Initialize(sender, level)
+function ADDON:MountJournalFilterDropDown_Initialize(sender, level)
     local info
 
     if (level == 1) then
@@ -505,7 +240,7 @@ function private:MountJournalFilterDropDown_Initialize(sender, level)
         info.keepShownOnClick = false
         info.hasArrow = false
         info.func = function(_, _, _, value)
-            self.settings.filter = CopyTable(defaultFilterStates)
+            ADDON:ResetFilterSettings();
             self:UpdateMountInfoCache()
             MountJournal_UpdateMountList()
         end
@@ -565,7 +300,7 @@ function private:MountJournalFilterDropDown_Initialize(sender, level)
     end
 end
 
-function private:MakeMultiColumnMenu(level, entriesPerColumn)
+function ADDON:MakeMultiColumnMenu(level, entriesPerColumn)
     local listFrame = _G["DropDownList"..level]
     local columnWidth = listFrame.maxWidth + 25
 
@@ -592,7 +327,7 @@ function private:MakeMultiColumnMenu(level, entriesPerColumn)
     self:Hook(listFrame, "SetWidth", function() end)
 end
 
-function private:MountOptionsMenu_Init(sender, level)
+function ADDON:MountOptionsMenu_Init(sender, level)
 	if not MountJournal.menuMountIndex then
 		return
 	end
@@ -689,7 +424,7 @@ end
 
 -- endregion
 
-function private:MountJournal_UpdateMountList()
+function ADDON:MountJournal_UpdateMountList()
     local buttons = MountJournal.ListScrollFrame.buttons
     for i = 1, #buttons do
         if (self.settings.hiddenMounts[buttons[i].spellID]) then
@@ -703,27 +438,27 @@ end
 
 --region filter functions
 
-function private:FilterMountsByName(name, searchString)
+function ADDON:FilterMountsByName(name, searchString)
     return string.find(string.lower(name), searchString, 1, true)
 end
 
-function private:FilterHiddenMounts(spellId)
+function ADDON:FilterHiddenMounts(spellId)
     return self.settings.filter.hidden or not self.settings.hiddenMounts[spellId]
 end
 
-function private:FilterFavoriteMounts(isFavorite)
+function ADDON:FilterFavoriteMounts(isFavorite)
     return isFavorite or not self.settings.filter.onlyFavorites or not self.settings.filter.collected
 end
 
-function private:FilterUsableMounts(isUsable)
+function ADDON:FilterUsableMounts(isUsable)
     return not self.settings.filter.onlyUsable or isUsable
 end
 
-function private:FilterCollectedMounts(collected)
+function ADDON:FilterCollectedMounts(collected)
     return (self.settings.filter.collected and collected) or (self.settings.filter.notCollected and not collected)
 end
 
-function private:CheckAllSettings(settings)
+function ADDON:CheckAllSettings(settings)
     local allDisabled = true
     local allEnabled = true
     for _, value in pairs(settings) do
@@ -743,7 +478,7 @@ function private:CheckAllSettings(settings)
     return nil
 end
 
-function private:CheckMountInList(settings, sourceData, spellId)
+function ADDON:CheckMountInList(settings, sourceData, spellId)
     local isInList = false
 
     for setting, value in pairs(settings) do
@@ -763,7 +498,7 @@ function private:CheckMountInList(settings, sourceData, spellId)
     return nil
 end
 
-function private:FilterMountsBySource(spellId, sourceType)
+function ADDON:FilterMountsBySource(spellId, sourceType)
 
     local settingsResult = self:CheckAllSettings(self.settings.filter.source)
     if settingsResult then
@@ -785,11 +520,11 @@ function private:FilterMountsBySource(spellId, sourceType)
     return true
 end
 
-function private:FilterMountsByFaction(isFaction, faction)
+function ADDON:FilterMountsByFaction(isFaction, faction)
     return (self.settings.filter.faction.noFaction and not isFaction or self.settings.filter.faction.alliance and faction == 1 or self.settings.filter.faction.horde and faction == 0)
 end
 
-function private:SearchInList(searchTerms, text)
+function ADDON:SearchInList(searchTerms, text)
     if searchTerms then
         for _, searchTerm in pairs(searchTerms) do
             if string.find(text, searchTerm, 1, true) then
@@ -801,7 +536,7 @@ function private:SearchInList(searchTerms, text)
     return false
 end
 
-function private:FilterMountsByFamily(spellId)
+function ADDON:FilterMountsByFamily(spellId)
 
     local settingsResult = self:CheckAllSettings(self.settings.filter.family)
     if settingsResult then
@@ -816,7 +551,7 @@ function private:FilterMountsByFamily(spellId)
     return mountResult == nil
 end
 
-function private:FilterMountsByExpansion(spellId)
+function ADDON:FilterMountsByExpansion(spellId)
 
     local settingsResult = self:CheckAllSettings(self.settings.filter.expansion)
     if settingsResult then
@@ -840,7 +575,7 @@ function private:FilterMountsByExpansion(spellId)
     return false
 end
 
-function private:FilterMountsByType(spellId, mountID)
+function ADDON:FilterMountsByType(spellId, mountID)
     local settingsResult = self:CheckAllSettings(self.settings.filter.mountType)
     if settingsResult then
         return true
@@ -870,7 +605,7 @@ end
 
 --endregion
 
-function private:UpdateMountInfoCache()
+function ADDON:UpdateMountInfoCache()
     local mountInfoCache = { }
     local indexMap = { }
     indexMap[0] = 0
@@ -909,7 +644,7 @@ function private:UpdateMountInfoCache()
     self.indexMap = indexMap
 end
 
-function private:MountListItem_OnClick(sender, anchor, button)
+function ADDON:MountListItem_OnClick(sender, anchor, button)
     if ( button ~= "LeftButton" ) then
         local _, _, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetDisplayedMountInfo(sender.index)
         if not isCollected then
@@ -918,21 +653,21 @@ function private:MountListItem_OnClick(sender, anchor, button)
     end
 end
 
-function private:MountListItem_OnDoubleClick(sender, button)
+function ADDON:MountListItem_OnDoubleClick(sender, button)
     if (button == "LeftButton") then
         local _, _, _, _, _, _, _, _, _, _, _, mountID = C_MountJournal.GetDisplayedMountInfo(sender.index)
         C_MountJournal.SummonByID(mountID)
     end
 end
 
-function private:MountJournal_OnSearchTextChanged(sender)
+function ADDON:MountJournal_OnSearchTextChanged(sender)
     SearchBoxTemplate_OnTextChanged(sender)
     
     self:UpdateMountInfoCache()
     MountJournal_UpdateMountList()
 end
 
-function private:Hook(obj, name, func)
+function ADDON:Hook(obj, name, func)
     local hook = self.hooks[name]
     if (hook ~= nil) then
         return false
@@ -949,7 +684,7 @@ function private:Hook(obj, name, func)
     return true
 end
 
-function private:Unhook(obj, name)
+function ADDON:Unhook(obj, name)
     local hook = self.hooks[name]
     if (hook == nil) then
         return false
@@ -965,60 +700,26 @@ function private:Unhook(obj, name)
     return true
 end
 
-function private:Load()
-    self:LoadUI()
-    if self.settings.debugMode then
-        self:RunDebugMode()
-    end
-
-    self:AddEventHandler("COMPANION_LEARNED", function() self:OnMountsUpdated() end)
-    self:AddEventHandler("ACHIEVEMENT_EARNED", function() self:OnMountsUpdated() end)
-    self:AddEventHandler("ACHIEVEMENT_EARNED", function() self:OnAchievement() end)
-    self:AddEventHandler("SPELL_UPDATE_USABLE", function() self:OnSpellUpdated() end)
-
-    self:AddSlashCommand("MOUNTJOURNALENHANCED", function(...) private:OnSlashCommand(...) end, 'mountjournalenhanced', 'mje')
-end
-
-function private:OnMountsUpdated()
-    self:UpdateMountInfoCache()
-
-    self.characterMountCountFrame.uniqueCount:SetText(GetNumCompanions("MOUNT"))
-end
-
-function private:OnAchievement()
-    self.achievementFrame.staticText:SetText(GetCategoryAchievementPoints(MOUNT_ACHIEVEMENT_CATEGORY, true))
-end
-
-function private:OnSpellUpdated()
-    if (CollectionsJournal:IsShown()) then
-        self:UpdateMountInfoCache()
-        MountJournal_UpdateMountList()
-    end
-end
-
-function private:OnSlashCommand(command, parameter1, parameter2)
-    if (command == "debug") then
-        if (parameter1 == "on") then
-            self.settings.debugMode = true
-            print("MountJournalEnhanced: Debug mode activated.")
-            self:RunDebugMode()
-        elseif (parameter1 == "off") then
-            self.settings.debugMode = false
-            print("MountJournalEnhanced: Debug mode deactivated.")
+function ADDON:Load()
+    if not self.initialized then
+        self:LoadSettings()
+        self:LoadUI()
+        if self.settings.debugMode then
+            ADDON:RunDebugTest()
         end
-    elseif (command == "shop") then
-        if (parameter1 == "on") then
-            self.settings.showShopButton = true
-            print("MountJournalEnhanced: shop button activated.")
-            self:ToggleShopButton()
-        elseif (parameter1 == "off") then
-            self.settings.showShopButton = false
-            print("MountJournalEnhanced: shop button deactivated.")
-            self:ToggleShopButton()
-        end
-    else
-        print("Syntax:")
-        print("/mje shop (on | off)")
-        print("/mje debug (on | off)")
+
+        local frame = CreateFrame("frame");
+        frame:RegisterEvent("SPELL_UPDATE_USABLE")
+        frame:SetScript("OnEvent", function(sender, ...)
+            if (CollectionsJournal:IsShown()) then
+                self:UpdateMountInfoCache()
+                MountJournal_UpdateMountList()
+            end
+        end);
+
+        self.initialized = true
     end
 end
+
+hooksecurefunc("CollectionsJournal_LoadUI", function() ADDON:Load() end)
+hooksecurefunc("SetCollectionsJournalShown", function() ADDON:Load() end)
