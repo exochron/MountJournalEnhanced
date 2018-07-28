@@ -11,6 +11,7 @@ local L = CoreFramework:GetModule("Localization", "1.1"):GetLocalization(ADDON_N
 local initialState = {
     settings = {
         debugMode = false,
+        showShopButton = true,
         hiddenMounts = { },
         filter = {
             collected = true,
@@ -79,6 +80,7 @@ function private:LoadUI()
     
     hooksecurefunc(MountJournal.mountOptionsMenu, "initialize", function(sender, level) UIDropDownMenu_InitializeHelper(sender) self:MountOptionsMenu_Init(sender, level) end)
     hooksecurefunc(MountJournalFilterDropDown, "initialize", function(sender, level) UIDropDownMenu_InitializeHelper(sender) self:MountJournalFilterDropDown_Initialize(sender, level) end)
+    hooksecurefunc("MountJournal_UpdateMountDisplay", function(sender, level) self:ToggleShopButton() end)
 
     local buttons = MountJournal.ListScrollFrame.buttons
     for buttonIndex = 1, #buttons do
@@ -96,7 +98,8 @@ function private:LoadUI()
    
     self:CreateCharacterMountCountFrame()
     self:CreateAchievementFrame()
-    
+    self:CreateShopButton()
+
     self:UpdateMountInfoCache()
     MountJournal_UpdateMountList()
 end
@@ -199,6 +202,39 @@ function private:CreateAchievementFrame()
     frame:SetScript("OnLeave", function() frame.highlight:SetShown(false) end)
 
     self.achievementFrame = frame
+end
+
+function private:CreateShopButton()
+    local frame = CreateFrame("Button", nil, MountJournal.MountDisplay.InfoButton)
+
+    frame:ClearAllPoints()
+    frame:SetPoint("BOTTOMRIGHT", MountJournal.MountDisplay, -14, 14)
+    frame:SetSize(28, 36)
+    frame:SetNormalAtlas('hud-microbutton-BStore-Up', true)
+    frame:SetPushedAtlas('hud-microbutton-BStore-Down', true)
+    frame:SetDisabledAtlas('hud-microbutton-BStore-Disabled', true)
+    frame:SetHighlightAtlas('hud-microbutton-highlight', true)
+
+    frame:SetScript("OnClick", function()
+        SetStoreUIShown(true)
+    end)
+
+    MountJournal.MountDisplay.InfoButton.Shop = frame
+end
+
+function private:ToggleShopButton()
+    local frame = MountJournal.MountDisplay.InfoButton.Shop
+    if (frame) then
+        if (self.settings.showShopButton and MountJournal.selectedMountID) then
+            local _, _, _, _, _, sourceType, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(MountJournal.selectedMountID)
+            if not isCollected and sourceType == 10 then
+                frame:Show()
+                return
+            end
+        end
+
+        frame:Hide()
+    end
 end
 
 function private:RunDebugMode()
@@ -963,8 +999,19 @@ function private:OnSlashCommand(command, parameter1, parameter2)
             self.settings.debugMode = false
             print("MountJournalEnhanced: Debug mode deactivated.")
         end
+    elseif (command == "shop") then
+        if (parameter1 == "on") then
+            self.settings.showShopButton = true
+            print("MountJournalEnhanced: shop button activated.")
+            self:ToggleShopButton()
+        elseif (parameter1 == "off") then
+            self.settings.showShopButton = false
+            print("MountJournalEnhanced: shop button deactivated.")
+            self:ToggleShopButton()
+        end
     else
         print("Syntax:")
+        print("/mje shop (on | off)")
         print("/mje debug (on | off)")
     end
 end
