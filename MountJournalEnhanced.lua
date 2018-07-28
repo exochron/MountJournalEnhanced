@@ -4,7 +4,7 @@ local COLLECTION_ACHIEVEMENT_CATEGORY = 15246
 local MOUNT_ACHIEVEMENT_CATEGORY = 15248
 local MOUNT_COUNT_STATISTIC = 339
 local EXPANSIONS = { "Classic", "The Burning Crusade", "Wrath of the Lich King", "Cataclysm", "Mists of Pandaria", "Warlords of Draenor", "Legion", "Battle for Azeroth" }
-local SOURCE_INDEX_ORDER = { "Drop", "Quest", "Vendor", "Profession", "Instance", "Reputation", "Achievement", "Island Expedition", "Garrison", "PVP", "Class", "World Event", "Black Market", "Promotion"}
+local SOURCE_INDEX_ORDER = { "Drop", "Quest", "Vendor", "Profession", "Instance", "Reputation", "Achievement", "Island Expedition", "Garrison", "PVP", "Class", "World Event", "Black Market", "Shop", "Promotion"}
 
 local L = CoreFramework:GetModule("Localization", "1.1"):GetLocalization(ADDON_NAME)
 
@@ -58,8 +58,11 @@ private.mountInfoCache = nil
 private.indexMap = { }
 
 function private:LoadUI()
+    -- reset default filter settings
 	C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true)
 	C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, true)
+	C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, true)
+    C_MountJournal.SetAllSourceFilters(true)
 
     PetJournal:HookScript("OnShow", function() if (not PetJournalPetCard.petID) then PetJournal_ShowPetCard(1) end end)
 
@@ -206,6 +209,7 @@ function private:RunDebugMode()
         mounts[spellID] = {
             name=name,
             mountID=mountID,
+            sourceType=sourceType,
         }
     end
 
@@ -225,7 +229,7 @@ function private:RunDebugMode()
 
     for spellID, data in pairs(mounts) do
         if not MountJournalEnhancedIgnored[spellID] then
-            if self:FilterMountsBySource(spellID) then
+            if self:FilterMountsBySource(spellID, data.sourceType) then
                 print("[MJE] New mount: " .. data.name .. " (" .. spellID .. ")")
             end
             if self:FilterMountsByFamily(spellID) then
@@ -261,10 +265,12 @@ function private:RunDebugMode()
     local names = { }
     for _, data in pairs(MountJournalEnhancedSource) do
         for id, name in pairs(data) do
-            if (names[id] and names[id] ~= name) then
-                print("[MJE] Invalide mount info for mount: " .. name .. " (" .. id .. ")")
+            if id ~= "sourceType" then
+                if (names[id] and names[id] ~= name) then
+                    print("[MJE] Invalide mount info for mount: " .. name .. " (" .. id .. ")")
+                end
+                names[id] = name
             end
-            names[id] = name
         end
     end
 
@@ -724,6 +730,13 @@ function private:FilterMountsBySource(spellId, sourceType)
     local mountResult = self:CheckMountInList(self.settings.filter.source, MountJournalEnhancedSource, spellId)
     if mountResult ~= nil then
         return mountResult
+    end
+
+    for source, value in pairs(self.settings.filter.source) do
+        if MountJournalEnhancedSource[source] and MountJournalEnhancedSource[source]["sourceType"]
+                and tContains(MountJournalEnhancedSource[source]["sourceType"], sourceType) then
+            return value
+        end
     end
 
     return true
