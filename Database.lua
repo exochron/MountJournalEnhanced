@@ -1,4 +1,6 @@
-MountJournalEnhancedSource = {
+local ADDON_NAME, ADDON = ...
+
+ADDON.MountJournalEnhancedSource = {
     ["Drop"] = {
         -- sourceType = 1
         ------------------------------
@@ -1034,7 +1036,7 @@ MountJournalEnhancedSource = {
     },
 }
 
-MountJournalEnhancedExpansion = {
+ADDON.MountJournalEnhancedExpansion = {
 
 	["Classic"] = {
         ["minID"] = 0,
@@ -1099,7 +1101,7 @@ MountJournalEnhancedExpansion = {
     }
 }
 
-MountJournalEnhancedType = {
+ADDON.MountJournalEnhancedType = {
     ground = {
         typeIDs = {230, 231, 241, 269, 284}
     },
@@ -1138,7 +1140,7 @@ MountJournalEnhancedType = {
     },
 }
 
-MountJournalEnhancedIgnored = {
+ADDON.MountJournalEnhancedIgnored = {
     [459] = true, -- Gray Wolf
     [468] = true, -- White Stallion
     [578] = true, -- Black Wolf

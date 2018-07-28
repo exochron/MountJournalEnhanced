@@ -1,6 +1,6 @@
-﻿local ADDON_NAME = ...;
+﻿local ADDON_NAME, ADDON = ...
 
-L = CoreFramework:GetModule("Localization", "1.1"):NewLocalization(ADDON_NAME, "enUS");
+local L = ADDON.L or {}
 
 L["Show"] = SHOW
 L["Hide"] = HIDE
@@ -111,3 +111,5 @@ L["Wolves"] = "Wolves"
 L["Wyverns"] = "Wyverns"
 L["Yaks"] = "Yaks"
 L["Yeti"] = "Yetis"
+
+ADDON.L = L

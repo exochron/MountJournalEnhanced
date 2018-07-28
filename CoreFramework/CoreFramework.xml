@@ -3,8 +3,6 @@
     <Script file="CoreFramework.lua" />
 	<Script file="CommandLine.lua" />
 	<Script file="Listener.lua" />
-	<Script file="Localization.lua" />
     <Script file="Settings.lua" />
     <Script file="Addon.lua" />
-    <Script file="UserInterface.lua" />
 </Ui>

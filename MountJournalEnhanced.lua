@@ -1,4 +1,4 @@
-local ADDON_NAME = ...
+local ADDON_NAME, ADDON = ...
 
 local COLLECTION_ACHIEVEMENT_CATEGORY = 15246
 local MOUNT_ACHIEVEMENT_CATEGORY = 15248
@@ -6,12 +6,19 @@ local MOUNT_COUNT_STATISTIC = 339
 local EXPANSIONS = { "Classic", "The Burning Crusade", "Wrath of the Lich King", "Cataclysm", "Mists of Pandaria", "Warlords of Draenor", "Legion", "Battle for Azeroth" }
 local SOURCE_INDEX_ORDER = { "Drop", "Quest", "Vendor", "Profession", "Instance", "Reputation", "Achievement", "Island Expedition", "Garrison", "PVP", "Class", "World Event", "Black Market", "Shop", "Promotion"}
 
-local L = CoreFramework:GetModule("Localization", "1.1"):GetLocalization(ADDON_NAME)
+local L = ADDON.L
+local MountJournalEnhancedFamily = ADDON.MountJournalEnhancedFamily
+local MountJournalEnhancedSource = ADDON.MountJournalEnhancedSource
+local MountJournalEnhancedExpansion = ADDON.MountJournalEnhancedExpansion
+local MountJournalEnhancedType = ADDON.MountJournalEnhancedType
+local MountJournalEnhancedIgnored = ADDON.MountJournalEnhancedIgnored
 
 local initialState = {
     settings = {
         debugMode = false,
-        showShopButton = true,
+        showShopButton = false,
+        favoritePerCharacter = true,
+        favoredMounts = {},
         hiddenMounts = { },
         filter = {
             collected = true,
@@ -105,7 +112,7 @@ function private:LoadUI()
 end
 
 function private:CreateCharacterMountCountFrame()
-    local frame = CreateFrame("frame", "MJECharacterMountCount", MountJournal, "InsetFrameTemplate3")
+    local frame = CreateFrame("frame", nil, MountJournal, "InsetFrameTemplate3")
 
     frame:ClearAllPoints()
     frame:SetPoint("TOPLEFT", MountJournal, 70, -42)
@@ -130,7 +137,7 @@ function private:CreateCharacterMountCountFrame()
 end
 
 function private:CreateAchievementFrame()
-    local frame = CreateFrame("Button", "MJEMountAchievementStatus", MountJournal)
+    local frame = CreateFrame("Button", nil, MountJournal)
 
     frame:ClearAllPoints()
     frame:SetPoint("TOP", MountJournal, 0, -21)
@@ -383,7 +390,7 @@ end
 
 --endregion Hooks
 
--- region dropdown menus
+--region dropdown menus
 function private:CreateFilterInfo(text, filterKey, subfilterKey, callback)
     local info = UIDropDownMenu_CreateInfo()
     info.keepShownOnClick = true

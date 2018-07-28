@@ -1,10 +1,10 @@
-local ADDON_NAME = ...
-local L = CoreFramework:GetModule("Localization", "1.1"):GetLocalization(ADDON_NAME)
+local ADDON_NAME, ADDON = ...
+local L = ADDON.L
 
 local function handleDressUpItem(itemLink)
     local itemId = GetItemInfoInstant(itemLink)
     if itemId then
-        local spellId = MountJournalEnhancedItems[itemId]
+        local spellId = ADDON.MountJournalEnhancedItems[itemId]
         if spellId then
 
             if ( SideDressUpFrame.parentFrame and SideDressUpFrame.parentFrame:IsShown() ) then
