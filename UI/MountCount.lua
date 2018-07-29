@@ -1,7 +1,7 @@
 local ADDON_NAME, ADDON = ...
 local MOUNT_COUNT_STATISTIC = 339
 
-function ADDON:CreateCharacterMountCount()
+local function CreateCharacterMountCount()
     local frame = CreateFrame("frame", nil, MountJournal, "InsetFrameTemplate3")
 
     frame:ClearAllPoints()
@@ -30,3 +30,5 @@ function ADDON:CreateCharacterMountCount()
         frame.uniqueCount:SetText(GetNumCompanions("MOUNT"))
     end)
 end
+
+hooksecurefunc(ADDON, "LoadUI", CreateCharacterMountCount)

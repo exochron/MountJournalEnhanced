@@ -3,7 +3,7 @@ local ADDON_NAME, ADDON = ...
 local COLLECTION_ACHIEVEMENT_CATEGORY = 15246
 local MOUNT_ACHIEVEMENT_CATEGORY = 15248
 
-function ADDON:CreateAchievementPoints()
+local function CreateAchievementPoints()
     local frame = CreateFrame("Button", nil, MountJournal)
 
     frame:ClearAllPoints()
@@ -81,3 +81,5 @@ function ADDON:CreateAchievementPoints()
     end)
 
 end
+
+hooksecurefunc(ADDON, "LoadUI", CreateAchievementPoints)

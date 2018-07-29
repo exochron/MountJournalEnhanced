@@ -3,7 +3,7 @@ local ADDON_NAME, ADDON = ...
 ADDON.hooks = { }
 ADDON.indexMap = { }
 
---region Hooks
+--region C_MountJournal Hooks
 local function MapIndex(index)
     if (not ADDON.indexMap) then
         ADDON:UpdateIndexMap()
@@ -88,7 +88,7 @@ local function MountJournal_OnSearchTextChanged(sender)
     MountJournal_UpdateMountList()
 end
 
-local function LoadUI()
+function ADDON:LoadUI()
     -- reset default filter settings
     C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true)
     C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, true)
@@ -106,15 +106,6 @@ local function LoadUI()
     hooksecurefunc("MountJournal_UpdateMountList", UpdateMountList)
 
     MountJournalSearchBox:SetScript("OnTextChanged", MountJournal_OnSearchTextChanged)
-
-    hooksecurefunc(MountJournal.mountOptionsMenu, "initialize", function(sender, level)
-        UIDropDownMenu_InitializeHelper(sender)
-        ADDON:MountOptionsMenu_Init(sender, level)
-    end)
-    hooksecurefunc(MountJournalFilterDropDown, "initialize", function(sender, level)
-        UIDropDownMenu_InitializeHelper(sender)
-        ADDON:MountJournalFilterDropDown_Initialize(sender, level)
-    end)
 
     local buttons = MountJournal.ListScrollFrame.buttons
     for buttonIndex = 1, #buttons do
@@ -134,15 +125,12 @@ local function LoadUI()
         button.DragButton.IsHidden:SetShown(false)
     end
 
-    ADDON:CreateCharacterMountCount()
-    ADDON:CreateAchievementPoints()
-    ADDON:CreateShopButton()
-
-    ADDON:UpdateIndexMap()
+    self:UpdateIndexMap()
     MountJournal_UpdateMountList()
 
     local frame = CreateFrame("frame");
     frame:RegisterEvent("SPELL_UPDATE_USABLE")
+    frame:RegisterEvent("MOUNT_JOURNAL_USABILITY_CHANGED")
     frame:SetScript("OnEvent", function(sender, ...)
         if (CollectionsJournal:IsShown()) then
             ADDON:UpdateIndexMap()
@@ -207,7 +195,7 @@ local function Load()
     if not ADDON.initialized then
         ADDON.initialized = true
         ADDON:LoadSettings()
-        LoadUI()
+        ADDON:LoadUI()
         if ADDON.settings.debugMode then
             ADDON:RunDebugTest()
         end

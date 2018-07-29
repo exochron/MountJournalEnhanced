@@ -10,13 +10,13 @@ Database\Database.lua
 Database\families.db.lua
 Database\items.db.lua
 Settings.lua
+DebugTest.lua
+Filters.lua
+MountJournalEnhanced.lua
 UI\AchievementPoints.lua
 UI\DropDownMenus.lua
 UI\MountCount.lua
 UI\ShopButton.lua
-DebugTest.lua
-Filters.lua
-MountJournalEnhanced.lua
 DressUpMounts.lua
 Favorite.lua
 SlashCommand.lua

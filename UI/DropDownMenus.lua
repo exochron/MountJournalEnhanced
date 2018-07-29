@@ -99,7 +99,7 @@ local function MakeMultiColumnMenu(level, entriesPerColumn)
     ADDON:Hook(listFrame, "SetWidth", function() end)
 end
 
-function ADDON:MountJournalFilterDropDown_Initialize(sender, level)
+local function InitializeFilterDropDown(sender, level)
     local info
 
     if (level == 1) then
@@ -114,7 +114,7 @@ function ADDON:MountJournalFilterDropDown_Initialize(sender, level)
 
         info = CreateFilterInfo(FAVORITES_FILTER, "onlyFavorites")
         info.leftPadding = 16
-        info.disabled = not self.settings.filter.collected
+        info.disabled = not ADDON.settings.filter.collected
         UIDropDownMenu_AddButton(info, level)
 
         info = CreateFilterInfo(NOT_COLLECTED, "notCollected")
@@ -210,7 +210,7 @@ function ADDON:MountJournalFilterDropDown_Initialize(sender, level)
     end
 end
 
-function ADDON:MountOptionsMenu_Init(sender, level)
+local function InitializeMountOptionsMenu(sender, level)
     if not MountJournal.menuMountIndex then
         return
     end
@@ -304,3 +304,14 @@ function ADDON:MountOptionsMenu_Init(sender, level)
     info.func = nil
     UIDropDownMenu_AddButton(info, level)
 end
+
+hooksecurefunc(ADDON, "LoadUI", function ()
+    hooksecurefunc(MountJournal.mountOptionsMenu, "initialize", function(sender, level)
+        UIDropDownMenu_InitializeHelper(sender)
+        InitializeMountOptionsMenu(sender, level)
+    end)
+    hooksecurefunc(MountJournalFilterDropDown, "initialize", function(sender, level)
+        UIDropDownMenu_InitializeHelper(sender)
+        InitializeFilterDropDown(sender, level)
+    end)
+end)

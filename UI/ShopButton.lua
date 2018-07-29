@@ -1,6 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
-function ADDON:CreateShopButton()
+local function CreateShopButton()
     local frame = CreateFrame("Button", nil, MountJournal.MountDisplay.InfoButton)
 
     frame:ClearAllPoints()
@@ -18,9 +18,11 @@ function ADDON:CreateShopButton()
     MountJournal.MountDisplay.InfoButton.Shop = frame
 
     hooksecurefunc("MountJournal_UpdateMountDisplay", function(sender, level)
-        self:ToggleShopButton()
+        ADDON:ToggleShopButton()
     end)
 end
+
+hooksecurefunc(ADDON, "LoadUI", CreateShopButton)
 
 -- also called from SlashCommand
 function ADDON:ToggleShopButton()
