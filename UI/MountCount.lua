@@ -26,7 +26,7 @@ function ADDON:CreateCharacterMountCount()
     frame:RegisterEvent("COMPANION_LEARNED")
     frame:RegisterEvent("ACHIEVEMENT_EARNED")
     frame:SetScript("OnEvent", function(self, event, ...)
-        ADDON:UpdateMountInfoCache()
+        ADDON:UpdateIndexMap()
         frame.uniqueCount:SetText(GetNumCompanions("MOUNT"))
     end)
 end

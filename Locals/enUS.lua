@@ -2,9 +2,6 @@
 
 local L = ADDON.L or {}
 
-L["Show"] = SHOW
-L["Hide"] = HIDE
-
 -- Expansion
 L["Classic"] = EXPANSION_NAME0
 L["The Burning Crusade"] = EXPANSION_NAME1
