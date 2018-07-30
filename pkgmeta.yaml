@@ -1,5 +1,6 @@
 ignore:
     - LICENSE
     - README.md
+    - Roadmap.md
 
 license-output: LICENSE

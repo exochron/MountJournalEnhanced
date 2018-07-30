@@ -2,13 +2,21 @@
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron
-## Version: 1.8.1
+## Version: 1.9
 ## SavedVariables: MountJournalEnhancedSettings
 
-CoreFramework\CoreFramework.xml
 Locals\Locals.xml
-Database.lua
-families.db.lua
-items.db.lua
+Database\Database.lua
+Database\families.db.lua
+Database\items.db.lua
+Settings.lua
+DebugTest.lua
+Filters.lua
 MountJournalEnhanced.lua
+UI\AchievementPoints.lua
+UI\DropDownMenus.lua
+UI\MountCount.lua
+UI\ShopButton.lua
 DressUpMounts.lua
+Favorite.lua
+SlashCommand.lua
