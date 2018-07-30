@@ -1,4 +1,6 @@
-MountJournalEnhancedItems = {
+local ADDON_NAME, ADDON = ...
+
+ADDON.MountJournalEnhancedItems = {
 [142369] = 230401, -- Ivory Hawkstrider
 [159146] = 267270, -- Kua'fon
 [44234] = 61447, -- Traveler's Tundra Mammoth
