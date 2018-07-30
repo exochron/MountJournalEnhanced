@@ -71,6 +71,8 @@ if (GetLocale() == 'deDE') then
     L["Spiders"] = "Spinnen"
     L["Talbuks"] = "Talbuks"
     L["Tallstriders"] = "Schreiter"
+    L["TASK_END"] = "[MJE] Uff! Endlich geschafft."
+    L["TASK_FAVOR_START"] = "[MJE] Bitte warten, deine Reittiere werden mit Sternen beklebt."
     L["Transform"] = "Verwandlung"
     L["Trilobites"] = "Trilobiten"
     L["Turtles"] = "Schildkröten"

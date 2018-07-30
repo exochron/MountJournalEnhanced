@@ -14,7 +14,6 @@ if (GetLocale() == 'ruRU') then
     L["Camels"] = "Верблюды"
     L["Cats"] = "Кошки"
     L["Chimeras"] = "Химеры"
-    L["Class"] = "Класс"
     L["Clefthooves"] = "Копытни"
     L["Coursers"] = "скакун"
     L["Cranes"] = "Журавли"
@@ -29,13 +28,10 @@ if (GetLocale() == 'ruRU') then
     L["Elekks"] = "Элекки"
     --[[Translation missing --]]
     --[[ L["Elementals"] = ""--]]
-    --[[Translation missing --]]
-    --[[ L["Expansion"] = ""--]]
     L["Family"] = "Семейство"
     L["Fishes"] = "Рыбы"
     L["Flying"] = "Летающий"
     L["Foxes"] = "лисицы"
-    L["Garrison"] = "Гарнизон"
     L["Goats"] = "Козлы"
     L["Gronnlings"] = "Малые гронны"
     L["Ground"] = "Наземный"
@@ -49,7 +45,6 @@ if (GetLocale() == 'ruRU') then
     --[[Translation missing --]]
     --[[ L["Hyena"] = ""--]]
     L["Infernals"] = "инферналов"
-    L["Instance"] = "Подземелье"
     L["Jellyfishes"] = "Медузы"
     L["Kirin"] = "Ветророги"
     L["Kodos"] = "Кодо"
@@ -66,7 +61,6 @@ if (GetLocale() == 'ruRU') then
     L["Passenger"] = "Пассажирский"
     L["Phoenixes"] = "Фениксы"
     L["Pterodactyl"] = "Птеродактили"
-    L["PVP"] = "PVP"
     L["Rams"] = "Бараны"
     L["Raptors"] = "Ящеры"
     L["Rats"] = "Крысы"
@@ -74,8 +68,6 @@ if (GetLocale() == 'ruRU') then
     L["Ravens"] = "Вороны"
     --[[Translation missing --]]
     --[[ L["Rays"] = ""--]]
-    L["Repair"] = "Ремонт"
-    L["Reputation"] = "Репутация"
     L["Reset filters"] = "Сбросить фильтры"
     L["Rhinos"] = "Носороги"
     L["Riverbeasts"] = "Речные чудовища"
@@ -85,10 +77,16 @@ if (GetLocale() == 'ruRU') then
     L["Seahorses"] = "Морские коньки"
     --[[Translation missing --]]
     --[[ L["Serpents"] = ""--]]
+    --[[Translation missing --]]
+    --[[ L["Show in Collections"] = ""--]]
     L["Silithids"] = "Силитиды"
     L["Spiders"] = "пауки"
     L["Talbuks"] = "Талбуки"
     L["Tallstriders"] = "Долгоноги"
+    --[[Translation missing --]]
+    --[[ L["TASK_END"] = ""--]]
+    --[[Translation missing --]]
+    --[[ L["TASK_FAVOR_START"] = ""--]]
     L["Transform"] = "Универсальный"
     --[[Translation missing --]]
     --[[ L["Trilobites"] = ""--]]

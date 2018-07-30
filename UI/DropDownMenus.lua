@@ -239,7 +239,7 @@ local function InitializeMountOptionsMenu(sender, level)
 
     UIDropDownMenu_AddButton(info, level)
 
-    local spellId = nil
+    local spellId
     local isCollected = false
     if (MountJournal.menuMountIndex) then
         _, spellId, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetDisplayedMountInfo(MountJournal.menuMountIndex)
@@ -258,14 +258,12 @@ local function InitializeMountOptionsMenu(sender, level)
             info.text = BATTLE_PET_UNFAVORITE
             info.func = function()
                 C_MountJournal.SetIsFavorite(MountJournal.menuMountIndex, false)
-                ADDON:UpdateMountInfoCache()
                 MountJournal_UpdateMountList()
             end
         else
             info.text = BATTLE_PET_FAVORITE
             info.func = function()
                 C_MountJournal.SetIsFavorite(MountJournal.menuMountIndex, true)
-                ADDON:UpdateMountInfoCache()
                 MountJournal_UpdateMountList()
             end
         end
@@ -285,14 +283,14 @@ local function InitializeMountOptionsMenu(sender, level)
             info.text = SHOW
             info.func = function()
                 ADDON.settings.hiddenMounts[spellId] = false
-                ADDON:UpdateMountInfoCache()
+                ADDON:UpdateIndexMap()
                 MountJournal_UpdateMountList()
             end
         else
             info.text = HIDE
             info.func = function()
                 ADDON.settings.hiddenMounts[spellId] = true
-                ADDON:UpdateMountInfoCache()
+                ADDON:UpdateIndexMap()
                 MountJournal_UpdateMountList()
             end
         end

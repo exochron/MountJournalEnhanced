@@ -12,7 +12,6 @@ if (GetLocale() == 'frFR') then
     L["Camels"] = "Dromadaires"
     L["Cats"] = "Félins"
     L["Chimeras"] = "Chimères"
-    L["Class"] = "Classe"
     L["Clefthooves"] = "Sabot-Fourchus"
     L["Coursers"] = "Coursiers"
     L["Cranes"] = "Grues"
@@ -25,12 +24,10 @@ if (GetLocale() == 'frFR') then
     L["Drakes"] = "Drakes"
     L["Elekks"] = "Elekks"
     L["Elementals"] = "Élémentaires"
-    L["Expansion"] = "Extension"
     L["Family"] = "Famille"
     L["Fishes"] = "Poissons"
     L["Flying"] = "Volante"
     L["Foxes"] = "Renards"
-    L["Garrison"] = "Fief"
     L["Goats"] = "Chèvres"
     L["Gronnlings"] = "Gronnlins"
     L["Ground"] = "Terrestre"
@@ -43,7 +40,6 @@ if (GetLocale() == 'frFR') then
     L["Hounds"] = "Molosses"
     L["Hyena"] = "Hyènes"
     L["Infernals"] = "Infernaux"
-    L["Instance"] = "Instance"
     L["Jellyfishes"] = "Méduses"
     L["Kirin"] = "Kirin"
     L["Kodos"] = "Kodos"
@@ -59,15 +55,12 @@ if (GetLocale() == 'frFR') then
     L["Passenger"] = "Passagers"
     L["Phoenixes"] = "Phénix"
     L["Pterodactyl"] = "Pterreurdactyles"
-    L["PVP"] = "PvP"
     L["Rams"] = "Béliers"
     L["Raptors"] = "Raptors"
     L["Rats"] = "Rats"
     L["Ravagers"] = "Saccageurs"
     L["Ravens"] = "Corbeaux"
     L["Rays"] = "Raies"
-    L["Repair"] = "Réparation"
-    L["Reputation"] = "Réputation"
     L["Reset filters"] = "Réinitialiser les filtres"
     L["Rhinos"] = "Rhinocéros"
     L["Riverbeasts"] = "Potamodontes"
@@ -75,10 +68,16 @@ if (GetLocale() == 'frFR') then
     L["Sea Dwellers"] = "Aquatiques"
     L["Seahorses"] = "Hippocampes"
     L["Serpents"] = "Serpents"
+    --[[Translation missing --]]
+    --[[ L["Show in Collections"] = ""--]]
     L["Silithids"] = "Silithides"
     L["Spiders"] = "Araignées"
     L["Talbuks"] = "Talbuks"
     L["Tallstriders"] = "Trotteurs"
+    --[[Translation missing --]]
+    --[[ L["TASK_END"] = ""--]]
+    --[[Translation missing --]]
+    --[[ L["TASK_FAVOR_START"] = ""--]]
     L["Transform"] = "Transformation"
     --[[Translation missing --]]
     --[[ L["Trilobites"] = ""--]]
