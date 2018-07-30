@@ -29,17 +29,19 @@ local function FavorMounts(spellIds)
     for index =1, ADDON.hooks["GetNumDisplayedMounts"]() do
         local _, spellId, _, _, _, _, _, _, _, _, isCollected = ADDON.hooks["GetDisplayedMountInfo"](index)
         if isCollected then
-            local isFavorite = ADDON.hooks["GetIsFavorite"](index)
-            local shouldFavor = tContains(spellIds, spellId)
-            if isFavorite and not shouldFavor then
-                ADDON.hooks["SetIsFavorite"](index, false)
-                index = index - 1
-                hasUpdate = true
-            elseif not isFavorite and shouldFavor then
-                ADDON.hooks["SetIsFavorite"](index, true)
-                hasUpdate = true
-            elseif not isFavorite and isEmptySpellList then
-                break
+            local isFavorite, canFavorite = ADDON.hooks["GetIsFavorite"](index)
+            if canFavorite then
+                local shouldFavor = tContains(spellIds, spellId)
+                if isFavorite and not shouldFavor then
+                    ADDON.hooks["SetIsFavorite"](index, false)
+                    index = index - 1
+                    hasUpdate = true
+                elseif not isFavorite and shouldFavor then
+                    ADDON.hooks["SetIsFavorite"](index, true)
+                    hasUpdate = true
+                elseif not isFavorite and isEmptySpellList then
+                    break
+                end
             end
         else
             break
