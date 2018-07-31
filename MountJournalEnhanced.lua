@@ -145,6 +145,7 @@ function ADDON:LoadUI()
     C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, true)
     C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, true)
     C_MountJournal.SetAllSourceFilters(true)
+    C_MountJournal.SetSearch('')
 
     PetJournal:HookScript("OnShow", function()
         if (not PetJournalPetCard.petID) then

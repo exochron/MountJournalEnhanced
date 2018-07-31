@@ -1110,8 +1110,7 @@ ADDON.MountJournalEnhancedType = {
     },
     waterWalking = {
         typeIDs = {269},
-        [118089] = true, -- Azure Water Strider
-},
+    },
     underwater = {
         typeIDs = {232, 254},
         [30174] = true, -- Riding Turtle
