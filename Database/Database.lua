@@ -7,8 +7,6 @@ ADDON.MountJournalEnhancedSource = {
         -- Alliance & Horde ----------
         ------------------------------
 
-        [24242] = true, -- Swift Razzashi Raptor- no longer available
-        [24252] = true, -- Swift Zulian Tiger- no longer available
         [60002] = true, -- Time-Lost Proto-Drake- The Storm Peaks, Time-Lost Proto-Drake
         [88718] = true, -- Phosphorescent Stone Drake- Deepholm, Aeonaxx
         [88750] = true, -- Grey Riding Camel- Uldum, Mysterious Camel Figurine
@@ -991,6 +989,8 @@ ADDON.MountJournalEnhancedSource = {
 
     ["Black Market"] = {
         [17481] = true, -- Rivendare's Deathcharger
+        [24242] = true, -- Swift Razzashi Raptor - Black Market only
+        [24252] = true, -- Swift Zulian Tiger - Black Market only
         [30174] = true, -- Riding Turtle
         [36702] = true, -- Fiery Warhorse
         [40192] = true, -- Ashes of Al'ar
@@ -1022,7 +1022,9 @@ ADDON.MountJournalEnhancedSource = {
         [132036] = true, -- Thundering Ruby Cloud Serpent
         [139442] = true, -- Thundering Cobalt Cloud Serpent
         [139448] = true, -- Clutch of Ji-Kun
+        [148417] = true, -- Kor'kron Juggernaut - Siege of Orgrimmar, Garrosh Hellscream
         [148476] = true, -- Thundering Onyx Cloud Serpent
+        [170347] = true, -- Core Hound - Black Market only
     },
 
     ["Shop"] = {

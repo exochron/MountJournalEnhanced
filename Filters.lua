@@ -166,9 +166,9 @@ end
 
 function ADDON:FilterMount(index, searchString)
 
-    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID = ADDON.hooks["GetDisplayedMountInfo"](index)
+    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, isFiltered, isCollected, mountID = ADDON.hooks["GetDisplayedMountInfo"](index)
 
-    if (hideOnChar ~= true and
+    if (isFiltered ~= true and
             not MountJournalEnhancedIgnored[spellId] and
             (searchString and FilterMountsByName(creatureName, searchString) or
                     (not searchString and
