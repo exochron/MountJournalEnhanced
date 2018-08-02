@@ -74,7 +74,7 @@ local function InitializeDropDown(menu, level)
     info.hasArrow = false
 
     if level == 1 then
-        info.text = CHECK_ALL
+        info.text = L['FAVOR_DISPLAYED']
         info.func = function()
             RunSetFavorites(FetchDisplayedSpellIds())
         end

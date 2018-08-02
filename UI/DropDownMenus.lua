@@ -44,7 +44,7 @@ local function CreateFilterInfo(text, filterKey, subfilterKey, callback)
     return info
 end
 
-local function AddCheckAllAndNoneInfo(filterKey, level, dropdownLevel)
+local function AddCheckAllAndNoneInfo(sender, filterKey, level, dropdownLevel)
     local info = CreateFilterInfo(CHECK_ALL)
     info.hasArrow = false
     info.func = function()
@@ -52,7 +52,7 @@ local function AddCheckAllAndNoneInfo(filterKey, level, dropdownLevel)
             ADDON.settings.filter[filterKey][key] = true
         end
 
-        UIDropDownMenu_Refresh(MountJournalFilterDropDown, dropdownLevel, 2)
+        UIDropDownMenu_Refresh(sender, dropdownLevel, 2)
         ADDON:UpdateIndexMap()
         MountJournal_UpdateMountList()
     end
@@ -65,7 +65,7 @@ local function AddCheckAllAndNoneInfo(filterKey, level, dropdownLevel)
             ADDON.settings.filter[filterKey][key] = false
         end
 
-        UIDropDownMenu_Refresh(MountJournalFilterDropDown, dropdownLevel, 2)
+        UIDropDownMenu_Refresh(sender, dropdownLevel, 2)
         ADDON:UpdateIndexMap()
         MountJournal_UpdateMountList()
     end
@@ -156,13 +156,13 @@ local function InitializeFilterDropDown(sender, level)
         end
         UIDropDownMenu_AddButton(info, level)
     elseif (UIDROPDOWNMENU_MENU_VALUE == 1) then
-        AddCheckAllAndNoneInfo("source", level, 1)
+        AddCheckAllAndNoneInfo(sender, "source", level, 1)
         for _,categoryName in pairs(GetSourceOrder()) do
             info = CreateFilterInfo(L[categoryName] or categoryName, "source", categoryName)
             UIDropDownMenu_AddButton(info, level)
         end
     elseif (UIDROPDOWNMENU_MENU_VALUE == 2) then
-        AddCheckAllAndNoneInfo("mountType", level, 2)
+        AddCheckAllAndNoneInfo(sender, "mountType", level, 2)
 
         info = CreateFilterInfo(L["Ground"], "mountType", "ground")
         UIDropDownMenu_AddButton(info, level)
@@ -186,7 +186,7 @@ local function InitializeFilterDropDown(sender, level)
         info = CreateFilterInfo(NPC_NAMES_DROPDOWN_NONE, "faction", "noFaction")
         UIDropDownMenu_AddButton(info, level)
     elseif (UIDROPDOWNMENU_MENU_VALUE == 4) then
-        AddCheckAllAndNoneInfo("family", level, 4)
+        AddCheckAllAndNoneInfo(sender, "family", level, 4)
 
         local sortedFamilies = {}
         for family, _ in pairs(ADDON.MountJournalEnhancedFamily) do
@@ -201,7 +201,7 @@ local function InitializeFilterDropDown(sender, level)
 
         MakeMultiColumnMenu(level, 21)
     elseif (UIDROPDOWNMENU_MENU_VALUE == 5) then
-        AddCheckAllAndNoneInfo("expansion", level, 5)
+        AddCheckAllAndNoneInfo(sender, "expansion", level, 5)
 
         for _, expansion in pairs(GetExpansionOrder()) do
             info = CreateFilterInfo(L[expansion] or expansion, "expansion", expansion)
