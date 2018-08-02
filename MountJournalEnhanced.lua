@@ -116,15 +116,6 @@ local function UpdateMountList()
     end
 end
 
-local function MountListItem_OnClick(sender, anchor, button)
-    if (button ~= "LeftButton") then
-        local _, _, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetDisplayedMountInfo(sender.index)
-        if not isCollected then
-            MountJournal_ShowMountDropdown(sender.index, anchor, 0, 0)
-        end
-    end
-end
-
 local function MountListItem_OnDoubleClick(sender, button)
     if (button == "LeftButton") then
         local _, _, _, _, _, _, _, _, _, _, _, mountID = C_MountJournal.GetDisplayedMountInfo(sender.index)
@@ -162,13 +153,7 @@ function ADDON:LoadUI()
     local buttons = MountJournal.ListScrollFrame.buttons
     for buttonIndex = 1, #buttons do
         local button = buttons[buttonIndex]
-        button:HookScript("OnClick", function(sender, mouseButton)
-            MountListItem_OnClick(sender, sender, mouseButton)
-        end)
         button:SetScript("OnDoubleClick", MountListItem_OnDoubleClick)
-        button.DragButton:HookScript("OnClick", function(sender, mouseButton)
-            MountListItem_OnClick(sender:GetParent(), sender, mouseButton)
-        end)
         button.DragButton.IsHidden = button.DragButton:CreateTexture(nil, "OVERLAY")
         button.DragButton.IsHidden:SetTexture("Interface\\BUTTONS\\UI-GroupLoot-Pass-Up")
         button.DragButton.IsHidden:SetSize(36, 36)

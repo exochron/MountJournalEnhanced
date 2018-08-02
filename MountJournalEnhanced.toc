@@ -5,6 +5,9 @@
 ## Version: 1.9
 ## SavedVariables: MountJournalEnhancedSettings
 
+Libs\LibStub\LibStub.lua
+Libs\MSA-DropDownMenu-1.0\MSA-DropDownMenu-1.0.xml
+
 Locals\Locals.xml
 Database\Database.lua
 Database\families.db.lua

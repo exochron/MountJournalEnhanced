@@ -10,7 +10,7 @@ local function GetExpansionOrder()
 end
 
 local function CreateFilterInfo(text, filterKey, subfilterKey, callback)
-    local info = UIDropDownMenu_CreateInfo()
+    local info = MSA_DropDownMenu_CreateInfo()
     info.keepShownOnClick = true
     info.isNotRadio = true
     info.text = text
@@ -52,11 +52,11 @@ local function AddCheckAllAndNoneInfo(sender, filterKey, level, dropdownLevel)
             ADDON.settings.filter[filterKey][key] = true
         end
 
-        UIDropDownMenu_Refresh(sender, dropdownLevel, 2)
+        MSA_DropDownMenu_Refresh(sender, dropdownLevel, 2)
         ADDON:UpdateIndexMap()
         MountJournal_UpdateMountList()
     end
-    UIDropDownMenu_AddButton(info, level)
+    MSA_DropDownMenu_AddButton(info, level)
 
     info = CreateFilterInfo(UNCHECK_ALL)
     info.hasArrow = false
@@ -65,15 +65,15 @@ local function AddCheckAllAndNoneInfo(sender, filterKey, level, dropdownLevel)
             ADDON.settings.filter[filterKey][key] = false
         end
 
-        UIDropDownMenu_Refresh(sender, dropdownLevel, 2)
+        MSA_DropDownMenu_Refresh(sender, dropdownLevel, 2)
         ADDON:UpdateIndexMap()
         MountJournal_UpdateMountList()
     end
-    UIDropDownMenu_AddButton(info, level)
+    MSA_DropDownMenu_AddButton(info, level)
 end
 
 local function MakeMultiColumnMenu(level, entriesPerColumn)
-    local listFrame = _G["DropDownList"..level]
+    local listFrame = _G["MSA_DropDownList"..level]
     local columnWidth = listFrame.maxWidth + 25
 
     local listFrameName = listFrame:GetName()
@@ -81,20 +81,20 @@ local function MakeMultiColumnMenu(level, entriesPerColumn)
     for index = entriesPerColumn + 1, listFrame.numButtons do
         columnIndex = math.ceil(index / entriesPerColumn)
         local button = _G[listFrameName.."Button"..index]
-        local yPos = -((button:GetID() - 1 - entriesPerColumn * (columnIndex - 1)) * UIDROPDOWNMENU_BUTTON_HEIGHT) - UIDROPDOWNMENU_BORDER_HEIGHT
+        local yPos = -((button:GetID() - 1 - entriesPerColumn * (columnIndex - 1)) * MSA_DROPDOWNMENU_BUTTON_HEIGHT) - MSA_DROPDOWNMENU_BORDER_HEIGHT
 
         button:ClearAllPoints()
         button:SetPoint("TOPLEFT", button:GetParent(), "TOPLEFT", columnWidth * (columnIndex - 1), yPos)
         button:SetWidth(columnWidth)
     end
 
-    listFrame:SetHeight((min(listFrame.numButtons, entriesPerColumn) * UIDROPDOWNMENU_BUTTON_HEIGHT) + (UIDROPDOWNMENU_BORDER_HEIGHT * 2))
+    listFrame:SetHeight((min(listFrame.numButtons, entriesPerColumn) * MSA_DROPDOWNMENU_BUTTON_HEIGHT) + (MSA_DROPDOWNMENU_BORDER_HEIGHT * 2))
     listFrame:SetWidth(columnWidth * columnIndex)
 
-    ADDON:Hook(nil, "UIDropDownMenu_OnHide", function(sender)
+    ADDON:Hook(nil, "MSA_DropDownMenu_OnHide", function(sender)
         ADDON:Unhook(listFrame, "SetWidth")
-        ADDON:Unhook(nil, "UIDropDownMenu_OnHide")
-        UIDropDownMenu_OnHide(sender)
+        ADDON:Unhook(nil, "MSA_DropDownMenu_OnHide")
+        MSA_DropDownMenu_OnHide(sender)
     end)
     ADDON:Hook(listFrame, "SetWidth", function() end)
 end
@@ -105,46 +105,46 @@ local function InitializeFilterDropDown(sender, level)
     if (level == 1) then
         info = CreateFilterInfo(COLLECTED, "collected", nil,  function(value)
             if (value) then
-                UIDropDownMenu_EnableButton(1,2)
+                MSA_DropDownMenu_EnableButton(1,2)
             else
-                UIDropDownMenu_DisableButton(1,2)
+                MSA_DropDownMenu_DisableButton(1,2)
             end
         end)
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
 
         info = CreateFilterInfo(FAVORITES_FILTER, "onlyFavorites")
         info.leftPadding = 16
         info.disabled = not ADDON.settings.filter.collected
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
 
         info = CreateFilterInfo(NOT_COLLECTED, "notCollected")
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
 
         info = CreateFilterInfo(L["Only usable"], "onlyUsable")
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
 
         info = CreateFilterInfo(SOURCES)
         info.value = 1
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
 
         info = CreateFilterInfo(TYPE)
         info.value = 2
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
 
         info = CreateFilterInfo(FACTION)
         info.value = 3
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
 
         info = CreateFilterInfo(L["Family"])
         info.value = 4
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
 
         info = CreateFilterInfo(L["Expansion"])
         info.value = 5
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
 
         info = CreateFilterInfo(L["Hidden"], "hidden")
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
 
         info = CreateFilterInfo(L["Reset filters"])
         info.keepShownOnClick = false
@@ -154,38 +154,38 @@ local function InitializeFilterDropDown(sender, level)
             ADDON:UpdateIndexMap()
             MountJournal_UpdateMountList()
         end
-        UIDropDownMenu_AddButton(info, level)
-    elseif (UIDROPDOWNMENU_MENU_VALUE == 1) then
+        MSA_DropDownMenu_AddButton(info, level)
+    elseif (MSA_DROPDOWNMENU_MENU_VALUE == 1) then
         AddCheckAllAndNoneInfo(sender, "source", level, 1)
         for _,categoryName in pairs(GetSourceOrder()) do
             info = CreateFilterInfo(L[categoryName] or categoryName, "source", categoryName)
-            UIDropDownMenu_AddButton(info, level)
+            MSA_DropDownMenu_AddButton(info, level)
         end
-    elseif (UIDROPDOWNMENU_MENU_VALUE == 2) then
+    elseif (MSA_DROPDOWNMENU_MENU_VALUE == 2) then
         AddCheckAllAndNoneInfo(sender, "mountType", level, 2)
 
         info = CreateFilterInfo(L["Ground"], "mountType", "ground")
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
         info = CreateFilterInfo(L["Flying"], "mountType", "flying")
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
         info = CreateFilterInfo(L["Water Walking"], "mountType", "waterWalking")
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
         info = CreateFilterInfo(L["Underwater"], "mountType", "underwater")
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
         info = CreateFilterInfo(L["Transform"], "mountType", "transform")
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
         info = CreateFilterInfo(L["Repair"], "mountType", "repair")
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
         info = CreateFilterInfo(L["Passenger"], "mountType", "passenger")
-        UIDropDownMenu_AddButton(info, level)
-    elseif (UIDROPDOWNMENU_MENU_VALUE == 3) then
+        MSA_DropDownMenu_AddButton(info, level)
+    elseif (MSA_DROPDOWNMENU_MENU_VALUE == 3) then
         info = CreateFilterInfo(FACTION_ALLIANCE, "faction", "alliance")
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
         info = CreateFilterInfo(FACTION_HORDE, "faction", "horde")
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
         info = CreateFilterInfo(NPC_NAMES_DROPDOWN_NONE, "faction", "noFaction")
-        UIDropDownMenu_AddButton(info, level)
-    elseif (UIDROPDOWNMENU_MENU_VALUE == 4) then
+        MSA_DropDownMenu_AddButton(info, level)
+    elseif (MSA_DROPDOWNMENU_MENU_VALUE == 4) then
         AddCheckAllAndNoneInfo(sender, "family", level, 4)
 
         local sortedFamilies = {}
@@ -196,16 +196,16 @@ local function InitializeFilterDropDown(sender, level)
 
         for _, family in pairs(sortedFamilies) do
             info = CreateFilterInfo(L[family] or family, "family", family)
-            UIDropDownMenu_AddButton(info, level)
+            MSA_DropDownMenu_AddButton(info, level)
         end
 
         MakeMultiColumnMenu(level, 21)
-    elseif (UIDROPDOWNMENU_MENU_VALUE == 5) then
+    elseif (MSA_DROPDOWNMENU_MENU_VALUE == 5) then
         AddCheckAllAndNoneInfo(sender, "expansion", level, 5)
 
         for _, expansion in pairs(GetExpansionOrder()) do
             info = CreateFilterInfo(L[expansion] or expansion, "expansion", expansion)
-            UIDropDownMenu_AddButton(info, level)
+            MSA_DropDownMenu_AddButton(info, level)
         end
     end
 end
@@ -215,7 +215,7 @@ local function InitializeMountOptionsMenu(sender, level)
         return
     end
 
-    local info = UIDropDownMenu_CreateInfo()
+    local info = MSA_DropDownMenu_CreateInfo()
     info.notCheckable = true
 
     local active = select(4, C_MountJournal.GetMountInfoByID(MountJournal.menuMountID))
@@ -237,7 +237,7 @@ local function InitializeMountOptionsMenu(sender, level)
         MountJournalMountButton_UseMount(MountJournal.menuMountID)
     end
 
-    UIDropDownMenu_AddButton(info, level)
+    MSA_DropDownMenu_AddButton(info, level)
 
     local spellId
     local isCollected = false
@@ -274,7 +274,7 @@ local function InitializeMountOptionsMenu(sender, level)
             info.disabled = true
         end
 
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
     end
 
     if (spellId) then
@@ -294,22 +294,47 @@ local function InitializeMountOptionsMenu(sender, level)
                 MountJournal_UpdateMountList()
             end
         end
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
     end
 
     info.disabled = nil
     info.text = CANCEL
     info.func = nil
-    UIDropDownMenu_AddButton(info, level)
+    MSA_DropDownMenu_AddButton(info, level)
+end
+
+local function MountListItem_OnClick(menu, sender, anchor, button)
+    if (button ~= "LeftButton") then
+        local _, _, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetDisplayedMountInfo(sender.index)
+        if not isCollected then
+            MountJournal_ShowMountDropdown(sender.index, anchor, 0, 0)
+        end
+        MountJournal_HideMountDropdown()
+
+        MSA_ToggleDropDownMenu(1, nil, menu, anchor, 0, 0)
+    end
 end
 
 hooksecurefunc(ADDON, "LoadUI", function ()
-    hooksecurefunc(MountJournal.mountOptionsMenu, "initialize", function(sender, level)
-        UIDropDownMenu_InitializeHelper(sender)
-        InitializeMountOptionsMenu(sender, level)
-    end)
-    hooksecurefunc(MountJournalFilterDropDown, "initialize", function(sender, level)
-        UIDropDownMenu_InitializeHelper(sender)
-        InitializeFilterDropDown(sender, level)
+    local menu = CreateFrame("Button", ADDON_NAME.."MountOptionsMenu", MountJournal, "MSA_DropDownMenuTemplate")
+    MSA_DropDownMenu_Initialize(menu, InitializeMountOptionsMenu, "MENU")
+
+    local buttons = MountJournal.ListScrollFrame.buttons
+    for buttonIndex = 1, #buttons do
+        local button = buttons[buttonIndex]
+        button:HookScript("OnClick", function(sender, mouseButton)
+            MountListItem_OnClick(menu, sender, sender, mouseButton)
+        end)
+        button.DragButton:HookScript("OnClick", function(sender, mouseButton)
+            MountListItem_OnClick(menu, sender:GetParent(), sender, mouseButton)
+        end)
+    end
+
+    local menu = CreateFrame("Button", ADDON_NAME.."FilterMenu", MountJournal, "MSA_DropDownMenuTemplate")
+    MSA_DropDownMenu_Initialize(menu, InitializeFilterDropDown, "MENU")
+
+    MountJournalFilterButton:HookScript("OnClick", function(sender)
+        MountJournalFilterDropDown:Hide()
+        MSA_ToggleDropDownMenu(1, nil, menu, sender, 74, 15);
     end)
 end)

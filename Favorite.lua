@@ -67,7 +67,7 @@ local function RunSetFavorites(spellIds)
 end
 
 local function InitializeDropDown(menu, level)
-    local info = UIDropDownMenu_CreateInfo()
+    local info = MSA_DropDownMenu_CreateInfo()
     info.keepShownOnClick = false
     info.isNotRadio = true
     info.notCheckable = true
@@ -78,20 +78,20 @@ local function InitializeDropDown(menu, level)
         info.func = function()
             RunSetFavorites(FetchDisplayedSpellIds())
         end
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
 
         info.text = UNCHECK_ALL
         info.func = function()
             RunSetFavorites({})
         end
-        UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
     end
 end
 
 local function BuildStarButton()
 
-    local menu = CreateFrame("Button", nil, MountJournal, "UIDropDownMenuTemplate")
-    UIDropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
+    local menu = CreateFrame("Button", ADDON_NAME.."FavorMenu", MountJournal, "MSA_DropDownMenuTemplate")
+    MSA_DropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
 
     button = CreateFrame("Button", nil, MountJournal)
     button:SetPoint("TOPLEFT", MountJournal.LeftInset, "TOPLEFT", 0, -7)
@@ -107,7 +107,7 @@ local function BuildStarButton()
         GameTooltip:Hide()
     end);
     button:SetScript("OnClick", function()
-        ToggleDropDownMenu(1, nil, menu, button, 0, 10)
+        MSA_ToggleDropDownMenu(1, nil, menu, button, 0, 10)
     end)
 
     local searchBox = MountJournal.searchBox
