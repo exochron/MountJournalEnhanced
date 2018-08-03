@@ -16,10 +16,14 @@ Settings.lua
 DebugTest.lua
 Filters.lua
 MountJournalEnhanced.lua
+UI\CompactMountList.lua
 UI\AchievementPoints.lua
-UI\DropDownMenus.lua
+UI\DoubleClick.lua
+UI\FavoriteButton.lua
+UI\FilterDropDown.lua
+UI\HiddenIcon.lua
 UI\MountCount.lua
+UI\MountListDropDown.lua
 UI\ShopButton.lua
 DressUpMounts.lua
-Favorite.lua
 SlashCommand.lua

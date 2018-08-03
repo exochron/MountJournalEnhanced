@@ -126,25 +126,6 @@ end
 
 --endregion Hooks
 
-local function UpdateMountList()
-    local buttons = MountJournal.ListScrollFrame.buttons
-    for i = 1, #buttons do
-        if (ADDON.settings.hiddenMounts[buttons[i].spellID]) then
-            buttons[i].DragButton.IsHidden:SetShown(true)
-        else
-            buttons[i].DragButton.IsHidden:SetShown(false)
-        end
-        buttons[i].DragButton:SetEnabled(true)
-    end
-end
-
-local function MountListItem_OnDoubleClick(sender, button)
-    if (button == "LeftButton") then
-        local _, _, _, _, _, _, _, _, _, _, _, mountID = C_MountJournal.GetDisplayedMountInfo(sender.index)
-        C_MountJournal.SummonByID(mountID)
-    end
-end
-
 function ADDON:LoadUI()
     -- reset default filter settings
     C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true)
@@ -160,20 +141,6 @@ function ADDON:LoadUI()
     end)
 
     RegisterMountJournalHooks()
-
-    hooksecurefunc("MountJournal_UpdateMountList", UpdateMountList)
-
-    local buttons = MountJournal.ListScrollFrame.buttons
-    for buttonIndex = 1, #buttons do
-        local button = buttons[buttonIndex]
-        button:SetScript("OnDoubleClick", MountListItem_OnDoubleClick)
-        button.DragButton.IsHidden = button.DragButton:CreateTexture(nil, "OVERLAY")
-        button.DragButton.IsHidden:SetTexture("Interface\\BUTTONS\\UI-GroupLoot-Pass-Up")
-        button.DragButton.IsHidden:SetSize(36, 36)
-        button.DragButton.IsHidden:SetPoint("CENTER", button.DragButton, "CENTER", 0, 0)
-        button.DragButton.IsHidden:SetDrawLayer("OVERLAY", 1)
-        button.DragButton.IsHidden:SetShown(false)
-    end
 
     self:UpdateIndexMap()
     MountJournal_UpdateMountList()

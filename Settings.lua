@@ -7,6 +7,7 @@ local function PrepareDefaults()
     local defaultSettings = {
         debugMode = false,
         showShopButton = false,
+        compactMountList = true,
         favoritePerCharacter = true,
         favoredMounts = { },
         hiddenMounts = { },

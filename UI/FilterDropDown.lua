@@ -2,7 +2,7 @@ local ADDON_NAME, ADDON = ...
 local L = ADDON.L
 
 local function GetSourceOrder()
-    return { "Drop", "Quest", "Vendor", "Profession", "Instance", "Reputation", "Achievement", "Island Expedition", "Garrison", "PVP", "Class", "World Event", "Black Market", "Shop", "Promotion"}
+    return { "Drop", "Quest", "Vendor", "Profession", "Instance", "Reputation", "Achievement", "Island Expedition", "Garrison", "PVP", "Class", "World Event", "Black Market", "Shop", "Promotion" }
 end
 
 local function GetExpansionOrder()
@@ -73,14 +73,14 @@ local function AddCheckAllAndNoneInfo(sender, filterKey, level, dropdownLevel)
 end
 
 local function MakeMultiColumnMenu(level, entriesPerColumn)
-    local listFrame = _G["MSA_DropDownList"..level]
+    local listFrame = _G["MSA_DropDownList" .. level]
     local columnWidth = listFrame.maxWidth + 25
 
     local listFrameName = listFrame:GetName()
     local columnIndex = 0
     for index = entriesPerColumn + 1, listFrame.numButtons do
         columnIndex = math.ceil(index / entriesPerColumn)
-        local button = _G[listFrameName.."Button"..index]
+        local button = _G[listFrameName .. "Button" .. index]
         local yPos = -((button:GetID() - 1 - entriesPerColumn * (columnIndex - 1)) * MSA_DROPDOWNMENU_BUTTON_HEIGHT) - MSA_DROPDOWNMENU_BORDER_HEIGHT
 
         button:ClearAllPoints()
@@ -103,11 +103,11 @@ local function InitializeFilterDropDown(sender, level)
     local info
 
     if (level == 1) then
-        info = CreateFilterInfo(COLLECTED, "collected", nil,  function(value)
+        info = CreateFilterInfo(COLLECTED, "collected", nil, function(value)
             if (value) then
-                MSA_DropDownMenu_EnableButton(1,2)
+                MSA_DropDownMenu_EnableButton(1, 2)
             else
-                MSA_DropDownMenu_DisableButton(1,2)
+                MSA_DropDownMenu_DisableButton(1, 2)
             end
         end)
         MSA_DropDownMenu_AddButton(info, level)
@@ -157,7 +157,7 @@ local function InitializeFilterDropDown(sender, level)
         MSA_DropDownMenu_AddButton(info, level)
     elseif (MSA_DROPDOWNMENU_MENU_VALUE == 1) then
         AddCheckAllAndNoneInfo(sender, "source", level, 1)
-        for _,categoryName in pairs(GetSourceOrder()) do
+        for _, categoryName in pairs(GetSourceOrder()) do
             info = CreateFilterInfo(L[categoryName] or categoryName, "source", categoryName)
             MSA_DropDownMenu_AddButton(info, level)
         end
@@ -210,131 +210,11 @@ local function InitializeFilterDropDown(sender, level)
     end
 end
 
-local function InitializeMountOptionsMenu(sender, level)
-    if not MountJournal.menuMountIndex then
-        return
-    end
-
-    local info = MSA_DropDownMenu_CreateInfo()
-    info.notCheckable = true
-
-    local active = select(4, C_MountJournal.GetMountInfoByID(MountJournal.menuMountID))
-    local needsFanfare = C_MountJournal.NeedsFanfare(MountJournal.menuMountID)
-
-    if (needsFanfare) then
-        info.text = UNWRAP
-    elseif ( active ) then
-        info.text = BINDING_NAME_DISMOUNT
-    else
-        info.text = MOUNT
-        info.disabled = not MountJournal.menuIsUsable
-    end
-
-    info.func = function()
-        if needsFanfare then
-            MountJournal_Select(MountJournal.menuMountIndex)
-        end
-        MountJournalMountButton_UseMount(MountJournal.menuMountID)
-    end
-
-    MSA_DropDownMenu_AddButton(info, level)
-
-    local spellId
-    local isCollected = false
-    if (MountJournal.menuMountIndex) then
-        _, spellId, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetDisplayedMountInfo(MountJournal.menuMountIndex)
-    end
-
-    if not needsFanfare and isCollected then
-        info.disabled = nil
-
-        local canFavorite = false
-        local isFavorite = false
-        if (MountJournal.menuMountIndex) then
-            isFavorite, canFavorite = C_MountJournal.GetIsFavorite(MountJournal.menuMountIndex)
-        end
-
-        if (isFavorite) then
-            info.text = BATTLE_PET_UNFAVORITE
-            info.func = function()
-                C_MountJournal.SetIsFavorite(MountJournal.menuMountIndex, false)
-                MountJournal_UpdateMountList()
-            end
-        else
-            info.text = BATTLE_PET_FAVORITE
-            info.func = function()
-                C_MountJournal.SetIsFavorite(MountJournal.menuMountIndex, true)
-                MountJournal_UpdateMountList()
-            end
-        end
-
-        if (canFavorite) then
-            info.disabled = false
-        else
-            info.disabled = true
-        end
-
-        MSA_DropDownMenu_AddButton(info, level)
-    end
-
-    if (spellId) then
-        info.disabled = nil
-        if (ADDON.settings.hiddenMounts[spellId]) then
-            info.text = SHOW
-            info.func = function()
-                ADDON.settings.hiddenMounts[spellId] = false
-                ADDON:UpdateIndexMap()
-                MountJournal_UpdateMountList()
-            end
-        else
-            info.text = HIDE
-            info.func = function()
-                ADDON.settings.hiddenMounts[spellId] = true
-                ADDON:UpdateIndexMap()
-                MountJournal_UpdateMountList()
-            end
-        end
-        MSA_DropDownMenu_AddButton(info, level)
-    end
-
-    info.disabled = nil
-    info.text = CANCEL
-    info.func = nil
-    MSA_DropDownMenu_AddButton(info, level)
-end
-
-local function MountListItem_OnClick(menu, sender, anchor, button)
-    if (button ~= "LeftButton") then
-        local _, _, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetDisplayedMountInfo(sender.index)
-        if not isCollected then
-            MountJournal_ShowMountDropdown(sender.index, anchor, 0, 0)
-        end
-        MountJournal_HideMountDropdown()
-
-        MSA_ToggleDropDownMenu(1, nil, menu, anchor, 0, 0)
-    end
-end
-
-hooksecurefunc(ADDON, "LoadUI", function ()
-    local menu = CreateFrame("Button", ADDON_NAME.."MountOptionsMenu", MountJournal, "MSA_DropDownMenuTemplate")
-    MSA_DropDownMenu_Initialize(menu, InitializeMountOptionsMenu, "MENU")
-
-    local buttons = MountJournal.ListScrollFrame.buttons
-    for buttonIndex = 1, #buttons do
-        local button = buttons[buttonIndex]
-        button:HookScript("OnClick", function(sender, mouseButton)
-            MountListItem_OnClick(menu, sender, sender, mouseButton)
-        end)
-        button.DragButton:HookScript("OnClick", function(sender, mouseButton)
-            MountListItem_OnClick(menu, sender:GetParent(), sender, mouseButton)
-        end)
-    end
-
-    local menu = CreateFrame("Button", ADDON_NAME.."FilterMenu", MountJournal, "MSA_DropDownMenuTemplate")
+hooksecurefunc(ADDON, "LoadUI", function()
+    local menu = CreateFrame("Button", ADDON_NAME .. "FilterMenu", MountJournalFilterButton, "MSA_DropDownMenuTemplate")
     MSA_DropDownMenu_Initialize(menu, InitializeFilterDropDown, "MENU")
-
-    MountJournalFilterButton:HookScript("OnClick", function(sender)
-        MountJournalFilterDropDown:Hide()
-        MSA_ToggleDropDownMenu(1, nil, menu, sender, 74, 15);
+    MountJournalFilterButton:SetScript("OnClick", function(sender)
+        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+        MSA_ToggleDropDownMenu(1, nil, menu, sender, 74, 15)
     end)
 end)
