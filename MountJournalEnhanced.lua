@@ -3,8 +3,22 @@ local ADDON_NAME, ADDON = ...
 ADDON.hooks = {}
 ADDON.indexMap = {}
 
+local function SearchIsActive()
+    local searchString = MountJournal.searchBox:GetText()
+    if (not searchString or string.len(searchString) == 0) then
+        return false
+    end
+
+    return true
+end
+
 --region C_MountJournal Hooks
 function ADDON:MapIndex(index)
+
+    if (SearchIsActive()) then
+        return index
+    end
+
     if (not self.indexMap) then
         self:UpdateIndexMap()
     end
@@ -13,6 +27,10 @@ function ADDON:MapIndex(index)
 end
 
 local function C_MountJournal_GetNumDisplayedMounts()
+    if SearchIsActive() then
+        return ADDON.hooks["GetNumDisplayedMounts"]()
+    end
+
     if (not ADDON.indexMap) then
         ADDON:UpdateIndexMap()
     end
@@ -21,7 +39,11 @@ local function C_MountJournal_GetNumDisplayedMounts()
 end
 
 local function C_MountJournal_GetDisplayedMountInfo(index)
-    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = ADDON.hooks["GetDisplayedMountInfo"](ADDON:MapIndex(index))
+    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h
+    local mappedIndex = ADDON:MapIndex(index)
+    if mappedIndex then
+        creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = ADDON.hooks["GetDisplayedMountInfo"](mappedIndex)
+    end
 
     isUsable = isUsable and IsUsableSpell(spellId)
 
@@ -123,13 +145,6 @@ local function MountListItem_OnDoubleClick(sender, button)
     end
 end
 
-local function MountJournal_OnSearchTextChanged(sender)
-    SearchBoxTemplate_OnTextChanged(sender)
-
-    ADDON:UpdateIndexMap()
-    MountJournal_UpdateMountList()
-end
-
 function ADDON:LoadUI()
     -- reset default filter settings
     C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true)
@@ -147,8 +162,6 @@ function ADDON:LoadUI()
     RegisterMountJournalHooks()
 
     hooksecurefunc("MountJournal_UpdateMountList", UpdateMountList)
-
-    MountJournalSearchBox:SetScript("OnTextChanged", MountJournal_OnSearchTextChanged)
 
     local buttons = MountJournal.ListScrollFrame.buttons
     for buttonIndex = 1, #buttons do
@@ -179,16 +192,11 @@ end
 function ADDON:UpdateIndexMap()
     local indexMap = {}
 
-    local searchString = MountJournal.searchBox:GetText()
-    if (not searchString or string.len(searchString) == 0) then
-        searchString = nil
-    else
-        searchString = string.lower(searchString)
-    end
-
-    for i = 1, self.hooks["GetNumDisplayedMounts"]() do
-        if (ADDON:FilterMount(i, searchString)) then
-            indexMap[#indexMap + 1] = i
+    if not SearchIsActive() then
+        for i = 1, self.hooks["GetNumDisplayedMounts"]() do
+            if (ADDON:FilterMount(i)) then
+                indexMap[#indexMap + 1] = i
+            end
         end
     end
 

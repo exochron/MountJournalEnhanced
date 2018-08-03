@@ -1141,6 +1141,7 @@ ADDON.MountJournalEnhancedType = {
     },
 }
 
+-- used as filter for debug output
 ADDON.MountJournalEnhancedIgnored = {
     [459] = true, -- Gray Wolf
     [468] = true, -- White Stallion
