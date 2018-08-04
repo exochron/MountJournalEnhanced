@@ -123,4 +123,7 @@ hooksecurefunc(ADDON, "LoadUI", function()
     end
 
     ADDON:Hook(nil, "MountJournal_ShowMountDropdown", ShowMountDropdown)
+    hooksecurefunc("MountJournal_HideMountDropdown", function()
+        menu:Hide()
+    end)
 end)

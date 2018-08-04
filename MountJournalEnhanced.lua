@@ -117,22 +117,22 @@ local function RegisterMountJournalHooks()
     ADDON:Hook(C_MountJournal, "GetDisplayedMountInfoExtra", C_MountJournal_GetDisplayedMountInfoExtra)
     ADDON:Hook(C_MountJournal, "SetIsFavorite", C_MountJournal_SetIsFavorite)
     ADDON:Hook(C_MountJournal, "GetIsFavorite", function(index)
-        return ADDON.hooks["GetIsFavorite"](ADDON:MapIndex(index))
+        local mappedIndex = ADDON:MapIndex(index)
+        if mappedIndex then
+            return ADDON.hooks["GetIsFavorite"](mappedIndex)
+        end
     end)
     ADDON:Hook(C_MountJournal, "Pickup", function(index)
-        return ADDON.hooks["Pickup"](ADDON:MapIndex(index))
+        local mappedIndex = ADDON:MapIndex(index)
+        if mappedIndex then
+            return ADDON.hooks["Pickup"](mappedIndex)
+        end
     end)
 end
 
 --endregion Hooks
 
 function ADDON:LoadUI()
-    -- reset default filter settings
-    C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true)
-    C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, true)
-    C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, true)
-    C_MountJournal.SetAllSourceFilters(true)
-    C_MountJournal.SetSearch('')
 
     PetJournal:HookScript("OnShow", function()
         if (not PetJournalPetCard.petID) then
@@ -213,6 +213,13 @@ local function Load()
         end
     end
 end
+
+-- reset default filter settings
+C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true)
+C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, true)
+C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, true)
+C_MountJournal.SetAllSourceFilters(true)
+C_MountJournal.SetSearch('')
 
 hooksecurefunc("LoadAddOn", function(name)
     if (name == 'Blizzard_Collections') then
