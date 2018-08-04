@@ -7,6 +7,7 @@
 - Variation Filter (Undead,Mech, Elemental, Magic...)
 - Restructured Family filter
 - Settings Panel
+  - compact mount list
   - Display Shop Button
   - (Favor per Character)
 

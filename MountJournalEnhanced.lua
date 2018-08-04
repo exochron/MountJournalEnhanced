@@ -15,7 +15,7 @@ end
 --region C_MountJournal Hooks
 function ADDON:MapIndex(index)
 
-    if (SearchIsActive()) then
+    if (SearchIsActive() or index == 0) then
         return index
     end
 
