@@ -5,6 +5,11 @@ ADDON.indexMap = {}
 
 --region C_MountJournal Hooks
 function ADDON:MapIndex(index)
+    -- index=0 => SummonRandomButton
+    if (index == 0) then
+        return index
+    end
+
     if (not self.indexMap) then
         self:UpdateIndexMap()
     end
@@ -21,7 +26,11 @@ local function C_MountJournal_GetNumDisplayedMounts()
 end
 
 local function C_MountJournal_GetDisplayedMountInfo(index)
-    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = ADDON.hooks["GetDisplayedMountInfo"](ADDON:MapIndex(index))
+    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h
+    local mappedIndex = ADDON:MapIndex(index)
+    if nil ~= mappedIndex then
+        creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = ADDON.hooks["GetDisplayedMountInfo"](mappedIndex)
+    end
 
     isUsable = isUsable and IsUsableSpell(spellId)
 
@@ -95,10 +104,16 @@ local function RegisterMountJournalHooks()
     ADDON:Hook(C_MountJournal, "GetDisplayedMountInfoExtra", C_MountJournal_GetDisplayedMountInfoExtra)
     ADDON:Hook(C_MountJournal, "SetIsFavorite", C_MountJournal_SetIsFavorite)
     ADDON:Hook(C_MountJournal, "GetIsFavorite", function(index)
-        return ADDON.hooks["GetIsFavorite"](ADDON:MapIndex(index))
+        local mappedIndex = ADDON:MapIndex(index)
+        if nil~= mappedIndex then
+            return ADDON.hooks["GetIsFavorite"](mappedIndex)
+        end
     end)
     ADDON:Hook(C_MountJournal, "Pickup", function(index)
-        return ADDON.hooks["Pickup"](ADDON:MapIndex(index))
+        local mappedIndex = ADDON:MapIndex(index)
+        if nil~= mappedIndex then
+            return ADDON.hooks["Pickup"](mappedIndex)
+        end
     end)
 end
 

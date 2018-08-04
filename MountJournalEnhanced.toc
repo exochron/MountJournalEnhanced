@@ -2,7 +2,7 @@
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron
-## Version: 1.9
+## Version: 1.9.1
 ## SavedVariables: MountJournalEnhancedSettings
 
 Locals\Locals.xml
