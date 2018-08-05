@@ -3,7 +3,7 @@
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron
 ## Version: 1.9.1
-## SavedVariables: MountJournalEnhancedSettings
+## SavedVariablesPerCharacter: MountJournalEnhancedSettings
 
 Libs\LibStub\LibStub.lua
 Libs\MSA-DropDownMenu-1.0\MSA-DropDownMenu-1.0.xml
@@ -16,10 +16,10 @@ Settings.lua
 DebugTest.lua
 Filters.lua
 MountJournalEnhanced.lua
+Favorites.lua
 UI\CompactMountList.lua
 UI\AchievementPoints.lua
 UI\DoubleClick.lua
-UI\FavoriteButton.lua
 UI\FilterDropDown.lua
 UI\HiddenIcon.lua
 UI\MountCount.lua

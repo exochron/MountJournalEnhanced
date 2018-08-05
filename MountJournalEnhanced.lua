@@ -203,26 +203,31 @@ function ADDON:Unhook(obj, name)
     return true
 end
 
-local function Load()
-    if not ADDON.initialized then
-        ADDON.initialized = true
-        ADDON:LoadSettings()
-        ADDON:LoadUI()
-        if ADDON.settings.debugMode then
-            ADDON:RunDebugTest()
-        end
-    end
+function ADDON:OnLogin()
+    -- reset default filter settings
+    C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true)
+    C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, true)
+    C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, true)
+    C_MountJournal.SetAllSourceFilters(true)
+    C_MountJournal.SetSearch("")
+
+    ADDON:LoadSettings()
 end
 
--- reset default filter settings
-C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true)
-C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, true)
-C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, true)
-C_MountJournal.SetAllSourceFilters(true)
-C_MountJournal.SetSearch('')
-
-hooksecurefunc("LoadAddOn", function(name)
-    if (name == 'Blizzard_Collections') then
-        Load()
+local frame = CreateFrame("Frame")
+frame:RegisterEvent("ADDON_LOADED")
+frame:RegisterEvent("PLAYER_LOGIN")
+frame:SetScript("OnEvent", function(self, event, arg1)
+    if event == "PLAYER_LOGIN" then
+        ADDON:OnLogin()
+    elseif event == "ADDON_LOADED" and arg1 == "Blizzard_Collections" then
+        if not ADDON.initialized then
+            frame:UnregisterEvent("ADDON_LOADED")
+            ADDON:LoadUI()
+            ADDON.initialized = true
+            if ADDON.settings.debugMode then
+                ADDON:RunDebugTest()
+            end
+        end
     end
 end)

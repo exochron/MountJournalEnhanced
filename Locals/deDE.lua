@@ -25,6 +25,7 @@ if (GetLocale() == 'deDE') then
     L["Elementals"] = "Elementare"
     L["Family"] = "Familie"
     L['FAVOR_DISPLAYED'] = "Alle Angezeigten Wählen"
+    L['FAVOR_PER_CHARACTER'] = "Pro Charakter"
     L["Fishes"] = "Fische"
     L["Flying"] = "Luft"
     L["Foxes"] = "Füchse"

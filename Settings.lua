@@ -8,7 +8,7 @@ local function PrepareDefaults()
         debugMode = false,
         showShopButton = false,
         compactMountList = true,
-        favoritePerCharacter = true,
+        favoritePerChar = false,
         favoredMounts = { },
         hiddenMounts = { },
         filter = {
