@@ -19,6 +19,7 @@ MountJournalEnhanced.lua
 Favorites.lua
 UI\CompactMountList.lua
 UI\AchievementPoints.lua
+UI\DisplayDirector.lua
 UI\DoubleClick.lua
 UI\FilterDropDown.lua
 UI\HiddenIcon.lua

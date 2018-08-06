@@ -2,16 +2,6 @@
 
 local L = ADDON.L or {}
 
--- Expansion
-L["Classic"] = EXPANSION_NAME0
-L["The Burning Crusade"] = EXPANSION_NAME1
-L["Wrath of the Lich King"] = EXPANSION_NAME2
-L["Cataclysm"] = EXPANSION_NAME3
-L["Mists of Pandaria"] = EXPANSION_NAME4
-L["Warlords of Draenor"] = EXPANSION_NAME5
-L["Legion"] = EXPANSION_NAME6
-L["Battle for Azeroth"] = EXPANSION_NAME7
-
 -- Source
 L["Drop"] = BATTLE_PET_SOURCE_1
 L["Quest"] = BATTLE_PET_SOURCE_2
@@ -26,7 +16,6 @@ L["Reputation"] = REPUTATION
 L["Garrison"] = GARRISON_LOCATION_TOOLTIP
 L["PVP"] = PVP
 L["Repair"] = MINIMAP_TRACKING_REPAIR
-L["Expansion"] = EXPANSION_FILTER_TEXT
 L["Island Expedition"] = ISLANDS_HEADER
 L["Class"] = CLASS
 
