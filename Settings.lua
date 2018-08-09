@@ -39,8 +39,18 @@ local function PrepareDefaults()
     for categoryName, _ in pairs(ADDON.MountJournalEnhancedSource) do
         defaultSettings.filter.source[categoryName] = true
     end
-    for categoryName, _ in pairs(ADDON.MountJournalEnhancedFamily) do
-        defaultSettings.filter.family[categoryName] = true
+    for categoryName, categoryConfig in pairs(ADDON.MountJournalEnhancedFamily) do
+        for subCategory, subConfig in pairs(categoryConfig) do
+            if type(subConfig) == "table" then
+                if not defaultSettings.filter.family[categoryName] then
+                    defaultSettings.filter.family[categoryName] = {}
+                end
+                defaultSettings.filter.family[categoryName][subCategory] = true
+            else
+                defaultSettings.filter.family[categoryName] = true
+                break
+            end
+        end
     end
     for expansionName, _ in pairs(ADDON.MountJournalEnhancedExpansion) do
         defaultSettings.filter.expansion[expansionName] = true
@@ -53,8 +63,18 @@ local function CombineSettings(settings, defaultSettings)
     for key, value in pairs(defaultSettings) do
         if (settings[key] == nil) then
             settings[key] = value;
-        elseif (type(settings[key]) == "table" and type(value) == "table") then
+        elseif (type(value) == "table") and next(value) ~= nil then
+            if type(settings[key]) ~= "table" then
+                settings[key] = {}
+            end
             CombineSettings(settings[key], value);
+        end
+    end
+
+    -- cleanup old still existing settings
+    for key, _ in pairs(settings) do
+        if (defaultSettings[key] == nil) then
+            settings[key] = nil;
         end
     end
 end

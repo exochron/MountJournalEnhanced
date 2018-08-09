@@ -11,9 +11,9 @@ function ADDON:RunDebugTest()
     for i, mountID in ipairs(mountIDs) do
         local name, spellID, icon, active, isUsable, sourceType = C_MountJournal.GetMountInfoByID(mountID)
         mounts[spellID] = {
-            name=name,
-            mountID=mountID,
-            sourceType=sourceType,
+            name = name,
+            mountID = mountID,
+            sourceType = sourceType,
         }
     end
 
@@ -21,8 +21,14 @@ function ADDON:RunDebugTest()
     for key, _ in pairs(self.settings.filter.source) do
         self.settings.filter.source[key] = false
     end
-    for key, _ in pairs(self.settings.filter.family) do
-        self.settings.filter.family[key] = false
+    for key, value in pairs(self.settings.filter.family) do
+        if type(value) == "table" then
+            for subKey, _ in pairs(value) do
+                self.settings.filter.family[key][subKey] = false
+            end
+        else
+            self.settings.filter.family[key] = false
+        end
     end
     for key, _ in pairs(self.settings.filter.expansion) do
         self.settings.filter.expansion[key] = false
@@ -52,7 +58,13 @@ function ADDON:RunDebugTest()
 
     for _, familyMounts in pairs(MountJournalEnhancedFamily) do
         for id, name in pairs(familyMounts) do
-            if id ~= "keywords" and not MountJournalEnhancedIgnored[id] and not mounts[id] then
+            if type(name) == "table" then
+                for subId, subName in pairs(name) do
+                    if not MountJournalEnhancedIgnored[subId] and not mounts[subId] then
+                        print("[MJE] Old family info for mount: " .. subName .. " (" .. id .. ")")
+                    end
+                end
+            elseif not MountJournalEnhancedIgnored[id] and not mounts[id] then
                 print("[MJE] Old family info for mount: " .. name .. " (" .. id .. ")")
             end
         end
@@ -66,7 +78,7 @@ function ADDON:RunDebugTest()
         end
     end
 
-    local names = { }
+    local names = {}
     for _, data in pairs(MountJournalEnhancedSource) do
         for id, name in pairs(data) do
             if id ~= "sourceType" then

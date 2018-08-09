@@ -16,7 +16,7 @@ local function GetSourceOrder()
     return { "Drop", "Quest", "Vendor", "Profession", "Instance", "Reputation", "Achievement", "Island Expedition", "Garrison", "PVP", "Class", "World Event", "Black Market", "Shop", "Promotion" }
 end
 
-local function CreateFilterInfo(text, filterKey, subfilterKey, callback)
+local function CreateFilterInfo(text, filterKey, filterSettings, callback)
     local info = MSA_DropDownMenu_CreateInfo()
     info.keepShownOnClick = true
     info.isNotRadio = true
@@ -24,21 +24,21 @@ local function CreateFilterInfo(text, filterKey, subfilterKey, callback)
     info.text = text
 
     if filterKey then
-        info.notCheckable = false
-        if subfilterKey then
-            info.checked = function() return ADDON.settings.filter[filterKey][subfilterKey] end
-        else
-            info.checked = function() return ADDON.settings.filter[filterKey] end
+        if not filterSettings then
+            filterSettings = ADDON.settings.filter
         end
-        info.func = function(_, _, _, value)
-            if subfilterKey then
-                ADDON.settings.filter[filterKey][subfilterKey] = value
-            else
-                ADDON.settings.filter[filterKey] = value
-            end
+        info.arg1 = filterSettings
+        info.notCheckable = false
+        info.checked = function(self) return self.arg1[filterKey] end
+        info.func = function(_, arg1, _, value)
+            arg1[filterKey] = value
             ADDON:UpdateIndexMap()
             MountJournal_UpdateMountList()
-            MSA_DropDownMenu_Refresh(_G[ADDON_NAME .. "FilterMenu"], nil, 1)
+            if (MSA_DROPDOWNMENU_MENU_LEVEL > 1) then
+                for i=1, MSA_DROPDOWNMENU_MENU_LEVEL do
+                    MSA_DropDownMenu_Refresh(_G[ADDON_NAME .. "FilterMenu"], nil, i)
+                end
+            end
 
             if callback then
                 callback(value)
@@ -51,9 +51,17 @@ local function CreateFilterInfo(text, filterKey, subfilterKey, callback)
     return info
 end
 
-local function CheckSetting(filterKey)
+local function CreateFilterCategory(text, value)
+    local info = CreateFilterInfo(text)
+    info.hasArrow = true
+    info.value = value
+
+    return info
+end
+
+local function CheckSetting(settings)
     local hasTrue, hasFalse = false, false
-    for _, v in pairs(ADDON.settings.filter[filterKey]) do
+    for _, v in pairs(settings) do
         if (v == true) then
             hasTrue = true
         elseif v == false then
@@ -67,13 +75,21 @@ local function CheckSetting(filterKey)
     return hasTrue, hasFalse
 end
 
-local function SetAllSubFilters(filterKey, switch, dropdownLevel)
-    for key, _ in pairs(ADDON.settings.filter[filterKey]) do
-        ADDON.settings.filter[filterKey][key] = switch
+local function SetAllSubFilters(settings, switch)
+    for key, value in pairs(settings) do
+        if type(value) == "table" then
+            for subKey, _ in pairs(value) do
+                settings[key][subKey] = switch
+            end
+        else
+            settings[key] = switch
+        end
     end
 
-    MSA_DropDownMenu_Refresh(_G[ADDON_NAME .. "FilterMenu"], dropdownLevel, 2)
-    MSA_DropDownMenu_Refresh(_G[ADDON_NAME .. "FilterMenu"], nil, 1)
+    if (MSA_DROPDOWNMENU_MENU_LEVEL ~= 2) then
+        MSA_DropDownMenu_Refresh(_G[ADDON_NAME .. "FilterMenu"], nil, 2)
+    end
+    MSA_DropDownMenu_Refresh(_G[ADDON_NAME .. "FilterMenu"])
     ADDON:UpdateIndexMap()
     MountJournal_UpdateMountList()
 end
@@ -91,7 +107,7 @@ local function RefreshCategoryButton(button, isNotRadio)
     button.isNotRadio = isNotRadio
 end
 
-local function CreateInfoWithMenu(text, filterKey, dropdownLevel)
+local function CreateInfoWithMenu(text, filterKey, settings, dropdownLevel)
     local info = MSA_DropDownMenu_CreateInfo()
     info.text = text
     info.value = filterKey
@@ -99,35 +115,35 @@ local function CreateInfoWithMenu(text, filterKey, dropdownLevel)
     info.notCheckable = false
     info.hasArrow = true
 
-    local hasTrue, hasFalse = CheckSetting(filterKey)
+    local hasTrue, hasFalse = CheckSetting(settings)
     info.isNotRadio = not hasTrue or not hasFalse
 
     info.checked = function(button)
-        local hasTrue, hasFalse = CheckSetting(filterKey)
+        local hasTrue, hasFalse = CheckSetting(settings)
         RefreshCategoryButton(button, not hasTrue or not hasFalse)
         return hasTrue
     end
-    info.func = function(button, _,_, value)
+    info.func = function(button, _, _, value)
         if button.isNotRadio == value then
-            SetAllSubFilters(filterKey, true, dropdownLevel)
+            SetAllSubFilters(settings, true)
         elseif true == button.isNotRadio and false == value then
-            SetAllSubFilters(filterKey, false, dropdownLevel)
+            SetAllSubFilters(settings, false)
         end
     end
 
     return info
 end
 
-local function AddCheckAllAndNoneInfo(filterKey, level, dropdownLevel)
+local function AddCheckAllAndNoneInfo(settings, level)
     local info = CreateFilterInfo(CHECK_ALL)
     info.func = function()
-        SetAllSubFilters(filterKey, true, dropdownLevel)
+        SetAllSubFilters(settings, true)
     end
     MSA_DropDownMenu_AddButton(info, level)
 
     info = CreateFilterInfo(UNCHECK_ALL)
     info.func = function()
-        SetAllSubFilters(filterKey, false, dropdownLevel)
+        SetAllSubFilters(settings, false)
     end
     MSA_DropDownMenu_AddButton(info, level)
 end
@@ -179,11 +195,11 @@ local function InitializeFilterDropDown(filterMenu, level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(NOT_COLLECTED, SETTING_NOT_COLLECTED), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Only usable"], SETTING_ONLY_USEABLE), level)
 
-        MSA_DropDownMenu_AddButton(CreateInfoWithMenu(SOURCES, SETTING_SOURCE, 1), level)
-        MSA_DropDownMenu_AddButton(CreateInfoWithMenu(TYPE, SETTING_MOUNT_TYPE, 2), level)
-        MSA_DropDownMenu_AddButton(CreateInfoWithMenu(FACTION, SETTING_FACTION, 3), level)
-        MSA_DropDownMenu_AddButton(CreateInfoWithMenu(L["Family"], SETTING_FAMILY, 4), level)
-        MSA_DropDownMenu_AddButton(CreateInfoWithMenu(EXPANSION_FILTER_TEXT, SETTING_EXPANSION, 5), level)
+        MSA_DropDownMenu_AddButton(CreateFilterCategory(SOURCES, SETTING_SOURCE), level)
+        MSA_DropDownMenu_AddButton(CreateFilterCategory(TYPE, SETTING_MOUNT_TYPE), level)
+        MSA_DropDownMenu_AddButton(CreateFilterCategory(FACTION, SETTING_FACTION), level)
+        MSA_DropDownMenu_AddButton(CreateFilterCategory(L["Family"], SETTING_FAMILY), level)
+        MSA_DropDownMenu_AddButton(CreateFilterCategory(EXPANSION_FILTER_TEXT, SETTING_EXPANSION), level)
 
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Hidden"], SETTING_HIDDEN), level)
         info = CreateFilterInfo(L["Reset filters"])
@@ -195,40 +211,67 @@ local function InitializeFilterDropDown(filterMenu, level)
         end
         MSA_DropDownMenu_AddButton(info, level)
     elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_SOURCE) then
-        AddCheckAllAndNoneInfo(SETTING_SOURCE, level, 1)
+        local settings = ADDON.settings.filter[SETTING_SOURCE]
+        AddCheckAllAndNoneInfo(settings, level)
         for _, categoryName in pairs(GetSourceOrder()) do
-            MSA_DropDownMenu_AddButton(CreateFilterInfo(L[categoryName] or categoryName, SETTING_SOURCE, categoryName), level)
+            MSA_DropDownMenu_AddButton(CreateFilterInfo(L[categoryName] or categoryName, categoryName, settings), level)
         end
     elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_MOUNT_TYPE) then
-        AddCheckAllAndNoneInfo(SETTING_MOUNT_TYPE, level, 2)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Ground"], SETTING_MOUNT_TYPE, "ground"), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Flying"], SETTING_MOUNT_TYPE, "flying"), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Water Walking"], SETTING_MOUNT_TYPE, "waterWalking"), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Underwater"], SETTING_MOUNT_TYPE, "underwater"), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Transform"], SETTING_MOUNT_TYPE, "transform"), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Repair"], SETTING_MOUNT_TYPE, "repair"), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Passenger"], SETTING_MOUNT_TYPE, "passenger"), level)
+        local settings = ADDON.settings.filter[SETTING_MOUNT_TYPE]
+        AddCheckAllAndNoneInfo(settings, level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Ground"], "ground", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Flying"], "flying", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Water Walking"], "waterWalking", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Underwater"], "underwater", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Transform"], "transform", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Repair"], "repair", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Passenger"], "passenger", settings), level)
     elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_FACTION) then
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(FACTION_ALLIANCE, SETTING_FACTION, "alliance"), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(FACTION_HORDE, SETTING_FACTION, "horde"), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(NPC_NAMES_DROPDOWN_NONE, SETTING_FACTION, "noFaction"), level)
+        local settings = ADDON.settings.filter[SETTING_FACTION]
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(FACTION_ALLIANCE, "alliance", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(FACTION_HORDE, "horde", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(NPC_NAMES_DROPDOWN_NONE, "noFaction", settings), level)
     elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_FAMILY) then
-        AddCheckAllAndNoneInfo(SETTING_FAMILY, level, 4)
-        local sortedFamilies = {}
-        for family, _ in pairs(ADDON.MountJournalEnhancedFamily) do
+        local settings = ADDON.settings.filter[SETTING_FAMILY]
+        local sortedFamilies, hasSubFamilies = {}, {}
+        AddCheckAllAndNoneInfo(settings, level)
+
+        for family, mainConfig in pairs(ADDON.MountJournalEnhancedFamily) do
+            hasSubFamilies[family] = false
+            for _, subConfig in pairs(mainConfig) do
+                if type(subConfig) == "table" then
+                    hasSubFamilies[family] = true
+                else
+                    break
+                end
+            end
             table.insert(sortedFamilies, family)
         end
         table.sort(sortedFamilies, function(a, b) return (L[a] or a) < (L[b] or b) end)
 
         for _, family in pairs(sortedFamilies) do
-            MSA_DropDownMenu_AddButton(CreateFilterInfo(L[family] or family, SETTING_FAMILY, family), level)
+            if hasSubFamilies[family] then
+                MSA_DropDownMenu_AddButton(CreateInfoWithMenu(L[family] or family, family, settings[family]), level)
+            else
+                MSA_DropDownMenu_AddButton(CreateFilterInfo(L[family] or family, family, settings), level)
+            end
         end
-
-        MakeMultiColumnMenu(level, 21)
     elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_EXPANSION) then
-        AddCheckAllAndNoneInfo(SETTING_EXPANSION, level, 5)
-        for i=0, 7 do
-            MSA_DropDownMenu_AddButton(CreateFilterInfo(_G["EXPANSION_NAME"..i], SETTING_EXPANSION, i), level)
+        local settings = ADDON.settings.filter[SETTING_EXPANSION]
+        AddCheckAllAndNoneInfo(settings, level)
+        for i = 0, 7 do
+            MSA_DropDownMenu_AddButton(CreateFilterInfo(_G["EXPANSION_NAME" .. i], i, settings), level)
+        end
+    elseif (level == 3 and ADDON.MountJournalEnhancedFamily[MSA_DROPDOWNMENU_MENU_VALUE]) then
+        local settings = ADDON.settings.filter[SETTING_FAMILY][MSA_DROPDOWNMENU_MENU_VALUE]
+        local sortedFamilies = {}
+        for family, _ in pairs(ADDON.MountJournalEnhancedFamily[MSA_DROPDOWNMENU_MENU_VALUE]) do
+            table.insert(sortedFamilies, family)
+        end
+        table.sort(sortedFamilies, function(a, b) return (L[a] or a) < (L[b] or b) end)
+        for _, family in pairs(sortedFamilies) do
+            local info = CreateFilterInfo(L[family] or family, family, settings)
+            MSA_DropDownMenu_AddButton(info, level)
         end
     end
 end

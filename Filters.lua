@@ -25,10 +25,21 @@ local function CheckAllSettings(settings)
     local allDisabled = true
     local allEnabled = true
     for _, value in pairs(settings) do
-        if (value) then
+        if type(value) == "table" then
+            local subResult = CheckAllSettings(value)
+            if (subResult ~= false) then
+                allDisabled = false
+            elseif (subResult ~= true) then
+                allEnabled = false
+            end
+        elseif (value) then
             allDisabled = false
         else
             allEnabled = false
+        end
+
+        if allEnabled == false and false == allDisabled then
+            break
         end
     end
 
@@ -45,7 +56,14 @@ local function CheckMountInList(settings, sourceData, spellId)
     local isInList = false
 
     for setting, value in pairs(settings) do
-        if sourceData[setting] and sourceData[setting][spellId] then
+        if type(value) == "table" then
+            local subResult = CheckMountInList(value, sourceData[setting], spellId)
+            if subResult then
+                return true
+            elseif subResult == false then
+                isInList = true
+            end
+        elseif sourceData[setting] and sourceData[setting][spellId] then
             if (value) then
                 return true
             else
