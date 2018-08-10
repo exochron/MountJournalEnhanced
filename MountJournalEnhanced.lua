@@ -9,6 +9,8 @@ local function SearchIsActive()
         return false
     end
 
+    ADDON.indexMap = {}
+
     return true
 end
 
@@ -218,10 +220,14 @@ local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function(self, event, arg1)
-    if event == "PLAYER_LOGIN" then
+    if not ADDON.settings then
         ADDON:OnLogin()
-    elseif event == "ADDON_LOADED" and arg1 == "Blizzard_Collections" then
+        frame:UnregisterEvent("PLAYER_LOGIN")
+    end
+
+    if event == "ADDON_LOADED" and arg1 == "Blizzard_Collections" then
         if not ADDON.initialized then
+            ADDON:OnLogin()
             frame:UnregisterEvent("ADDON_LOADED")
             ADDON:LoadUI()
             ADDON.initialized = true
