@@ -12,10 +12,6 @@ local SETTING_FAMILY = "family"
 local SETTING_EXPANSION = "expansion"
 local SETTING_HIDDEN = "hidden"
 
-local function GetSourceOrder()
-    return { "Drop", "Quest", "Vendor", "Profession", "Instance", "Reputation", "Achievement", "Island Expedition", "Garrison", "PVP", "Class", "World Event", "Black Market", "Shop", "Promotion" }
-end
-
 local function CreateFilterInfo(text, filterKey, filterSettings, callback)
     local info = MSA_DropDownMenu_CreateInfo()
     info.keepShownOnClick = true
@@ -213,9 +209,21 @@ local function InitializeFilterDropDown(filterMenu, level)
     elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_SOURCE) then
         local settings = ADDON.settings.filter[SETTING_SOURCE]
         AddCheckAllAndNoneInfo(settings, level)
-        for _, categoryName in pairs(GetSourceOrder()) do
-            MSA_DropDownMenu_AddButton(CreateFilterInfo(L[categoryName] or categoryName, categoryName, settings), level)
-        end
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_1, "Drop", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_2, "Quest", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_3, "Vendor", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_4, "Profession", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(INSTANCE, "Instance", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(REPUTATION, "Reputation", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_6, "Achievement", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(ISLANDS_HEADER, "Island Expedition", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(GARRISON_LOCATION_TOOLTIP, "Garrison", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(PVP, "PVP", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(CLASS, "Class", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_7, "World Event", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Black Market"], "Black Market", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_10, "Shop", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_8, "Promotion", settings), level)
     elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_MOUNT_TYPE) then
         local settings = ADDON.settings.filter[SETTING_MOUNT_TYPE]
         AddCheckAllAndNoneInfo(settings, level)
@@ -224,7 +232,7 @@ local function InitializeFilterDropDown(filterMenu, level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Water Walking"], "waterWalking", settings), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Underwater"], "underwater", settings), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Transform"], "transform", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Repair"], "repair", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(MINIMAP_TRACKING_REPAIR, "repair", settings), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Passenger"], "passenger", settings), level)
     elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_FACTION) then
         local settings = ADDON.settings.filter[SETTING_FACTION]

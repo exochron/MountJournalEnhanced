@@ -161,6 +161,42 @@ ADDON.MountJournalEnhancedFamily = {
 [122708] = true, -- Grand Expedition Yak
 },
 },
+["Carnivorans"] = {
+["Bears"] = {
+[229487] = true, -- Vicious War Bear
+[229486] = true, -- Vicious War Bear
+[51412] = true, -- Big Battle Bear
+[54753] = true, -- White Polar Bear
+[58983] = true, -- Big Blizzard Bear
+[43688] = true, -- Amani War Bear
+[103081] = true, -- Darkmoon Dancing Bear
+[60114] = true, -- Armored Brown Bear
+[60116] = true, -- Armored Brown Bear
+[60118] = true, -- Black War Bear
+[60119] = true, -- Black War Bear
+[98204] = true, -- Amani Battle Bear
+},
+["Foxes"] = {
+[242897] = true, -- Vicious War Fox
+[242896] = true, -- Vicious War Fox
+[171850] = true, -- Llothien Prowler
+},
+["Hounds"] = {
+[213209] = true, -- Steelbound Devourer
+[271646] = true, -- Dark Iron Core Hound
+[259395] = true, -- Shu-Zen, the Divine Sentinel
+[170347] = true, -- Core Hound
+[189998] = true, -- Illidari Felstalker
+},
+["Hyenas"] = {
+[237287] = true, -- Alabaster Hyena
+[237286] = true, -- Dune Scavenger
+},
+["Quilen"] = {
+[124659] = true, -- Imperial Quilen
+[279469] = true, -- Qinsho's Eternal Hound
+},
+},
 ["Cats"] = {
 ["Lions"] = {
 [229512] = true, -- Vicious War Lion
@@ -309,7 +345,7 @@ ADDON.MountJournalEnhancedFamily = {
 [142478] = true, -- Armored Blue Dragonhawk
 [194464] = true, -- Eclipse Dragonhawk
 },
-["Dragons"] = {
+["Drakes"] = {
 ["Cloud Serpents"] = {
 [123993] = true, -- Golden Cloud Serpent
 [123992] = true, -- Azure Cloud Serpent
@@ -492,7 +528,7 @@ ADDON.MountJournalEnhancedFamily = {
 [229439] = true, -- Huntmaster's Dire Wolfhawk
 [229438] = true, -- Huntmaster's Fierce Wolfhawk
 },
-["Wyvern"] = {
+["Wyverns"] = {
 [135418] = true, -- Grand Armored Wyvern
 [32243] = true, -- Tawny Wind Rider
 [32244] = true, -- Blue Wind Rider
@@ -632,7 +668,7 @@ ADDON.MountJournalEnhancedFamily = {
 [171849] = true, -- Sunhide Gronnling
 [189364] = true, -- Coalfist Gronnling
 },
-["Yeti"] = {
+["Yetis"] = {
 [171848] = true, -- Challenger's War Yeti
 [191314] = true, -- Minion of Grumpus
 [279467] = true, -- Craghorn Chasm-Leaper
@@ -668,42 +704,6 @@ ADDON.MountJournalEnhancedFamily = {
 [223018] = true, -- Fathom Dweller
 [253711] = true, -- Pond Nettle
 [278979] = true, -- Surf Jelly
-},
-["Predators"] = {
-["Bears"] = {
-[229487] = true, -- Vicious War Bear
-[229486] = true, -- Vicious War Bear
-[51412] = true, -- Big Battle Bear
-[54753] = true, -- White Polar Bear
-[58983] = true, -- Big Blizzard Bear
-[43688] = true, -- Amani War Bear
-[103081] = true, -- Darkmoon Dancing Bear
-[60114] = true, -- Armored Brown Bear
-[60116] = true, -- Armored Brown Bear
-[60118] = true, -- Black War Bear
-[60119] = true, -- Black War Bear
-[98204] = true, -- Amani Battle Bear
-},
-["Foxes"] = {
-[242897] = true, -- Vicious War Fox
-[242896] = true, -- Vicious War Fox
-[171850] = true, -- Llothien Prowler
-},
-["Hounds"] = {
-[213209] = true, -- Steelbound Devourer
-[271646] = true, -- Dark Iron Core Hound
-[259395] = true, -- Shu-Zen, the Divine Sentinel
-[170347] = true, -- Core Hound
-[189998] = true, -- Illidari Felstalker
-},
-["Hyenas"] = {
-[237287] = true, -- Alabaster Hyena
-[237286] = true, -- Dune Scavenger
-},
-["Quilen"] = {
-[124659] = true, -- Imperial Quilen
-[279469] = true, -- Qinsho's Eternal Hound
-},
 },
 ["Rats"] = {
 [215558] = true, -- Ratstallion
@@ -786,7 +786,7 @@ ADDON.MountJournalEnhancedFamily = {
 [153489] = true, -- Iron Skyreaver
 [191633] = true, -- Soaring Skyterror
 },
-["Ungulate"] = {
+["Ungulates"] = {
 ["Boars"] = {
 [190690] = true, -- Bristling Hellboar
 [190977] = true, -- Deathtusk Felboar
@@ -864,6 +864,10 @@ ADDON.MountJournalEnhancedFamily = {
 },
 },
 ["Vehicles"] = {
+["Airships"] = {
+[245723] = true, -- Stormwind Skychaser
+[245725] = true, -- Orgrimmar Interceptor
+},
 ["Carpets"] = {
 [61451] = true, -- Flying Carpet
 [75596] = true, -- Frosty Flying Carpet
@@ -931,15 +935,9 @@ ADDON.MountJournalEnhancedFamily = {
 ["Scorpions"] = {
 [148417] = true, -- Kor'kron Juggernaut
 },
-["Skyships"] = {
-[245723] = true, -- Stormwind Skychaser
-},
 ["Steeds"] = {
 [163024] = true, -- Warforged Nightmare
 [142910] = true, -- Ironbound Wraithcharger
-},
-["Zeppelins"] = {
-[245725] = true, -- Orgrimmar Interceptor
 },
 },
 ["Wolves"] = {
