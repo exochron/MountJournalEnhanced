@@ -3,6 +3,10 @@ local ADDON_NAME, ADDON = ...
 MountJournalEnhancedSettings = MountJournalEnhancedSettings or {}
 local defaultFilterStates
 
+function ADDON:ResetFilterSettings()
+    MountJournalEnhancedSettings.filter = CopyTable(defaultFilterStates)
+end
+
 local function PrepareDefaults()
     local defaultSettings = {
         debugMode = false,
@@ -79,15 +83,10 @@ local function CombineSettings(settings, defaultSettings)
     end
 end
 
-function ADDON:LoadSettings()
+local function LoadSettings()
     local defaultSettings = PrepareDefaults()
     defaultFilterStates = CopyTable(defaultSettings.filter)
     CombineSettings(MountJournalEnhancedSettings, defaultSettings)
-    self.settings = MountJournalEnhancedSettings
-
-    return MountJournalEnhancedSettings
+    ADDON.settings = MountJournalEnhancedSettings
 end
-
-function ADDON:ResetFilterSettings()
-    MountJournalEnhancedSettings.filter = CopyTable(defaultFilterStates)
-end
+LoadSettings()

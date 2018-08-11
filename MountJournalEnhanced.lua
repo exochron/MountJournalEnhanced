@@ -9,8 +9,6 @@ local function SearchIsActive()
         return false
     end
 
-    ADDON.indexMap = {}
-
     return true
 end
 
@@ -134,6 +132,9 @@ end
 
 --endregion Hooks
 
+function ADDON:OnLogin()
+end
+
 function ADDON:LoadUI()
 
     PetJournal:HookScript("OnShow", function()
@@ -150,6 +151,7 @@ function ADDON:LoadUI()
     local frame = CreateFrame("frame");
     frame:RegisterEvent("SPELL_UPDATE_USABLE")
     frame:RegisterEvent("MOUNT_JOURNAL_USABILITY_CHANGED")
+    frame:RegisterEvent("MOUNT_JOURNAL_SEARCH_UPDATED")
     frame:SetScript("OnEvent", function(sender, ...)
         if (CollectionsJournal:IsShown()) then
             ADDON:UpdateIndexMap()
@@ -205,27 +207,21 @@ function ADDON:Unhook(obj, name)
     return true
 end
 
-function ADDON:OnLogin()
-    -- reset default filter settings
-    C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true)
-    C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, true)
-    C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, true)
-    C_MountJournal.SetAllSourceFilters(true)
-    C_MountJournal.SetSearch("")
+-- reset default filter settings
+C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true)
+C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, true)
+C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, true)
+C_MountJournal.SetAllSourceFilters(true)
+C_MountJournal.SetSearch("")
 
-    ADDON:LoadSettings()
-end
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function(self, event, arg1)
-    if not ADDON.settings then
+    if event == "PLAYER_LOGIN" then
         ADDON:OnLogin()
-        frame:UnregisterEvent("PLAYER_LOGIN")
-    end
-
-    if event == "ADDON_LOADED" and arg1 == "Blizzard_Collections" then
+    elseif event == "ADDON_LOADED" and arg1 == "Blizzard_Collections" then
         if not ADDON.initialized then
             ADDON:OnLogin()
             frame:UnregisterEvent("ADDON_LOADED")
