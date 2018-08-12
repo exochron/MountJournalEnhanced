@@ -5,7 +5,7 @@ local MountJournalEnhancedSource = ADDON.MountJournalEnhancedSource
 local MountJournalEnhancedExpansion = ADDON.MountJournalEnhancedExpansion
 local MountJournalEnhancedIgnored = ADDON.MountJournalEnhancedIgnored
 
-function ADDON:RunDebugTest()
+local function RunDebugTest()
     local mounts = {}
     local mountIDs = C_MountJournal.GetMountIDs()
     for i, mountID in ipairs(mountIDs) do
@@ -17,44 +17,44 @@ function ADDON:RunDebugTest()
         }
     end
 
-    local filterSettingsBackup = CopyTable(self.settings.filter)
-    for key, _ in pairs(self.settings.filter.source) do
-        self.settings.filter.source[key] = false
+    local filterSettingsBackup = CopyTable(ADDON.settings.filter)
+    for key, _ in pairs(ADDON.settings.filter.source) do
+        ADDON.settings.filter.source[key] = false
     end
-    for key, value in pairs(self.settings.filter.family) do
+    for key, value in pairs(ADDON.settings.filter.family) do
         if type(value) == "table" then
             for subKey, _ in pairs(value) do
-                self.settings.filter.family[key][subKey] = false
+                ADDON.settings.filter.family[key][subKey] = false
             end
         else
-            self.settings.filter.family[key] = false
+            ADDON.settings.filter.family[key] = false
         end
     end
-    for key, _ in pairs(self.settings.filter.expansion) do
-        self.settings.filter.expansion[key] = false
+    for key, _ in pairs(ADDON.settings.filter.expansion) do
+        ADDON.settings.filter.expansion[key] = false
     end
-    for key, _ in pairs(self.settings.filter.mountType) do
-        self.settings.filter.mountType[key] = false
+    for key, _ in pairs(ADDON.settings.filter.mountType) do
+        ADDON.settings.filter.mountType[key] = false
     end
 
     for spellID, data in pairs(mounts) do
         if not MountJournalEnhancedIgnored[spellID] then
-            if self:FilterMountsBySource(spellID, data.sourceType) then
+            if ADDON:FilterMountsBySource(spellID, data.sourceType) then
                 print("[MJE] New mount: " .. data.name .. " (" .. spellID .. ")")
             end
-            if self:FilterMountsByFamily(spellID) then
+            if ADDON:FilterMountsByFamily(spellID) then
                 print("[MJE] No family info for mount: " .. data.name .. " (" .. spellID .. ")")
             end
-            if self:FilterMountsByExpansion(spellID) then
+            if ADDON:FilterMountsByExpansion(spellID) then
                 print("[MJE] No expansion info for mount: " .. data.name .. " (" .. spellID .. ")")
             end
-            if self:FilterMountsByType(spellID, data.mountID) then
+            if ADDON:FilterMountsByType(spellID, data.mountID) then
                 print("[MJE] New mount type for mount \"" .. data.name .. "\" (" .. spellID .. ")")
             end
         end
     end
 
-    self.settings.filter = CopyTable(filterSettingsBackup)
+    ADDON.settings.filter = CopyTable(filterSettingsBackup)
 
     for _, familyMounts in pairs(MountJournalEnhancedFamily) do
         for id, name in pairs(familyMounts) do
@@ -96,3 +96,9 @@ function ADDON:RunDebugTest()
         end
     end
 end
+
+hooksecurefunc(ADDON, "LoadUI", function()
+    if ADDON.settings.debugMode then
+        RunDebugTest()
+    end
+end)

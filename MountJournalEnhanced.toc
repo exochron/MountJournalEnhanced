@@ -12,10 +12,10 @@ Locals\Locals.xml
 Database\Database.lua
 Database\families.db.lua
 Database\items.db.lua
-Settings.lua
-DebugTest.lua
 Filters.lua
 MountJournalEnhanced.lua
+Settings.lua
+DebugTest.lua
 Favorites.lua
 UI\CompactMountList.lua
 UI\AchievementPoints.lua

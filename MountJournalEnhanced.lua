@@ -214,22 +214,25 @@ C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, true)
 C_MountJournal.SetAllSourceFilters(true)
 C_MountJournal.SetSearch("")
 
-
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function(self, event, arg1)
+    local doInit = false
     if event == "PLAYER_LOGIN" then
         ADDON:OnLogin()
-    elseif event == "ADDON_LOADED" and arg1 == "Blizzard_Collections" then
-        if not ADDON.initialized then
-            ADDON:OnLogin()
-            frame:UnregisterEvent("ADDON_LOADED")
-            ADDON:LoadUI()
-            ADDON.initialized = true
-            if ADDON.settings.debugMode then
-                ADDON:RunDebugTest()
-            end
+        if MountJournal then
+            doInit = true
         end
+    elseif event == "ADDON_LOADED" and arg1 == "Blizzard_Collections" then
+        if not ADDON.initialized and ADDON.settings then
+            doInit = true
+        end
+    end
+
+    if doInit then
+        frame:UnregisterEvent("ADDON_LOADED")
+        ADDON:LoadUI()
+        ADDON.initialized = true
     end
 end)

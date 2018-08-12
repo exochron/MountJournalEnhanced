@@ -4,7 +4,7 @@ MountJournalEnhancedSettings = MountJournalEnhancedSettings or {}
 local defaultFilterStates
 
 function ADDON:ResetFilterSettings()
-    MountJournalEnhancedSettings.filter = CopyTable(defaultFilterStates)
+    ADDON.settings.filter = CopyTable(defaultFilterStates)
 end
 
 local function PrepareDefaults()
@@ -13,14 +13,14 @@ local function PrepareDefaults()
         showShopButton = false,
         compactMountList = true,
         favoritePerChar = false,
-        favoredMounts = { },
-        hiddenMounts = { },
+        favoredMounts = {},
+        hiddenMounts = {},
         filter = {
             collected = true,
             notCollected = true,
             onlyFavorites = false,
             onlyUsable = false,
-            source = { },
+            source = {},
             faction = {
                 alliance = true,
                 horde = true,
@@ -35,8 +35,8 @@ local function PrepareDefaults()
                 repair = true,
                 passenger = true,
             },
-            family = { },
-            expansion = { },
+            family = {},
+            expansion = {},
             hidden = false,
         },
     }
@@ -83,10 +83,10 @@ local function CombineSettings(settings, defaultSettings)
     end
 end
 
-local function LoadSettings()
+-- Settings have to be loaded during PLAYER_LOGIN
+hooksecurefunc(ADDON, "OnLogin", function()
     local defaultSettings = PrepareDefaults()
     defaultFilterStates = CopyTable(defaultSettings.filter)
     CombineSettings(MountJournalEnhancedSettings, defaultSettings)
     ADDON.settings = MountJournalEnhancedSettings
-end
-LoadSettings()
+end)
