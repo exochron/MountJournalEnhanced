@@ -1,16 +1,14 @@
-### 2.0 (Next)
-- use https://wow.curseforge.com/projects/msa-dropdownmenu-10?gameCategorySlug=addons&projectID=254936
-    for DropDownMenus to avoid tainted calls
-- Settings Panel
-- Search Text also in Extra Texts (maybe just use C_MountJournal.SetSearch?)
-- Favorite per character + Setting
-- Compact mount list (Long Names as Oneliner -> Shorten) + Setting
-- Animation control in Display (Mountspecial, Start/Pause, Movements) + FadeIn/Out Controls on Hover
+### 2.1 (Next)
+- Animation control in Display (Mountspecial, Start/Pause, Movements, With Soundeffects)
+- Color Filter
 - Variation Filter (Undead,Mech, Elemental, Magic...)
-- Restructured Family filter
+- Settings Panel
+  - compact mount list
+  - Display Shop Button
+  - (Favor per Character)
 
 ### More Ideas:
-- Option: Autofavorite new mounts; even those learned during offline time
+- Option: Autofavorite new mounts; even those learned during offline time/on alts
+- Favorite Groups / Custom Filter Groups
 - Favorite Menu at SummonRandomFavoriteButton?
-- Color Filter
-- Show Rider/Character in Display
+- Show Rider/Character in MountDisplay

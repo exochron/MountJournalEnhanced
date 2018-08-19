@@ -3,19 +3,24 @@ local ADDON_NAME, ADDON = ...
 MountJournalEnhancedSettings = MountJournalEnhancedSettings or {}
 local defaultFilterStates
 
+function ADDON:ResetFilterSettings()
+    ADDON.settings.filter = CopyTable(defaultFilterStates)
+end
+
 local function PrepareDefaults()
     local defaultSettings = {
         debugMode = false,
         showShopButton = false,
-        favoritePerCharacter = true,
-        favoredMounts = { },
-        hiddenMounts = { },
+        compactMountList = true,
+        favoritePerChar = false,
+        favoredMounts = {},
+        hiddenMounts = {},
         filter = {
             collected = true,
             notCollected = true,
             onlyFavorites = false,
             onlyUsable = false,
-            source = { },
+            source = {},
             faction = {
                 alliance = true,
                 horde = true,
@@ -30,16 +35,26 @@ local function PrepareDefaults()
                 repair = true,
                 passenger = true,
             },
-            family = { },
-            expansion = { },
+            family = {},
+            expansion = {},
             hidden = false,
         },
     }
     for categoryName, _ in pairs(ADDON.MountJournalEnhancedSource) do
         defaultSettings.filter.source[categoryName] = true
     end
-    for categoryName, _ in pairs(ADDON.MountJournalEnhancedFamily) do
-        defaultSettings.filter.family[categoryName] = true
+    for categoryName, categoryConfig in pairs(ADDON.MountJournalEnhancedFamily) do
+        for subCategory, subConfig in pairs(categoryConfig) do
+            if type(subConfig) == "table" then
+                if not defaultSettings.filter.family[categoryName] then
+                    defaultSettings.filter.family[categoryName] = {}
+                end
+                defaultSettings.filter.family[categoryName][subCategory] = true
+            else
+                defaultSettings.filter.family[categoryName] = true
+                break
+            end
+        end
     end
     for expansionName, _ in pairs(ADDON.MountJournalEnhancedExpansion) do
         defaultSettings.filter.expansion[expansionName] = true
@@ -52,21 +67,26 @@ local function CombineSettings(settings, defaultSettings)
     for key, value in pairs(defaultSettings) do
         if (settings[key] == nil) then
             settings[key] = value;
-        elseif (type(settings[key]) == "table" and type(value) == "table") then
+        elseif (type(value) == "table") and next(value) ~= nil then
+            if type(settings[key]) ~= "table" then
+                settings[key] = {}
+            end
             CombineSettings(settings[key], value);
+        end
+    end
+
+    -- cleanup old still existing settings
+    for key, _ in pairs(settings) do
+        if (defaultSettings[key] == nil) then
+            settings[key] = nil;
         end
     end
 end
 
-function ADDON:LoadSettings()
+-- Settings have to be loaded during PLAYER_LOGIN
+hooksecurefunc(ADDON, "OnLogin", function()
     local defaultSettings = PrepareDefaults()
     defaultFilterStates = CopyTable(defaultSettings.filter)
     CombineSettings(MountJournalEnhancedSettings, defaultSettings)
-    self.settings = MountJournalEnhancedSettings
-
-    return MountJournalEnhancedSettings
-end
-
-function ADDON:ResetFilterSettings()
-    MountJournalEnhancedSettings.filter = CopyTable(defaultFilterStates)
-end
+    ADDON.settings = MountJournalEnhancedSettings
+end)

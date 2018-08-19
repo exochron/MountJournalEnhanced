@@ -4,11 +4,6 @@ local MountJournalEnhancedFamily = ADDON.MountJournalEnhancedFamily
 local MountJournalEnhancedSource = ADDON.MountJournalEnhancedSource
 local MountJournalEnhancedExpansion = ADDON.MountJournalEnhancedExpansion
 local MountJournalEnhancedType = ADDON.MountJournalEnhancedType
-local MountJournalEnhancedIgnored = ADDON.MountJournalEnhancedIgnored
-
-local function FilterMountsByName(name, searchString)
-    return string.find(string.lower(name), searchString, 1, true)
-end
 
 local function FilterHiddenMounts(spellId)
     return ADDON.settings.filter.hidden or not ADDON.settings.hiddenMounts[spellId]
@@ -30,10 +25,21 @@ local function CheckAllSettings(settings)
     local allDisabled = true
     local allEnabled = true
     for _, value in pairs(settings) do
-        if (value) then
+        if type(value) == "table" then
+            local subResult = CheckAllSettings(value)
+            if (subResult ~= false) then
+                allDisabled = false
+            elseif (subResult ~= true) then
+                allEnabled = false
+            end
+        elseif (value) then
             allDisabled = false
         else
             allEnabled = false
+        end
+
+        if allEnabled == false and false == allDisabled then
+            break
         end
     end
 
@@ -50,7 +56,14 @@ local function CheckMountInList(settings, sourceData, spellId)
     local isInList = false
 
     for setting, value in pairs(settings) do
-        if sourceData[setting] and sourceData[setting][spellId] then
+        if type(value) == "table" then
+            local subResult = CheckMountInList(value, sourceData[setting], spellId)
+            if subResult then
+                return true
+            elseif subResult == false then
+                isInList = true
+            end
+        elseif sourceData[setting] and sourceData[setting][spellId] then
             if (value) then
                 return true
             else
@@ -122,8 +135,7 @@ function ADDON:FilterMountsByExpansion(spellId)
     for expansion, value in pairs(self.settings.filter.expansion) do
         if MountJournalEnhancedExpansion[expansion] and
                 MountJournalEnhancedExpansion[expansion]["minID"] <= spellId and
-                spellId <= MountJournalEnhancedExpansion[expansion]["maxID"]
-        then
+                spellId <= MountJournalEnhancedExpansion[expansion]["maxID"] then
             return value
         end
     end
@@ -164,23 +176,19 @@ function ADDON:FilterMountsByType(spellId, mountID)
     return result
 end
 
-function ADDON:FilterMount(index, searchString)
+function ADDON:FilterMount(index)
 
-    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, isFiltered, isCollected, mountID = ADDON.hooks["GetDisplayedMountInfo"](index)
+    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, isFiltered, isCollected, mountId = ADDON.hooks["GetDisplayedMountInfo"](index)
 
-    if (isFiltered ~= true and
-            not MountJournalEnhancedIgnored[spellId] and
-            (searchString and FilterMountsByName(creatureName, searchString) or
-                    (not searchString and
-                            FilterHiddenMounts(spellId) and
-                            FilterFavoriteMounts(isFavorite) and
-                            FilterUsableMounts(spellId, isUsable) and
-                            FilterCollectedMounts(isCollected) and
-                            self:FilterMountsBySource(spellId, sourceType) and
-                            FilterMountsByFaction(isFaction, faction) and
-                            self:FilterMountsByType(spellId, mountID) and
-                            self:FilterMountsByFamily(spellId) and
-                            self:FilterMountsByExpansion(spellId)))) then
+    if (FilterHiddenMounts(spellId) and
+            FilterFavoriteMounts(isFavorite) and
+            FilterUsableMounts(spellId, isUsable) and
+            FilterCollectedMounts(isCollected) and
+            FilterMountsByFaction(isFaction, faction) and
+            self:FilterMountsBySource(spellId, sourceType) and
+            self:FilterMountsByType(spellId, mountId) and
+            self:FilterMountsByFamily(spellId) and
+            self:FilterMountsByExpansion(spellId)) then
         return true
     end
 

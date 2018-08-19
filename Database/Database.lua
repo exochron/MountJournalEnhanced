@@ -1040,18 +1040,18 @@ ADDON.MountJournalEnhancedSource = {
 
 ADDON.MountJournalEnhancedExpansion = {
 
-	["Classic"] = {
+	[0] = { -- Classic
         ["minID"] = 0,
         ["maxID"] = 30000,
     },
 	
-	["The Burning Crusade"] = {
+	[1] = { -- The Burning Crusade
         ["minID"] = 30001,
         ["maxID"] = 50000,
 		[58983] = true, -- Big Blizzard Bear
     },
 	
-	["Wrath of the Lich King"] = {
+	[2] = { -- Wrath of the Lich King
         ["minID"] = 50001,
         ["maxID"] = 76000,
 		[48778] = true, -- Acherus Deathcharger
@@ -1059,19 +1059,19 @@ ADDON.MountJournalEnhancedExpansion = {
 		[46199] = true, -- X-51 Nether-Rocket X-TREME
     },
 	
-	["Cataclysm"] = {
+	[3] = { -- Cataclysm
         ["minID"] = 76001,
         ["maxID"] = 113120,
         [71810] = true, -- Wrathful Gladiator's Frost Wyrm
         [75207] = true, -- Abyssal Seahorse
     },
 	
-	["Mists of Pandaria"] = {
+	[4] = { -- Mists of Pandaria
         ["minID"] = 113121,
         ["maxID"] = 160000,
     },
 	
-	["Warlords of Draenor"] = {
+	[5] = { -- Warlords of Draenor
         ["minID"] = 160001,
         ["maxID"] = 193000,
 		[142910] = true, -- Ironbound Wraithcharger
@@ -1080,7 +1080,7 @@ ADDON.MountJournalEnhancedExpansion = {
         [155741] = true, -- Dread Raven - Warlords of Draenor Collector's Edition
     },
 
-    ["Legion"] = {
+    [6] = { -- Legion
         ["minID"] = 193001,
         ["maxID"] = 254500,
         [171827] = true, -- Hellfire Infernal
@@ -1090,7 +1090,7 @@ ADDON.MountJournalEnhancedExpansion = {
         [259395] = true, -- Shu-zen, the Divine Sentinel
     },
 
-    ["Battle for Azeroth"] = {
+    [7] = { -- Battle for Azeroth
         ["minID"] = 254501,
         ["maxID"] = 999999,
         [213350] = true, -- Frostshard  Infernal
@@ -1141,6 +1141,7 @@ ADDON.MountJournalEnhancedType = {
     },
 }
 
+-- used as filter for debug output
 ADDON.MountJournalEnhancedIgnored = {
     [459] = true, -- Gray Wolf
     [468] = true, -- White Stallion
