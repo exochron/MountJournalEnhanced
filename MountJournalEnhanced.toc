@@ -23,6 +23,7 @@ UI\DisplayDirector.lua
 UI\DoubleClick.lua
 UI\FilterDropDown.lua
 UI\HiddenIcon.lua
+UI\Hotkeys.lua
 UI\MountCount.lua
 UI\MountListDropDown.lua
 UI\ShopButton.lua
