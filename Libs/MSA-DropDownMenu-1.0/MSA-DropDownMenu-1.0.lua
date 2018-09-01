@@ -598,7 +598,7 @@ end
 function MSA_DropDownMenu_CreateFrames(level, index)
     while ( level > MSA_DROPDOWNMENU_MAXLEVELS ) do
         MSA_DROPDOWNMENU_MAXLEVELS = MSA_DROPDOWNMENU_MAXLEVELS + 1;
-        local newList = CreateDropDownList("MSA_DropDownList"..MSA_DROPDOWNMENU_MAXLEVELS);
+        local newList = CreateDropDownList("MSA_DropDownList"..MSA_DROPDOWNMENU_MAXLEVELS, UIParent);
         newList:SetFrameStrata("FULLSCREEN_DIALOG");
         newList:SetToplevel(true);
         newList:Hide();

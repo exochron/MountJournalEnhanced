@@ -144,33 +144,6 @@ local function AddCheckAllAndNoneInfo(settings, level)
     MSA_DropDownMenu_AddButton(info, level)
 end
 
-local function MakeMultiColumnMenu(level, entriesPerColumn)
-    local listFrame = _G["MSA_DropDownList" .. level]
-    local columnWidth = listFrame.maxWidth + 25
-
-    local listFrameName = listFrame:GetName()
-    local columnIndex = 0
-    for index = entriesPerColumn + 1, listFrame.numButtons do
-        columnIndex = math.ceil(index / entriesPerColumn)
-        local button = _G[listFrameName .. "Button" .. index]
-        local yPos = -((button:GetID() - 1 - entriesPerColumn * (columnIndex - 1)) * MSA_DROPDOWNMENU_BUTTON_HEIGHT) - MSA_DROPDOWNMENU_BORDER_HEIGHT
-
-        button:ClearAllPoints()
-        button:SetPoint("TOPLEFT", button:GetParent(), "TOPLEFT", columnWidth * (columnIndex - 1), yPos)
-        button:SetWidth(columnWidth)
-    end
-
-    listFrame:SetHeight((min(listFrame.numButtons, entriesPerColumn) * MSA_DROPDOWNMENU_BUTTON_HEIGHT) + (MSA_DROPDOWNMENU_BORDER_HEIGHT * 2))
-    listFrame:SetWidth(columnWidth * columnIndex)
-
-    ADDON:Hook(nil, "MSA_DropDownMenu_OnHide", function(sender)
-        ADDON:Unhook(listFrame, "SetWidth")
-        ADDON:Unhook(nil, "MSA_DropDownMenu_OnHide")
-        MSA_DropDownMenu_OnHide(sender)
-    end)
-    ADDON:Hook(listFrame, "SetWidth", function() end)
-end
-
 local function InitializeFilterDropDown(filterMenu, level)
     local info
 
