@@ -285,7 +285,7 @@ local function InitializeFilterDropDown(filterMenu, level)
 end
 
 hooksecurefunc(ADDON, "LoadUI", function()
-    local menu = CreateFrame("Button", ADDON_NAME .. "FilterMenu", MountJournalFilterButton, "MSA_DropDownMenuTemplate")
+    local menu = MSA_DropDownMenu_Create(ADDON_NAME .. "FilterMenu", MountJournalFilterButton)
     MSA_DropDownMenu_Initialize(menu, InitializeFilterDropDown, "MENU")
     MountJournalFilterButton:SetScript("OnClick", function(sender)
         PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)

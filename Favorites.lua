@@ -131,7 +131,7 @@ local function InitializeDropDown(menu, level)
 end
 
 local function BuildStarButton()
-    local menu = CreateFrame("Button", ADDON_NAME.."FavorMenu", MountJournal, "MSA_DropDownMenuTemplate")
+    local menu = MSA_DropDownMenu_Create(ADDON_NAME.."FavorMenu", MountJournal)
     MSA_DropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
 
     starButton = CreateFrame("Button", nil, MountJournal)
