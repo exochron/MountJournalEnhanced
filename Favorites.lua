@@ -8,7 +8,7 @@ local ADDON_NAME, ADDON = ...
 local L = ADDON.L
 local starButton
 
-local function CollectFavored()
+function ADDON:CollectFavoredMounts()
     local personalFavored = {}
     if ADDON.settings.favoritePerChar then
         local mountIds = C_MountJournal.GetMountIDs()
@@ -124,7 +124,7 @@ local function InitializeDropDown(menu, level)
         info.checked = ADDON.settings.favoritePerChar
         info.func = function(_, _, _, value)
             ADDON.settings.favoritePerChar = not value
-            CollectFavored()
+            ADDON:CollectFavoredMounts()
         end
         MSA_DropDownMenu_AddButton(info, level)
     end
@@ -165,9 +165,9 @@ hooksecurefunc(ADDON, "OnLogin", function()
     if ADDON.settings.favoritePerChar then
         FavorMounts(ADDON.settings.favoredMounts, function()
             -- not quite performant but so far best solution
-            hooksecurefunc(C_MountJournal, "SetIsFavorite", CollectFavored)
+            hooksecurefunc(C_MountJournal, "SetIsFavorite", ADDON.CollectFavoredMounts)
         end)
     else
-        hooksecurefunc(C_MountJournal, "SetIsFavorite", CollectFavored)
+        hooksecurefunc(C_MountJournal, "SetIsFavorite", ADDON.CollectFavoredMounts)
     end
 end)

@@ -130,12 +130,4 @@ end
 hooksecurefunc(ADDON, "LoadUI", function()
     HideRotationButtons()
     BuildCameraPanel()
-
-    -- unlock Y rotation with mouse
-    hooksecurefunc(MountJournal.MountDisplay.ModelScene, "SetActiveCamera", function()
-        local cam = MountJournal.MountDisplay.ModelScene:GetActiveCamera()
-        if cam then
-            cam:SetLeftMouseButtonYMode(ORBIT_CAMERA_MOUSE_MODE_PITCH_ROTATION, true)
-        end
-    end)
 end)

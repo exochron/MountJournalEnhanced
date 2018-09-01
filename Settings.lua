@@ -7,11 +7,21 @@ function ADDON:ResetFilterSettings()
     ADDON.settings.filter = CopyTable(defaultFilterStates)
 end
 
+function ADDON:ResetUISettings()
+    ADDON.settings.showShopButton = false
+    ADDON.settings.compactMountList = true
+    ADDON.settings.unlockDisplayCamera = true
+    ADDON.settings.enableCursorKeys = true
+    ADDON.settings.favoritePerChar = false
+end
+
 local function PrepareDefaults()
     local defaultSettings = {
         debugMode = false,
         showShopButton = false,
         compactMountList = true,
+        unlockDisplayCamera = true,
+        enableCursorKeys = true,
         favoritePerChar = false,
         favoredMounts = {},
         hiddenMounts = {},

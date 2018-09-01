@@ -53,7 +53,7 @@ hooksecurefunc(ADDON, "LoadUI", function()
     MountJournal.ListScrollFrame:EnableKeyboard(true)
     MountJournal.ListScrollFrame:SetScript("OnKeyDown", function(self, key)
         local totalDisplayed
-        if key == "DOWN" or key == "UP" then
+        if (key == "DOWN" or key == "UP") and ADDON.settings.enableCursorKeys and not IsModifierKeyDown() then
             totalDisplayed = C_MountJournal.GetNumDisplayedMounts()
             if totalDisplayed > 0 then
                 local step = 1

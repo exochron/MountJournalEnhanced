@@ -15,10 +15,12 @@ Database\items.db.lua
 Filters.lua
 MountJournalEnhanced.lua
 Settings.lua
+SettingsPanel.lua
 DebugTest.lua
 Favorites.lua
 UI\CompactMountList.lua
 UI\AchievementPoints.lua
+UI\DisplayCamera.lua
 UI\DisplayDirector.lua
 UI\DoubleClick.lua
 UI\FilterDropDown.lua

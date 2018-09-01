@@ -140,5 +140,12 @@ if (GetLocale() == 'deDE') then
     L["Yaks"] = "Yaks"
     L["Yetis"] = "Yetis"
 
+    -- Settings
+    L["SETTING_COMPACT_LIST"] = "Kompakte Mount-Liste"
+    L["SETTING_CURSOR_KEYS"] = "Aktiviere Aufwärts- und Abwärtstaste zum Durchblättern"
+    L["SETTING_FAVORITE_PER_CHAR"] = "Speichere Favoriten pro Charakter"
+    L["SETTING_SHOP_BUTTON"] = "Zeige Shop bei verfügbaren Reittieren"
+    L["SETTING_YCAMERA"] = "Aktiviere Y-Rotation via Maus in Modellanzeige"
+
     ADDON.L = L
 end
