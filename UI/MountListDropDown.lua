@@ -108,7 +108,7 @@ local function ShowMountDropdown(index, anchorTo, offsetX, offsetY)
 end
 
 hooksecurefunc(ADDON, "LoadUI", function()
-    local menu = CreateFrame("Button", ADDON_NAME .. "MountOptionsMenu", MountJournal, "MSA_DropDownMenuTemplate")
+    local menu = MSA_DropDownMenu_Create(ADDON_NAME .. "MountOptionsMenu", MountJournal)
     MSA_DropDownMenu_Initialize(menu, InitializeMountOptionsMenu, "MENU")
 
     local buttons = MountJournal.ListScrollFrame.buttons
