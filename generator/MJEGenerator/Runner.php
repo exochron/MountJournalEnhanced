@@ -37,10 +37,21 @@ class Runner
      */
     private function enhanceMounts($mounts): array
     {
-        $mountItems = (new Wowhead)->fetchMountItems();
+        $wowHead    = new Wowhead;
+        $mountItems = $wowHead->fetchMountItems();
         foreach ($mountItems as $spellId => $itemIds) {
             if (isset($mounts[$spellId])) {
                 $mounts[$spellId]->setItemIds($itemIds);
+            }
+        }
+
+        foreach ($mounts as $mount) {
+            $animations = $wowHead->fetchAnimationsBySpellId($mount->getSpellId());
+            foreach ($animations as $animation) {
+                if ($animation->getName() === 'MountSpecial') {
+                    $mount->setMountSpecialLength($animation->getLength());
+                    break;
+                }
             }
         }
 
@@ -68,6 +79,14 @@ class Runner
         return $this;
     }
 
+    private function generateMountSpecialList(array $mounts): self
+    {
+        $lua      = $this->export->toLuaSpecialLength('MountJournalEnhancedMountSpecial', $mounts);
+        file_put_contents('mountspecial.db.lua', $lua);
+
+        return $this;
+    }
+
     public function run(): self
     {
         $mounts = $this->collectMounts();
@@ -75,6 +94,7 @@ class Runner
 
         $this->generateFamilies($mounts);
         $this->generateItemList($mounts);
+        $this->generateMountSpecialList($mounts);
 
         return $this;
     }

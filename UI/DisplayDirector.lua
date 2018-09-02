@@ -11,7 +11,11 @@ local ADDON_NAME, ADDON = ...
 --18=attack
 --38=falling
 --39=landing
---42=swimming
+--41=flying still
+--42=flying forward
+--94=mountspecial
+--118=eat
+--618=MountSelfIdle -- for isSelfMount
 --636=mountspecial
 
 
@@ -19,6 +23,30 @@ local function HideRotationButtons()
     local scene = MountJournal.MountDisplay.ModelScene
     scene.RotateLeftButton:Hide()
     scene.RotateRightButton:Hide()
+end
+
+local function DoMountSpecial(button)
+    local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
+    if actor then
+        actor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_ANIM)
+        actor:SetAnimation(94, 0)
+
+        local currentSpellId = MountJournal.selectedSpellID
+        local animationLength = ADDON.MountJournalEnhancedMountSpecial[currentSpellId]
+        if animationLength then
+            C_Timer.After(animationLength / 1000, function()
+                if MountJournal.selectedSpellID == currentSpellId then
+                    local _, _, _, isSelfMount = C_MountJournal.GetMountInfoExtraByID(MountJournal.selectedMountID)
+                    actor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_ANIM)
+                    if (isSelfMount) then
+                        actor:SetAnimation(618)
+                    else
+                        actor:SetAnimation(0);
+                    end
+                end
+            end)
+        end
+    end
 end
 
 local function BuildControlContainer(width)
@@ -61,6 +89,7 @@ local function BuildButton(frame, relativeTo, tooltip, tooltipText)
 
     return button
 end
+
 local function BuildCameraButton(frame, relativeTo, tooltip, tooltipText, cameraMode, amountPerSceond)
     local button = CreateFrame("Button", nil, frame, "ModelControlButtonTemplate,ModifyOrbitCameraBaseButtonTemplate")
     button:SetSize(18, 18)
@@ -88,14 +117,19 @@ local function BuildCameraButton(frame, relativeTo, tooltip, tooltipText, camera
 end
 
 local function BuildCameraPanel()
-    local frame = BuildControlContainer(130)
+    local frame = BuildControlContainer(148)
     frame:SetPoint("BOTTOM", 0, 15)
 
     local scene = MountJournal.MountDisplay.ModelScene
     scene:HookScript("OnEnter", function() frame:Show() end)
     scene:HookScript("OnLeave", function() frame:Hide() end)
 
-    local zoomIn = BuildCameraButton(frame, nil, ZOOM_IN, KEY_MOUSEWHEELUP, ORBIT_CAMERA_MOUSE_MODE_ZOOM, 0.9)
+    local special = BuildButton(frame, nil, "/mountspecial")
+    special.icon:SetTexture("Interface/QuestTypeIcons")
+    special.icon:SetTexCoord(0, 0.14285714285714285714285714285714, 0.275, 0.575)
+    special:HookScript("OnClick", DoMountSpecial)
+
+    local zoomIn = BuildCameraButton(frame, special, ZOOM_IN, KEY_MOUSEWHEELUP, ORBIT_CAMERA_MOUSE_MODE_ZOOM, 0.9)
     zoomIn.icon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
 
     local zoomOut = BuildCameraButton(frame, zoomIn, ZOOM_OUT, KEY_MOUSEWHEELDOWN, ORBIT_CAMERA_MOUSE_MODE_ZOOM, -0.9)

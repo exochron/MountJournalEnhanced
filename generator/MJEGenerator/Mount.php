@@ -17,6 +17,7 @@ class Mount
     private $isFlying = false;
     private $isAquatic = false;
     private $isJumping = false;
+    private $mountSpecialLength = 0;
 
     public function __construct(array $data)
     {
@@ -38,6 +39,13 @@ class Mount
     public function setItemIds(array $items): self
     {
         $this->itemIds = $items;
+
+        return $this;
+    }
+
+    public function setMountSpecialLength(int $mountSpecialLength): self
+    {
+        $this->mountSpecialLength = $mountSpecialLength;
 
         return $this;
     }
@@ -93,5 +101,10 @@ class Mount
     public function isJumping(): bool
     {
         return $this->isJumping;
+    }
+
+    public function getMountSpecialLength(): int
+    {
+        return $this->mountSpecialLength;
     }
 }
