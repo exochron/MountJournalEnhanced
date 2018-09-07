@@ -28,4 +28,4 @@ local function AddHiddenIcons()
     hooksecurefunc(MountJournal.ListScrollFrame, "update", UpdateMountList)
 end
 
-hooksecurefunc(ADDON, "LoadUI", AddHiddenIcons)
+ADDON:RegisterLoadUICallback(AddHiddenIcons)

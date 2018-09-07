@@ -15,12 +15,18 @@ class Requester
         self::REGION_US => 'en_US',
     ];
 
-    private $apiKey;
+    private const CORRECT_SPELLID = [
+        "Mecha-Mogul Mk2" => 261437
+    ];
+    private const CORRECT_ITEMID = [
+        261437 => 161134
+    ];
 
     private const SPELL_BLACKLIST = [
-        0 => true,
         244457 => 'Default AI Mount Record',
     ];
+
+    private $apiKey;
 
     public function __construct(string $apiKey)
     {
@@ -37,6 +43,13 @@ class Requester
 
         $data = $this->call($region, 'mount');
         foreach ($data['mounts'] ?? [] as $item) {
+            if (empty($item['spellId']) && isset(self::CORRECT_SPELLID[$item['name']])) {
+                $item['spellId'] = self::CORRECT_SPELLID[$item['name']];
+            }
+            if (empty($item['itemId']) && isset(self::CORRECT_ITEMID[$item['spellId']])) {
+                $item['itemId'] = self::CORRECT_ITEMID[$item['spellId']];
+            }
+
             if (false === isset(self::SPELL_BLACKLIST[$item['spellId']])) {
                 $result[$item['spellId']] = new Mount($item);
             }

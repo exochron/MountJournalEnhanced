@@ -1,6 +1,7 @@
 local ADDON_NAME, ADDON = ...
 
 ADDON.MountJournalEnhancedMountSpecial = {
+[261437] = 4700, -- Mecha-Mogul Mk2
 [229377] = 3000, -- High Priest's Lightsworn Seeker
 [230401] = 3066, -- Ivory Hawkstrider
 [267270] = 6666, -- Kua'fon

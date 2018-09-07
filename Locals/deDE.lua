@@ -15,7 +15,7 @@ if (GetLocale() == 'deDE') then
     L["Reset filters"] = "Filter zurücksetzen"
     L["Show in Collections"] = "In Sammlung anzeigen"
     L["TASK_END"] = "[MJE] Uff! Endlich geschafft."
-    L["TASK_FAVOR_START"] = "[MJE] Bitte warten. deine Reittiere werden mit Sternen neu beklebt."
+    L["TASK_FAVOR_START"] = "[MJE] Bitte warten. Deine Reittiere werden mit Sternen neu beklebt."
     L["Transform"] = "Verwandlung"
     L["Underwater"] = "Unterwasser"
     L["Water Walking"] = "Wasserwandeln"

@@ -85,7 +85,23 @@ end
 
 --endregion Hooks
 
+-- region callbakcs
+local loginCallbacks, loadUICallbacks = {}, {}
+function ADDON:RegisterLoginCallback(func)
+    table.insert(loginCallbacks, func)
+end
+function ADDON:RegisterLoadUICallback(func)
+    table.insert(loadUICallbacks, func)
+end
+function FireCallbacks(callbacks)
+    for _, callback in pairs(callbacks) do
+        callback()
+    end
+end
+--endregion
+
 function ADDON:OnLogin()
+    FireCallbacks(loginCallbacks)
 end
 
 function ADDON:LoadUI()
@@ -111,6 +127,8 @@ function ADDON:LoadUI()
             MountJournal_UpdateMountList()
         end
     end);
+
+    FireCallbacks(loadUICallbacks)
 end
 
 function ADDON:UpdateIndexMap()

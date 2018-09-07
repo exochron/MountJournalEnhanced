@@ -107,7 +107,7 @@ local function ShowMountDropdown(index, anchorTo, offsetX, offsetY)
     PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
 end
 
-hooksecurefunc(ADDON, "LoadUI", function()
+ADDON:RegisterLoadUICallback(function()
     local menu = MSA_DropDownMenu_Create(ADDON_NAME .. "MountOptionsMenu", MountJournal)
     MSA_DropDownMenu_Initialize(menu, InitializeMountOptionsMenu, "MENU")
 

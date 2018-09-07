@@ -174,7 +174,7 @@ local function InitializeFilterDropDown(filterMenu, level)
         info = CreateFilterInfo(L["Reset filters"])
         info.keepShownOnClick = false
         info.func = function(_, _, _, value)
-            ADDON:ResetFilterSettings();
+            ADDON:ResetFilterSettings()
             ADDON:UpdateIndexMap()
             MountJournal_UpdateMountList()
         end
@@ -257,7 +257,7 @@ local function InitializeFilterDropDown(filterMenu, level)
     end
 end
 
-hooksecurefunc(ADDON, "LoadUI", function()
+ADDON:RegisterLoadUICallback(function()
     local menu = MSA_DropDownMenu_Create(ADDON_NAME .. "FilterMenu", MountJournalFilterButton)
     MSA_DropDownMenu_Initialize(menu, InitializeFilterDropDown, "MENU")
     MountJournalFilterButton:SetScript("OnClick", function(sender)

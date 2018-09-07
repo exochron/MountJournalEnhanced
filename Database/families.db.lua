@@ -880,6 +880,7 @@ ADDON.MountJournalEnhancedFamily = {
 [130092] = true, -- Red Flying Cloud
 },
 ["Gyrocopters"] = {
+[261437] = true, -- Mecha-Mogul Mk2
 [44151] = true, -- Turbo-Charged Flying Machine
 [44153] = true, -- Flying Machine
 [63796] = true, -- Mimiron's Head
