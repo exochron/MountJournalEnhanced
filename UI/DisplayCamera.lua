@@ -11,6 +11,6 @@ local function SetupCamera()
     end
 end
 
-hooksecurefunc(ADDON, "LoadUI", function()
+ADDON:RegisterLoadUICallback(function()
     hooksecurefunc(MountJournal.MountDisplay.ModelScene, "SetActiveCamera", SetupCamera)
 end)

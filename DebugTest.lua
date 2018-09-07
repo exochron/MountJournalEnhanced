@@ -97,7 +97,7 @@ local function RunDebugTest()
     end
 end
 
-hooksecurefunc(ADDON, "LoadUI", function()
+ADDON:RegisterLoadUICallback(function()
     if ADDON.settings.debugMode then
         RunDebugTest()
     end

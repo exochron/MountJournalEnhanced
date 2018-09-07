@@ -47,7 +47,7 @@ local function Select(step, totalDisplayed)
     ScrollToIndex(index)
 end
 
-hooksecurefunc(ADDON, "LoadUI", function()
+ADDON:RegisterLoadUICallback(function()
     -- I had issues handling the keyboard directly at the MountJournal frame. So I used ListScrollFrame instead.
     MountJournal.ListScrollFrame:SetPropagateKeyboardInput(true)
     MountJournal.ListScrollFrame:EnableKeyboard(true)

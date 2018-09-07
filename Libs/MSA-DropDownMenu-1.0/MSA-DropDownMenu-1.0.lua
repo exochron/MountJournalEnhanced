@@ -4,9 +4,9 @@
 ---
 --- https://www.curseforge.com/wow/addons/msa-dropdownmenu-10
 
-local name, version = "MSA-DropDownMenu-1.0", 5
+local name, version = "MSA-DropDownMenu-1.0", 6
 
-local lib, oldVersion = LibStub:NewLibrary(name, version)
+local lib = LibStub:NewLibrary(name, version)
 if not lib then return end
 
 -- WoW API
@@ -386,7 +386,7 @@ local function CreateDropDownMenu(name, parent)
     return DropDownMenu
 end
 
-local DropDownList1 = CreateDropDownList("MSA_DropDownList1", UIParent)
+local DropDownList1 = CreateDropDownList("MSA_DropDownList1")
 DropDownList1:Hide()
 DropDownList1:SetToplevel(true)
 DropDownList1:SetFrameStrata("FULLSCREEN_DIALOG")
@@ -396,7 +396,7 @@ DropDownList1:SetHeight(10)
 local _, fontHeight, _ = _G["MSA_DropDownList1Button1NormalText"]:GetFont()
 MSA_DROPDOWNMENU_DEFAULT_TEXT_HEIGHT = fontHeight
 
-local DropDownList2 = CreateDropDownList("MSA_DropDownList2", UIParent)
+local DropDownList2 = CreateDropDownList("MSA_DropDownList2")
 DropDownList2:Hide()
 DropDownList2:SetToplevel(true)
 DropDownList2:SetFrameStrata("FULLSCREEN_DIALOG")
@@ -598,7 +598,7 @@ end
 function MSA_DropDownMenu_CreateFrames(level, index)
     while ( level > MSA_DROPDOWNMENU_MAXLEVELS ) do
         MSA_DROPDOWNMENU_MAXLEVELS = MSA_DROPDOWNMENU_MAXLEVELS + 1;
-        local newList = CreateDropDownList("MSA_DropDownList"..MSA_DROPDOWNMENU_MAXLEVELS, UIParent);
+        local newList = CreateDropDownList("MSA_DropDownList"..MSA_DROPDOWNMENU_MAXLEVELS);
         newList:SetFrameStrata("FULLSCREEN_DIALOG");
         newList:SetToplevel(true);
         newList:Hide();
@@ -1228,10 +1228,7 @@ function MSA_ToggleDropDownMenu(level, value, dropDownFrame, anchorName, xOffset
         else
             uiScale = uiParentScale;
         end
-        -- MSA
-        if oldVersion and oldVersion <= 4 then
-            listFrame:SetScale(uiScale);
-        end
+        listFrame:SetScale(uiScale);
 
         -- Hide the listframe anyways since it is redrawn OnShow()
         listFrame:Hide();

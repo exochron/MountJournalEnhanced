@@ -55,7 +55,7 @@ local function OKHandler(frame)
     end
 end
 
-hooksecurefunc(ADDON, "OnLogin", function()
+ADDON:RegisterLoginCallback(function()
     local frame = BuildFrame()
     frame.name = GetAddOnMetadata(ADDON_NAME, "Title")
     frame.refresh = function(frame)

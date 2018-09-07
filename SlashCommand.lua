@@ -7,9 +7,6 @@ function SlashCmdList.MOUNTJOURNALENHANCED(msg, editBox)
     if (msg == "debug on") then
         ADDON.settings.debugMode = true
         print("MountJournalEnhanced: Debug mode activated.")
-        if ADDON.initialized then
-            ADDON:RunDebugTest()
-        end
     elseif (msg == "debug off") then
         ADDON.settings.debugMode = false
         print("MountJournalEnhanced: Debug mode deactivated.")

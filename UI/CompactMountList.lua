@@ -72,7 +72,7 @@ local function ModifyMountList()
     hooksecurefunc("HybridScrollFrame_Update", HookScrollUpdate)
 end
 
-hooksecurefunc(ADDON, "LoadUI",function()
+ADDON:RegisterLoadUICallback(function()
     if ADDON.settings.compactMountList then
         ModifyMountList()
     end

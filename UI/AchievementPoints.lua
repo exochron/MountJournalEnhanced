@@ -82,4 +82,4 @@ local function CreateAchievementPoints()
 
 end
 
-hooksecurefunc(ADDON, "LoadUI", CreateAchievementPoints)
+ADDON:RegisterLoadUICallback(CreateAchievementPoints)

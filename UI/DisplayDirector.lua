@@ -25,16 +25,20 @@ local function HideRotationButtons()
     scene.RotateRightButton:Hide()
 end
 
+local activeTimer
 local function DoMountSpecial(button)
     local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
     if actor then
         actor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_ANIM)
         actor:SetAnimation(94, 0)
+        if activeTimer then
+            activeTimer:Cancel()
+        end
 
         local currentSpellId = MountJournal.selectedSpellID
         local animationLength = ADDON.MountJournalEnhancedMountSpecial[currentSpellId]
         if animationLength then
-            C_Timer.After(animationLength / 1000, function()
+            activeTimer = C_Timer.NewTimer(animationLength / 1000, function()
                 if MountJournal.selectedSpellID == currentSpellId then
                     local _, _, _, isSelfMount = C_MountJournal.GetMountInfoExtraByID(MountJournal.selectedMountID)
                     actor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_ANIM)
@@ -161,7 +165,7 @@ local function BuildCameraPanel()
     end)
 end
 
-hooksecurefunc(ADDON, "LoadUI", function()
+ADDON:RegisterLoadUICallback(function()
     HideRotationButtons()
     BuildCameraPanel()
 end)

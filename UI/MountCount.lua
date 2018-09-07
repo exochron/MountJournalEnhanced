@@ -31,4 +31,4 @@ local function CreateCharacterMountCount()
     end)
 end
 
-hooksecurefunc(ADDON, "LoadUI", CreateCharacterMountCount)
+ADDON:RegisterLoadUICallback(CreateCharacterMountCount)

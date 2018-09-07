@@ -1,5 +1,22 @@
 local ADDON_NAME, ADDON = ...
 
+local function ToggleShopButton()
+    if (MountJournal) then
+        local frame = MountJournal.MountDisplay.InfoButton.Shop
+        if (frame) then
+            if (ADDON.settings.showShopButton and MountJournal.selectedMountID) then
+                local _, _, _, _, _, sourceType, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(MountJournal.selectedMountID)
+                if not isCollected and sourceType == 10 then
+                    frame:Show()
+                    return
+                end
+            end
+
+            frame:Hide()
+        end
+    end
+end
+
 local function CreateShopButton()
     local frame = CreateFrame("Button", nil, MountJournal.MountDisplay.InfoButton)
 
@@ -18,26 +35,8 @@ local function CreateShopButton()
     MountJournal.MountDisplay.InfoButton.Shop = frame
 
     hooksecurefunc("MountJournal_UpdateMountDisplay", function(sender, level)
-        ADDON:ToggleShopButton()
+        ToggleShopButton()
     end)
 end
 
-hooksecurefunc(ADDON, "LoadUI", CreateShopButton)
-
--- also called from SlashCommand
-function ADDON:ToggleShopButton()
-    if (MountJournal) then
-        local frame = MountJournal.MountDisplay.InfoButton.Shop
-        if (frame) then
-            if (self.settings.showShopButton and MountJournal.selectedMountID) then
-                local _, _, _, _, _, sourceType, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(MountJournal.selectedMountID)
-                if not isCollected and sourceType == 10 then
-                    frame:Show()
-                    return
-                end
-            end
-
-            frame:Hide()
-        end
-    end
-end
+ADDON:RegisterLoadUICallback(CreateShopButton)

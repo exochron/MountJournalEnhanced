@@ -94,7 +94,7 @@ local function CombineSettings(settings, defaultSettings)
 end
 
 -- Settings have to be loaded during PLAYER_LOGIN
-hooksecurefunc(ADDON, "OnLogin", function()
+ADDON:RegisterLoginCallback(function()
     local defaultSettings = PrepareDefaults()
     defaultFilterStates = CopyTable(defaultSettings.filter)
     CombineSettings(MountJournalEnhancedSettings, defaultSettings)

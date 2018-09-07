@@ -7,7 +7,7 @@ local function MountListItem_OnDoubleClick(sender, button)
     end
 end
 
-hooksecurefunc(ADDON, "LoadUI", function()
+ADDON:RegisterLoadUICallback(function()
     local buttons = MountJournal.ListScrollFrame.buttons
     for buttonIndex = 1, #buttons do
         local button = buttons[buttonIndex]

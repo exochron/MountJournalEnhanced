@@ -156,12 +156,12 @@ local function BuildStarButton()
     searchBox:SetPoint("TOPLEFT", MountJournal.LeftInset, "TOPLEFT", 27, -9)
     searchBox:SetSize(133, 20)
 end
-hooksecurefunc(ADDON, "LoadUI", BuildStarButton)
+ADDON:RegisterLoadUICallback(BuildStarButton)
 
 --endregion
 
 -- resetting personal favored mounts
-hooksecurefunc(ADDON, "OnLogin", function()
+ADDON:RegisterLoginCallback(function()
     if ADDON.settings.favoritePerChar then
         FavorMounts(ADDON.settings.favoredMounts, function()
             -- not quite performant but so far best solution
