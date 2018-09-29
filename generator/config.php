@@ -5,6 +5,10 @@ return [
         'apiKey' => $_ENV['BATTLENET_APIKEY'],
     ],
 
+    'missingIds' => [ // missing in battle net response
+        272770, // The Dreadwake
+    ],
+
     'ignored' => [
         459,// Gray Wolf
         468,// White Stallion
@@ -239,7 +243,7 @@ return [
             'Scorpions' => ['Mechanical Scorpions'],
             'Steeds' => ['Mechanical Steeds'],
             'Motorcycles' => ['Motorcycles'],
-            'Airships' => ['Skyships', 'Zeppelins'],
+            'Airships' => ['Skyships', 'Zeppelins', 'Flying Ships'],
             'Gyrocopters' => ['Gyrocopters'],
             'Mecha-suits' => ['Flying Mecha-suits'],
             'Rockets' => ['Rockets'],

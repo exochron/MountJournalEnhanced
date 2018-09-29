@@ -103,7 +103,7 @@ local function RefreshCategoryButton(button, isNotRadio)
     button.isNotRadio = isNotRadio
 end
 
-local function CreateInfoWithMenu(text, filterKey, settings, dropdownLevel)
+local function CreateInfoWithMenu(text, filterKey, settings)
     local info = MSA_DropDownMenu_CreateInfo()
     info.text = text
     info.value = filterKey

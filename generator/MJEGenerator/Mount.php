@@ -1,8 +1,7 @@
 <?php
-
+declare(strict_types=1);
 
 namespace MJEGenerator;
-
 
 class Mount
 {
@@ -19,21 +18,28 @@ class Mount
     private $isJumping = false;
     private $mountSpecialLength = 0;
 
-    public function __construct(array $data)
-    {
-        $this->name       = $data['name'];
-        $this->spellId    = $data['spellId'];
-        $this->creatureId = $data['creatureId'];
-        $this->qualityId  = $data['qualityId'];
-        $this->icon       = $data['icon'];
-        $this->isGround   = $data['isGround'];
-        $this->isFlying   = $data['isFlying'];
-        $this->isAquatic  = $data['isAquatic'];
-        $this->isJumping  = $data['isJumping'];
-
-        if (false === empty($data['itemId'])) {
-            $this->itemIds = [$data['itemId']];
-        }
+    public function __construct(
+        string $name,
+        int $spellId,
+        int $creatureId = 0,
+        int $qualityId = 0,
+        string $icon = '',
+        bool $isGround = false,
+        bool $isFlying = false,
+        bool $isAquatic = false,
+        bool $isJumping = false,
+        array $itemIds = []
+    ) {
+        $this->name       = $name;
+        $this->spellId    = $spellId;
+        $this->creatureId = $creatureId;
+        $this->qualityId  = $qualityId;
+        $this->icon       = $icon;
+        $this->isGround   = $isGround;
+        $this->isFlying   = $isFlying;
+        $this->isAquatic  = $isAquatic;
+        $this->isJumping  = $isJumping;
+        $this->itemIds    = $itemIds;
     }
 
     public function setItemIds(array $items): self

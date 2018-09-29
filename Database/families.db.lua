@@ -867,6 +867,7 @@ ADDON.MountJournalEnhancedFamily = {
 ["Airships"] = {
 [245723] = true, -- Stormwind Skychaser
 [245725] = true, -- Orgrimmar Interceptor
+[272770] = true, -- The Dreadwake
 },
 ["Carpets"] = {
 [61451] = true, -- Flying Carpet
@@ -880,10 +881,10 @@ ADDON.MountJournalEnhancedFamily = {
 [130092] = true, -- Red Flying Cloud
 },
 ["Gyrocopters"] = {
-[261437] = true, -- Mecha-Mogul Mk2
 [44151] = true, -- Turbo-Charged Flying Machine
 [44153] = true, -- Flying Machine
 [63796] = true, -- Mimiron's Head
+[261437] = true, -- Mecha-Mogul Mk2
 },
 ["Kites"] = {
 [133023] = true, -- Jade Pandaren Kite
