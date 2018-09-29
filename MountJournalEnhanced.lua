@@ -85,7 +85,7 @@ end
 
 --endregion Hooks
 
--- region callbakcs
+-- region callbacks
 local loginCallbacks, loadUICallbacks = {}, {}
 function ADDON:RegisterLoginCallback(func)
     table.insert(loginCallbacks, func)
@@ -93,7 +93,7 @@ end
 function ADDON:RegisterLoadUICallback(func)
     table.insert(loadUICallbacks, func)
 end
-function FireCallbacks(callbacks)
+local function FireCallbacks(callbacks)
     for _, callback in pairs(callbacks) do
         callback()
     end

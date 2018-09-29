@@ -1095,6 +1095,7 @@ ADDON.MountJournalEnhancedExpansion = {
         ["maxID"] = 999999,
         [213350] = true, -- Frostshard  Infernal
         [237286] = true, -- Dune Scavenger
+        [237287] = true, -- Alabaster Hyena
         [239049] = true, -- Obsidian Krolusk
         [243795] = true, -- Leaping Veinseeker
         [250735] = true, -- Bloodgorged Crawg

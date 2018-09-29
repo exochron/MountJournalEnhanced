@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace MJEGenerator\WarcraftMounts;
 
@@ -23,6 +24,15 @@ class Requester
                 $name = html_entity_decode($name, ENT_QUOTES | ENT_XML1);
                 $name = strtolower($name);
                 $name = str_replace([' [horde]', ' [alliance]'], '', $name);
+
+                // 8.1 name changes already online
+//                if ($name === 'vicious kaldorei warsaber') {
+//                    $name = 'vicious warsaber';
+//                }
+//                if ($name === 'conqueror\'s scythemaw') {
+//                    $name = 'conquerer\'s scythemaw';
+//                }
+
                 $result[$name] = $familyName[1];
             }
         }

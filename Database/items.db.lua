@@ -1,7 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
 ADDON.MountJournalEnhancedItems = {
-[161134] = 261437, -- Mecha-Mogul Mk2
 [142369] = 230401, -- Ivory Hawkstrider
 [159146] = 267270, -- Kua'fon
 [44234] = 61447, -- Traveler's Tundra Mammoth
@@ -281,6 +280,7 @@ ADDON.MountJournalEnhancedItems = {
 [91012] = 127293, -- Great Green Dragon Turtle
 [87802] = 127295, -- Great Black Dragon Turtle
 [91011] = 127295, -- Great Black Dragon Turtle
+[161134] = 261437, -- Mecha-Mogul Mk2
 [156564] = 259395, -- Shu-Zen, the Divine Sentinel
 [77067] = 107842, -- Blazing Drake
 [122469] = 180545, -- Mystic Runesaber
@@ -679,4 +679,5 @@ ADDON.MountJournalEnhancedItems = {
 [76902] = 107517, -- Spectral Wind Rider
 [76889] = 107516, -- Spectral Gryphon
 [104269] = 148476, -- Thundering Onyx Cloud Serpent
+[160589] = 272770, -- The Dreadwake
 }

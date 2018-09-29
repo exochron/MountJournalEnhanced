@@ -1,7 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
 ADDON.MountJournalEnhancedMountSpecial = {
-[261437] = 4700, -- Mecha-Mogul Mk2
 [229377] = 3000, -- High Priest's Lightsworn Seeker
 [230401] = 3066, -- Ivory Hawkstrider
 [267270] = 6666, -- Kua'fon
@@ -282,6 +281,7 @@ ADDON.MountJournalEnhancedMountSpecial = {
 [136505] = 2000, -- Ghastly Charger
 [127293] = 4000, -- Great Green Dragon Turtle
 [127295] = 4000, -- Great Black Dragon Turtle
+[261437] = 4700, -- Mecha-Mogul Mk2
 [259395] = 5333, -- Shu-Zen, the Divine Sentinel
 [107842] = 5333, -- Blazing Drake
 [180545] = 5334, -- Mystic Runesaber
@@ -698,4 +698,5 @@ ADDON.MountJournalEnhancedMountSpecial = {
 [107517] = 2000, -- Spectral Wind Rider
 [107516] = 3000, -- Spectral Gryphon
 [148476] = 2700, -- Thundering Onyx Cloud Serpent
+[272770] = 7133, -- The Dreadwake
 }

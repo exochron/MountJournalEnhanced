@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 
 namespace MJEGenerator;
 
@@ -37,7 +37,14 @@ class Runner
      */
     private function enhanceMounts($mounts): array
     {
-        $wowHead    = new Wowhead;
+        $wowHead = new Wowhead;
+
+        foreach ($this->config['missingIds'] as $spellId) {
+            if (false === isset($mounts[$spellId])) {
+                $mounts[$spellId] = $wowHead->fetchMount($spellId);
+            }
+        }
+
         $mountItems = $wowHead->fetchMountItems();
         foreach ($mountItems as $spellId => $itemIds) {
             if (isset($mounts[$spellId])) {
@@ -81,7 +88,7 @@ class Runner
 
     private function generateMountSpecialList(array $mounts): self
     {
-        $lua      = $this->export->toLuaSpecialLength('MountJournalEnhancedMountSpecial', $mounts);
+        $lua = $this->export->toLuaSpecialLength('MountJournalEnhancedMountSpecial', $mounts);
         file_put_contents('mountspecial.db.lua', $lua);
 
         return $this;
@@ -90,7 +97,7 @@ class Runner
     public function run(): self
     {
         $mounts = $this->collectMounts();
-        $this->enhanceMounts($mounts);
+        $mounts = $this->enhanceMounts($mounts);
 
         $this->generateFamilies($mounts);
         $this->generateItemList($mounts);

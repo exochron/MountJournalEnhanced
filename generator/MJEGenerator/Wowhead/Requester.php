@@ -1,8 +1,10 @@
 <?php
-
+declare(strict_types=1);
 
 namespace MJEGenerator\Wowhead;
 
+
+use MJEGenerator\Mount;
 
 class Requester
 {
@@ -44,7 +46,7 @@ class Requester
             $json = json_decode($json);
 
             if (empty($json->Model)) {
-                throw new \Exception('no model id from wowhead for: '. $spellId);
+                throw new \Exception('no model id from wowhead for: ' . $spellId);
             }
 
             $fileName      = $json->Model . '.mo3';
@@ -61,5 +63,13 @@ class Requester
         }
 
         return [];
+    }
+
+    public function fetchMount(int $spellId): Mount
+    {
+        $json = file_get_contents('https://www.wowhead.com/tooltip/spell/' . $spellId . '&json&power');
+        $json = json_decode($json, true);
+
+        return new Mount($json['name_enus'], $spellId);
     }
 }
