@@ -53,21 +53,6 @@ class LuaExport
      * @param Mount[] $mounts
      * @return string
      */
-    public function toLuaSpellList(string $variableName, array $mounts): string
-    {
-        $result = $this->prepareHead($variableName);
-        foreach ($mounts as $key => $mount) {
-            $result .= '[' . $key . '] = ' . $mount->getSpellId() . ', -- ' . $mount->getName() . PHP_EOL;
-        }
-
-        return $result . '}';
-    }
-
-    /**
-     * @param string $variableName
-     * @param Mount[] $mounts
-     * @return string
-     */
     public function toLuaSpecialLength(string $variableName, array $mounts): string
     {
         $result = $this->prepareHead($variableName);

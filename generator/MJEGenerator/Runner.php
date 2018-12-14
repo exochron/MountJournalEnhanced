@@ -7,7 +7,6 @@ use MJEGenerator\Battlenet\Requester as Battlenet;
 use MJEGenerator\Wowhead\Requester as Wowhead;
 use MJEGenerator\WarcraftMounts\Requester as WarcraftMounts;
 use MJEGenerator\Convert\Family;
-use MJEGenerator\Convert\ItemList;
 use MJEGenerator\Convert\LuaExport;
 
 class Runner
@@ -26,7 +25,7 @@ class Runner
      */
     private function collectMounts(): array
     {
-        $bnet = new Battlenet($this->config['battle.net']['apiKey']);
+        $bnet = new Battlenet($this->config['battle.net']['clientId'], $this->config['battle.net']['clientSecret']);
 
         return $bnet->fetchMounts($bnet::REGION_EU) + $bnet->fetchMounts($bnet::REGION_US);
     }
@@ -39,18 +38,18 @@ class Runner
     {
         $wowHead = new Wowhead;
 
-        foreach ($this->config['missingIds'] as $spellId) {
+        foreach ($this->config['missingMounts'] as $spellId => $mount) {
             if (false === isset($mounts[$spellId])) {
-                $mounts[$spellId] = $wowHead->fetchMount($spellId);
+                $mounts[$spellId] = $mount;
             }
         }
 
-        $mountItems = $wowHead->fetchMountItems();
-        foreach ($mountItems as $spellId => $itemIds) {
-            if (isset($mounts[$spellId])) {
-                $mounts[$spellId]->setItemIds($itemIds);
-            }
-        }
+//        $mountItems = $wowHead->fetchMountItems();
+//        foreach ($mountItems as $spellId => $itemIds) {
+//            if (isset($mounts[$spellId])) {
+//                $mounts[$spellId]->setItemIds($itemIds);
+//            }
+//        }
 
         foreach ($mounts as $mount) {
             $animations = $wowHead->fetchAnimationsBySpellId($mount->getSpellId());
@@ -69,19 +68,15 @@ class Runner
     {
         $wcmMountFamilies = (new WarcraftMounts)->fetchMountFamilies();
 
-        $families = (new Family($this->config['familyMap'], $this->config['ignored']))
-            ->groupMountsByFamily($mounts, $wcmMountFamilies);
+        $handler  = new Family($this->config['familyMap']);
+        $families = $handler->groupMountsByFamily($mounts, $wcmMountFamilies);
         $lua      = $this->export->toLuaCategories('MountJournalEnhancedFamily', $families);
         file_put_contents('families.db.lua', $lua);
 
-        return $this;
-    }
-
-    private function generateItemList(array $mounts): self
-    {
-        $itemList = (new ItemList)->listMountsByItemIds($mounts);
-        $lua      = $this->export->toLuaSpellList('MountJournalEnhancedItems', $itemList);
-        file_put_contents('items.db.lua', $lua);
+        $errors = $handler->getErrors();
+        if ([] !== $errors) {
+            echo PHP_EOL . implode(PHP_EOL, $errors);
+        }
 
         return $this;
     }
@@ -97,10 +92,10 @@ class Runner
     public function run(): self
     {
         $mounts = $this->collectMounts();
+        $mounts = array_diff_key($mounts, array_flip($this->config['ignored']));
         $mounts = $this->enhanceMounts($mounts);
 
         $this->generateFamilies($mounts);
-        $this->generateItemList($mounts);
         $this->generateMountSpecialList($mounts);
 
         return $this;

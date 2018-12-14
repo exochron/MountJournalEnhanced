@@ -64,12 +64,4 @@ class Requester
 
         return [];
     }
-
-    public function fetchMount(int $spellId): Mount
-    {
-        $json = file_get_contents('https://www.wowhead.com/tooltip/spell/' . $spellId . '&json&power');
-        $json = json_decode($json, true);
-
-        return new Mount($json['name_enus'], $spellId);
-    }
 }

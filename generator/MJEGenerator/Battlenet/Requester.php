@@ -7,23 +7,27 @@ use MJEGenerator\Mount;
 
 class Requester
 {
-    const REGION_US = 'us';
-    const REGION_EU = 'eu';
+    public const REGION_US = 'us';
+    public const REGION_EU = 'eu';
+
+    private const ENDPOINT = [
+        self::REGION_EU => 'https://eu.api.blizzard.com',
+        self::REGION_US => 'https://us.api.blizzard.com',
+    ];
 
     private const LOCALES = [
         self::REGION_EU => 'en_GB',
         self::REGION_US => 'en_US',
     ];
 
-    private const SPELL_BLACKLIST = [
-        244457 => 'Default AI Mount Record',
-    ];
+    private $accessToken = [];
+    private $clientId;
+    private $clientSecret;
 
-    private $apiKey;
-
-    public function __construct(string $apiKey)
+    public function __construct(string $clientId, string $clientSecret)
     {
-        $this->apiKey = $apiKey;
+        $this->clientId     = $clientId;
+        $this->clientSecret = $clientSecret;
     }
 
     /**
@@ -36,20 +40,18 @@ class Requester
 
         $data = $this->call($region, 'mount');
         foreach ($data['mounts'] ?? [] as $item) {
-            if (false === isset(self::SPELL_BLACKLIST[$item['spellId']])) {
-                $result[$item['spellId']] = new Mount(
-                    $item['name'],
-                    $item['spellId'],
-                    $item['creatureId'],
-                    $item['qualityId'],
-                    $item['icon'],
-                    $item['isGround'],
-                    $item['isFlying'],
-                    $item['isAquatic'],
-                    $item['isJumping'],
-                    $item['itemId'] > 0 ? [$item['itemId']] : []
-                );
-            }
+            $result[$item['spellId']] = new Mount(
+                $item['name'],
+                $item['spellId'],
+                $item['creatureId'],
+                $item['qualityId'],
+                $item['icon'] ?? '',
+                $item['isGround'],
+                $item['isFlying'],
+                $item['isAquatic'],
+                $item['isJumping'],
+                $item['itemId'] > 0 ? [$item['itemId']] : []
+            );
         }
 
         return $result;
@@ -57,13 +59,45 @@ class Requester
 
     private function call(string $region, string $resource): array
     {
-        $url = 'https://' . $region . '.api.battle.net/wow/' . $resource . '/';
-        $url .= '?locale=' . self::LOCALES[$region];
-        $url .= '&apiKey=' . $this->apiKey;
+        $token = $this->accessToken[$region];
 
-        $response = file_get_contents($url);
+        if (empty($token)) {
+            $token = $this->accessToken[$region] = $this->oAauthToken($region);
+        }
+
+        $url = self::ENDPOINT[$region] . '/wow/' . $resource . '/';
+        $url .= '?locale=' . self::LOCALES[$region];
+
+        $options = [
+            'http' => [
+                'header' => [
+                    "Authorization: Bearer " . $token,
+                ],
+                'method' => 'GET',
+            ],
+        ];
+        $context = stream_context_create($options);
+        $response = file_get_contents($url, false, $context);
 
         return json_decode($response, true);
     }
 
+    private function oAauthToken(string $region)
+    {
+        $options = [
+            'http' => [
+                'header'  => [
+                    "Authorization: Basic " . base64_encode($this->clientId . ':' . $this->clientSecret),
+                ],
+                'method'  => 'POST',
+                'content' => http_build_query([
+                    'grant_type' => 'client_credentials',
+                ]),
+            ],
+        ];
+        $context = stream_context_create($options);
+        $result  = file_get_contents('https://' . $region . '.battle.net/oauth/token', false, $context);
+        $result  = json_decode($result, true);
+        return $result['access_token'];
+    }
 }

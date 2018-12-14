@@ -84,6 +84,12 @@ ADDON.MountJournalEnhancedSource = {
         [260174] = true, -- Terrified Pack Mule
         [279456] = true, -- Highland Mustang -Doomrider Helgrim
         [260175] = true, -- Goldenmane
+        [261395] = true, -- The Hivemind - hidden mount
+        [288438] = true, -- Blackpaw - Darkshore Warfront
+        [288495] = true, -- Ashenvale Chimaera - Darkshore Warfront
+        [288499] = true, -- Frightened Kodo - Darkshore Warfront
+        [288503] = true, -- Umber Nightsaber - Darkshore Warfront
+        [288505] = true, -- Kaldorei Nightsaber - Darkshore Warfront
     },
 
     ["Quest"] = {
@@ -141,6 +147,11 @@ ADDON.MountJournalEnhancedSource = {
         [230844] = true, -- Brawler's Burly Basilisk - brawler guild mount (season 2)
         [264058] = true, -- Mighty Caravan Brutosaur
         [279474] = true, -- Palehide Direhorn
+        [266925] = true, -- Siltwing Albatross - Island expedition
+        [288711] = true, -- Saltwater Seahorse - Island expedition
+        [288587] = true, -- Blue Marsh Hopper
+        [288589] = true, -- Yellow Marsh Hopper
+        [259740] = true, -- Green Marsh Hopper
 
         ------------------------------
         -- Alliance ------------------
@@ -173,6 +184,10 @@ ADDON.MountJournalEnhancedSource = {
         [61229] = true, -- Armored Snowy Gryphon
         [61425] = true, -- Traveler's Tundra Mammoth - Alliance
 
+        -- Warfront Service Medal
+        [288740] = true, -- Priestess' Moonsaber
+        [288736] = true, -- Azureshell Krolusk
+
         ------------------------------
         -- Horde ---------------------
         ------------------------------
@@ -199,6 +214,10 @@ ADDON.MountJournalEnhancedSource = {
         [60116] = true, -- Armored Brown Bear - Horde
         [61230] = true, -- Armored Blue Wind Rider
         [61447] = true, -- Traveler's Tundra Mammoth - Horde
+
+        -- Warfront Service Medal
+        [288714] = true, -- Bloodthirsty Dreadwing
+        [288735] = true, -- Rubyshell Krolusk
     },
 
     ["Profession"] = {
@@ -259,6 +278,8 @@ ADDON.MountJournalEnhancedSource = {
         [253088] = true, -- Antoran Charhound - Antorus, Shatug
         [253639] = true, -- Violet Spellwing - Antorus, Argus
         [243651] = true, -- Shackled Ur'zul - Antorus, Argus Mythic
+        [289083] = true, -- G.M.O.D. - Battle of Dazar'alor
+        [289555] = true, -- Glacial Tidestorm - Battle of Dazar'alor
     },
 
     ["Reputation"] = {
@@ -670,6 +691,7 @@ ADDON.MountJournalEnhancedSource = {
         [250735] = true, -- Bloodgorged Crawg - Glory of the Uldir Raider
         [279454] = true, -- Conquerer's Scythemaw - Conqueror of Azeroth
         [280730] = true, -- Pureheart Courser - 100 Exalted Reputations
+        [289101] = true, -- DazarDazar'alor Windreaver - Glory of the Dazar'alor Raider
 
         ------------------------------
         -- Alliance ------------------
@@ -705,6 +727,12 @@ ADDON.MountJournalEnhancedSource = {
         [279466] = true, -- Twilight Avenger
         [279469] = true, -- Qinsho's Eternal Hound
         [279467] = true, -- Craghorn Chasm-Leaper
+        [288711] = true, -- Saltwater Seahorse
+        [288712] = true, -- Stonehide Elderhorn
+        [288720] = true, -- Bloodgorged Hunter
+        [288721] = true, -- Island Thunderscale
+        [288722] = true, -- Risen Mare
+        [266925] = true, -- Siltwing Albatross
     },
 
     ["Garrison"] = {
@@ -791,8 +819,10 @@ ADDON.MountJournalEnhancedSource = {
         [227991] = true, -- Ferocious Gladiator's Storm Dragon - Gladiator: Legion Season 4
         [227994] = true, -- Fierce Gladiator's Storm Dragon
         [227995] = true, -- Dominating Gladiator's Storm Dragon
+        [237288] = true, -- Reins of the Onyx War Hyena
         [243201] = true, -- Demonic Gladiator's Storm Dragon
         [262022] = true, -- Dread Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 1
+        [262023] = true, -- Sinister Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 2
 
         -- Prestige Reward
         [222202] = true, -- Prestigious Bronze Courser
@@ -822,6 +852,7 @@ ADDON.MountJournalEnhancedSource = {
         [242896] = true, -- Vicious War Fox
         [261433] = true, -- Vicious War Basilisk
         [272481] = true, -- Vicious War Riverbeast
+        [281887] = true, -- Vicious Black Warsaber
 
         -- Achievement
         [60118] = true, -- Black War Bear - For The Alliance!
@@ -861,6 +892,7 @@ ADDON.MountJournalEnhancedSource = {
         [242897] = true, -- Vicious War Fox
         [261434] = true, -- Vicious War Basilisk
         [270560] = true, -- Vicious War Clefthoof
+        [281890] = true, -- Vicious Black Bonesteed
 
         -- Achievement
         [60119] = true, -- Black War Bear - For The Horde!

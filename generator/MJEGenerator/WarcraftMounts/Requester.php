@@ -25,14 +25,6 @@ class Requester
                 $name = strtolower($name);
                 $name = str_replace([' [horde]', ' [alliance]'], '', $name);
 
-                // 8.1 name changes already online
-//                if ($name === 'vicious kaldorei warsaber') {
-//                    $name = 'vicious warsaber';
-//                }
-//                if ($name === 'conqueror\'s scythemaw') {
-//                    $name = 'conquerer\'s scythemaw';
-//                }
-
                 $result[$name] = $familyName[1];
             }
         }

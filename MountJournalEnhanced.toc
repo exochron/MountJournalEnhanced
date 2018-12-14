@@ -1,8 +1,8 @@
-## Interface: 80000
+## Interface: 80100
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron
-## Version: 2.1.2
+## Version: 2.2
 ## SavedVariablesPerCharacter: MountJournalEnhancedSettings
 
 Libs\LibStub\LibStub.lua
@@ -11,7 +11,6 @@ Libs\MSA-DropDownMenu-1.0\MSA-DropDownMenu-1.0.xml
 Locals\Locals.xml
 Database\Database.lua
 Database\families.db.lua
-Database\items.db.lua
 Database\mountspecial.db.lua
 Filters.lua
 MountJournalEnhanced.lua
@@ -24,11 +23,11 @@ UI\AchievementPoints.lua
 UI\DisplayCamera.lua
 UI\DisplayDirector.lua
 UI\DoubleClick.lua
+UI\DressUpButton.lua
 UI\FilterDropDown.lua
 UI\HiddenIcon.lua
 UI\Hotkeys.lua
 UI\MountCount.lua
 UI\MountListDropDown.lua
 UI\ShopButton.lua
-DressUpMounts.lua
 SlashCommand.lua

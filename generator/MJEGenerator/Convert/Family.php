@@ -9,12 +9,11 @@ use MJEGenerator\Mount;
 class Family
 {
     private $config = [];
-    private $ignoredMounts;
+    private $errors = [];
 
-    public function __construct(array $config, array $ignoredMounts)
+    public function __construct(array $config)
     {
         $this->config = $this->prepareConfig($config);
-        $this->ignoredMounts = array_flip($ignoredMounts);
     }
 
     /**
@@ -49,9 +48,7 @@ class Family
             // check by family name
             $wcmFamily = $wcmMountMap[strtolower($mount->getName())] ?? null;
             if (null === $wcmFamily) {
-                if(false === isset($this->ignoredMounts[$spellId])) {
-                    throw new \Exception('mount not available on warcraftmounts: ' . $mount->getName() . ' (' . $mount->getSpellId() . '; ' . $mount->getIcon() . ')');
-                }
+                $this->errors[] = 'mount not available on warcraftmounts: ' . $mount->getSpellId().', // '. $mount->getName() . ' (' . $mount->getIcon() . ')';
             } else {
                 $matched = false;
                 foreach ($this->config as $mainFamily => $mainConfig) {
@@ -71,7 +68,7 @@ class Family
                 }
 
                 if (false === $matched) {
-                    throw new \Exception('no Family found for ' . $mount->getName() . ' (' . $mount->getSpellId() . '; ' . $mount->getIcon() . '; ' . $wcmFamily . ')');
+                    $this->errors[] = 'no Family found for ' . $mount->getName() . ' (' . $mount->getSpellId() . '; ' . $mount->getIcon() . '; ' . $wcmFamily . ')';
                 }
             }
         }
@@ -114,5 +111,10 @@ class Family
         }
 
         return false;
+    }
+
+    public function getErrors(): array
+    {
+        return $this->errors;
     }
 }
