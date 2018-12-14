@@ -22,7 +22,11 @@ if (GetLocale() == 'zhCN') then
 
     -- Families
     L["Airships"] = "飞艇"
+    --[[Translation missing --]]
+    --[[ L["Amphibian"] = ""--]]
     L["Arachnids"] = "蛛形类"
+    --[[Translation missing --]]
+    --[[ L["Assault Wagons"] = ""--]]
     L["Basilisks"] = "蜥蜴"
     L["Bats"] = "蝙蝠"
     L["Bears"] = "熊"
@@ -124,6 +128,8 @@ if (GetLocale() == 'zhCN') then
     L["Tallstriders"] = "蛇鸟"
     L["Talonbirds"] = "鸦神"
     L["Tigers"] = "虎"
+    --[[Translation missing --]]
+    --[[ L["Toads"] = ""--]]
     L["Turtles"] = "龟"
     L["Undead Drakes"] = "不死幼龙"
     L["Undead Steeds"] = "不死战马"

@@ -56,43 +56,17 @@ local function RunDebugTest()
 
     ADDON.settings.filter = CopyTable(filterSettingsBackup)
 
-    for _, familyMounts in pairs(MountJournalEnhancedFamily) do
-        for id, name in pairs(familyMounts) do
-            if type(name) == "table" then
-                for subId, subName in pairs(name) do
-                    if not MountJournalEnhancedIgnored[subId] and not mounts[subId] then
-                        print("[MJE] Old family info for mount: " .. subName .. " (" .. id .. ")")
-                    end
-                end
-            elseif not MountJournalEnhancedIgnored[id] and not mounts[id] then
-                print("[MJE] Old family info for mount: " .. name .. " (" .. id .. ")")
-            end
-        end
-    end
-
     for _, expansionMounts in pairs(MountJournalEnhancedExpansion) do
-        for id, name in pairs(expansionMounts) do
-            if id ~= "minID" and id ~= "maxID" and not MountJournalEnhancedIgnored[id] and not mounts[id] then
-                print("[MJE] Old expansion info for mount: " .. name .. " (" .. id .. ")")
-            end
-        end
-    end
-
-    local names = {}
-    for _, data in pairs(MountJournalEnhancedSource) do
-        for id, name in pairs(data) do
-            if id ~= "sourceType" then
-                if (names[id] and names[id] ~= name) then
-                    print("[MJE] Invalide mount info for mount: " .. name .. " (" .. id .. ")")
-                end
-                names[id] = name
+        for id, _ in pairs(expansionMounts) do
+            if id ~= "minID" and id ~= "maxID" and not mounts[id] then
+                print("[MJE] Old expansion info for mount: " .. id)
             end
         end
     end
 
     for id, name in pairs(MountJournalEnhancedIgnored) do
         if not mounts[id] then
-            print("[MJE] Old ignore entry for mount: " .. name .. " (" .. id .. ")")
+            print("[MJE] Old ignore entry for mount: " .. id)
         end
     end
 end

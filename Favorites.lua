@@ -1,7 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
 -- TODOs:
--- save favorites per character (v2.0)
 -- Option: Autofavorite new mounts; even those learned during offline time
 -- (Favorite Menu at SummonRandomFavoriteButton?)
 

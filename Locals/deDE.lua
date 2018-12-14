@@ -22,7 +22,9 @@ if (GetLocale() == 'deDE') then
 
     -- Families
     L["Airships"] = "Luftschiffe"
+    L["Amphibian"] = "Amphibien"
     L["Arachnids"] = "Spinnentiere"
+    L["Assault Wagons"] = "Angriffswagen"
     L["Basilisks"] = "Basilisken"
     L["Bats"] = "Fledermäuse"
     L["Bears"] = "Bären"
@@ -124,6 +126,7 @@ if (GetLocale() == 'deDE') then
     L["Tallstriders"] = "Schreiter"
     L["Talonbirds"] = "Raben"
     L["Tigers"] = "Tiger"
+    L["Toads"] = "Kröten"
     L["Turtles"] = "Schildkröten"
     L["Undead Drakes"] = "Untote Drachen"
     L["Undead Steeds"] = "Untote Pferde"
