@@ -9,6 +9,7 @@ return [
     'missingMounts' => [ // missing in battle net response
         266925 => new \MJEGenerator\Mount('Siltwing Albatross', 266925, 0, 0, 'inv_vulturemount_alabatrosswhite'),
         290133 => new \MJEGenerator\Mount('Vulpine Familiar', 290133),
+        290134 => new \MJEGenerator\Mount('Hogrus, Swine of Good Fortune', 290134),
     ],
 
     'ignored'   => [
@@ -370,7 +371,7 @@ return [
             'Stingrays'   => ['Stingrays'],
         ],
         'Ungulates'    => [
-            'Boars'       => ['Boars'],
+            'Boars'       => ['Boars', 'Divine Boars'],
             'Camels'      => ['Camels'],
             'Elekks'      => ['Elekks'],
             'Mammoths'    => ['Mammoths'],

@@ -1128,6 +1128,7 @@ ADDON.MountJournalEnhancedExpansion = {
         [213350] = true, -- Frostshard  Infernal
         [237286] = true, -- Dune Scavenger
         [237287] = true, -- Alabaster Hyena
+        [237288] = true, -- Onyx War Hyena
         [239049] = true, -- Obsidian Krolusk
         [243795] = true, -- Leaping Veinseeker
         [250735] = true, -- Bloodgorged Crawg
@@ -1170,6 +1171,7 @@ ADDON.MountJournalEnhancedType = {
         [75973] = true, -- X-53 Touring Rocket
         [245723] = true, -- Stormwind Skychaser - Blizzcon 2017
         [245725] = true, -- Orgrimmar Interceptor - Blizzcon 2017
+        [261395] = true, -- The Hivemind
         [264058] = true, -- Mighty Caravan Brutosaur
     },
 }

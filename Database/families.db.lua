@@ -845,6 +845,7 @@ ADDON.MountJournalEnhancedFamily = {
 [171633] = true, -- Wild Goretusk
 [171636] = true, -- Great Greytusk
 [171637] = true, -- Trained Rocktusk
+[290134] = true, -- Hogrus, Swine of Good Fortune
 },
 ["Camels"] = {
 [102488] = true, -- White Riding Camel

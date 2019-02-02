@@ -68,7 +68,9 @@ class Requester
         $url = self::ENDPOINT[$region] . '/wow/' . $resource . '/';
         $url .= '?locale=' . self::LOCALES[$region];
 
-        $options = [
+//        var_dump($url . '&access_token=' . $token);
+
+        $options  = [
             'http' => [
                 'header' => [
                     "Authorization: Bearer " . $token,
@@ -76,7 +78,7 @@ class Requester
                 'method' => 'GET',
             ],
         ];
-        $context = stream_context_create($options);
+        $context  = stream_context_create($options);
         $response = file_get_contents($url, false, $context);
 
         return json_decode($response, true);
