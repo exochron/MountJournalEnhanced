@@ -3,11 +3,22 @@ declare(strict_types=1);
 
 namespace MJEGenerator\Wowhead;
 
-
-use MJEGenerator\Mount;
-
 class Requester
 {
+
+    private function get(string $url, int $retry = 5): string
+    {
+        $html = file_get_contents($url);
+
+        if (false === empty($html)) {
+            return $html;
+        }
+        if ($retry > 0) {
+            return $this->get($url, $retry - 1);
+        }
+
+        return '';
+    }
 
     /**
      * @return int[][] spellId => itemIds
@@ -16,7 +27,7 @@ class Requester
     {
         $result  = [];
         $matches = [];
-        $html    = file_get_contents('http://www.wowhead.com/mount-spells/live-only:on');
+        $html    = $this->get('http://www.wowhead.com/mount-spells/live-only:on');
         if (preg_match('/var listviewspells = (.*);/iU', $html, $matches)) {
             $json = $matches[1];
             $json = str_replace(['reagents', 'npcmodel'], ['"reagents"', '"npcmodel"'], $json);
@@ -37,12 +48,12 @@ class Requester
      */
     public function fetchAnimationsBySpellId(int $spellId): array
     {
-        $html = file_get_contents('https://www.wowhead.com/spell=' . $spellId);
+        $html = $this->get('https://www.wowhead.com/spell=' . $spellId);
 
         $pattern = '#onclick="ModelViewer.show\(.*displayId: (\d+),?.*}\)"\>View in 3D#is';
         $matches = [];
         if (preg_match_all($pattern, $html, $matches, PREG_SET_ORDER)) {
-            $json = file_get_contents('https://wow.zamimg.com/modelviewer/meta/npc/' . $matches[0][1] . '.json');
+            $json = $this->get('https://wow.zamimg.com/modelviewer/meta/npc/' . $matches[0][1] . '.json');
             $json = json_decode($json);
 
             if (empty($json->Model)) {

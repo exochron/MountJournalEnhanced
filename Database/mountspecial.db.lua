@@ -723,4 +723,5 @@ ADDON.MountJournalEnhancedMountSpecial = {
 [55293] = 3833, -- Amani War Bear
 [266925] = 2666, -- Siltwing Albatross
 [290133] = 9833, -- Vulpine Familiar
+[290134] = 8466, -- Hogrus, Swine of Good Fortune
 }
