@@ -1,12 +1,17 @@
 local ADDON_NAME, ADDON = ...
 local MOUNT_COUNT_STATISTIC = 339
 
+local doStrip = false
+
 local function CreateCharacterMountCount()
     local frame = CreateFrame("frame", nil, MountJournal, "InsetFrameTemplate3")
 
     frame:ClearAllPoints()
     frame:SetPoint("TOPLEFT", MountJournal, 70, -42)
     frame:SetSize(130, 18)
+    if (doStrip) then
+        frame:StripTextures()
+    end
 
     frame.staticText = frame:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
     frame.staticText:ClearAllPoints()
@@ -32,3 +37,9 @@ local function CreateCharacterMountCount()
 end
 
 ADDON:RegisterLoadUICallback(CreateCharacterMountCount)
+
+ADDON:RegisterUIOverhaulCallback(function(self)
+    if (MountJournal and self == MountJournal.MountCount) then
+        doStrip = true
+    end
+end)

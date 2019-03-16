@@ -1,5 +1,7 @@
 local ADDON_NAME, ADDON = ...
 
+-- TODO: ElvUI Skinning
+
 local function saveMountIdInFrame(link)
     if (link) then
         local mountId
@@ -44,10 +46,10 @@ local function createJournalButton(ParentFrame)
     end)
     button:Hide()
 
-    hooksecurefunc(ParentFrame.ResetButton, "Show", function()
+    ParentFrame.ResetButton:HookScript("OnShow", function()
         button:Hide()
     end)
-    hooksecurefunc(ParentFrame.ResetButton, "Hide", function()
+    ParentFrame.ResetButton:HookScript("OnHide", function()
         if (ParentFrame.mode == "mount") then
             button:Show()
         else

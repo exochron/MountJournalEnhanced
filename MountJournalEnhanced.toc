@@ -19,6 +19,7 @@ Settings.lua
 SettingsPanel.lua
 DebugTest.lua
 Favorites.lua
+UI\FixUIPacks.lua
 UI\CompactMountList.lua
 UI\AchievementPoints.lua
 UI\DisplayCamera.lua
