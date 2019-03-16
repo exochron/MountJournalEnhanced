@@ -8,11 +8,11 @@ local function HookScrollUpdate(self, totalHeight, displayedHeight)
         local totalHeight = C_MountJournal.GetNumDisplayedMounts() * MOUNT_BUTTON_HEIGHT
         local range = floor(totalHeight - self:GetHeight() + 0.5);
 
-        if ( range > 0 and self.scrollBar ) then
+        if (range > 0 and self.scrollBar) then
             local minVal, maxVal = self.scrollBar:GetMinMaxValues();
-            if ( math.floor(self.scrollBar:GetValue()) >= math.floor(maxVal) ) then
+            if (math.floor(self.scrollBar:GetValue()) >= math.floor(maxVal)) then
                 scrollBarMinMaxHandler(self.scrollBar, 0, range)
-                if ( math.floor(self.scrollBar:GetValue()) ~= math.floor(range) ) then
+                if (math.floor(self.scrollBar:GetValue()) ~= math.floor(range)) then
                     self.scrollBar:SetValue(range);
                 else
                     HybridScrollFrame_SetOffset(self, range); -- If we've scrolled to the bottom, we need to recalculate the offset.
@@ -40,7 +40,8 @@ local function ModifyMountList()
 
     HybridScrollFrame_CreateButtons(scrollFrame, "MountListButtonTemplate")
     scrollBarMinMaxHandler = scrollFrame.scrollBar.SetMinMaxValues
-    scrollFrame.scrollBar.SetMinMaxValues = function() end
+    scrollFrame.scrollBar.SetMinMaxValues = function()
+    end
 
     for buttonIndex = 1, #buttons do
         local button = buttons[buttonIndex]
@@ -72,8 +73,17 @@ local function ModifyMountList()
     hooksecurefunc("HybridScrollFrame_Update", HookScrollUpdate)
 end
 
+local doInit = true
+
 ADDON:RegisterLoadUICallback(function()
-    if ADDON.settings.compactMountList then
+    if doInit and ADDON.settings.compactMountList then
+        doInit = false
         ModifyMountList()
     end
-end )
+end)
+ADDON:RegisterUIOverhaulCallback(function(self)
+    if (self == MountJournal and doInit and ADDON.settings.compactMountList) then
+        doInit = false
+        ModifyMountList()
+    end
+end)

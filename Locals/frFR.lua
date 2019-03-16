@@ -12,6 +12,8 @@ if (GetLocale() == 'frFR') then
     L["Flying"] = "Volante"
     L["Ground"] = "Terrestre"
     L["Hidden"] = "Cachées"
+    --[[Translation missing --]]
+    --[[ L["Only tradable"] = ""--]]
     L["Only usable"] = "Utilisables"
     L["Passenger"] = "Passagers"
     L["Reset filters"] = "Réinitialiser les filtres"
@@ -62,6 +64,7 @@ if (GetLocale() == 'frFR') then
     L["Cranes"] = "Grues"
     --[[Translation missing --]]
     --[[ L["Crawgs"] = ""--]]
+    L["Crocolisks"] = "Crocilisque"
     --[[Translation missing --]]
     --[[ L["Crows"] = ""--]]
     L["Demonic Hounds"] = "Molosses Démoniaques"

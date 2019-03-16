@@ -62,4 +62,21 @@ class LuaExport
 
         return $result . '}';
     }
+
+    /**
+     * @param string $variableName
+     * @param Mount[] $mounts
+     * @return string
+     */
+    public function toLuaTradable(string $variableName, array $mounts): string
+    {
+        $result = $this->prepareHead($variableName);
+        foreach ($mounts as $mount) {
+            if ($mount->isItemTradable()) {
+                $result .= '[' . $mount->getSpellId() . '] = true, -- ' . $mount->getName() . PHP_EOL;
+            }
+        }
+
+        return $result . '}';
+    }
 }

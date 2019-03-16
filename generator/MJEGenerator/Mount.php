@@ -16,6 +16,7 @@ class Mount
     private $isFlying = false;
     private $isAquatic = false;
     private $isJumping = false;
+    private $isItemTradable = false;
     private $mountSpecialLength = 0;
 
     public function __construct(
@@ -112,5 +113,16 @@ class Mount
     public function getMountSpecialLength(): int
     {
         return $this->mountSpecialLength;
+    }
+
+    public function setIsItemTradable(bool $isItemTradable): self
+    {
+        $this->isItemTradable = $isItemTradable;
+        return $this;
+    }
+
+    public function isItemTradable(): bool
+    {
+        return $this->isItemTradable;
     }
 }

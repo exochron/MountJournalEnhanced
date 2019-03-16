@@ -5,6 +5,7 @@ local SETTING_COLLECTED = "collected"
 local SETTING_ONLY_FAVORITES = "onlyFavorites"
 local SETTING_NOT_COLLECTED = "notCollected"
 local SETTING_ONLY_USEABLE = "onlyUsable"
+local SETTING_ONLY_TRADABLE = "onlyTradable"
 local SETTING_SOURCE = "source"
 local SETTING_MOUNT_TYPE = "mountType"
 local SETTING_FACTION = "faction"
@@ -163,6 +164,7 @@ local function InitializeFilterDropDown(filterMenu, level)
         MSA_DropDownMenu_AddButton(info, level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(NOT_COLLECTED, SETTING_NOT_COLLECTED), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Only usable"], SETTING_ONLY_USEABLE), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Only tradable"], SETTING_ONLY_TRADABLE), level)
 
         MSA_DropDownMenu_AddButton(CreateFilterCategory(SOURCES, SETTING_SOURCE), level)
         MSA_DropDownMenu_AddButton(CreateFilterCategory(TYPE, SETTING_MOUNT_TYPE), level)

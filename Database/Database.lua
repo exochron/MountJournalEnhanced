@@ -112,6 +112,7 @@ ADDON.MountJournalEnhancedSource = {
         [215159] = true, -- Long-Forgotten Hippogryph - Ephemeral Crystal x5
         [230987] = true, -- Arcanist's Manasaber - Fate of the Nightborne
         [239770] = true, -- Black Qiraji War Tank - newer high res version of the Black Qiraji Battle Tank
+        [289639] = true, -- Brucek -Complete the Brawler's Guild Questline
 
         ------------------------------
         -- Alliance ------------------
@@ -692,6 +693,7 @@ ADDON.MountJournalEnhancedSource = {
         [279454] = true, -- Conquerer's Scythemaw - Conqueror of Azeroth
         [280730] = true, -- Pureheart Courser - 100 Exalted Reputations
         [289101] = true, -- DazarDazar'alor Windreaver - Glory of the Dazar'alor Raider
+        [282682] = true, -- Kul Tiran Charger - Allied Races: Kul Tiran Human
 
         ------------------------------
         -- Alliance ------------------
@@ -701,6 +703,7 @@ ADDON.MountJournalEnhancedSource = {
         [68187] = true, -- Crusader's White Warhorse - no longer available
         [90621] = true, -- Golden King - Guild Level 25
         [130985] = true, -- Pandaren Kite - Pandaren Ambassador, Alliance
+        [295386] = true, -- Ironclad Frostclaw - Two Sides to Every Tale
 
         [61996] = true, -- Blue Dragonhawk - Mountain o' Mounts, Alliance
         [142478] = true, -- Armored Blue Dragonhawk - Mount Parade, Alliance
@@ -716,6 +719,7 @@ ADDON.MountJournalEnhancedSource = {
         [118737] = true, -- Pandaren Kite - Pandaren Ambassador, Horde
         [171845] = true, -- Warlord's Deathwheel -  Warlord's Deathwheel
         [179244] = true, -- Chauffeur - Heirloom Hoarder, Horde
+        [295387] = true, -- Bloodflank Charger - Two Sides to Every Tale
 
         [61997] = true, -- Red Dragonhawk - Mountain o' Mounts, Horde
         [142266] = true, -- Armored Red Dragonhawk - Mount Parade, Horde
@@ -946,6 +950,7 @@ ADDON.MountJournalEnhancedSource = {
         [231589] = true, -- Highlord's Valorous Charger
         [270564] = true, -- Dawnforge Ram
         [270562] = true, -- Darkforge Ram
+        [290608] = true, -- Crusader's Direhorn
 
         -- Priest
         [229377] = true, -- High Priest's Lightsworn Seeker
@@ -1013,6 +1018,8 @@ ADDON.MountJournalEnhancedSource = {
 
         -- Timewalking
         [127165] = true, -- Yu'lei, Daughter of Jade
+        [294568] = true, -- Beastlord's Irontusk
+        [294569] = true, -- Beastlord's Warwolf
 
         -- Call of the Scarab (Micro)
         [239766] = true, -- Blue Qiraji War Tank
@@ -1212,6 +1219,4 @@ ADDON.MountJournalEnhancedIgnored = {
     
     -- Legion Unknown Source
     [239363] = true, -- Swift Spectral Hippogryph
-
-    [244457] = true, -- ?
 }

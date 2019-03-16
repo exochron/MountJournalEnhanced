@@ -2,7 +2,7 @@
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron
-## Version: 2.2.1
+## Version: 2.3
 ## SavedVariablesPerCharacter: MountJournalEnhancedSettings
 
 Libs\LibStub\LibStub.lua
@@ -12,12 +12,14 @@ Locals\Locals.xml
 Database\Database.lua
 Database\families.db.lua
 Database\mountspecial.db.lua
+Database\tradable.db.lua
 Filters.lua
 MountJournalEnhanced.lua
 Settings.lua
 SettingsPanel.lua
 DebugTest.lua
 Favorites.lua
+UI\FixUIPacks.lua
 UI\CompactMountList.lua
 UI\AchievementPoints.lua
 UI\DisplayCamera.lua

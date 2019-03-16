@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 namespace MJEGenerator\Battlenet;
 
+use Amp\Artax\DefaultClient;
+use Amp\Artax\FormBody;
+use Amp\Artax\Request;
+use Amp\Artax\Response;
 use MJEGenerator\Mount;
 
 class Requester
@@ -20,25 +24,28 @@ class Requester
         self::REGION_US => 'en_US',
     ];
 
+    private $client;
     private $accessToken = [];
     private $clientId;
     private $clientSecret;
 
     public function __construct(string $clientId, string $clientSecret)
     {
+        $this->client       = new DefaultClient;
         $this->clientId     = $clientId;
         $this->clientSecret = $clientSecret;
     }
 
     /**
      * @param string $region
+     *
      * @return Mount[]
      */
-    public function fetchMounts(string $region = self::REGION_EU): array
+    public function fetchMounts(string $region = self::REGION_EU)
     {
         $result = [];
 
-        $data = $this->call($region, 'mount');
+        $data = yield from $this->call($region, 'mount');
         foreach ($data['mounts'] ?? [] as $item) {
             $result[$item['spellId']] = new Mount(
                 $item['name'],
@@ -57,49 +64,43 @@ class Requester
         return $result;
     }
 
-    private function call(string $region, string $resource): array
+    private function call(string $region, string $resource)
     {
         $token = $this->accessToken[$region];
 
         if (empty($token)) {
-            $token = $this->accessToken[$region] = $this->oAauthToken($region);
+            $token = $this->accessToken[$region] = yield from $this->fetchAuthToken($region);
         }
 
-        $url = self::ENDPOINT[$region] . '/wow/' . $resource . '/';
-        $url .= '?locale=' . self::LOCALES[$region];
+        $url     = self::ENDPOINT[$region] . '/wow/' . $resource . '/';
+        $url     .= '?locale=' . self::LOCALES[$region];
+        $request = new Request($url);
+        $request = $request->withHeader('Authorization', 'Bearer ' . $token);
 
-//        var_dump($url . '&access_token=' . $token);
+        var_dump($url . '&access_token=' . $token, $token);
 
-        $options  = [
-            'http' => [
-                'header' => [
-                    "Authorization: Bearer " . $token,
-                ],
-                'method' => 'GET',
-            ],
-        ];
-        $context  = stream_context_create($options);
-        $response = file_get_contents($url, false, $context);
+        /** @var Response $response */
+        $response = yield $this->client->request($request);
+        $body     = yield $response->getBody();
 
-        return json_decode($response, true);
+        return json_decode($body, true);
     }
 
-    private function oAauthToken(string $region)
+    private function fetchAuthToken(string $region)
     {
-        $options = [
-            'http' => [
-                'header'  => [
-                    "Authorization: Basic " . base64_encode($this->clientId . ':' . $this->clientSecret),
-                ],
-                'method'  => 'POST',
-                'content' => http_build_query([
-                    'grant_type' => 'client_credentials',
-                ]),
-            ],
-        ];
-        $context = stream_context_create($options);
-        $result  = file_get_contents('https://' . $region . '.battle.net/oauth/token', false, $context);
-        $result  = json_decode($result, true);
+        $form = new FormBody;
+        $form->addField('grant_type', 'client_credentials');
+
+        $request = (new Request('https://' . $region . '.battle.net/oauth/token', 'POST'))
+            ->withHeader(
+                'Authorization',
+                'Basic ' . base64_encode($this->clientId . ':' . $this->clientSecret)
+            )->withBody($form);
+
+        /** @var Response $response */
+        $response = yield $this->client->request($request);
+        $body     = yield $response->getBody();
+        $result   = json_decode($body, true);
         return $result['access_token'];
     }
 }

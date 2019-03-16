@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-include "autoload.php";
-$config = include "config.php";
+include 'vendor/autoload.php';
+$config = include 'config.php';
 
-(new \MJEGenerator\Runner($config))->run();
+\Amp\Loop::run(new \MJEGenerator\Runner($config));

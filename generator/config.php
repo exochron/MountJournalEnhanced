@@ -7,9 +7,7 @@ return [
     ],
 
     'missingMounts' => [ // missing in battle net response
-        266925 => new \MJEGenerator\Mount('Siltwing Albatross', 266925, 0, 0, 'inv_vulturemount_alabatrosswhite'),
-        290133 => new \MJEGenerator\Mount('Vulpine Familiar', 290133),
-        290134 => new \MJEGenerator\Mount('Hogrus, Swine of Good Fortune', 290134),
+//        266925 => new \MJEGenerator\Mount('Siltwing Albatross', 266925, 0, 0, 'inv_vulturemount_alabatrosswhite'),
     ],
 
     'ignored'   => [
@@ -149,7 +147,6 @@ return [
         237285, // Hyena Mount White (PH)
         239363, // Swift Spectral Hippogryph
         239769, // Purple Qiraji War Tank
-        244457, // Default AI Mount Record
         244712, // Armored Ebony Pterrordax (PH)
         254471, // Valorous Charger
         254474, // Golden Charger
@@ -171,6 +168,9 @@ return [
         278656, // Spectral Phoenix
         278966, // Tempestuous Skystallion
         281296, // Silver Hand Charger
+        288506, // Sandy Nightsaber
+        290328, // PH Mechanical Parrot
+        294923, // Hati
     ],
 
     // family based on http://www.warcraftmounts.com/gallery.php + https://wow.gamepedia.com/Beast
@@ -308,7 +308,7 @@ return [
         'Horses'       => [
             'Chargers'          => [
                 'wcm'   => ['Horses'],
-                'icons' => ['_paladinmount_', '_charger', 'nature_swiftness', 'alliancepvpmount', 'vicioushorse', 'paladin_divinesteed'],
+                'icons' => ['_paladinmount_', '_charger', 'nature_swiftness', 'alliancepvpmount', 'vicioushorse', 'paladin_divinesteed', 'horsekultiran','hordehorse'],
                 67466   => "Argent Warhorse",
                 68187   => "Crusader's White Warhorse",
                 68188   => "Crusader's Black Warhorse",
@@ -361,6 +361,7 @@ return [
             ],
             'Mushan'       => ['Mushan'],
             'Basilisks'    => ['Basilisks'],
+            'Crocolisks'   => ['Crocolisks'],
             'Sea Serpents' => ['Sea Serpents'],
             'Turtles'      => ['Dragon Turtles', 'Sea Turtles', 'Turtles'],
         ],
@@ -401,7 +402,7 @@ return [
             ],
             'War Wolves'    => [
                 'wcm'   => ['Wolves'],
-                'icons' => ['hordepvpmount'],
+                'icons' => ['hordepvpmount', 'alliancewolf', 'armoredwolf'],
             ],
             'Wolves'        => [
                 'wcm'   => ['Wolves'],
