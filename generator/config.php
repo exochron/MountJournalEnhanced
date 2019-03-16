@@ -397,12 +397,12 @@ return [
         'Wolves'       => [
             'Dire Wolves'   => [
                 'wcm'   => ['Wolves'],
-                'icons' => ['wolfdraenor', 'orcclanworg', 'armoredwolf'],
+                'icons' => ['wolfdraenor', 'orcclanworg'],
                 171851  => "Garn Nighthowl",
             ],
             'War Wolves'    => [
                 'wcm'   => ['Wolves'],
-                'icons' => ['hordepvpmount', 'alliancewolf'],
+                'icons' => ['hordepvpmount', 'alliancewolf', 'armoredwolf'],
             ],
             'Wolves'        => [
                 'wcm'   => ['Wolves'],
