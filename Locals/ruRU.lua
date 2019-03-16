@@ -12,6 +12,8 @@ if (GetLocale() == 'ruRU') then
     L["Flying"] = "Летающий"
     L["Ground"] = "Наземный"
     L["Hidden"] = "Скрытые"
+    --[[Translation missing --]]
+    --[[ L["Only tradable"] = ""--]]
     L["Only usable"] = "Только доступные"
     L["Passenger"] = "Пассажирский"
     L["Reset filters"] = "Сбросить фильтры"
@@ -63,6 +65,7 @@ if (GetLocale() == 'ruRU') then
     L["Cranes"] = "Журавли"
     --[[Translation missing --]]
     --[[ L["Crawgs"] = ""--]]
+    L["Crocolisks"] = "Кроколиск"
     --[[Translation missing --]]
     --[[ L["Crows"] = ""--]]
     --[[Translation missing --]]

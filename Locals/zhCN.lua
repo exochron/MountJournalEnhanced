@@ -10,6 +10,8 @@ if (GetLocale() == 'zhCN') then
     L["Flying"] = "飞行"
     L["Ground"] = "陆行"
     L["Hidden"] = "隐藏"
+    --[[Translation missing --]]
+    --[[ L["Only tradable"] = ""--]]
     L["Only usable"] = "仅可用"
     L["Passenger"] = "载客"
     L["Reset filters"] = "重置过滤"
@@ -46,6 +48,7 @@ if (GetLocale() == 'zhCN') then
     L["Core Hounds"] = "熔核猎犬"
     L["Cranes"] = "仙鹤"
     L["Crawgs"] = "抱齿"
+    L["Crocolisks"] = "鳄鱼"
     L["Crows"] = "乌鸦"
     L["Demonic Hounds"] = "恶魔犬"
     L["Demonic Steeds"] = "恶魔马"
