@@ -1,0 +1,13 @@
+{
+  "require": {
+    "amphp/artax": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "MJEGenerator\\": "MJEGenerator"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true
+  }
+}
