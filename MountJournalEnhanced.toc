@@ -12,7 +12,7 @@ Locals\Locals.xml
 Database\Database.lua
 Database\families.db.lua
 Database\mountspecial.db.lua
-Database\tradeable.db.lua
+Database\tradable.db.lua
 Filters.lua
 MountJournalEnhanced.lua
 Settings.lua

@@ -4,7 +4,7 @@ local MountJournalEnhancedFamily = ADDON.MountJournalEnhancedFamily
 local MountJournalEnhancedSource = ADDON.MountJournalEnhancedSource
 local MountJournalEnhancedExpansion = ADDON.MountJournalEnhancedExpansion
 local MountJournalEnhancedType = ADDON.MountJournalEnhancedType
-local MountJournalEnhancedTradeable = ADDON.MountJournalEnhancedTradeable
+local MountJournalEnhancedTradable = ADDON.MountJournalEnhancedTradable
 
 local function FilterHiddenMounts(spellId)
     return ADDON.settings.filter.hidden or not ADDON.settings.hiddenMounts[spellId]
@@ -19,7 +19,7 @@ local function FilterUsableMounts(spellId, isUsable)
 end
 
 local function FilterTradableMounts(spellId)
-    return not ADDON.settings.filter.onlyTradable or MountJournalEnhancedTradeable[spellId]
+    return not ADDON.settings.filter.onlyTradable or MountJournalEnhancedTradable[spellId]
 end
 
 local function FilterCollectedMounts(collected)

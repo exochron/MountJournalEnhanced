@@ -1,6 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
-ADDON.MountJournalEnhancedTradeable = {
+ADDON.MountJournalEnhancedTradable = {
 [61451] = true, -- Flying Carpet
 [260175] = true, -- Goldenmane
 [260174] = true, -- Terrified Pack Mule

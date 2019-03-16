@@ -62,7 +62,7 @@ class Runner
                     && false === strpos($tooltip, 'Binds when picked up')
                     && false === strpos($tooltip, 'Binds to Blizzard Battle.net account')
                 ) {
-                    $mount->setIsItemTradeable(true);
+                    $mount->setIsItemTradable(true);
                 }
             }
         }
@@ -102,10 +102,10 @@ class Runner
         $lua = $this->export->toLuaSpecialLength('MountJournalEnhancedMountSpecial', $mounts);
         yield put('mountspecial.db.lua', $lua);
     }
-    private function generateTradeableList(array $mounts)
+    private function generateTradableList(array $mounts)
     {
-        $lua = $this->export->toLuaTradeable('MountJournalEnhancedTradeable', $mounts);
-        yield put('tradeable.db.lua', $lua);
+        $lua = $this->export->toLuaTradable('MountJournalEnhancedTradable', $mounts);
+        yield put('tradable.db.lua', $lua);
     }
 
     public function __invoke()
@@ -116,7 +116,7 @@ class Runner
 
         yield from $this->generateFamilies($mounts);
         yield from $this->generateMountSpecialList($mounts);
-        yield from $this->generateTradeableList($mounts);
+        yield from $this->generateTradableList($mounts);
 
         return $this;
     }

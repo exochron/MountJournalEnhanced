@@ -68,11 +68,11 @@ class LuaExport
      * @param Mount[] $mounts
      * @return string
      */
-    public function toLuaTradeable(string $variableName, array $mounts): string
+    public function toLuaTradable(string $variableName, array $mounts): string
     {
         $result = $this->prepareHead($variableName);
         foreach ($mounts as $mount) {
-            if ($mount->isItemTradeable()) {
+            if ($mount->isItemTradable()) {
                 $result .= '[' . $mount->getSpellId() . '] = true, -- ' . $mount->getName() . PHP_EOL;
             }
         }
