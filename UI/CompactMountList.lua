@@ -31,21 +31,23 @@ local function HookScrollUpdate(self, totalHeight, displayedHeight)
     end
 end
 
-local function ModifyMountList()
+local function GenerateButtons()
     local scrollFrame = MountJournal.ListScrollFrame
-    local buttons = MountJournal.ListScrollFrame.buttons
-    scrollFrame.buttons[1]:SetHeight(MOUNT_BUTTON_HEIGHT)
-    scrollFrame.buttons[1]:ClearAllPoints()
-    scrollFrame.buttons[1]:SetPoint("TOPLEFT", scrollFrame.scrollChild, "TOPLEFT", 34, 0)
+    local buttons = scrollFrame.buttons
 
+    buttons[1]:SetHeight(MOUNT_BUTTON_HEIGHT)
+    buttons[1]:ClearAllPoints()
+    buttons[1]:SetPoint("TOPLEFT", scrollFrame.scrollChild, "TOPLEFT", 34, 0)
     HybridScrollFrame_CreateButtons(scrollFrame, "MountListButtonTemplate")
+
     scrollBarMinMaxHandler = scrollFrame.scrollBar.SetMinMaxValues
     scrollFrame.scrollBar.SetMinMaxValues = function()
     end
+    hooksecurefunc("HybridScrollFrame_Update", HookScrollUpdate)
+end
 
-    for buttonIndex = 1, #buttons do
-        local button = buttons[buttonIndex]
-
+local function ModifyListButtons()
+    for _, button in pairs(MountJournal.ListScrollFrame.buttons) do
         button:SetSize(220, MOUNT_BUTTON_HEIGHT)
         button.DragButton:SetSize(MOUNT_BUTTON_HEIGHT, MOUNT_BUTTON_HEIGHT)
         button.icon:SetSize(MOUNT_BUTTON_HEIGHT, MOUNT_BUTTON_HEIGHT)
@@ -56,34 +58,38 @@ local function ModifyMountList()
         button.unusable:SetPoint("TOPLEFT", button.DragButton)
         button.unusable:SetPoint("BOTTOMRIGHT", button.DragButton)
 
-        button.name:SetWidth(208)
         button.name:ClearAllPoints()
         button.name:SetPoint("LEFT", button, "LEFT", 10, 0)
+        button.name:SetPoint("RIGHT", button, "RIGHT", -10, 0)
 
         button.new:ClearAllPoints()
         button.new:SetPoint("CENTER", button.DragButton)
 
         button.factionIcon:ClearAllPoints()
-        button.factionIcon:SetPoint("RIGHT", button, -1, 0)
+        button.factionIcon:SetPoint('TOPRIGHT', -4, -4)
+        button.factionIcon:SetPoint('BOTTOMRIGHT', -4, 4)
         hooksecurefunc(button.factionIcon, "SetAtlas", function(self)
             self:SetSize(MOUNT_BUTTON_HEIGHT, MOUNT_BUTTON_HEIGHT)
         end)
     end
-
-    hooksecurefunc("HybridScrollFrame_Update", HookScrollUpdate)
 end
 
 local doInit = true
 
 ADDON:RegisterLoadUICallback(function()
-    if doInit and ADDON.settings.compactMountList then
-        doInit = false
-        ModifyMountList()
+    if ADDON.settings.compactMountList then
+        if doInit then
+            doInit = false
+            GenerateButtons()
+        end
+        ModifyListButtons()
     end
 end)
+
+-- UI Pack fix  (eg. ElvUI, TukUI)
 ADDON:RegisterUIOverhaulCallback(function(self)
     if (self == MountJournal and doInit and ADDON.settings.compactMountList) then
         doInit = false
-        ModifyMountList()
+        GenerateButtons()
     end
 end)

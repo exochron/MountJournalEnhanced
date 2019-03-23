@@ -2,10 +2,11 @@
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron
-## Version: 2.3
+## Version: 2.3.1
 ## SavedVariablesPerCharacter: MountJournalEnhancedSettings
 
 Libs\LibStub\LibStub.lua
+Libs\AceGUI-3.0\AceGUI-3.0.xml
 Libs\MSA-DropDownMenu-1.0\MSA-DropDownMenu-1.0.xml
 
 Locals\Locals.xml

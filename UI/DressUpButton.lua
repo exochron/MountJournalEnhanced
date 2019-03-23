@@ -1,7 +1,5 @@
 local ADDON_NAME, ADDON = ...
 
--- TODO: ElvUI Skinning
-
 local function saveMountIdInFrame(link)
     if (link) then
         local mountId
@@ -25,16 +23,19 @@ end
 hooksecurefunc("DressUpMountLink", saveMountIdInFrame)
 
 local function createJournalButton(ParentFrame)
-    local button = CreateFrame("Button", nil, ParentFrame, "UIPanelButtonNoTooltipTemplate")
+    local AceGUI = LibStub("AceGUI-3.0")
+
+    local button = AceGUI:Create("Button")
+    button:SetParent({ content = ParentFrame })
     button:SetText(ADDON.L["Show in Collections"])
+    button:SetAutoWidth(true)
     if (ParentFrame == SideDressUpFrame) then
-        button:SetFrameStrata("HIGH")
-        button:SetPoint("BOTTOM", ParentFrame, "BOTTOM", 0, 14)
+        button.frame:SetFrameStrata("HIGH")
+        button:SetPoint("BOTTOM", SideDressUpModel, "BOTTOM", 0, 0)
     else
         button:SetPoint("BOTTOMLEFT", ParentFrame, "BOTTOMLEFT", 7, 4)
     end
-    button:SetSize(button.Text:GetWidth() + 15, 22)
-    button:SetScript("OnClick", function(self)
+    button:SetCallback("OnClick", function()
         if (ParentFrame.mode == "mount") then
             local mountId = ParentFrame.mountId;
             if mountId then
@@ -44,16 +45,15 @@ local function createJournalButton(ParentFrame)
             end
         end
     end)
-    button:Hide()
 
     ParentFrame.ResetButton:HookScript("OnShow", function()
-        button:Hide()
+        button.frame:Hide()
     end)
     ParentFrame.ResetButton:HookScript("OnHide", function()
         if (ParentFrame.mode == "mount") then
-            button:Show()
+            button.frame:Show()
         else
-            button:Hide()
+            button.frame:Hide()
         end
     end)
 end

@@ -10,7 +10,6 @@ function SlashCmdList.MOUNTJOURNALENHANCED(msg, editBox)
     elseif (msg == "debug off") then
         ADDON.settings.debugMode = false
         print("MountJournalEnhanced: Debug mode deactivated.")
-
     else
         local title = GetAddOnMetadata(ADDON_NAME, "Title")
         InterfaceOptionsFrame_OpenToCategory(title)
