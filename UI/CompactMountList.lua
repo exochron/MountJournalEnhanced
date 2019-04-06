@@ -1,6 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
-local MOUNT_BUTTON_HEIGHT = 30
+local MOUNT_BUTTON_HEIGHT = 29
 local scrollBarMinMaxHandler
 
 local function HookScrollUpdate(self, totalHeight, displayedHeight)
@@ -37,7 +37,7 @@ local function GenerateButtons()
 
     buttons[1]:SetHeight(MOUNT_BUTTON_HEIGHT)
     buttons[1]:ClearAllPoints()
-    buttons[1]:SetPoint("TOPLEFT", scrollFrame.scrollChild, "TOPLEFT", 34, 0)
+    buttons[1]:SetPoint("TOPLEFT", scrollFrame.scrollChild, "TOPLEFT", 33, 0)
     HybridScrollFrame_CreateButtons(scrollFrame, "MountListButtonTemplate")
 
     scrollBarMinMaxHandler = scrollFrame.scrollBar.SetMinMaxValues
@@ -47,12 +47,24 @@ local function GenerateButtons()
 end
 
 local function ModifyListButtons()
+    local previousButton
     for _, button in pairs(MountJournal.ListScrollFrame.buttons) do
-        button:SetSize(220, MOUNT_BUTTON_HEIGHT)
+        if (previousButton) then
+            button:ClearAllPoints()
+            button:SetPoint("TOPLEFT", previousButton, "BOTTOMLEFT", 0, -1)
+        end
+
+        button:SetSize(221, MOUNT_BUTTON_HEIGHT)
         button.DragButton:SetSize(MOUNT_BUTTON_HEIGHT, MOUNT_BUTTON_HEIGHT)
         button.icon:SetSize(MOUNT_BUTTON_HEIGHT, MOUNT_BUTTON_HEIGHT)
         button.icon:ClearAllPoints()
         button.icon:SetPoint("RIGHT", button, "LEFT", -2, 0)
+
+        if (button.backdrop) then
+            -- ElvUI customization
+            button.backdrop:SetInside(button, 0, 0)
+            button.icon:SetSize(MOUNT_BUTTON_HEIGHT - 2, MOUNT_BUTTON_HEIGHT - 2)
+        end
 
         button.unusable:ClearAllPoints()
         button.unusable:SetPoint("TOPLEFT", button.DragButton)
@@ -66,11 +78,11 @@ local function ModifyListButtons()
         button.new:SetPoint("CENTER", button.DragButton)
 
         button.factionIcon:ClearAllPoints()
-        button.factionIcon:SetPoint('TOPRIGHT', -4, -4)
-        button.factionIcon:SetPoint('BOTTOMRIGHT', -4, 4)
-        hooksecurefunc(button.factionIcon, "SetAtlas", function(self)
-            self:SetSize(MOUNT_BUTTON_HEIGHT, MOUNT_BUTTON_HEIGHT)
-        end)
+        button.factionIcon:SetPoint('TOPRIGHT', -2, -2)
+        button.factionIcon:SetPoint('TOPLEFT', button, "TOPRIGHT", -2 - MOUNT_BUTTON_HEIGHT, -2)
+        button.factionIcon:SetPoint('BOTTOMRIGHT', -2, 2)
+
+        previousButton = button
     end
 end
 
@@ -88,7 +100,7 @@ end)
 
 -- UI Pack fix  (eg. ElvUI, TukUI)
 ADDON:RegisterUIOverhaulCallback(function(self)
-    if (self == MountJournal and doInit and ADDON.settings.compactMountList) then
+    if (doInit and self == MountJournal and ADDON.settings.compactMountList) then
         doInit = false
         GenerateButtons()
     end
