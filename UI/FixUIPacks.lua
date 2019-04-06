@@ -1,6 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
-local callbacks = {}, {}
+local callbacks = {}
 function ADDON:RegisterUIOverhaulCallback(func)
     table.insert(callbacks, func)
 end
@@ -11,11 +11,13 @@ local function hookStripTextures()
         local mt = getmetatable(frame).__index
         local org_Strip = mt.StripTextures
         mt.StripTextures = function(self, a, b, c, d, e, f, g, h, i)
-            for _, callback in pairs(callbacks) do
-                callback(self)
+            if (_G['MountJournal']) then
+                for _, callback in pairs(callbacks) do
+                    callback(self)
+                end
             end
             return org_Strip(self, a, b, c, d, e, f, g, h, i)
         end
     end
 end
-hookStripTextures()
+ADDON:RegisterLoginCallback(hookStripTextures)
