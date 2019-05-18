@@ -108,8 +108,14 @@ local function BuildCameraButton(frame, relativeTo, tooltip, tooltipText, camera
     end
     button:HookScript("OnEnter", function() frame:Show() end)
     -- rehook handlers of ModelControlButtonTemplate since both templates are overwriteing each other
-    button:HookScript("OnMouseDown", ModelControlButton_OnMouseDown)
-    button:HookScript("OnMouseUp", ModelControlButton_OnMouseUp)
+    if (ModelControlButton_OnMouseDown) then
+        -- remove after 8.2
+        button:HookScript("OnMouseDown", ModelControlButton_OnMouseDown)
+    end
+    if (ModelControlButton_OnMouseUp) then
+        -- remove after 8.2
+        button:HookScript("OnMouseUp", ModelControlButton_OnMouseUp)
+    end
 
     button.cameraMode = cameraMode
     button.amountPerSecond = amountPerSceond

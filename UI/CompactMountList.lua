@@ -5,7 +5,7 @@ local scrollBarMinMaxHandler
 
 local function HookScrollUpdate(self, totalHeight, displayedHeight)
     if self == MountJournal.ListScrollFrame then
-        local totalHeight = C_MountJournal.GetNumDisplayedMounts() * MOUNT_BUTTON_HEIGHT
+        totalHeight = C_MountJournal.GetNumDisplayedMounts() * (MOUNT_BUTTON_HEIGHT + 1)
         local range = floor(totalHeight - self:GetHeight() + 0.5);
 
         if (range > 0 and self.scrollBar) then
@@ -38,7 +38,7 @@ local function GenerateButtons()
     buttons[1]:SetHeight(MOUNT_BUTTON_HEIGHT)
     buttons[1]:ClearAllPoints()
     buttons[1]:SetPoint("TOPLEFT", scrollFrame.scrollChild, "TOPLEFT", 33, 0)
-    HybridScrollFrame_CreateButtons(scrollFrame, "MountListButtonTemplate")
+    HybridScrollFrame_CreateButtons(scrollFrame, "MountListButtonTemplate", nil, nil, nil, nil, 0, -1)
 
     scrollBarMinMaxHandler = scrollFrame.scrollBar.SetMinMaxValues
     scrollFrame.scrollBar.SetMinMaxValues = function()
@@ -66,9 +66,12 @@ local function ModifyListButtons()
             button.icon:SetSize(MOUNT_BUTTON_HEIGHT - 2, MOUNT_BUTTON_HEIGHT - 2)
         end
 
-        button.unusable:ClearAllPoints()
-        button.unusable:SetPoint("TOPLEFT", button.DragButton)
-        button.unusable:SetPoint("BOTTOMRIGHT", button.DragButton)
+        if (button.unusable) then
+            -- remove after 8.2
+            button.unusable:ClearAllPoints()
+            button.unusable:SetPoint("TOPLEFT", button.DragButton)
+            button.unusable:SetPoint("BOTTOMRIGHT", button.DragButton)
+        end
 
         button.name:ClearAllPoints()
         button.name:SetPoint("LEFT", button, "LEFT", 10, 0)
