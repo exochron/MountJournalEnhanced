@@ -1,5 +1,7 @@
 {
   "require": {
+    "ext-json": "*",
+    "ext-zlib": "*",
     "amphp/artax": "^3.0"
   },
   "autoload": {

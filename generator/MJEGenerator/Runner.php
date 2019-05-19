@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace MJEGenerator;
 
 use function Amp\File\put;
+use Generator;
 use MJEGenerator\Battlenet\Requester as Battlenet;
 use MJEGenerator\Wowhead\Requester as Wowhead;
 use MJEGenerator\WarcraftMounts\Requester as WarcraftMounts;
@@ -22,9 +23,9 @@ class Runner
     }
 
     /**
-     * @return Mount[]
+     * @return Mount[]|Generator
      */
-    private function collectMounts()
+    private function collectMounts(): Generator
     {
         $bnet = new Battlenet($this->config['battle.net']['clientId'], $this->config['battle.net']['clientSecret']);
 
@@ -40,7 +41,7 @@ class Runner
      */
     private function enhanceMounts($mounts)
     {
-        $wowHead = new Wowhead;
+        $wowHead = new Wowhead($this->config['wowhead']['channel']);
 
         foreach ($this->config['missingMounts'] as $spellId => $mount) {
             if (false === isset($mounts[$spellId])) {
@@ -80,7 +81,7 @@ class Runner
         return $mounts;
     }
 
-    private function generateFamilies(array $mounts)
+    private function generateFamilies(array $mounts): Generator
     {
         $wcmMountFamilies = (new WarcraftMounts)->fetchMountFamilies();
 
@@ -93,16 +94,14 @@ class Runner
         if ([] !== $errors) {
             echo PHP_EOL . implode(PHP_EOL, $errors);
         }
-
-        return $this;
     }
 
-    private function generateMountSpecialList(array $mounts)
+    private function generateMountSpecialList(array $mounts): Generator
     {
         $lua = $this->export->toLuaSpecialLength('MountJournalEnhancedMountSpecial', $mounts);
         yield put('mountspecial.db.lua', $lua);
     }
-    private function generateTradableList(array $mounts)
+    private function generateTradableList(array $mounts): Generator
     {
         $lua = $this->export->toLuaTradable('MountJournalEnhancedTradable', $mounts);
         yield put('tradable.db.lua', $lua);

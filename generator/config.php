@@ -6,6 +6,10 @@ return [
         'clientSecret' => $_ENV['BATTLENET_CLIENTSECRET'],
     ],
 
+    'wowhead' => [
+        'channel' => 'www', // www|ptr
+    ],
+
     'missingMounts' => [ // missing in battle net response
 //        266925 => new \MJEGenerator\Mount('Siltwing Albatross', 266925, 0, 0, 'inv_vulturemount_alabatrosswhite'),
     ],
@@ -147,7 +151,7 @@ return [
         237285, // Hyena Mount White (PH)
         239363, // Swift Spectral Hippogryph
         239769, // Purple Qiraji War Tank
-        244712, // Armored Ebony Pterrordax (PH)
+        244457, // Default AI Mount Record
         254471, // Valorous Charger
         254474, // Golden Charger
         254473, // Vigilant Charger
@@ -155,21 +159,14 @@ return [
         254545, // Baarut the Brisk
         254812, // PH Giant Parrot (Blue)
         256121, // PH Goblin Hovercraft (Blue)
-        256123, // Xiwyllag ATV
         256124, // PH Goblin Hovercraft (Red)
         256125, // PH Goblin Hovercraft (Green)
         259741, // PH Bee
         260176, // Kul Tiras Horse (PH)
-        275838, // Armored Orange Pterrordax (PH)
-        275840, // Armored Albino Pterrordax (PH)
-        275859, // Dusky Waycrest Gryphon (PH)
-        275868, // Proudmoore Sea Scout (PH)
-        275866, // Stormsong Coastwatcher (PH)
         278656, // Spectral Phoenix
         278966, // Tempestuous Skystallion
         281296, // Silver Hand Charger
         288506, // Sandy Nightsaber
-        290328, // PH Mechanical Parrot
         294923, // Hati
     ],
 
