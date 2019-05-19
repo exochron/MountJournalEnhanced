@@ -1160,12 +1160,14 @@ ADDON.MountJournalEnhancedType = {
         [64731] = true, -- Sea Turtle
     },
     repair = {
-        [61425] = true, -- Traveler's Tundra Mammoth
+        [61425] = true, -- Traveler's Tundra Mammoth (Alliance)
+        [61447] = true, -- Traveler's Tundra Mammoth (Horde)
         [122708] = true, -- Grand Expedition Yak
         [264058] = true, -- Mighty Caravan Brutosaur
     },
     passenger = {
-        [61425] = true, -- Traveler's Tundra Mammoth
+        [61425] = true, -- Traveler's Tundra Mammoth (Alliance)
+        [61447] = true, -- Traveler's Tundra Mammoth (Horde)
         [122708] = true, -- Grand Expedition Yak
         [61469] = true, -- Grand Ice Mammoth
         [61470] = true, -- Grand Ice Mammoth

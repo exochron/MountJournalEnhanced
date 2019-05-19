@@ -6,6 +6,8 @@ namespace MJEGenerator\Wowhead;
 
 use Amp\File\Handle;
 use function Amp\File\open;
+use Generator;
+use RuntimeException;
 
 class MO3FileReader
 {
@@ -69,13 +71,17 @@ class MO3FileReader
         return (bool)unpack('C', yield $fp->read( 1))[1];
     }
 
-    private function getString(Handle $fp)
+    private function getString(Handle $fp): Generator
     {
         $len = yield from $this->getInt16($fp);
 
         return yield $fp->read( $len);
     }
 
+    /**
+     * @return Handle|Generator
+     * @throws Exception
+     */
     private function extract()
     {
         if (null === $this->uncompressedStream) {
@@ -117,7 +123,7 @@ class MO3FileReader
             $uncompressedData = zlib_decode($compressedData);
 
             if (strlen($uncompressedData) !== $uncompressedSize) {
-                throw new \Exception('Corrupted MO3File');
+                throw new RuntimeException('Corrupted MO3File');
             }
 
             $this->uncompressedStream = yield open('php://memory', 'r+');
@@ -129,9 +135,9 @@ class MO3FileReader
     }
 
     /**
-     * @return Animation[]
+     * @return Animation[]|Generator
      */
-    public function fetchAnimations()
+    public function fetchAnimations(): Generator
     {
         /** @var Handle $stream */
         $stream = yield from $this->extract();

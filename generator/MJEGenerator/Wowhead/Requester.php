@@ -8,18 +8,28 @@ use Amp\Artax\Response;
 use function Amp\File\isfile;
 use function Amp\File\open;
 use function Amp\File\put;
-use MJEGenerator\Mount;
+use RuntimeException;
 
 class Requester
 {
+    public const CHANNEL_WWW = 'www';
+    public const CHANNEL_PTR = 'ptr';
+
+    private const ENDPOINT = [
+        self::CHANNEL_WWW => 'https://www.wowhead.com/',
+        self::CHANNEL_PTR => 'https://ptr.wowhead.com/',
+    ];
 
     private $client;
+    private $baseUrl;
+    private $channel;
 
-    public function __construct()
+    public function __construct(string $channel)
     {
-        $this->client = new DefaultClient;
+        $this->client  = new DefaultClient;
+        $this->baseUrl = self::ENDPOINT[$channel];
+        $this->channel = $channel;
     }
-
 
     private function get(string $url, int $retry = 5)
     {
@@ -47,7 +57,11 @@ class Requester
     {
         $result  = [];
         $matches = [];
-        $html    = yield from $this->get('http://www.wowhead.com/mount-spells/live-only:on');
+
+        $url = $this->baseUrl . 'mount-spells/live-only:';
+        $url .= ($this->channel === self::CHANNEL_WWW ? 'on' : 'off');
+
+        $html = yield from $this->get($url);
         if (preg_match('/var listviewspells = (.*);/iU', $html, $matches)) {
             $json = $matches[1];
             $json = str_replace(['reagents', 'npcmodel'], ['"reagents"', '"npcmodel"'], $json);
@@ -69,16 +83,16 @@ class Requester
      */
     public function fetchAnimationsBySpellId(int $spellId)
     {
-        $html = yield from $this->get('https://www.wowhead.com/spell=' . $spellId);
+        $html = yield from $this->get($this->baseUrl . 'spell=' . $spellId);
 
         $pattern = '#onclick="ModelViewer.show\(.*displayId: (\d+),?.*}\)"\>View in 3D#is';
         $matches = [];
         if (preg_match_all($pattern, $html, $matches, PREG_SET_ORDER)) {
             $json = yield from $this->get('https://wow.zamimg.com/modelviewer/meta/npc/' . $matches[0][1] . '.json');
-            $json = json_decode($json);
+            $json = json_decode($json, false);
 
             if (empty($json->Model)) {
-                throw new \Exception('no model id from wowhead for: ' . $spellId);
+                throw new RuntimeException('no model id from wowhead for: ' . $spellId);
             }
 
             $fileName      = $json->Model . '.mo3';
@@ -99,7 +113,7 @@ class Requester
 
     public function fetchItemTooltip(int $itemId)
     {
-        $body = yield from $this->get('https://www.wowhead.com/tooltip/item/' . $itemId . '&json&power');
+        $body = yield from $this->get($this->baseUrl . 'tooltip/item/' . $itemId . '&json&power');
         $json = json_decode($body, true);
         return $json['tooltip_enus'];
     }
