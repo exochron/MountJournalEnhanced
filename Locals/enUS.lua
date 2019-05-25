@@ -148,6 +148,7 @@ L["Yetis"] = "Yetis"
 L["SETTING_COMPACT_LIST"] = "Compact mount list"
 L["SETTING_CURSOR_KEYS"] = "Enable Up&Down keys to browse mounts"
 L["SETTING_FAVORITE_PER_CHAR"] = "Favorite mounts per character"
+L["SETTING_MOVE_EQUIPMENT"] = "Move equipment slot into display"
 L["SETTING_SHOP_BUTTON"] = "Show shop button at untrained shop mounts"
 L["SETTING_YCAMERA"] = "Unlock Y rotation with mouse in display"
 

@@ -1,8 +1,8 @@
-## Interface: 80100
+## Interface: 80200
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron
-## Version: 2.3.3
+## Version: 2.4
 ## SavedVariablesPerCharacter: MountJournalEnhancedSettings
 
 Libs\LibStub\LibStub.lua
@@ -21,6 +21,7 @@ SettingsPanel.lua
 DebugTest.lua
 Favorites.lua
 UI\FixUIPacks.lua
+UI\EquipmentSlot.lua
 UI\CompactMountList.lua
 UI\AchievementPoints.lua
 UI\DisplayCamera.lua

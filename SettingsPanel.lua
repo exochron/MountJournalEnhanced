@@ -22,6 +22,7 @@ local function BuildFrame()
 
     local L = ADDON.L
     frame.compactListCheck = BuildCheckBox(frame, L.SETTING_COMPACT_LIST)
+    frame.moveEquipmentCheck = BuildCheckBox(frame, L.SETTING_MOVE_EQUIPMENT)
     frame.unlockCameraCheck = BuildCheckBox(frame, L.SETTING_YCAMERA)
     frame.enableCursorKeysCheck = BuildCheckBox(frame, L.SETTING_CURSOR_KEYS)
     frame.favoritesPerCharCheck = BuildCheckBox(frame, L.SETTING_FAVORITE_PER_CHAR)
@@ -39,6 +40,10 @@ local function OKHandler(frame)
         if ADDON.settings.favoritePerChar then
             ADDON:CollectFavoredMounts()
         end
+    end
+    if (ADDON.settings.moveEquipmentSlot ~= frame.moveEquipmentCheck:GetValue()) then
+        ADDON.settings.moveEquipmentSlot = frame.moveEquipmentCheck:GetValue()
+        reload = true
     end
     if (ADDON.settings.compactMountList ~= frame.compactListCheck:GetValue()) then
         ADDON.settings.compactMountList = frame.compactListCheck:GetValue()
@@ -60,6 +65,7 @@ ADDON:RegisterLoginCallback(function()
     local group = BuildFrame()
     group:SetCallback("refresh", function(frame)
         frame.compactListCheck:SetValue(ADDON.settings.compactMountList)
+        frame.moveEquipmentCheck:SetValue(ADDON.settings.moveEquipmentSlot)
         frame.unlockCameraCheck:SetValue(ADDON.settings.unlockDisplayCamera)
         frame.enableCursorKeysCheck:SetValue(ADDON.settings.enableCursorKeys)
         frame.favoritesPerCharCheck:SetValue(ADDON.settings.favoritePerChar)

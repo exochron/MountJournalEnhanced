@@ -13,6 +13,7 @@ function ADDON:ResetUISettings()
     ADDON.settings.unlockDisplayCamera = true
     ADDON.settings.enableCursorKeys = true
     ADDON.settings.favoritePerChar = false
+    ADDON.settings.moveEquipmentSlot = true
 end
 
 local function PrepareDefaults()
@@ -23,6 +24,7 @@ local function PrepareDefaults()
         unlockDisplayCamera = true,
         enableCursorKeys = true,
         favoritePerChar = false,
+        moveEquipmentSlot = true,
         favoredMounts = {},
         hiddenMounts = {},
         filter = {
