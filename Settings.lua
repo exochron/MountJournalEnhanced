@@ -42,7 +42,6 @@ local function PrepareDefaults()
             mountType = {
                 ground = true,
                 flying = true,
-                waterWalking = true,
                 underwater = true,
                 transform = true,
                 repair = true,

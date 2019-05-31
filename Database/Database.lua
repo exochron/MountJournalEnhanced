@@ -1151,9 +1151,6 @@ ADDON.MountJournalEnhancedType = {
     flying = {
         typeIDs = {247, 248}
     },
-    waterWalking = {
-        typeIDs = {269},
-    },
     underwater = {
         typeIDs = {232, 254},
         [30174] = true, -- Riding Turtle
