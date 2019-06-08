@@ -107,7 +107,9 @@ function ADDON:FilterMountsBySource(spellId, sourceType)
 end
 
 local function FilterMountsByFaction(isFaction, faction)
-    return (ADDON.settings.filter.faction.noFaction and not isFaction or ADDON.settings.filter.faction.alliance and faction == 1 or ADDON.settings.filter.faction.horde and faction == 0)
+    return (ADDON.settings.filter.faction.noFaction and not isFaction
+            or ADDON.settings.filter.faction.alliance and faction == 1
+            or ADDON.settings.filter.faction.horde and faction == 0)
 end
 
 function ADDON:FilterMountsByFamily(spellId)

@@ -90,6 +90,11 @@ ADDON.MountJournalEnhancedSource = {
         [288499] = true, -- Frightened Kodo - Darkshore Warfront
         [288503] = true, -- Umber Nightsaber - Darkshore Warfront
         [288505] = true, -- Kaldorei Nightsaber - Darkshore Warfront
+        [291492] = true, -- Rusty Mechanocrawler - Mechagon
+        [294038] = true, -- Royal Snapdragon - Nazjatar
+        [297157] = true, -- Junkheap Drifter - Mechagon
+        [300149] = true, -- Silent Glider - Nazjatar
+        [300150] = true, -- Fabious - Nazjatar
     },
 
     ["Quest"] = {
@@ -112,7 +117,8 @@ ADDON.MountJournalEnhancedSource = {
         [215159] = true, -- Long-Forgotten Hippogryph - Ephemeral Crystal x5
         [230987] = true, -- Arcanist's Manasaber - Fate of the Nightborne
         [239770] = true, -- Black Qiraji War Tank - newer high res version of the Black Qiraji Battle Tank
-        [289639] = true, -- Brucek -Complete the Brawler's Guild Questline
+        [289639] = true, -- Bruce - Complete the Brawler's Guild Questline
+        [299159] = true, -- Scrapforged Mechaspider - Drive It Away Today
 
         ------------------------------
         -- Alliance ------------------
@@ -120,6 +126,7 @@ ADDON.MountJournalEnhancedSource = {
 
         [136163] = true, -- Grand Gryphon - Operation: Shieldwall; The Silence
         [274610] = true, -- Teldrassil Hippogryph - From the Ashes... (BfA PreQuest)
+        [300147] = true, -- Deepcoral Snapdragon - Wild Tame
 
         ------------------------------
         -- Horde ---------------------
@@ -128,6 +135,8 @@ ADDON.MountJournalEnhancedSource = {
         [136164] = true, -- Grand Wyvern - Dominance Offensive; Breath of Darkest Shadow
         [272472] = true, -- Undercity Plaguebat - Killer Queen (BfA PreQuest)
         [267270] = true, -- Kua'fon - Down, But Not Out
+        [297560] = true, -- Child of Torcali - Wander Not Alone
+        [300146] = true, -- Snapdragon Kelpstalker - Good Girl
     },
 
     ["Vendor"] = {
@@ -153,6 +162,9 @@ ADDON.MountJournalEnhancedSource = {
         [288587] = true, -- Blue Marsh Hopper
         [288589] = true, -- Yellow Marsh Hopper
         [259740] = true, -- Green Marsh Hopper
+        [294143] = true, -- X-995 Mechanocat
+        [300151] = true, -- Inkscale Deepseeker
+        [300153] = true, -- Crimson Tidestallion
 
         ------------------------------
         -- Alliance ------------------
@@ -243,6 +255,8 @@ ADDON.MountJournalEnhancedSource = {
         [254813] = true, -- Sharkbait - Freehold (Mythic)
         [266058] = true, -- Tomb Stalker - Kings' Rest (Mythic)
         [273541] = true, -- Underrot Crawg - The Underrot (Mythic)
+        [290718] = true, -- Aerial Unit R-21/X - Mechagon
+        [299158] = true, -- Mechagon Peacekeeper - Mechagon
 
         -- Raid
         [25953] = true, -- Blue Qiraji Battle Tank - Temple of Ahn'Qiraj
@@ -404,6 +418,9 @@ ADDON.MountJournalEnhancedSource = {
         -- Army of the Light
         [239013] = true, -- Lightforged Warframe
 
+        -- Rustbolt Resistance
+        [299170] = true, -- Rustbolt Resistor
+
         ------------------------------
         -- Alliance ------------------
         ------------------------------
@@ -502,12 +519,18 @@ ADDON.MountJournalEnhancedSource = {
 
         -- Order of Embers
         [260173] = true, -- Smoky Charger
+        [275859] = true, -- Dusky Waycrest Gryphon
 
         -- Proudmoore Admiralty
         [259213] = true, -- Admiralty Stallion
+        [275868] = true, -- Proudmoore Sea Scout
 
         -- Storm's Wake
         [260172] = true, -- Dapple Gray
+        [275866] = true, -- Stormsong Coastwatcher
+
+        -- Ankoan
+        [292407] = true, -- Ankoan Waveray
 
         ------------------------------
         -- Horde ---------------------
@@ -606,13 +629,19 @@ ADDON.MountJournalEnhancedSource = {
         [171842] = true, -- Swift Frostwolf
 
         -- Talanji's Expedition
+        [275838] = true, -- Captured Swampstalker
         [275841] = true, -- Expedition Bloodswarmer
 
         -- Voldunai
         [237287] = true, -- Alabaster Hyena
+        [275840] = true, -- Voldunai Dunescraper
 
         -- Zandalari Empire
+        [244712] = true, -- Spectral Pterrorwing
         [275837] = true, -- Cobalt Pterrordax
+
+        -- Unshackled
+        [291538] = true, -- Unshackled Waveray
     },
 
     ["Achievement"] = {
@@ -694,6 +723,10 @@ ADDON.MountJournalEnhancedSource = {
         [280730] = true, -- Pureheart Courser - 100 Exalted Reputations
         [289101] = true, -- DazarDazar'alor Windreaver - Glory of the Dazar'alor Raider
         [282682] = true, -- Kul Tiran Charger - Allied Races: Kul Tiran Human
+        [290328] = true, -- Wonderwing 2.0 - Battle for Azeroth Pathfinder, Part Two
+        [292419] = true, -- Azshari Bloatray - Glory of the Palace Raider
+        [294039] = true, -- Snapback Scuttler - Undersea Usurper
+        [296788] = true, -- Mechacycle Model W - Mecha-Done
 
         ------------------------------
         -- Alliance ------------------
@@ -1079,43 +1112,43 @@ ADDON.MountJournalEnhancedSource = {
 
 ADDON.MountJournalEnhancedExpansion = {
 
-	[0] = { -- Classic
+    [0] = { -- Classic
         ["minID"] = 0,
         ["maxID"] = 30000,
     },
-	
-	[1] = { -- The Burning Crusade
+
+    [1] = { -- The Burning Crusade
         ["minID"] = 30001,
         ["maxID"] = 50000,
-		[58983] = true, -- Big Blizzard Bear
+        [58983] = true, -- Big Blizzard Bear
     },
-	
-	[2] = { -- Wrath of the Lich King
+
+    [2] = { -- Wrath of the Lich King
         ["minID"] = 50001,
         ["maxID"] = 76000,
-		[48778] = true, -- Acherus Deathcharger
-		[46197] = true, -- X-51 Nether-Rocket
-		[46199] = true, -- X-51 Nether-Rocket X-TREME
+        [48778] = true, -- Acherus Deathcharger
+        [46197] = true, -- X-51 Nether-Rocket
+        [46199] = true, -- X-51 Nether-Rocket X-TREME
     },
-	
-	[3] = { -- Cataclysm
+
+    [3] = { -- Cataclysm
         ["minID"] = 76001,
         ["maxID"] = 113120,
         [71810] = true, -- Wrathful Gladiator's Frost Wyrm
         [75207] = true, -- Abyssal Seahorse
     },
-	
-	[4] = { -- Mists of Pandaria
+
+    [4] = { -- Mists of Pandaria
         ["minID"] = 113121,
         ["maxID"] = 160000,
     },
-	
-	[5] = { -- Warlords of Draenor
+
+    [5] = { -- Warlords of Draenor
         ["minID"] = 160001,
         ["maxID"] = 193000,
-		[142910] = true, -- Ironbound Wraithcharger
-		[194464] = true, -- Eclipse Dragonhawk
-		[201098] = true, -- Infinite Timereaver
+        [142910] = true, -- Ironbound Wraithcharger
+        [194464] = true, -- Eclipse Dragonhawk
+        [201098] = true, -- Infinite Timereaver
         [155741] = true, -- Dread Raven - Warlords of Draenor Collector's Edition
     },
 
@@ -1145,16 +1178,16 @@ ADDON.MountJournalEnhancedExpansion = {
 }
 
 ADDON.MountJournalEnhancedType = {
+    -- https://wow.gamepedia.com/API_C_MountJournal.GetMountInfoExtraByID
     ground = {
-        typeIDs = {230, 231, 241, 269, 284}
+        typeIDs = { 230, 231, 241, 269, 284 },
     },
     flying = {
-        typeIDs = {247, 248}
+        typeIDs = { 247, 248 },
+        [267270] = true, -- Kua'fon
     },
     underwater = {
-        typeIDs = {232, 254},
-        [30174] = true, -- Riding Turtle
-        [64731] = true, -- Sea Turtle
+        typeIDs = { 231, 232, 254 },
     },
     repair = {
         [61425] = true, -- Traveler's Tundra Mammoth (Alliance)
@@ -1215,7 +1248,9 @@ ADDON.MountJournalEnhancedIgnored = {
     -- ghost
     [55164] = true, -- Swift Spectral Gryphon
     [194046] = true, -- Swift Spectral Rylak
-    
-    -- Legion Unknown Source
     [239363] = true, -- Swift Spectral Hippogryph
+    [302794] = true, -- Swift Spectral Fathom Ray
+    [302795] = true, -- Swift Spectral Magnetocraft
+    [302796] = true, -- Swift Spectral Armored Gryphon
+    [302797] = true, -- Swift Spectral Pterrordax
 }

@@ -7,6 +7,7 @@ ADDON.MountJournalEnhancedTradable = {
 [243795] = true, -- Leaping Veinseeker
 [102488] = true, -- White Riding Camel
 [102514] = true, -- Corrupted Hippogryph
+[256123] = true, -- Xiwyllag ATV
 [51412] = true, -- Big Battle Bear
 [213209] = true, -- Steelbound Devourer
 [55531] = true, -- Mechano-Hog

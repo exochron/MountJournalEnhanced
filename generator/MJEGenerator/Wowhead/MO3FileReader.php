@@ -58,24 +58,24 @@ class MO3FileReader
 
     private function getInt32(Handle $fp)
     {
-        return unpack('I', yield $fp->read( 4))[1];
+        return unpack('I', yield $fp->read(4))[1];
     }
 
     private function getInt16(Handle $fp)
     {
-        return unpack('S', yield $fp->read( 2))[1];
+        return unpack('S', yield $fp->read(2))[1];
     }
 
     private function getBool(Handle $fp)
     {
-        return (bool)unpack('C', yield $fp->read( 1))[1];
+        return (bool)unpack('C', yield $fp->read(1))[1];
     }
 
     private function getString(Handle $fp): Generator
     {
         $len = yield from $this->getInt16($fp);
 
-        return yield $fp->read( $len);
+        return yield $fp->read($len);
     }
 
     /**
@@ -84,6 +84,8 @@ class MO3FileReader
      */
     private function extract()
     {
+        // from https://wow.zamimg.com/modelviewer/viewer/viewer.min.js -> ZamModelViewer.Wow.Model.prototype.loadMo3
+
         if (null === $this->uncompressedStream) {
             $magic   = yield from $this->getInt32($this->sourceStream);
             $version = yield from $this->getInt32($this->sourceStream);
@@ -112,6 +114,7 @@ class MO3FileReader
             $this->ofsAlphaLookup      = yield from $this->getInt32($this->sourceStream);
             $this->ofsParticleEmitters = yield from $this->getInt32($this->sourceStream);
             $this->ofsRibbonEmitters   = yield from $this->getInt32($this->sourceStream);
+            $ofsExp2                   = yield from $this->getInt32($this->sourceStream);
             $uncompressedSize          = yield from $this->getInt32($this->sourceStream);
 
             $compressedData = '';
@@ -122,7 +125,8 @@ class MO3FileReader
 
             $uncompressedData = zlib_decode($compressedData);
 
-            if (strlen($uncompressedData) !== $uncompressedSize) {
+            if (false === $uncompressedData || strlen($uncompressedData) !== $uncompressedSize) {
+                var_dump($uncompressedSize, $compressedData);
                 throw new RuntimeException('Corrupted MO3File');
             }
 
@@ -154,7 +158,7 @@ class MO3FileReader
                 yield from $this->getInt16($stream),
                 yield from $this->getInt16($stream),
                 yield from $this->getBool($stream),
-            );
+                );
 
             if ($animation->isAvailable()) {
                 $animation->setName(yield from $this->getString($stream));

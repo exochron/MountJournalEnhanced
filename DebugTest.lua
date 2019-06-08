@@ -1,7 +1,5 @@
 local ADDON_NAME, ADDON = ...
 
-local MountJournalEnhancedFamily = ADDON.MountJournalEnhancedFamily
-local MountJournalEnhancedSource = ADDON.MountJournalEnhancedSource
 local MountJournalEnhancedExpansion = ADDON.MountJournalEnhancedExpansion
 local MountJournalEnhancedIgnored = ADDON.MountJournalEnhancedIgnored
 
@@ -40,7 +38,7 @@ local function RunDebugTest()
     for spellID, data in pairs(mounts) do
         if not MountJournalEnhancedIgnored[spellID] then
             if ADDON:FilterMountsBySource(spellID, data.sourceType) then
-                print("[MJE] New mount: " .. data.name .. " (" .. spellID .. ")")
+                print("[MJE] New mount: " .. data.name .. " (" .. spellID .. ", " .. data.sourceType .. ") ")
             end
             if ADDON:FilterMountsByFamily(spellID) then
                 print("[MJE] No family info for mount: " .. data.name .. " (" .. spellID .. ")")
@@ -49,7 +47,7 @@ local function RunDebugTest()
                 print("[MJE] No expansion info for mount: " .. data.name .. " (" .. spellID .. ")")
             end
             if ADDON:FilterMountsByType(spellID, data.mountID) then
-                print("[MJE] New mount type for mount \"" .. data.name .. "\" (" .. spellID .. ")")
+                print("[MJE] New mount type for mount \"" .. data.name .. "\" (" .. spellID .. ", " .. data.mountID .. ") ")
             end
         end
     end

@@ -64,7 +64,11 @@ class Requester
         $html = yield from $this->get($url);
         if (preg_match('/var listviewspells = (.*);/iU', $html, $matches)) {
             $json = $matches[1];
-            $json = str_replace(['reagents', 'npcmodel'], ['"reagents"', '"npcmodel"'], $json);
+            $json = str_replace(
+                ['reagents', 'npcmodel', 'popularity'],
+                ['"reagents"', '"npcmodel"', '"popularity"'],
+                $json
+            );
             $data = json_decode($json, true);
             foreach ($data as $item) {
                 $result[$item['id']] = array_column($item['reagents'] ?? [], 0);
@@ -115,6 +119,6 @@ class Requester
     {
         $body = yield from $this->get($this->baseUrl . 'tooltip/item/' . $itemId . '&json&power');
         $json = json_decode($body, true);
-        return $json['tooltip_enus'];
+        return $json['tooltip'];
     }
 }
