@@ -7,12 +7,19 @@ local function MoveSlotButton()
     button:SetPoint("BOTTOMLEFT", MountJournal.MountDisplay, 15, 15)
 end
 
-ADDON:RegisterLoadUICallback(function()
-    if (ADDON.settings.moveEquipmentSlot) then
+local doInit = true
+
+local function init()
+    if (ADDON.settings.moveEquipmentSlot and doInit) then
+        doInit = false
         MoveSlotButton()
 
         MountJournal.BottomLeftInset:Hide()
         MountJournal.LeftInset:SetPoint("BOTTOMLEFT", 4, 26)
         MountJournal.RightInset:SetPoint("BOTTOMLEFT", MountJournal.LeftInset, "BOTTOMRIGHT", 20, 0)
     end
-end)
+end
+
+ADDON:RegisterLoadUICallback(init)
+-- UI Pack fix  (eg. ElvUI, TukUI)
+ADDON:RegisterUIOverhaulCallback(init)
