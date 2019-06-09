@@ -11,7 +11,7 @@ if (GetLocale() == 'zhCN') then
     L["Ground"] = "陆行"
     L["Hidden"] = "隐藏"
     --[[Translation missing --]]
-    --[[ L["Only tradable"] = ""--]]
+    --[[ L["Only tradable"] = "Only tradable"--]]
     L["Only usable"] = "仅可用"
     L["Passenger"] = "载客"
     L["Reset filters"] = "重置过滤"
@@ -20,15 +20,14 @@ if (GetLocale() == 'zhCN') then
     L["TASK_FAVOR_START"] = "[MJE] 在你的坐骑上重新标星收藏。请等待一会儿直到完成。"
     L["Transform"] = "变形"
     L["Underwater"] = "水中"
-    L["Water Walking"] = "水面"
 
     -- Families
     L["Airships"] = "飞艇"
     --[[Translation missing --]]
-    --[[ L["Amphibian"] = ""--]]
+    --[[ L["Amphibian"] = "Amphibian"--]]
     L["Arachnids"] = "蛛形类"
     --[[Translation missing --]]
-    --[[ L["Assault Wagons"] = ""--]]
+    --[[ L["Assault Wagons"] = "Assault Wagons"--]]
     L["Basilisks"] = "蜥蜴"
     L["Bats"] = "蝙蝠"
     L["Bears"] = "熊"
@@ -46,6 +45,8 @@ if (GetLocale() == 'zhCN') then
     L["Clefthooves"] = "裂蹄牛"
     L["Cloud Serpents"] = "翔龙"
     L["Core Hounds"] = "熔核猎犬"
+    --[[Translation missing --]]
+    --[[ L["Crabs"] = "Crabs"--]]
     L["Cranes"] = "仙鹤"
     L["Crawgs"] = "抱齿"
     L["Crocolisks"] = "鳄鱼"
@@ -63,6 +64,8 @@ if (GetLocale() == 'zhCN') then
     L["Elekks"] = "雷象"
     L["Elementals"] = "元素"
     L["Falcosaurs"] = "猎龙"
+    --[[Translation missing --]]
+    --[[ L["Fathom Rays"] = "Fathom Rays"--]]
     L["Feathermanes"] = "羽鬃类"
     L["Felsabers"] = "邪刃豹"
     L["Fish"] = "鱼类"
@@ -78,11 +81,15 @@ if (GetLocale() == 'zhCN') then
     L["Horned Steeds"] = "角马"
     L["Horses"] = "马科"
     L["Hounds"] = "犬"
+    --[[Translation missing --]]
+    --[[ L["Hovercraft"] = "Hovercraft"--]]
     L["Humanoids"] = "类人"
     L["Hyenas"] = "狼"
     L["Infernals"] = "地狱火"
     L["Insects"] = "昆虫"
     L["Jellyfish"] = "水母"
+    --[[Translation missing --]]
+    --[[ L["Jet Aerial Units"] = "Jet Aerial Units"--]]
     L["Kites"] = "风筝"
     L["Kodos"] = "科多兽"
     L["Krolusks"] = "三叶虫"
@@ -90,6 +97,12 @@ if (GetLocale() == 'zhCN') then
     L["Mammoths"] = "猛犸象"
     L["Mana Rays"] = "法力鳐"
     L["Manasabers"] = "魔刃豹"
+    --[[Translation missing --]]
+    --[[ L["Mechanical Animals"] = "Mechanical Animals"--]]
+    --[[Translation missing --]]
+    --[[ L["Mechanical Birds"] = "Mechanical Birds"--]]
+    --[[Translation missing --]]
+    --[[ L["Mechanical Cats"] = "Mechanical Cats"--]]
     L["Mechanical Steeds"] = "机械马"
     L["Mechanostriders"] = "机械陆行鸟"
     L["Mecha-suits"] = "机甲"
@@ -122,6 +135,10 @@ if (GetLocale() == 'zhCN') then
     L["Sea Serpents"] = "海蛇"
     L["Seahorses"] = "海马"
     L["Silithids"] = "异种蝎"
+    --[[Translation missing --]]
+    --[[ L["Snapdragons"] = "Snapdragons"--]]
+    --[[Translation missing --]]
+    --[[ L["Spider Tanks"] = "Spider Tanks"--]]
     L["Spiders"] = "蜘蛛"
     L["Steeds"] = "马"
     L["Stingrays"] = "鳐鱼"
@@ -132,7 +149,7 @@ if (GetLocale() == 'zhCN') then
     L["Talonbirds"] = "鸦神"
     L["Tigers"] = "虎"
     --[[Translation missing --]]
-    --[[ L["Toads"] = ""--]]
+    --[[ L["Toads"] = "Toads"--]]
     L["Turtles"] = "龟"
     L["Undead Drakes"] = "不死幼龙"
     L["Undead Steeds"] = "不死战马"
@@ -153,6 +170,8 @@ if (GetLocale() == 'zhCN') then
     L["SETTING_COMPACT_LIST"] = "紧凑坐骑列表"
     L["SETTING_CURSOR_KEYS"] = "允许上下键浏览坐骑"
     L["SETTING_FAVORITE_PER_CHAR"] = "收藏坐骑每个角色"
+    --[[Translation missing --]]
+    --[[ L["SETTING_MOVE_EQUIPMENT"] = "Move equipment slot into display"--]]
     L["SETTING_SHOP_BUTTON"] = "坐骑店铺上显示未购买按钮"
     L["SETTING_YCAMERA"] = "解锁鼠标纵轴旋转显示"
 
