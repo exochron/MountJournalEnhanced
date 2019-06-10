@@ -10,7 +10,7 @@ end
 local doInit = true
 
 local function init()
-    if (ADDON.settings.moveEquipmentSlot and doInit) then
+    if (ADDON.settings.moveEquipmentSlot and doInit and MountJournal.BottomLeftInset) then
         doInit = false
         MoveSlotButton()
 

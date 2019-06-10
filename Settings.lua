@@ -42,6 +42,7 @@ local function PrepareDefaults()
             mountType = {
                 ground = true,
                 flying = true,
+                waterWalking = true,
                 underwater = true,
                 transform = true,
                 repair = true,
@@ -70,6 +71,12 @@ local function PrepareDefaults()
     end
     for expansionName, _ in pairs(ADDON.MountJournalEnhancedExpansion) do
         defaultSettings.filter.expansion[expansionName] = true
+    end
+
+    if (select(4, GetBuildInfo()) < 80200) then
+        defaultSettings.moveEquipmentSlot = nil
+    else
+        defaultSettings.filter.mountType.waterWalking = nil
     end
 
     return defaultSettings

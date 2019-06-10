@@ -25,6 +25,7 @@ if (GetLocale() == 'ruRU') then
     --[[ L["TASK_FAVOR_START"] = "[MJE] Reapplying stars all over your mounts. Please wait a few seconds until I'm finished."--]]
     L["Transform"] = "Универсальный"
     L["Underwater"] = "Подводные"
+    L["Water Walking"] = "Хождение по воде"
 
     -- Families
     --[[Translation missing --]]

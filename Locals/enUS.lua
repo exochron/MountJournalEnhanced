@@ -18,6 +18,7 @@ L["TASK_END"] = "[MJE] Phew! I'm done."
 L["TASK_FAVOR_START"] = "[MJE] Reapplying stars all over your mounts. Please wait a few seconds until I'm finished."
 L["Transform"] = "Transform"
 L["Underwater"] = "Underwater"
+L["Water Walking"] = "Water Walking"
 
 -- Families
 L["Airships"] = "Airships"
