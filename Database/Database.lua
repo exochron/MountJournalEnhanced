@@ -1186,6 +1186,9 @@ ADDON.MountJournalEnhancedType = {
         typeIDs = { 247, 248 },
         [267270] = true, -- Kua'fon
     },
+    waterWalking = {
+        typeIDs = {269},
+    },
     underwater = {
         typeIDs = { 231, 232, 254 },
     },

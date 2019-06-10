@@ -22,7 +22,7 @@ local function BuildFrame()
 
     local L = ADDON.L
     frame.compactListCheck = BuildCheckBox(frame, L.SETTING_COMPACT_LIST)
-    if (ADDON.settings.favoritePerChar ~= nil) then
+    if (ADDON.settings.moveEquipmentSlot ~= nil) then
         frame.moveEquipmentCheck = BuildCheckBox(frame, L.SETTING_MOVE_EQUIPMENT)
     end
     frame.unlockCameraCheck = BuildCheckBox(frame, L.SETTING_YCAMERA)
