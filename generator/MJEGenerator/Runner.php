@@ -43,8 +43,12 @@ class Runner
     {
         $wowHead = new Wowhead($this->config['wowhead']['channel']);
 
-        foreach ($this->config['missingMounts'] as $spellId => $mount) {
-            if (false === isset($mounts[$spellId])) {
+        /** @var Mount $mount */
+        foreach ($this->config['overwriteMounts'] as $mount) {
+            $spellId = $mount->getSpellId();
+            if (isset($mounts[$spellId])) {
+                $mounts[$spellId]->mergeTogether($mount);
+            } else {
                 $mounts[$spellId] = $mount;
             }
         }

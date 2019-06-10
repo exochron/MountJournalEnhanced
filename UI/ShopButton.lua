@@ -21,7 +21,7 @@ local function CreateShopButton()
     local frame = CreateFrame("Button", nil, MountJournal.MountDisplay.InfoButton)
 
     frame:ClearAllPoints()
-    frame:SetPoint("BOTTOMRIGHT", MountJournal.MountDisplay, -14, 14)
+    frame:SetPoint("BOTTOMRIGHT", MountJournal.MountDisplay, -15, 15)
     frame:SetSize(28, 36)
     frame:SetNormalAtlas('hud-microbutton-BStore-Up', true)
     frame:SetPushedAtlas('hud-microbutton-BStore-Down', true)

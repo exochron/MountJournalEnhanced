@@ -7,7 +7,7 @@ local function CreateAchievementPoints()
     local frame = CreateFrame("Button", nil, MountJournal)
 
     frame:ClearAllPoints()
-    frame:SetPoint("TOP", MountJournal, 0, -21)
+    frame:SetPoint("TOP", MountJournal, -50, -21)
     frame:SetSize(60, 40)
 
     frame.bgLeft = frame:CreateTexture(nil, "BACKGROUND")

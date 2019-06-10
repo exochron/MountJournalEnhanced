@@ -6,216 +6,234 @@ if (GetLocale() == 'ruRU') then
     L["Black Market"] = "Черный рынок"
     L["Family"] = "Семейство"
     --[[Translation missing --]]
-    --[[ L["FAVOR_DISPLAYED"] = ""--]]
+    --[[ L["FAVOR_DISPLAYED"] = "All Displayed"--]]
     --[[Translation missing --]]
-    --[[ L["FAVOR_PER_CHARACTER"] = ""--]]
+    --[[ L["FAVOR_PER_CHARACTER"] = "Per Character"--]]
     L["Flying"] = "Летающий"
     L["Ground"] = "Наземный"
     L["Hidden"] = "Скрытые"
     --[[Translation missing --]]
-    --[[ L["Only tradable"] = ""--]]
+    --[[ L["Only tradable"] = "Only tradable"--]]
     L["Only usable"] = "Только доступные"
     L["Passenger"] = "Пассажирский"
     L["Reset filters"] = "Сбросить фильтры"
     --[[Translation missing --]]
-    --[[ L["Show in Collections"] = ""--]]
+    --[[ L["Show in Collections"] = "Show in Collections"--]]
     --[[Translation missing --]]
-    --[[ L["TASK_END"] = ""--]]
+    --[[ L["TASK_END"] = "[MJE] Phew! I'm done."--]]
     --[[Translation missing --]]
-    --[[ L["TASK_FAVOR_START"] = ""--]]
+    --[[ L["TASK_FAVOR_START"] = "[MJE] Reapplying stars all over your mounts. Please wait a few seconds until I'm finished."--]]
     L["Transform"] = "Универсальный"
     L["Underwater"] = "Подводные"
     L["Water Walking"] = "Хождение по воде"
 
     -- Families
     --[[Translation missing --]]
-    --[[ L["Airships"] = ""--]]
+    --[[ L["Airships"] = "Airships"--]]
     --[[Translation missing --]]
-    --[[ L["Amphibian"] = ""--]]
+    --[[ L["Amphibian"] = "Amphibian"--]]
     --[[Translation missing --]]
-    --[[ L["Arachnids"] = ""--]]
+    --[[ L["Arachnids"] = "Arachnids"--]]
     --[[Translation missing --]]
-    --[[ L["Assault Wagons"] = ""--]]
+    --[[ L["Assault Wagons"] = "Assault Wagons"--]]
     --[[Translation missing --]]
-    --[[ L["Basilisks"] = ""--]]
+    --[[ L["Basilisks"] = "Basilisks"--]]
     L["Bats"] = "Летучие мыши"
     L["Bears"] = "Медведи"
     L["Birds"] = "Птицы"
     --[[Translation missing --]]
-    --[[ L["Blood Ticks"] = ""--]]
+    --[[ L["Blood Ticks"] = "Blood Ticks"--]]
     L["Boars"] = "Кабаны"
     --[[Translation missing --]]
-    --[[ L["Bovids"] = ""--]]
+    --[[ L["Bovids"] = "Bovids"--]]
     --[[Translation missing --]]
-    --[[ L["Brutosaurs"] = ""--]]
+    --[[ L["Brutosaurs"] = "Brutosaurs"--]]
     L["Camels"] = "Верблюды"
     --[[Translation missing --]]
-    --[[ L["Carnivorans"] = ""--]]
+    --[[ L["Carnivorans"] = "Carnivorans"--]]
     --[[Translation missing --]]
-    --[[ L["Carpets"] = ""--]]
+    --[[ L["Carpets"] = "Carpets"--]]
     L["Cats"] = "Кошки"
     --[[Translation missing --]]
-    --[[ L["Chargers"] = ""--]]
+    --[[ L["Chargers"] = "Chargers"--]]
     --[[Translation missing --]]
-    --[[ L["Chickens"] = ""--]]
+    --[[ L["Chickens"] = "Chickens"--]]
     L["Clefthooves"] = "Копытни"
     L["Cloud Serpents"] = "Облачные змеи"
     --[[Translation missing --]]
-    --[[ L["Core Hounds"] = ""--]]
+    --[[ L["Core Hounds"] = "Core Hounds"--]]
+    --[[Translation missing --]]
+    --[[ L["Crabs"] = "Crabs"--]]
     L["Cranes"] = "Журавли"
     --[[Translation missing --]]
-    --[[ L["Crawgs"] = ""--]]
+    --[[ L["Crawgs"] = "Crawgs"--]]
     L["Crocolisks"] = "Кроколиск"
     --[[Translation missing --]]
-    --[[ L["Crows"] = ""--]]
+    --[[ L["Crows"] = "Crows"--]]
     --[[Translation missing --]]
-    --[[ L["Demonic Hounds"] = ""--]]
+    --[[ L["Demonic Hounds"] = "Demonic Hounds"--]]
     --[[Translation missing --]]
-    --[[ L["Demonic Steeds"] = ""--]]
+    --[[ L["Demonic Steeds"] = "Demonic Steeds"--]]
     --[[Translation missing --]]
-    --[[ L["Demons"] = ""--]]
+    --[[ L["Demons"] = "Demons"--]]
     --[[Translation missing --]]
-    --[[ L["Dinosaurs"] = ""--]]
+    --[[ L["Dinosaurs"] = "Dinosaurs"--]]
     --[[Translation missing --]]
-    --[[ L["Dire Wolves"] = ""--]]
+    --[[ L["Dire Wolves"] = "Dire Wolves"--]]
     L["Direhorns"] = "Дикороги"
     --[[Translation missing --]]
-    --[[ L["Discs"] = ""--]]
+    --[[ L["Discs"] = "Discs"--]]
     L["Dragonhawks"] = "Дракондоры"
     L["Drakes"] = "Драконы"
     --[[Translation missing --]]
-    --[[ L["Dread Ravens"] = ""--]]
+    --[[ L["Dread Ravens"] = "Dread Ravens"--]]
     L["Elekks"] = "Элекки"
     --[[Translation missing --]]
-    --[[ L["Elementals"] = ""--]]
+    --[[ L["Elementals"] = "Elementals"--]]
     --[[Translation missing --]]
-    --[[ L["Falcosaurs"] = ""--]]
+    --[[ L["Falcosaurs"] = "Falcosaurs"--]]
     --[[Translation missing --]]
-    --[[ L["Feathermanes"] = ""--]]
+    --[[ L["Fathom Rays"] = "Fathom Rays"--]]
     --[[Translation missing --]]
-    --[[ L["Felsabers"] = ""--]]
+    --[[ L["Feathermanes"] = "Feathermanes"--]]
+    --[[Translation missing --]]
+    --[[ L["Felsabers"] = "Felsabers"--]]
     L["Fish"] = "Рыбы"
     --[[Translation missing --]]
-    --[[ L["Flying Steeds"] = ""--]]
+    --[[ L["Flying Steeds"] = "Flying Steeds"--]]
     L["Foxes"] = "лисицы"
     L["Goats"] = "Козлы"
     --[[Translation missing --]]
-    --[[ L["Grand Drakes"] = ""--]]
+    --[[ L["Grand Drakes"] = "Grand Drakes"--]]
     L["Gronnlings"] = "Малые гронны"
     L["Gryphons"] = "Грифоны"
     --[[Translation missing --]]
-    --[[ L["Gyrocopters"] = ""--]]
+    --[[ L["Gyrocopters"] = "Gyrocopters"--]]
     L["Hawkstriders"] = "Крылобеги"
     L["Hippogryphs"] = "Гиппогрифы"
     --[[Translation missing --]]
-    --[[ L["Horned Steeds"] = ""--]]
+    --[[ L["Horned Steeds"] = "Horned Steeds"--]]
     L["Horses"] = "Лошади"
     L["Hounds"] = "Гончие"
     --[[Translation missing --]]
-    --[[ L["Humanoids"] = ""--]]
+    --[[ L["Hovercraft"] = "Hovercraft"--]]
     --[[Translation missing --]]
-    --[[ L["Hyenas"] = ""--]]
+    --[[ L["Humanoids"] = "Humanoids"--]]
+    --[[Translation missing --]]
+    --[[ L["Hyenas"] = "Hyenas"--]]
     L["Infernals"] = "инферналов"
     --[[Translation missing --]]
-    --[[ L["Insects"] = ""--]]
+    --[[ L["Insects"] = "Insects"--]]
     L["Jellyfish"] = "Медузы"
     --[[Translation missing --]]
-    --[[ L["Kites"] = ""--]]
+    --[[ L["Jet Aerial Units"] = "Jet Aerial Units"--]]
+    --[[Translation missing --]]
+    --[[ L["Kites"] = "Kites"--]]
     L["Kodos"] = "Кодо"
     --[[Translation missing --]]
-    --[[ L["Krolusks"] = ""--]]
+    --[[ L["Krolusks"] = "Krolusks"--]]
     --[[Translation missing --]]
-    --[[ L["Lions"] = ""--]]
+    --[[ L["Lions"] = "Lions"--]]
     L["Mammoths"] = "Мамонты"
     --[[Translation missing --]]
-    --[[ L["Mana Rays"] = ""--]]
+    --[[ L["Mana Rays"] = "Mana Rays"--]]
     --[[Translation missing --]]
-    --[[ L["Manasabers"] = ""--]]
+    --[[ L["Manasabers"] = "Manasabers"--]]
     --[[Translation missing --]]
-    --[[ L["Mechanical Steeds"] = ""--]]
+    --[[ L["Mechanical Animals"] = "Mechanical Animals"--]]
+    --[[Translation missing --]]
+    --[[ L["Mechanical Birds"] = "Mechanical Birds"--]]
+    --[[Translation missing --]]
+    --[[ L["Mechanical Cats"] = "Mechanical Cats"--]]
+    --[[Translation missing --]]
+    --[[ L["Mechanical Steeds"] = "Mechanical Steeds"--]]
     L["Mechanostriders"] = "Механодолгоноги"
     --[[Translation missing --]]
-    --[[ L["Mecha-suits"] = ""--]]
+    --[[ L["Mecha-suits"] = "Mecha-suits"--]]
     L["Moose"] = "Лось"
     --[[Translation missing --]]
-    --[[ L["Motorcycles"] = ""--]]
+    --[[ L["Motorcycles"] = "Motorcycles"--]]
     --[[Translation missing --]]
-    --[[ L["Mountain Horses"] = ""--]]
+    --[[ L["Mountain Horses"] = "Mountain Horses"--]]
     L["Mushan"] = "Мушаны"
     --[[Translation missing --]]
-    --[[ L["Nether Drakes"] = ""--]]
+    --[[ L["Nether Drakes"] = "Nether Drakes"--]]
     L["Nether Rays"] = "Скаты Пустоты"
     --[[Translation missing --]]
-    --[[ L["Others"] = ""--]]
+    --[[ L["Others"] = "Others"--]]
     --[[Translation missing --]]
-    --[[ L["Pandaren Phoenixes"] = ""--]]
+    --[[ L["Pandaren Phoenixes"] = "Pandaren Phoenixes"--]]
     --[[Translation missing --]]
-    --[[ L["Parrots"] = ""--]]
+    --[[ L["Parrots"] = "Parrots"--]]
     L["Phoenixes"] = "Фениксы"
     --[[Translation missing --]]
-    --[[ L["Proto-Drakes"] = ""--]]
+    --[[ L["Proto-Drakes"] = "Proto-Drakes"--]]
     L["Pterrordaxes"] = "Птеродактили"
     --[[Translation missing --]]
-    --[[ L["Quilen"] = ""--]]
+    --[[ L["Quilen"] = "Quilen"--]]
     L["Rams"] = "Бараны"
     L["Raptors"] = "Ящеры"
     L["Rats"] = "Крысы"
     L["Ravagers"] = "Разорители"
     --[[Translation missing --]]
-    --[[ L["Rays"] = ""--]]
+    --[[ L["Rays"] = "Rays"--]]
     --[[Translation missing --]]
-    --[[ L["Reptiles"] = ""--]]
+    --[[ L["Reptiles"] = "Reptiles"--]]
     L["Rhinos"] = "Носороги"
     L["Riverbeasts"] = "Речные чудовища"
     --[[Translation missing --]]
-    --[[ L["Rockets"] = ""--]]
+    --[[ L["Rockets"] = "Rockets"--]]
     --[[Translation missing --]]
-    --[[ L["Ruinstriders"] = ""--]]
+    --[[ L["Ruinstriders"] = "Ruinstriders"--]]
     --[[Translation missing --]]
-    --[[ L["Rylaks"] = ""--]]
+    --[[ L["Rylaks"] = "Rylaks"--]]
     --[[Translation missing --]]
-    --[[ L["Sabers"] = ""--]]
+    --[[ L["Sabers"] = "Sabers"--]]
     L["Scorpions"] = "Скорпионы"
     --[[Translation missing --]]
-    --[[ L["Sea Serpents"] = ""--]]
+    --[[ L["Sea Serpents"] = "Sea Serpents"--]]
     L["Seahorses"] = "Морские коньки"
     L["Silithids"] = "Силитиды"
+    --[[Translation missing --]]
+    --[[ L["Snapdragons"] = "Snapdragons"--]]
+    --[[Translation missing --]]
+    --[[ L["Spider Tanks"] = "Spider Tanks"--]]
     L["Spiders"] = "пауки"
     --[[Translation missing --]]
-    --[[ L["Steeds"] = ""--]]
+    --[[ L["Steeds"] = "Steeds"--]]
     --[[Translation missing --]]
-    --[[ L["Stingrays"] = ""--]]
+    --[[ L["Stingrays"] = "Stingrays"--]]
     --[[Translation missing --]]
-    --[[ L["Stone Cats"] = ""--]]
+    --[[ L["Stone Cats"] = "Stone Cats"--]]
     --[[Translation missing --]]
-    --[[ L["Stone Drakes"] = ""--]]
+    --[[ L["Stone Drakes"] = "Stone Drakes"--]]
     L["Talbuks"] = "Талбуки"
     L["Tallstriders"] = "Долгоноги"
     L["Talonbirds"] = "Вороны"
     --[[Translation missing --]]
-    --[[ L["Tigers"] = ""--]]
+    --[[ L["Tigers"] = "Tigers"--]]
     --[[Translation missing --]]
-    --[[ L["Toads"] = ""--]]
+    --[[ L["Toads"] = "Toads"--]]
     L["Turtles"] = "Черепахи"
     --[[Translation missing --]]
-    --[[ L["Undead Drakes"] = ""--]]
+    --[[ L["Undead Drakes"] = "Undead Drakes"--]]
     --[[Translation missing --]]
-    --[[ L["Undead Steeds"] = ""--]]
+    --[[ L["Undead Steeds"] = "Undead Steeds"--]]
     --[[Translation missing --]]
-    --[[ L["Undead Wolves"] = ""--]]
+    --[[ L["Undead Wolves"] = "Undead Wolves"--]]
     --[[Translation missing --]]
-    --[[ L["Ungulates"] = ""--]]
+    --[[ L["Ungulates"] = "Ungulates"--]]
     --[[Translation missing --]]
-    --[[ L["Ur'zul"] = ""--]]
+    --[[ L["Ur'zul"] = "Ur'zul"--]]
     --[[Translation missing --]]
-    --[[ L["Vehicles"] = ""--]]
+    --[[ L["Vehicles"] = "Vehicles"--]]
     --[[Translation missing --]]
-    --[[ L["War Wolves"] = ""--]]
+    --[[ L["War Wolves"] = "War Wolves"--]]
     L["Water Striders"] = "Водные долгоноги"
     --[[Translation missing --]]
-    --[[ L["Wind Drakes"] = ""--]]
+    --[[ L["Wind Drakes"] = "Wind Drakes"--]]
     --[[Translation missing --]]
-    --[[ L["Wolfhawks"] = ""--]]
+    --[[ L["Wolfhawks"] = "Wolfhawks"--]]
     L["Wolves"] = "Волки"
     L["Wyverns"] = "Виверны"
     L["Yaks"] = "Яки"
@@ -223,15 +241,17 @@ if (GetLocale() == 'ruRU') then
 
     -- Settings
     --[[Translation missing --]]
-    --[[ L["SETTING_COMPACT_LIST"] = ""--]]
+    --[[ L["SETTING_COMPACT_LIST"] = "Compact mount list"--]]
     --[[Translation missing --]]
-    --[[ L["SETTING_CURSOR_KEYS"] = ""--]]
+    --[[ L["SETTING_CURSOR_KEYS"] = "Enable Up&Down keys to browse mounts"--]]
     --[[Translation missing --]]
-    --[[ L["SETTING_FAVORITE_PER_CHAR"] = ""--]]
+    --[[ L["SETTING_FAVORITE_PER_CHAR"] = "Favorite mounts per character"--]]
     --[[Translation missing --]]
-    --[[ L["SETTING_SHOP_BUTTON"] = ""--]]
+    --[[ L["SETTING_MOVE_EQUIPMENT"] = "Move equipment slot into display"--]]
     --[[Translation missing --]]
-    --[[ L["SETTING_YCAMERA"] = ""--]]
+    --[[ L["SETTING_SHOP_BUTTON"] = "Show shop button at untrained shop mounts"--]]
+    --[[Translation missing --]]
+    --[[ L["SETTING_YCAMERA"] = "Unlock Y rotation with mouse in display"--]]
 
     ADDON.L = L
 end

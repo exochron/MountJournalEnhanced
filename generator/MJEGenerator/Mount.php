@@ -6,16 +6,16 @@ namespace MJEGenerator;
 class Mount
 {
 
-    private $name = '';
-    private $spellId = 0;
-    private $creatureId = 0;
-    private $itemIds = [];
-    private $qualityId = 0;
-    private $icon = '';
-    private $isGround = false;
-    private $isFlying = false;
-    private $isAquatic = false;
-    private $isJumping = false;
+    private $name;
+    private $spellId;
+    private $creatureId;
+    private $itemIds;
+    private $qualityId;
+    private $icon;
+    private $isGround;
+    private $isFlying;
+    private $isAquatic;
+    private $isJumping;
     private $isItemTradable = false;
     private $mountSpecialLength = 0;
 
@@ -41,6 +41,45 @@ class Mount
         $this->isAquatic  = $isAquatic;
         $this->isJumping  = $isJumping;
         $this->itemIds    = $itemIds;
+    }
+
+    public function mergeTogether(Mount $source): self
+    {
+        $this->name    = $source->getName();
+        $this->spellId = $source->getSpellId();
+
+        if ($source->getCreatureId()) {
+            $this->creatureId = $source->getCreatureId();
+        }
+        if ($source->getQualityId()) {
+            $this->qualityId = $source->getQualityId();
+        }
+        if ($source->getIcon()) {
+            $this->icon = $source->getIcon();
+        }
+        if ($source->isGround()) {
+            $this->isGround = $source->isGround();
+        }
+        if ($source->isFlying()) {
+            $this->isFlying = $source->isFlying();
+        }
+        if ($source->isAquatic()) {
+            $this->isAquatic = $source->isAquatic();
+        }
+        if ($source->isJumping()) {
+            $this->isJumping = $source->isJumping();
+        }
+        if ($source->isItemTradable()) {
+            $this->isItemTradable = $source->isItemTradable();
+        }
+        if ([] !== $source->getItemIds()) {
+            $this->itemIds = $source->getItemIds();
+        }
+        if ($source->getMountSpecialLength()) {
+            $this->mountSpecialLength = $source->getMountSpecialLength();
+        }
+
+        return $this;
     }
 
     public function setItemIds(array $items): self

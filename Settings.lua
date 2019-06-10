@@ -13,6 +13,7 @@ function ADDON:ResetUISettings()
     ADDON.settings.unlockDisplayCamera = true
     ADDON.settings.enableCursorKeys = true
     ADDON.settings.favoritePerChar = false
+    ADDON.settings.moveEquipmentSlot = true
 end
 
 local function PrepareDefaults()
@@ -23,6 +24,7 @@ local function PrepareDefaults()
         unlockDisplayCamera = true,
         enableCursorKeys = true,
         favoritePerChar = false,
+        moveEquipmentSlot = true,
         favoredMounts = {},
         hiddenMounts = {},
         filter = {
@@ -69,6 +71,12 @@ local function PrepareDefaults()
     end
     for expansionName, _ in pairs(ADDON.MountJournalEnhancedExpansion) do
         defaultSettings.filter.expansion[expansionName] = true
+    end
+
+    if (select(4, GetBuildInfo()) < 80200) then
+        defaultSettings.moveEquipmentSlot = nil
+    else
+        defaultSettings.filter.mountType.waterWalking = nil
     end
 
     return defaultSettings

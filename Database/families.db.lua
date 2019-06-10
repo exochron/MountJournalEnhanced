@@ -76,6 +76,9 @@ ADDON.MountJournalEnhancedFamily = {
 [46628] = true, -- Swift White Hawkstrider
 [34795] = true, -- Red Hawkstrider
 },
+["Mechanical Birds"] = {
+[290328] = true, -- Wonderwing 2.0
+},
 ["Pandaren Phoenixes"] = {
 [139448] = true, -- Clutch of Ji-Kun
 [129552] = true, -- Crimson Pandaren Phoenix
@@ -228,6 +231,9 @@ ADDON.MountJournalEnhancedFamily = {
 [258845] = true, -- Nightborne Manasaber
 [230987] = true, -- Arcanist's Manasaber
 },
+["Mechanical Cats"] = {
+[294143] = true, -- X-995 Mechanocat
+},
 ["Others"] = {
 [232405] = true, -- Primal Flamesaber
 [200175] = true, -- Felsaber
@@ -275,6 +281,9 @@ ADDON.MountJournalEnhancedFamily = {
 [42777] = true, -- Swift Spectral Tiger
 },
 },
+["Crabs"] = {
+[294039] = true, -- Snapback Scuttler
+},
 ["Demons"] = {
 ["Demonic Hounds"] = {
 [253087] = true, -- Antoran Gloomhound
@@ -319,6 +328,7 @@ ADDON.MountJournalEnhancedFamily = {
 [136471] = true, -- Spawn of Horridon
 [263707] = true, -- Zandalari Direhorn
 [290608] = true, -- Crusader's Direhorn
+[297560] = true, -- Child of Torcali
 },
 ["Falcosaurs"] = {
 [213158] = true, -- Predatory Bloodgazer
@@ -328,9 +338,12 @@ ADDON.MountJournalEnhancedFamily = {
 },
 ["Pterrordaxes"] = {
 [289101] = true, -- Dazar'alor Windreaver
+[244712] = true, -- Spectral Pterrorwing
 [267270] = true, -- Kua'fon
 [136400] = true, -- Armored Skyscreamer
 [275837] = true, -- Cobalt Pterrordax
+[275838] = true, -- Captured Swampstalker
+[275840] = true, -- Voldunai Dunescraper
 },
 ["Raptors"] = {
 [65644] = true, -- Swift Purple Raptor
@@ -532,6 +545,9 @@ ADDON.MountJournalEnhancedFamily = {
 [135416] = true, -- Grand Armored Gryphon
 [136163] = true, -- Grand Gryphon
 [107516] = true, -- Spectral Gryphon
+[275859] = true, -- Dusky Waycrest Gryphon
+[275868] = true, -- Proudmoore Sea Scout
+[275866] = true, -- Stormsong Coastwatcher
 [54729] = true, -- Winged Steed of the Ebon Blade
 [32235] = true, -- Golden Gryphon
 [32239] = true, -- Ebon Gryphon
@@ -584,6 +600,9 @@ ADDON.MountJournalEnhancedFamily = {
 [98718] = true, -- Subdued Seahorse
 [75207] = true, -- Vashj'ir Seahorse
 [288711] = true, -- Saltwater Seahorse
+[300150] = true, -- Fabious
+[300151] = true, -- Inkscale Deepseeker
+[300153] = true, -- Crimson Tidestallion
 },
 ["Stingrays"] = {
 [278803] = true, -- Great Sea Ray
@@ -753,6 +772,12 @@ ADDON.MountJournalEnhancedFamily = {
 [215558] = true, -- Ratstallion
 },
 ["Rays"] = {
+["Fathom Rays"] = {
+[292407] = true, -- Ankoan Waveray
+[291538] = true, -- Unshackled Waveray
+[292419] = true, -- Azshari Bloatray
+[300149] = true, -- Silent Glider
+},
 ["Mana Rays"] = {
 [235764] = true, -- Darkspore Mana Ray
 [253107] = true, -- Lambent Mana Ray
@@ -810,6 +835,11 @@ ADDON.MountJournalEnhancedFamily = {
 [232519] = true, -- Abyss Worm
 [275623] = true, -- Nazjatar Blood Serpent
 [243025] = true, -- Riddler's Mind-Worm
+},
+["Snapdragons"] = {
+[300146] = true, -- Snapdragon Kelpstalker
+[300147] = true, -- Deepcoral Snapdragon
+[294038] = true, -- Royal Snapdragon
 },
 ["Turtles"] = {
 [127287] = true, -- Blue Dragon Turtle
@@ -945,6 +975,13 @@ ADDON.MountJournalEnhancedFamily = {
 [44153] = true, -- Flying Machine
 [261437] = true, -- Mecha-Mogul Mk2
 },
+["Hovercraft"] = {
+[256123] = true, -- Xiwyllag ATV
+},
+["Jet Aerial Units"] = {
+[299170] = true, -- Rustbolt Resistor
+[290718] = true, -- Aerial Unit R-21/X
+},
 ["Kites"] = {
 [133023] = true, -- Jade Pandaren Kite
 [130985] = true, -- Pandaren Kite
@@ -956,6 +993,14 @@ ADDON.MountJournalEnhancedFamily = {
 [182912] = true, -- Felsteel Annihilator
 [134359] = true, -- Sky Golem
 [239013] = true, -- Lightforged Warframe
+},
+["Mechanical Animals"] = {
+[148417] = true, -- Kor'kron Juggernaut
+[163016] = true, -- Warforged Nightmare
+[163024] = true, -- Warforged Nightmare
+[290328] = true, -- Wonderwing 2.0
+[142910] = true, -- Ironbound Wraithcharger
+[294143] = true, -- X-995 Mechanocat
 },
 ["Mechanostriders"] = {
 [65642] = true, -- Turbostrider
@@ -982,6 +1027,8 @@ ADDON.MountJournalEnhancedFamily = {
 [87090] = true, -- Goblin Trike
 [171846] = true, -- Champion's Treadblade
 [171845] = true, -- Warlord's Deathwheel
+[296788] = true, -- Mechacycle Model W
+[297157] = true, -- Junkheap Drifter
 },
 ["Rockets"] = {
 [75973] = true, -- X-53 Touring Rocket
@@ -992,13 +1039,10 @@ ADDON.MountJournalEnhancedFamily = {
 [247448] = true, -- Darkmoon Dirigible
 [71342] = true, -- Big Love Rocket
 },
-["Scorpions"] = {
-[148417] = true, -- Kor'kron Juggernaut
-},
-["Steeds"] = {
-[163016] = true, -- Warforged Nightmare
-[163024] = true, -- Warforged Nightmare
-[142910] = true, -- Ironbound Wraithcharger
+["Spider Tanks"] = {
+[299159] = true, -- Scrapforged Mechaspider
+[299158] = true, -- Mechagon Peacekeeper
+[291492] = true, -- Rusty Mechanocrawler
 },
 },
 ["Wolves"] = {
@@ -1019,10 +1063,10 @@ ADDON.MountJournalEnhancedFamily = {
 [92232] = true, -- Spectral Wolf
 },
 ["War Wolves"] = {
-[294569] = true, -- Beastlord's Warwolf
 [295386] = true, -- Ironclad Frostclaw
 [148396] = true, -- Kor'kron War Wolf
 [204166] = true, -- Prestigious War Wolf
+[294569] = true, -- Beastlord's Warwolf
 [100333] = true, -- Vicious War Wolf
 },
 ["Wolves"] = {

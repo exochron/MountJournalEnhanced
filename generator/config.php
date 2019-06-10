@@ -1,5 +1,7 @@
 <?php
 
+use MJEGenerator\Mount;
+
 return [
     'battle.net' => [
         'clientId'     => $_ENV['BATTLENET_CLIENTID'],
@@ -7,11 +9,39 @@ return [
     ],
 
     'wowhead' => [
-        'channel' => 'www', // www|ptr
+        'channel' => 'ptr', // www|ptr
     ],
 
-    'missingMounts' => [ // missing in battle net response
-//        266925 => new \MJEGenerator\Mount('Siltwing Albatross', 266925, 0, 0, 'inv_vulturemount_alabatrosswhite'),
+    'overwriteMounts' => [ // missing in battle net response
+        //PTR 8.2
+        new Mount('Wonderwing 2.0', 290328),
+        new Mount('Ankoan Waveray', 292407, 0, 0, 'inv_sharkraymount_1'),
+        new Mount('Dusky Waycrest Gryphon', 275859),
+        new Mount('Proudmoore Sea Scout', 275868, 0, 0, 'inv_misc_elitegryphonarmored'),
+        new Mount('Captured Swampstalker', 275838, 0, 0, 'inv_pterrordax2mount_lightgreen'),
+        new Mount('Spectral Pterrorwing', 244712, 0, 0, 'inv_pterrordax2mount_white'),
+        new Mount('Voldunai Dunescraper', 275840, 0, 0, 'inv_pterrordax2mount_purple'),
+        new Mount('Rustbolt Resistor', 299170, 0, 0, 'inv_hunterkillershipred'),
+        new Mount('Stormsong Coastwatcher', 275866, 0, 0, 'inv_misc_elitegryphonarmored'),
+        new Mount('Unshackled Waveray', 291538, 0, 0, 'inv_sharkraymount_2'),
+        new Mount('Snapback Scuttler', 294039, 0, 0, 'inv_crabmount'),
+        new Mount('Azshari Bloatray', 292419, 0, 0, 'inv_sharkraymount_4'),
+        new Mount('Mechacycle Model W', 296788, 0, 0, 'inv_mechacycle'),
+        new Mount('Xiwyllag ATV', 256123, 0, 0, 'inv_hovercraftmount'),
+        new Mount('Scrapforged Mechaspider', 299159, 0, 0, 'inv_mechagonspidertank_silver'),
+        new Mount('Snapdragon Kelpstalker', 300146, 0, 0, 'inv_snapdragonmount02'),
+        new Mount('Child of Torcali', 297560, 0, 0, 'inv_triceratopsgreen'),
+        new Mount('Deepcoral Snapdragon', 300147, 0, 0, 'inv_snapdragonmount03'),
+        new Mount('Aerial Unit R-21/X', 290718, 0, 0, 'inv_hunterkillershipyellow'),
+        new Mount('Mechagon Peacekeeper', 299158, 0, 0, 'inv_mechagonspidertank_brass'),
+        new Mount('Fabious', 300150, 0, 0, 'inv_hippocampusmount_purple'),
+        new Mount('Royal Snapdragon', 294038, 0, 0, 'inv_snapdragonmount01'),
+        new Mount('Junkheap Drifter', 297157, 0, 0, 'inv_mechacycle'),
+        new Mount('Rusty Mechanocrawler', 291492, 0, 0, 'inv_mechagonspidertank_junker'),
+        new Mount('Inkscale Deepseeker', 300151, 0, 0, 'inv_hippocampusmount_black'),
+        new Mount('X-995 Mechanocat', 294143, 0, 0, 'inv_mechanicaltiger_grey'),
+        new Mount('Crimson Tidestallion', 300153, 0, 0, 'inv_hippocampusmount_red'),
+        new Mount('Silent Glider', 300149, 0, 0, 'inv_sharkraymount_3'),
     ],
 
     'ignored'   => [
@@ -209,6 +239,7 @@ return [
                 'icons' => ['pandarenphoenix', 'ji-kun'],
             ],
             'Phoenixes'          => ['Phoenixes'],
+            'Mechanical Birds'   => ['Mechanical Birds'],
         ],
         'Bovids'       => [
             'Clefthooves'  => ['Clefthooves'],
@@ -225,31 +256,33 @@ return [
             'Yaks'         => ['Yaks'],
         ],
         'Cats'         => [
-            'Stone Cats' => [
+            'Stone Cats'      => [
                 'wcm' => ['Flying Stone Cats'],
                 98727 => 'Winged Guardian',
             ],
-            'Lions'      => [
+            'Lions'           => [
                 'wcm'   => ['Cats'],
                 'icons' => ['lion', 'goldenking',],
                 98727   => 'Winged Guardian',
             ],
-            'Sabers'     => [
+            'Sabers'          => [
                 'wcm'   => ['Cats'],
                 'icons' => ['blackpanther', 'whitetiger', 'pinktiger', 'nightsaber2', 'saber3mount'],
             ],
-            'Manasabers' => [
+            'Manasabers'      => [
                 'wcm'   => ['Cats'],
                 'icons' => ['suramarmount', 'nightborneracial',],
                 180545  => "Mystic Runesaber",
             ],
-            'Tigers'     => [
+            'Tigers'          => [
                 'wcm'   => ['Cats', 'Undead Cats'],
                 'icons' => ['monkmount', 'spectraltiger', 'siberiantiger', 'warnightsaber'],
                 24252   => "Swift Zulian Tiger",
             ],
-            'Others'     => ['Flamesabers', 'Panthara', 'Felsabers'],
+            'Mechanical Cats' => ['Mechanical Cats'],
+            'Others'          => ['Flamesabers', 'Panthara', 'Felsabers'],
         ],
+        'Crabs'        => ['Crabs'],
         'Dinosaurs'    => [
             'Brutosaurs'   => ['Brutosaurs'],
             'Pterrordaxes' => ['Pterrordaxes'],
@@ -300,12 +333,12 @@ return [
         'Fish'         => [
             'Fish'      => ['Fish'],
             'Stingrays' => ['Stingrays'],
-            'Seahorses' => ['Seahorses'],
+            'Seahorses' => ['Seahorses', 'Hippocampuses'],
         ],
         'Horses'       => [
             'Chargers'          => [
                 'wcm'   => ['Horses'],
-                'icons' => ['_paladinmount_', '_charger', 'nature_swiftness', 'alliancepvpmount', 'vicioushorse', 'paladin_divinesteed', 'horsekultiran','hordehorse'],
+                'icons' => ['_paladinmount_', '_charger', 'nature_swiftness', 'alliancepvpmount', 'vicioushorse', 'paladin_divinesteed', 'horsekultiran', 'hordehorse'],
                 67466   => "Argent Warhorse",
                 68187   => "Crusader's White Warhorse",
                 68188   => "Crusader's Black Warhorse",
@@ -361,11 +394,13 @@ return [
             'Crocolisks'   => ['Crocolisks'],
             'Sea Serpents' => ['Sea Serpents'],
             'Turtles'      => ['Dragon Turtles', 'Sea Turtles', 'Turtles'],
+            'Snapdragons'  => ['Snapdragons'],
         ],
         'Rats'         => ['Rats'], //maybe Rodents later
         'Rays'         => [
             'Nether Rays' => ['Nether Rays'],
             'Mana Rays'   => ['Mana Rays'],
+            'Fathom Rays' => ['Fathom Rays'],
             'Stingrays'   => ['Stingrays'],
         ],
         'Ungulates'    => [
@@ -378,18 +413,20 @@ return [
             'Riverbeasts' => ['Riverbeasts'],
         ],
         'Vehicles'     => [
-            'Mechanostriders' => ['Mechanostriders'],
-            'Scorpions'       => ['Mechanical Scorpions'],
-            'Steeds'          => ['Mechanical Steeds'],
-            'Motorcycles'     => ['Motorcycles'],
-            'Airships'        => ['Skyships', 'Zeppelins', 'Flying Ships'],
-            'Gyrocopters'     => ['Gyrocopters'],
-            'Mecha-suits'     => ['Flying Mecha-suits'],
-            'Rockets'         => ['Rockets'],
-            'Carpets'         => ['Flying Carpets'],
-            'Kites'           => ['Kites'],
-            'Discs'           => ['Discs'],
-            'Assault Wagons'  => ['Assault Wagons'],
+            'Mechanostriders'    => ['Mechanostriders'],
+            'Mechanical Animals' => ['Mechanical Scorpions', 'Mechanical Steeds', 'Mechanical Birds', 'Mechanical Cats',],
+            'Motorcycles'        => ['Motorcycles', 'Monocycles'],
+            'Airships'           => ['Skyships', 'Zeppelins', 'Flying Ships'],
+            'Gyrocopters'        => ['Gyrocopters'],
+            'Mecha-suits'        => ['Flying Mecha-suits'],
+            'Rockets'            => ['Rockets'],
+            'Carpets'            => ['Flying Carpets'],
+            'Kites'              => ['Kites'],
+            'Discs'              => ['Discs'],
+            'Assault Wagons'     => ['Assault Wagons'],
+            'Hovercraft'         => ['Hovercraft'],
+            'Jet Aerial Units'   => ['Jet Aerial Units'],
+            'Spider Tanks'       => ['Spider Tanks'],
         ],
         'Wolves'       => [
             'Dire Wolves'   => [
