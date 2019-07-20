@@ -178,6 +178,9 @@ function ADDON:FilterMountsByType(spellId, mountID)
 
     if result == nil then
         result = true
+        if mountResult ~= nil then
+            result = mountResult
+        end
     end
 
     return result

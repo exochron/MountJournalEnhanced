@@ -24,6 +24,7 @@ ADDON.MountJournalEnhancedTradable = {
 [121839] = true, -- Sunstone Panther
 [121838] = true, -- Ruby Panther
 [60424] = true, -- Mekgineer's Chopper
+[267274] = true, -- Mag'har Direwolf
 [74856] = true, -- Blazing Hippogryph
 [46197] = true, -- X-51 Nether-Rocket
 [44151] = true, -- Turbo-Charged Flying Machine

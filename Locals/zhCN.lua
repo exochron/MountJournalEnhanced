@@ -20,7 +20,6 @@ if (GetLocale() == 'zhCN') then
     L["TASK_FAVOR_START"] = "[MJE] 在你的坐骑上重新标星收藏。请等待一会儿直到完成。"
     L["Transform"] = "变形"
     L["Underwater"] = "水中"
-    L["Water Walking"] = "水面"
 
     -- Families
     L["Airships"] = "飞艇"

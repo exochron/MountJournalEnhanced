@@ -13,35 +13,7 @@ return [
     ],
 
     'overwriteMounts' => [ // missing in battle net response
-        //PTR 8.2
-        new Mount('Wonderwing 2.0', 290328),
-        new Mount('Ankoan Waveray', 292407, 0, 0, 'inv_sharkraymount_1'),
-        new Mount('Dusky Waycrest Gryphon', 275859),
-        new Mount('Proudmoore Sea Scout', 275868, 0, 0, 'inv_misc_elitegryphonarmored'),
-        new Mount('Captured Swampstalker', 275838, 0, 0, 'inv_pterrordax2mount_lightgreen'),
-        new Mount('Spectral Pterrorwing', 244712, 0, 0, 'inv_pterrordax2mount_white'),
-        new Mount('Voldunai Dunescraper', 275840, 0, 0, 'inv_pterrordax2mount_purple'),
-        new Mount('Rustbolt Resistor', 299170, 0, 0, 'inv_hunterkillershipred'),
-        new Mount('Stormsong Coastwatcher', 275866, 0, 0, 'inv_misc_elitegryphonarmored'),
-        new Mount('Unshackled Waveray', 291538, 0, 0, 'inv_sharkraymount_2'),
-        new Mount('Snapback Scuttler', 294039, 0, 0, 'inv_crabmount'),
-        new Mount('Azshari Bloatray', 292419, 0, 0, 'inv_sharkraymount_4'),
-        new Mount('Mechacycle Model W', 296788, 0, 0, 'inv_mechacycle'),
-        new Mount('Xiwyllag ATV', 256123, 0, 0, 'inv_hovercraftmount'),
-        new Mount('Scrapforged Mechaspider', 299159, 0, 0, 'inv_mechagonspidertank_silver'),
-        new Mount('Snapdragon Kelpstalker', 300146, 0, 0, 'inv_snapdragonmount02'),
-        new Mount('Child of Torcali', 297560, 0, 0, 'inv_triceratopsgreen'),
-        new Mount('Deepcoral Snapdragon', 300147, 0, 0, 'inv_snapdragonmount03'),
-        new Mount('Aerial Unit R-21/X', 290718, 0, 0, 'inv_hunterkillershipyellow'),
-        new Mount('Mechagon Peacekeeper', 299158, 0, 0, 'inv_mechagonspidertank_brass'),
-        new Mount('Fabious', 300150, 0, 0, 'inv_hippocampusmount_purple'),
-        new Mount('Royal Snapdragon', 294038, 0, 0, 'inv_snapdragonmount01'),
-        new Mount('Junkheap Drifter', 297157, 0, 0, 'inv_mechacycle'),
-        new Mount('Rusty Mechanocrawler', 291492, 0, 0, 'inv_mechagonspidertank_junker'),
-        new Mount('Inkscale Deepseeker', 300151, 0, 0, 'inv_hippocampusmount_black'),
-        new Mount('X-995 Mechanocat', 294143, 0, 0, 'inv_mechanicaltiger_grey'),
-        new Mount('Crimson Tidestallion', 300153, 0, 0, 'inv_hippocampusmount_red'),
-        new Mount('Silent Glider', 300149, 0, 0, 'inv_sharkraymount_3'),
+        new Mount('Sylverian Dreamer', 290132),
     ],
 
     'ignored'   => [
@@ -198,6 +170,14 @@ return [
         281296, // Silver Hand Charger
         288506, // Sandy Nightsaber
         294923, // Hati
+        300152, // Tidestallion
+        300154, // Tidestallion
+        302796, // Swift Spectral Armored Gryphon (inv_mount_hippogryph_arcane)
+        302797, // Swift Spectral Pterrordax (inv_mount_hippogryph_arcane)
+        302794, // Swift Spectral Fathom Ray (inv_mount_hippogryph_arcane)
+        302795, // Swift Spectral Magnetocraft (inv_mount_hippogryph_arcane)
+        304696, // Wild Snapdragon
+        305032, // Silver Hand Direhorn (ability_mount_kodosunwalkerelite)
     ],
 
     // family based on http://www.warcraftmounts.com/gallery.php + https://wow.gamepedia.com/Beast

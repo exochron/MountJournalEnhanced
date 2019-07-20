@@ -157,6 +157,9 @@ class MO3FileReader
                 yield from $this->getInt32($stream),
                 yield from $this->getInt16($stream),
                 yield from $this->getInt16($stream),
+                yield from $this->getInt16($stream),
+                yield from $this->getInt16($stream),
+                yield from $this->getInt16($stream),
                 yield from $this->getBool($stream),
                 );
 
