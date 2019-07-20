@@ -19,7 +19,6 @@ if (GetLocale() == 'deDE') then
     L["TASK_FAVOR_START"] = "[MJE] Bitte warten. Deine Reittiere werden mit Sternen neu beklebt."
     L["Transform"] = "Verwandlung"
     L["Underwater"] = "Unterwasser"
-    L["Water Walking"] = "Wasserwandeln"
 
     -- Families
     L["Airships"] = "Luftschiffe"
