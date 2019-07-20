@@ -8,8 +8,11 @@ class Animation
 {
     private $id;
     private $subId;
-    private $flags;
     private $length;
+    private $flags;
+    private $frequency;
+    private $blendTimeIn;
+    private $blendTimeOut;
     private $next;
     private $index;
     private $available;
@@ -18,19 +21,25 @@ class Animation
     public function __construct(
         int $id,
         int $subId,
-        int $flags,
         int $length,
+        int $flags,
+        int $frequency,
+        int $blendTimeIn,
+        int $blendTimeOut,
         int $next,
         int $index,
         bool $available
     ) {
-        $this->id        = $id;
-        $this->subId     = $subId;
-        $this->flags     = $flags;
-        $this->length    = $length;
-        $this->next      = $next;
-        $this->index     = $index;
-        $this->available = $available;
+        $this->id           = $id;
+        $this->subId        = $subId;
+        $this->length       = $length;
+        $this->flags        = $flags;
+        $this->frequency    = $frequency;
+        $this->blendTimeIn  = $blendTimeIn;
+        $this->blendTimeOut = $blendTimeOut;
+        $this->next         = $next;
+        $this->index        = $index;
+        $this->available    = $available;
     }
 
     public function setName(string $name): self
@@ -57,6 +66,21 @@ class Animation
     public function getLength(): int
     {
         return $this->length;
+    }
+
+    public function getFrequency(): int
+    {
+        return $this->frequency;
+    }
+
+    public function getBlendTimeIn(): int
+    {
+        return $this->blendTimeIn;
+    }
+
+    public function getBlendTimeOut(): int
+    {
+        return $this->blendTimeOut;
     }
 
     public function getNext(): int

@@ -318,6 +318,7 @@ ADDON.MountJournalEnhancedFamily = {
 [264058] = true, -- Mighty Caravan Brutosaur
 },
 ["Direhorns"] = {
+[297560] = true, -- Child of Torcali
 [279474] = true, -- Palehide Direhorn
 [140250] = true, -- Crimson Primal Direhorn
 [140249] = true, -- Golden Primal Direhorn
@@ -328,7 +329,6 @@ ADDON.MountJournalEnhancedFamily = {
 [136471] = true, -- Spawn of Horridon
 [263707] = true, -- Zandalari Direhorn
 [290608] = true, -- Crusader's Direhorn
-[297560] = true, -- Child of Torcali
 },
 ["Falcosaurs"] = {
 [213158] = true, -- Predatory Bloodgazer
@@ -338,6 +338,7 @@ ADDON.MountJournalEnhancedFamily = {
 },
 ["Pterrordaxes"] = {
 [289101] = true, -- Dazar'alor Windreaver
+[301841] = true, -- Kua'fon
 [244712] = true, -- Spectral Pterrorwing
 [267270] = true, -- Kua'fon
 [136400] = true, -- Armored Skyscreamer
@@ -423,6 +424,7 @@ ADDON.MountJournalEnhancedFamily = {
 [175700] = true, -- Emerald Drake
 [124550] = true, -- Cataclysmic Gladiator's Twilight Drake
 [69395] = true, -- Onyxian Drake
+[290132] = true, -- Sylverian Dreamer
 },
 ["Grand Drakes"] = {
 [107842] = true, -- Blazing Drake
@@ -462,7 +464,7 @@ ADDON.MountJournalEnhancedFamily = {
 [262027] = true, -- Black Gladiator's Proto-Drake
 [262026] = true, -- Green Gladiator's Proto-Drake
 [262025] = true, -- Pale Gladiator's Proto-Drake
-[262024] = true, -- Purple Gladiator's Proto-Drake
+[262024] = true, -- Notorious Gladiator's Proto-Drake
 [262028] = true, -- Gold Gladiator's Proto-Drake
 },
 ["Stone Drakes"] = {
@@ -598,11 +600,11 @@ ADDON.MountJournalEnhancedFamily = {
 },
 ["Seahorses"] = {
 [98718] = true, -- Subdued Seahorse
-[75207] = true, -- Vashj'ir Seahorse
-[288711] = true, -- Saltwater Seahorse
 [300150] = true, -- Fabious
 [300151] = true, -- Inkscale Deepseeker
 [300153] = true, -- Crimson Tidestallion
+[75207] = true, -- Vashj'ir Seahorse
+[288711] = true, -- Saltwater Seahorse
 },
 ["Stingrays"] = {
 [278803] = true, -- Great Sea Ray
@@ -773,10 +775,10 @@ ADDON.MountJournalEnhancedFamily = {
 },
 ["Rays"] = {
 ["Fathom Rays"] = {
-[292407] = true, -- Ankoan Waveray
 [291538] = true, -- Unshackled Waveray
-[292419] = true, -- Azshari Bloatray
 [300149] = true, -- Silent Glider
+[292407] = true, -- Ankoan Waveray
+[292419] = true, -- Azshari Bloatray
 },
 ["Mana Rays"] = {
 [235764] = true, -- Darkspore Mana Ray
@@ -998,9 +1000,9 @@ ADDON.MountJournalEnhancedFamily = {
 [148417] = true, -- Kor'kron Juggernaut
 [163016] = true, -- Warforged Nightmare
 [163024] = true, -- Warforged Nightmare
+[294143] = true, -- X-995 Mechanocat
 [290328] = true, -- Wonderwing 2.0
 [142910] = true, -- Ironbound Wraithcharger
-[294143] = true, -- X-995 Mechanocat
 },
 ["Mechanostriders"] = {
 [65642] = true, -- Turbostrider
@@ -1019,6 +1021,7 @@ ADDON.MountJournalEnhancedFamily = {
 },
 ["Motorcycles"] = {
 [223354] = true, -- Vicious War Trike
+[297157] = true, -- Junkheap Drifter
 [55531] = true, -- Mechano-Hog
 [60424] = true, -- Mekgineer's Chopper
 [179244] = true, -- Chauffeured Mechano-Hog
@@ -1028,7 +1031,6 @@ ADDON.MountJournalEnhancedFamily = {
 [171846] = true, -- Champion's Treadblade
 [171845] = true, -- Warlord's Deathwheel
 [296788] = true, -- Mechacycle Model W
-[297157] = true, -- Junkheap Drifter
 },
 ["Rockets"] = {
 [75973] = true, -- X-53 Touring Rocket
@@ -1040,8 +1042,8 @@ ADDON.MountJournalEnhancedFamily = {
 [71342] = true, -- Big Love Rocket
 },
 ["Spider Tanks"] = {
-[299159] = true, -- Scrapforged Mechaspider
 [299158] = true, -- Mechagon Peacekeeper
+[299159] = true, -- Scrapforged Mechaspider
 [291492] = true, -- Rusty Mechanocrawler
 },
 },
