@@ -59,6 +59,13 @@ local function C_MountJournal_GetDisplayedMountInfoExtra(index)
     return C_MountJournal.GetMountInfoExtraByID(mountId)
 end
 
+local function C_MountJournal_GetDisplayedMountAllCreatureDisplayInfo(index)
+    local mappedIndex = ADDON:MapIndex(index)
+    if nil ~= mappedIndex then
+        return ADDON.hooks["GetDisplayedMountAllCreatureDisplayInfo"](mappedIndex)
+    end
+end
+
 local function CallHookedFunction(functionName, index, arg1, arg2)
     local mappedIndex = ADDON:MapIndex(index)
     if nil~= mappedIndex then
@@ -70,6 +77,7 @@ local function RegisterMountJournalHooks()
     ADDON:Hook(C_MountJournal, "GetNumDisplayedMounts", C_MountJournal_GetNumDisplayedMounts)
     ADDON:Hook(C_MountJournal, "GetDisplayedMountInfo", C_MountJournal_GetDisplayedMountInfo)
     ADDON:Hook(C_MountJournal, "GetDisplayedMountInfoExtra", C_MountJournal_GetDisplayedMountInfoExtra)
+    ADDON:Hook(C_MountJournal, "GetDisplayedMountAllCreatureDisplayInfo", C_MountJournal_GetDisplayedMountAllCreatureDisplayInfo)
     ADDON:Hook(C_MountJournal, "SetIsFavorite", function(index, isFavored)
         local result = CallHookedFunction("SetIsFavorite", index, isFavored)
         ADDON:UpdateIndexMap()

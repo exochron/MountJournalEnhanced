@@ -205,9 +205,6 @@ local function InitializeFilterDropDown(filterMenu, level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Ground"], "ground", settings), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Flying"], "flying", settings), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Underwater"], "underwater", settings), level)
-        if (settings.waterWalking ~= nil) then
-            MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Water Walking"], "waterWalking", settings), level)
-        end
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Transform"], "transform", settings), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(MINIMAP_TRACKING_REPAIR, "repair", settings), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Passenger"], "passenger", settings), level)
