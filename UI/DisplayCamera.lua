@@ -2,21 +2,34 @@ local ADDON_NAME, ADDON = ...
 
 -- unlock Y rotation with mouse
 
-local function SetupCamera()
-    if ADDON.settings.unlockDisplayCamera then
+function ADDON:ApplyUnlockDisplayCamera(flag)
+    ADDON.settings.unlockDisplayCamera = flag
+    if (MountJournal) then
         local cam = MountJournal.MountDisplay.ModelScene:GetActiveCamera()
         if cam then
-            cam:SetLeftMouseButtonYMode(ORBIT_CAMERA_MOUSE_MODE_PITCH_ROTATION)
-
-            local org_GetDelta = cam.GetDeltaModifierForCameraMode
-            cam.GetDeltaModifierForCameraMode = function(self, mode)
-                local result = org_GetDelta(self, mode)
-                if (mode == ORBIT_CAMERA_MOUSE_MODE_PITCH_ROTATION) then
-                    result = -result
-                end
-
-                return result
+            if flag then
+                cam:SetLeftMouseButtonYMode(ORBIT_CAMERA_MOUSE_MODE_PITCH_ROTATION)
+            else
+                cam:SetLeftMouseButtonYMode(ORBIT_CAMERA_MOUSE_MODE_NOTHING)
             end
+        end
+    end
+end
+
+local function SetupCamera()
+    local cam = MountJournal.MountDisplay.ModelScene:GetActiveCamera()
+    if cam then
+        ADDON:ApplyUnlockDisplayCamera(ADDON.settings.unlockDisplayCamera)
+
+        -- revert Y rotation for a better feel
+        local org_GetDelta = cam.GetDeltaModifierForCameraMode
+        cam.GetDeltaModifierForCameraMode = function(self, mode)
+            local result = org_GetDelta(self, mode)
+            if (mode == ORBIT_CAMERA_MOUSE_MODE_PITCH_ROTATION) then
+                result = -result
+            end
+
+            return result
         end
     end
 end

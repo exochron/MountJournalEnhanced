@@ -66,13 +66,6 @@ local function ModifyListButtons()
             button.icon:SetSize(MOUNT_BUTTON_HEIGHT - 2, MOUNT_BUTTON_HEIGHT - 2)
         end
 
-        if (button.unusable) then
-            -- remove after 8.2
-            button.unusable:ClearAllPoints()
-            button.unusable:SetPoint("TOPLEFT", button.DragButton)
-            button.unusable:SetPoint("BOTTOMRIGHT", button.DragButton)
-        end
-
         button.name:ClearAllPoints()
         button.name:SetPoint("LEFT", button, "LEFT", 10, 0)
         button.name:SetPoint("RIGHT", button, "RIGHT", -10, 0)

@@ -1,22 +1,37 @@
 local ADDON_NAME, ADDON = ...
 
-local function MoveSlotButton()
+function ADDON:ApplyMoveEquipmentSlot(flag)
+    ADDON.settings.moveEquipmentSlot = flag
+
     local button = MountJournal.SlotButton
-    button:SetParent(MountJournal.MountDisplay)
     button:ClearAllPoints()
-    button:SetPoint("BOTTOMLEFT", MountJournal.MountDisplay, 15, 15)
-end
 
-local doInit = true
+    if (flag) then
+        -- regenerate compact list buttons
 
-local function init()
-    if (ADDON.settings.moveEquipmentSlot and doInit and MountJournal.BottomLeftInset) then
-        doInit = false
-        MoveSlotButton()
+        button:SetParent(MountJournal.MountDisplay)
+        button:SetPoint("BOTTOMLEFT", MountJournal.MountDisplay, 15, 15)
 
+        -- Hide
         MountJournal.BottomLeftInset:Hide()
         MountJournal.LeftInset:SetPoint("BOTTOMLEFT", 4, 26)
         MountJournal.RightInset:SetPoint("BOTTOMLEFT", MountJournal.LeftInset, "BOTTOMRIGHT", 20, 0)
+    else
+        button:SetParent(MountJournal.BottomLeftInset)
+        button:SetPoint("LEFT", 23, 0)
+
+        -- Show
+        MountJournal.BottomLeftInset:Show()
+        MountJournal.LeftInset:SetPoint("BOTTOMLEFT", 4, 111)
+        MountJournal.RightInset:SetPoint("BOTTOMLEFT", MountJournal.LeftInset, "BOTTOMRIGHT", 20, -85)
+    end
+end
+
+local doInit = true
+local function init()
+    if (doInit) then
+        doInit = false
+        ADDON:ApplyMoveEquipmentSlot(ADDON.settings.moveEquipmentSlot)
     end
 end
 

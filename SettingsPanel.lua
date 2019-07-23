@@ -56,17 +56,15 @@ local function OKHandler(frame)
             ADDON:CollectFavoredMounts()
         end
     end
-    if (frame.moveEquipmentCheck and frame.moveEquipmentCheck:GetValue() ~= ADDON.settings.moveEquipmentSlot) then
-        ADDON.settings.moveEquipmentSlot = frame.moveEquipmentCheck:GetValue()
-        reload = true
+    if (frame.moveEquipmentCheck) then
+        ADDON:ApplyMoveEquipmentSlot(frame.moveEquipmentCheck:GetValue())
     end
     if (frame.compactListCheck and frame.compactListCheck:GetValue() ~= ADDON.settings.compactMountList) then
         ADDON.settings.compactMountList = frame.compactListCheck:GetValue()
         reload = true
     end
-    if (frame.unlockCameraCheck and frame.unlockCameraCheck:GetValue() ~= ADDON.settings.unlockDisplayCamera) then
-        ADDON.settings.unlockDisplayCamera = frame.unlockCameraCheck:GetValue()
-        reload = true
+    if (frame.unlockCameraCheck) then
+        ADDON:ApplyUnlockDisplayCamera(frame.unlockCameraCheck:GetValue())
     end
     if (frame.shopButtonCheck and frame.shopButtonCheck:GetValue() ~= ADDON.settings.showShopButton) then
         ADDON.settings.showShopButton = frame.shopButtonCheck:GetValue()
