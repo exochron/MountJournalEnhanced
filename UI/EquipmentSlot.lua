@@ -1,29 +1,36 @@
 local ADDON_NAME, ADDON = ...
 
+local originalParent
+
 function ADDON:ApplyMoveEquipmentSlot(flag)
     ADDON.settings.moveEquipmentSlot = flag
 
     local button = MountJournal.SlotButton
-    button:ClearAllPoints()
 
     if (flag) then
-        -- regenerate compact list buttons
+        -- backup frame settings
+        ADDON.UI:SavePoint(button)
+        ADDON.UI:SavePoint(MountJournal.LeftInset, "BOTTOMLEFT")
+        ADDON.UI:SavePoint(MountJournal.RightInset, "BOTTOMLEFT")
+        originalParent = button:GetParent()
 
+        -- move button
         button:SetParent(MountJournal.MountDisplay)
+        button:ClearAllPoints()
         button:SetPoint("BOTTOMLEFT", MountJournal.MountDisplay, 15, 15)
 
-        -- Hide
+        -- Hide and fix surrounding insets
         MountJournal.BottomLeftInset:Hide()
         MountJournal.LeftInset:SetPoint("BOTTOMLEFT", 4, 26)
         MountJournal.RightInset:SetPoint("BOTTOMLEFT", MountJournal.LeftInset, "BOTTOMRIGHT", 20, 0)
     else
-        button:SetParent(MountJournal.BottomLeftInset)
-        button:SetPoint("LEFT", 23, 0)
-
-        -- Show
+        if (originalParent) then
+            button:SetParent(originalParent)
+        end
+        ADDON.UI:RestorePoint(button)
+        ADDON.UI:RestorePoint(MountJournal.LeftInset, "BOTTOMLEFT")
+        ADDON.UI:RestorePoint(MountJournal.RightInset, "BOTTOMLEFT")
         MountJournal.BottomLeftInset:Show()
-        MountJournal.LeftInset:SetPoint("BOTTOMLEFT", 4, 111)
-        MountJournal.RightInset:SetPoint("BOTTOMLEFT", MountJournal.LeftInset, "BOTTOMRIGHT", 20, -85)
     end
 end
 
@@ -37,4 +44,4 @@ end
 
 ADDON:RegisterLoadUICallback(init)
 -- UI Pack fix  (eg. ElvUI, TukUI)
-ADDON:RegisterUIOverhaulCallback(init)
+ADDON.UI:RegisterUIOverhaulCallback(init)

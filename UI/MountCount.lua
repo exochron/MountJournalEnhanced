@@ -38,7 +38,7 @@ end
 
 ADDON:RegisterLoadUICallback(CreateCharacterMountCount)
 
-ADDON:RegisterUIOverhaulCallback(function(self)
+ADDON.UI:RegisterUIOverhaulCallback(function(self)
     if (self == MountJournal.MountCount) then
         doStrip = true
     end

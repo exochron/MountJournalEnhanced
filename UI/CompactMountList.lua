@@ -95,7 +95,7 @@ ADDON:RegisterLoadUICallback(function()
 end)
 
 -- UI Pack fix  (eg. ElvUI, TukUI)
-ADDON:RegisterUIOverhaulCallback(function(self)
+ADDON.UI:RegisterUIOverhaulCallback(function(self)
     if (doInit and self == MountJournal and ADDON.settings.compactMountList) then
         doInit = false
         GenerateButtons()
