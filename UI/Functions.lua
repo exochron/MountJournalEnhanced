@@ -4,21 +4,21 @@ ADDON.UI = {}
 
 --region frame point handling
 
-local SAVE_KEY = 'MJE_SavedPoints'
+local SAVE_KEY_POINTS = 'MJE_SavedPoints'
 
 ---SavePoint
 ---@param frame table
 ---@param savePoint string|nil TOP|BOTTOM|.. or nil. nil saves all current points
 function ADDON.UI:SavePoint(frame, savePoint)
 
-    if (not frame[SAVE_KEY] or not savePoint) then
-        frame[SAVE_KEY] = {}
+    if (not frame[SAVE_KEY_POINTS] or not savePoint) then
+        frame[SAVE_KEY_POINTS] = {}
     end
 
     for i = 1, frame:GetNumPoints() do
         local point, relativeTo, relativePoint, xOfs, yOfs = frame:GetPoint(i)
         if (point == savePoint or not savePoint) then
-            frame[SAVE_KEY][point] = {point, relativeTo, relativePoint, xOfs, yOfs}
+            frame[SAVE_KEY_POINTS][point] = { point, relativeTo, relativePoint, xOfs, yOfs}
             break
         end
     end
@@ -28,13 +28,30 @@ end
 ---@param frame table
 ---@param savePoint string|nil TOP|BOTTOM|.. or nil. nil resores all saved points
 function ADDON.UI:RestorePoint(frame, savePoint)
-    if (savePoint and frame[SAVE_KEY] and frame[SAVE_KEY][savePoint]) then
-        frame:SetPoint(unpack(frame[SAVE_KEY][savePoint]))
-    elseif not savePoint and frame[SAVE_KEY] then
+    if (savePoint and frame[SAVE_KEY_POINTS] and frame[SAVE_KEY_POINTS][savePoint]) then
+        frame:SetPoint(unpack(frame[SAVE_KEY_POINTS][savePoint]))
+    elseif not savePoint and frame[SAVE_KEY_POINTS] then
         frame:ClearAllPoints()
-        for _, v in pairs(frame[SAVE_KEY]) do
+        for _, v in pairs(frame[SAVE_KEY_POINTS]) do
             frame:SetPoint(unpack(v))
         end
+    end
+end
+
+--endregion
+
+--region frame size handling
+
+local SAVE_KEY_SIZE = 'MJE_SavedSize'
+
+function ADDON.UI:SaveSize(frame)
+    local w,h = frame:GetSize()
+    frame[SAVE_KEY_SIZE] = {w,h}
+end
+
+function ADDON.UI:RestoreSize(frame)
+    if (frame[SAVE_KEY_SIZE]) then
+        frame:SetSize(unpack(frame[SAVE_KEY_SIZE]))
     end
 end
 

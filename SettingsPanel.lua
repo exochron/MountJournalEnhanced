@@ -44,8 +44,6 @@ local function BuildFrame()
 end
 
 local function OKHandler(frame)
-    local reload
-
     if (frame.enableCursorKeysCheck) then
         ADDON.settings.enableCursorKeys = frame.enableCursorKeysCheck:GetValue()
     end
@@ -60,17 +58,13 @@ local function OKHandler(frame)
         ADDON:ApplyMoveEquipmentSlot(frame.moveEquipmentCheck:GetValue())
     end
     if (frame.compactListCheck and frame.compactListCheck:GetValue() ~= ADDON.settings.compactMountList) then
-        ADDON.settings.compactMountList = frame.compactListCheck:GetValue()
-        reload = true
+        ADDON:ApplyCompactMountList(frame.compactListCheck:GetValue())
     end
     if (frame.unlockCameraCheck) then
         ADDON:ApplyUnlockDisplayCamera(frame.unlockCameraCheck:GetValue())
     end
     if (frame.shopButtonCheck and frame.shopButtonCheck:GetValue() ~= ADDON.settings.showShopButton) then
         ADDON.settings.showShopButton = frame.shopButtonCheck:GetValue()
-    end
-    if reload and ADDON.initialized then
-        ReloadUI()
     end
 end
 
