@@ -1,5 +1,11 @@
-### 2.2 (Next)
-- ?
+### 2.5 (Next)
+- revamped Settings
+  - global UI settings // with option to save on character
+  - global filter settings // with option to save on character
+  - every UI element gets a show/hide setting
+  - seamless transition => no setting reset!
+  - no more reload!
+  - settings dropdown menu
 
 ### More Ideas:
 - more animation control in display (start/pause, movements, with soundeffects)

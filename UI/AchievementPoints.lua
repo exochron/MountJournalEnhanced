@@ -1,9 +1,9 @@
 local ADDON_NAME, ADDON = ...
 
-local COLLECTION_ACHIEVEMENT_CATEGORY = 15246
-local MOUNT_ACHIEVEMENT_CATEGORY = 15248
-
 local function CreateAchievementPoints()
+    local COLLECTION_ACHIEVEMENT_CATEGORY = 15246
+    local MOUNT_ACHIEVEMENT_CATEGORY = 15248
+
     local frame = CreateFrame("Button", nil, MountJournal)
 
     frame:ClearAllPoints()
@@ -72,14 +72,36 @@ local function CreateAchievementPoints()
             button = _G["AchievementFrameCategoriesContainerButton" .. i]
         end
     end)
-    frame:SetScript("OnEnter", function() frame.highlight:SetShown(true) end)
-    frame:SetScript("OnLeave", function() frame.highlight:SetShown(false) end)
+    frame:SetScript("OnEnter", function()
+        frame.highlight:SetShown(true)
+    end)
+    frame:SetScript("OnLeave", function()
+        frame.highlight:SetShown(false)
+    end)
 
     frame:RegisterEvent("ACHIEVEMENT_EARNED")
     frame:SetScript("OnEvent", function(self, event, ...)
         frame.staticText:SetText(GetCategoryAchievementPoints(MOUNT_ACHIEVEMENT_CATEGORY, true))
     end)
 
+    return frame
 end
 
-ADDON:RegisterLoadUICallback(CreateAchievementPoints)
+local frame
+
+function ADDON:ApplyShowAchievementPoints(flag)
+    ADDON.settings.showAchievementPoints = flag
+    if (MountJournal) then
+        if (not frame and flag) then
+            frame = CreateAchievementPoints()
+        end
+
+        if frame then
+            frame:SetShown(flag)
+        end
+    end
+end
+
+ADDON:RegisterLoadUICallback(function()
+    ADDON:ApplyShowAchievementPoints(ADDON.settings.showAchievementPoints)
+end)

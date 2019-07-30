@@ -36,14 +36,6 @@ function ADDON:ApplyMoveEquipmentSlot(flag)
     end
 end
 
-local doInit = true
-local function init()
-    if (doInit) then
-        doInit = false
-        ADDON:ApplyMoveEquipmentSlot(ADDON.settings.moveEquipmentSlot)
-    end
-end
-
-ADDON:RegisterLoadUICallback(init)
--- UI Pack fix  (eg. ElvUI, TukUI)
-ADDON.UI:RegisterUIOverhaulCallback(init)
+ADDON:RegisterLoadUICallback(function()
+    ADDON:ApplyMoveEquipmentSlot(ADDON.settings.moveEquipmentSlot)
+end)

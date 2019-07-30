@@ -21,6 +21,9 @@ local function BuildFrame()
     frame:SetLayout("List")
 
     local L = ADDON.L
+    if (ADDON.settings.showAchievementPoints ~= nil) then
+        frame.showAchievementPointsCheck = BuildCheckBox(frame, 'Show achievement points')
+    end
     if (ADDON.settings.compactMountList ~= nil) then
         frame.compactListCheck = BuildCheckBox(frame, L.SETTING_COMPACT_LIST)
     end
@@ -48,23 +51,23 @@ local function OKHandler(frame)
         ADDON.settings.enableCursorKeys = frame.enableCursorKeysCheck:GetValue()
     end
 
-    if (frame.favoritesPerCharCheck and frame.favoritesPerCharCheck:GetValue() ~= ADDON.settings.favoritePerChar) then
-        ADDON.settings.favoritePerChar = frame.favoritesPerCharCheck:GetValue()
-        if ADDON.settings.favoritePerChar then
-            ADDON:CollectFavoredMounts()
-        end
+    if (frame.favoritesPerCharCheck) then
+        ADDON:ApplyFavoritePerCharacter(frame.favoritesPerCharCheck:GetValue())
     end
     if (frame.moveEquipmentCheck) then
         ADDON:ApplyMoveEquipmentSlot(frame.moveEquipmentCheck:GetValue())
     end
-    if (frame.compactListCheck and frame.compactListCheck:GetValue() ~= ADDON.settings.compactMountList) then
+    if (frame.compactListCheck) then
         ADDON:ApplyCompactMountList(frame.compactListCheck:GetValue())
     end
     if (frame.unlockCameraCheck) then
         ADDON:ApplyUnlockDisplayCamera(frame.unlockCameraCheck:GetValue())
     end
-    if (frame.shopButtonCheck and frame.shopButtonCheck:GetValue() ~= ADDON.settings.showShopButton) then
+    if (frame.shopButtonCheck) then
         ADDON.settings.showShopButton = frame.shopButtonCheck:GetValue()
+    end
+    if (frame.showAchievementPointsCheck) then
+        ADDON:ApplyShowAchievementPoints(frame.showAchievementPointsCheck:GetValue())
     end
 end
 
@@ -88,6 +91,9 @@ ADDON:RegisterLoginCallback(function()
         end
         if (frame.shopButtonCheck) then
             frame.shopButtonCheck:SetValue(ADDON.settings.showShopButton)
+        end
+        if (frame.showAchievementPointsCheck) then
+            frame.showAchievementPointsCheck:SetValue(ADDON.settings.showAchievementPoints)
         end
     end)
     group:SetCallback("okay", OKHandler)

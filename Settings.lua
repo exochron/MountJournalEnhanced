@@ -8,6 +8,7 @@ function ADDON:ResetFilterSettings()
 end
 
 function ADDON:ResetUISettings()
+    ADDON.settings.showAchievementPoints = true
     ADDON.settings.showShopButton = false
     ADDON.settings.compactMountList = true
     ADDON.settings.unlockDisplayCamera = true
@@ -19,6 +20,7 @@ end
 local function PrepareDefaults()
     local defaultSettings = {
         debugMode = false,
+        showAchievementPoints = true,
         showShopButton = false,
         compactMountList = true,
         unlockDisplayCamera = true,
