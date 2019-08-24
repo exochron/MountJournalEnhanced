@@ -15,6 +15,8 @@ function ADDON:ResetUISettings()
     ADDON.settings.enableCursorKeys = true
     ADDON.settings.favoritePerChar = false
     ADDON.settings.moveEquipmentSlot = true
+    ADDON.settings.previewButton = true
+    ADDON.settings.showPersonalCount = true
 end
 
 local function PrepareDefaults()
@@ -27,6 +29,8 @@ local function PrepareDefaults()
         enableCursorKeys = true,
         favoritePerChar = false,
         moveEquipmentSlot = true,
+        previewButton = true,
+        showPersonalCount = true,
         favoredMounts = {},
         hiddenMounts = {},
         filter = {

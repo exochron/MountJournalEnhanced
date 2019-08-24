@@ -22,7 +22,10 @@ local function BuildFrame()
 
     local L = ADDON.L
     if (ADDON.settings.showAchievementPoints ~= nil) then
-        frame.showAchievementPointsCheck = BuildCheckBox(frame, 'Show achievement points')
+        frame.showAchievementPointsCheck = BuildCheckBox(frame, L.SETTING_ACHIEVEMENT_POINTS)
+    end
+    if (ADDON.settings.showPersonalCount ~= nil) then
+        frame.showPersonalCountCheck = BuildCheckBox(frame, L.SETTING_MOUNT_COUNT)
     end
     if (ADDON.settings.compactMountList ~= nil) then
         frame.compactListCheck = BuildCheckBox(frame, L.SETTING_COMPACT_LIST)
@@ -38,6 +41,9 @@ local function BuildFrame()
     end
     if (ADDON.settings.favoritePerChar ~= nil) then
         frame.favoritesPerCharCheck = BuildCheckBox(frame, L.SETTING_FAVORITE_PER_CHAR)
+    end
+    if (ADDON.settings.previewButton ~= nil) then
+        frame.previewButtonCheck = BuildCheckBox(frame, L.SETTING_PREVIEW_LINK)
     end
     if (ADDON.settings.showShopButton ~= nil) then
         frame.shopButtonCheck = BuildCheckBox(frame, L.SETTING_SHOP_BUTTON)
@@ -69,6 +75,12 @@ local function OKHandler(frame)
     if (frame.showAchievementPointsCheck) then
         ADDON:ApplyShowAchievementPoints(frame.showAchievementPointsCheck:GetValue())
     end
+    if (frame.previewButtonCheck) then
+        ADDON:ApplyPreviewButton(frame.previewButtonCheck:GetValue())
+    end
+    if (frame.showPersonalCountCheck) then
+        ADDON:ApplyShowPersonalCount(frame.showPersonalCountCheck:GetValue())
+    end
 end
 
 ADDON:RegisterLoginCallback(function()
@@ -94,6 +106,12 @@ ADDON:RegisterLoginCallback(function()
         end
         if (frame.showAchievementPointsCheck) then
             frame.showAchievementPointsCheck:SetValue(ADDON.settings.showAchievementPoints)
+        end
+        if (frame.previewButtonCheck) then
+            frame.previewButtonCheck:SetValue(ADDON.settings.previewButton)
+        end
+        if (frame.showPersonalCountCheck) then
+            frame.showPersonalCountCheck:SetValue(ADDON.settings.showPersonalCount)
         end
     end)
     group:SetCallback("okay", OKHandler)

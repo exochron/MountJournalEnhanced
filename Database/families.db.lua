@@ -559,6 +559,7 @@ ADDON.MountJournalEnhancedFamily = {
 [32290] = true, -- Swift Green Gryphon
 [32292] = true, -- Swift Purple Gryphon
 [61229] = true, -- Armored Snowy Gryphon
+[302361] = true, -- Alabaster Stormtalon
 },
 ["Hippogryphs"] = {
 [102514] = true, -- Corrupted Hippogryph
@@ -592,6 +593,7 @@ ADDON.MountJournalEnhancedFamily = {
 [32296] = true, -- Swift Yellow Wind Rider
 [32297] = true, -- Swift Purple Wind Rider
 [61230] = true, -- Armored Blue Wind Rider
+[302362] = true, -- Alabaster Thunderwing
 },
 },
 ["Fish"] = {

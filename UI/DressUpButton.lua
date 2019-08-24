@@ -20,8 +20,6 @@ local function saveMountIdInFrame(link)
     end
 end
 
-hooksecurefunc("DressUpMountLink", saveMountIdInFrame)
-
 local function createJournalButton(ParentFrame)
     local AceGUI = LibStub("AceGUI-3.0")
 
@@ -46,11 +44,19 @@ local function createJournalButton(ParentFrame)
         end
     end)
 
+    -- Todo: wobbly show/hide
     ParentFrame.ResetButton:HookScript("OnShow", function()
         button.frame:Hide()
     end)
     ParentFrame.ResetButton:HookScript("OnHide", function()
-        if (ParentFrame.mode == "mount") then
+        if (ParentFrame.mode == "mount" and ADDON.settings.previewButton) then
+            button.frame:Show()
+        else
+            button.frame:Hide()
+        end
+    end)
+    ParentFrame:HookScript("OnShow", function()
+        if (ParentFrame.mode == "mount" and ADDON.settings.previewButton) then
             button.frame:Show()
         else
             button.frame:Hide()
@@ -58,5 +64,21 @@ local function createJournalButton(ParentFrame)
     end)
 end
 
-createJournalButton(DressUpFrame)
-createJournalButton(SideDressUpFrame)
+local inititalized = false
+
+function ADDON:ApplyPreviewButton(flag)
+    ADDON.settings.previewButton = flag
+
+    if (flag and not inititalized) then
+        createJournalButton(DressUpFrame)
+        createJournalButton(SideDressUpFrame)
+
+        hooksecurefunc("DressUpMountLink", saveMountIdInFrame)
+
+        inititalized = true
+    end
+end
+
+ADDON:RegisterLoginCallback(function ()
+    ADDON:ApplyPreviewButton(ADDON.settings.previewButton)
+end)

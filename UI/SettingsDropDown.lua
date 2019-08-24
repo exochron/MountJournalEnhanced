@@ -35,7 +35,10 @@ local function InitializeDropDown(filterMenu, level)
     MSA_DropDownMenu_AddButton(CreateTitle(), level)
 
     if (ADDON.settings.showAchievementPoints ~= nil) then
-        MSA_DropDownMenu_AddButton(CreateCheck('Show achievement points', 'showAchievementPoints', ADDON.ApplyShowAchievementPoints), level)
+        MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_ACHIEVEMENT_POINTS, 'showAchievementPoints', ADDON.ApplyShowAchievementPoints), level)
+    end
+    if (ADDON.settings.showAchievementPoints ~= nil) then
+        MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_MOUNT_COUNT, 'showPersonalCount', ADDON.ApplyShowPersonalCount), level)
     end
     if (ADDON.settings.compactMountList ~= nil) then
         MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_COMPACT_LIST, 'compactMountList', ADDON.ApplyCompactMountList), level)
@@ -52,15 +55,17 @@ local function InitializeDropDown(filterMenu, level)
     if (ADDON.settings.favoritePerChar ~= nil) then
         MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_FAVORITE_PER_CHAR, 'favoritePerChar', ADDON.ApplyFavoritePerCharacter), level)
     end
+    if (ADDON.settings.previewButton ~= nil) then
+        MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_PREVIEW_LINK, 'previewButton', ADDON.ApplyPreviewButton), level)
+    end
     if (ADDON.settings.showShopButton ~= nil) then
         MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_SHOP_BUTTON, 'showShopButton'), level)
     end
 end
 
-local function BuildButton()
+local function BuildWheelButton()
     local button = CreateFrame("Button", nil, MountJournal)
 
-    print(CollectionsJournalPortrait:GetAlpha())
     if (CollectionsJournalPortrait:IsShown() and CollectionsJournalPortrait:GetAlpha() > 0.0) then
         button:SetPoint("TOPLEFT", MountJournal, "TOPLEFT", 60, -3)
     else
@@ -78,7 +83,7 @@ local function BuildButton()
 end
 
 ADDON:RegisterLoadUICallback(function()
-    local button = BuildButton()
+    local button = BuildWheelButton()
 
     local menu = MSA_DropDownMenu_Create(ADDON_NAME .. "SettingsMenu", MountJournal)
     MSA_DropDownMenu_Initialize(menu, InitializeDropDown, "MENU")

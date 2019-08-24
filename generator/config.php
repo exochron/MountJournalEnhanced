@@ -9,11 +9,13 @@ return [
     ],
 
     'wowhead' => [
-        'channel' => 'ptr', // www|ptr
+        'channel' => 'www', // www|ptr
     ],
 
     'overwriteMounts' => [ // missing in battle net response
         new Mount('Sylverian Dreamer', 290132),
+        new Mount('Alabaster Stormtalon', 302361),
+        new Mount('Alabaster Thunderwing', 302362),
     ],
 
     'ignored'   => [

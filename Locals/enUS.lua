@@ -1,6 +1,7 @@
 ﻿local ADDON_NAME, ADDON = ...
 
-local L = ADDON.L or {}
+ADDON.L = {}
+local L = ADDON.L
 
 L["Black Market"] = "Black Market"
 L["Family"] = "Family"
@@ -153,11 +154,12 @@ L["Yaks"] = "Yaks"
 L["Yetis"] = "Yetis"
 
 -- Settings
+L["SETTING_ACHIEVEMENT_POINTS"] = "Show achievement points"
 L["SETTING_COMPACT_LIST"] = "Compact mount list"
 L["SETTING_CURSOR_KEYS"] = "Enable Up&Down keys to browse mounts"
 L["SETTING_FAVORITE_PER_CHAR"] = "Favorite mounts per character"
+L["SETTING_MOUNT_COUNT"] = "Show personal mount count"
 L["SETTING_MOVE_EQUIPMENT"] = "Move equipment slot into display"
+L["SETTING_PREVIEW_LINK"] = "Show Collection button in mount preview"
 L["SETTING_SHOP_BUTTON"] = "Show shop button at untrained shop mounts"
 L["SETTING_YCAMERA"] = "Unlock Y rotation with mouse in display"
-
-ADDON.L = L
