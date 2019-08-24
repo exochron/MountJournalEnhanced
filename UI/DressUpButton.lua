@@ -37,25 +37,17 @@ local function createJournalButton(ParentFrame)
         if (ParentFrame.mode == "mount") then
             local mountId = ParentFrame.mountId;
             if mountId then
-                local spellId = select(2, C_MountJournal.GetMountInfoByID(mountId))
                 SetCollectionsJournalShown(true, COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS);
-                MountJournal_SelectByMountID(mountId, spellId)
+                MountJournal_SelectByMountID(mountId)
             end
         end
     end)
 
-    -- Todo: wobbly show/hide
     ParentFrame.ResetButton:HookScript("OnShow", function()
         button.frame:Hide()
     end)
-    ParentFrame.ResetButton:HookScript("OnHide", function()
-        if (ParentFrame.mode == "mount" and ADDON.settings.previewButton) then
-            button.frame:Show()
-        else
-            button.frame:Hide()
-        end
-    end)
-    ParentFrame:HookScript("OnShow", function()
+    -- OnHide won't trigger if it's already hidden. (happens when switching preview between pet and mount)
+    hooksecurefunc(ParentFrame.ResetButton, "Hide", function()
         if (ParentFrame.mode == "mount" and ADDON.settings.previewButton) then
             button.frame:Show()
         else
@@ -79,6 +71,6 @@ function ADDON:ApplyPreviewButton(flag)
     end
 end
 
-ADDON:RegisterLoginCallback(function ()
+ADDON:RegisterLoginCallback(function()
     ADDON:ApplyPreviewButton(ADDON.settings.previewButton)
 end)
