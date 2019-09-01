@@ -66,7 +66,7 @@ local function InitializeMountOptionsMenu(sender, level)
         if (ADDON.settings.hiddenMounts[spellId]) then
             info.text = SHOW
             info.func = function()
-                ADDON.settings.hiddenMounts[spellId] = false
+                ADDON.settings.hiddenMounts[spellId] = nil
                 ADDON:UpdateIndexMap()
                 MountJournal_UpdateMountList()
             end

@@ -9,18 +9,55 @@ function ADDON:ResetFilterSettings()
 end
 
 function ADDON:ResetSettings()
-    ADDON.settings.ui.showAchievementPoints = true
-    ADDON.settings.ui.showShopButton = false
-    ADDON.settings.ui.compactMountList = true
-    ADDON.settings.ui.unlockDisplayCamera = true
-    ADDON.settings.ui.enableCursorKeys = true
-    ADDON.settings.ui.moveEquipmentSlot = true
-    ADDON.settings.ui.previewButton = true
-    ADDON.settings.ui.showPersonalCount = true
+    ADDON:ApplyPersonalUI(false)
+    ADDON:ApplyFavoritePerCharacter(false)
+    ADDON:ApplyPersonalHiddenMounts(false)
+    ADDON:ApplyPersonalFilter(false)
 
-    ADDON.settings.favoritePerChar = false
-    ADDON.settings.personalHiddenMounts = false
-    ADDON.settings.personalFilter = false
+    ADDON:ApplyShowAchievementPoints(true)
+    ADDON:ApplyCompactMountList(true)
+    ADDON:ApplyUnlockDisplayCamera(true)
+    ADDON:ApplyMoveEquipmentSlot(true)
+    ADDON:ApplyPreviewButton(true)
+    ADDON:ApplyShowPersonalCount(true)
+    ADDON.settings.ui.enableCursorKeys = true
+    ADDON.settings.ui.showShopButton = false
+end
+
+function ADDON:ApplyPersonalUI(flag)
+    ADDON.settings.personalUi = flag
+    MJEPersonalSettings.personalUi = flag
+    if flag == true then
+        ADDON.settings.ui = MJEPersonalSettings.ui
+    else
+        ADDON.settings.ui = MJEGlobalSettings.ui
+    end
+end
+function ADDON:ApplyPersonalHiddenMounts(flag)
+    MJEPersonalSettings.personalHiddenMounts = flag
+    ADDON.settings.personalHiddenMounts = flag
+    if flag == true then
+        ADDON.settings.hiddenMounts = MJEPersonalSettings.hiddenMounts
+    else
+        ADDON.settings.hiddenMounts = MJEGlobalSettings.hiddenMounts
+    end
+
+    if ADDON.initialized then
+        ADDON:UpdateIndexMap()
+    end
+end
+function ADDON:ApplyPersonalFilter(flag)
+    MJEPersonalSettings.personalFilter = flag
+    ADDON.settings.personalFilter = flag
+    if flag == true then
+        ADDON.settings.filter = MJEPersonalSettings.filter
+    else
+        ADDON.settings.filter = MJEGlobalSettings.filter
+    end
+
+    if ADDON.initialized then
+        ADDON:UpdateIndexMap()
+    end
 end
 
 local function PrepareDefaults()
@@ -123,26 +160,10 @@ ADDON:RegisterLoginCallback(function()
 
     ADDON.settings = {}
 
-    if MJEPersonalSettings.personalUi == true then
-        ADDON.settings.ui = MJEPersonalSettings.ui
-    else
-        ADDON.settings.ui = MJEGlobalSettings.ui
-    end
+    ADDON:ApplyPersonalUI(MJEPersonalSettings.personalUi)
+    ADDON:ApplyPersonalHiddenMounts(MJEPersonalSettings.personalHiddenMounts)
+    ADDON:ApplyPersonalFilter(MJEPersonalSettings.personalFilter)
 
     ADDON.settings.favoritePerChar = MJEPersonalSettings.favoritePerChar
     ADDON.settings.favoredMounts = MJEPersonalSettings.favoredMounts
-
-    ADDON.settings.personalHiddenMounts = MJEPersonalSettings.personalHiddenMounts
-    if ADDON.settings.personalHiddenMounts == true then
-        ADDON.settings.hiddenMounts = MJEPersonalSettings.hiddenMounts
-    else
-        ADDON.settings.hiddenMounts = MJEGlobalSettings.hiddenMounts
-    end
-
-    ADDON.settings.personalFilter = MJEPersonalSettings.personalFilter
-    if ADDON.settings.personalFilter == true then
-        ADDON.settings.filter = MJEPersonalSettings.filter
-    else
-        ADDON.settings.filter = MJEGlobalSettings.filter
-    end
 end)

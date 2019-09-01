@@ -2,11 +2,8 @@ local ADDON_NAME, ADDON = ...
 
 -- This script migrates the settings from personal scope to the current mixed scopes (2.5)
 
--- Settings have to be loaded during PLAYER_LOGIN
-
 ADDON:RegisterLoginCallback(function()
-    if MountJournalEnhancedSettings and not MJEPersonalSettings then
-
+    if MountJournalEnhancedSettings and 0 == #MJEPersonalSettings then
         MJEPersonalSettings = {
             personalUi = true,
             ui = {
@@ -26,5 +23,7 @@ ADDON:RegisterLoginCallback(function()
             filter = MountJournalEnhancedSettings.filter,
             personalFilter = true,
         }
+
+        MountJournalEnhancedSettings = nil
     end
 end)

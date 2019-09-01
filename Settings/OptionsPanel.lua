@@ -58,20 +58,39 @@ local function BuildFrame()
 
     BuildHeading(frame, L. SETTING_HEAD_SETTING_BEHAVIOUR)
 
+    if (ADDON.settings.personalUi ~= nil) then
+        frame.personalUICheck = BuildCheckBox(frame, 'Apply Interface settings only to this character')
+    end
+    if (ADDON.settings.personalFilter ~= nil) then
+        frame.personalFilterCheck = BuildCheckBox(frame, 'Apply filters only to this character')
+    end
     if (ADDON.settings.favoritePerChar ~= nil) then
         frame.favoritesPerCharCheck = BuildCheckBox(frame, L.SETTING_FAVORITE_PER_CHAR)
+    end
+    if (ADDON.settings.personalHiddenMounts ~= nil) then
+        frame.personalHiddenMountsCheck = BuildCheckBox(frame, 'Apply hidden mounts only to this character')
     end
 
     return frame
 end
 
 local function OKHandler(frame)
-    if (frame.enableCursorKeysCheck) then
-        ADDON.settings.ui.enableCursorKeys = frame.enableCursorKeysCheck:GetValue()
-    end
 
+    if (frame.personalUICheck) then
+        ADDON:ApplyPersonalUI(frame.personalUICheck:GetValue())
+    end
+    if (frame.personalFilterCheck) then
+        ADDON:ApplyPersonalFilter(frame.personalFilterCheck:GetValue())
+    end
     if (frame.favoritesPerCharCheck) then
         ADDON:ApplyFavoritePerCharacter(frame.favoritesPerCharCheck:GetValue())
+    end
+    if (frame.personalHiddenMountsCheck) then
+        ADDON:ApplyPersonalHiddenMounts(frame.personalHiddenMountsCheck:GetValue())
+    end
+
+    if (frame.enableCursorKeysCheck) then
+        ADDON.settings.ui.enableCursorKeys = frame.enableCursorKeysCheck:GetValue()
     end
     if (frame.moveEquipmentCheck) then
         ADDON:ApplyMoveEquipmentSlot(frame.moveEquipmentCheck:GetValue())
@@ -111,9 +130,6 @@ ADDON:RegisterLoginCallback(function()
         if (frame.enableCursorKeysCheck) then
             frame.enableCursorKeysCheck:SetValue(ADDON.settings.ui.enableCursorKeys)
         end
-        if (frame.favoritesPerCharCheck) then
-            frame.favoritesPerCharCheck:SetValue(ADDON.settings.favoritePerChar)
-        end
         if (frame.shopButtonCheck) then
             frame.shopButtonCheck:SetValue(ADDON.settings.ui.showShopButton)
         end
@@ -125,6 +141,19 @@ ADDON:RegisterLoginCallback(function()
         end
         if (frame.showPersonalCountCheck) then
             frame.showPersonalCountCheck:SetValue(ADDON.settings.ui.showPersonalCount)
+        end
+
+        if (frame.personalUICheck) then
+            frame.personalUICheck:SetValue(ADDON.settings.personalUi)
+        end
+        if (frame.personalFilterCheck) then
+            frame.personalFilterCheck:SetValue(ADDON.settings.personalFilter)
+        end
+        if (frame.favoritesPerCharCheck) then
+            frame.favoritesPerCharCheck:SetValue(ADDON.settings.favoritePerChar)
+        end
+        if (frame.personalHiddenMountsCheck) then
+            frame.personalHiddenMountsCheck:SetValue(ADDON.settings.personalHiddenMounts)
         end
     end)
     group:SetCallback("okay", OKHandler)

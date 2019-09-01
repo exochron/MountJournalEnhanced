@@ -19,7 +19,7 @@ Filters.lua
 MountJournalEnhanced.lua
 Settings\Migration.lua
 Settings\Settings.lua
-Settings\Panel.lua
+Settings\OptionsPanel.lua
 DebugTest.lua
 Favorites.lua
 UI\Functions.lua

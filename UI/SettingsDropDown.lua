@@ -18,12 +18,12 @@ local function CreateCheck(text, settingKey, applyFunc)
     info.hasArrow = false
     info.text = text
     info.notCheckable = false
-    info.checked = ADDON.settings[settingKey]
+    info.checked = ADDON.settings.ui[settingKey]
     info.func = function(_, _, _, value)
         if (applyFunc) then
             applyFunc(ADDON, value)
         else
-            ADDON.settings[settingKey] = value
+            ADDON.settings.ui[settingKey] = value
         end
     end
 
