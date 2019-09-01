@@ -59,16 +59,16 @@ local function BuildFrame()
     BuildHeading(frame, L. SETTING_HEAD_SETTING_BEHAVIOUR)
 
     if (ADDON.settings.personalUi ~= nil) then
-        frame.personalUICheck = BuildCheckBox(frame, 'Apply Interface settings only to this character')
+        frame.personalUICheck = BuildCheckBox(frame, L.SETTING_PERSONAL_UI)
     end
     if (ADDON.settings.personalFilter ~= nil) then
-        frame.personalFilterCheck = BuildCheckBox(frame, 'Apply filters only to this character')
+        frame.personalFilterCheck = BuildCheckBox(frame, L.SETTING_PERSONAL_FILTER)
     end
     if (ADDON.settings.favoritePerChar ~= nil) then
         frame.favoritesPerCharCheck = BuildCheckBox(frame, L.SETTING_FAVORITE_PER_CHAR)
     end
     if (ADDON.settings.personalHiddenMounts ~= nil) then
-        frame.personalHiddenMountsCheck = BuildCheckBox(frame, 'Apply hidden mounts only to this character')
+        frame.personalHiddenMountsCheck = BuildCheckBox(frame, L.SETTING_PERSONAL_HIDDEN_MOUNTS)
     end
 
     return frame
