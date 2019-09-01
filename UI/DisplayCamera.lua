@@ -3,7 +3,7 @@ local ADDON_NAME, ADDON = ...
 -- unlock Y rotation with mouse
 
 function ADDON:ApplyUnlockDisplayCamera(flag)
-    ADDON.settings.unlockDisplayCamera = flag
+    ADDON.settings.ui.unlockDisplayCamera = flag
     if (MountJournal) then
         local cam = MountJournal.MountDisplay.ModelScene:GetActiveCamera()
         if cam then
@@ -19,7 +19,7 @@ end
 local function SetupCamera()
     local cam = MountJournal.MountDisplay.ModelScene:GetActiveCamera()
     if cam then
-        ADDON:ApplyUnlockDisplayCamera(ADDON.settings.unlockDisplayCamera)
+        ADDON:ApplyUnlockDisplayCamera(ADDON.settings.ui.unlockDisplayCamera)
 
         -- revert Y rotation for a better feel
         local org_GetDelta = cam.GetDeltaModifierForCameraMode

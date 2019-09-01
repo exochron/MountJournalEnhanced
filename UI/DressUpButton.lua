@@ -48,7 +48,7 @@ local function createJournalButton(ParentFrame)
     end)
     -- OnHide won't trigger if it's already hidden. (happens when switching preview between pet and mount)
     hooksecurefunc(ParentFrame.ResetButton, "Hide", function()
-        if (ParentFrame.mode == "mount" and ADDON.settings.previewButton) then
+        if (ParentFrame.mode == "mount" and ADDON.settings.ui.previewButton) then
             button.frame:Show()
         else
             button.frame:Hide()
@@ -59,7 +59,7 @@ end
 local inititalized = false
 
 function ADDON:ApplyPreviewButton(flag)
-    ADDON.settings.previewButton = flag
+    ADDON.settings.ui.previewButton = flag
 
     if (flag and not inititalized) then
         createJournalButton(DressUpFrame)
@@ -72,5 +72,5 @@ function ADDON:ApplyPreviewButton(flag)
 end
 
 ADDON:RegisterLoginCallback(function()
-    ADDON:ApplyPreviewButton(ADDON.settings.previewButton)
+    ADDON:ApplyPreviewButton(ADDON.settings.ui.previewButton)
 end)

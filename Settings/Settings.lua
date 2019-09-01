@@ -1,38 +1,51 @@
 local ADDON_NAME, ADDON = ...
 
-MountJournalEnhancedSettings = MountJournalEnhancedSettings or {}
+MJEPersonalSettings = MJEPersonalSettings or {}
+MJEGlobalSettings = MJEGlobalSettings or {}
 local defaultFilterStates
 
 function ADDON:ResetFilterSettings()
     ADDON.settings.filter = CopyTable(defaultFilterStates)
 end
 
-function ADDON:ResetUISettings()
-    ADDON.settings.showAchievementPoints = true
-    ADDON.settings.showShopButton = false
-    ADDON.settings.compactMountList = true
-    ADDON.settings.unlockDisplayCamera = true
-    ADDON.settings.enableCursorKeys = true
+function ADDON:ResetSettings()
+    ADDON.settings.ui.showAchievementPoints = true
+    ADDON.settings.ui.showShopButton = false
+    ADDON.settings.ui.compactMountList = true
+    ADDON.settings.ui.unlockDisplayCamera = true
+    ADDON.settings.ui.enableCursorKeys = true
+    ADDON.settings.ui.moveEquipmentSlot = true
+    ADDON.settings.ui.previewButton = true
+    ADDON.settings.ui.showPersonalCount = true
+
     ADDON.settings.favoritePerChar = false
-    ADDON.settings.moveEquipmentSlot = true
-    ADDON.settings.previewButton = true
-    ADDON.settings.showPersonalCount = true
+    ADDON.settings.personalHiddenMounts = false
+    ADDON.settings.personalFilter = false
 end
 
 local function PrepareDefaults()
     local defaultSettings = {
-        debugMode = false,
-        showAchievementPoints = true,
-        showShopButton = false,
-        compactMountList = true,
-        unlockDisplayCamera = true,
-        enableCursorKeys = true,
+
+        personalUi = false,
+        ui = {
+            debugMode = false,
+            showAchievementPoints = true,
+            showShopButton = false,
+            compactMountList = true,
+            unlockDisplayCamera = true,
+            enableCursorKeys = true,
+            moveEquipmentSlot = true,
+            previewButton = true,
+            showPersonalCount = true,
+        },
+
         favoritePerChar = false,
-        moveEquipmentSlot = true,
-        previewButton = true,
-        showPersonalCount = true,
         favoredMounts = {},
+
         hiddenMounts = {},
+        personalHiddenMounts = false,
+
+        personalFilter = false,
         filter = {
             collected = true,
             notCollected = true,
@@ -105,6 +118,31 @@ end
 ADDON:RegisterLoginCallback(function()
     local defaultSettings = PrepareDefaults()
     defaultFilterStates = CopyTable(defaultSettings.filter)
-    CombineSettings(MountJournalEnhancedSettings, defaultSettings)
-    ADDON.settings = MountJournalEnhancedSettings
+    CombineSettings(MJEGlobalSettings, defaultSettings)
+    CombineSettings(MJEPersonalSettings, defaultSettings)
+
+    ADDON.settings = {}
+
+    if MJEPersonalSettings.personalUi == true then
+        ADDON.settings.ui = MJEPersonalSettings.ui
+    else
+        ADDON.settings.ui = MJEGlobalSettings.ui
+    end
+
+    ADDON.settings.favoritePerChar = MJEPersonalSettings.favoritePerChar
+    ADDON.settings.favoredMounts = MJEPersonalSettings.favoredMounts
+
+    ADDON.settings.personalHiddenMounts = MJEPersonalSettings.personalHiddenMounts
+    if ADDON.settings.personalHiddenMounts == true then
+        ADDON.settings.hiddenMounts = MJEPersonalSettings.hiddenMounts
+    else
+        ADDON.settings.hiddenMounts = MJEGlobalSettings.hiddenMounts
+    end
+
+    ADDON.settings.personalFilter = MJEPersonalSettings.personalFilter
+    if ADDON.settings.personalFilter == true then
+        ADDON.settings.filter = MJEPersonalSettings.filter
+    else
+        ADDON.settings.filter = MJEGlobalSettings.filter
+    end
 end)

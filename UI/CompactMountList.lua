@@ -145,7 +145,7 @@ local function RestoreListButtons()
 end
 
 function ADDON:ApplyCompactMountList(flag)
-    ADDON.settings.compactMountList = flag
+    ADDON.settings.ui.compactMountList = flag
     if (MountJournal) then
         if (flag) then
             ModifyListButtons()
@@ -163,7 +163,7 @@ ADDON:RegisterLoadUICallback(function()
         GenerateButtons()
         SetupScrollFix()
     end
-    ADDON:ApplyCompactMountList(ADDON.settings.compactMountList)
+    ADDON:ApplyCompactMountList(ADDON.settings.ui.compactMountList)
 end)
 
 -- UI Pack fix  (eg. ElvUI, TukUI)

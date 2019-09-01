@@ -12,6 +12,14 @@ local function BuildCheckBox(parent, text)
 
     return button
 end
+local function BuildHeading(parent, text)
+    local head = AceGUI:Create("Heading")
+    head:SetText(text)
+    head:SetFullWidth(true)
+    parent:AddChild(head)
+
+    return head
+end
 
 local function BuildFrame()
     local title = GetAddOnMetadata(ADDON_NAME, "Title")
@@ -20,33 +28,38 @@ local function BuildFrame()
     frame:SetTitle(title)
     frame:SetLayout("List")
 
+    BuildHeading(frame, UIOPTIONS_MENU)
+
     local L = ADDON.L
-    if (ADDON.settings.showAchievementPoints ~= nil) then
+    if (ADDON.settings.ui.showAchievementPoints ~= nil) then
         frame.showAchievementPointsCheck = BuildCheckBox(frame, L.SETTING_ACHIEVEMENT_POINTS)
     end
-    if (ADDON.settings.showPersonalCount ~= nil) then
+    if (ADDON.settings.ui.showPersonalCount ~= nil) then
         frame.showPersonalCountCheck = BuildCheckBox(frame, L.SETTING_MOUNT_COUNT)
     end
-    if (ADDON.settings.compactMountList ~= nil) then
+    if (ADDON.settings.ui.compactMountList ~= nil) then
         frame.compactListCheck = BuildCheckBox(frame, L.SETTING_COMPACT_LIST)
     end
-    if (ADDON.settings.moveEquipmentSlot ~= nil) then
+    if (ADDON.settings.ui.moveEquipmentSlot ~= nil) then
         frame.moveEquipmentCheck = BuildCheckBox(frame, L.SETTING_MOVE_EQUIPMENT)
     end
-    if (ADDON.settings.unlockDisplayCamera ~= nil) then
+    if (ADDON.settings.ui.unlockDisplayCamera ~= nil) then
         frame.unlockCameraCheck = BuildCheckBox(frame, L.SETTING_YCAMERA)
     end
-    if (ADDON.settings.enableCursorKeys ~= nil) then
+    if (ADDON.settings.ui.enableCursorKeys ~= nil) then
         frame.enableCursorKeysCheck = BuildCheckBox(frame, L.SETTING_CURSOR_KEYS)
     end
-    if (ADDON.settings.favoritePerChar ~= nil) then
-        frame.favoritesPerCharCheck = BuildCheckBox(frame, L.SETTING_FAVORITE_PER_CHAR)
-    end
-    if (ADDON.settings.previewButton ~= nil) then
+    if (ADDON.settings.ui.previewButton ~= nil) then
         frame.previewButtonCheck = BuildCheckBox(frame, L.SETTING_PREVIEW_LINK)
     end
-    if (ADDON.settings.showShopButton ~= nil) then
+    if (ADDON.settings.ui.showShopButton ~= nil) then
         frame.shopButtonCheck = BuildCheckBox(frame, L.SETTING_SHOP_BUTTON)
+    end
+
+    BuildHeading(frame, L. SETTING_HEAD_SETTING_BEHAVIOUR)
+
+    if (ADDON.settings.favoritePerChar ~= nil) then
+        frame.favoritesPerCharCheck = BuildCheckBox(frame, L.SETTING_FAVORITE_PER_CHAR)
     end
 
     return frame
@@ -54,7 +67,7 @@ end
 
 local function OKHandler(frame)
     if (frame.enableCursorKeysCheck) then
-        ADDON.settings.enableCursorKeys = frame.enableCursorKeysCheck:GetValue()
+        ADDON.settings.ui.enableCursorKeys = frame.enableCursorKeysCheck:GetValue()
     end
 
     if (frame.favoritesPerCharCheck) then
@@ -70,7 +83,7 @@ local function OKHandler(frame)
         ADDON:ApplyUnlockDisplayCamera(frame.unlockCameraCheck:GetValue())
     end
     if (frame.shopButtonCheck) then
-        ADDON.settings.showShopButton = frame.shopButtonCheck:GetValue()
+        ADDON.settings.ui.showShopButton = frame.shopButtonCheck:GetValue()
     end
     if (frame.showAchievementPointsCheck) then
         ADDON:ApplyShowAchievementPoints(frame.showAchievementPointsCheck:GetValue())
@@ -87,34 +100,34 @@ ADDON:RegisterLoginCallback(function()
     local group = BuildFrame()
     group:SetCallback("refresh", function(frame)
         if (frame.compactListCheck) then
-            frame.compactListCheck:SetValue(ADDON.settings.compactMountList)
+            frame.compactListCheck:SetValue(ADDON.settings.ui.compactMountList)
         end
         if (frame.moveEquipmentCheck) then
-            frame.moveEquipmentCheck:SetValue(ADDON.settings.moveEquipmentSlot)
+            frame.moveEquipmentCheck:SetValue(ADDON.settings.ui.moveEquipmentSlot)
         end
         if (frame.unlockCameraCheck) then
-            frame.unlockCameraCheck:SetValue(ADDON.settings.unlockDisplayCamera)
+            frame.unlockCameraCheck:SetValue(ADDON.settings.ui.unlockDisplayCamera)
         end
         if (frame.enableCursorKeysCheck) then
-            frame.enableCursorKeysCheck:SetValue(ADDON.settings.enableCursorKeys)
+            frame.enableCursorKeysCheck:SetValue(ADDON.settings.ui.enableCursorKeys)
         end
         if (frame.favoritesPerCharCheck) then
             frame.favoritesPerCharCheck:SetValue(ADDON.settings.favoritePerChar)
         end
         if (frame.shopButtonCheck) then
-            frame.shopButtonCheck:SetValue(ADDON.settings.showShopButton)
+            frame.shopButtonCheck:SetValue(ADDON.settings.ui.showShopButton)
         end
         if (frame.showAchievementPointsCheck) then
-            frame.showAchievementPointsCheck:SetValue(ADDON.settings.showAchievementPoints)
+            frame.showAchievementPointsCheck:SetValue(ADDON.settings.ui.showAchievementPoints)
         end
         if (frame.previewButtonCheck) then
-            frame.previewButtonCheck:SetValue(ADDON.settings.previewButton)
+            frame.previewButtonCheck:SetValue(ADDON.settings.ui.previewButton)
         end
         if (frame.showPersonalCountCheck) then
-            frame.showPersonalCountCheck:SetValue(ADDON.settings.showPersonalCount)
+            frame.showPersonalCountCheck:SetValue(ADDON.settings.ui.showPersonalCount)
         end
     end)
     group:SetCallback("okay", OKHandler)
-    group:SetCallback("default", ADDON.ResetUISettings)
+    group:SetCallback("default", ADDON.ResetSettings)
     InterfaceOptions_AddCategory(group.frame)
 end)

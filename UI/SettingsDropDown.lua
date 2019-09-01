@@ -34,31 +34,28 @@ local function InitializeDropDown(filterMenu, level)
 
     MSA_DropDownMenu_AddButton(CreateTitle(), level)
 
-    if (ADDON.settings.showAchievementPoints ~= nil) then
+    if (ADDON.settings.ui.showAchievementPoints ~= nil) then
         MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_ACHIEVEMENT_POINTS, 'showAchievementPoints', ADDON.ApplyShowAchievementPoints), level)
     end
-    if (ADDON.settings.showAchievementPoints ~= nil) then
+    if (ADDON.settings.ui.showAchievementPoints ~= nil) then
         MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_MOUNT_COUNT, 'showPersonalCount', ADDON.ApplyShowPersonalCount), level)
     end
-    if (ADDON.settings.compactMountList ~= nil) then
+    if (ADDON.settings.ui.compactMountList ~= nil) then
         MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_COMPACT_LIST, 'compactMountList', ADDON.ApplyCompactMountList), level)
     end
-    if (ADDON.settings.moveEquipmentSlot ~= nil) then
+    if (ADDON.settings.ui.moveEquipmentSlot ~= nil) then
         MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_MOVE_EQUIPMENT, 'moveEquipmentSlot', ADDON.ApplyMoveEquipmentSlot), level)
     end
-    if (ADDON.settings.unlockDisplayCamera ~= nil) then
+    if (ADDON.settings.ui.unlockDisplayCamera ~= nil) then
         MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_YCAMERA, 'unlockDisplayCamera', ADDON.ApplyUnlockDisplayCamera), level)
     end
-    if (ADDON.settings.enableCursorKeys ~= nil) then
+    if (ADDON.settings.ui.enableCursorKeys ~= nil) then
         MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_CURSOR_KEYS, 'enableCursorKeys'), level)
     end
-    if (ADDON.settings.favoritePerChar ~= nil) then
-        MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_FAVORITE_PER_CHAR, 'favoritePerChar', ADDON.ApplyFavoritePerCharacter), level)
-    end
-    if (ADDON.settings.previewButton ~= nil) then
+    if (ADDON.settings.ui.previewButton ~= nil) then
         MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_PREVIEW_LINK, 'previewButton', ADDON.ApplyPreviewButton), level)
     end
-    if (ADDON.settings.showShopButton ~= nil) then
+    if (ADDON.settings.ui.showShopButton ~= nil) then
         MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_SHOP_BUTTON, 'showShopButton'), level)
     end
 end

@@ -4,7 +4,7 @@ local function ToggleShopButton()
     if (MountJournal) then
         local frame = MountJournal.MountDisplay.InfoButton.Shop
         if (frame) then
-            if (ADDON.settings.showShopButton and MountJournal.selectedMountID) then
+            if (ADDON.settings.ui.showShopButton and MountJournal.selectedMountID) then
                 local _, _, _, _, _, sourceType, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(MountJournal.selectedMountID)
                 if not isCollected and sourceType == 10 then
                     frame:Show()
