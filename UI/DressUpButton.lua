@@ -20,8 +20,6 @@ local function saveMountIdInFrame(link)
     end
 end
 
-hooksecurefunc("DressUpMountLink", saveMountIdInFrame)
-
 local function createJournalButton(ParentFrame)
     local AceGUI = LibStub("AceGUI-3.0")
 
@@ -39,9 +37,8 @@ local function createJournalButton(ParentFrame)
         if (ParentFrame.mode == "mount") then
             local mountId = ParentFrame.mountId;
             if mountId then
-                local spellId = select(2, C_MountJournal.GetMountInfoByID(mountId))
                 SetCollectionsJournalShown(true, COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS);
-                MountJournal_SelectByMountID(mountId, spellId)
+                MountJournal_SelectByMountID(mountId)
             end
         end
     end)
@@ -49,8 +46,9 @@ local function createJournalButton(ParentFrame)
     ParentFrame.ResetButton:HookScript("OnShow", function()
         button.frame:Hide()
     end)
-    ParentFrame.ResetButton:HookScript("OnHide", function()
-        if (ParentFrame.mode == "mount") then
+    -- OnHide won't trigger if it's already hidden. (happens when switching preview between pet and mount)
+    hooksecurefunc(ParentFrame.ResetButton, "Hide", function()
+        if (ParentFrame.mode == "mount" and ADDON.settings.ui.previewButton) then
             button.frame:Show()
         else
             button.frame:Hide()
@@ -58,5 +56,21 @@ local function createJournalButton(ParentFrame)
     end)
 end
 
-createJournalButton(DressUpFrame)
-createJournalButton(SideDressUpFrame)
+local inititalized = false
+
+function ADDON:ApplyPreviewButton(flag)
+    ADDON.settings.ui.previewButton = flag
+
+    if (flag and not inititalized) then
+        createJournalButton(DressUpFrame)
+        createJournalButton(SideDressUpFrame)
+
+        hooksecurefunc("DressUpMountLink", saveMountIdInFrame)
+
+        inititalized = true
+    end
+end
+
+ADDON:RegisterLoginCallback(function()
+    ADDON:ApplyPreviewButton(ADDON.settings.ui.previewButton)
+end)

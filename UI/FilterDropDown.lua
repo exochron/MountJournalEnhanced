@@ -165,6 +165,7 @@ local function InitializeFilterDropDown(filterMenu, level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(NOT_COLLECTED, SETTING_NOT_COLLECTED), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Only usable"], SETTING_ONLY_USEABLE), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Only tradable"], SETTING_ONLY_TRADABLE), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Hidden"], SETTING_HIDDEN), level)
 
         MSA_DropDownMenu_AddButton(CreateFilterCategory(SOURCES, SETTING_SOURCE), level)
         MSA_DropDownMenu_AddButton(CreateFilterCategory(TYPE, SETTING_MOUNT_TYPE), level)
@@ -172,7 +173,6 @@ local function InitializeFilterDropDown(filterMenu, level)
         MSA_DropDownMenu_AddButton(CreateFilterCategory(L["Family"], SETTING_FAMILY), level)
         MSA_DropDownMenu_AddButton(CreateFilterCategory(EXPANSION_FILTER_TEXT, SETTING_EXPANSION), level)
 
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Hidden"], SETTING_HIDDEN), level)
         info = CreateFilterInfo(L["Reset filters"])
         info.keepShownOnClick = false
         info.func = function(_, _, _, value)

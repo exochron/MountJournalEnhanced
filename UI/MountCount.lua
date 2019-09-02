@@ -25,20 +25,47 @@ local function CreateCharacterMountCount()
     local _, _, _, mountCount = GetAchievementCriteriaInfo(MOUNT_COUNT_STATISTIC, 1)
     frame.uniqueCount:SetText(mountCount)
 
-    MountJournal.MountCount:SetPoint("TopLeft", 70, -22)
-    MountJournal.MountCount:SetSize(130, 18)
-
     frame:RegisterEvent("COMPANION_LEARNED")
     frame:RegisterEvent("ACHIEVEMENT_EARNED")
     frame:SetScript("OnEvent", function(self, event, ...)
         ADDON:UpdateIndexMap()
         frame.uniqueCount:SetText(GetNumCompanions("MOUNT"))
     end)
+
+    return frame
 end
 
-ADDON:RegisterLoadUICallback(CreateCharacterMountCount)
+local frame
 
-ADDON:RegisterUIOverhaulCallback(function(self)
+function ADDON:ApplyShowPersonalCount(flag)
+    ADDON.settings.ui.showPersonalCount = flag
+    if (MountJournal) then
+        if (not frame and flag) then
+            frame = CreateCharacterMountCount()
+
+            ADDON.UI:SavePoint(MountJournal.MountCount)
+            ADDON.UI:SaveSize(MountJournal.MountCount)
+        end
+
+        if frame then
+            frame:SetShown(flag)
+
+            if flag then
+                MountJournal.MountCount:SetPoint("TOPLEFT", 70, -22)
+                MountJournal.MountCount:SetSize(130, 18)
+            else
+                ADDON.UI:RestorePoint(MountJournal.MountCount)
+                ADDON.UI:RestoreSize(MountJournal.MountCount)
+            end
+        end
+    end
+end
+
+ADDON:RegisterLoadUICallback(function ()
+    ADDON:ApplyShowPersonalCount(ADDON.settings.ui.showPersonalCount)
+end)
+
+ADDON.UI:RegisterUIOverhaulCallback(function(self)
     if (self == MountJournal.MountCount) then
         doStrip = true
     end

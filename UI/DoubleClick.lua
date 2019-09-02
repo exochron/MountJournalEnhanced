@@ -11,6 +11,6 @@ ADDON:RegisterLoadUICallback(function()
     local buttons = MountJournal.ListScrollFrame.buttons
     for buttonIndex = 1, #buttons do
         local button = buttons[buttonIndex]
-        button:SetScript("OnDoubleClick", MountListItem_OnDoubleClick)
+        button:HookScript("OnDoubleClick", MountListItem_OnDoubleClick)
     end
 end)

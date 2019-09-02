@@ -70,7 +70,7 @@ local function RunDebugTest()
 end
 
 ADDON:RegisterLoadUICallback(function()
-    if ADDON.settings.debugMode then
+    if ADDON.settings.ui.debugMode then
         RunDebugTest()
     end
 end)

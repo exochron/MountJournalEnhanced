@@ -5,10 +5,10 @@ function SlashCmdList.MOUNTJOURNALENHANCED(msg, editBox)
     msg = msg:lower()
 
     if (msg == "debug on") then
-        ADDON.settings.debugMode = true
+        ADDON.settings.ui.debugMode = true
         print("MountJournalEnhanced: Debug mode activated.")
     elseif (msg == "debug off") then
-        ADDON.settings.debugMode = false
+        ADDON.settings.ui.debugMode = false
         print("MountJournalEnhanced: Debug mode deactivated.")
     else
         local title = GetAddOnMetadata(ADDON_NAME, "Title")

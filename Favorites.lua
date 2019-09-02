@@ -7,6 +7,11 @@ local ADDON_NAME, ADDON = ...
 local L = ADDON.L
 local starButton
 
+function ADDON:ApplyFavoritePerCharacter(flag)
+    ADDON.settings.favoritePerChar = flag
+    ADDON:CollectFavoredMounts()
+end
+
 function ADDON:CollectFavoredMounts()
     local personalFavored = {}
     if ADDON.settings.favoritePerChar then
@@ -25,7 +30,7 @@ function ADDON:CollectFavoredMounts()
 end
 
 local function FavorMounts(mountIds, finishedCallback)
-    -- appearantly Blizzard only allows ~5 requests per second
+    -- apparently Blizzard only allows ~5 requests per second
 
     if starButton then
         starButton:Disable()
@@ -122,8 +127,7 @@ local function InitializeDropDown(menu, level)
         info.notCheckable = false
         info.checked = ADDON.settings.favoritePerChar
         info.func = function(_, _, _, value)
-            ADDON.settings.favoritePerChar = not value
-            ADDON:CollectFavoredMounts()
+            ADDON:ApplyFavoritePerCharacter(not value)
         end
         MSA_DropDownMenu_AddButton(info, level)
     end

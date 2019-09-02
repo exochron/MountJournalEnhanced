@@ -860,6 +860,7 @@ ADDON.MountJournalEnhancedSource = {
         [243201] = true, -- Demonic Gladiator's Storm Dragon
         [262022] = true, -- Dread Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 1
         [262023] = true, -- Sinister Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 2
+        [262024] = true, -- Notorious Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 3
 
         -- Prestige Reward
         [222202] = true, -- Prestigious Bronze Courser

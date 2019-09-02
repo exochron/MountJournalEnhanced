@@ -2,8 +2,9 @@
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron
-## Version: 2.4.1
-## SavedVariablesPerCharacter: MountJournalEnhancedSettings
+## Version: 2.5
+## SavedVariablesPerCharacter: MountJournalEnhancedSettings, MJEPersonalSettings
+## SavedVariables: MJEGlobalSettings
 
 Libs\LibStub\LibStub.lua
 Libs\AceGUI-3.0\AceGUI-3.0.xml
@@ -16,22 +17,24 @@ Database\mountspecial.db.lua
 Database\tradable.db.lua
 Filters.lua
 MountJournalEnhanced.lua
-Settings.lua
-SettingsPanel.lua
+Settings\Migration.lua
+Settings\Settings.lua
+Settings\OptionsPanel.lua
 DebugTest.lua
 Favorites.lua
-UI\FixUIPacks.lua
-UI\EquipmentSlot.lua
+UI\Functions.lua
 UI\CompactMountList.lua
 UI\AchievementPoints.lua
 UI\DisplayCamera.lua
 UI\DisplayDirector.lua
 UI\DoubleClick.lua
 UI\DressUpButton.lua
+UI\EquipmentSlot.lua
 UI\FilterDropDown.lua
 UI\HiddenIcon.lua
 UI\Hotkeys.lua
 UI\MountCount.lua
 UI\MountListDropDown.lua
+UI\SettingsDropDown.lua
 UI\ShopButton.lua
 SlashCommand.lua
