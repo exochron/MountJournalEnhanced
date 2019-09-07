@@ -53,6 +53,11 @@ local function RunDebugTest()
     end
 
     ADDON.settings.filter = CopyTable(filterSettingsBackup)
+    if ADDON.settings.personalFilter then
+        MJEPersonalSettings.filter = ADDON.settings.filter
+    else
+        MJEGlobalSettings.filter = ADDON.settings.filter
+    end
 
     for _, expansionMounts in pairs(MountJournalEnhancedExpansion) do
         for id, _ in pairs(expansionMounts) do
