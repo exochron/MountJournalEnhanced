@@ -6,6 +6,11 @@ local defaultFilterStates
 
 function ADDON:ResetFilterSettings()
     ADDON.settings.filter = CopyTable(defaultFilterStates)
+    if ADDON.settings.personalFilter then
+        MJEPersonalSettings.filter = ADDON.settings.filter
+    else
+        MJEGlobalSettings.filter = ADDON.settings.filter
+    end
 end
 
 function ADDON:ResetSettings()
