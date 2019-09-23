@@ -125,6 +125,7 @@ ADDON.MountJournalEnhancedSource = {
         ------------------------------
 
         [136163] = true, -- Grand Gryphon - Operation: Shieldwall; The Silence
+        [259741] = true, -- Honeyback Harvester - Leaving the Hive: Harvester
         [274610] = true, -- Teldrassil Hippogryph - From the Ashes... (BfA PreQuest)
         [300147] = true, -- Deepcoral Snapdragon - Wild Tame
 
@@ -727,6 +728,7 @@ ADDON.MountJournalEnhancedSource = {
         [292419] = true, -- Azshari Bloatray - Glory of the Palace Raider
         [294039] = true, -- Snapback Scuttler - Undersea Usurper
         [296788] = true, -- Mechacycle Model W - Mecha-Done
+        [294197] = true, -- Obsidian Worldbreaker - Memories of Fel, Frost and Fire
 
         ------------------------------
         -- Alliance ------------------
@@ -741,6 +743,7 @@ ADDON.MountJournalEnhancedSource = {
         [61996] = true, -- Blue Dragonhawk - Mountain o' Mounts, Alliance
         [142478] = true, -- Armored Blue Dragonhawk - Mount Parade, Alliance
         [179245] = true, -- Chauffeur - Heirloom Hoarder, Alliance
+        [308250] = true, -- Stormpike Battle Ram - Alterac Valley of Olde
 
         ------------------------------
         -- Horde ---------------------
@@ -756,6 +759,7 @@ ADDON.MountJournalEnhancedSource = {
 
         [61997] = true, -- Red Dragonhawk - Mountain o' Mounts, Horde
         [142266] = true, -- Armored Red Dragonhawk - Mount Parade, Horde
+        [306421] = true, -- Frostwolf Snarler - Alterac Valley of Olde
     },
 
     ["Island Expedition"] = {
@@ -1076,6 +1080,8 @@ ADDON.MountJournalEnhancedSource = {
         [59996] = true, -- Blue Proto-Drake
         [60021] = true, -- Plagued Proto-Drake - Black Market only
         [61294] = true, -- Green Proto-Drake
+        [61465] = true, -- Grand Black War Mammoth
+        [61467] = true, -- Grand Black War Mammoth
         [63796] = true, -- Mimiron's Head
         [63963] = true, -- Rusted Proto-Drake
         [69395] = true, -- Onyxian Drake
@@ -1084,6 +1090,8 @@ ADDON.MountJournalEnhancedSource = {
         [88742] = true, -- Drake of the North Wind
         [88744] = true, -- Drake of the South Wind
         [88746] = true, -- Vitreous Stone Drake
+        [96491] = true, -- Armored Razzashi Raptor - Zul'Gurub, Bloodlord Mandokir
+        [96499] = true, -- Swift Zulian Panther - Zul'Gurub, High Priestess Kilnara
         [97493] = true, -- Pureblood Fire Hawk
         [101542] = true, -- Flametalon of Alysrazor
         [107842] = true, -- Blazing Drake
@@ -1093,11 +1101,19 @@ ADDON.MountJournalEnhancedSource = {
         [127158] = true, -- Heavenly Onyx Cloud Serpent
         [130965] = true, -- Son of Galleon
         [132036] = true, -- Thundering Ruby Cloud Serpent
+        [136471] = true, -- Spawn of Horridon - Throne of Thunder, Horridon
+        [138423] = true, -- Cobalt Primordial Direhorn- Isle of Giants, Oondasta
+        [138424] = true, -- Amber Primordial Direhorn
+        [138425] = true, -- Slate Primordial Direhorn
+        [138426] = true, -- Jade Primordial Direhorn
         [139442] = true, -- Thundering Cobalt Cloud Serpent
         [139448] = true, -- Clutch of Ji-Kun
         [148417] = true, -- Kor'kron Juggernaut - Siege of Orgrimmar, Garrosh Hellscream
         [148476] = true, -- Thundering Onyx Cloud Serpent
         [170347] = true, -- Core Hound - Black Market only
+        [171621] = true, -- Ironhoof Destroyer - Blackrock Foundry, Blackhand
+        [171828] = true, -- Solar Spirehawk - Rukhmar
+        [182912] = true, -- Felsteel Annihilator - Hellfire Citadel, Archimonde
     },
 
     ["Shop"] = {
@@ -1108,6 +1124,8 @@ ADDON.MountJournalEnhancedSource = {
         sourceType = {8,9},
         --  8 = promotion
         --  9 = TCG
+
+        [294197] = true, -- Obsidian Worldbreaker - 15th Anniversary
     },
 }
 
@@ -1216,6 +1234,8 @@ ADDON.MountJournalEnhancedType = {
         [245725] = true, -- Orgrimmar Interceptor - Blizzcon 2017
         [261395] = true, -- The Hivemind
         [264058] = true, -- Mighty Caravan Brutosaur
+        [307256] = true, -- Explorer's Jungle Hopper
+        [307263] = true, -- Explorer's Dunetrekker
     },
 }
 
@@ -1228,6 +1248,7 @@ ADDON.MountJournalEnhancedIgnored = {
     [581] = true, -- Winter Wolf
     [8980] = true, -- Skeletal Horse
     [6896] = true, -- Black Ram
+    [10790] = true, -- Tiger
     [10795] = true, -- Ivory Raptor
     [15780] = true, -- Green Mechanostrider
     [18363] = true, -- Riding Kodo

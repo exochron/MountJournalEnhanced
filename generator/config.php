@@ -12,10 +12,17 @@ return [
         'channel' => 'www', // www|ptr
     ],
 
-    'overwriteMounts' => [ // missing in battle net response
+    'overwriteMounts' => [ // missing mounts in battle.net response
         new Mount('Sylverian Dreamer', 290132),
         new Mount('Alabaster Stormtalon', 302361),
         new Mount('Alabaster Thunderwing', 302362),
+        // 8.2.5 ptr
+        new Mount('Honeyback Harvester', 259741),
+        new Mount('Obsidian Worldbreaker', 294197),
+        new Mount('Frostwolf Snarler', 306421),
+        new Mount('Stormpike Battle Ram', 308250),
+        new Mount('Explorer\'s Jungle Hopper', 307256),
+        new Mount('Explorer\'s Dunetrekker', 307263),
     ],
 
     'ignored'   => [
@@ -346,6 +353,7 @@ return [
             'Yetis'      => ['Yeti'],
         ],
         'Insects'      => [
+            'Bees'           => ['Bees'],
             'Krolusks'       => ['Krolusks'],
             'Silithids'      => [
                 'wcm'  => ['Silithids',],
@@ -409,21 +417,23 @@ return [
             'Hovercraft'         => ['Hovercraft'],
             'Jet Aerial Units'   => ['Jet Aerial Units'],
             'Spider Tanks'       => ['Spider Tanks'],
+            'Airplanes'          => ['Airplanes'],
         ],
         'Wolves'       => [
             'Dire Wolves'   => [
                 'wcm'   => ['Wolves'],
                 'icons' => ['wolfdraenor', 'orcclanworg'],
-                171851  => "Garn Nighthowl",
+                171851  => 'Garn Nighthowl',
             ],
             'War Wolves'    => [
                 'wcm'   => ['Wolves'],
-                'icons' => ['hordepvpmount', 'alliancewolf', 'armoredwolf'],
+                'icons' => ['hordepvpmount', 'alliancewolf', 'armoredwolf', 'frostwolfhowler'],
+                306421   => 'Frostwolf Snarler',
             ],
             'Wolves'        => [
                 'wcm'   => ['Wolves'],
                 'icons' => ['direwolf'],
-                16081   => "Arctic Wolf",
+                16081   => 'Arctic Wolf',
             ],
             'Undead Wolves' => ['Undead Wolves'],
         ],

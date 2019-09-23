@@ -145,6 +145,7 @@ ADDON.MountJournalEnhancedFamily = {
 [276112] = true, -- Darkforge Ram
 [50870] = true, -- Brewfest Ram
 [171834] = true, -- Vicious War Ram
+[308250] = true, -- Stormpike Battle Ram
 },
 ["Ruinstriders"] = {
 [254260] = true, -- Bleakhoof Ruinstrider
@@ -425,6 +426,7 @@ ADDON.MountJournalEnhancedFamily = {
 [124550] = true, -- Cataclysmic Gladiator's Twilight Drake
 [69395] = true, -- Onyxian Drake
 [290132] = true, -- Sylverian Dreamer
+[294197] = true, -- Obsidian Worldbreaker
 },
 ["Grand Drakes"] = {
 [107842] = true, -- Blazing Drake
@@ -741,6 +743,9 @@ ADDON.MountJournalEnhancedFamily = {
 },
 },
 ["Insects"] = {
+["Bees"] = {
+[259741] = true, -- Honeyback Harvester
+},
 ["Krolusks"] = {
 [279454] = true, -- Conqueror's Scythemaw
 [239049] = true, -- Obsidian Krolusk
@@ -891,6 +896,7 @@ ADDON.MountJournalEnhancedFamily = {
 [88749] = true, -- Tan Riding Camel
 [88748] = true, -- Brown Riding Camel
 [88750] = true, -- Grey Riding Camel
+[307263] = true, -- Explorer's Dunetrekker
 },
 ["Elekks"] = {
 [65637] = true, -- Great Red Elekk
@@ -954,6 +960,9 @@ ADDON.MountJournalEnhancedFamily = {
 },
 },
 ["Vehicles"] = {
+["Airplanes"] = {
+[307256] = true, -- Explorer's Jungle Hopper
+},
 ["Airships"] = {
 [272770] = true, -- The Dreadwake
 [245723] = true, -- Stormwind Skychaser
@@ -1072,6 +1081,7 @@ ADDON.MountJournalEnhancedFamily = {
 [204166] = true, -- Prestigious War Wolf
 [294569] = true, -- Beastlord's Warwolf
 [100333] = true, -- Vicious War Wolf
+[306421] = true, -- Frostwolf Snarler
 },
 ["Wolves"] = {
 [65646] = true, -- Swift Burgundy Wolf

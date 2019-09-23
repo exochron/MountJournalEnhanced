@@ -13,5 +13,6 @@ RUN apk --update --no-cache add autoconf g++ make && \
 WORKDIR /opt/project
 ADD . .
 COPY --from=install /opt/project/vendor /opt/project/vendor
+COPY php.ini /usr/local/etc/php/conf.d/custom.ini
 
 CMD php run.php

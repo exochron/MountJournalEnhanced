@@ -66,9 +66,9 @@ class Requester
 
     private function call(string $region, string $resource)
     {
-        $token = $this->accessToken[$region];
+        $token = $this->accessToken[$region] ?? '';
 
-        if (empty($token)) {
+        if ('' === $token) {
             $token = $this->accessToken[$region] = yield from $this->fetchAuthToken($region);
         }
 

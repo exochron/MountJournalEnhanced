@@ -762,4 +762,10 @@ ADDON.MountJournalEnhancedMountSpecial = {
 [290132] = 5333, -- Sylverian Dreamer
 [302361] = 3000, -- Alabaster Stormtalon
 [302362] = 2000, -- Alabaster Thunderwing
+[259741] = 10000, -- Honeyback Harvester
+[294197] = 5333, -- Obsidian Worldbreaker
+[306421] = 2667, -- Frostwolf Snarler
+[308250] = 2000, -- Stormpike Battle Ram
+[307256] = 0, -- Explorer's Jungle Hopper
+[307263] = 2500, -- Explorer's Dunetrekker
 }

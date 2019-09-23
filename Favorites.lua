@@ -9,6 +9,7 @@ local starButton
 
 function ADDON:ApplyFavoritePerCharacter(flag)
     ADDON.settings.favoritePerChar = flag
+    MJEPersonalSettings.favoritePerChar = flag
     ADDON:CollectFavoredMounts()
 end
 
@@ -25,6 +26,7 @@ function ADDON:CollectFavoredMounts()
     end
 
     ADDON.settings.favoredMounts = personalFavored
+    MJEPersonalSettings.favoredMounts = personalFavored
 
     return personalFavored
 end

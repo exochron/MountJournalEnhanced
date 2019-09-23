@@ -31,13 +31,13 @@ class Family
             // check for spellId in config
             foreach ($this->config as $mainFamily => $mainConfig) {
                 if (isset($mainConfig['wcm'])) {
-                    if ($mainConfig[$spellId]) {
+                    if (isset($mainConfig[$spellId])) {
                         $result[$mainFamily][$spellId] = $mount;
                         continue 2;
                     }
                 } else {
                     foreach ($mainConfig as $subFamily => $subConfig) {
-                        if ($subConfig[$spellId]) {
+                        if (isset($subConfig[$spellId])) {
                             $result[$mainFamily][$subFamily][$spellId] = $mount;
                             continue 3;
                         }
@@ -104,7 +104,7 @@ class Family
     {
         $wcmList = $subConfig['wcm'];
         if (isset($wcmList[$wcmFamily])) {
-            $iconPattern = $subConfig['icons'] ?: null;
+            $iconPattern = $subConfig['icons'] ?? null;
             if (null === $iconPattern || preg_match($iconPattern, $mount->getIcon())) {
                 return true;
             }

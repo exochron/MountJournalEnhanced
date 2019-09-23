@@ -186,12 +186,15 @@ function ADDON:Unhook(obj, name)
     return true
 end
 
--- reset default filter settings
-C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true)
-C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, true)
-C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, true)
-C_MountJournal.SetAllSourceFilters(true)
-C_MountJournal.SetSearch("")
+local function ResetIngameFilter()
+    -- reset default filter settings
+    C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true)
+    C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, true)
+    C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, true)
+    C_MountJournal.SetAllSourceFilters(true)
+    C_MountJournal.SetSearch("")
+end
+ResetIngameFilter()
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
@@ -199,6 +202,7 @@ frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function(self, event, arg1)
     local doInit = false
     if event == "PLAYER_LOGIN" then
+        ResetIngameFilter()
         ADDON:OnLogin()
         if MountJournal then
             doInit = true
