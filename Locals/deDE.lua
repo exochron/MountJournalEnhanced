@@ -24,6 +24,7 @@ L["Transform"] = "Verwandlung"
 L["Underwater"] = "Unterwasser"
 
 -- Families
+L["Airplanes"] = "Flugzeuge"
 L["Airships"] = "Luftschiffe"
 L["Amphibian"] = "Amphibien"
 L["Arachnids"] = "Spinnentiere"

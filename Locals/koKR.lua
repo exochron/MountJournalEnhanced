@@ -24,6 +24,8 @@ L["Transform"] = "변환"
 L["Underwater"] = "수중"
 
 -- Families
+--[[Translation missing --]]
+--[[ L["Airplanes"] = "Airplanes"--]]
 L["Airships"] = "비행선"
 L["Amphibian"] = "양서류"
 L["Arachnids"] = "거미"
@@ -157,9 +159,23 @@ L["Yaks"] = "야크"
 L["Yetis"] = "예티"
 
 -- Settings
+--[[Translation missing --]]
+--[[ L["SETTING_ACHIEVEMENT_POINTS"] = "Show achievement points"--]]
 L["SETTING_COMPACT_LIST"] = "간소한 목록"
 L["SETTING_CURSOR_KEYS"] = "위 아래 화살표 키로 목록 탐색하기"
 L["SETTING_FAVORITE_PER_CHAR"] = "캐릭터별 즐겨찾기"
+--[[Translation missing --]]
+--[[ L["SETTING_HEAD_SETTING_BEHAVIOUR"] = "Setting Behaviour"--]]
+--[[Translation missing --]]
+--[[ L["SETTING_MOUNT_COUNT"] = "Show personal mount count"--]]
 L["SETTING_MOVE_EQUIPMENT"] = "착용 장비 표시 이동"
+--[[Translation missing --]]
+--[[ L["SETTING_PERSONAL_FILTER"] = "Apply filters only to this character"--]]
+--[[Translation missing --]]
+--[[ L["SETTING_PERSONAL_HIDDEN_MOUNTS"] = "Apply hidden mounts only to this character"--]]
+--[[Translation missing --]]
+--[[ L["SETTING_PERSONAL_UI"] = "Apply Interface settings only to this character"--]]
+--[[Translation missing --]]
+--[[ L["SETTING_PREVIEW_LINK"] = "Show Collection button in mount preview"--]]
 L["SETTING_SHOP_BUTTON"] = "구매 버튼 활성화"
 L["SETTING_YCAMERA"] = "표시 화면에서 마우스로 Y 축 회전 잠금 해제"

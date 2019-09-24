@@ -25,6 +25,8 @@ L["Transform"] = "变形"
 L["Underwater"] = "水中"
 
 -- Families
+--[[Translation missing --]]
+--[[ L["Airplanes"] = "Airplanes"--]]
 L["Airships"] = "飞艇"
 --[[Translation missing --]]
 --[[ L["Amphibian"] = "Amphibian"--]]
@@ -170,10 +172,24 @@ L["Yaks"] = "牦牛"
 L["Yetis"] = "雪人"
 
 -- Settings
+--[[Translation missing --]]
+--[[ L["SETTING_ACHIEVEMENT_POINTS"] = "Show achievement points"--]]
 L["SETTING_COMPACT_LIST"] = "紧凑坐骑列表"
 L["SETTING_CURSOR_KEYS"] = "允许上下键浏览坐骑"
 L["SETTING_FAVORITE_PER_CHAR"] = "收藏坐骑每个角色"
 --[[Translation missing --]]
+--[[ L["SETTING_HEAD_SETTING_BEHAVIOUR"] = "Setting Behaviour"--]]
+--[[Translation missing --]]
+--[[ L["SETTING_MOUNT_COUNT"] = "Show personal mount count"--]]
+--[[Translation missing --]]
 --[[ L["SETTING_MOVE_EQUIPMENT"] = "Move equipment slot into display"--]]
+--[[Translation missing --]]
+--[[ L["SETTING_PERSONAL_FILTER"] = "Apply filters only to this character"--]]
+--[[Translation missing --]]
+--[[ L["SETTING_PERSONAL_HIDDEN_MOUNTS"] = "Apply hidden mounts only to this character"--]]
+--[[Translation missing --]]
+--[[ L["SETTING_PERSONAL_UI"] = "Apply Interface settings only to this character"--]]
+--[[Translation missing --]]
+--[[ L["SETTING_PREVIEW_LINK"] = "Show Collection button in mount preview"--]]
 L["SETTING_SHOP_BUTTON"] = "坐骑店铺上显示未购买按钮"
 L["SETTING_YCAMERA"] = "解锁鼠标纵轴旋转显示"
