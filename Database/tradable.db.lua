@@ -48,4 +48,6 @@ ADDON.MountJournalEnhancedTradable = {
 [171851] = true, -- Garn Nighthowl
 [102349] = true, -- Swift Springstrider
 [102350] = true, -- Swift Lovebird
+[307256] = true, -- Explorer's Jungle Hopper
+[307263] = true, -- Explorer's Dunetrekker
 }
