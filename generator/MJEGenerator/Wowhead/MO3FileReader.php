@@ -4,16 +4,13 @@ declare(strict_types=1);
 namespace MJEGenerator\Wowhead;
 
 
-use Amp\File\Handle;
-use function Amp\File\open;
-use Generator;
 use RuntimeException;
 
 class MO3FileReader
 {
 
     private $sourceStream;
-    /** @var Handle */
+    /** @var resource */
     private $uncompressedStream;
 
     private $ofsVertices;
@@ -41,45 +38,48 @@ class MO3FileReader
     private $ofsParticleEmitters;
     private $ofsRibbonEmitters;
 
-    public function __construct(Handle $stream)
+    /**
+     * @param resource $stream
+     */
+    public function __construct($stream)
     {
         $this->sourceStream = $stream;
     }
 
     public function __destruct()
     {
-        if (isset($this->sourceStream)) {
-            $this->sourceStream->close();
-        }
         if (isset($this->uncompressedStream)) {
-            $this->uncompressedStream->close();
+            fclose($this->uncompressedStream);
+        }
+        if (isset($this->sourceStream)) {
+            fclose($this->sourceStream);
         }
     }
 
-    private function getInt32(Handle $fp)
+    private function readInt32($fp): int
     {
-        return unpack('I', yield $fp->read(4))[1];
+        return unpack('I', fread($fp, 4))[1];
     }
 
-    private function getInt16(Handle $fp)
+    private function readInt16($fp): int
     {
-        return unpack('S', yield $fp->read(2))[1];
+        return unpack('S', fread($fp, 2))[1];
     }
 
-    private function getBool(Handle $fp)
+    private function readBool($fp): bool
     {
-        return (bool)unpack('C', yield $fp->read(1))[1];
+        return (bool)unpack('C', fread($fp, 1))[1];
     }
 
-    private function getString(Handle $fp): Generator
+    private function readString($fp): string
     {
-        $len = yield from $this->getInt16($fp);
+        $len = $this->readInt16($fp);
 
-        return yield $fp->read($len);
+        return fread($fp, $len);
     }
 
     /**
-     * @return Handle|Generator
+     * @return resource
      * @throws Exception
      */
     private function extract()
@@ -87,41 +87,39 @@ class MO3FileReader
         // from https://wow.zamimg.com/modelviewer/viewer/viewer.min.js -> ZamModelViewer.Wow.Model.prototype.loadMo3
 
         if (null === $this->uncompressedStream) {
-            $magic   = yield from $this->getInt32($this->sourceStream);
-            $version = yield from $this->getInt32($this->sourceStream);
+            $magic   = $this->readInt32($this->sourceStream);
+            $version = $this->readInt32($this->sourceStream);
 
-            $this->ofsVertices         = yield from $this->getInt32($this->sourceStream);
-            $this->ofsIndices          = yield from $this->getInt32($this->sourceStream);
-            $this->ofsSequences        = yield from $this->getInt32($this->sourceStream);
-            $this->ofsAnimations       = yield from $this->getInt32($this->sourceStream);
-            $this->ofsAnimLookup       = yield from $this->getInt32($this->sourceStream);
-            $this->ofsBones            = yield from $this->getInt32($this->sourceStream);
-            $this->ofsBoneLookup       = yield from $this->getInt32($this->sourceStream);
-            $this->ofsKeyBoneLookup    = yield from $this->getInt32($this->sourceStream);
-            $this->ofsMeshes           = yield from $this->getInt32($this->sourceStream);
-            $this->ofsTexUnits         = yield from $this->getInt32($this->sourceStream);
-            $this->ofsTexUnitLookup    = yield from $this->getInt32($this->sourceStream);
-            $this->ofsRenderFlags      = yield from $this->getInt32($this->sourceStream);
-            $this->ofsMaterials        = yield from $this->getInt32($this->sourceStream);
-            $this->ofsMaterialLookup   = yield from $this->getInt32($this->sourceStream);
-            $this->ofsTextureAnims     = yield from $this->getInt32($this->sourceStream);
-            $this->ofsTexAnimLookup    = yield from $this->getInt32($this->sourceStream);
-            $this->ofsTexReplacements  = yield from $this->getInt32($this->sourceStream);
-            $this->ofsAttachments      = yield from $this->getInt32($this->sourceStream);
-            $this->ofsAttachmentLookup = yield from $this->getInt32($this->sourceStream);
-            $this->ofsColors           = yield from $this->getInt32($this->sourceStream);
-            $this->ofsAlphas           = yield from $this->getInt32($this->sourceStream);
-            $this->ofsAlphaLookup      = yield from $this->getInt32($this->sourceStream);
-            $this->ofsParticleEmitters = yield from $this->getInt32($this->sourceStream);
-            $this->ofsRibbonEmitters   = yield from $this->getInt32($this->sourceStream);
-            $ofsExp2                   = yield from $this->getInt32($this->sourceStream);
-            $uncompressedSize          = yield from $this->getInt32($this->sourceStream);
+            $this->ofsVertices         = $this->readInt32($this->sourceStream);
+            $this->ofsIndices          = $this->readInt32($this->sourceStream);
+            $this->ofsSequences        = $this->readInt32($this->sourceStream);
+            $this->ofsAnimations       = $this->readInt32($this->sourceStream);
+            $this->ofsAnimLookup       = $this->readInt32($this->sourceStream);
+            $this->ofsBones            = $this->readInt32($this->sourceStream);
+            $this->ofsBoneLookup       = $this->readInt32($this->sourceStream);
+            $this->ofsKeyBoneLookup    = $this->readInt32($this->sourceStream);
+            $this->ofsMeshes           = $this->readInt32($this->sourceStream);
+            $this->ofsTexUnits         = $this->readInt32($this->sourceStream);
+            $this->ofsTexUnitLookup    = $this->readInt32($this->sourceStream);
+            $this->ofsRenderFlags      = $this->readInt32($this->sourceStream);
+            $this->ofsMaterials        = $this->readInt32($this->sourceStream);
+            $this->ofsMaterialLookup   = $this->readInt32($this->sourceStream);
+            $this->ofsTextureAnims     = $this->readInt32($this->sourceStream);
+            $this->ofsTexAnimLookup    = $this->readInt32($this->sourceStream);
+            $this->ofsTexReplacements  = $this->readInt32($this->sourceStream);
+            $this->ofsAttachments      = $this->readInt32($this->sourceStream);
+            $this->ofsAttachmentLookup = $this->readInt32($this->sourceStream);
+            $this->ofsColors           = $this->readInt32($this->sourceStream);
+            $this->ofsAlphas           = $this->readInt32($this->sourceStream);
+            $this->ofsAlphaLookup      = $this->readInt32($this->sourceStream);
+            $this->ofsParticleEmitters = $this->readInt32($this->sourceStream);
+            $this->ofsRibbonEmitters   = $this->readInt32($this->sourceStream);
+            $ofsExp2                   = $this->readInt32($this->sourceStream);
+            $uncompressedSize          = $this->readInt32($this->sourceStream);
 
-            $compressedData = '';
-            while (null !== $chunk = yield $this->sourceStream->read()) {
-                $compressedData .= $chunk;
-            }
-            yield $this->sourceStream->close();
+            $compressedData = fread($this->sourceStream, PHP_INT_MAX);
+            fclose($this->sourceStream);
+            $this->sourceStream = null;
 
             $uncompressedData = zlib_decode($compressedData);
 
@@ -130,41 +128,40 @@ class MO3FileReader
                 throw new RuntimeException('Corrupted MO3File');
             }
 
-            $this->uncompressedStream = yield open('php://memory', 'r+');
-            yield $this->uncompressedStream->write($uncompressedData);
-            yield $this->uncompressedStream->seek(0);
+            $this->uncompressedStream = fopen('php://memory', 'rb+');
+            fwrite($this->uncompressedStream, $uncompressedData);
+            fseek($this->uncompressedStream, 0);
         }
 
         return $this->uncompressedStream;
     }
 
     /**
-     * @return Animation[]|Generator
+     * @return Animation[]
      */
-    public function fetchAnimations(): Generator
+    public function fetchAnimations(): array
     {
-        /** @var Handle $stream */
-        $stream = yield from $this->extract();
-        yield $stream->seek($this->ofsAnimations);
-        $numAnims   = yield from $this->getInt32($stream);
+        $stream = $this->extract();
+        fseek($stream, $this->ofsAnimations);
+        $numAnims   = $this->readInt32($stream);
         $animations = [];
 
         for ($i = 0; $i < $numAnims; $i++) {
             $animation = new Animation(
-                yield from $this->getInt16($stream),
-                yield from $this->getInt16($stream),
-                yield from $this->getInt32($stream),
-                yield from $this->getInt32($stream),
-                yield from $this->getInt16($stream),
-                yield from $this->getInt16($stream),
-                yield from $this->getInt16($stream),
-                yield from $this->getInt16($stream),
-                yield from $this->getInt16($stream),
-                yield from $this->getBool($stream),
-                );
+                $this->readInt16($stream),
+                $this->readInt16($stream),
+                $this->readInt32($stream),
+                $this->readInt32($stream),
+                $this->readInt16($stream),
+                $this->readInt16($stream),
+                $this->readInt16($stream),
+                $this->readInt16($stream),
+                $this->readInt16($stream),
+                $this->readBool($stream),
+            );
 
             if ($animation->isAvailable()) {
-                $animation->setName(yield from $this->getString($stream));
+                $animation->setName($this->readString($stream));
             }
 
             $animations[] = $animation;

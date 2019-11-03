@@ -3,11 +3,6 @@ declare(strict_types=1);
 
 namespace MJEGenerator\Wowhead;
 
-use Amp\Artax\DefaultClient;
-use Amp\Artax\Response;
-use function Amp\File\isfile;
-use function Amp\File\open;
-use function Amp\File\put;
 use RuntimeException;
 
 class Requester
@@ -35,16 +30,16 @@ class Requester
     {
         $html = null;
         /** @var Response $response */
-        $response = yield $this->client->request($url);
-        if ($response->getStatus() === 200) {
-            $html = yield $response->getBody();
-        }
+//        $response = yield $this->client->request($url);
+//        if ($response->getStatus() === 200) {
+//            $html = yield $response->getBody();
+//        }
 
         if (false === empty($html)) {
             return $html;
         }
         if ($retry > 0) {
-            return yield from $this->get($url, $retry - 1);
+            return $this->get($url, $retry - 1);
         }
 
         return '';
@@ -61,7 +56,7 @@ class Requester
         $url = $this->baseUrl . 'mount-spells/live-only:';
         $url .= ($this->channel === self::CHANNEL_WWW ? 'on' : 'off');
 
-        $html = yield from $this->get($url);
+        $html = $this->get($url);
         if (preg_match('/var listviewspells = (.*);/iU', $html, $matches)) {
             $json = $matches[1];
             $json = str_replace(
@@ -69,7 +64,7 @@ class Requester
                 ['"reagents"', '"npcmodel"', '"popularity"'],
                 $json
             );
-            $data = json_decode($json, true);
+            $data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
             foreach ($data as $item) {
                 $result[$item['id']] = array_column($item['reagents'] ?? [], 0);
             }
@@ -85,15 +80,15 @@ class Requester
      *
      * @return Animation[]
      */
-    public function fetchAnimationsBySpellId(int $spellId)
+    public function fetchAnimationsBySpellId(int $spellId): array
     {
-        $html = yield from $this->get($this->baseUrl . 'spell=' . $spellId);
+        $html = $this->get($this->baseUrl . 'spell=' . $spellId);
 
         $pattern = '#onclick="ModelViewer.show\(.*displayId: (\d+),?.*}\)"\>View in 3D#is';
         $matches = [];
         if (preg_match_all($pattern, $html, $matches, PREG_SET_ORDER)) {
-            $json = yield from $this->get('https://wow.zamimg.com/modelviewer/meta/npc/' . $matches[0][1] . '.json');
-            $json = json_decode($json, false);
+            $json = $this->get('https://wow.zamimg.com/modelviewer/meta/npc/' . $matches[0][1] . '.json');
+            $json = json_decode($json, false, 512, JSON_THROW_ON_ERROR);
 
             if (empty($json->Model)) {
                 throw new RuntimeException('no model id from wowhead for: ' . $spellId);
@@ -101,15 +96,15 @@ class Requester
 
             $fileName      = $json->Model . '.mo3';
             $localFileName = 'MO3' . DIRECTORY_SEPARATOR . $fileName;
-            if (false === yield isfile($localFileName)) {
-                $mo3File = yield from $this->get('https://wow.zamimg.com/modelviewer/mo3/' . $fileName);
-                yield put($localFileName, $mo3File);
+            if (false === file_exists($localFileName)) {
+                $mo3File = $this->get('https://wow.zamimg.com/modelviewer/mo3/' . $fileName);
+                file_put_contents($localFileName, $mo3File);
             }
 
-            $stream    = yield open($localFileName, 'r');
+            $stream    = fopen($localFileName, 'rb');
             $mo3Reader = new MO3FileReader($stream);
 
-            return yield from $mo3Reader->fetchAnimations();
+            return $mo3Reader->fetchAnimations();
         }
 
         return [];
@@ -117,8 +112,8 @@ class Requester
 
     public function fetchItemTooltip(int $itemId)
     {
-        $body = yield from $this->get($this->baseUrl . 'tooltip/item/' . $itemId . '&json&power');
-        $json = json_decode($body, true);
+        $body = $this->get($this->baseUrl . 'tooltip/item/' . $itemId . '&json&power');
+        $json = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
         return $json['tooltip'];
     }
 }

@@ -2,7 +2,8 @@
   "require": {
     "ext-json": "*",
     "ext-zlib": "*",
-    "amphp/artax": "^3.0"
+    "guzzlehttp/guzzle": "6.4.*",
+    "guzzlehttp/oauth-subscriber": "0.3.*"
   },
   "autoload": {
     "psr-4": {

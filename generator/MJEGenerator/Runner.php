@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace MJEGenerator;
 
-use function Amp\File\put;
-use Generator;
 use MJEGenerator\Battlenet\Requester as Battlenet;
 use MJEGenerator\Wowhead\Requester as Wowhead;
 use MJEGenerator\WarcraftMounts\Requester as WarcraftMounts;
@@ -23,14 +21,14 @@ class Runner
     }
 
     /**
-     * @return Mount[]|Generator
+     * @return Mount[]
      */
-    private function collectMounts(): Generator
+    private function collectMounts(): array
     {
         $bnet = new Battlenet($this->config['battle.net']['clientId'], $this->config['battle.net']['clientSecret']);
 
-        $mounts = yield from $bnet->fetchMounts($bnet::REGION_EU);
-        $mounts += yield from $bnet->fetchMounts($bnet::REGION_US);
+        $mounts = $bnet->fetchMounts($bnet::REGION_EU);
+        $mounts += $bnet->fetchMounts($bnet::REGION_US);
 
         return $mounts;
     }
@@ -53,7 +51,7 @@ class Runner
             }
         }
 
-        $mountItems = yield from $wowHead->fetchMountItems();
+        $mountItems = $wowHead->fetchMountItems();
         foreach ($mountItems as $spellId => $itemIds) {
             if (isset($mounts[$spellId])) {
                 $mounts[$spellId]->setItemIds($itemIds);
@@ -62,7 +60,7 @@ class Runner
         foreach ($mounts as $mount) {
             $itemIds = $mount->getItemIds();
             if ([] !== $itemIds) {
-                $tooltip = yield from $wowHead->fetchItemTooltip(reset($itemIds));
+                $tooltip = $wowHead->fetchItemTooltip(reset($itemIds));
                 if (false === empty($tooltip)
                     && false === strpos($tooltip, 'Binds when picked up')
                     && false === strpos($tooltip, 'Binds to Blizzard Battle.net account')
@@ -73,7 +71,7 @@ class Runner
         }
 
         foreach ($mounts as $mount) {
-            $animations = yield from $wowHead->fetchAnimationsBySpellId($mount->getSpellId());
+            $animations = $wowHead->fetchAnimationsBySpellId($mount->getSpellId());
             foreach ($animations as $animation) {
                 if ($animation->getName() === 'MountSpecial') {
                     $mount->setMountSpecialLength($animation->getLength());
@@ -85,41 +83,47 @@ class Runner
         return $mounts;
     }
 
-    private function generateFamilies(array $mounts): Generator
+    private function generateFamilies(array $mounts): self
     {
         $wcmMountFamilies = (new WarcraftMounts)->fetchMountFamilies();
 
         $handler  = new Family($this->config['familyMap']);
         $families = $handler->groupMountsByFamily($mounts, $wcmMountFamilies);
         $lua      = $this->export->toLuaCategories('MountJournalEnhancedFamily', $families);
-        yield put('families.db.lua', $lua);
+        file_put_contents('families.db.lua', $lua);
 
         $errors = $handler->getErrors();
         if ([] !== $errors) {
             echo PHP_EOL . implode(PHP_EOL, $errors);
         }
+
+        return $this;
     }
 
-    private function generateMountSpecialList(array $mounts): Generator
+    private function generateMountSpecialList(array $mounts): self
     {
         $lua = $this->export->toLuaSpecialLength('MountJournalEnhancedMountSpecial', $mounts);
-        yield put('mountspecial.db.lua', $lua);
+        file_put_contents('mountspecial.db.lua', $lua);
+
+        return $this;
     }
-    private function generateTradableList(array $mounts): Generator
+    private function generateTradableList(array $mounts): self
     {
         $lua = $this->export->toLuaTradable('MountJournalEnhancedTradable', $mounts);
-        yield put('tradable.db.lua', $lua);
+        file_put_contents('tradable.db.lua', $lua);
+
+        return $this;
     }
 
     public function __invoke()
     {
-        $mounts = yield from $this->collectMounts();
+        $mounts = $this->collectMounts();
         $mounts = array_diff_key($mounts, array_flip($this->config['ignored']));
-        $mounts = yield from $this->enhanceMounts($mounts);
+        $mounts = $this->enhanceMounts($mounts);
 
-        yield from $this->generateFamilies($mounts);
-        yield from $this->generateMountSpecialList($mounts);
-        yield from $this->generateTradableList($mounts);
+        $this->generateFamilies($mounts);
+        $this->generateMountSpecialList($mounts);
+        $this->generateTradableList($mounts);
 
         return $this;
     }
