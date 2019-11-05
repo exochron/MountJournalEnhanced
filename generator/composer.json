@@ -2,12 +2,20 @@
   "require": {
     "ext-json": "*",
     "ext-zlib": "*",
+    "ext-gmp": "*",
     "guzzlehttp/guzzle": "6.4.*",
-    "guzzlehttp/oauth-subscriber": "0.3.*"
+    "caseyamcl/guzzle_retry_middleware": "2.3.*"
+  },
+  "require-dev": {
+    "phpmd/phpmd": "*",
+    "squizlabs/php_codesniffer": "*",
+    "friendsofphp/php-cs-fixer": "*",
+    "roave/security-advisories": "dev-master"
   },
   "autoload": {
     "psr-4": {
-      "MJEGenerator\\": "MJEGenerator"
+      "MJEGenerator\\": "MJEGenerator",
+      "Erorus\\": "ModifiedLibs/Erorus"
     }
   },
   "config": {

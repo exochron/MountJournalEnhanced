@@ -3,3 +3,4 @@ composer.lock
 generator/*.db.lua
 generator/MO3/
 generator/vendor/
+generator/raw/

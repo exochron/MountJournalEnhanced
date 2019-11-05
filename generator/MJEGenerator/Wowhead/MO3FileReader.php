@@ -117,7 +117,10 @@ class MO3FileReader
             $ofsExp2                   = $this->readInt32($this->sourceStream);
             $uncompressedSize          = $this->readInt32($this->sourceStream);
 
-            $compressedData = fread($this->sourceStream, PHP_INT_MAX);
+            $compressedData = '';
+            while ($chunk = fread($this->sourceStream, 1048576)) {
+                $compressedData .= $chunk;
+            }
             fclose($this->sourceStream);
             $this->sourceStream = null;
 

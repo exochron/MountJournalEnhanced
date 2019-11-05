@@ -1,192 +1,37 @@
 <?php
 
-use MJEGenerator\Mount;
-
 return [
-    'battle.net' => [
-        'clientId'     => $_ENV['BATTLENET_CLIENTID'],
-        'clientSecret' => $_ENV['BATTLENET_CLIENTSECRET'],
-    ],
-
     'wowhead' => [
         'channel' => 'www', // www|ptr
     ],
 
-    'overwriteMounts' => [ // missing mounts in battle.net response
-        new Mount('Sylverian Dreamer', 290132),
-        new Mount('Alabaster Stormtalon', 302361),
-        new Mount('Alabaster Thunderwing', 302362),
-        // 8.2.5 ptr
-        new Mount('Honeyback Harvester', 259741),
-        new Mount('Obsidian Worldbreaker', 294197),
-        new Mount('Frostwolf Snarler', 306421),
-        new Mount('Stormpike Battle Ram', 308250),
-        new Mount('Explorer\'s Jungle Hopper', 307256),
-        new Mount('Explorer\'s Dunetrekker', 307263),
-    ],
-
     'ignored'   => [
-        0, // ?
         459, // Gray Wolf
-        468, // White Stallion
-        471, // Palamino
-        578, // Black Wolf
-        579, // Red Wolf
         581, // Winter Wolf
-        3363, // Nether Drake
-        6896, // Black Ram
-        6897, // Blue Ram
         8980, // Skeletal Horse
-        10788, // Leopard
-        10790, // Tiger
-        10792, // Spotted Panther
-        10795, // Ivory Raptor
-        10798, // Obsidian Raptor
-        15780, // Green Mechanostrider
-        15781, // Steel Mechanostrider
-        16058, // Primal Leopard
-        16059, // Tawny Sabercat
-        16060, // Golden Sabercat
-        17455, // Purple Mechanostrider
-        17456, // Red and Blue Mechanostrider
-        17458, // Fluorescent Green Mechanostrider
         18363, // Riding Kodo
-        23220, // Swift Dawnsaber
-        24576, // Chromatic Mount
-        25675, // Reindeer
-        25858, // Reindeer
-        25859, // Reindeer
-        25863, // Black Qiraji Battle Tank
-        26332, // Summon Mouth Tentacle
-        26655, // Black Qiraji Battle Tank
         28828, // Nether Drake
-        29059, // Naxxramas Deathcharger
-        30829, // Kessel's Elekk
-        31973, // Kessel's Elekk
-        32345, // Peep the Phoenix Mount
-        33630, // Blue Mechanostrider
-        34407, // Great Elite Elekk
-        40212, // Dragonmaw Nether Drake
-        42667, // Flying Broom
-        42668, // Swift Flying Broom
-        43810, // Frost Wyrm
-        43880, // Ramstein's Swift Work Ram
-        43883, // Rental Racing Ram
-        44317, // Merciless Nether Drake
-        44824, // Flying Reindeer
-        44825, // Flying Reindeer
-        44827, // Flying Reindeer
-        47037, // Swift War Elekk
-        47977, // Magic Broom
-        48954, // Swift Zhevra
-        49908, // Pink Elekk
-        50281, // Black Warp Stalker
-        50869, // Brewfest Kodo
-        51960, // Frost Wyrm Mount
         55164, // Swift Spectral Gryphon
         59572, // Black Polar Bear
         59573, // Brown Polar Bear
         60136, // Grand Caravan Mammoth
         60140, // Grand Caravan Mammoth
-        61289, // Borrowed Broom
         62048, // Black Dragonhawk Mount
         64656, // Blue Skeletal Warhorse
-        64681, // Loaned Gryphon
-        64761, // Loaned Wind Rider
-        66122, // Magic Rooster
-        66123, // Magic Rooster
-        66124, // Magic Rooster
-        68930, // Brood of Onyxia
-        68768, // Little White Stallion
-        68769, // Little Ivory Raptor
-        75387, // Tiny Mooncloth Carpet
-        79361, // Twilight Phoenix
-        86579, // Wooden Raft
-        87840, // Running Wild
-        89520, // Goblin Mini Hotrod
-        97390, // Hitch Horse
-        101641, // Tarecgosa's Visage
-        103170, // Helper's Reindeer
-        104515, // Darkmoon Pony
-        104517, // Khaz Modan Ram
-        123160, // Crimson Riding Crane
         123182, // White Riding Yak
-        127178, // Jungle Riding Crane
-        127180, // Albino Riding Crane
-        127272, // Orange Water Strider
-        127274, // Jade Water Strider
-        127278, // Golden Water Strider
         127209, // Black Riding Yak
         127213, // Brown Riding Yak
-        128971, // Shado-Pan Tiger
-        130678, // Unruly Behemoth
-        130730, // Kafa-Crazed Goat
-        130895, // Rampaging Yak
-        134854, // Cloud Mount
-        134931, // Darkmoon Strider
-        145133, // Moonfang
-        147595, // Stormcrow
-        148626, // Furious Ashhide Mushan
-        153675, // Darkmoon Race Rocketeer
-        153722, // Darkmoon Race Strider (Basic)
-        164222, // Frostwolf War Wolf
-        164601, // Perplexed Pony
-        165803, // Telaari Talbuk
-        171618, // Ancient Leatherhide
-        174004, // Spirit of Shinri
-        176759, // GorenLog Roller
-        176762, // Iron Star Roller
-        179251, // Darkmoon Race Powermonger
-        179252, // Darkmoon Race Rocketeer (Advanced)
-        179256, // Darkmoon Race Wanderluster
-        179283, // Darkmoon Race Strider (Standard)
-        179750, // Darkmoon Race Strider (Advanced)
         194046, // Swift Spectral Rylak
-        203853, // Adventurer's Darter
-        212421, // Storm's Reach Cliffwalker
-        213147, // Storm's Reach Worg
-        218815, // Storm's Reach Greatstag
-        218891, // Storm's Reach Warbear
-        218964, // Storm's Reach Squallhunter
-        220480, // Ebon Blade Deathcharger
-        220484, // Nazgrim's Deathcharger
-        220491, // Mograine's Deathcharger
-        220489, // Whitemane's Deathcharger
-        220488, // Trollbane's Deathcharger
-        220504, // Silver Hand Charger
-        220505, // Silver Hand Kodo
-        220506, // Silver Hand Elekk
-        220507, // Silver Hand Charger
-        230894, // Boastful Pony
-        230904, // Boastful Wolf
-        237285, // Hyena Mount White (PH)
+        205656, // Charger
         239363, // Swift Spectral Hippogryph
-        239769, // Purple Qiraji War Tank
-        244457, // Default AI Mount Record
         254471, // Valorous Charger
-        254474, // Golden Charger
-        254473, // Vigilant Charger
         254472, // Vengeful Charger
-        254545, // Baarut the Brisk
-        254812, // PH Giant Parrot (Blue)
-        256121, // PH Goblin Hovercraft (Blue)
-        256124, // PH Goblin Hovercraft (Red)
-        256125, // PH Goblin Hovercraft (Green)
-        259741, // PH Bee
-        260176, // Kul Tiras Horse (PH)
-        278656, // Spectral Phoenix
-        278966, // Tempestuous Skystallion
-        281296, // Silver Hand Charger
-        288506, // Sandy Nightsaber
-        294923, // Hati
-        300152, // Tidestallion
-        300154, // Tidestallion
-        302796, // Swift Spectral Armored Gryphon (inv_mount_hippogryph_arcane)
-        302797, // Swift Spectral Pterrordax (inv_mount_hippogryph_arcane)
+        254473, // Vigilant Charger
+        254474, // Golden Charger
         302794, // Swift Spectral Fathom Ray (inv_mount_hippogryph_arcane)
         302795, // Swift Spectral Magnetocraft (inv_mount_hippogryph_arcane)
-        304696, // Wild Snapdragon
-        305032, // Silver Hand Direhorn (ability_mount_kodosunwalkerelite)
+        302796, // Swift Spectral Armored Gryphon (inv_mount_hippogryph_arcane)
+        302797, // Swift Spectral Pterrordax (inv_mount_hippogryph_arcane)
     ],
 
     // family based on http://www.warcraftmounts.com/gallery.php + https://wow.gamepedia.com/Beast
@@ -261,12 +106,11 @@ return [
             'Manasabers'      => [
                 'wcm'   => ['Cats'],
                 'icons' => ['suramarmount', 'nightborneracial',],
-                180545  => "Mystic Runesaber",
+                180545  => 'Mystic Runesaber',
             ],
             'Tigers'          => [
                 'wcm'   => ['Cats', 'Undead Cats'],
-                'icons' => ['monkmount', 'spectraltiger', 'siberiantiger', 'warnightsaber'],
-                24252   => "Swift Zulian Tiger",
+                'icons' => ['monkmount', 'spectraltiger', 'siberiantiger', 'warnightsaber', 'jungletiger'],
             ],
             'Mechanical Cats' => ['Mechanical Cats'],
             'Others'          => ['Flamesabers', 'Panthara', 'Felsabers'],
@@ -305,8 +149,9 @@ return [
         ],
         'Dragonhawks'  => ['Dragonhawks'],
         'Rylaks'       => ['Rylaks'],
-        'Elementals'   => [
+        'Elementals' => [
             'Elementals'   => ['Elementals'],
+            'Everwyrms'    => ['Everwyrms'],
             'Core Hounds'  => ['Core Hounds'],
             'Sabers'       => ['Flamesabers'],
             'Phoenixes'    => ['Phoenixes'],
@@ -428,7 +273,7 @@ return [
             'War Wolves'    => [
                 'wcm'   => ['Wolves'],
                 'icons' => ['hordepvpmount', 'alliancewolf', 'armoredwolf', 'frostwolfhowler'],
-                306421   => 'Frostwolf Snarler',
+                306421  => 'Frostwolf Snarler',
             ],
             'Wolves'        => [
                 'wcm'   => ['Wolves'],

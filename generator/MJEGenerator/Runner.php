@@ -1,80 +1,64 @@
 <?php
+
 declare(strict_types=1);
 
 namespace MJEGenerator;
 
-use MJEGenerator\Battlenet\Requester as Battlenet;
-use MJEGenerator\Wowhead\Requester as Wowhead;
-use MJEGenerator\WarcraftMounts\Requester as WarcraftMounts;
+use GuzzleHttp\Client;
 use MJEGenerator\Convert\Family;
 use MJEGenerator\Convert\LuaExport;
+use MJEGenerator\RawLoader\DatabaseWrapper;
+use MJEGenerator\RawLoader\FileIdMapper;
+use MJEGenerator\RawLoader\MountLoader;
+use MJEGenerator\WarcraftMounts\Requester as WarcraftMounts;
+use MJEGenerator\Wowhead\Requester as Wowhead;
 
 class Runner
 {
     private $config;
-    private $export;
 
     public function __construct(array $config)
     {
         $this->config = $config;
-        $this->export = new LuaExport;
     }
 
-    /**
-     * @return Mount[]
-     */
-    private function collectMounts(): array
+    private function loadRaw()
     {
-        $bnet = new Battlenet($this->config['battle.net']['clientId'], $this->config['battle.net']['clientSecret']);
+        $fileIdMapper = new FileIdMapper('raw/listfile.csv');
 
-        $mounts = $bnet->fetchMounts($bnet::REGION_EU);
-        $mounts += $bnet->fetchMounts($bnet::REGION_US);
+        $loader = new MountLoader(
+            new DatabaseWrapper('raw/Cache', 'raw/Extract'),
+            $fileIdMapper
+        );
+        $mounts = $loader->load();
+
+        ksort($mounts);
 
         return $mounts;
     }
 
     /**
      * @param Mount[] $mounts
-     * @return array
+     *
+     * @return Mount[]
      */
-    private function enhanceMounts($mounts)
+    private function enhanceMounts(array $mounts): array
     {
-        $wowHead = new Wowhead($this->config['wowhead']['channel']);
+        $channel = $this->config['wowhead']['channel'];
+        $guzzle  = new Client([
+            'base_uri' => 'https://' . $channel . '.wowhead.com/',
 
-        /** @var Mount $mount */
-        foreach ($this->config['overwriteMounts'] as $mount) {
-            $spellId = $mount->getSpellId();
-            if (isset($mounts[$spellId])) {
-                $mounts[$spellId]->mergeTogether($mount);
-            } else {
-                $mounts[$spellId] = $mount;
-            }
-        }
+            'retry_on_timeout'   => true,
+            'max_retry_attempts' => 5,
+        ]);
 
-        $mountItems = $wowHead->fetchMountItems();
-        foreach ($mountItems as $spellId => $itemIds) {
-            if (isset($mounts[$spellId])) {
-                $mounts[$spellId]->setItemIds($itemIds);
-            }
-        }
-        foreach ($mounts as $mount) {
-            $itemIds = $mount->getItemIds();
-            if ([] !== $itemIds) {
-                $tooltip = $wowHead->fetchItemTooltip(reset($itemIds));
-                if (false === empty($tooltip)
-                    && false === strpos($tooltip, 'Binds when picked up')
-                    && false === strpos($tooltip, 'Binds to Blizzard Battle.net account')
-                ) {
-                    $mount->setIsItemTradable(true);
-                }
-            }
-        }
+        $wowHead = new Wowhead($channel, $guzzle);
 
-        foreach ($mounts as $mount) {
-            $animations = $wowHead->fetchAnimationsBySpellId($mount->getSpellId());
-            foreach ($animations as $animation) {
+        $animations = $wowHead->fetchAnimationsForSpells(array_keys($mounts));
+        foreach ($animations as $spellId => $animationList) {
+            foreach ($animationList as $animation) {
                 if ($animation->getName() === 'MountSpecial') {
-                    $mount->setMountSpecialLength($animation->getLength());
+                    $mounts[$spellId]->setMountSpecialLength($animation->getLength());
                     break;
                 }
             }
@@ -83,13 +67,13 @@ class Runner
         return $mounts;
     }
 
-    private function generateFamilies(array $mounts): self
+    private function generateFamilies(array $mounts, LuaExport $export): self
     {
         $wcmMountFamilies = (new WarcraftMounts)->fetchMountFamilies();
 
         $handler  = new Family($this->config['familyMap']);
         $families = $handler->groupMountsByFamily($mounts, $wcmMountFamilies);
-        $lua      = $this->export->toLuaCategories('MountJournalEnhancedFamily', $families);
+        $lua      = $export->toLuaCategories('MountJournalEnhancedFamily', $families);
         file_put_contents('families.db.lua', $lua);
 
         $errors = $handler->getErrors();
@@ -100,16 +84,17 @@ class Runner
         return $this;
     }
 
-    private function generateMountSpecialList(array $mounts): self
+    private function generateMountSpecialList(array $mounts, LuaExport $export): self
     {
-        $lua = $this->export->toLuaSpecialLength('MountJournalEnhancedMountSpecial', $mounts);
+        $lua = $export->toLuaSpecialLength('MountJournalEnhancedMountSpecial', $mounts);
         file_put_contents('mountspecial.db.lua', $lua);
 
         return $this;
     }
-    private function generateTradableList(array $mounts): self
+
+    private function generateTradableList(array $mounts, LuaExport $export): self
     {
-        $lua = $this->export->toLuaTradable('MountJournalEnhancedTradable', $mounts);
+        $lua = $export->toLuaTradable('MountJournalEnhancedTradable', $mounts);
         file_put_contents('tradable.db.lua', $lua);
 
         return $this;
@@ -117,13 +102,14 @@ class Runner
 
     public function __invoke()
     {
-        $mounts = $this->collectMounts();
+        $mounts = $this->loadRaw();
         $mounts = array_diff_key($mounts, array_flip($this->config['ignored']));
         $mounts = $this->enhanceMounts($mounts);
 
-        $this->generateFamilies($mounts);
-        $this->generateMountSpecialList($mounts);
-        $this->generateTradableList($mounts);
+        $export = new LuaExport();
+        $this->generateFamilies($mounts, $export);
+        $this->generateMountSpecialList($mounts, $export);
+        $this->generateTradableList($mounts, $export);
 
         return $this;
     }
