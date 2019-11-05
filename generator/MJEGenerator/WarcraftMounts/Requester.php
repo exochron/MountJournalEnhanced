@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace MJEGenerator\WarcraftMounts;
-
 
 class Requester
 {
@@ -16,7 +16,6 @@ class Requester
 
         preg_match_all("#<h5><a .*</div>\s+</span>#isU", $html, $htmlParts);
         foreach ($htmlParts[0] as $htmlPart) {
-
             preg_match("#<h5><a id=\'(.*)\'>#isU", $htmlPart, $familyName);
 
             preg_match_all("#<img class=\'thumbimage\' src=\'.*\' alt=\'(.*)\' />#isU", $htmlPart, $names);

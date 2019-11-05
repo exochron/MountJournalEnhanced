@@ -13,7 +13,6 @@ Libs\MSA-DropDownMenu-1.0\MSA-DropDownMenu-1.0.xml
 Locals\Locals.xml
 Database\Database.lua
 Database\families.db.lua
-Database\mountspecial.db.lua
 Database\tradable.db.lua
 Filters.lua
 MountJournalEnhanced.lua

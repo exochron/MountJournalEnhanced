@@ -18,39 +18,19 @@ local ADDON_NAME, ADDON = ...
 --618=MountSelfIdle -- for isSelfMount
 --636=mountspecial
 
-
 local function HideRotationButtons()
     local scene = MountJournal.MountDisplay.ModelScene
     scene.RotateLeftButton:Hide()
     scene.RotateRightButton:Hide()
 end
 
-local activeTimer
-local function DoMountSpecial(button)
-    local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
-    if actor then
-        actor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_ANIM)
-        actor:SetAnimation(94, 0)
-        if activeTimer then
-            activeTimer:Cancel()
+local function SetupModelActor()
+    hooksecurefunc("MountJournal_UpdateMountDisplay", function(sender, level)
+        local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
+        if actor then
+            actor:StopAnimationKit()
         end
-
-        local currentSpellId = MountJournal.selectedSpellID
-        local animationLength = ADDON.MountJournalEnhancedMountSpecial[currentSpellId]
-        if animationLength then
-            activeTimer = C_Timer.NewTimer(animationLength / 1000, function()
-                if MountJournal.selectedSpellID == currentSpellId then
-                    local _, _, _, isSelfMount = C_MountJournal.GetMountInfoExtraByID(MountJournal.selectedMountID)
-                    actor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_ANIM)
-                    if (isSelfMount) then
-                        actor:SetAnimation(618)
-                    else
-                        actor:SetAnimation(0);
-                    end
-                end
-            end)
-        end
-    end
+    end)
 end
 
 local function BuildControlContainer(width)
@@ -89,7 +69,9 @@ local function BuildButton(frame, relativeTo, tooltip, tooltipText)
     if tooltipText then
         button.tooltipText = tooltipText
     end
-    button:HookScript("OnEnter", function() frame:Show() end)
+    button:HookScript("OnEnter", function()
+        frame:Show()
+    end)
 
     return button
 end
@@ -106,7 +88,9 @@ local function BuildCameraButton(frame, relativeTo, tooltip, tooltipText, camera
     if tooltipText then
         button.tooltipText = tooltipText
     end
-    button:HookScript("OnEnter", function() frame:Show() end)
+    button:HookScript("OnEnter", function()
+        frame:Show()
+    end)
 
     button.cameraMode = cameraMode
     button.amountPerSecond = amountPerSceond
@@ -122,13 +106,23 @@ local function BuildCameraPanel()
     frame:SetPoint("BOTTOM", 0, 15)
 
     local scene = MountJournal.MountDisplay.ModelScene
-    scene:HookScript("OnEnter", function() frame:Show() end)
-    scene:HookScript("OnLeave", function() frame:Hide() end)
+    scene:HookScript("OnEnter", function()
+        frame:Show()
+    end)
+    scene:HookScript("OnLeave", function()
+        frame:Hide()
+    end)
 
     local special = BuildButton(frame, nil, "/mountspecial")
     special.icon:SetTexture("Interface/QuestTypeIcons")
     special.icon:SetTexCoord(0, 0.14285714285714285714285714285714, 0.275, 0.575)
-    special:HookScript("OnClick", DoMountSpecial)
+    special:HookScript("OnClick", function ()
+        local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
+        if actor then
+            actor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_ANIM)
+            actor:PlayAnimationKit(1371)
+        end
+    end)
 
     local zoomIn = BuildCameraButton(frame, special, ZOOM_IN, KEY_MOUSEWHEELUP, ORBIT_CAMERA_MOUSE_MODE_ZOOM, 0.9)
     zoomIn.icon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
@@ -164,5 +158,6 @@ end
 
 ADDON:RegisterLoadUICallback(function()
     HideRotationButtons()
+    SetupModelActor()
     BuildCameraPanel()
 end)

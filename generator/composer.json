@@ -1,10 +1,7 @@
 {
   "require": {
-    "ext-json": "*",
     "ext-zlib": "*",
-    "ext-gmp": "*",
-    "guzzlehttp/guzzle": "6.4.*",
-    "caseyamcl/guzzle_retry_middleware": "2.3.*"
+    "ext-gmp": "*"
   },
   "require-dev": {
     "phpmd/phpmd": "*",

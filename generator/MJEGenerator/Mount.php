@@ -10,7 +10,6 @@ class Mount
     private $spellId;
     private $icon;
     private $isItemTradable = false;
-    private $mountSpecialLength = 0;
 
     public function __construct(
         string $name,
@@ -20,13 +19,6 @@ class Mount
         $this->name    = $name;
         $this->spellId = $spellId;
         $this->icon    = $icon;
-    }
-
-    public function setMountSpecialLength(int $mountSpecialLength): self
-    {
-        $this->mountSpecialLength = $mountSpecialLength;
-
-        return $this;
     }
 
     public function getName(): string
@@ -48,11 +40,6 @@ class Mount
     public function getIcon(): string
     {
         return $this->icon;
-    }
-
-    public function getMountSpecialLength(): int
-    {
-        return $this->mountSpecialLength;
     }
 
     public function setIsItemTradable(bool $isItemTradable): self
