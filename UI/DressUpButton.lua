@@ -1,25 +1,5 @@
 local ADDON_NAME, ADDON = ...
 
-local function saveMountIdInFrame(link)
-    if (link) then
-        local mountId
-        local _, _, _, linkType, linkId = strsplit(":|H", link);
-        if linkType == "item" then
-            mountId = C_MountJournal.GetMountFromItem(tonumber(linkId));
-        elseif linkType == "spell" then
-            mountId = C_MountJournal.GetMountFromSpell(tonumber(linkId));
-        end
-
-        if mountId then
-            if (SideDressUpFrame.parentFrame and SideDressUpFrame.parentFrame:IsShown()) then
-                SideDressUpFrame.mountId = mountId
-            else
-                DressUpFrame.mountId = mountId
-            end
-        end
-    end
-end
-
 local function createJournalButton(ParentFrame)
     local AceGUI = LibStub("AceGUI-3.0")
 
@@ -33,6 +13,7 @@ local function createJournalButton(ParentFrame)
     else
         button:SetPoint("BOTTOMLEFT", ParentFrame, "BOTTOMLEFT", 7, 4)
     end
+
     button:SetCallback("OnClick", function()
         if (ParentFrame.mode == "mount") then
             local mountId = ParentFrame.mountId;
@@ -43,16 +24,11 @@ local function createJournalButton(ParentFrame)
         end
     end)
 
-    ParentFrame.ResetButton:HookScript("OnShow", function()
+    hooksecurefunc(ParentFrame.ModelScene, "ClearScene", function()
         button.frame:Hide()
     end)
-    -- OnHide won't trigger if it's already hidden. (happens when switching preview between pet and mount)
-    hooksecurefunc(ParentFrame.ResetButton, "Hide", function()
-        if (ParentFrame.mode == "mount" and ADDON.settings.ui.previewButton) then
-            button.frame:Show()
-        else
-            button.frame:Hide()
-        end
+    hooksecurefunc(ParentFrame.ModelScene, "AttachPlayerToMount", function()
+        button.frame:Show()
     end)
 end
 
@@ -65,7 +41,15 @@ function ADDON:ApplyPreviewButton(flag)
         createJournalButton(DressUpFrame)
         createJournalButton(SideDressUpFrame)
 
-        hooksecurefunc("DressUpMountLink", saveMountIdInFrame)
+        hooksecurefunc("DressUpMount", function(mountId)
+            if mountId then
+                if (SideDressUpFrame.parentFrame and SideDressUpFrame.parentFrame:IsShown()) then
+                    SideDressUpFrame.mountId = mountId
+                else
+                    DressUpFrame.mountId = mountId
+                end
+            end
+        end)
 
         inititalized = true
     end
