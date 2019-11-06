@@ -9,7 +9,7 @@ use MJEGenerator\Convert\LuaExport;
 use MJEGenerator\RawLoader\DatabaseWrapper;
 use MJEGenerator\RawLoader\FileIdMapper;
 use MJEGenerator\RawLoader\MountLoader;
-use MJEGenerator\WarcraftMounts\Requester as WarcraftMounts;
+use MJEGenerator\WarcraftMounts\Requester;
 
 class Runner
 {
@@ -20,7 +20,7 @@ class Runner
         $this->config = $config;
     }
 
-    private function loadRaw()
+    private function loadRaw(): array
     {
         $fileIdMapper = new FileIdMapper('raw/listfile.csv');
 
@@ -37,7 +37,7 @@ class Runner
 
     private function generateFamilies(array $mounts, LuaExport $export): self
     {
-        $wcmMountFamilies = (new WarcraftMounts)->fetchMountFamilies();
+        $wcmMountFamilies = (new Requester)->fetchMountFamilies();
 
         $handler  = new Family($this->config['familyMap']);
         $families = $handler->groupMountsByFamily($mounts, $wcmMountFamilies);

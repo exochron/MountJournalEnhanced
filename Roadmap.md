@@ -1,9 +1,7 @@
 ### 2.6 (Next - 8.2.5)
-- toggle rider in display
+- toggle rider in display director
 - fix ridiculous fly-in animation of rider (currently on ptr)
 - update handling for dressup button
-- create IconButtons with AceGUI
-- new battle.net wow api for generator
 
 ### More Ideas:
 - more animation control in display (start/pause, movements, with sound effects)
