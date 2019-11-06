@@ -1,10 +1,6 @@
 <?php
 
 return [
-    'wowhead' => [
-        'channel' => 'www', // www|ptr
-    ],
-
     'ignored'   => [
         459, // Gray Wolf
         581, // Winter Wolf
@@ -13,7 +9,6 @@ return [
         28828, // Nether Drake
         55164, // Swift Spectral Gryphon
         59572, // Black Polar Bear
-        59573, // Brown Polar Bear
         60136, // Grand Caravan Mammoth
         60140, // Grand Caravan Mammoth
         62048, // Black Dragonhawk Mount

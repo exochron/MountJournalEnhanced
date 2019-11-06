@@ -12,7 +12,6 @@ class DatabaseWrapper
     private $cacheFile;
     private $extractDir;
 
-    private $creatureDisplayInfoReader;
     private $itemSparseReader;
 
     public function __construct(string $cacheDir, string $extractDir)
@@ -40,18 +39,6 @@ class DatabaseWrapper
             ],
             [
                 6 => true, //sourceType
-            ]
-        );
-    }
-
-    public function iterateMountXDisplay(): Generator
-    {
-        yield from $this->iterateFile(
-            'MountXDisplay.db2',
-            [
-                'creatureDisplayId',
-                'playerConditionId',
-                'mountId',
             ]
         );
     }
@@ -108,21 +95,6 @@ class DatabaseWrapper
         $reader->setFieldsSigned($signedFields);
 
         yield from $reader->generateRecords();
-    }
-
-    public function fetchCreatureDisplayInfo(int $creatureDisplayId): array
-    {
-        if (null === $this->creatureDisplayInfoReader) {
-            $this->creatureDisplayInfoReader = new HotfixedReader($this->extractDir . 'CreatureDisplayInfo.db2', $this->cacheFile);
-            $this->creatureDisplayInfoReader->setFieldNames([
-                'modelId',
-                'soundId',
-                'sizeClass',
-                // ... and a lot more
-            ]);
-        }
-
-        return $this->creatureDisplayInfoReader->getRecord($creatureDisplayId);
     }
 
     public function fetchItemSparse(int $itemId): ?array
@@ -197,5 +169,4 @@ class DatabaseWrapper
 
         return $this->itemSparseReader->getRecord($itemId);
     }
-
 }

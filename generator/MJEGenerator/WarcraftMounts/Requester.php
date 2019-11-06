@@ -16,9 +16,9 @@ class Requester
 
         preg_match_all("#<h5><a .*</div>\s+</span>#isU", $html, $htmlParts);
         foreach ($htmlParts[0] as $htmlPart) {
-            preg_match("#<h5><a id=\'(.*)\'>#isU", $htmlPart, $familyName);
+            preg_match("#<h5><a id='(.*)'>#isU", $htmlPart, $familyName);
 
-            preg_match_all("#<img class=\'thumbimage\' src=\'.*\' alt=\'(.*)\' />#isU", $htmlPart, $names);
+            preg_match_all("#<img class='thumbimage' src='.*' alt='(.*)' />#isU", $htmlPart, $names);
             foreach ($names[1] as $name) {
                 $name = html_entity_decode($name, ENT_QUOTES | ENT_XML1);
                 $name = strtolower($name);

@@ -20,23 +20,11 @@ class MountLoader
 
     public function load(): array
     {
-        $mountToSpellId = $list = [];
+        $list = [];
         foreach ($this->dbWrapper->iterateMount() as $record) {
-            $spellId                  = $record['spellId'];
-//            $mountId                  = $record['mountId'];
-            $list[$spellId]           = new Mount($record['name'], $spellId);
-//            $mountToSpellId[$mountId] = $spellId;
+            $spellId        = $record['spellId'];
+            $list[$spellId] = new Mount($record['name'], $spellId);
         }
-
-//        foreach ($this->dbWrapper->iterateMountXDisplay() as $record) {
-//            if (isset($mountToSpellId[$record['mountId']], $list[$mountToSpellId[$record['mountId']]])) {
-//                /** @var Mount $mount */
-//                $mount = $list[$mountToSpellId[$record['mountId']]];
-//                $creatureInfo = $this->dbWrapper->fetchCreatureDisplayInfo($record['creatureDisplayId']);
-//                $creatureInfo['modelId'];
-//                var_dump($creatureInfo);
-//            }
-//        }
 
         foreach ($this->dbWrapper->iterateItemEffect() as $record) {
             if (1 === $record['legacySlotIndex'] && 6 === $record['triggerType'] && isset($list[$record['spellId']])) {
