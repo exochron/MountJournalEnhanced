@@ -1,5 +1,5 @@
-### 2.6 (Next - 8.2.5)
-- toggle rider in display director
+### 2.6 (Next)
+- add Everywyrms as family
 
 ### More Ideas:
 - more animation control in display (start/pause, movements, with sound effects)
