@@ -36,6 +36,8 @@ L["Arachnids"] = "蛛形类"
 L["Basilisks"] = "蜥蜴"
 L["Bats"] = "蝙蝠"
 L["Bears"] = "熊"
+--[[Translation missing --]]
+--[[ L["Bees"] = "Bees"--]]
 L["Birds"] = "鸟类"
 L["Blood Ticks"] = "血蛛"
 L["Boars"] = "野猪"
