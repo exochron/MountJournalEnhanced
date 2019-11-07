@@ -1,6 +1,5 @@
 ### 2.6 (Next - 8.2.5)
 - toggle rider in display director
-- fix ridiculous fly-in animation of rider (currently on ptr)
 
 ### More Ideas:
 - more animation control in display (start/pause, movements, with sound effects)

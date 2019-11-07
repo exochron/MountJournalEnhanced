@@ -36,4 +36,5 @@ UI\MountCount.lua
 UI\MountListDropDown.lua
 UI\SettingsDropDown.lua
 UI\ShopButton.lua
+UI\BlizzFixes.lua
 SlashCommand.lua
