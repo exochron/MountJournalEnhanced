@@ -448,6 +448,7 @@ ADDON.MountJournalEnhancedFamily = {
 ["Others"] = {
 [110051] = true, -- Heart of the Aspects
 [142878] = true, -- Enchanted Fey Dragon
+[307932] = true, -- Ensorcelled Everwyrm
 },
 ["Proto-Drakes"] = {
 [59961] = true, -- Red Proto-Drake
@@ -506,9 +507,6 @@ ADDON.MountJournalEnhancedFamily = {
 ["Elementals"] = {
 [231442] = true, -- Farseer's Raging Tempest
 [289555] = true, -- Glacial Tidestorm
-},
-["Everwyrms"] = {
-[307932] = true, -- Ensorcelled Everwyrm
 },
 ["Phoenixes"] = {
 [40192] = true, -- Ashes of Al'ar
@@ -640,6 +638,9 @@ ADDON.MountJournalEnhancedFamily = {
 [36702] = true, -- Fiery Warhorse
 [48778] = true, -- Acherus Deathcharger
 [73313] = true, -- Crimson Deathcharger
+[232412] = true, -- Netherlord's Chaotic Wrathsteed
+[238452] = true, -- Netherlord's Brimstone Wrathsteed
+[238454] = true, -- Netherlord's Accursed Wrathsteed
 },
 ["Flying Steeds"] = {
 [48025] = true, -- Headless Horseman's Mount
@@ -715,9 +716,6 @@ ADDON.MountJournalEnhancedFamily = {
 [92231] = true, -- Spectral Steed
 [146622] = true, -- Vicious Skeletal Warhorse
 [229499] = true, -- Midnight
-[232412] = true, -- Netherlord's Chaotic Wrathsteed
-[238452] = true, -- Netherlord's Brimstone Wrathsteed
-[238454] = true, -- Netherlord's Accursed Wrathsteed
 [281890] = true, -- Vicious Black Bonesteed
 [288722] = true, -- Risen Mare
 },

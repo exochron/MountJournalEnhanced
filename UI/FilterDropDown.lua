@@ -26,13 +26,15 @@ local function CreateFilterInfo(text, filterKey, filterSettings, callback)
         end
         info.arg1 = filterSettings
         info.notCheckable = false
-        info.checked = function(self) return self.arg1[filterKey] end
+        info.checked = function(self)
+            return self.arg1[filterKey]
+        end
         info.func = function(_, arg1, _, value)
             arg1[filterKey] = value
             ADDON:UpdateIndexMap()
             MountJournal_UpdateMountList()
             if (MSA_DROPDOWNMENU_MENU_LEVEL > 1) then
-                for i=1, MSA_DROPDOWNMENU_MENU_LEVEL do
+                for i = 1, MSA_DROPDOWNMENU_MENU_LEVEL do
                     MSA_DropDownMenu_Refresh(_G[ADDON_NAME .. "FilterMenu"], nil, i)
                 end
             end
@@ -145,6 +147,22 @@ local function AddCheckAllAndNoneInfo(settings, level)
     MSA_DropDownMenu_AddButton(info, level)
 end
 
+local function ShouldDisplayFamily(spellIds)
+    if #spellIds > 5 then
+        return true
+    end
+
+    for spellId, _ in pairs(spellIds) do
+        local mountId = C_MountJournal.GetMountFromSpell(spellId)
+        local shouldHideOnChar = select(10, C_MountJournal.GetMountInfoByID(mountId))
+        if shouldHideOnChar == false then
+            return true
+        end
+    end
+
+    return false
+end
+
 local function InitializeFilterDropDown(filterMenu, level)
     local info
 
@@ -229,13 +247,17 @@ local function InitializeFilterDropDown(filterMenu, level)
             end
             table.insert(sortedFamilies, family)
         end
-        table.sort(sortedFamilies, function(a, b) return (L[a] or a) < (L[b] or b) end)
+        table.sort(sortedFamilies, function(a, b)
+            return (L[a] or a) < (L[b] or b)
+        end)
 
         for _, family in pairs(sortedFamilies) do
             if hasSubFamilies[family] then
                 MSA_DropDownMenu_AddButton(CreateInfoWithMenu(L[family] or family, family, settings[family]), level)
             else
+
                 MSA_DropDownMenu_AddButton(CreateFilterInfo(L[family] or family, family, settings), level)
+
             end
         end
     elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_EXPANSION) then
@@ -250,10 +272,13 @@ local function InitializeFilterDropDown(filterMenu, level)
         for family, _ in pairs(ADDON.MountJournalEnhancedFamily[MSA_DROPDOWNMENU_MENU_VALUE]) do
             table.insert(sortedFamilies, family)
         end
-        table.sort(sortedFamilies, function(a, b) return (L[a] or a) < (L[b] or b) end)
+        table.sort(sortedFamilies, function(a, b)
+            return (L[a] or a) < (L[b] or b)
+        end)
         for _, family in pairs(sortedFamilies) do
-            local info = CreateFilterInfo(L[family] or family, family, settings)
-            MSA_DropDownMenu_AddButton(info, level)
+            if ShouldDisplayFamily(ADDON.MountJournalEnhancedFamily[MSA_DROPDOWNMENU_MENU_VALUE][family]) then
+                MSA_DropDownMenu_AddButton(CreateFilterInfo(L[family] or family, family, settings), level)
+            end
         end
     end
 end

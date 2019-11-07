@@ -133,7 +133,7 @@ return [
             'Grand Drakes'   => ['Grand Drakes'],
             'Proto-Drakes'   => ['Proto-Drakes'],
             'Undead Drakes'  => ['Undead Drakes'],
-            'Others'         => ['Sinuous Drakes', 'Fey Drakes'],
+            'Others'         => ['Sinuous Drakes', 'Fey Drakes', 'Everwyrms'],
         ],
         'Demons'       => [
             'Demonic Steeds' => ['Demonic Steeds'],
@@ -144,9 +144,8 @@ return [
         ],
         'Dragonhawks'  => ['Dragonhawks'],
         'Rylaks'       => ['Rylaks'],
-        'Elementals' => [
+        'Elementals'   => [
             'Elementals'   => ['Elementals'],
-            'Everwyrms'    => ['Everwyrms'],
             'Core Hounds'  => ['Core Hounds'],
             'Sabers'       => ['Flamesabers'],
             'Phoenixes'    => ['Phoenixes'],
@@ -168,11 +167,16 @@ return [
             'Chargers'          => [
                 'wcm'   => ['Horses'],
                 'icons' => ['_paladinmount_', '_charger', 'nature_swiftness', 'alliancepvpmount', 'vicioushorse', 'paladin_divinesteed', 'horsekultiran', 'hordehorse'],
-                67466   => "Argent Warhorse",
+                67466   => 'Argent Warhorse',
                 68187   => "Crusader's White Warhorse",
                 68188   => "Crusader's Black Warhorse",
             ],
-            'Demonic Steeds'    => ['Demonic Steeds'],
+            'Demonic Steeds'    => [
+                'wcm' => ['Demonic Steeds'],
+                232412 => "Netherlord's Chaotic Wrathsteed",
+                238452 => "Netherlord's Brimstone Wrathsteed",
+                238454 => "Netherlord's Accursed Wrathsteed",
+            ],
             'Steeds'            => [
                 'wcm'   => ['Horses'],
                 'icons' => ['ridinghorse', 'nightmarehorse'],
@@ -180,12 +184,15 @@ return [
             'Mountain Horses'   => [
                 'wcm'   => ['Horses'],
                 'icons' => ['dressedhorse', 'horse3'],
-                103195  => "Mountain Horse",
-                103196  => "Swift Mountain Horse",
+                103195  => 'Mountain Horse',
+                103196  => 'Swift Mountain Horse',
             ],
             'Horned Steeds'     => ['Horned Steeds', 'Windsteeds'],
             'Flying Steeds'     => ['Flying Steeds', 'Windsteeds'],
-            'Undead Steeds'     => ['Undead Steeds'],
+            'Undead Steeds'     => [
+                'wcm'   => ['Undead Steeds'],
+                'icons' => ['undead', 'skeletal', 'spectral', 'dreadsteed'],
+            ],
             'Mechanical Steeds' => ['Mechanical Steeds'],
         ],
         'Humanoids'    => [
