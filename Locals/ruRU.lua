@@ -44,6 +44,8 @@ L["Underwater"] = "Подводные"
 --[[ L["Basilisks"] = "Basilisks"--]]
 L["Bats"] = "Летучие мыши"
 L["Bears"] = "Медведи"
+--[[Translation missing --]]
+--[[ L["Bees"] = "Bees"--]]
 L["Birds"] = "Птицы"
 --[[Translation missing --]]
 --[[ L["Blood Ticks"] = "Blood Ticks"--]]

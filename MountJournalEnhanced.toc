@@ -2,7 +2,7 @@
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron
-## Version: 2.5.2
+## Version: 2.6
 ## SavedVariablesPerCharacter: MountJournalEnhancedSettings, MJEPersonalSettings
 ## SavedVariables: MJEGlobalSettings
 
@@ -13,7 +13,6 @@ Libs\MSA-DropDownMenu-1.0\MSA-DropDownMenu-1.0.xml
 Locals\Locals.xml
 Database\Database.lua
 Database\families.db.lua
-Database\mountspecial.db.lua
 Database\tradable.db.lua
 Filters.lua
 MountJournalEnhanced.lua
@@ -37,4 +36,5 @@ UI\MountCount.lua
 UI\MountListDropDown.lua
 UI\SettingsDropDown.lua
 UI\ShopButton.lua
+UI\BlizzFixes.lua
 SlashCommand.lua

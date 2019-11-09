@@ -35,7 +35,7 @@ local function FavorMounts(mountIds, finishedCallback)
     -- apparently Blizzard only allows ~5 requests per second
 
     if starButton then
-        starButton:Disable()
+        starButton:SetDisabled(true)
     end
 
     local MJ_GetNumDisplayedMounts = ADDON.hooks["GetNumDisplayedMounts"] or C_MountJournal.GetNumDisplayedMounts
@@ -77,7 +77,7 @@ local function FavorMounts(mountIds, finishedCallback)
         end)
     elseif finishedCallback then
         if starButton then
-            starButton:Enable()
+            starButton:SetDisabled(false)
         end
         finishedCallback()
     end
@@ -139,22 +139,33 @@ local function BuildStarButton()
     local menu = MSA_DropDownMenu_Create(ADDON_NAME.."FavorMenu", MountJournal)
     MSA_DropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
 
-    starButton = CreateFrame("Button", nil, MountJournal)
+    local AceGUI = LibStub("AceGUI-3.0")
+
+    starButton = AceGUI:Create("Icon")
+    starButton:SetParent({ content = MountJournal })
     starButton:SetPoint("TOPLEFT", MountJournal.LeftInset, "TOPLEFT", 0, -7)
-    starButton:SetSize(25, 25)
-    starButton:SetNormalAtlas("PetJournal-FavoritesIcon", true)
-    starButton:SetScript("OnEnter", function(sender)
-        GameTooltip:SetOwner(sender, "ANCHOR_NONE")
-        GameTooltip:SetPoint("BOTTOM", sender, "TOP", 0, -4)
+    starButton:SetWidth(25)
+    starButton:SetHeight(25)
+
+    starButton.image:SetAtlas("PetJournal-FavoritesIcon")
+    starButton.image:SetWidth(25)
+    starButton.image:SetHeight(25)
+    starButton.image:SetPoint("TOP", 0, 0)
+
+    starButton:SetCallback("OnEnter", function(sender)
+        GameTooltip:SetOwner(sender.frame, "ANCHOR_NONE")
+        GameTooltip:SetPoint("BOTTOM", sender.frame, "TOP", 0, -4)
         GameTooltip:SetText(FAVORITES)
         GameTooltip:Show()
     end);
-    starButton:SetScript("OnLeave", function(sender)
+    starButton:SetCallback("OnLeave", function(sender)
         GameTooltip:Hide()
     end);
-    starButton:SetScript("OnClick", function()
-        MSA_ToggleDropDownMenu(1, nil, menu, starButton, 0, 10)
+    starButton:SetCallback("OnClick", function()
+        MSA_ToggleDropDownMenu(1, nil, menu, starButton.frame, 0, 10)
     end)
+
+    starButton.frame:Show()
 
     local searchBox = MountJournal.searchBox
     searchBox:ClearAllPoints()

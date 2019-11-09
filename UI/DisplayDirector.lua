@@ -18,39 +18,21 @@ local ADDON_NAME, ADDON = ...
 --618=MountSelfIdle -- for isSelfMount
 --636=mountspecial
 
-
-local function HideRotationButtons()
+local function HideOriginalElements()
     local scene = MountJournal.MountDisplay.ModelScene
     scene.RotateLeftButton:Hide()
     scene.RotateRightButton:Hide()
+    scene.TogglePlayer:Hide()
 end
 
-local activeTimer
-local function DoMountSpecial(button)
-    local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
-    if actor then
-        actor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_ANIM)
-        actor:SetAnimation(94, 0)
-        if activeTimer then
-            activeTimer:Cancel()
+-- Switching mounts still starts the Animationkit. So we have to stop it.
+local function SetupModelActor()
+    hooksecurefunc("MountJournal_UpdateMountDisplay", function(sender, level)
+        local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
+        if actor then
+            actor:StopAnimationKit()
         end
-
-        local currentSpellId = MountJournal.selectedSpellID
-        local animationLength = ADDON.MountJournalEnhancedMountSpecial[currentSpellId]
-        if animationLength then
-            activeTimer = C_Timer.NewTimer(animationLength / 1000, function()
-                if MountJournal.selectedSpellID == currentSpellId then
-                    local _, _, _, isSelfMount = C_MountJournal.GetMountInfoExtraByID(MountJournal.selectedMountID)
-                    actor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_ANIM)
-                    if (isSelfMount) then
-                        actor:SetAnimation(618)
-                    else
-                        actor:SetAnimation(0);
-                    end
-                end
-            end)
-        end
-    end
+    end)
 end
 
 local function BuildControlContainer(width)
@@ -78,8 +60,7 @@ local function BuildControlContainer(width)
     return frame
 end
 
-local function BuildButton(frame, relativeTo, tooltip, tooltipText)
-    local button = CreateFrame("Button", nil, frame, "ModelControlButtonTemplate")
+local function InitButton(button, frame, relativeTo, tooltip, tooltipText)
     if relativeTo then
         button:SetPoint("LEFT", relativeTo, "RIGHT", 0, 0)
     else
@@ -89,7 +70,32 @@ local function BuildButton(frame, relativeTo, tooltip, tooltipText)
     if tooltipText then
         button.tooltipText = tooltipText
     end
-    button:HookScript("OnEnter", function() frame:Show() end)
+    button:HookScript("OnEnter", function()
+        frame:Show()
+    end)
+end
+
+local function BuildButton(frame, relativeTo, tooltip, tooltipText)
+    local button = CreateFrame("Button", nil, frame, "ModelControlButtonTemplate")
+    InitButton(button, frame, relativeTo, tooltip, tooltipText)
+
+    return button
+end
+
+local function CheckButtonStatus(self)
+    if self:GetChecked() then
+        self:OnMouseDown()
+    else
+        self:OnMouseUp()
+    end
+end
+
+local function BuildCheckButton(frame, relativeTo, tooltip, tooltipText, OnInitShow)
+    local button = CreateFrame("CheckButton", nil, frame, "ModelControlButtonTemplate")
+    InitButton(button, frame, relativeTo, tooltip, tooltipText)
+    button:HookScript("OnShow", OnInitShow)
+    button:HookScript("OnShow", CheckButtonStatus)
+    button:HookScript("OnClick", CheckButtonStatus)
 
     return button
 end
@@ -97,16 +103,7 @@ end
 local function BuildCameraButton(frame, relativeTo, tooltip, tooltipText, cameraMode, amountPerSceond)
     local button = CreateFrame("Button", nil, frame, "ModelControlButtonTemplate,ModifyOrbitCameraBaseButtonTemplate")
     button:SetSize(18, 18)
-    if relativeTo then
-        button:SetPoint("LEFT", relativeTo, "RIGHT", 0, 0)
-    else
-        button:SetPoint("LEFT", 2, 0)
-    end
-    button.tooltip = tooltip
-    if tooltipText then
-        button.tooltipText = tooltipText
-    end
-    button:HookScript("OnEnter", function() frame:Show() end)
+    InitButton(button, frame, relativeTo, tooltip, tooltipText)
 
     button.cameraMode = cameraMode
     button.amountPerSecond = amountPerSceond
@@ -118,19 +115,34 @@ local function BuildCameraButton(frame, relativeTo, tooltip, tooltipText, camera
 end
 
 local function BuildCameraPanel()
-    local frame = BuildControlContainer(148)
+    local frame = BuildControlContainer(166)
     frame:SetPoint("BOTTOM", 0, 15)
 
     local scene = MountJournal.MountDisplay.ModelScene
-    scene:HookScript("OnEnter", function() frame:Show() end)
-    scene:HookScript("OnLeave", function() frame:Hide() end)
+    scene:HookScript("OnEnter", function()
+        frame:Show()
+    end)
+    scene:HookScript("OnLeave", function()
+        frame:Hide()
+    end)
 
     local special = BuildButton(frame, nil, "/mountspecial")
     special.icon:SetTexture("Interface/QuestTypeIcons")
     special.icon:SetTexCoord(0, 0.14285714285714285714285714285714, 0.275, 0.575)
-    special:HookScript("OnClick", DoMountSpecial)
+    special:HookScript("OnClick", function()
+        local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
+        if actor then
+            actor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_ANIM)
+            actor:PlayAnimationKit(1371)
+        end
+    end)
 
-    local zoomIn = BuildCameraButton(frame, special, ZOOM_IN, KEY_MOUSEWHEELUP, ORBIT_CAMERA_MOUSE_MODE_ZOOM, 0.9)
+    local char = BuildCheckButton(frame, special, MOUNT_JOURNAL_PLAYER, nil, PlayerPreviewToggle.OnShow)
+    char.icon:SetTexture(386865) -- interface/friendsframe/ui-toast-toasticons.blp
+    char.icon:SetTexCoord(0.04, 0.58, 0.04, 0.92, 0.21, 0.58, 0.21, 0.92)
+    char:HookScript("OnClick", PlayerPreviewToggle.OnClick)
+
+    local zoomIn = BuildCameraButton(frame, char, ZOOM_IN, KEY_MOUSEWHEELUP, ORBIT_CAMERA_MOUSE_MODE_ZOOM, 0.9)
     zoomIn.icon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
 
     local zoomOut = BuildCameraButton(frame, zoomIn, ZOOM_OUT, KEY_MOUSEWHEELDOWN, ORBIT_CAMERA_MOUSE_MODE_ZOOM, -0.9)
@@ -163,6 +175,7 @@ local function BuildCameraPanel()
 end
 
 ADDON:RegisterLoadUICallback(function()
-    HideRotationButtons()
+    HideOriginalElements()
+    SetupModelActor()
     BuildCameraPanel()
 end)

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace MJEGenerator\Convert;
@@ -8,8 +9,9 @@ use MJEGenerator\Mount;
 class LuaExport
 {
     /**
-     * @param string $variableName
+     * @param string    $variableName
      * @param Mount[][] $mounts
+     *
      * @return string
      */
     public function toLuaCategories(string $variableName, array $mounts): string
@@ -27,6 +29,7 @@ class LuaExport
 
     /**
      * @param Mount[][] $mounts
+     *
      * @return string
      */
     private function toCategory(array $mounts): string
@@ -49,23 +52,9 @@ class LuaExport
     }
 
     /**
-     * @param string $variableName
+     * @param string  $variableName
      * @param Mount[] $mounts
-     * @return string
-     */
-    public function toLuaSpecialLength(string $variableName, array $mounts): string
-    {
-        $result = $this->prepareHead($variableName);
-        foreach ($mounts as $mount) {
-            $result .= '[' . $mount->getSpellId() . '] = ' . $mount->getMountSpecialLength() . ', -- ' . $mount->getName() . PHP_EOL;
-        }
-
-        return $result . '}';
-    }
-
-    /**
-     * @param string $variableName
-     * @param Mount[] $mounts
+     *
      * @return string
      */
     public function toLuaTradable(string $variableName, array $mounts): string

@@ -1,125 +1,73 @@
 <?php
+
 declare(strict_types=1);
 
 namespace MJEGenerator;
 
-use function Amp\File\put;
-use Generator;
-use MJEGenerator\Battlenet\Requester as Battlenet;
-use MJEGenerator\Wowhead\Requester as Wowhead;
-use MJEGenerator\WarcraftMounts\Requester as WarcraftMounts;
 use MJEGenerator\Convert\Family;
 use MJEGenerator\Convert\LuaExport;
+use MJEGenerator\RawLoader\DatabaseWrapper;
+use MJEGenerator\RawLoader\FileIdMapper;
+use MJEGenerator\RawLoader\MountLoader;
+use MJEGenerator\WarcraftMounts\Requester;
 
 class Runner
 {
     private $config;
-    private $export;
 
     public function __construct(array $config)
     {
         $this->config = $config;
-        $this->export = new LuaExport;
     }
 
-    /**
-     * @return Mount[]|Generator
-     */
-    private function collectMounts(): Generator
+    private function loadRaw(): array
     {
-        $bnet = new Battlenet($this->config['battle.net']['clientId'], $this->config['battle.net']['clientSecret']);
+        $fileIdMapper = new FileIdMapper('raw/listfile.csv');
 
-        $mounts = yield from $bnet->fetchMounts($bnet::REGION_EU);
-        $mounts += yield from $bnet->fetchMounts($bnet::REGION_US);
+        $loader = new MountLoader(
+            new DatabaseWrapper('raw/Cache', 'raw/Extract'),
+            $fileIdMapper
+        );
+        $mounts = $loader->load();
+
+        ksort($mounts);
 
         return $mounts;
     }
 
-    /**
-     * @param Mount[] $mounts
-     * @return array
-     */
-    private function enhanceMounts($mounts)
+    private function generateFamilies(array $mounts, LuaExport $export): self
     {
-        $wowHead = new Wowhead($this->config['wowhead']['channel']);
-
-        /** @var Mount $mount */
-        foreach ($this->config['overwriteMounts'] as $mount) {
-            $spellId = $mount->getSpellId();
-            if (isset($mounts[$spellId])) {
-                $mounts[$spellId]->mergeTogether($mount);
-            } else {
-                $mounts[$spellId] = $mount;
-            }
-        }
-
-        $mountItems = yield from $wowHead->fetchMountItems();
-        foreach ($mountItems as $spellId => $itemIds) {
-            if (isset($mounts[$spellId])) {
-                $mounts[$spellId]->setItemIds($itemIds);
-            }
-        }
-        foreach ($mounts as $mount) {
-            $itemIds = $mount->getItemIds();
-            if ([] !== $itemIds) {
-                $tooltip = yield from $wowHead->fetchItemTooltip(reset($itemIds));
-                if (false === empty($tooltip)
-                    && false === strpos($tooltip, 'Binds when picked up')
-                    && false === strpos($tooltip, 'Binds to Blizzard Battle.net account')
-                ) {
-                    $mount->setIsItemTradable(true);
-                }
-            }
-        }
-
-        foreach ($mounts as $mount) {
-            $animations = yield from $wowHead->fetchAnimationsBySpellId($mount->getSpellId());
-            foreach ($animations as $animation) {
-                if ($animation->getName() === 'MountSpecial') {
-                    $mount->setMountSpecialLength($animation->getLength());
-                    break;
-                }
-            }
-        }
-
-        return $mounts;
-    }
-
-    private function generateFamilies(array $mounts): Generator
-    {
-        $wcmMountFamilies = (new WarcraftMounts)->fetchMountFamilies();
+        $wcmMountFamilies = (new Requester)->fetchMountFamilies();
 
         $handler  = new Family($this->config['familyMap']);
         $families = $handler->groupMountsByFamily($mounts, $wcmMountFamilies);
-        $lua      = $this->export->toLuaCategories('MountJournalEnhancedFamily', $families);
-        yield put('families.db.lua', $lua);
+        $lua      = $export->toLuaCategories('MountJournalEnhancedFamily', $families);
+        file_put_contents('families.db.lua', $lua);
 
         $errors = $handler->getErrors();
         if ([] !== $errors) {
             echo PHP_EOL . implode(PHP_EOL, $errors);
         }
+
+        return $this;
     }
 
-    private function generateMountSpecialList(array $mounts): Generator
+    private function generateTradableList(array $mounts, LuaExport $export): self
     {
-        $lua = $this->export->toLuaSpecialLength('MountJournalEnhancedMountSpecial', $mounts);
-        yield put('mountspecial.db.lua', $lua);
-    }
-    private function generateTradableList(array $mounts): Generator
-    {
-        $lua = $this->export->toLuaTradable('MountJournalEnhancedTradable', $mounts);
-        yield put('tradable.db.lua', $lua);
+        $lua = $export->toLuaTradable('MountJournalEnhancedTradable', $mounts);
+        file_put_contents('tradable.db.lua', $lua);
+
+        return $this;
     }
 
     public function __invoke()
     {
-        $mounts = yield from $this->collectMounts();
+        $mounts = $this->loadRaw();
         $mounts = array_diff_key($mounts, array_flip($this->config['ignored']));
-        $mounts = yield from $this->enhanceMounts($mounts);
 
-        yield from $this->generateFamilies($mounts);
-        yield from $this->generateMountSpecialList($mounts);
-        yield from $this->generateTradableList($mounts);
+        $export = new LuaExport();
+        $this->generateFamilies($mounts, $export);
+        $this->generateTradableList($mounts, $export);
 
         return $this;
     }

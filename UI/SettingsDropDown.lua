@@ -61,20 +61,25 @@ local function InitializeDropDown(filterMenu, level)
 end
 
 local function BuildWheelButton()
-    local button = CreateFrame("Button", nil, MountJournal)
+    local AceGUI = LibStub("AceGUI-3.0")
+
+    local button = AceGUI:Create("Icon")
+    button:SetParent({ content = MountJournal })
+    button:SetWidth(18)
+    button:SetHeight(18)
 
     if (CollectionsJournalPortrait:IsShown() and CollectionsJournalPortrait:GetAlpha() > 0.0) then
-        button:SetPoint("TOPLEFT", MountJournal, "TOPLEFT", 60, -3)
+        button:SetPoint("TOPLEFT", MountJournal, "TOPLEFT", 60, -1)
     else
-        button:SetPoint("TOPLEFT", MountJournal, "TOPLEFT", 3, -3)
+        button:SetPoint("TOPLEFT", MountJournal, "TOPLEFT", 3, -1)
     end
 
-    button:SetSize(18, 18)
-    local tex = button:CreateTexture()
-    tex:SetAllPoints(button)
-    tex:SetTexture('Interface\\Minimap\\ObjectIconsAtlas')
-    tex:SetTexCoord(0.86, 0.89, 0.205, 0.2683)
-    button:Show()
+    button.image:SetAtlas("mechagon-projects")
+    button.image:SetWidth(20)
+    button.image:SetHeight(20)
+    button.image:SetPoint("TOP", 0, 0)
+
+    button.frame:Show()
 
     return button
 end
@@ -84,8 +89,8 @@ ADDON:RegisterLoadUICallback(function()
 
     local menu = MSA_DropDownMenu_Create(ADDON_NAME .. "SettingsMenu", MountJournal)
     MSA_DropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
-    button:SetScript("OnClick", function(sender)
+    button:SetCallback("OnClick", function(sender)
         PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-        MSA_ToggleDropDownMenu(1, nil, menu, sender, 0, 0)
+        MSA_ToggleDropDownMenu(1, nil, menu, button.frame, 0, 0)
     end)
 end)

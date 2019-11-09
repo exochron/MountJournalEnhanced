@@ -33,6 +33,8 @@ L["Assault Wagons"] = "공성차량"
 L["Basilisks"] = "바실리스크"
 L["Bats"] = "박쥐"
 L["Bears"] = "곰"
+--[[Translation missing --]]
+--[[ L["Bees"] = "Bees"--]]
 L["Birds"] = "새"
 L["Blood Ticks"] = "흡혈충"
 L["Boars"] = "멧돼지"

@@ -1,8 +1,5 @@
-### 2.6 (Next - 8.2.5)
-- toggle rider in display
-- fix ridiculous fly-in animation of rider (currently on ptr)
-- update handling for dressup button
-- create IconButtons with AceGUI
+### 2.7 (8.3)
+- updated db
 
 ### More Ideas:
 - more animation control in display (start/pause, movements, with sound effects)

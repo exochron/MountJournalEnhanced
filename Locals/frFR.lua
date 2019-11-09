@@ -43,6 +43,8 @@ L["Underwater"] = "Aquatiques"
 L["Basilisks"] = "Basilics"
 L["Bats"] = "Chauve-Souris"
 L["Bears"] = "Ours"
+--[[Translation missing --]]
+--[[ L["Bees"] = "Bees"--]]
 L["Birds"] = "Oiseaux"
 --[[Translation missing --]]
 --[[ L["Blood Ticks"] = "Blood Ticks"--]]

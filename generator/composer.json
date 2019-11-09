@@ -1,12 +1,18 @@
 {
   "require": {
-    "ext-json": "*",
     "ext-zlib": "*",
-    "amphp/artax": "^3.0"
+    "ext-gmp": "*"
+  },
+  "require-dev": {
+    "phpmd/phpmd": "*",
+    "squizlabs/php_codesniffer": "*",
+    "friendsofphp/php-cs-fixer": "*",
+    "roave/security-advisories": "dev-master"
   },
   "autoload": {
     "psr-4": {
-      "MJEGenerator\\": "MJEGenerator"
+      "MJEGenerator\\": "MJEGenerator",
+      "Erorus\\": "ModifiedLibs/Erorus"
     }
   },
   "config": {

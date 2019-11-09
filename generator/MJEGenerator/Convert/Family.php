@@ -1,14 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace MJEGenerator\Convert;
-
 
 use MJEGenerator\Mount;
 
 class Family
 {
-    private $config = [];
+    private $config;
     private $errors = [];
 
     public function __construct(array $config)
@@ -17,15 +17,15 @@ class Family
     }
 
     /**
-     * @param Mount[] $mounts
+     * @param Mount[]  $mounts
      * @param string[] $wcmMountMap
+     *
      * @return Mount[][]
      */
     public function groupMountsByFamily(array $mounts, array $wcmMountMap): array
     {
         $result = [];
         foreach ($mounts as $mount) {
-
             $spellId = $mount->getSpellId();
 
             // check for spellId in config
@@ -48,27 +48,29 @@ class Family
             // check by family name
             $wcmFamily = $wcmMountMap[strtolower($mount->getName())] ?? null;
             if (null === $wcmFamily) {
-                $this->errors[] = 'mount not available on warcraftmounts: ' . $mount->getSpellId().', // '. $mount->getName() . ' (' . $mount->getIcon() . ')';
+                $this->errors[] = 'mount not available on warcraftmounts: '
+                    . $mount->getSpellId() . ', // ' . $mount->getName() . ' (' . $mount->getIcon() . ')';
             } else {
                 $matched = false;
                 foreach ($this->config as $mainFamily => $mainConfig) {
                     if (isset($mainConfig['wcm'])) {
                         if ($this->doesMatch($mount, $wcmFamily, $mainConfig)) {
                             $result[$mainFamily][$spellId] = $mount;
-                            $matched = true;
+                            $matched                       = true;
                         }
                     } else {
                         foreach ($mainConfig as $subFamily => $subConfig) {
                             if ($this->doesMatch($mount, $wcmFamily, $subConfig)) {
                                 $result[$mainFamily][$subFamily][$spellId] = $mount;
-                                $matched = true;
+                                $matched                                   = true;
                             }
                         }
                     }
                 }
 
                 if (false === $matched) {
-                    $this->errors[] = 'no Family found for ' . $mount->getName() . ' (' . $mount->getSpellId() . '; ' . $mount->getIcon() . '; ' . $wcmFamily . ')';
+                    $this->errors[] = 'no Family found for ' . $mount->getName()
+                        . ' (' . $mount->getSpellId() . '; ' . $mount->getIcon() . '; ' . $wcmFamily . ')';
                 }
             }
         }
