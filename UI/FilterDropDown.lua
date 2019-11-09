@@ -255,9 +255,7 @@ local function InitializeFilterDropDown(filterMenu, level)
             if hasSubFamilies[family] then
                 MSA_DropDownMenu_AddButton(CreateInfoWithMenu(L[family] or family, family, settings[family]), level)
             else
-
                 MSA_DropDownMenu_AddButton(CreateFilterInfo(L[family] or family, family, settings), level)
-
             end
         end
     elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_EXPANSION) then
