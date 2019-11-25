@@ -47,6 +47,8 @@ local function Select(step, totalDisplayed)
     ScrollToIndex(index)
 end
 
+ADDON:RegisterUISetting('enableCursorKeys', true, ADDON.L.SETTING_CURSOR_KEYS)
+
 ADDON:RegisterLoadUICallback(function()
     -- I had issues handling the keyboard directly at the MountJournal frame. So I used ListScrollFrame instead.
     MountJournal.ListScrollFrame:SetPropagateKeyboardInput(true)

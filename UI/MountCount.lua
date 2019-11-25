@@ -37,8 +37,7 @@ end
 
 local frame
 
-function ADDON:ApplyShowPersonalCount(flag)
-    ADDON.settings.ui.showPersonalCount = flag
+ADDON:RegisterUISetting('showPersonalCount', true, ADDON.L.SETTING_MOUNT_COUNT, function(flag)
     if (MountJournal) then
         if (not frame and flag) then
             frame = CreateCharacterMountCount()
@@ -59,10 +58,10 @@ function ADDON:ApplyShowPersonalCount(flag)
             end
         end
     end
-end
+end)
 
 ADDON:RegisterLoadUICallback(function ()
-    ADDON:ApplyShowPersonalCount(ADDON.settings.ui.showPersonalCount)
+    ADDON:ApplySetting('showPersonalCount', ADDON.settings.ui.showPersonalCount)
 end)
 
 ADDON.UI:RegisterUIOverhaulCallback(function(self)

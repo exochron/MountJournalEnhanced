@@ -7,11 +7,14 @@ local ADDON_NAME, ADDON = ...
 local L = ADDON.L
 local starButton
 
-function ADDON:ApplyFavoritePerCharacter(flag)
-    ADDON.settings.favoritePerChar = flag
-    MJEPersonalSettings.favoritePerChar = flag
-    ADDON:CollectFavoredMounts()
-end
+ADDON:RegisterBehaviorSetting(
+        'favoritePerChar',
+        false,
+        L.SETTING_FAVORITE_PER_CHAR,
+        function()
+            ADDON:CollectFavoredMounts()
+        end
+)
 
 function ADDON:CollectFavoredMounts()
     local personalFavored = {}
@@ -20,7 +23,7 @@ function ADDON:CollectFavoredMounts()
         for _, mountId in ipairs(mountIds) do
             local _, _, _, _, _, _, isFavorite = C_MountJournal.GetMountInfoByID(mountId)
             if isFavorite then
-                personalFavored[#personalFavored+1] = mountId
+                personalFavored[#personalFavored + 1] = mountId
             end
         end
     end
@@ -45,7 +48,7 @@ local function FavorMounts(mountIds, finishedCallback)
 
     local hasUpdate
     local isEmptyIdList = (#mountIds == 0)
-    for index =1, MJ_GetNumDisplayedMounts() do
+    for index = 1, MJ_GetNumDisplayedMounts() do
         local _, _, _, _, _, _, _, _, _, _, isCollected, mountId = MJ_GetDisplayedMountInfo(index)
         if isCollected then
             local isFavorite, canFavorite = MJ_GetIsFavorite(index)
@@ -94,10 +97,10 @@ end
 
 local function FetchDisplayedMountIds()
     local mountIds = {}
-    for index =1, C_MountJournal.GetNumDisplayedMounts() do
+    for index = 1, C_MountJournal.GetNumDisplayedMounts() do
         local _, _, _, _, _, _, _, _, _, _, isCollected, mountId = C_MountJournal.GetDisplayedMountInfo(index)
         if isCollected then
-            mountIds[#mountIds +1]=mountId
+            mountIds[#mountIds + 1] = mountId
         else
             break
         end
@@ -129,14 +132,14 @@ local function InitializeDropDown(menu, level)
         info.notCheckable = false
         info.checked = ADDON.settings.favoritePerChar
         info.func = function(_, _, _, value)
-            ADDON:ApplyFavoritePerCharacter(not value)
+            ADDON:ApplySetting('favoritePerChar', not value)
         end
         MSA_DropDownMenu_AddButton(info, level)
     end
 end
 
 local function BuildStarButton()
-    local menu = MSA_DropDownMenu_Create(ADDON_NAME.."FavorMenu", MountJournal)
+    local menu = MSA_DropDownMenu_Create(ADDON_NAME .. "FavorMenu", MountJournal)
     MSA_DropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
 
     local AceGUI = LibStub("AceGUI-3.0")

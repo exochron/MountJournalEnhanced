@@ -1,5 +1,7 @@
 local ADDON_NAME, ADDON = ...
 
+ADDON:RegisterUISetting('showShopButton', true, ADDON.L.SETTING_SHOP_BUTTON)
+
 local function ToggleShopButton()
     if (MountJournal) then
         local frame = MountJournal.MountDisplay.InfoButton.Shop

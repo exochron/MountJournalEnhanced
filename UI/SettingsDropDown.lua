@@ -1,5 +1,4 @@
 local ADDON_NAME, ADDON = ...
-local L = ADDON.L
 
 local function CreateTitle()
     local title = GetAddOnMetadata(ADDON_NAME, "Title")
@@ -11,52 +10,29 @@ local function CreateTitle()
     return info
 end
 
-local function CreateCheck(text, settingKey, applyFunc)
+local function CreateCheck(text, setting)
     local info = MSA_DropDownMenu_CreateInfo()
     info.keepShownOnClick = true
     info.isNotRadio = true
     info.hasArrow = false
     info.text = text
     info.notCheckable = false
-    info.checked = ADDON.settings.ui[settingKey]
+    info.checked = ADDON.settings.ui[setting]
     info.func = function(_, _, _, value)
-        if (applyFunc) then
-            applyFunc(ADDON, value)
-        else
-            ADDON.settings.ui[settingKey] = value
-        end
+        ADDON:ApplySetting(setting, value)
     end
 
     return info
 end
 
-local function InitializeDropDown(filterMenu, level)
-
+local function InitializeDropDown(menu, level)
     MSA_DropDownMenu_AddButton(CreateTitle(), level)
 
-    if (ADDON.settings.ui.showAchievementPoints ~= nil) then
-        MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_ACHIEVEMENT_POINTS, 'showAchievementPoints', ADDON.ApplyShowAchievementPoints), level)
-    end
-    if (ADDON.settings.ui.showAchievementPoints ~= nil) then
-        MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_MOUNT_COUNT, 'showPersonalCount', ADDON.ApplyShowPersonalCount), level)
-    end
-    if (ADDON.settings.ui.compactMountList ~= nil) then
-        MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_COMPACT_LIST, 'compactMountList', ADDON.ApplyCompactMountList), level)
-    end
-    if (ADDON.settings.ui.moveEquipmentSlot ~= nil) then
-        MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_MOVE_EQUIPMENT, 'moveEquipmentSlot', ADDON.ApplyMoveEquipmentSlot), level)
-    end
-    if (ADDON.settings.ui.unlockDisplayCamera ~= nil) then
-        MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_YCAMERA, 'unlockDisplayCamera', ADDON.ApplyUnlockDisplayCamera), level)
-    end
-    if (ADDON.settings.ui.enableCursorKeys ~= nil) then
-        MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_CURSOR_KEYS, 'enableCursorKeys'), level)
-    end
-    if (ADDON.settings.ui.previewButton ~= nil) then
-        MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_PREVIEW_LINK, 'previewButton', ADDON.ApplyPreviewButton), level)
-    end
-    if (ADDON.settings.ui.showShopButton ~= nil) then
-        MSA_DropDownMenu_AddButton(CreateCheck(L.SETTING_SHOP_BUTTON, 'showShopButton'), level)
+    local uiLabels, _ = ADDON:GetSettingLabels()
+    for setting, label in pairs(uiLabels) do
+        if (ADDON.settings.ui[setting] ~= nil) then
+            MSA_DropDownMenu_AddButton(CreateCheck(label, setting), level)
+        end
     end
 end
 

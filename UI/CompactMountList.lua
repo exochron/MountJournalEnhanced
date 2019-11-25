@@ -144,8 +144,7 @@ local function RestoreListButtons()
     HybridScrollFrame_CreateButtons(scrollFrame, "MountListButtonTemplate")
 end
 
-function ADDON:ApplyCompactMountList(flag)
-    ADDON.settings.ui.compactMountList = flag
+ADDON:RegisterUISetting('compactMountList', true, ADDON.L.SETTING_COMPACT_LIST, function(flag)
     if (MountJournal) then
         if (flag) then
             ModifyListButtons()
@@ -153,7 +152,7 @@ function ADDON:ApplyCompactMountList(flag)
             RestoreListButtons()
         end
     end
-end
+end)
 
 local doInit = true
 
@@ -163,7 +162,7 @@ ADDON:RegisterLoadUICallback(function()
         GenerateButtons()
         SetupScrollFix()
     end
-    ADDON:ApplyCompactMountList(ADDON.settings.ui.compactMountList)
+    ADDON:ApplySetting('compactMountList', ADDON.settings.ui.compactMountList)
 end)
 
 -- UI Pack fix  (eg. ElvUI, TukUI)

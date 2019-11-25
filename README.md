@@ -4,7 +4,7 @@ This is an interface addon for World of Warcraft. It extends the ingame mount jo
 
 ### Features
 
-+ Filter mounts by extended source/faction/type/family/expansion
++ Filter mounts by extended source, faction, type, family or expansion
 + Filter unusable or unwanted mounts
 + Saves filter options
 + Double click list entry to summon mount
