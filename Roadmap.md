@@ -1,5 +1,6 @@
 ### 2.7 (8.3)
 - updated db
+- switch through mount variation (eg. High Priest's Lightsworn Seeker: C_MountJournal.GetMountAllCreatureDisplayInfoByID(861))
 
 ### More Ideas:
 - more animation control in display (start/pause, movements, with sound effects)

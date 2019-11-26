@@ -11,7 +11,7 @@ function ADDON:RegisterUISetting(key, default, label, func)
         end
     end
     defaults[key] = default
-    uiLabels[key] = label
+    table.insert(uiLabels, { key, label })
 end
 function ADDON:RegisterBehaviorSetting(key, default, label, func)
     callbacks[key] = function(flag)
@@ -20,7 +20,7 @@ function ADDON:RegisterBehaviorSetting(key, default, label, func)
         func(flag)
     end
     defaults[key] = default
-    behaviorLabels[key] = label
+    table.insert(behaviorLabels, { key, label })
 end
 function ADDON:ApplySetting(key, value)
     if callbacks[key] then

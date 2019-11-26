@@ -29,7 +29,8 @@ local function InitializeDropDown(menu, level)
     MSA_DropDownMenu_AddButton(CreateTitle(), level)
 
     local uiLabels, _ = ADDON:GetSettingLabels()
-    for setting, label in pairs(uiLabels) do
+    for _, labelData in ipairs(uiLabels) do
+        local setting, label = labelData[1], labelData[2]
         if (ADDON.settings.ui[setting] ~= nil) then
             MSA_DropDownMenu_AddButton(CreateCheck(label, setting), level)
         end
