@@ -13,58 +13,6 @@ function ADDON:ResetFilterSettings()
     end
 end
 
-function ADDON:ResetSettings()
-    ADDON:ApplyPersonalUI(false)
-    ADDON:ApplyFavoritePerCharacter(false)
-    ADDON:ApplyPersonalHiddenMounts(false)
-    ADDON:ApplyPersonalFilter(false)
-
-    ADDON:ApplyShowAchievementPoints(true)
-    ADDON:ApplyCompactMountList(true)
-    ADDON:ApplyUnlockDisplayCamera(true)
-    ADDON:ApplyMoveEquipmentSlot(true)
-    ADDON:ApplyPreviewButton(true)
-    ADDON:ApplyShowPersonalCount(true)
-    ADDON.settings.ui.enableCursorKeys = true
-    ADDON.settings.ui.showShopButton = false
-end
-
-function ADDON:ApplyPersonalUI(flag)
-    ADDON.settings.personalUi = flag
-    MJEPersonalSettings.personalUi = flag
-    if flag == true then
-        ADDON.settings.ui = MJEPersonalSettings.ui
-    else
-        ADDON.settings.ui = MJEGlobalSettings.ui
-    end
-end
-function ADDON:ApplyPersonalHiddenMounts(flag)
-    MJEPersonalSettings.personalHiddenMounts = flag
-    ADDON.settings.personalHiddenMounts = flag
-    if flag == true then
-        ADDON.settings.hiddenMounts = MJEPersonalSettings.hiddenMounts
-    else
-        ADDON.settings.hiddenMounts = MJEGlobalSettings.hiddenMounts
-    end
-
-    if ADDON.initialized then
-        ADDON:UpdateIndexMap()
-    end
-end
-function ADDON:ApplyPersonalFilter(flag)
-    MJEPersonalSettings.personalFilter = flag
-    ADDON.settings.personalFilter = flag
-    if flag == true then
-        ADDON.settings.filter = MJEPersonalSettings.filter
-    else
-        ADDON.settings.filter = MJEGlobalSettings.filter
-    end
-
-    if ADDON.initialized then
-        ADDON:UpdateIndexMap()
-    end
-end
-
 local function PrepareDefaults()
     local defaultSettings = {
 
@@ -165,9 +113,9 @@ ADDON:RegisterLoginCallback(function()
 
     ADDON.settings = {}
 
-    ADDON:ApplyPersonalUI(MJEPersonalSettings.personalUi)
-    ADDON:ApplyPersonalHiddenMounts(MJEPersonalSettings.personalHiddenMounts)
-    ADDON:ApplyPersonalFilter(MJEPersonalSettings.personalFilter)
+    ADDON:ApplySetting('personalUi', MJEPersonalSettings.personalUi)
+    ADDON:ApplySetting('personalHiddenMounts', MJEPersonalSettings.personalHiddenMounts)
+    ADDON:ApplySetting('personalFilter', MJEPersonalSettings.personalFilter)
 
     ADDON.settings.favoritePerChar = MJEPersonalSettings.favoritePerChar
     ADDON.settings.favoredMounts = MJEPersonalSettings.favoredMounts

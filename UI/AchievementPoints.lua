@@ -89,8 +89,7 @@ end
 
 local frame
 
-function ADDON:ApplyShowAchievementPoints(flag)
-    ADDON.settings.ui.showAchievementPoints = flag
+ADDON:RegisterUISetting('showAchievementPoints', true, ADDON.L.SETTING_ACHIEVEMENT_POINTS, function(flag)
     if (MountJournal) then
         if (not frame and flag) then
             frame = CreateAchievementPoints()
@@ -100,8 +99,8 @@ function ADDON:ApplyShowAchievementPoints(flag)
             frame:SetShown(flag)
         end
     end
-end
+end)
 
 ADDON:RegisterLoadUICallback(function()
-    ADDON:ApplyShowAchievementPoints(ADDON.settings.ui.showAchievementPoints)
+    ADDON:ApplySetting('showAchievementPoints', ADDON.settings.ui.showAchievementPoints)
 end)

@@ -284,8 +284,19 @@ end
 ADDON:RegisterLoadUICallback(function()
     local menu = MSA_DropDownMenu_Create(ADDON_NAME .. "FilterMenu", MountJournalFilterButton)
     MSA_DropDownMenu_Initialize(menu, InitializeFilterDropDown, "MENU")
-    MountJournalFilterButton:SetScript("OnClick", function(sender)
-        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-        MSA_ToggleDropDownMenu(1, nil, menu, sender, 74, 15)
-    end)
+
+    local version = select(4, GetBuildInfo())
+    if version < 80300 then
+        -- todo: remove after 8.3 release
+        MountJournalFilterButton:SetScript("OnClick", function(sender)
+            PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+            MSA_ToggleDropDownMenu(1, nil, menu, sender, 74, 15)
+        end)
+    else
+        MountJournalFilterButton:SetScript("OnMouseDown", function(sender, button)
+            UIMenuButtonStretchMixin.OnMouseDown(sender, button);
+            PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+            MSA_ToggleDropDownMenu(1, nil, menu, sender, 74, 15)
+        end)
+    end
 end)

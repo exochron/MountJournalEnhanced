@@ -2,9 +2,7 @@ local ADDON_NAME, ADDON = ...
 
 local originalParent
 
-function ADDON:ApplyMoveEquipmentSlot(flag)
-    ADDON.settings.ui.moveEquipmentSlot = flag
-
+ADDON:RegisterUISetting('moveEquipmentSlot', true, ADDON.L.SETTING_MOVE_EQUIPMENT, function(flag)
     if (MountJournal) then
         local button = MountJournal.SlotButton
 
@@ -34,8 +32,8 @@ function ADDON:ApplyMoveEquipmentSlot(flag)
             MountJournal.BottomLeftInset:Show()
         end
     end
-end
+end)
 
 ADDON:RegisterLoadUICallback(function()
-    ADDON:ApplyMoveEquipmentSlot(ADDON.settings.ui.moveEquipmentSlot)
+    ADDON:ApplySetting('moveEquipmentSlot', ADDON.settings.ui.moveEquipmentSlot)
 end)
