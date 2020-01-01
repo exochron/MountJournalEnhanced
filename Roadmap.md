@@ -1,5 +1,18 @@
 ### 2.7 (8.3)
 - updated db
+- track mount usage
+    - last usage time
+    - usage count
+    - total riding time
+    - total riding distance
+    - learned date
+- sort options (=> https://www.curseforge.com/wow/addons/mount-journal-enhanced/issues/43)
+    - list favorites between everything else (beware auto favorite logic)
+    - mix unowned & owned depending by sort order
+    - sort by name asc/desc
+    - sort by expansion asc/desc (actually just by mountid)
+    - sort by type/family
+    - sort by usage
 - switch through mount variation (eg. High Priest's Lightsworn Seeker: C_MountJournal.GetMountAllCreatureDisplayInfoByID(861))
 
 ### More Ideas:
