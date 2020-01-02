@@ -25,6 +25,7 @@ local function PrepareDefaults()
             showShopButton = false,
             compactMountList = true,
             unlockDisplayCamera = true,
+            showUsageStatistics = true,
             enableCursorKeys = true,
             moveEquipmentSlot = true,
             previewButton = true,

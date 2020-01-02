@@ -45,6 +45,7 @@ UI\EquipmentSlot.lua
 UI\FilterDropDown.lua
 UI\HiddenIcon.lua
 UI\DisplayCamera.lua
+UI\DisplayStatistics.lua
 UI\Hotkeys.lua
 UI\MountListDropDown.lua
 UI\SettingsDropDown.lua

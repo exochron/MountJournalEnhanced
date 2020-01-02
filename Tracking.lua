@@ -1,18 +1,27 @@
 local ADDON_NAME, ADDON = ...
 
-local INDEX_USE_COUNT, INDEX_USE_TIME, INDEX_TRAVEL_TIME, INDEX_TRAVEL_DISTANCE, INDEX_LEARNED_TIME = 1, 2, 3, 4, 5
-local HBD = LibStub("HereBeDragons-2.0")
+local INDEX_USE_COUNT, INDEX_LAST_USE_TIME, INDEX_TRAVEL_TIME, INDEX_TRAVEL_DISTANCE, INDEX_LEARNED_TIME = 1, 2, 3, 4, 5
 
 MJETrackingData = MJETrackingData or {}
 
+local HBD = LibStub("HereBeDragons-2.0")
+local currentMount, startZone, startPositionX, startPositionY, travelTicker
+
 -- todos:
 --  test distance in instance
+
+function ADDON:GetMountStatistics(mountId)
+    if MJETrackingData[mountId] then
+        local blob = MJETrackingData[mountId]
+        return blob[INDEX_USE_COUNT], blob[INDEX_LAST_USE_TIME], blob[INDEX_TRAVEL_TIME], blob[INDEX_TRAVEL_DISTANCE], blob[INDEX_LEARNED_TIME]
+    end
+end
 
 local function initData(mountId)
     if not MJETrackingData[mountId] then
         MJETrackingData[mountId] = {
             [INDEX_USE_COUNT] = 0,
-            [INDEX_USE_TIME] = nil,
+            [INDEX_LAST_USE_TIME] = nil,
             [INDEX_TRAVEL_TIME] = 0,
             [INDEX_TRAVEL_DISTANCE] = 0,
             [INDEX_LEARNED_TIME] = nil,
@@ -21,8 +30,6 @@ local function initData(mountId)
 
     return MJETrackingData[mountId]
 end
-
-local currentMount, startZone, startPositionX, startPositionY, travelTicker
 
 local function updateDistance()
     if MJETrackingData[currentMount] then
@@ -39,14 +46,14 @@ end
 local function startTracking(mount)
     currentMount = mount
     local blob = initData(mount)
-    blob[INDEX_USE_TIME] = GetServerTime()
+    blob[INDEX_LAST_USE_TIME] = GetServerTime()
     blob[INDEX_USE_COUNT] = blob[INDEX_USE_COUNT] + 1
     startPositionX, startPositionY, startZone = HBD:GetPlayerZonePosition()
     travelTicker = C_Timer.NewTicker(5, updateDistance)
 end
 local function stopTracking(mount)
     local blob = initData(mount)
-    blob[INDEX_TRAVEL_TIME] = blob[INDEX_TRAVEL_TIME] + (GetServerTime() - blob[INDEX_USE_TIME])
+    blob[INDEX_TRAVEL_TIME] = blob[INDEX_TRAVEL_TIME] + (GetServerTime() - blob[INDEX_LAST_USE_TIME])
 
     travelTicker:Cancel()
     updateDistance()

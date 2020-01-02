@@ -156,6 +156,7 @@ L["Yaks"] = "Yaks"
 L["Yetis"] = "Yetis"
 
 -- Settings
+L["SETTING_SHOW_USAGE"] = "Display mount usage statistics"
 L["SETTING_ACHIEVEMENT_POINTS"] = "Show achievement points"
 L["SETTING_COMPACT_LIST"] = "Compact mount list"
 L["SETTING_CURSOR_KEYS"] = "Enable Up&Down keys to browse mounts"
