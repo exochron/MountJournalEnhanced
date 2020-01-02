@@ -93,7 +93,7 @@ end
 
 --endregion Hooks
 
--- region callbacks
+--region callbacks
 local loginCallbacks, loadUICallbacks = {}, {}
 function ADDON:RegisterLoginCallback(func)
     table.insert(loginCallbacks, func)

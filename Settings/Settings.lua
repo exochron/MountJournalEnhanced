@@ -16,6 +16,8 @@ end
 local function PrepareDefaults()
     local defaultSettings = {
 
+        trackUsageStats = true,
+
         personalUi = false,
         ui = {
             debugMode = false,
@@ -119,4 +121,5 @@ ADDON:RegisterLoginCallback(function()
 
     ADDON.settings.favoritePerChar = MJEPersonalSettings.favoritePerChar
     ADDON.settings.favoredMounts = MJEPersonalSettings.favoredMounts
+    ADDON.settings.trackUsageStats = MJEPersonalSettings.trackUsageStats
 end)

@@ -53,10 +53,10 @@ local function stopTracking(mount)
     currentMount, startZone, startPositionX, startPositionY = nil, nil, nil, nil
 end
 
-local function checkMountEvent(self, evt)
+local function checkMountEvent()
     if currentMount then
         stopTracking(currentMount)
-    else
+    elseif ADDON.settings.trackUsageStats then
         for i = 1, 40 do
             local spellId = select(10, UnitBuff("player", i, "HELPFUL|PLAYER|CANCELABLE"))
             if spellId then
@@ -72,6 +72,46 @@ end
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_MOUNT_DISPLAY_CHANGED") -- player mounts or dismounts
-frame:SetScript("OnEvent", checkMountEvent)
+frame:RegisterEvent("NEW_MOUNT_ADDED")
+frame:SetScript("OnEvent", function(self, event, arg1)
+    if event == 'PLAYER_MOUNT_DISPLAY_CHANGED' then
+        checkMountEvent()
+    elseif event == 'NEW_MOUNT_ADDED' and arg1 and ADDON.settings.trackUsageStats then
+        local blob = initData(arg1)
+        blob[INDEX_LEARNED_TIME] = GetServerTime()
+    end
+end)
 
 ADDON:RegisterLoginCallback(checkMountEvent)
+ADDON:RegisterBehaviourSetting('trackUsageStats', true, ADDON.L.SETTING_TRACK_USAGE)
+
+local function parseLearnedDateFromAchievements()
+    if ADDON.settings.trackUsageStats then
+        for spellId, achievementIds in pairs(ADDON.MountJournalEnhancedSource.Achievement) do
+            if achievementIds ~= true then
+                local mountId = C_MountJournal.GetMountFromSpell(spellId)
+                if mountId and (not MJETrackingData[mountId] or not MJETrackingData[mountId][INDEX_LEARNED_TIME]) then
+                    local collected = select(11, C_MountJournal.GetMountInfoByID(mountId))
+                    if collected then
+                        if type(achievementIds) == "number" then
+                            achievementIds = { achievementIds }
+                        end
+                        for _, achievementId in ipairs(achievementIds) do
+                            local _, _, _, completed, month, day, year = GetAchievementInfo(achievementId)
+                            if completed then
+                                local blob = initData(mountId)
+                                blob[INDEX_LEARNED_TIME] = time({
+                                    ["year"] = 2000 + year,
+                                    ["month"] = month,
+                                    ["day"] = day,
+                                })
+                                break
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+ADDON:RegisterLoadUICallback(parseLearnedDateFromAchievements)

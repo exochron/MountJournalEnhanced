@@ -38,7 +38,7 @@ local function BuildFrame(uiLabels, behaviourLabels)
         end
     end
 
-    BuildHeading(frame, ADDON.L.SETTING_HEAD_SETTING_BEHAVIOUR)
+    BuildHeading(frame, ADDON.L.SETTING_HEAD_BEHAVIOUR)
 
     for _, labelData in ipairs(behaviourLabels) do
         local setting, label = labelData[1], labelData[2]

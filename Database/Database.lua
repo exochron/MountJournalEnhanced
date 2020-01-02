@@ -235,7 +235,7 @@ ADDON.MountJournalEnhancedSource = {
     },
 
     ["Profession"] = {
-        sourceType = {4},
+        sourceType = { 4 },
         [30174] = true, -- Riding Turtle
         [121838] = true, -- Ruby Panther
     },
@@ -651,84 +651,84 @@ ADDON.MountJournalEnhancedSource = {
         -- Alliance & Horde ----------
         ------------------------------
 
-        [43688] = true, -- Amani War Bear - no longer available
-        [59976] = true, -- Black Proto-Drake - no longer available
-        [60024] = true, -- Violet Proto-Drake - What a Long, Strange Trip It's Been
-        [60025] = true, -- Albino Drake - Leading the Cavalry
-        [98204] = true, -- Amani Battle Bear - Bear-ly Made It
-        [133023] = true, -- Jade Pandaren Kite - Jade Pandaren Kite
+        [60024] = 2144, -- Violet Proto-Drake - What a Long, Strange Trip It's Been
+        [60025] = 2143, -- Albino Drake - Leading the Cavalry
+        [98204] = 5858, -- Amani Battle Bear - Bear-ly Made It
+        [133023] = { 7860, 7862 }, -- Jade Pandaren Kite - We're Going to Need More Saddles
         [142641] = true, -- Brawler's Burly Mushan Beast - I've Got the Biggest Brawls of Them All (Season 1)
-        [127169] = true, -- Heavenly Azure Cloud Serpent - Lord of the Reins
+        [127169] = { 10355, 10356 }, -- Heavenly Azure Cloud Serpent - Lord of the Reins
 
         -- Wrath of the Lichking
-        [59961] = true, -- Red Proto-Drake - Glory of the Hero
-        [63956] = true, -- Ironbound Proto-Drake - Glory of the Ulduar Raider (25 player)
-        [63963] = true, -- Rusted Proto-Drake - Glory of the Ulduar Raider (10 player)
-        [72807] = true, -- Icebound Frostbrood Vanquisher - Glory of the Icecrown Raider (25 player)
-        [72808] = true, -- Bloodbathed Frostbrood Vanquisher - Glory of the Icecrown Raider (10 player)
+        [43688] = 430, -- Amani War Bear - no longer available
+        [59961] = 2136, -- Red Proto-Drake - Glory of the Hero
+        [59976] = 2138, -- Black Proto-Drake - no longer available - Glory of the Raider (25 player)
+        [63956] = { 2958, 12401 }, -- Ironbound Proto-Drake - Glory of the Ulduar Raider (25 player)
+        [63963] = { 2957, 12401 }, -- Rusted Proto-Drake - Glory of the Ulduar Raider (10 player)
+        [72807] = 4603, -- Icebound Frostbrood Vanquisher - Glory of the Icecrown Raider (25 player)
+        [72808] = 4602, -- Bloodbathed Frostbrood Vanquisher - Glory of the Icecrown Raider (10 player)
 
         -- Cataclysm
-        [97359] = true, -- Flameward Hippogryph - The Molten Front Offensive
-        [88331] = true, -- Volcanic Stone Drake - Glory of the Cataclysm Hero
-        [88335] = true, -- Drake of the East Wind - Glory of the Cataclysm Raider
+        [97359] = 5866, -- Flameward Hippogryph - The Molten Front Offensive
+        [88331] = 4845, -- Volcanic Stone Drake - Glory of the Cataclysm Hero
+        [88335] = 4853, -- Drake of the East Wind - Glory of the Cataclysm Raider
         [88990] = true, -- Dark Phoenix - Guild Glory of the Cataclysm Raider
-        [97560] = true, -- Corrupted Fire Hawk - Glory of the Firelands Raider
-        [107844] = true, -- Twilight Harbinger - Glory of the Dragon Soul Raider
+        [97560] = 5828, -- Corrupted Fire Hawk - Glory of the Firelands Raider
+        [107844] = 6169, -- Twilight Harbinger - Glory of the Dragon Soul Raider
 
         -- Mists of Pandaria
         [124408] = true, -- Thundering Jade Cloud Serpent - Guild Glory of the Pandaria Raider
-        [127156] = true, -- Crimson Cloud Serpent - Glory of the Pandaria Hero
-        [127161] = true, -- Heavenly Crimson Cloud Serpent - Glory of the Pandaria Raider
-        [136400] = true, -- Armored Skyscreamer - Glory of the Thundering Raider
-        [148392] = true, -- Spawn of Galakras - Glory of the Orgrimmar Raider
-        [148396] = true, -- Kor'kron War Wolf - Ahead of the Curve: Garrosh Hellscream (10/25 player)
+        [127156] = 6927, -- Crimson Cloud Serpent - Glory of the Pandaria Hero
+        [127161] = 6932, -- Heavenly Crimson Cloud Serpent - Glory of the Pandaria Raider
+        [136400] = 8124, -- Armored Skyscreamer - Glory of the Thundering Raider
+        [148392] = 8454, -- Spawn of Galakras - Glory of the Orgrimmar Raider
+        [148396] = { 6398, 6399 }, -- Kor'kron War Wolf - Ahead of the Curve: Garrosh Hellscream (10/25 player)
 
         -- Challenge Mode
-        [129552] = true, -- Crimson Pandaren Phoenix - Challenge Conqueror: Silver
-        [132117] = true, -- Ashen Pandaren Phoenix - Challenge Conqueror: Silver
-        [132118] = true, -- Emerald Pandaren Phoenix - Challenge Conqueror: Silver
-        [132119] = true, -- Violet Pandaren Phoenix - Challenge Conqueror: Silver
+        [129552] = { 6375 }, -- Crimson Pandaren Phoenix - Challenge Conqueror: Silver
+        [132117] = { 6375 }, -- Ashen Pandaren Phoenix - Challenge Conqueror: Silver
+        [132118] = { 6375 }, -- Emerald Pandaren Phoenix - Challenge Conqueror: Silver
+        [132119] = { 6375 }, -- Violet Pandaren Phoenix - Challenge Conqueror: Silver
 
         -- Warlords of Draenor
-        [97501] = true, -- Felfire Hawk - Mountacular
-        [170347] = true, -- Core Hound - Boldly, You Sought the Power of Ragnaros
-        [175700] = true, -- Emerald Drake -  Awake the Drakes
-        [171436] = true, -- Gorestrider Gronnling - Glory of the Draenor Raider
+        [97501] = { 9598, 9599 }, -- Felfire Hawk - Mountacular
+        [170347] = 9550, -- Core Hound - Boldly, You Sought the Power of Ragnaros
+        [175700] = 9713, -- Emerald Drake - Awake the Drakes
+        [171436] = 8985, -- Gorestrider Gronnling - Glory of the Draenor Raider
         [171627] = true, -- Blacksteel Battleboar - Guild Glory of the Draenor Raider
-        [171632] = true, -- Frostplains Battleboar - Glory of the Draenor Hero
-        [171848] = true, -- Challenger's War Yeti - Challenge Warlord: Silver
-        [186305] = true, -- Infernal Direwolf - Glory of the Hellfire Raider
-        [191633] = true, -- Soaring Skyterror - Draenor Pathfinder
+        [171632] = 9396, -- Frostplains Battleboar - Glory of the Draenor Hero
+        [171848] = 8898, -- Challenger's War Yeti - Challenge Warlord: Silver
+        [186305] = 10149, -- Infernal Direwolf - Glory of the Hellfire Raider
+        [191633] = 10018, -- Soaring Skyterror - Draenor Pathfinder
 
         -- Legion
-        [223814] = true, -- Mechanized Lumber Extractor - Remember to Share
-        [225765] = true, -- Leyfeather Hippogryph - Glory of the Legion Hero
-        [215558] = true, -- Ratstallion - Underbelly Tycoon
-        [193007] = true, -- Grove Defiler - Glory of the Legion Raider
-        [254260] = true, -- Bleakhoof Ruinstrider - ...And Chew Mana Buns
-        [253087] = true, -- Antoran Gloomhound - Glory of the Argus Raider
+        [223814] = 11176, -- Mechanized Lumber Extractor - Remember to Share
+        [225765] = 11163, -- Leyfeather Hippogryph - Glory of the Legion Hero
+        [215558] = 11066, -- Ratstallion - Underbelly Tycoon
+        [193007] = 11180, -- Grove Defiler - Glory of the Legion Raider
+        [254260] = 12103, -- Bleakhoof Ruinstrider - ...And Chew Mana Buns
+        [253087] = 11987, -- Antoran Gloomhound - Glory of the Argus Raider
         [258022] = true, -- Lightforged Felcrusher - Allied Races: Lightforged Draenei
         [258060] = true, -- Highmountain Thunderhoof - Allied Races: Highmountain Tauren
         [258845] = true, -- Nightborne Manasaber - Allied Races: Nightborne
         [259202] = true, -- Starcursed Voidstrider - Allied Races: Void Elf
 
         -- Battle for Azeroth
-        [213350] = true, -- Frostshard Infernal - No Stable Big Enough
-        [280729] = true, -- Frenzied Feltalon - A Horde of Hoofbeats
+        [213350] = { 12931, 12932 }, -- Frostshard Infernal - No Stable Big Enough
+        [280729] = { 12933, 12934 }, -- Frenzied Feltalon - A Horde of Hoofbeats
         [263707] = true, -- Zandalari Direhorn - Allied Races: Zandalari Troll
         [267274] = true, -- Mag'har Direwolf - Allied Races: Mag'har Orc
         [271646] = true, -- Dark Iron Core Hound - Allied Races: Dark Iron Dwarf
-        [239049] = true, -- Obsidian Krolusk - Glory of the Wartorn Hero
-        [250735] = true, -- Bloodgorged Crawg - Glory of the Uldir Raider
-        [279454] = true, -- Conquerer's Scythemaw - Conqueror of Azeroth
-        [280730] = true, -- Pureheart Courser - 100 Exalted Reputations
-        [289101] = true, -- DazarDazar'alor Windreaver - Glory of the Dazar'alor Raider
+        [239049] = 12812, -- Obsidian Krolusk - Glory of the Wartorn Hero
+        [250735] = 12806, -- Bloodgorged Crawg - Glory of the Uldir Raider
+        [279454] = {12604,12605}, -- Conquerer's Scythemaw - Conqueror of Azeroth
+        [280730] = 12866, -- Pureheart Courser - 100 Exalted Reputations
+        [289101] = 13315, -- DazarDazar'alor Windreaver - Glory of the Dazar'alor Raider
         [282682] = true, -- Kul Tiran Charger - Allied Races: Kul Tiran Human
-        [290328] = true, -- Wonderwing 2.0 - Battle for Azeroth Pathfinder, Part Two
-        [292419] = true, -- Azshari Bloatray - Glory of the Palace Raider
-        [294039] = true, -- Snapback Scuttler - Undersea Usurper
-        [296788] = true, -- Mechacycle Model W - Mecha-Done
-        [294197] = true, -- Obsidian Worldbreaker - Memories of Fel, Frost and Fire
+        [290328] = 13250, -- Wonderwing 2.0 - Battle for Azeroth Pathfinder, Part Two
+        [292419] = 13687, -- Azshari Bloatray - Glory of the Eternal Raider
+        [294039] = 13638, -- Snapback Scuttler - Undersea Usurper
+        [296788] = 13541, -- Mechacycle Model W - Mecha-Done
+        [294197] = 13931, -- Obsidian Worldbreaker - Memories of Fel, Frost and Fire
 
         ------------------------------
         -- Alliance ------------------
@@ -737,13 +737,13 @@ ADDON.MountJournalEnhancedSource = {
         [68057] = true, -- Swift Alliance Steed - no longer available
         [68187] = true, -- Crusader's White Warhorse - no longer available
         [90621] = true, -- Golden King - Guild Level 25
-        [130985] = true, -- Pandaren Kite - Pandaren Ambassador, Alliance
-        [295386] = true, -- Ironclad Frostclaw - Two Sides to Every Tale
+        [130985] = 6828, -- Pandaren Kite - Pandaren Ambassador, Alliance
+        [295386] = 13517, -- Ironclad Frostclaw - Two Sides to Every Tale
 
-        [61996] = true, -- Blue Dragonhawk - Mountain o' Mounts, Alliance
-        [142478] = true, -- Armored Blue Dragonhawk - Mount Parade, Alliance
-        [179245] = true, -- Chauffeur - Heirloom Hoarder, Alliance
-        [308250] = true, -- Stormpike Battle Ram - Alterac Valley of Olde
+        [61996] = 2536, -- Blue Dragonhawk - Mountain o' Mounts, Alliance
+        [142478] = 8304, -- Armored Blue Dragonhawk - Mount Parade, Alliance
+        [179245] = 9909, -- Chauffeur - Heirloom Hoarder, Alliance
+        [308250] = 13928, -- Stormpike Battle Ram - Alterac Valley of Olde
 
         ------------------------------
         -- Horde ---------------------
@@ -752,14 +752,14 @@ ADDON.MountJournalEnhancedSource = {
         [68056] = true, -- Swift Horde Wolf - no longer available
         [68188] = true, -- Crusader's Black Warhorse - no longer available
         [93644] = true, -- Kor'kron Annihilator - Guild Level 25
-        [118737] = true, -- Pandaren Kite - Pandaren Ambassador, Horde
-        [171845] = true, -- Warlord's Deathwheel -  Warlord's Deathwheel
-        [179244] = true, -- Chauffeur - Heirloom Hoarder, Horde
-        [295387] = true, -- Bloodflank Charger - Two Sides to Every Tale
+        [118737] = 6827, -- Pandaren Kite - Pandaren Ambassador, Horde
+        [171845] = 9496, -- Warlord's Deathwheel - Warlord's Deathwheel
+        [295387] = 13517, -- Bloodflank Charger - Two Sides to Every Tale
 
-        [61997] = true, -- Red Dragonhawk - Mountain o' Mounts, Horde
-        [142266] = true, -- Armored Red Dragonhawk - Mount Parade, Horde
-        [306421] = true, -- Frostwolf Snarler - Alterac Valley of Olde
+        [61997] = 2537, -- Red Dragonhawk - Mountain o' Mounts, Horde
+        [142266] = 8302, -- Armored Red Dragonhawk - Mount Parade, Horde
+        [179244] = 9909, -- Chauffeur - Heirloom Hoarder, Horde
+        [306421] = 13930, -- Frostwolf Snarler - Alterac Valley of Olde
     },
 
     ["Island Expedition"] = {
@@ -1035,7 +1035,7 @@ ADDON.MountJournalEnhancedSource = {
     },
 
     ["World Event"] = {
-        sourceType = {7},
+        sourceType = { 7 },
         -- Love is in the Air
         [71342] = true, -- Big Love Rocket
 
@@ -1117,11 +1117,11 @@ ADDON.MountJournalEnhancedSource = {
     },
 
     ["Shop"] = {
-        sourceType = {10},
+        sourceType = { 10 },
     },
 
     ["Promotion"] = {
-        sourceType = {8,9},
+        sourceType = { 8, 9 },
         --  8 = promotion
         --  9 = TCG
 
@@ -1206,7 +1206,7 @@ ADDON.MountJournalEnhancedType = {
         [267270] = true, -- Kua'fon
     },
     waterWalking = {
-        typeIDs = {269},
+        typeIDs = { 269 },
     },
     underwater = {
         typeIDs = { 231, 232, 254 },
