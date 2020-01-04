@@ -1,5 +1,6 @@
 ﻿local ADDON_NAME, ADDON = ...
 
+ADDON.isMetric = false -- is the metric or imperial/us unit system used?
 ADDON.L = {}
 local L = ADDON.L
 

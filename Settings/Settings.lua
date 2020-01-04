@@ -122,5 +122,5 @@ ADDON:RegisterLoginCallback(function()
 
     ADDON.settings.favoritePerChar = MJEPersonalSettings.favoritePerChar
     ADDON.settings.favoredMounts = MJEPersonalSettings.favoredMounts
-    ADDON.settings.trackUsageStats = MJEPersonalSettings.trackUsageStats
+    ADDON.settings.trackUsageStats = MJEGlobalSettings.trackUsageStats
 end)

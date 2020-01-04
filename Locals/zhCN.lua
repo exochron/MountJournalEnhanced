@@ -4,6 +4,7 @@ if (GetLocale() ~= 'zhCN') then
     return
 end
 
+ADDON.isMetric = true -- is the metric or imperial/us unit system used?
 local L = ADDON.L or {}
 
 L["Black Market"] = "黑市"

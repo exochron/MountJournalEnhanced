@@ -7,9 +7,6 @@ MJETrackingData = MJETrackingData or {}
 local HBD = LibStub("HereBeDragons-2.0")
 local currentMount, startZone, startPositionX, startPositionY, travelTicker
 
--- todos:
---  test distance in instance
-
 function ADDON:GetMountStatistics(mountId)
     if MJETrackingData[mountId] then
         local blob = MJETrackingData[mountId]
@@ -90,7 +87,9 @@ frame:SetScript("OnEvent", function(self, event, arg1)
 end)
 
 ADDON:RegisterLoginCallback(checkMountEvent)
-ADDON:RegisterBehaviourSetting('trackUsageStats', true, ADDON.L.SETTING_TRACK_USAGE)
+ADDON:RegisterBehaviourSetting('trackUsageStats', true, ADDON.L.SETTING_TRACK_USAGE, function(flag)
+    MJEGlobalSettings.trackUsageStats = flag
+end)
 
 local function parseLearnedDateFromAchievements()
     if ADDON.settings.trackUsageStats then

@@ -1,10 +1,8 @@
 local ADDON_NAME, ADDON = ...
 
--- todo: formatting & icons
-
 ADDON:RegisterUISetting('showUsageStatistics', true, ADDON.L.SETTING_SHOW_USAGE)
 
-local function setupText()
+local function setupFontString()
     local frame = MountJournal.MountDisplay.InfoButton
 
     local statsText = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
@@ -18,29 +16,51 @@ local function setupText()
     return statsText
 end
 
+local function formatDistance(length)
+    if ADDON.isMetric then
+        length = length / 1.0936
+        if length < 1000 then
+            return floor(length) .. 'm';
+        end
+        return floor(length / 1000) .. 'km';
+    else
+        if length < 1760 then
+            return floor(length) .. 'yd';
+        end
+        return floor(length / 1760) .. 'mi';
+    end
+end
+
+local function generateText(mountId)
+    local text = ''
+    local useCount, lastUseTime, travelTime, travelDistance, learnedTime = ADDON:GetMountStatistics(mountId)
+    if useCount ~= nil then
+        if useCount > 0 then
+            text = '|cffffd100N|r ' .. useCount..'x'
+        end
+        if travelTime > 0 then
+            text = text .. '  |cffffd100t|r ' .. SecondsToClock(travelTime, true)
+        end
+        if travelDistance > 0 then
+            text = text .. '  |cffffd100l|r ' .. formatDistance(travelDistance)
+        end
+        if learnedTime then
+            -- interface/buttons/ui-checkbox-check
+            local data = date('*t', learnedTime)
+            text = text .. "  |T130751:0|t" .. FormatShortDate(data.day, data.month, data.year)
+        end
+    end
+    return text
+end
+
 ADDON:RegisterLoadUICallback(function()
-    local statsText = setupText()
+    local statsText = setupFontString()
 
     hooksecurefunc("MountJournal_UpdateMountDisplay", function()
         if MountJournal.selectedMountID and statsText then
-            local text = ""
+            local text = ''
             if ADDON.settings.ui.showUsageStatistics then
-                local useCount, lastUseTime, travelTime, travelDistance, learnedTime = ADDON:GetMountStatistics(MountJournal.selectedMountID)
-                if useCount ~= nil then
-                    text = useCount
-                    if lastUseTime then
-                        text = text .. ' | ' .. lastUseTime
-                    end
-                    if travelTime > 0 then
-                        text = text .. ' | ' .. travelTime .. 's'
-                    end
-                    if travelDistance > 0 then
-                        text = text .. ' | ' .. travelDistance .. 'yd'
-                    end
-                    if learnedTime then
-                        text = text .. ' | ' .. learnedTime
-                    end
-                end
+                text = generateText(MountJournal.selectedMountID)
             end
             statsText:SetText(text)
         end
