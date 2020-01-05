@@ -1,6 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
-ADDON.MountJournalEnhancedTradable = {
+ADDON.DB.Tradable = {
 [42776] = true, -- Spectral Tiger
 [42777] = true, -- Swift Spectral Tiger
 [44151] = true, -- Turbo-Charged Flying Machine

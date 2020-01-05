@@ -1,6 +1,8 @@
 local ADDON_NAME, ADDON = ...
 
-ADDON.MountJournalEnhancedSource = {
+ADDON.DB = {}
+
+ADDON.DB.Source = {
     ["Drop"] = {
         -- sourceType = 1
         ------------------------------
@@ -1129,7 +1131,7 @@ ADDON.MountJournalEnhancedSource = {
     },
 }
 
-ADDON.MountJournalEnhancedExpansion = {
+ADDON.DB.Expansion = {
 
     [0] = { -- Classic
         ["minID"] = 0,
@@ -1196,7 +1198,7 @@ ADDON.MountJournalEnhancedExpansion = {
     }
 }
 
-ADDON.MountJournalEnhancedType = {
+ADDON.DB.Type = {
     -- https://wow.gamepedia.com/API_C_MountJournal.GetMountInfoExtraByID
     ground = {
         typeIDs = { 230, 231, 241, 269, 284 },
@@ -1240,7 +1242,7 @@ ADDON.MountJournalEnhancedType = {
 }
 
 -- used as filter for debug output
-ADDON.MountJournalEnhancedIgnored = {
+ADDON.DB.Ignored = {
     [459] = true, -- Gray Wolf
     [468] = true, -- White Stallion
     [578] = true, -- Black Wolf

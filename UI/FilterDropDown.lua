@@ -236,7 +236,7 @@ local function InitializeFilterDropDown(filterMenu, level)
         local sortedFamilies, hasSubFamilies = {}, {}
         AddCheckAllAndNoneInfo(settings, level)
 
-        for family, mainConfig in pairs(ADDON.MountJournalEnhancedFamily) do
+        for family, mainConfig in pairs(ADDON.DB.Family) do
             hasSubFamilies[family] = false
             for _, subConfig in pairs(mainConfig) do
                 if type(subConfig) == "table" then
@@ -264,17 +264,17 @@ local function InitializeFilterDropDown(filterMenu, level)
         for i = 0, 7 do
             MSA_DropDownMenu_AddButton(CreateFilterInfo(_G["EXPANSION_NAME" .. i], i, settings), level)
         end
-    elseif (level == 3 and ADDON.MountJournalEnhancedFamily[MSA_DROPDOWNMENU_MENU_VALUE]) then
+    elseif (level == 3 and ADDON.DB.Family[MSA_DROPDOWNMENU_MENU_VALUE]) then
         local settings = ADDON.settings.filter[SETTING_FAMILY][MSA_DROPDOWNMENU_MENU_VALUE]
         local sortedFamilies = {}
-        for family, _ in pairs(ADDON.MountJournalEnhancedFamily[MSA_DROPDOWNMENU_MENU_VALUE]) do
+        for family, _ in pairs(ADDON.DB.Family[MSA_DROPDOWNMENU_MENU_VALUE]) do
             table.insert(sortedFamilies, family)
         end
         table.sort(sortedFamilies, function(a, b)
             return (L[a] or a) < (L[b] or b)
         end)
         for _, family in pairs(sortedFamilies) do
-            if ShouldDisplayFamily(ADDON.MountJournalEnhancedFamily[MSA_DROPDOWNMENU_MENU_VALUE][family]) then
+            if ShouldDisplayFamily(ADDON.DB.Family[MSA_DROPDOWNMENU_MENU_VALUE][family]) then
                 MSA_DropDownMenu_AddButton(CreateFilterInfo(L[family] or family, family, settings), level)
             end
         end

@@ -1,6 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
-ADDON.MountJournalEnhancedFamily = {
+ADDON.DB.Family = {
 ["Amphibian"] = {
 ["Crawgs"] = {
 [250735] = true, -- Bloodgorged Crawg

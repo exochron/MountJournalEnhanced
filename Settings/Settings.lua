@@ -64,10 +64,10 @@ local function PrepareDefaults()
             hidden = false,
         },
     }
-    for categoryName, _ in pairs(ADDON.MountJournalEnhancedSource) do
+    for categoryName, _ in pairs(ADDON.DB.Source) do
         defaultSettings.filter.source[categoryName] = true
     end
-    for categoryName, categoryConfig in pairs(ADDON.MountJournalEnhancedFamily) do
+    for categoryName, categoryConfig in pairs(ADDON.DB.Family) do
         for subCategory, subConfig in pairs(categoryConfig) do
             if type(subConfig) == "table" then
                 if not defaultSettings.filter.family[categoryName] then
@@ -80,7 +80,7 @@ local function PrepareDefaults()
             end
         end
     end
-    for expansionName, _ in pairs(ADDON.MountJournalEnhancedExpansion) do
+    for expansionName, _ in pairs(ADDON.DB.Expansion) do
         defaultSettings.filter.expansion[expansionName] = true
     end
 

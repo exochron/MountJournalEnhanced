@@ -1,10 +1,10 @@
 local ADDON_NAME, ADDON = ...
 
-local MountJournalEnhancedFamily = ADDON.MountJournalEnhancedFamily
-local MountJournalEnhancedSource = ADDON.MountJournalEnhancedSource
-local MountJournalEnhancedExpansion = ADDON.MountJournalEnhancedExpansion
-local MountJournalEnhancedType = ADDON.MountJournalEnhancedType
-local MountJournalEnhancedTradable = ADDON.MountJournalEnhancedTradable
+local FamilyDB = ADDON.DB.Family
+local SourceDB = ADDON.DB.Source
+local ExpansionDB = ADDON.DB.Expansion
+local TypeDB = ADDON.DB.Type
+local TradableDB = ADDON.DB.Tradable
 
 local function FilterHiddenMounts(spellId)
     return ADDON.settings.filter.hidden or not ADDON.settings.hiddenMounts[spellId]
@@ -19,7 +19,7 @@ local function FilterUsableMounts(spellId, isUsable)
 end
 
 local function FilterTradableMounts(spellId)
-    return not ADDON.settings.filter.onlyTradable or MountJournalEnhancedTradable[spellId]
+    return not ADDON.settings.filter.onlyTradable or TradableDB[spellId]
 end
 
 local function FilterCollectedMounts(collected)
@@ -91,14 +91,14 @@ function ADDON:FilterMountsBySource(spellId, sourceType)
         return true
     end
 
-    local mountResult = CheckMountInList(self.settings.filter.source, MountJournalEnhancedSource, spellId)
+    local mountResult = CheckMountInList(self.settings.filter.source, SourceDB, spellId)
     if mountResult ~= nil then
         return mountResult
     end
 
     for source, value in pairs(self.settings.filter.source) do
-        if MountJournalEnhancedSource[source] and MountJournalEnhancedSource[source]["sourceType"]
-                and tContains(MountJournalEnhancedSource[source]["sourceType"], sourceType) then
+        if SourceDB[source] and SourceDB[source]["sourceType"]
+                and tContains(SourceDB[source]["sourceType"], sourceType) then
             return value
         end
     end
@@ -119,7 +119,7 @@ function ADDON:FilterMountsByFamily(spellId)
         return true
     end
 
-    local mountResult = CheckMountInList(self.settings.filter.family, MountJournalEnhancedFamily, spellId)
+    local mountResult = CheckMountInList(self.settings.filter.family, FamilyDB, spellId)
     if mountResult then
         return true
     end
@@ -134,15 +134,15 @@ function ADDON:FilterMountsByExpansion(spellId)
         return true
     end
 
-    local mountResult = CheckMountInList(self.settings.filter.expansion, MountJournalEnhancedExpansion, spellId)
+    local mountResult = CheckMountInList(self.settings.filter.expansion, ExpansionDB, spellId)
     if mountResult ~= nil then
         return mountResult
     end
 
     for expansion, value in pairs(self.settings.filter.expansion) do
-        if MountJournalEnhancedExpansion[expansion] and
-                MountJournalEnhancedExpansion[expansion]["minID"] <= spellId and
-                spellId <= MountJournalEnhancedExpansion[expansion]["maxID"] then
+        if ExpansionDB[expansion] and
+                ExpansionDB[expansion]["minID"] <= spellId and
+                spellId <= ExpansionDB[expansion]["maxID"] then
             return value
         end
     end
@@ -156,7 +156,7 @@ function ADDON:FilterMountsByType(spellId, mountID)
         return true
     end
 
-    local mountResult = CheckMountInList(self.settings.filter.mountType, MountJournalEnhancedType, spellId)
+    local mountResult = CheckMountInList(self.settings.filter.mountType, TypeDB, spellId)
     if mountResult == true then
         return true
     end
@@ -169,9 +169,9 @@ function ADDON:FilterMountsByType(spellId, mountID)
 
     local result
     for category, value in pairs(self.settings.filter.mountType) do
-        if MountJournalEnhancedType[category] and
-                MountJournalEnhancedType[category].typeIDs and
-                tContains(MountJournalEnhancedType[category].typeIDs, mountType) then
+        if TypeDB[category] and
+                TypeDB[category].typeIDs and
+                tContains(TypeDB[category].typeIDs, mountType) then
             result = result or value
         end
     end
