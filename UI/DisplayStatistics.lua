@@ -36,13 +36,16 @@ local function generateText(mountId)
     local useCount, lastUseTime, travelTime, travelDistance, learnedTime = ADDON:GetMountStatistics(mountId)
     if useCount ~= nil then
         if useCount > 0 then
-            text = '|cffffd100N|r ' .. useCount..'x'
+            -- interface/icons/achievement_guildperk_mountup
+            text = '|T413588:0|t' .. useCount..'x'
         end
         if travelTime > 0 then
-            text = text .. '  |cffffd100t|r ' .. SecondsToClock(travelTime, true)
+            -- interface/icons/spell_nature_timestop
+            text = text .. '  |T136106:0|t' .. SecondsToClock(travelTime, true)
         end
         if travelDistance > 0 then
-            text = text .. '  |cffffd100l|r ' .. formatDistance(travelDistance)
+            -- interface/icons/ability_druid_dash_orange
+            text = text .. '  |T1817485:0|t' .. formatDistance(travelDistance)
         end
         if learnedTime then
             -- interface/buttons/ui-checkbox-check

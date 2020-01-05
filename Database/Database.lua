@@ -860,10 +860,10 @@ ADDON.DB.Source = {
         [227988] = true, -- Fearless Gladiator's Storm Dragon - Gladiator: Legion Season 2
         [227989] = true, -- Cruel Gladiator's Storm Dragon - Gladiator: Legion Season 3
         [227991] = true, -- Ferocious Gladiator's Storm Dragon - Gladiator: Legion Season 4
-        [227994] = true, -- Fierce Gladiator's Storm Dragon
-        [227995] = true, -- Dominating Gladiator's Storm Dragon
+        [227994] = true, -- Fierce Gladiator's Storm Dragon - Legion Arena Season 5
+        [227995] = true, -- Dominating Gladiator's Storm Dragon - Legion Arena Season 6
         [237288] = true, -- Reins of the Onyx War Hyena
-        [243201] = true, -- Demonic Gladiator's Storm Dragon
+        [243201] = true, -- Demonic Gladiator's Storm Dragon - Legion Arena Season 7
         [262022] = true, -- Dread Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 1
         [262023] = true, -- Sinister Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 2
         [262024] = true, -- Notorious Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 3
@@ -1129,6 +1129,63 @@ ADDON.DB.Source = {
 
         [294197] = true, -- Obsidian Worldbreaker - 15th Anniversary
     },
+}
+
+ADDON.DB.FeatsOfStrength = {
+    -- from https://wowhead.com/mount-feats-of-strength (56)
+    -- spellId => AchievementId
+    [17229] = 3356, -- Winterspring Frostsaber
+    [17481] = 729, -- Deathcharger's Reins
+    [24242] = 881, -- Swift Razzashi Raptor
+    [24252] = 880, -- Swift Zulian Tiger
+    [26656] = 416, -- Scarab Lord
+    [36702] = 882, -- Fiery Warhorse's Reins
+    [37015] = 886, -- Swift Nether Drake
+    [40192] = 885, -- Ashes of Al'ar
+    [41252] = 883, -- Reins of the Raven Lord
+    [44744] = 887, -- Merciless Nether Drake
+    [46628] = 884, -- Swift White Hawkstrider
+    [48025] = 980, -- The Horseman's Reins
+    [49193] = 888, -- Vengeful Nether Drake
+    [49322] = 1436, -- Friends In High Places
+    [58615] = 2316, -- Brutal Nether Drake
+    [61465] = 2081, -- Grand Black War Mammoth
+    [61467] = 2081, -- Grand Black War Mammoth
+    [63796] = 4626, -- And I'll Form the Head!
+    [64659] = 3357, -- Venomhide Ravasaur
+    [64927] = 3096, -- Deadly Gladiator's Frost Wyrm
+    [65439] = 3756, -- Furious Gladiator's Frost Wyrm
+    [67336] = 3757, -- Relentless Gladiator's Frost Wyrm
+    [71342] = 4627, -- Big Love Rocket
+    [71810] = 4600, -- Wrathful Gladiator's Frost Wyrm
+    [72286] = 4625, -- Invincible's Reins
+    [75973] = 4832, -- Friends In Even Higher Places
+    [88750] = 5767, -- Scourer of the Eternal Sands
+    [101282] = 6003, -- Vicious Gladiator's Twilight Drake
+    [101821] = 6322, -- Ruthless Gladiator's Twilight Drake
+    [121820] = 8213, -- Friends In Places Higher Yet
+    [124550] = 6741, -- Cataclysmic Gladiator's Twilight Drake
+    [138640] = 8092, -- Bone-White Primal Raptor
+    [139407] = 8216, -- Malevolent Gladiator's Cloud Serpent
+    [148618] = 8678, -- Tyrannical Gladiator's Cloud Serpent
+    [148619] = 8705, -- Grievous Gladiator's Cloud Serpent
+    [148620] = 8707, -- Prideful Gladiator's Cloud Serpent
+    [149801] = 8794, -- Friends In Places Even Higher Than That
+    [171847] = 9925, -- Friends In Places Yet Even Higher Than That
+    [186828] = 9229, -- Primal Gladiator's Felblood Gronnling
+    [189043] = 10137, -- Wild Gladiator's Felblood Gronnling
+    [189044] = 10146, -- Warmongering Gladiator's Felblood Gronnling
+    [227986] = 10999, -- Vindictive Gladiator's Storm Dragon
+    [227988] = 11000, -- Fearless Gladiator's Storm Dragon
+    [227989] = 11001, -- Cruel Gladiator's Storm Dragon
+    [227991] = 11002, -- Ferocious Gladiator's Storm Dragon
+    [227994] = 13450, -- Fierce Gladiator's Storm Dragon
+    [227995] = 12139, -- Dominating Gladiator's Storm Dragon
+    [239767] = 424, -- Why? Because It's Red
+    [243201] = 12140, -- Demonic Gladiator's Storm Dragon
+    [262022] = 13093, -- Dread Gladiator's Proto-Drake
+    [262023] = 13202, -- Sinister Gladiator's Proto-Drake
+    [262024] = 13632, -- Notorious Gladiator's Proto-Drake
 }
 
 ADDON.DB.Expansion = {

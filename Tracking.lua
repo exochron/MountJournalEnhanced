@@ -93,25 +93,28 @@ end)
 
 local function parseLearnedDateFromAchievements()
     if ADDON.settings.trackUsageStats then
-        for spellId, achievementIds in pairs(ADDON.MountJournalEnhancedSource.Achievement) do
-            if achievementIds ~= true then
-                local mountId = C_MountJournal.GetMountFromSpell(spellId)
-                if mountId and (not MJETrackingData[mountId] or not MJETrackingData[mountId][INDEX_LEARNED_TIME]) then
-                    local collected = select(11, C_MountJournal.GetMountInfoByID(mountId))
-                    if collected then
-                        if type(achievementIds) == "number" then
-                            achievementIds = { achievementIds }
-                        end
-                        for _, achievementId in ipairs(achievementIds) do
-                            local _, _, _, completed, month, day, year = GetAchievementInfo(achievementId)
-                            if completed then
-                                local blob = initData(mountId)
-                                blob[INDEX_LEARNED_TIME] = time({
-                                    ["year"] = 2000 + year,
-                                    ["month"] = month,
-                                    ["day"] = day,
-                                })
-                                break
+        local lists = { ADDON.DB.Source.Achievement, ADDON.DB.FeatsOfStrength }
+        for _, list in pairs(lists) do
+            for spellId, achievementIds in pairs(list) do
+                if achievementIds ~= true then
+                    local mountId = C_MountJournal.GetMountFromSpell(spellId)
+                    if mountId and (not MJETrackingData[mountId] or not MJETrackingData[mountId][INDEX_LEARNED_TIME]) then
+                        local collected = select(11, C_MountJournal.GetMountInfoByID(mountId))
+                        if collected then
+                            if type(achievementIds) == "number" then
+                                achievementIds = { achievementIds }
+                            end
+                            for _, achievementId in ipairs(achievementIds) do
+                                local _, _, _, completed, month, day, year = GetAchievementInfo(achievementId)
+                                if completed then
+                                    local blob = initData(mountId)
+                                    blob[INDEX_LEARNED_TIME] = time({
+                                        ["year"] = 2000 + year,
+                                        ["month"] = month,
+                                        ["day"] = day,
+                                    })
+                                    break
+                                end
                             end
                         end
                     end
