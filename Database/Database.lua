@@ -95,8 +95,18 @@ ADDON.DB.Source = {
         [291492] = true, -- Rusty Mechanocrawler - Mechagon
         [294038] = true, -- Royal Snapdragon - Nazjatar
         [297157] = true, -- Junkheap Drifter - Mechagon
+        [298367] = true, -- Mollie - Vol'dun
         [300149] = true, -- Silent Glider - Nazjatar
         [300150] = true, -- Fabious - Nazjatar
+        [312751] = true, -- Clutch of Ha-Li - Vale of Eternal Blossoms
+        [315014] = true, -- Ivory Cloud Serpent - Vale of Eternal Blossoms
+        [315847] = true, -- Drake of the Four Winds - Uldum
+        [315987] = true, -- Mail Muncher - Horrific Visions
+        [316275] = true, -- Waste Marauder - Uldum
+        [316337] = true, -- Malevolent Drone - Uldum
+        [316493] = true, -- Elusive Quickhoof - Vol'dun
+        [316722] = true, -- Ren's Stalwart Hound - Vale of Eternal Blossoms
+        [316723] = true, -- Xinlao - Vale of Eternal Blossoms
     },
 
     ["Quest"] = {
@@ -121,6 +131,8 @@ ADDON.DB.Source = {
         [239770] = true, -- Black Qiraji War Tank - newer high res version of the Black Qiraji Battle Tank
         [289639] = true, -- Bruce - Complete the Brawler's Guild Questline
         [299159] = true, -- Scrapforged Mechaspider - Drive It Away Today
+        [316339] = true, -- Shadowbarb Drone - Uldum
+        [316802] = true, -- Springfur Alpaca - Uldum
 
         ------------------------------
         -- Alliance ------------------
@@ -151,23 +163,25 @@ ADDON.DB.Source = {
         [122708] = true, -- Grand Expedition Yak
         [127216] = true, -- Grey Riding Yak
         [127220] = true, -- Blonde Riding Yak
-        [171825] = true, -- Mosshide Riverwallow
         [171616] = true, -- Witherhide Cliffstomper
         [171628] = true, -- Rocktusk Battleboar - Trader Araanda, Trader Darakk
+        [171825] = true, -- Mosshide Riverwallow
         [213115] = true, -- Bloodfang Widow - The Mad Merchant
-        [227956] = true, -- Arcadian War Turtle - Xur'ios
         [214791] = true, -- Brinedeep Bottom-Feeder - Conjurer Margoss
+        [227956] = true, -- Arcadian War Turtle - Xur'ios
         [230844] = true, -- Brawler's Burly Basilisk - brawler guild mount (season 2)
+        [259740] = true, -- Green Marsh Hopper
         [264058] = true, -- Mighty Caravan Brutosaur
-        [279474] = true, -- Palehide Direhorn
         [266925] = true, -- Siltwing Albatross - Island expedition
-        [288711] = true, -- Saltwater Seahorse - Island expedition
+        [279474] = true, -- Palehide Direhorn
+        [288506] = true, -- Sandy Nightsaber
         [288587] = true, -- Blue Marsh Hopper
         [288589] = true, -- Yellow Marsh Hopper
-        [259740] = true, -- Green Marsh Hopper
+        [288711] = true, -- Saltwater Seahorse - Island expedition
         [294143] = true, -- X-995 Mechanocat
         [300151] = true, -- Inkscale Deepseeker
         [300153] = true, -- Crimson Tidestallion
+        [316340] = true, -- Wicked Swarmer
 
         ------------------------------
         -- Alliance ------------------
@@ -298,6 +312,8 @@ ADDON.DB.Source = {
         [243651] = true, -- Shackled Ur'zul - Antorus, Argus Mythic
         [289083] = true, -- G.M.O.D. - Battle of Dazar'alor
         [289555] = true, -- Glacial Tidestorm - Battle of Dazar'alor
+        [302143] = true, -- Uncorrupted Voidwing - Heroic? N'Zoth, Ny'alotha
+        [308814] = true, -- Ny'alotha Allseer - Mythic N'Zoth, Ny'alotha
     },
 
     ["Reputation"] = {
@@ -423,6 +439,9 @@ ADDON.DB.Source = {
 
         -- Rustbolt Resistance
         [299170] = true, -- Rustbolt Resistor
+
+        -- Uldum Accord
+        [316276] = true, -- Wastewander Skyterror
 
         ------------------------------
         -- Alliance ------------------
@@ -722,7 +741,7 @@ ADDON.DB.Source = {
         [271646] = true, -- Dark Iron Core Hound - Allied Races: Dark Iron Dwarf
         [239049] = 12812, -- Obsidian Krolusk - Glory of the Wartorn Hero
         [250735] = 12806, -- Bloodgorged Crawg - Glory of the Uldir Raider
-        [279454] = {12604,12605}, -- Conquerer's Scythemaw - Conqueror of Azeroth
+        [279454] = { 12604, 12605 }, -- Conquerer's Scythemaw - Conqueror of Azeroth
         [280730] = 12866, -- Pureheart Courser - 100 Exalted Reputations
         [289101] = 13315, -- DazarDazar'alor Windreaver - Glory of the Dazar'alor Raider
         [282682] = true, -- Kul Tiran Charger - Allied Races: Kul Tiran Human
@@ -731,6 +750,11 @@ ADDON.DB.Source = {
         [294039] = 13638, -- Snapback Scuttler - Undersea Usurper
         [296788] = 13541, -- Mechacycle Model W - Mecha-Done
         [294197] = 13931, -- Obsidian Worldbreaker - Memories of Fel, Frost and Fire
+        [305182] = 14146, -- Black Serpent of N'Zoth - Through the Depths of Visions
+        [305592] = true, -- Mechagon Mechanostrider - Allied Races: Mechagnome
+        [306423] = true, -- Caravan Hyena - Allied Races: Vulpera
+        [316343] = 14146, -- Wriggling Parasite - Glory of the Ny'alotha Raider
+        [316637] = 14145, -- Awakened Mindborer - Battle for Azeroth Keystone Master: Season Four
 
         ------------------------------
         -- Alliance ------------------
@@ -867,6 +891,7 @@ ADDON.DB.Source = {
         [262022] = true, -- Dread Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 1
         [262023] = true, -- Sinister Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 2
         [262024] = true, -- Notorious Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 3
+        [262027] = true, -- Corrupted Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 4
 
         -- Prestige Reward
         [222202] = true, -- Prestigious Bronze Courser
@@ -897,6 +922,7 @@ ADDON.DB.Source = {
         [261433] = true, -- Vicious War Basilisk
         [272481] = true, -- Vicious War Riverbeast
         [281887] = true, -- Vicious Black Warsaber
+        [281888] = true, -- Vicious White Warsaber
 
         -- Achievement
         [60118] = true, -- Black War Bear - For The Alliance!
@@ -936,6 +962,7 @@ ADDON.DB.Source = {
         [242897] = true, -- Vicious War Fox
         [261434] = true, -- Vicious War Basilisk
         [270560] = true, -- Vicious War Clefthoof
+        [281889] = true, -- Vicious White Bonesteed
         [281890] = true, -- Vicious Black Bonesteed
 
         -- Achievement
@@ -1132,7 +1159,7 @@ ADDON.DB.Source = {
 }
 
 ADDON.DB.FeatsOfStrength = {
-    -- from https://wowhead.com/mount-feats-of-strength (56)
+    -- from https://wowhead.com/mount-feats-of-strength (58)
     -- spellId => AchievementId
     [17229] = 3356, -- Winterspring Frostsaber
     [17481] = 729, -- Deathcharger's Reins
@@ -1186,6 +1213,8 @@ ADDON.DB.FeatsOfStrength = {
     [262022] = 13093, -- Dread Gladiator's Proto-Drake
     [262023] = 13202, -- Sinister Gladiator's Proto-Drake
     [262024] = 13632, -- Notorious Gladiator's Proto-Drake
+    [262027] = 13958, -- Corrupted Gladiator's Proto-Drake
+    [264058] = 14183, -- Mighty Caravan Brutosaur
 }
 
 ADDON.DB.Expansion = {
