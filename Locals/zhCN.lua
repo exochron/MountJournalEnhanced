@@ -181,7 +181,7 @@ L["SETTING_COMPACT_LIST"] = "紧凑坐骑列表"
 L["SETTING_CURSOR_KEYS"] = "允许上下键浏览坐骑"
 L["SETTING_FAVORITE_PER_CHAR"] = "收藏坐骑每个角色"
 --[[Translation missing --]]
---[[ L["SETTING_HEAD_SETTING_BEHAVIOUR"] = "Setting Behaviour"--]]
+--[[ L["SETTING_HEAD_BEHAVIOUR"] = "Behavior"--]]
 --[[Translation missing --]]
 --[[ L["SETTING_MOUNT_COUNT"] = "Show personal mount count"--]]
 --[[Translation missing --]]
@@ -195,4 +195,8 @@ L["SETTING_FAVORITE_PER_CHAR"] = "收藏坐骑每个角色"
 --[[Translation missing --]]
 --[[ L["SETTING_PREVIEW_LINK"] = "Show Collection button in mount preview"--]]
 L["SETTING_SHOP_BUTTON"] = "坐骑店铺上显示未购买按钮"
+--[[Translation missing --]]
+--[[ L["SETTING_SHOW_USAGE"] = "Display mount usage statistics"--]]
+--[[Translation missing --]]
+--[[ L["SETTING_TRACK_USAGE"] = "Track mount usage behavior on all characters"--]]
 L["SETTING_YCAMERA"] = "解锁鼠标纵轴旋转显示"

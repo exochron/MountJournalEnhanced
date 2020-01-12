@@ -172,4 +172,6 @@ L["SETTING_PERSONAL_HIDDEN_MOUNTS"] = "Benutze versteckte Reittiere nur bei dies
 L["SETTING_PERSONAL_UI"] = "Benutze Interface-Einstellungen nur bei diesem Charakter"
 L["SETTING_PREVIEW_LINK"] = "Zeige Knopf zur Sammlung in Anprobe"
 L["SETTING_SHOP_BUTTON"] = "Zeige Shop bei verfügbaren Reittieren"
+L["SETTING_SHOW_USAGE"] = "Zeige Statistiken zum Nutzungsverhalten"
+L["SETTING_TRACK_USAGE"] = "Verfolge Reittier Nutzungsverhalten bei allen Charakteren "
 L["SETTING_YCAMERA"] = "Aktiviere Y-Rotation via Maus in Modellanzeige"

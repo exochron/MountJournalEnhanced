@@ -1,4 +1,4 @@
-## Interface: 80205
+## Interface: 80300
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron

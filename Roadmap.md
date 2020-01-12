@@ -1,11 +1,5 @@
 ### 2.7 (8.3)
 - updated db
-- track mount usage
-    - last usage time
-    - usage count
-    - total riding time
-    - total riding distance
-    - learned date
 - sort options (=> https://www.curseforge.com/wow/addons/mount-journal-enhanced/issues/43)
     - list favorites between everything else (beware auto favorite logic)
     - mix unowned & owned depending by sort order
