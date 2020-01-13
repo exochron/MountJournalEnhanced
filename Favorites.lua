@@ -7,7 +7,7 @@ local ADDON_NAME, ADDON = ...
 local L = ADDON.L
 local starButton
 
-ADDON:RegisterBehaviorSetting(
+ADDON:RegisterBehaviourSetting(
         'favoritePerChar',
         false,
         L.SETTING_FAVORITE_PER_CHAR,

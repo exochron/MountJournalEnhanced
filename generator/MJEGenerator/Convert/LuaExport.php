@@ -24,7 +24,7 @@ class LuaExport
     private function prepareHead(string $variableName): string
     {
         return 'local ADDON_NAME, ADDON = ...' . PHP_EOL . PHP_EOL
-            . 'ADDON.' . $variableName . ' = {' . PHP_EOL;
+            . 'ADDON.DB.' . $variableName . ' = {' . PHP_EOL;
     }
 
     /**

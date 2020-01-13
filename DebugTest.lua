@@ -1,7 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
-local MountJournalEnhancedExpansion = ADDON.MountJournalEnhancedExpansion
-local MountJournalEnhancedIgnored = ADDON.MountJournalEnhancedIgnored
+local IgnoredDB = ADDON.DB.Ignored
 
 local function RunDebugTest()
     local mounts = {}
@@ -36,7 +35,7 @@ local function RunDebugTest()
     end
 
     for spellID, data in pairs(mounts) do
-        if not MountJournalEnhancedIgnored[spellID] then
+        if not IgnoredDB[spellID] then
             if ADDON:FilterMountsBySource(spellID, data.sourceType) then
                 print("[MJE] New mount: " .. data.name .. " (" .. spellID .. ", " .. data.mountID .. ", " .. data.sourceType .. ") ")
             end
@@ -59,7 +58,7 @@ local function RunDebugTest()
         MJEGlobalSettings.filter = ADDON.settings.filter
     end
 
-    for _, expansionMounts in pairs(MountJournalEnhancedExpansion) do
+    for _, expansionMounts in pairs(ADDON.DB.Expansion) do
         for id, _ in pairs(expansionMounts) do
             if id ~= "minID" and id ~= "maxID" and not mounts[id] then
                 print("[MJE] Old expansion info for mount: " .. id)
@@ -67,7 +66,7 @@ local function RunDebugTest()
         end
     end
 
-    for id, name in pairs(MountJournalEnhancedIgnored) do
+    for id, name in pairs(IgnoredDB) do
         if not mounts[id] then
             print("[MJE] Old ignore entry for mount: " .. id)
         end

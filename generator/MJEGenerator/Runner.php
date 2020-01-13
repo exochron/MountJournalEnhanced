@@ -25,7 +25,7 @@ class Runner
         $fileIdMapper = new FileIdMapper('raw/listfile.csv');
 
         $loader = new MountLoader(
-            new DatabaseWrapper('raw/Cache', 'raw/Extract'),
+            new DatabaseWrapper('raw/Cache/', 'raw/Extract/'),
             $fileIdMapper
         );
         $mounts = $loader->load();
@@ -41,7 +41,7 @@ class Runner
 
         $handler  = new Family($this->config['familyMap']);
         $families = $handler->groupMountsByFamily($mounts, $wcmMountFamilies);
-        $lua      = $export->toLuaCategories('MountJournalEnhancedFamily', $families);
+        $lua      = $export->toLuaCategories('Family', $families);
         file_put_contents('families.db.lua', $lua);
 
         $errors = $handler->getErrors();
@@ -54,7 +54,7 @@ class Runner
 
     private function generateTradableList(array $mounts, LuaExport $export): self
     {
-        $lua = $export->toLuaTradable('MountJournalEnhancedTradable', $mounts);
+        $lua = $export->toLuaTradable('Tradable', $mounts);
         file_put_contents('tradable.db.lua', $lua);
 
         return $this;

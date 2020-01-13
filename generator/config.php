@@ -65,7 +65,11 @@ return [
             ],
             'Pandaren Phoenixes' => [
                 'wcm'   => ['Birds'],
-                'icons' => ['pandarenphoenix', 'ji-kun'],
+                'icons' => ['pandarenphoenix', 'ji-kun', 'thunderislebirdboss'],
+            ],
+            'Vultures'           => [
+                'wcm'   => ['Birds'],
+                'icons' => ['vulture'],
             ],
             'Phoenixes'          => ['Phoenixes'],
             'Mechanical Birds'   => ['Mechanical Birds'],
@@ -126,7 +130,7 @@ return [
         ],
         'Drakes'       => [
             'Cloud Serpents' => ['Cloud Serpents'],
-            'Drakes'         => ['Drakes', 'Onyxian Drakes'],
+            'Drakes'         => ['Drakes', 'Onyxian Drakes', 'Void Dragons'],
             'Nether Drakes'  => ['Nether Drakes'],
             'Stone Drakes'   => ['Stone Drakes'],
             'Wind Drakes'    => ['Wind Drakes'],
@@ -166,13 +170,22 @@ return [
         'Horses'       => [
             'Chargers'          => [
                 'wcm'   => ['Horses'],
-                'icons' => ['_paladinmount_', '_charger', 'nature_swiftness', 'alliancepvpmount', 'vicioushorse', 'paladin_divinesteed', 'horsekultiran', 'hordehorse'],
+                'icons' => [
+                    '_paladinmount_',
+                    '_charger',
+                    'nature_swiftness',
+                    'alliancepvpmount',
+                    'vicioushorse',
+                    'paladin_divinesteed',
+                    'horsekultiran',
+                    'hordehorse',
+                ],
                 67466   => 'Argent Warhorse',
                 68187   => "Crusader's White Warhorse",
                 68188   => "Crusader's Black Warhorse",
             ],
             'Demonic Steeds'    => [
-                'wcm' => ['Demonic Steeds'],
+                'wcm'  => ['Demonic Steeds'],
                 232412 => "Netherlord's Chaotic Wrathsteed",
                 238452 => "Netherlord's Brimstone Wrathsteed",
                 238454 => "Netherlord's Accursed Wrathsteed",
@@ -202,6 +215,7 @@ return [
         'Insects'      => [
             'Bees'           => ['Bees'],
             'Krolusks'       => ['Krolusks'],
+            'Aqir Flyers'    => ['Aqir Flyers'],
             'Silithids'      => [
                 'wcm'  => ['Silithids',],
                 239767 => 'Red Qiraji War Tank',
@@ -222,16 +236,17 @@ return [
             'Hyenas' => ['Hyenas'],
         ],
         'Reptiles'     => [
-            'Kodos'        => [
+            'Kodos'            => [
                 'wcm' => ['Kodos',],
                 49378 => 'Brewfest Riding Kodo',
             ],
-            'Mushan'       => ['Mushan'],
-            'Basilisks'    => ['Basilisks'],
-            'Crocolisks'   => ['Crocolisks'],
-            'Sea Serpents' => ['Sea Serpents'],
-            'Turtles'      => ['Dragon Turtles', 'Sea Turtles', 'Turtles'],
-            'Snapdragons'  => ['Snapdragons'],
+            'Mushan'           => ['Mushan'],
+            'Basilisks'        => ['Basilisks'],
+            'Crocolisks'       => ['Crocolisks'],
+            'Sea Serpents'     => ['Sea Serpents'],
+            'N\'Zoth Serpents' => ['N\'Zoth Serpents'],
+            'Turtles'          => ['Dragon Turtles', 'Sea Turtles', 'Turtles'],
+            'Snapdragons'      => ['Snapdragons'],
         ],
         'Rats'         => ['Rats'], //maybe Rodents later
         'Rays'         => [
@@ -241,6 +256,7 @@ return [
             'Stingrays'   => ['Stingrays'],
         ],
         'Ungulates'    => [
+            'Alpacas'     => ['Alpacas'],
             'Boars'       => ['Boars', 'Divine Boars'],
             'Camels'      => ['Camels'],
             'Elekks'      => ['Elekks'],
@@ -251,7 +267,12 @@ return [
         ],
         'Vehicles'     => [
             'Mechanostriders'    => ['Mechanostriders'],
-            'Mechanical Animals' => ['Mechanical Scorpions', 'Mechanical Steeds', 'Mechanical Birds', 'Mechanical Cats',],
+            'Mechanical Animals' => [
+                'Mechanical Scorpions',
+                'Mechanical Steeds',
+                'Mechanical Birds',
+                'Mechanical Cats',
+            ],
             'Motorcycles'        => ['Motorcycles', 'Monocycles'],
             'Airships'           => ['Skyships', 'Zeppelins', 'Flying Ships'],
             'Gyrocopters'        => ['Gyrocopters'],

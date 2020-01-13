@@ -4,6 +4,7 @@ if (GetLocale() ~= 'koKR') then
     return
 end
 
+ADDON.isMetric = true -- is the metric or imperial/us unit system used?
 local L = ADDON.L or {}
 
 L["Black Market"] = "암시장"
@@ -167,7 +168,7 @@ L["SETTING_COMPACT_LIST"] = "간소한 목록"
 L["SETTING_CURSOR_KEYS"] = "위 아래 화살표 키로 목록 탐색하기"
 L["SETTING_FAVORITE_PER_CHAR"] = "캐릭터별 즐겨찾기"
 --[[Translation missing --]]
---[[ L["SETTING_HEAD_SETTING_BEHAVIOUR"] = "Setting Behaviour"--]]
+--[[ L["SETTING_HEAD_BEHAVIOUR"] = "Behavior"--]]
 --[[Translation missing --]]
 --[[ L["SETTING_MOUNT_COUNT"] = "Show personal mount count"--]]
 L["SETTING_MOVE_EQUIPMENT"] = "착용 장비 표시 이동"
@@ -180,4 +181,8 @@ L["SETTING_MOVE_EQUIPMENT"] = "착용 장비 표시 이동"
 --[[Translation missing --]]
 --[[ L["SETTING_PREVIEW_LINK"] = "Show Collection button in mount preview"--]]
 L["SETTING_SHOP_BUTTON"] = "구매 버튼 활성화"
+--[[Translation missing --]]
+--[[ L["SETTING_SHOW_USAGE"] = "Display mount usage statistics"--]]
+--[[Translation missing --]]
+--[[ L["SETTING_TRACK_USAGE"] = "Track mount usage behavior on all characters"--]]
 L["SETTING_YCAMERA"] = "표시 화면에서 마우스로 Y 축 회전 잠금 해제"

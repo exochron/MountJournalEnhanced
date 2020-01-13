@@ -16,6 +16,8 @@ end
 local function PrepareDefaults()
     local defaultSettings = {
 
+        trackUsageStats = true,
+
         personalUi = false,
         ui = {
             debugMode = false,
@@ -23,6 +25,7 @@ local function PrepareDefaults()
             showShopButton = false,
             compactMountList = true,
             unlockDisplayCamera = true,
+            showUsageStatistics = true,
             enableCursorKeys = true,
             moveEquipmentSlot = true,
             previewButton = true,
@@ -61,10 +64,10 @@ local function PrepareDefaults()
             hidden = false,
         },
     }
-    for categoryName, _ in pairs(ADDON.MountJournalEnhancedSource) do
+    for categoryName, _ in pairs(ADDON.DB.Source) do
         defaultSettings.filter.source[categoryName] = true
     end
-    for categoryName, categoryConfig in pairs(ADDON.MountJournalEnhancedFamily) do
+    for categoryName, categoryConfig in pairs(ADDON.DB.Family) do
         for subCategory, subConfig in pairs(categoryConfig) do
             if type(subConfig) == "table" then
                 if not defaultSettings.filter.family[categoryName] then
@@ -77,7 +80,7 @@ local function PrepareDefaults()
             end
         end
     end
-    for expansionName, _ in pairs(ADDON.MountJournalEnhancedExpansion) do
+    for expansionName, _ in pairs(ADDON.DB.Expansion) do
         defaultSettings.filter.expansion[expansionName] = true
     end
 
@@ -119,4 +122,5 @@ ADDON:RegisterLoginCallback(function()
 
     ADDON.settings.favoritePerChar = MJEPersonalSettings.favoritePerChar
     ADDON.settings.favoredMounts = MJEPersonalSettings.favoredMounts
+    ADDON.settings.trackUsageStats = MJEGlobalSettings.trackUsageStats
 end)
