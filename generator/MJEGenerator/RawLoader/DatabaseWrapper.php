@@ -4,169 +4,58 @@ declare(strict_types=1);
 
 namespace MJEGenerator\RawLoader;
 
-use Erorus\DB2\HotfixedReader;
-use Generator;
 
 class DatabaseWrapper
 {
-    private $cacheFile;
+    private $db2Reader;
+    private $csvReader;
     private $extractDir;
-
-    private $itemSparseReader;
+    private $useDB2ForSparse = null;
 
     public function __construct(string $cacheDir, string $extractDir)
     {
-        $this->cacheFile  = $cacheDir . '/ADB/enUS/DBCache.bin';
         $this->extractDir = $extractDir . '/dbfilesclient/';
+        $this->db2Reader  = new DB2Reader($cacheDir, $this->extractDir);
+        $this->csvReader  = new CsvReader($extractDir);
     }
 
-    public function iterateMount(): Generator
+    public function iterateMount(): iterable
     {
-        yield from $this->iterateFile(
-            'Mount.db2',
-            [
-                'name',
-                'sourceText',
-                'description',
-                'mountId',
-                'mountTypeId',
-                'flags',
-                'sourceType',
-                'spellId',
-                'playerConditionId',
-                'mountFlyRideHeight',
-                'uiModelSceneId',
-            ],
-            [
-                6 => true, //sourceType
-            ]
-        );
+        if (file_exists($this->extractDir . 'Mount.db2')) {
+            yield from $this->db2Reader->iterateMount();
+        } else {
+            yield from $this->csvReader->iterateMount();
+        }
     }
 
-    public function iterateSpellMisc(): Generator
+    public function iterateSpellMisc(): iterable
     {
-        yield from $this->iterateFile(
-            'SpellMisc.db2',
-            [
-                'attributes',
-                'difficultyId',
-                'castingTimeIndex',
-                'durationIndex',
-                'rangeIndex',
-                'schoolMask',
-                'speed',
-                'launchDelay',
-                'minDuration',
-                'iconFileId',
-                'activeIconFileId',
-                'field_8_2_0',
-                'spellId',
-            ]
-        );
+        if (file_exists($this->extractDir . 'SpellMisc.db2')) {
+            yield from $this->db2Reader->iterateSpellMisc();
+        } else {
+            yield from $this->csvReader->iterateSpellMisc();
+        }
     }
 
-    public function iterateItemEffect(): Generator
+    public function iterateItemEffect(): iterable
     {
-        yield from $this->iterateFile(
-            'ItemEffect.db2',
-            [
-                'legacySlotIndex',
-                'triggerType',
-                'charges',
-                'coolDownMSec',
-                'categoryCoolDownMSec',
-                'spellCategoryId',
-                'spellId',
-                'chrSpecializationId',
-                'itemId',
-            ],
-            [
-                2 => true, //charges
-                3 => true, //coolDownMSec
-                4 => true, //categoryCoolDownMSec
-            ]
-        );
-    }
-
-    private function iterateFile(string $fileName, array $fieldNames, array $signedFields = []): Generator
-    {
-        $reader = new HotfixedReader($this->extractDir . $fileName, $this->cacheFile);
-        $reader->setFieldNames($fieldNames);
-        $reader->setFieldsSigned($signedFields);
-
-        yield from $reader->generateRecords();
+        if (file_exists($this->extractDir . 'ItemEffect.db2')) {
+            yield from $this->db2Reader->iterateItemEffect();
+        } else {
+            yield from $this->csvReader->iterateItemEffect();
+        }
     }
 
     public function fetchItemSparse(int $itemId): ?array
     {
-        if (null === $this->itemSparseReader) {
-            $this->itemSparseReader = new HotfixedReader($this->extractDir . 'ItemSparse.db2', $this->cacheFile);
-            $this->itemSparseReader->setFieldNames([
-                'AllowableRace',
-                'Description_lang',
-                'Display3_lang',
-                'Display2_lang',
-                'Display1_lang',
-                'Display_lang',
-                'DmgVariance',
-                'DurationInInventory',
-                'QualityModifier',
-                'BagFamily',
-                'ItemRange',
-                'StatPercentageOfSocket',
-                'StatPercentEditor',
-                'Stackable',
-                'MaxCount',
-                'RequiredAbility',
-                'SellPrice',
-                'BuyPrice',
-                'VendorStackCount',
-                'PriceVariance',
-                'PriceRandomValue',
-                'Flags',
-                'OppositeFactionItemID',
-                'ItemNameDescriptionID',
-                'RequiredTransmogHoliday',
-                'RequiredHoliday',
-                'LimitCategory',
-                'Gem_properties',
-                'Socket_match_enchantment_ID',
-                'TotemCategoryID',
-                'InstanceBound',
-                'ZoneBound',
-                'ItemSet',
-                'LockID',
-                'StartQuestID',
-                'PageID',
-                'ItemDelay',
-                'ScalingStatDistributionID',
-                'MinFactionID',
-                'RequiredSkillRank',
-                'RequiredSkill',
-                'ItemLevel',
-                'AllowableClass',
-                'ExpansionID',
-                'ArtifactID',
-                'SpellWeight',
-                'SpellWeightCategory',
-                'SocketType',
-                'SheatheType',
-                'Material',
-                'PageMaterialID',
-                'LanguageID',
-                'Bonding',
-                'DamageType',
-                'StatModifier_bonusStat',
-                'ContainerSlots',
-                'MinReputation',
-                'RequiredPVPMedal',
-                'RequiredPVPRank',
-                'RequiredLevel',
-                'InventoryType',
-                'OverallQualityID',
-            ]);
+        if (null === $this->useDB2ForSparse) {
+            $this->useDB2ForSparse = file_exists($this->extractDir . 'ItemSparse.db2');
         }
 
-        return $this->itemSparseReader->getRecord($itemId);
+        if ($this->useDB2ForSparse) {
+            return $this->db2Reader->fetchItemSparse($itemId);
+        }
+
+        return $this->csvReader->fetchItemSparse($itemId);
     }
 }

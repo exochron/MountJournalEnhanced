@@ -1,4 +1,4 @@
-FROM php:7.3-cli-alpine
+FROM php:7.4-cli-alpine
 
 RUN apk --update --no-cache add gmp-dev && \
     docker-php-ext-install -j$(nproc) gmp
