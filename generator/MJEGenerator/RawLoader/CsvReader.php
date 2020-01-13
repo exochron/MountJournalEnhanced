@@ -20,17 +20,25 @@ class CsvReader
         yield from $this->iterateFile('mount.csv');
     }
 
-    private function iterateFile(string $fileName): iterable
+    private function iterateFile(string $fileName): \Generator
     {
         $header = [];
 
         $file = new \SplFileObject($this->baseDir . $fileName);
         $file->setFlags(\SplFileObject::DROP_NEW_LINE | \SplFileObject::SKIP_EMPTY | \SplFileObject::READ_CSV);
         foreach ($file as $row) {
+            if (empty($row)) {
+                continue;
+            }
             if ([] === $header) {
                 $header = $row;
             } else {
-                yield array_combine($header, $row);
+                $data = array_combine($header, $row);
+                if (isset($data['ID'])) {
+                    yield $data['ID'] => $data;
+                } else {
+                    yield $data;
+                }
             }
         }
     }
@@ -48,12 +56,10 @@ class CsvReader
     public function fetchItemSparse(int $itemId): ?array
     {
         if ([] === $this->sparseCache) {
-            foreach ($this->iterateFile('itemsparse.csv') as $row) {
-                $this->sparseCache[$row['ID']] = $row;
-            }
+            $this->sparseCache = iterator_to_array($this->iterateFile('itemsparse.csv'));
         }
 
-        return $this->sparseCache[$itemId] ?? [];
+        return $this->sparseCache[$itemId] ?? null;
     }
 
 }

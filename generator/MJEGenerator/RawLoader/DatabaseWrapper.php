@@ -14,7 +14,7 @@ class DatabaseWrapper
 
     public function __construct(string $cacheDir, string $extractDir)
     {
-        $this->extractDir = $extractDir . '/dbfilesclient/';
+        $this->extractDir = $extractDir . 'dbfilesclient/';
         $this->db2Reader  = new DB2Reader($cacheDir, $this->extractDir);
         $this->csvReader  = new CsvReader($extractDir);
     }

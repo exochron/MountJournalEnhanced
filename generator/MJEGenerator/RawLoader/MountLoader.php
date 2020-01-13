@@ -22,28 +22,28 @@ class MountLoader
     {
         $list = [];
         foreach ($this->dbWrapper->iterateMount() as $record) {
-            $spellId        = $record['SourceSpellID'];
+            $spellId        = (int) $record['SourceSpellID'];
             $list[$spellId] = new Mount($record['Name_lang'], $spellId);
         }
 
         foreach ($this->dbWrapper->iterateItemEffect() as $record) {
-            if (1 === $record['LegacySlotIndex'] && 6 === $record['TriggerType'] && isset($list[$record['SpellID']])) {
+            if (1 === (int) $record['LegacySlotIndex'] && 6 === (int) $record['TriggerType'] && isset($list[$record['SpellID']])) {
                 /** @var Mount $mount */
                 $mount  = $list[$record['SpellID']];
-                $itemId = $record['ParentItemID'];
+                $itemId = (int) $record['ParentItemID'];
 
                 $sparse = $this->dbWrapper->fetchItemSparse($itemId);
-                if (null !== $sparse && $sparse['Bonding'] === 0) {
+                if (null !== $sparse && 0 === (int) $sparse['Bonding']) {
                     $mount->setIsItemTradable(true);
                 }
             }
         }
 
         foreach ($this->dbWrapper->iterateSpellMisc() as $record) {
-            if (isset($list[$record['SpellId']])) {
+            if (isset($list[$record['SpellID']])) {
                 /** @var Mount $mount */
-                $mount = $list[$record['SpellId']];
-                $icon  = $this->fileIdMapper->fetchIcon($record['SpellIconFileDataID']);
+                $mount = $list[$record['SpellID']];
+                $icon  = $this->fileIdMapper->fetchIcon((int) $record['SpellIconFileDataID']);
                 $mount->setIcon($icon);
             }
         }

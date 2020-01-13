@@ -88,6 +88,7 @@ ADDON.DB.Family = {
 [132118] = true, -- Emerald Pandaren Phoenix
 [132119] = true, -- Violet Pandaren Phoenix
 [139448] = true, -- Clutch of Ji-Kun
+[312751] = true, -- Clutch of Ha-Li
 },
 ["Parrots"] = {
 [254811] = true, -- Squawks
@@ -111,6 +112,11 @@ ADDON.DB.Family = {
 [101542] = true, -- Flametalon of Alysrazor
 [179478] = true, -- Voidtalon of the Dark Star
 [280729] = true, -- Frenzied Feltalon
+},
+["Vultures"] = {
+[266925] = true, -- Siltwing Albatross
+[316275] = true, -- Waste Marauder
+[316276] = true, -- Wastewander Skyterror
 },
 },
 ["Bovids"] = {
@@ -216,10 +222,13 @@ ADDON.DB.Family = {
 [237286] = true, -- Dune Scavenger
 [237287] = true, -- Alabaster Hyena
 [237288] = true, -- Onyx War Hyena
+[306423] = true, -- Caravan Hyena
 },
 ["Quilen"] = {
 [124659] = true, -- Imperial Quilen
 [279469] = true, -- Qinsho's Eternal Hound
+[316722] = true, -- Ren's Stalwart Hound
+[316723] = true, -- Xinlao
 },
 },
 ["Cats"] = {
@@ -257,6 +266,7 @@ ADDON.DB.Family = {
 [96499] = true, -- Swift Zulian Panther
 [288503] = true, -- Umber Nightsaber
 [288505] = true, -- Kaldorei Nightsaber
+[288506] = true, -- Sandy Nightsaber
 [288740] = true, -- Priestess' Moonsaber
 },
 ["Stone Cats"] = {
@@ -279,6 +289,7 @@ ADDON.DB.Family = {
 [146615] = true, -- Vicious Kaldorei Warsaber
 [229385] = true, -- Ban-Lu, Grandmaster's Companion
 [281887] = true, -- Vicious Black Warsaber
+[281888] = true, -- Vicious White Warsaber
 },
 },
 ["Crabs"] = {
@@ -405,6 +416,8 @@ ADDON.DB.Family = {
 [148618] = true, -- Tyrannical Gladiator's Cloud Serpent
 [148619] = true, -- Grievous Gladiator's Cloud Serpent
 [148620] = true, -- Prideful Gladiator's Cloud Serpent
+[315014] = true, -- Ivory Cloud Serpent
+[315427] = true, -- Rajani Warserpent
 },
 ["Drakes"] = {
 [59567] = true, -- Azure Drake
@@ -426,6 +439,7 @@ ADDON.DB.Family = {
 [279466] = true, -- Twilight Avenger
 [290132] = true, -- Sylverian Dreamer
 [294197] = true, -- Obsidian Worldbreaker
+[302143] = true, -- Uncorrupted Voidwing
 },
 ["Grand Drakes"] = {
 [107842] = true, -- Blazing Drake
@@ -465,6 +479,7 @@ ADDON.DB.Family = {
 [262022] = true, -- Dread Gladiator's Proto-Drake
 [262023] = true, -- Sinister Gladiator's Proto-Drake
 [262024] = true, -- Notorious Gladiator's Proto-Drake
+[262027] = true, -- Corrupted Gladiator's Proto-Drake
 },
 ["Stone Drakes"] = {
 [88331] = true, -- Volcanic Stone Drake
@@ -496,6 +511,7 @@ ADDON.DB.Family = {
 [242882] = true, -- Valarjar Stormwing
 [243201] = true, -- Demonic Gladiator's Storm Dragon
 [288721] = true, -- Island Thunderscale
+[315847] = true, -- Drake of the Four Winds
 },
 },
 ["Elementals"] = {
@@ -538,6 +554,7 @@ ADDON.DB.Family = {
 [242882] = true, -- Valarjar Stormwing
 [243201] = true, -- Demonic Gladiator's Storm Dragon
 [288721] = true, -- Island Thunderscale
+[315847] = true, -- Drake of the Four Winds
 },
 },
 ["Feathermanes"] = {
@@ -716,6 +733,7 @@ ADDON.DB.Family = {
 [92231] = true, -- Spectral Steed
 [146622] = true, -- Vicious Skeletal Warhorse
 [229499] = true, -- Midnight
+[281889] = true, -- Vicious White Bonesteed
 [281890] = true, -- Vicious Black Bonesteed
 [288722] = true, -- Risen Mare
 },
@@ -736,6 +754,11 @@ ADDON.DB.Family = {
 },
 },
 ["Insects"] = {
+["Aqir Flyers"] = {
+[316337] = true, -- Malevolent Drone
+[316339] = true, -- Shadowbarb Drone
+[316340] = true, -- Wicked Swarmer
+},
 ["Bees"] = {
 [259741] = true, -- Honeyback Harvester
 },
@@ -771,6 +794,7 @@ ADDON.DB.Family = {
 [253711] = true, -- Pond Nettle
 [261395] = true, -- The Hivemind
 [278979] = true, -- Surf Jelly
+[308814] = true, -- Ny'alotha Allseer
 },
 ["Rats"] = {
 [215558] = true, -- Ratstallion
@@ -835,6 +859,12 @@ ADDON.DB.Family = {
 [142641] = true, -- Brawler's Burly Mushan Beast
 [148428] = true, -- Ashhide Mushan Beast
 },
+["N'Zoth Serpents"] = {
+[305182] = true, -- Black Serpent of N'Zoth
+[315987] = true, -- Mail Muncher
+[316343] = true, -- Wriggling Parasite
+[316637] = true, -- Awakened Mindborer
+},
 ["Sea Serpents"] = {
 [232519] = true, -- Abyss Worm
 [243025] = true, -- Riddler's Mind-Worm
@@ -871,6 +901,11 @@ ADDON.DB.Family = {
 [288495] = true, -- Ashenvale Chimaera
 },
 ["Ungulates"] = {
+["Alpacas"] = {
+[298367] = true, -- Mollie
+[316493] = true, -- Elusive Quickhoof
+[316802] = true, -- Springfur Alpaca
+},
 ["Boars"] = {
 [171627] = true, -- Blacksteel Battleboar
 [171628] = true, -- Rocktusk Battleboar
@@ -1023,6 +1058,7 @@ ADDON.DB.Family = {
 [63638] = true, -- Gnomeregan Mechanostrider
 [65642] = true, -- Turbostrider
 [183889] = true, -- Vicious War Mechanostrider
+[305592] = true, -- Mechagon Mechanostrider
 },
 ["Motorcycles"] = {
 [55531] = true, -- Mechano-Hog

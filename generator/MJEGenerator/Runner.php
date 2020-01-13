@@ -25,7 +25,7 @@ class Runner
         $fileIdMapper = new FileIdMapper('raw/listfile.csv');
 
         $loader = new MountLoader(
-            new DatabaseWrapper('raw/Cache', 'raw/Extract'),
+            new DatabaseWrapper('raw/Cache/', 'raw/Extract/'),
             $fileIdMapper
         );
         $mounts = $loader->load();

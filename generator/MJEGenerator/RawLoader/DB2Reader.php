@@ -16,7 +16,7 @@ class DB2Reader
 
     public function __construct(string $cacheDir, string $extractDir)
     {
-        $this->cacheFile  = $cacheDir . '/ADB/enUS/DBCache.bin';
+        $this->cacheFile  = $cacheDir . 'ADB/enUS/DBCache.bin';
         $this->extractDir = $extractDir;
     }
 
