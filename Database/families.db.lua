@@ -798,6 +798,7 @@ ADDON.DB.Family = {
 },
 ["Rats"] = {
 [215558] = true, -- Ratstallion
+[308078] = true, -- Squeakers, the Trickster
 },
 ["Rays"] = {
 ["Fathom Rays"] = {

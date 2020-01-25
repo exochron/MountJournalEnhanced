@@ -105,6 +105,7 @@ ADDON.DB.Source = {
         [316275] = true, -- Waste Marauder - Uldum
         [316337] = true, -- Malevolent Drone - Uldum
         [316493] = true, -- Elusive Quickhoof - Vol'dun
+        [315427] = true, -- Rajani Warserpent (actually just the scale drops from rare) - Vale of Eternal Blossoms
         [316722] = true, -- Ren's Stalwart Hound - Vale of Eternal Blossoms
         [316723] = true, -- Xinlao - Vale of Eternal Blossoms
     },
