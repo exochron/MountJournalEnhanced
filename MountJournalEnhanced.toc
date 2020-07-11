@@ -2,7 +2,7 @@
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron
-## Version: 2.7.1
+## Version: 2.7.2
 ## SavedVariablesPerCharacter: MountJournalEnhancedSettings, MJEPersonalSettings
 ## SavedVariables: MJEGlobalSettings, MJETrackingData
 ## X-Curse-Project-ID: 86372

@@ -440,6 +440,7 @@ ADDON.DB.Family = {
 [290132] = true, -- Sylverian Dreamer
 [294197] = true, -- Obsidian Worldbreaker
 [302143] = true, -- Uncorrupted Voidwing
+[326390] = true, -- Steamscale Incinerator
 },
 ["Grand Drakes"] = {
 [107842] = true, -- Blazing Drake
@@ -1042,6 +1043,7 @@ ADDON.DB.Family = {
 [163024] = true, -- Warforged Nightmare
 [290328] = true, -- Wonderwing 2.0
 [294143] = true, -- X-995 Mechanocat
+[326390] = true, -- Steamscale Incinerator
 },
 ["Mechanostriders"] = {
 [10873] = true, -- Red Mechanostrider

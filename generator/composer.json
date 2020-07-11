@@ -1,7 +1,8 @@
 {
   "require": {
     "ext-zlib": "*",
-    "ext-gmp": "*"
+    "ext-gmp": "*",
+    "erorus/db2": "dev-master"
   },
   "require-dev": {
     "phpmd/phpmd": "*",
@@ -11,8 +12,7 @@
   },
   "autoload": {
     "psr-4": {
-      "MJEGenerator\\": "MJEGenerator",
-      "Erorus\\": "ModifiedLibs/Erorus"
+      "MJEGenerator\\": "MJEGenerator"
     }
   },
   "config": {
