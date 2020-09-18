@@ -1,6 +1,6 @@
-﻿local ADDON_NAME, ADDON = ...
+﻿local _, ADDON = ...
 
-if (GetLocale() ~= "deDE") then
+if GetLocale() ~= "deDE" then
     return
 end
 
