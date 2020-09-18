@@ -101,8 +101,6 @@ local function FetchDisplayedMountIds()
         local _, _, _, _, _, _, _, _, _, _, isCollected, mountId = C_MountJournal.GetDisplayedMountInfo(index)
         if isCollected then
             mountIds[#mountIds + 1] = mountId
-        else
-            break
         end
     end
     return mountIds
