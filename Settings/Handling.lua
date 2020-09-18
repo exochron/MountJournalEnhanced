@@ -63,8 +63,10 @@ end)
 ADDON:RegisterBehaviourSetting('personalFilter', false, L.SETTING_PERSONAL_FILTER, function(flag)
     if flag == true then
         ADDON.settings.filter = MJEPersonalSettings.filter
+        ADDON.settings.sort = MJEPersonalSettings.sort
     else
         ADDON.settings.filter = MJEGlobalSettings.filter
+        ADDON.settings.sort = MJEGlobalSettings.sort
     end
 
     if ADDON.initialized then

@@ -1289,11 +1289,7 @@ ADDON.DB.Type = {
         typeIDs = { 230, 231, 241, 269, 284 },
     },
     flying = {
-        typeIDs = { 247, 248 },
-        [267270] = true, -- Kua'fon
-    },
-    waterWalking = {
-        typeIDs = { 269 },
+        typeIDs = { 247, 248, 398 },
     },
     underwater = {
         typeIDs = { 231, 232, 254 },

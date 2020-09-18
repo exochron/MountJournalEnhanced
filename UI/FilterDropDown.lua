@@ -12,6 +12,7 @@ local SETTING_FACTION = "faction"
 local SETTING_FAMILY = "family"
 local SETTING_EXPANSION = "expansion"
 local SETTING_HIDDEN = "hidden"
+local SETTING_SORT = "sort"
 
 local function CreateFilterInfo(text, filterKey, filterSettings, callback)
     local info = MSA_DropDownMenu_CreateInfo()
@@ -29,8 +30,8 @@ local function CreateFilterInfo(text, filterKey, filterSettings, callback)
         info.checked = function(self)
             return self.arg1[filterKey]
         end
-        info.func = function(_, arg1, _, value)
-            arg1[filterKey] = value
+        info.func = function(_, arg1, arg2, value)
+            arg1[filterKey] = arg2 or value
             ADDON:UpdateIndexMap()
             MountJournal_UpdateMountList()
             if (MSA_DROPDOWNMENU_MENU_LEVEL > 1) then
@@ -45,6 +46,17 @@ local function CreateFilterInfo(text, filterKey, filterSettings, callback)
         end
     else
         info.notCheckable = true
+    end
+
+    return info
+end
+
+local function CreateFilterRadio(text, filterKey, filterSettings, filterValue)
+    local info = CreateFilterInfo(text, filterKey, filterSettings)
+    info.isNotRadio = false
+    info.arg2 = filterValue
+    info.checked = function(self)
+        return self.arg1[filterKey] == filterValue
     end
 
     return info
@@ -199,6 +211,8 @@ local function InitializeFilterDropDown(filterMenu, level)
             MountJournal_UpdateMountList()
         end
         MSA_DropDownMenu_AddButton(info, level)
+
+        MSA_DropDownMenu_AddButton(CreateFilterCategory(CLUB_FINDER_SORT_BY, SETTING_SORT), level)
     elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_SOURCE) then
         local settings = ADDON.settings.filter[SETTING_SOURCE]
         AddCheckAllAndNoneInfo(settings, level)
@@ -220,8 +234,8 @@ local function InitializeFilterDropDown(filterMenu, level)
     elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_MOUNT_TYPE) then
         local settings = ADDON.settings.filter[SETTING_MOUNT_TYPE]
         AddCheckAllAndNoneInfo(settings, level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Ground"], "ground", settings), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Flying"], "flying", settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Ground"], "ground", settings), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Underwater"], "underwater", settings), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Transform"], "transform", settings), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(MINIMAP_TRACKING_REPAIR, "repair", settings), level)
@@ -278,6 +292,25 @@ local function InitializeFilterDropDown(filterMenu, level)
                 MSA_DropDownMenu_AddButton(CreateFilterInfo(L[family] or family, family, settings), level)
             end
         end
+    elseif MSA_DROPDOWNMENU_MENU_VALUE == SETTING_SORT then
+        local settings = ADDON.settings[SETTING_SORT]
+        MSA_DropDownMenu_AddButton(CreateFilterRadio(NAME, "by", settings, 'name'), level)
+        MSA_DropDownMenu_AddButton(CreateFilterRadio(TYPE, "by", settings, 'type'), level)
+        MSA_DropDownMenu_AddButton(CreateFilterRadio(EXPANSION_FILTER_TEXT, "by", settings, 'expansion'), level)
+        -- inject some space
+
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(L.SORT_REVERSE, 'descending', settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(L.SORT_FAVORITES_FIRST, 'favoritesOnTop', settings), level)
+        MSA_DropDownMenu_AddButton(CreateFilterInfo(L.SORT_UNOWNED_BOTTOM, 'unownedOnBottom', settings), level)
+
+        info = CreateFilterInfo(NEWBIE_TOOLTIP_STOPWATCH_RESETBUTTON)
+        info.keepShownOnClick = false
+        info.func = function(_, _, _, value)
+            ADDON:ResetSortSettings()
+            ADDON:UpdateIndexMap()
+            MountJournal_UpdateMountList()
+        end
+        MSA_DropDownMenu_AddButton(info, level)
     end
 end
 
@@ -285,18 +318,9 @@ ADDON:RegisterLoadUICallback(function()
     local menu = MSA_DropDownMenu_Create(ADDON_NAME .. "FilterMenu", MountJournalFilterButton)
     MSA_DropDownMenu_Initialize(menu, InitializeFilterDropDown, "MENU")
 
-    local version = select(4, GetBuildInfo())
-    if version < 80300 then
-        -- todo: remove after 8.3 release
-        MountJournalFilterButton:SetScript("OnClick", function(sender)
-            PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-            MSA_ToggleDropDownMenu(1, nil, menu, sender, 74, 15)
-        end)
-    else
-        MountJournalFilterButton:SetScript("OnMouseDown", function(sender, button)
-            UIMenuButtonStretchMixin.OnMouseDown(sender, button);
-            PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-            MSA_ToggleDropDownMenu(1, nil, menu, sender, 74, 15)
-        end)
-    end
+    MountJournalFilterButton:SetScript("OnMouseDown", function(sender, button)
+        UIMenuButtonStretchMixin.OnMouseDown(sender, button);
+        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+        MSA_ToggleDropDownMenu(1, nil, menu, sender, 74, 15)
+    end)
 end)
