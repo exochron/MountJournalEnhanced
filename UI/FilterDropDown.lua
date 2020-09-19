@@ -14,6 +14,17 @@ local SETTING_EXPANSION = "expansion"
 local SETTING_HIDDEN = "hidden"
 local SETTING_SORT = "sort"
 
+local function CreateSpace()
+    local info = MSA_DropDownMenu_CreateInfo()
+    info.hasArrow = false
+    info.dist = 0
+    info.isTitle = true
+    info.isUninteractable = true
+    info.notCheckable = true
+
+    return info
+end
+
 local function CreateFilterInfo(text, filterKey, filterSettings, callback)
     local info = MSA_DropDownMenu_CreateInfo()
     info.keepShownOnClick = true
@@ -196,12 +207,14 @@ local function InitializeFilterDropDown(filterMenu, level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Only usable"], SETTING_ONLY_USEABLE), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Only tradable"], SETTING_ONLY_TRADABLE), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Hidden"], SETTING_HIDDEN), level)
+        MSA_DropDownMenu_AddButton(CreateSpace(), level)
 
         MSA_DropDownMenu_AddButton(CreateFilterCategory(SOURCES, SETTING_SOURCE), level)
         MSA_DropDownMenu_AddButton(CreateFilterCategory(TYPE, SETTING_MOUNT_TYPE), level)
         MSA_DropDownMenu_AddButton(CreateFilterCategory(FACTION, SETTING_FACTION), level)
         MSA_DropDownMenu_AddButton(CreateFilterCategory(L["Family"], SETTING_FAMILY), level)
         MSA_DropDownMenu_AddButton(CreateFilterCategory(EXPANSION_FILTER_TEXT, SETTING_EXPANSION), level)
+        MSA_DropDownMenu_AddButton(CreateSpace(), level)
 
         info = CreateFilterInfo(L["Reset filters"])
         info.keepShownOnClick = false
@@ -211,6 +224,7 @@ local function InitializeFilterDropDown(filterMenu, level)
             MountJournal_UpdateMountList()
         end
         MSA_DropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(CreateSpace(), level)
 
         MSA_DropDownMenu_AddButton(CreateFilterCategory(CLUB_FINDER_SORT_BY, SETTING_SORT), level)
     elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_SOURCE) then
@@ -297,11 +311,11 @@ local function InitializeFilterDropDown(filterMenu, level)
         MSA_DropDownMenu_AddButton(CreateFilterRadio(NAME, "by", settings, 'name'), level)
         MSA_DropDownMenu_AddButton(CreateFilterRadio(TYPE, "by", settings, 'type'), level)
         MSA_DropDownMenu_AddButton(CreateFilterRadio(EXPANSION_FILTER_TEXT, "by", settings, 'expansion'), level)
-        -- inject some space
-
+        MSA_DropDownMenu_AddButton(CreateSpace(), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L.SORT_REVERSE, 'descending', settings), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L.SORT_FAVORITES_FIRST, 'favoritesOnTop', settings), level)
         MSA_DropDownMenu_AddButton(CreateFilterInfo(L.SORT_UNOWNED_BOTTOM, 'unownedOnBottom', settings), level)
+        MSA_DropDownMenu_AddButton(CreateSpace(), level)
 
         info = CreateFilterInfo(NEWBIE_TOOLTIP_STOPWATCH_RESETBUTTON)
         info.keepShownOnClick = false
