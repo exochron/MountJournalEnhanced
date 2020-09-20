@@ -60,7 +60,7 @@ ADDON:RegisterUISetting('showPersonalCount', true, ADDON.L.SETTING_MOUNT_COUNT, 
     end
 end)
 
-ADDON:RegisterLoadUICallback(function ()
+ADDON:RegisterLoadUICallback(function()
     ADDON:ApplySetting('showPersonalCount', ADDON.settings.ui.showPersonalCount)
 end)
 

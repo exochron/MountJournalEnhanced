@@ -278,7 +278,8 @@ local function InitializeFilterDropDown(filterMenu, level)
     elseif (EDDM.UIDROPDOWNMENU_MENU_VALUE == SETTING_EXPANSION) then
         local settings = ADDON.settings.filter[SETTING_EXPANSION]
         AddCheckAllAndNoneInfo(settings, level)
-        for i = 0, 7 do
+        local maxExp = (select(4, GetBuildInfo()) / 10000) - 1
+        for i = 0, maxExp do
             EDDM.UIDropDownMenu_AddButton(CreateFilterInfo(_G["EXPANSION_NAME" .. i], i, settings), level)
         end
     elseif (level == 3 and ADDON.DB.Family[EDDM.UIDROPDOWNMENU_MENU_VALUE]) then
