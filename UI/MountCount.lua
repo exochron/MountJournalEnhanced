@@ -1,15 +1,66 @@
 local ADDON_NAME, ADDON = ...
-local MOUNT_COUNT_STATISTIC = 339
 
 local doStrip = false
+
+local playerFaction
+local function isPersonalMount(mountID, faction)
+
+    if mountID >= 117 and mountID <= 120 then
+        -- qiraji battle tanks dont count
+        return false
+    end
+
+    if faction == nil then
+        return true
+    end
+
+    if playerFaction == nil then
+        playerFaction = UnitFactionGroup("player")
+    end
+
+    if faction == 1 and playerFaction == "Alliance" then
+        return true
+    end
+    if faction == 0 and playerFaction == "Horde" then
+        return true
+    end
+
+    return false
+end
+
+local function count()
+    local mountIDs = C_MountJournal.GetMountIDs()
+    local total, owned, personal, personalTotal = 0, 0, 0, 0
+    for _, mountID in ipairs(mountIDs) do
+        local _, _, _, _, _, _, _, _, faction, hideOnChar, isCollected = C_MountJournal.GetMountInfoByID(mountID)
+        if hideOnChar ~= true then
+            total = total + 1
+
+            local isPersonal = isPersonalMount(mountID, faction)
+
+            if isPersonal then
+                personalTotal = personalTotal + 1
+            end
+
+            if isCollected then
+                owned = owned + 1
+                if isPersonal then
+                    personal = personal + 1
+                end
+            end
+        end
+    end
+
+    return personal, personalTotal, owned, total
+end
 
 local function CreateCharacterMountCount()
     local frame = CreateFrame("frame", nil, MountJournal, "InsetFrameTemplate3")
 
     frame:ClearAllPoints()
-    frame:SetPoint("TOPLEFT", MountJournal, 70, -42)
-    frame:SetSize(130, 18)
-    if (doStrip) then
+    frame:SetPoint("TOPLEFT", MountJournal.MountCount, "BOTTOMLEFT", 0, 0)
+    frame:SetSize(130, 19)
+    if doStrip then
         frame:StripTextures()
     end
 
@@ -21,16 +72,32 @@ local function CreateCharacterMountCount()
     frame.uniqueCount = frame:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
     frame.uniqueCount:ClearAllPoints()
     frame.uniqueCount:SetPoint("RIGHT", frame, -10, 0)
-    --frame.uniqueCount:SetText(GetNumCompanions("MOUNT"))
-    local _, _, _, mountCount = GetAchievementCriteriaInfo(MOUNT_COUNT_STATISTIC, 1)
-    frame.uniqueCount:SetText(mountCount)
 
-    frame:RegisterEvent("COMPANION_LEARNED")
-    frame:RegisterEvent("ACHIEVEMENT_EARNED")
-    frame:SetScript("OnEvent", function(self, event, ...)
-        ADDON:UpdateIndexMap()
-        frame.uniqueCount:SetText(GetNumCompanions("MOUNT"))
-    end)
+    local updateFunc = function()
+        if ADDON.settings.ui.showPersonalCount then
+            local personal, personalTotal, owned, totalCount = count()
+
+            local displayCount = C_MountJournal.GetNumDisplayedMounts()
+            if displayCount > 0 and displayCount < totalCount then
+                local collectedFilter = 0
+                for index = 1, displayCount do
+                    local _, _, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetDisplayedMountInfo(index)
+                    if isCollected then
+                        collectedFilter = collectedFilter + 1
+                    end
+                end
+                MountJournal.MountCount.Label:SetText(FILTER)
+                MountJournal.MountCount.Count:SetText(collectedFilter .. '/' .. displayCount)
+            else
+                MountJournal.MountCount.Label:SetText(TOTAL_MOUNTS)
+                MountJournal.MountCount.Count:SetText(owned .. '/' .. totalCount)
+            end
+
+            frame.uniqueCount:SetText(personal .. '/' .. personalTotal)
+        end
+    end
+    hooksecurefunc("MountJournal_UpdateMountList", updateFunc)
+    hooksecurefunc(MountJournal.ListScrollFrame, "update", updateFunc)
 
     return frame
 end
@@ -38,8 +105,8 @@ end
 local frame
 
 ADDON:RegisterUISetting('showPersonalCount', true, ADDON.L.SETTING_MOUNT_COUNT, function(flag)
-    if (MountJournal) then
-        if (not frame and flag) then
+    if MountJournal then
+        if not frame and flag then
             frame = CreateCharacterMountCount()
 
             ADDON.UI:SavePoint(MountJournal.MountCount)
@@ -51,7 +118,7 @@ ADDON:RegisterUISetting('showPersonalCount', true, ADDON.L.SETTING_MOUNT_COUNT, 
 
             if flag then
                 MountJournal.MountCount:SetPoint("TOPLEFT", 70, -22)
-                MountJournal.MountCount:SetSize(130, 18)
+                MountJournal.MountCount:SetSize(130, 19)
             else
                 ADDON.UI:RestorePoint(MountJournal.MountCount)
                 ADDON.UI:RestoreSize(MountJournal.MountCount)
