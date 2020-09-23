@@ -2,7 +2,7 @@ local ADDON_NAME, ADDON = ...
 
 MJEPersonalSettings = MJEPersonalSettings or {}
 MJEGlobalSettings = MJEGlobalSettings or {}
-local defaultFilterStates
+local defaultFilterStates, defaultSortStates
 
 function ADDON:ResetFilterSettings()
     ADDON.settings.filter = CopyTable(defaultFilterStates)
@@ -10,6 +10,14 @@ function ADDON:ResetFilterSettings()
         MJEPersonalSettings.filter = ADDON.settings.filter
     else
         MJEGlobalSettings.filter = ADDON.settings.filter
+    end
+end
+function ADDON:ResetSortSettings()
+    ADDON.settings.sort = CopyTable(defaultSortStates)
+    if ADDON.settings.personalFilter then
+        MJEPersonalSettings.sort = ADDON.settings.sort
+    else
+        MJEGlobalSettings.sort = ADDON.settings.sort
     end
 end
 
@@ -63,6 +71,13 @@ local function PrepareDefaults()
             expansion = {},
             hidden = false,
         },
+
+        sort = {
+            by = 'name', -- name|type|expansion
+            descending = false,
+            favoritesOnTop = true,
+            unownedOnBottom = true,
+        },
     }
     for categoryName, _ in pairs(ADDON.DB.Source) do
         defaultSettings.filter.source[categoryName] = true
@@ -111,6 +126,7 @@ end
 ADDON:RegisterLoginCallback(function()
     local defaultSettings = PrepareDefaults()
     defaultFilterStates = CopyTable(defaultSettings.filter)
+    defaultSortStates = CopyTable(defaultSettings.sort)
     CombineSettings(MJEGlobalSettings, defaultSettings)
     CombineSettings(MJEPersonalSettings, defaultSettings)
 

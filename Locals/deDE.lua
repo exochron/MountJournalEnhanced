@@ -1,6 +1,6 @@
-﻿local ADDON_NAME, ADDON = ...
+﻿local _, ADDON = ...
 
-if (GetLocale() ~= "deDE") then
+if GetLocale() ~= "deDE" then
     return
 end
 
@@ -18,7 +18,12 @@ L["Only tradable"] = "Nur handelbare"
 L["Only usable"] = "Nur benutzbare"
 L["Passenger"] = "Passagier"
 L["Reset filters"] = "Filter zurücksetzen"
+L["ROTATE_DOWN"] = "Abwärtsdrehung"
+L["ROTATE_UP"] = "Aufwärtsdrehung"
 L["Show in Collections"] = "In Sammlung anzeigen"
+L["SORT_FAVORITES_FIRST"] = "Favoriten zuerst"
+L["SORT_REVERSE"] = "Sortierung umkehren"
+L["SORT_UNOWNED_BOTTOM"] = "Nicht gesammelt nach unten"
 L["TASK_END"] = "[MJE] Uff! Endlich geschafft."
 L["TASK_FAVOR_START"] = "[MJE] Bitte warten. Deine Reittiere werden mit Sternen neu beklebt."
 L["Transform"] = "Verwandlung"

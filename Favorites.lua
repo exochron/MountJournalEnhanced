@@ -4,6 +4,7 @@ local ADDON_NAME, ADDON = ...
 -- Option: Autofavorite new mounts; even those learned during offline time
 -- (Favorite Menu at SummonRandomFavoriteButton?)
 
+local EDDM = LibStub("ElioteDropDownMenu-1.0")
 local L = ADDON.L
 local starButton
 
@@ -101,15 +102,13 @@ local function FetchDisplayedMountIds()
         local _, _, _, _, _, _, _, _, _, _, isCollected, mountId = C_MountJournal.GetDisplayedMountInfo(index)
         if isCollected then
             mountIds[#mountIds + 1] = mountId
-        else
-            break
         end
     end
     return mountIds
 end
 
 local function InitializeDropDown(menu, level)
-    local info = MSA_DropDownMenu_CreateInfo()
+    local info = EDDM.UIDropDownMenu_CreateInfo()
     info.keepShownOnClick = false
     info.isNotRadio = true
     info.notCheckable = true
@@ -120,13 +119,13 @@ local function InitializeDropDown(menu, level)
         info.func = function()
             RunSetFavorites(FetchDisplayedMountIds())
         end
-        MSA_DropDownMenu_AddButton(info, level)
+        EDDM.UIDropDownMenu_AddButton(info, level)
 
         info.text = UNCHECK_ALL
         info.func = function()
             RunSetFavorites({})
         end
-        MSA_DropDownMenu_AddButton(info, level)
+        EDDM.UIDropDownMenu_AddButton(info, level)
 
         info.text = L["FAVOR_PER_CHARACTER"]
         info.notCheckable = false
@@ -134,13 +133,13 @@ local function InitializeDropDown(menu, level)
         info.func = function(_, _, _, value)
             ADDON:ApplySetting('favoritePerChar', not value)
         end
-        MSA_DropDownMenu_AddButton(info, level)
+        EDDM.UIDropDownMenu_AddButton(info, level)
     end
 end
 
 local function BuildStarButton()
-    local menu = MSA_DropDownMenu_Create(ADDON_NAME .. "FavorMenu", MountJournal)
-    MSA_DropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
+    local menu = EDDM.UIDropDownMenu_Create(ADDON_NAME .. "FavorMenu", MountJournal)
+    EDDM.UIDropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
 
     local AceGUI = LibStub("AceGUI-3.0")
 
@@ -165,7 +164,7 @@ local function BuildStarButton()
         GameTooltip:Hide()
     end);
     starButton:SetCallback("OnClick", function()
-        MSA_ToggleDropDownMenu(1, nil, menu, starButton.frame, 0, 10)
+        EDDM.ToggleDropDownMenu(1, nil, menu, starButton.frame, 0, 10)
     end)
 
     starButton.frame:Show()

@@ -1,4 +1,4 @@
-﻿local ADDON_NAME, ADDON = ...
+﻿local _, ADDON = ...
 
 ADDON.isMetric = false -- is the metric or imperial/us unit system used?
 ADDON.L = {}
@@ -15,7 +15,12 @@ L["Only tradable"] = "Only tradable"
 L["Only usable"] = "Only usable"
 L["Passenger"] = "Passenger"
 L["Reset filters"] = "Reset filters"
+L["ROTATE_DOWN"] = "Rotate Down"
+L["ROTATE_UP"] = "Rotate Up"
 L["Show in Collections"] = "Show in Collections"
+L["SORT_FAVORITES_FIRST"] = "Favorites First"
+L["SORT_REVERSE"] = "Reverse Sort"
+L["SORT_UNOWNED_BOTTOM"] = "Unowned at Bottom"
 L["TASK_END"] = "[MJE] Phew! I'm done."
 L["TASK_FAVOR_START"] = "[MJE] Reapplying stars all over your mounts. Please wait a few seconds until I'm finished."
 L["Transform"] = "Transform"

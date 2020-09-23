@@ -1,12 +1,6 @@
-### 2.8
-- sort options (=> https://www.curseforge.com/wow/addons/mount-journal-enhanced/issues/43)
-    - list favorites between everything else (beware auto favorite logic)
-    - mix unowned & owned depending by sort order
-    - sort by name asc/desc
-    - sort by expansion asc/desc (actually just by mountid)
-    - sort by type/family
-    - sort by usage
+### Next
 - switch through mount variation (eg. High Priest's Lightsworn Seeker: C_MountJournal.GetMountAllCreatureDisplayInfoByID(861))
+- scroll to top/bottom (like in Rematch)
 
 ### More Ideas:
 - more animation control in display (start/pause, movements, with sound effects)

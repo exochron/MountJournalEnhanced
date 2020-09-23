@@ -1,7 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
 local function CreateAchievementPoints()
-    local COLLECTION_ACHIEVEMENT_CATEGORY = 15246
     local MOUNT_ACHIEVEMENT_CATEGORY = 15248
 
     local frame = CreateFrame("Button", nil, MountJournal)
@@ -47,30 +46,26 @@ local function CreateAchievementPoints()
     frame.staticText:SetText(GetCategoryAchievementPoints(MOUNT_ACHIEVEMENT_CATEGORY, true))
 
     frame:SetScript("OnClick", function()
+        if ACHIEVEMENT_FUNCTIONS then
+            ACHIEVEMENT_FUNCTIONS.selectedCategory = MOUNT_ACHIEVEMENT_CATEGORY
+        else
+            local onLoadAddon = CreateFrame("FRAME")
+            onLoadAddon:RegisterEvent("ADDON_LOADED")
+            onLoadAddon:SetScript("OnEvent", function(self, event, arg1)
+                if arg1 == "Blizzard_AchievementUI" then
+                    local doSwitch = true
+                    AchievementFrame:HookScript("OnShow", function ()
+                        if doSwitch then
+                            ACHIEVEMENT_FUNCTIONS.selectedCategory = MOUNT_ACHIEVEMENT_CATEGORY
+                            AchievementFrame_ForceUpdate()
+                            doSwitch = false
+                        end
+                    end)
+                end
+            end)
+        end
         ToggleAchievementFrame()
-        local i = 1
-        local button = _G["AchievementFrameCategoriesContainerButton" .. i]
-        while button do
-            if (button.element.id == COLLECTION_ACHIEVEMENT_CATEGORY) then
-                button:Click()
-                button = nil
-            else
-                i = i + 1
-                button = _G["AchievementFrameCategoriesContainerButton" .. i]
-            end
-        end
 
-        i = 1
-        button = _G["AchievementFrameCategoriesContainerButton" .. i]
-        while button do
-            if (button.element.id == MOUNT_ACHIEVEMENT_CATEGORY) then
-                button:Click()
-                return
-            end
-
-            i = i + 1
-            button = _G["AchievementFrameCategoriesContainerButton" .. i]
-        end
     end)
     frame:SetScript("OnEnter", function()
         frame.highlight:SetShown(true)

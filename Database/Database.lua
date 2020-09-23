@@ -1271,7 +1271,7 @@ ADDON.DB.Expansion = {
 
     [7] = { -- Battle for Azeroth
         ["minID"] = 254501,
-        ["maxID"] = 999999,
+        ["maxID"] = 320000,
         [213350] = true, -- Frostshard  Infernal
         [237286] = true, -- Dune Scavenger
         [237287] = true, -- Alabaster Hyena
@@ -1280,8 +1280,28 @@ ADDON.DB.Expansion = {
         [250735] = true, -- Bloodgorged Crawg
         [255695] = true, -- Seabraid Stallion - Battle for Azeroth CE
         [255696] = true, -- Gilded Ravasaurn - Battle for Azeroth CE
+        [326390] = true, -- Steamscale Incinerator
     }
 }
+
+if select(4, GetBuildInfo()) >= 90000 then
+    ADDON.DB.Expansion[8] = {
+        ["minID"] = 320001,
+        ["maxID"] = 999999,
+        [307932] = true, -- Ensorcelled Everwyrm
+        [318051] = true, -- Silky Shimmermoth
+        [318052] = true, -- Deathbringer's Flayedwing
+        [312776] = true, -- Chittering Animite
+        [312765] = true, -- Sundancer
+        [312767] = true, -- Swift Gloomhoof
+        [312763] = true, -- Darkwarren Hardshell
+        [312762] = true, -- Mawsworn Soulhunter
+        [312761] = true, -- Enchanted Dreamlight Runestag
+        [312759] = true, -- Dreamlight Runestag
+        [312754] = true, -- Battle Gargon Vrednic
+        [312753] = true, -- Hopecrusher Gargon
+    }
+end
 
 ADDON.DB.Type = {
     -- https://wow.gamepedia.com/API_C_MountJournal.GetMountInfoExtraByID
@@ -1289,11 +1309,7 @@ ADDON.DB.Type = {
         typeIDs = { 230, 231, 241, 269, 284 },
     },
     flying = {
-        typeIDs = { 247, 248 },
-        [267270] = true, -- Kua'fon
-    },
-    waterWalking = {
-        typeIDs = { 269 },
+        typeIDs = { 247, 248, 398 },
     },
     underwater = {
         typeIDs = { 231, 232, 254 },

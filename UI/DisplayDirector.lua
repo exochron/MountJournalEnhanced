@@ -72,6 +72,8 @@ local function InitButton(button, frame, relativeTo, tooltip, tooltipText)
     end
     button:HookScript("OnEnter", function()
         frame:Show()
+        GameTooltip:ClearAllPoints()
+        GameTooltip:SetPoint("TOP", button, "BOTTOM")
     end)
 end
 
@@ -115,6 +117,8 @@ local function BuildCameraButton(frame, relativeTo, tooltip, tooltipText, camera
 end
 
 local function BuildCameraPanel()
+    local L = ADDON.L
+
     local frame = BuildControlContainer(166)
     frame:SetPoint("BOTTOM", 0, 15)
 
@@ -134,6 +138,7 @@ local function BuildCameraPanel()
         if actor then
             actor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_ANIM)
             actor:PlayAnimationKit(1371)
+            actor:PlayAnimationKit(1371) -- animation gets sometimes canceled. second call is to enforce it.
         end
     end)
 
@@ -154,11 +159,11 @@ local function BuildCameraPanel()
     local rotateRight = BuildCameraButton(frame, rotateLeft, ROTATE_RIGHT, ROTATE_TOOLTIP, ORBIT_CAMERA_MOUSE_MODE_YAW_ROTATION, 3)
     rotateRight.icon:SetTexCoord(0.57812500, 0.82812500, 0.28906250, 0.41406250)
 
-    local rotateUp = BuildCameraButton(frame, rotateRight, ROTATE_LEFT, ROTATE_TOOLTIP, ORBIT_CAMERA_MOUSE_MODE_PITCH_ROTATION, -3)
+    local rotateUp = BuildCameraButton(frame, rotateRight, L.ROTATE_UP, ROTATE_TOOLTIP, ORBIT_CAMERA_MOUSE_MODE_PITCH_ROTATION, -3)
     rotateUp.icon:SetTexCoord(0.01562500, 0.26562500, 0.28906250, 0.41406250)
     rotateUp.icon:SetRotation(-90)
 
-    local rotateDown = BuildCameraButton(frame, rotateUp, ROTATE_RIGHT, ROTATE_TOOLTIP, ORBIT_CAMERA_MOUSE_MODE_PITCH_ROTATION, 3)
+    local rotateDown = BuildCameraButton(frame, rotateUp, L.ROTATE_DOWN, ROTATE_TOOLTIP, ORBIT_CAMERA_MOUSE_MODE_PITCH_ROTATION, 3)
     rotateDown.icon:SetTexCoord(0.57812500, 0.82812500, 0.28906250, 0.41406250)
     rotateDown.icon:SetRotation(-90)
 
