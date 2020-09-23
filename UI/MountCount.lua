@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 local doStrip = false
 
@@ -54,11 +54,19 @@ local function count()
     return personal, personalTotal, owned, total
 end
 
+local function generateText(num, total)
+    if num < total then
+        return num .. '/' .. total
+    end
+
+    return total
+end
+
 local function CreateCharacterMountCount()
     local frame = CreateFrame("frame", nil, MountJournal, "InsetFrameTemplate3")
 
     frame:ClearAllPoints()
-    frame:SetPoint("TOPLEFT", MountJournal.MountCount, "BOTTOMLEFT", 0, 0)
+    frame:SetPoint("BOTTOMLEFT", MountJournal.MountCount, "TOPLEFT", 0, 0)
     frame:SetSize(130, 19)
     if doStrip then
         frame:StripTextures()
@@ -87,13 +95,13 @@ local function CreateCharacterMountCount()
                     end
                 end
                 MountJournal.MountCount.Label:SetText(FILTER)
-                MountJournal.MountCount.Count:SetText(collectedFilter .. '/' .. displayCount)
+                MountJournal.MountCount.Count:SetText(generateText(collectedFilter, displayCount))
             else
                 MountJournal.MountCount.Label:SetText(TOTAL_MOUNTS)
-                MountJournal.MountCount.Count:SetText(owned .. '/' .. totalCount)
+                MountJournal.MountCount.Count:SetText(generateText(owned, totalCount))
             end
 
-            frame.uniqueCount:SetText(personal .. '/' .. personalTotal)
+            frame.uniqueCount:SetText(generateText(personal, personalTotal))
         end
     end
     hooksecurefunc("MountJournal_UpdateMountList", updateFunc)
@@ -117,12 +125,15 @@ ADDON:RegisterUISetting('showPersonalCount', true, ADDON.L.SETTING_MOUNT_COUNT, 
             frame:SetShown(flag)
 
             if flag then
-                MountJournal.MountCount:SetPoint("TOPLEFT", 70, -22)
+                MountJournal.MountCount:SetPoint("TOPLEFT", 70, -41)
                 MountJournal.MountCount:SetSize(130, 19)
             else
                 ADDON.UI:RestorePoint(MountJournal.MountCount)
                 ADDON.UI:RestoreSize(MountJournal.MountCount)
             end
+
+            --to trigger update function
+            MountJournal_UpdateMountList()
         end
     end
 end)
