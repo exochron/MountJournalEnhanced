@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-func (m mount) WriteToFile(file *os.File)  {
+func (m mount) WriteToFile(file *os.File) {
 	file.WriteString("[" + strconv.Itoa(m.SpellID) + "] = true, -- " + m.Name + "\n")
 }
 
@@ -55,7 +55,7 @@ func ExportTradeable(mounts map[int]mount) {
 func exportFamilyCategories(config []familyConfig, file *os.File) {
 
 	for _, c := range config {
-		file.WriteString("[\""+c.Name+"\"] = {\n")
+		file.WriteString("[\"" + c.Name + "\"] = {\n")
 
 		if len(c.Mounts) > 0 {
 			sort.Slice(c.Mounts, func(i, j int) bool {
@@ -77,6 +77,42 @@ func ExportFamilies(config []familyConfig) {
 	file := prepareLuaDB("families.db.lua", "Family")
 
 	exportFamilyCategories(config, file)
+
+	file.WriteString("}")
+
+	defer file.Close()
+}
+
+func ExportConditions(mounts map[int]mount) {
+	file := prepareLuaDB("restrictions.db.lua", "Restrictions")
+
+	keys := getOrderedKeys(mounts)
+
+	for _, k := range keys {
+		mount := mounts[k]
+		if len(mount.PlayerConditions) > 0 {
+
+			file.WriteString("[" + strconv.Itoa(mount.SpellID) + "] = function() return ")
+
+			for i, group := range mount.PlayerConditions{
+				if i > 0 {
+					file.WriteString(" and ")
+				}
+				file.WriteString("(")
+
+				for j, condition := range group{
+					if j > 0 {
+						file.WriteString(" or ")
+					}
+					file.WriteString(condition.ToString())
+				}
+
+				file.WriteString(")")
+			}
+
+			file.WriteString(" end, -- " + mount.Name + "\n")
+		}
+	}
 
 	file.WriteString("}")
 

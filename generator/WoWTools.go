@@ -5,6 +5,7 @@ import (
 	"encoding/csv"
 	"io/ioutil"
 	"log"
+	"mje_generator/condition"
 	"net/http"
 	"regexp"
 	"strconv"
@@ -12,11 +13,12 @@ import (
 )
 
 type mount struct {
-	ID              int
-	SpellID         int
-	Name            string
-	Icon            string
-	ItemIsTradeable bool
+	ID               int
+	SpellID          int
+	Name             string
+	Icon             string
+	ItemIsTradeable  bool
+	PlayerConditions [][]condition.Condition
 }
 
 func fetchBuild(branch string) string {
@@ -48,7 +50,7 @@ func request(url string) []byte {
 	return payload
 }
 
-func getCSV(table string, build string) []map[string]string {
+func getCSV(table string, build string) map[int]map[string]string {
 	url := "dbc/api/export/?name=" + strings.ToLower(table) + "&useHotfixes=true&build=" + build
 	data := request(url)
 	csvReader := csv.NewReader(bytes.NewReader(data))
@@ -60,15 +62,17 @@ func getCSV(table string, build string) []map[string]string {
 
 	header := records[0]
 
-	results := make([]map[string]string, len(records[1:]))
-	for rowNumber, row := range records[1:] {
+	results := map[int]map[string]string{}
+
+	for _, row := range records[1:] {
 
 		mapped := map[string]string{}
 		for columnNumber, column := range header {
 			mapped[column] = row[columnNumber]
 		}
 
-		results[rowNumber] = mapped
+		id, _ := strconv.Atoi(mapped["ID"])
+		results[id] = mapped
 	}
 
 	return results
@@ -78,9 +82,8 @@ func loadTradeableItems(build string) map[int]bool {
 	itemSparseCsv := getCSV("ItemSparse", build)
 
 	items := map[int]bool{}
-	for _, record := range itemSparseCsv {
+	for itemId, record := range itemSparseCsv {
 		if record["Bonding"] == "0" {
-			itemId, _ := strconv.Atoi(record["ID"])
 			items[itemId] = true
 		}
 	}
@@ -117,17 +120,30 @@ func LoadFromWoWTools(branch string) map[int]mount {
 
 	build := fetchBuild(branch)
 
-	mountCsv := getCSV("Mount", build)
+	playerConditions := getCSV("PlayerCondition", build)
 
+	mountCsv := getCSV("Mount", build)
 	mounts := map[int]mount{}
 	for _, record := range mountCsv {
 		id, _ := strconv.Atoi(record["ID"])
 		spellId, _ := strconv.Atoi(record["SourceSpellID"])
-		mounts[spellId] = mount{id, spellId, record["Name_lang"], "", false}
+		playerConditionId, _ := strconv.Atoi(record["PlayerConditionID"])
+		var mountConditions [][]condition.Condition
+		if playerCondition, ok := playerConditions[playerConditionId]; ok {
+			mountConditions = condition.NewConditions(playerCondition)
+		}
+
+		mounts[spellId] = mount{
+			id,
+			spellId,
+			record["Name_lang"],
+			"",
+			false,
+			mountConditions,
+		}
 	}
 
 	tradeableItems := loadTradeableItems(build)
-
 	itemEffectsCsv := getCSV("ItemEffect", build)
 	for _, record := range itemEffectsCsv {
 		// LegacySlotIndex == 1 and TriggerType == 6(Learn Spell)

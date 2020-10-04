@@ -23,7 +23,9 @@ Locals\zhCN.lua
 Database\Database.lua
 Database\families.db.lua
 Database\tradable.db.lua
+Database\restrictions.db.lua
 
+PlayerConditions.lua
 Filters.lua
 MountJournalEnhanced.lua
 Settings\Handling.lua

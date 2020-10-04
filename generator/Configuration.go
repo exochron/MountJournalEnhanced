@@ -156,10 +156,10 @@ func LoadConfig() config {
 					{Name: "Drakes", Wcm: []string{"Drakes", "Onyxian Drakes", "Void Dragons"}},
 					{Name: "Grand Drakes", Wcm: []string{"Grand Drakes"}},
 					{Name: "Nether Drakes", Wcm: []string{"Nether Drakes"}},
-					{Name: "Others", Wcm: []string{"Sinuous Drakes", "Fey Drakes", "Everwyrms", "Mechanical Dragons", "Soul Eaters"}},
+					{Name: "Others", Wcm: []string{"Sinuous Drakes", "Fey Drakes", "Everwyrms", "Mechanical Dragons"}},
 					{Name: "Proto-Drakes", Wcm: []string{"Proto-Drakes"}},
 					{Name: "Stone Drakes", Wcm: []string{"Stone Drakes"}},
-					{Name: "Undead Drakes", Wcm: []string{"Undead Drakes"}},
+					{Name: "Undead Drakes", Wcm: []string{"Undead Drakes", "Soul Eaters"}},
 					{Name: "Wind Drakes", Wcm: []string{"Wind Drakes"}},
 				},
 			},
@@ -241,7 +241,7 @@ func LoadConfig() config {
 			{
 				Name: "Insects",
 				SubFamily: []familyConfig{
-					{Name: "Animites", Wcm: []string{"Animites"}},
+					{Name: "Animite", Wcm: []string{"Animites"}},
 					{Name: "Aqir Flyers", Wcm: []string{"Aqir Flyers"}},
 					{Name: "Bees", Wcm: []string{"Bees"}},
 					{Name: "Gorm", Wcm: []string{"Gorm"}},
@@ -304,7 +304,7 @@ func LoadConfig() config {
 					{Name: "Moose", Wcm: []string{"Elderhorns"}},
 					{Name: "Rhinos", Wcm: []string{"Rhinos"}},
 					{Name: "Riverbeasts", Wcm: []string{"Riverbeasts"}},
-					{Name: "Runestags", Wcm: []string{"Runestags"}},
+					{Name: "Runestag", Wcm: []string{"Runestags"}},
 				},
 			},
 			{

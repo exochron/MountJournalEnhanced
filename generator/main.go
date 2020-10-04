@@ -13,4 +13,5 @@ func main() {
 
 	ExportTradeable(mounts)
 	ExportFamilies(conf.FamilyMap)
+	ExportConditions(mounts)
 }

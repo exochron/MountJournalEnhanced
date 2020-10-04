@@ -2,41 +2,28 @@ local _, ADDON = ...
 
 local doStrip = false
 
-local playerFaction
-local function isPersonalMount(mountID, faction)
+local function isPersonalMount(spellId, faction)
 
-    if mountID >= 117 and mountID <= 120 then
-        -- qiraji battle tanks dont count
+    if faction ~= nil and false == ADDON.playerIsFaction(faction) then
         return false
     end
 
-    if faction == nil then
+    if ADDON.DB.Restrictions[spellId] == nil then
         return true
     end
 
-    if playerFaction == nil then
-        playerFaction = UnitFactionGroup("player")
-    end
-
-    if faction == 1 and playerFaction == "Alliance" then
-        return true
-    end
-    if faction == 0 and playerFaction == "Horde" then
-        return true
-    end
-
-    return false
+    return ADDON.DB.Restrictions[spellId]()
 end
 
 local function count()
     local mountIDs = C_MountJournal.GetMountIDs()
     local total, owned, personal, personalTotal = 0, 0, 0, 0
     for _, mountID in ipairs(mountIDs) do
-        local _, _, _, _, _, _, _, _, faction, hideOnChar, isCollected = C_MountJournal.GetMountInfoByID(mountID)
-        if hideOnChar ~= true then
+        local _, spellId, _, _, _, _, _, _, faction, hideOnChar, isCollected = C_MountJournal.GetMountInfoByID(mountID)
+        if hideOnChar == false then
             total = total + 1
 
-            local isPersonal = isPersonalMount(mountID, faction)
+            local isPersonal = isPersonalMount(spellId, faction)
 
             if isPersonal then
                 personalTotal = personalTotal + 1
