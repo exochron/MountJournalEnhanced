@@ -8,13 +8,17 @@ function ADDON.playerHasProfession(skillId)
         playerProfessions = {}
         local prof1, prof2 = GetProfessions()
         -- https://wow.gamepedia.com/TradeSkillLineID
-        local prof1SkillID = select(7, GetProfessionInfo(prof1))
-        if prof1SkillID then
-            playerProfessions[prof1SkillID] = true
+        if prof1 then
+            local prof1SkillID = select(7, GetProfessionInfo(prof1))
+            if prof1SkillID then
+                playerProfessions[prof1SkillID] = true
+            end
         end
-        local prof2SkillID = select(7, GetProfessionInfo(prof2))
-        if prof2SkillID then
-            playerProfessions[prof2SkillID] = true
+        if prof2 then
+            local prof2SkillID = select(7, GetProfessionInfo(prof2))
+            if prof2SkillID then
+                playerProfessions[prof2SkillID] = true
+            end
         end
     end
 
