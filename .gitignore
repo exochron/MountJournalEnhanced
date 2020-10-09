@@ -1,5 +1,3 @@
 .idea/
-composer.lock
 generator/*.db.lua
-generator/vendor/
-generator/raw/
+generator/*.exe
