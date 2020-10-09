@@ -10,6 +10,7 @@ ADDON.DB.Family = {
 [259740] = true, -- Green Marsh Hopper
 [288587] = true, -- Blue Marsh Hopper
 [288589] = true, -- Yellow Marsh Hopper
+[339632] = true, -- Arboreal Gulper
 },
 },
 ["Arachnids"] = {
@@ -25,6 +26,8 @@ ADDON.DB.Family = {
 },
 ["Spiders"] = {
 [213115] = true, -- Bloodfang Widow
+[327407] = true, -- Vicious War Spider
+[327408] = true, -- Vicious War Spider
 },
 },
 ["Bats"] = {
@@ -34,6 +37,9 @@ ADDON.DB.Family = {
 [279868] = true, -- Witherbark Direwing
 [288714] = true, -- Bloodthirsty Dreadwing
 [288720] = true, -- Bloodgorged Hunter
+[312777] = true, -- Silvertip Dredwing
+[332882] = true, -- Horrid Dredwing
+[332903] = true, -- Rampart Screecher
 },
 ["Birds"] = {
 ["Albatross"] = {
@@ -100,6 +106,12 @@ ADDON.DB.Family = {
 [97493] = true, -- Pureblood Fire Hawk
 [97501] = true, -- Felfire Hawk
 [97560] = true, -- Corrupted Fire Hawk
+},
+["Roc"] = {
+[327405] = true, -- Colossal Slaughterclaw
+[336041] = true, -- Bonesewn Fleshroc
+[336042] = true, -- Hulking Deathroc
+[336045] = true, -- Predatory Plagueroc
 },
 ["Tallstriders"] = {
 [101573] = true, -- Swift Shorestrider
@@ -183,6 +195,16 @@ ADDON.DB.Family = {
 [171832] = true, -- Breezestrider Stallion
 [171833] = true, -- Pale Thorngrazer
 },
+["Tauralus"] = {
+[332455] = true, -- War-Bred Tauralus
+[332456] = true, -- Plaguerot Tauralus
+[332457] = true, -- Bonehoof Tauralus
+[332460] = true, -- Chosen Tauralus
+[332462] = true, -- Armored War-Bred Tauralus
+[332464] = true, -- Armored Plaguerot Tauralus
+[332466] = true, -- Armored Bonehoof Tauralus
+[332467] = true, -- Armored Chosen Tauralus
+},
 ["Yaks"] = {
 [122708] = true, -- Grand Expedition Yak
 [127216] = true, -- Grey Riding Yak
@@ -209,7 +231,16 @@ ADDON.DB.Family = {
 [171850] = true, -- Llothien Prowler
 [242896] = true, -- Vicious War Fox
 [242897] = true, -- Vicious War Fox
-[290133] = true, -- Vulpine Familiar
+},
+["Gargon"] = {
+[312753] = true, -- Hopecrusher Gargon
+[312754] = true, -- Battle Gargon Vrednic
+[332923] = true, -- Inquisition Gargon
+[332927] = true, -- Sinfall Gargon
+[332932] = true, -- Crypt Gargon
+[332949] = true, -- Desire's Battle Gargon
+[333021] = true, -- Gravestone Battle Gargon
+[333023] = true, -- Battle Gargon Silessa
 },
 ["Hounds"] = {
 [170347] = true, -- Core Hound
@@ -217,11 +248,14 @@ ADDON.DB.Family = {
 [213209] = true, -- Steelbound Devourer
 [259395] = true, -- Shu-Zen, the Divine Sentinel
 [271646] = true, -- Dark Iron Core Hound
+[312762] = true, -- Mawsworn Soulhunter
+[341766] = true, -- Warstitched Darkhound
+[344228] = true, -- Battle-Bound Warhound
+[344578] = true, -- Corridor Creeper
 },
 ["Hyenas"] = {
 [237286] = true, -- Dune Scavenger
 [237287] = true, -- Alabaster Hyena
-[237288] = true, -- Onyx War Hyena
 [306423] = true, -- Caravan Hyena
 },
 ["Quilen"] = {
@@ -230,10 +264,15 @@ ADDON.DB.Family = {
 [316722] = true, -- Ren's Stalwart Hound
 [316723] = true, -- Xinlao
 },
+["Vulpin"] = {
+[290133] = true, -- Vulpine Familiar
+[334366] = true, -- Wild Glimmerfur Prowler
+},
 },
 ["Cats"] = {
 ["Lions"] = {
 [90621] = true, -- Golden King
+[98727] = true, -- Winged Guardian
 [229512] = true, -- Vicious War Lion
 },
 ["Manasabers"] = {
@@ -243,8 +282,18 @@ ADDON.DB.Family = {
 },
 ["Mechanical Cats"] = {
 [294143] = true, -- X-995 Mechanocat
+[334382] = true, -- Phalynx of Loyalty
+[334386] = true, -- Phalynx of Humility
+[334391] = true, -- Phalynx of Courage
+[334398] = true, -- Phalynx of Purity
+[334403] = true, -- Eternal Phalynx of Purity
+[334406] = true, -- Eternal Phalynx of Courage
+[334408] = true, -- Eternal Phalynx of Loyalty
+[334409] = true, -- Eternal Phalynx of Humility
 },
 ["Others"] = {
+[42776] = true, -- Spectral Tiger
+[42777] = true, -- Swift Spectral Tiger
 [200175] = true, -- Felsaber
 [232405] = true, -- Primal Flamesaber
 [243512] = true, -- Luminous Starseeker
@@ -440,7 +489,6 @@ ADDON.DB.Family = {
 [290132] = true, -- Sylverian Dreamer
 [294197] = true, -- Obsidian Worldbreaker
 [302143] = true, -- Uncorrupted Voidwing
-[326390] = true, -- Steamscale Incinerator
 },
 ["Grand Drakes"] = {
 [107842] = true, -- Blazing Drake
@@ -464,6 +512,7 @@ ADDON.DB.Family = {
 [110051] = true, -- Heart of the Aspects
 [142878] = true, -- Enchanted Fey Dragon
 [307932] = true, -- Ensorcelled Everwyrm
+[326390] = true, -- Steamscale Incinerator
 },
 ["Proto-Drakes"] = {
 [59961] = true, -- Red Proto-Drake
@@ -497,6 +546,7 @@ ADDON.DB.Family = {
 [72808] = true, -- Bloodbathed Frostbrood Vanquisher
 [229387] = true, -- Deathlord's Vilebrood Vanquisher
 [231428] = true, -- Smoldering Ember Wyrm
+[332400] = true, -- Sinful Gladiator's Soul Eater
 },
 ["Wind Drakes"] = {
 [88335] = true, -- Drake of the East Wind
@@ -524,6 +574,7 @@ ADDON.DB.Family = {
 ["Elementals"] = {
 [231442] = true, -- Farseer's Raging Tempest
 [289555] = true, -- Glacial Tidestorm
+[340068] = true, -- Sintouched Deathwalker
 },
 ["Phoenixes"] = {
 [40192] = true, -- Ashes of Al'ar
@@ -590,6 +641,11 @@ ADDON.DB.Family = {
 [225765] = true, -- Leyfeather Hippogryph
 [242881] = true, -- Cloudwing Hippogryph
 [274610] = true, -- Teldrassil Hippogryph
+},
+["Larion"] = {
+[334433] = true, -- Silverwind Larion
+[341776] = true, -- Highwind Darkmane
+[342334] = true, -- Gilded Prowler
 },
 ["Wolfhawks"] = {
 [229386] = true, -- Huntmaster's Loyal Wolfhawk
@@ -685,6 +741,11 @@ ADDON.DB.Family = {
 [247402] = true, -- Lucid Nightmare
 [280730] = true, -- Pureheart Courser
 [281044] = true, -- Prestigious Bloodforged Courser
+[312765] = true, -- Sundancer
+[312767] = true, -- Swift Gloomhoof
+[332252] = true, -- Shimmermist Runner
+[336064] = true, -- Dauntless Duskrunner
+[342335] = true, -- Ascended Skymane
 },
 ["Mechanical Steeds"] = {
 [142910] = true, -- Ironbound Wraithcharger
@@ -702,6 +763,7 @@ ADDON.DB.Family = {
 [279456] = true, -- Highland Mustang
 [279457] = true, -- Broken Highland Mustang
 [279608] = true, -- Lil' Donkey
+[341639] = true, -- Court Sinrunner
 },
 ["Steeds"] = {
 [458] = true, -- Brown Horse
@@ -737,6 +799,7 @@ ADDON.DB.Family = {
 [281889] = true, -- Vicious White Bonesteed
 [281890] = true, -- Vicious Black Bonesteed
 [288722] = true, -- Risen Mare
+[339588] = true, -- Sinrunner Blanchy
 },
 },
 ["Humanoids"] = {
@@ -748,6 +811,10 @@ ADDON.DB.Family = {
 [189044] = true, -- Warmongering Gladiator's Felblood Gronnling
 [189364] = true, -- Coalfist Gronnling
 },
+["Gorger"] = {
+[333027] = true, -- Loyal Gorger
+[344659] = true, -- Voracious Gorger
+},
 ["Yetis"] = {
 [171848] = true, -- Challenger's War Yeti
 [191314] = true, -- Minion of Grumpus
@@ -755,6 +822,10 @@ ADDON.DB.Family = {
 },
 },
 ["Insects"] = {
+["Animite"] = {
+[312776] = true, -- Chittering Animite
+[332905] = true, -- Endmire Flyer
+},
 ["Aqir Flyers"] = {
 [316337] = true, -- Malevolent Drone
 [316339] = true, -- Shadowbarb Drone
@@ -763,11 +834,23 @@ ADDON.DB.Family = {
 ["Bees"] = {
 [259741] = true, -- Honeyback Harvester
 },
+["Gorm"] = {
+[312763] = true, -- Darkwarren Hardshell
+[334364] = true, -- Spinemaw Gladechewer
+[334365] = true, -- Pale Acidmaw
+[340503] = true, -- Umbral Scythehorn
+},
 ["Krolusks"] = {
 [239049] = true, -- Obsidian Krolusk
 [279454] = true, -- Conqueror's Scythemaw
 [288735] = true, -- Rubyshell Krolusk
 [288736] = true, -- Azureshell Krolusk
+},
+["Moth"] = {
+[318051] = true, -- Silky Shimmermoth
+[332256] = true, -- Duskflutter Ardenmoth
+[342666] = true, -- Amber Ardenmoth
+[342667] = true, -- Vibrant Flutterwing
 },
 ["Ravagers"] = {
 [163025] = true, -- Grinning Reaver
@@ -814,6 +897,9 @@ ADDON.DB.Family = {
 [253107] = true, -- Lambent Mana Ray
 [253108] = true, -- Felglow Mana Ray
 [253109] = true, -- Scintillating Mana Ray
+[344574] = true, -- Bulbous Necroray
+[344575] = true, -- Pestilent Necroray
+[344576] = true, -- Infested Necroray
 },
 ["Nether Rays"] = {
 [39798] = true, -- Green Riding Nether Ray
@@ -866,6 +952,7 @@ ADDON.DB.Family = {
 [315987] = true, -- Mail Muncher
 [316343] = true, -- Wriggling Parasite
 [316637] = true, -- Awakened Mindborer
+[346141] = true, -- Slime Serpent
 },
 ["Sea Serpents"] = {
 [232519] = true, -- Abyss Worm
@@ -901,6 +988,10 @@ ADDON.DB.Family = {
 [153489] = true, -- Iron Skyreaver
 [191633] = true, -- Soaring Skyterror
 [288495] = true, -- Ashenvale Chimaera
+[318052] = true, -- Deathbringer's Flayedwing
+[336036] = true, -- Marrowfang
+[336038] = true, -- Callow Flayedwing
+[336039] = true, -- Gruesome Flayedwing
 },
 ["Ungulates"] = {
 ["Alpacas"] = {
@@ -922,6 +1013,10 @@ ADDON.DB.Family = {
 [190690] = true, -- Bristling Hellboar
 [190977] = true, -- Deathtusk Felboar
 [290134] = true, -- Hogrus, Swine of Good Fortune
+[332478] = true, -- Blisterback Bloodtusk
+[332480] = true, -- Gorespine
+[332482] = true, -- Bonecleaver's Skullboar
+[332484] = true, -- Lurid Bloodtusk
 },
 ["Camels"] = {
 [88748] = true, -- Brown Riding Camel
@@ -988,6 +1083,16 @@ ADDON.DB.Family = {
 [171826] = true, -- Mudback Riverbeast
 [272481] = true, -- Vicious War Riverbeast
 },
+["Runestag"] = {
+[312759] = true, -- Dreamlight Runestag
+[312761] = true, -- Enchanted Dreamlight Runestag
+[332243] = true, -- Shadeleaf Runestag
+[332244] = true, -- Wakener's Runestag
+[332245] = true, -- Winterborn Runestag
+[332246] = true, -- Enchanted Shadeleaf Runestag
+[332247] = true, -- Enchanted Wakener's Runestag
+[332248] = true, -- Enchanted Winterborn Runestag
+},
 },
 ["Vehicles"] = {
 ["Airplanes"] = {
@@ -1044,6 +1149,14 @@ ADDON.DB.Family = {
 [290328] = true, -- Wonderwing 2.0
 [294143] = true, -- X-995 Mechanocat
 [326390] = true, -- Steamscale Incinerator
+[334382] = true, -- Phalynx of Loyalty
+[334386] = true, -- Phalynx of Humility
+[334391] = true, -- Phalynx of Courage
+[334398] = true, -- Phalynx of Purity
+[334403] = true, -- Eternal Phalynx of Purity
+[334406] = true, -- Eternal Phalynx of Courage
+[334408] = true, -- Eternal Phalynx of Loyalty
+[334409] = true, -- Eternal Phalynx of Humility
 },
 ["Mechanostriders"] = {
 [10873] = true, -- Red Mechanostrider
@@ -1084,6 +1197,9 @@ ADDON.DB.Family = {
 [126507] = true, -- Depleted-Kyparium Rocket
 [126508] = true, -- Geosynchronous World Spinner
 [247448] = true, -- Darkmoon Dirigible
+},
+["Seat"] = {
+[334352] = true, -- Wildseed Cradle
 },
 ["Spider Tanks"] = {
 [291492] = true, -- Rusty Mechanocrawler

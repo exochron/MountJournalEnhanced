@@ -54,14 +54,6 @@ ADDON.DB.Source = {
         -- Legion
         [223018] = true, -- Fathom Dweller - World Boss, Kosumoth the Hungering
         [243025] = true, -- Riddler's Mind-Worm
-        [242881] = true, -- Cloudwing Hippogryph - Farondis cache (paragon)
-        [242874] = true, -- Highmountain Elderhorn - Highmountain Supplies (paragon)
-        [233364] = true, -- Leywoven Flying Carpet - Nightfallen Cache (paragon)
-        [242882] = true, -- Valarjar Stormwing - Valarjar Strongbox (paragon)
-        [242875] = true, -- Wild Dreamrunner - Dreamweaver Cache (paragon)
-        [254258] = true, -- Blessed Felcrusher - Army of the Light Cache (paragon)
-        [254259] = true, -- Avenging Felcrusher - Army of the Light Cache (paragon)
-        [254069] = true, -- Glorious Felcrusher - Army of the Light Cache (paragon)
         [253058] = true, -- Maddened Chaosrunner
         [243652] = true, -- Vile Fiend
         [253661] = true, -- Crimson Slavermaw
@@ -93,7 +85,6 @@ ADDON.DB.Source = {
         [288503] = true, -- Umber Nightsaber - Darkshore Warfront
         [288505] = true, -- Kaldorei Nightsaber - Darkshore Warfront
         [291492] = true, -- Rusty Mechanocrawler - Mechagon
-        [294038] = true, -- Royal Snapdragon - Nazjatar
         [297157] = true, -- Junkheap Drifter - Mechagon
         [298367] = true, -- Mollie - Vol'dun
         [300149] = true, -- Silent Glider - Nazjatar
@@ -108,6 +99,32 @@ ADDON.DB.Source = {
         [315427] = true, -- Rajani Warserpent (actually just the scale drops from rare) - Vale of Eternal Blossoms
         [316722] = true, -- Ren's Stalwart Hound - Vale of Eternal Blossoms
         [316723] = true, -- Xinlao - Vale of Eternal Blossoms
+
+        -- Shadowlands
+        [312753] = true, -- Hopecrusher Gargon - Revendreth - Hopecrusher
+        [312762] = true, -- Mawsworn Soulhunter - The Maw - Gorged Shadehound
+        [312765] = true, -- Sundancer - Bastion - Sundancer
+        [312767] = true, -- Swift Gloomhoof - Ardenweald - Night Mare
+        [332478] = true, -- Blisterback Bloodtusk - Maldraxxus - Warbringer Mal'korak
+        [332480] = true, -- Gorespine - Maldraxxus - Nerissa Heartless
+        [332482] = true, -- Bonecleaver's Skullboard - Maldraxxus - Sabreil
+        [332882] = true, -- Horrid Dredwing - Revendreth - Harika the Horrid
+        [332905] = true, -- Endmire Flyer - Revendreth - Famu the Infinite
+        [334364] = true, -- Spinemaw Gladechewer - Ardenweald - Gormtamer Tizo
+        [334366] = true, -- Wild Glimmerfur Prowler - Ardenweald - Valfir the Unrelenting
+        [334433] = true, -- Silverwind Larion - Bastion - Treasure
+        [336042] = true, -- Hulking Deathroc - Maldraxxus - Violet Mistake
+        [336045] = true, -- Predatory Plagueroc - Maldraxxus - Gieger
+        [339632] = true, -- Arboreal Gulper - Ardenweald - Humon'gozz
+        [332252] = true, -- Shimmermist Runner - Ardenweald - Treasure
+        [334352] = true, -- Wildseed Cradle - Ardenweald - Treasure
+        [336038] = true, -- Callow Flayedwing (?)
+        [339588] = true, -- Sinrunner Blanchy (?)
+        [342335] = true, -- Ascended Skymane - Bastion - Treasure
+        [344574] = true, -- Bulbous Necroray - Necroray Egg
+        [344575] = true, -- Pestilent Necroray - Necroray Egg
+        [344576] = true, -- Infested Necroray - Necroray Egg
+        [346141] = true, -- Slime Serpent (secret)
     },
 
     ["Quest"] = {
@@ -134,6 +151,7 @@ ADDON.DB.Source = {
         [299159] = true, -- Scrapforged Mechaspider - Drive It Away Today
         [316339] = true, -- Shadowbarb Drone - Uldum
         [316802] = true, -- Springfur Alpaca - Uldum
+        [333027] = true, -- Loyal Gorger - Revendreth
 
         ------------------------------
         -- Alliance ------------------
@@ -172,7 +190,6 @@ ADDON.DB.Source = {
         [227956] = true, -- Arcadian War Turtle - Xur'ios
         [230844] = true, -- Brawler's Burly Basilisk - brawler guild mount (season 2)
         [259740] = true, -- Green Marsh Hopper
-        [264058] = true, -- Mighty Caravan Brutosaur
         [266925] = true, -- Siltwing Albatross - Island expedition
         [279474] = true, -- Palehide Direhorn
         [288506] = true, -- Sandy Nightsaber
@@ -183,6 +200,7 @@ ADDON.DB.Source = {
         [300151] = true, -- Inkscale Deepseeker
         [300153] = true, -- Crimson Tidestallion
         [316340] = true, -- Wicked Swarmer
+        [318051] = true, -- Silky Shimmermoth - Ardenweald
 
         ------------------------------
         -- Alliance ------------------
@@ -275,6 +293,8 @@ ADDON.DB.Source = {
         [273541] = true, -- Underrot Crawg - The Underrot (Mythic)
         [290718] = true, -- Aerial Unit R-21/X - Mechagon
         [299158] = true, -- Mechagon Peacekeeper - Mechagon
+        [336036] = true, -- Marrowfang - The Necrotic Wake
+        [344228] = true, -- Battle-Bound Warhound - Theatre of Pain
 
         -- Raid
         [25953] = true, -- Blue Qiraji Battle Tank - Temple of Ahn'Qiraj
@@ -424,25 +444,34 @@ ADDON.DB.Source = {
         -- Vol'jin's Headhunters, Hand of the Prophet
         [190977] = true, -- Deathtusk Felboar
 
-        -- Talon's Vengeance
-        [230401] = true, -- White Hawkstrider
+        [230401] = true, -- White Hawkstrider -- Talon's Vengeance
+        [242305] = true, -- Sable Ruinstrider -- Argussian Reach
+        [253004] = true, -- Amethyst Ruinstrider -- Argussian Reach
+        [253005] = true, -- Beryl Ruinstrider -- Argussian Reach
+        [253006] = true, -- Russet Ruinstrider -- Argussian Reach
+        [253007] = true, -- Cerulean Ruinstrider -- Argussian Reach
+        [253008] = true, -- Umber Ruinstrider -- Argussian Reach
+        [239013] = true, -- Lightforged Warframe -- Army of the Light
+        [242881] = true, -- Cloudwing Hippogryph - Farondis cache (paragon)
+        [242874] = true, -- Highmountain Elderhorn - Highmountain Supplies (paragon)
+        [233364] = true, -- Leywoven Flying Carpet - Nightfallen Cache (paragon)
+        [242882] = true, -- Valarjar Stormwing - Valarjar Strongbox (paragon)
+        [242875] = true, -- Wild Dreamrunner - Dreamweaver Cache (paragon)
+        [254258] = true, -- Blessed Felcrusher - Army of the Light Cache (paragon)
+        [254259] = true, -- Avenging Felcrusher - Army of the Light Cache (paragon)
+        [254069] = true, -- Glorious Felcrusher - Army of the Light Cache (paragon)
 
-        -- Argussian Reach
-        [242305] = true, -- Sable Ruinstrider
-        [253004] = true, -- Amethyst Ruinstrider
-        [253005] = true, -- Beryl Ruinstrider
-        [253006] = true, -- Russet Ruinstrider
-        [253007] = true, -- Cerulean Ruinstrider
-        [253008] = true, -- Umber Ruinstrider
+        [294038] = true, -- Royal Snapdragon - Nazjatar (supplies/paragon)
+        [299170] = true, -- Rustbolt Resistor -- Rustbolt Resistance
+        [316276] = true, -- Wastewander Skyterror -- Uldum Accord
 
-        -- Army of the Light
-        [239013] = true, -- Lightforged Warframe
-
-        -- Rustbolt Resistance
-        [299170] = true, -- Rustbolt Resistor
-
-        -- Uldum Accord
-        [316276] = true, -- Wastewander Skyterror
+        [327405] = true, -- Colossal Slaughterclaw - Supplies of the Undying Army (paragon)
+        [332256] = true, -- Duskflutter Ardenmoth - Wild Hunt
+        [332484] = true, -- Lurid Bloodtusk - The Undying Army
+        [332923] = true, -- Inquisition Gargon - The Avowed
+        [341639] = true, -- Court Sinrunner -- Court of Harvesters
+        [342334] = true, -- Gilded Prowler - The Ascended
+        [342666] = true, -- Amber Ardenmoth - Wild Hunt Supplies (paragon)
 
         ------------------------------
         -- Alliance ------------------
@@ -757,6 +786,15 @@ ADDON.DB.Source = {
         [316343] = 14146, -- Wriggling Parasite - Glory of the Ny'alotha Raider
         [316637] = 14145, -- Awakened Mindborer - Battle for Azeroth Keystone Master: Season Four
 
+        -- Shadowlands
+        [318052] = 14520, -- Deathbringer's Flayedwing - Deathbringer
+        [332460] = 14751, -- Chosen Tauralus - The Gang's All Here
+        [332467] = 14752, -- Armored Chosen Tauralus - Things To Do When You're Dead
+        [332903] = 14355, -- Rampart Screecher - Glory of the Nathria Raider
+        [340068] = 14532, -- Sintouched Deathwalker - Shadowlands Keystone Master: Season One
+        [344578] = 14751, -- Corridor Creeper - Twisting Corridors: Layer 8
+        [344659] = 14322, -- Voracious Gorger - Glory of the Shadowlands Hero
+
         ------------------------------
         -- Alliance ------------------
         ------------------------------
@@ -787,6 +825,52 @@ ADDON.DB.Source = {
         [142266] = 8302, -- Armored Red Dragonhawk - Mount Parade, Horde
         [179244] = 9909, -- Chauffeur - Heirloom Hoarder, Horde
         [306421] = 13930, -- Frostwolf Snarler - Alterac Valley of Olde
+    },
+
+    ["Covenants"] = {
+        -- adventures
+        [312763] = true, -- Darkwarren Hardshell
+        [312776] = true, -- Chittering Animite
+        [341766] = true, -- Warstitched Darkhound
+        [341776] = true, -- Highwind Darkmane
+
+        [312777] = true, -- Silvertip Dredwing
+        [334365] = true, -- Pale Acidmaw
+        [336064] = true, -- Dauntless Duskrunner
+        [336039] = true, -- Gruesome Flayedwing
+        [334382] = true, -- Phalynx of Loyalty
+        [334386] = true, -- Phalynx of Humility
+        [334391] = true, -- Phalynx of Courage
+        [334398] = true, -- Phalynx of Purity
+        [334403] = true, -- Eternal Phalynx of Purity
+        [334406] = true, -- Eternal Phalynx of Courage
+        [334408] = true, -- Eternal Phalynx of Loyalty
+        [334409] = true, -- Eternal Phalynx of Humility
+        [332455] = true, -- War-Bred Tauralus
+        [332456] = true, -- Plaguerot Tauralus
+        [332457] = true, -- Bonehoof Tauralus
+        [332460] = true, -- Chosen Tauralus
+        [332462] = true, -- Armored War-Bred Tauralus
+        [332464] = true, -- Armored Plaguerot Tauralus
+        [332466] = true, -- Armored Bonehoof Tauralus
+        [332467] = true, -- Armored Chosen Tauralus
+        [336041] = true, -- Bonesewn Fleshroc
+        [342667] = true, -- Vibrant Flutterwing
+        [340503] = true, -- Umbral Scythehorn
+        [312759] = true, -- Dreamlight Runestag
+        [332243] = true, -- Shadeleaf Runestag
+        [332244] = true, -- Wakener's Runestag
+        [332245] = true, -- Winterborn Runestag
+        [312761] = true, -- Enchanted Dreamlight Runestag
+        [332246] = true, -- Enchanted Shadeleaf Runestag
+        [332247] = true, -- Enchanted Wakener's Runestag
+        [332248] = true, -- Enchanted Winterborn Runestag
+        [312754] = true, -- Battle Gargon Vrednic
+        [332927] = true, -- Sinfall Gargon
+        [332932] = true, -- Crypt Gargon
+        [332949] = true, -- Desire's Battle Gargon
+        [333021] = true, -- Gravestone Battle Armor
+        [333023] = true, -- Battle Gargon Silessa
     },
 
     ["Island Expedition"] = {
@@ -892,6 +976,7 @@ ADDON.DB.Source = {
         [262023] = true, -- Sinister Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 2
         [262024] = true, -- Notorious Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 3
         [262027] = true, -- Corrupted Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 4
+        [332400] = true, -- Sinful Gladiator's Soul Eater - Sinful Gladiator: Shadowlands Season 1
 
         -- Prestige Reward
         [222202] = true, -- Prestigious Bronze Courser
@@ -923,6 +1008,7 @@ ADDON.DB.Source = {
         [272481] = true, -- Vicious War Riverbeast
         [281887] = true, -- Vicious Black Warsaber
         [281888] = true, -- Vicious White Warsaber
+        [327407] = true, -- Vicious War Spider
 
         -- Achievement
         [60118] = true, -- Black War Bear - For The Alliance!
@@ -964,6 +1050,7 @@ ADDON.DB.Source = {
         [270560] = true, -- Vicious War Clefthoof
         [281889] = true, -- Vicious White Bonesteed
         [281890] = true, -- Vicious Black Bonesteed
+        [327408] = true, -- Vicious War Spider
 
         -- Achievement
         [60119] = true, -- Black War Bear - For The Horde!
@@ -1143,6 +1230,15 @@ ADDON.DB.Source = {
         [171621] = true, -- Ironhoof Destroyer - Blackrock Foundry, Blackhand
         [171828] = true, -- Solar Spirehawk - Rukhmar
         [182912] = true, -- Felsteel Annihilator - Hellfire Citadel, Archimonde
+        [171827] = true, -- Hellfire Infernal - The Nighthold, Gul'dan (Mythic)
+        [213134] = true, -- Felblaze Infernal - The Nighthold, Gul'dan
+        [223018] = true, -- Fathom Dweller - World Boss, Kosumoth the Hungering
+        [232519] = true, -- Abyss Worm - Tomb of Sargeras, Mistress Sassz'ine
+        [233364] = true, -- Leywoven Flying Carpet - Nightfallen Cache (paragon)
+        [242882] = true, -- Valarjar Stormwing - Valarjar Strongbox (paragon)
+        [243651] = true, -- Shackled Ur'zul - Antorus, Argus Mythic
+        [243652] = true, -- Vile Fiend
+        [264058] = true, -- Mighty Caravan Brutosaur
     },
 
     ["Shop"] = {
@@ -1215,6 +1311,7 @@ ADDON.DB.FeatsOfStrength = {
     [262024] = 13632, -- Notorious Gladiator's Proto-Drake
     [262027] = 13958, -- Corrupted Gladiator's Proto-Drake
     [264058] = 14183, -- Mighty Caravan Brutosaur
+    [332400] = 14816, -- Sinful Gladiator's Soul Eater
 }
 
 ADDON.DB.Expansion = {
