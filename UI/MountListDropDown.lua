@@ -1,6 +1,5 @@
 local ADDON_NAME, ADDON = ...
 
-local EDDM = LibStub("ElioteDropDownMenu-1.0")
 local menuMountIndex
 
 local function InitializeMountOptionsMenu(sender, level)
@@ -11,7 +10,7 @@ local function InitializeMountOptionsMenu(sender, level)
 
     local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountId = C_MountJournal.GetDisplayedMountInfo(menuMountIndex)
 
-    local info = EDDM.UIDropDownMenu_CreateInfo()
+    local info = MSA_DropDownMenu_CreateInfo()
     info.notCheckable = true
 
     local needsFanfare = C_MountJournal.NeedsFanfare(mountId)
@@ -32,7 +31,7 @@ local function InitializeMountOptionsMenu(sender, level)
         MountJournalMountButton_UseMount(mountId)
     end
 
-    EDDM.UIDropDownMenu_AddButton(info, level)
+    MSA_DropDownMenu_AddButton(info, level)
 
     if not needsFanfare and isCollected then
         info.disabled = nil
@@ -59,7 +58,7 @@ local function InitializeMountOptionsMenu(sender, level)
             info.disabled = true
         end
 
-        EDDM.UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
     end
 
     if (spellId) then
@@ -79,13 +78,13 @@ local function InitializeMountOptionsMenu(sender, level)
                 MountJournal_UpdateMountList()
             end
         end
-        EDDM.UIDropDownMenu_AddButton(info, level)
+        MSA_DropDownMenu_AddButton(info, level)
     end
 
     info.disabled = nil
     info.text = CANCEL
     info.func = nil
-    EDDM.UIDropDownMenu_AddButton(info, level)
+    MSA_DropDownMenu_AddButton(info, level)
 end
 
 local function MountListItem_OnClick(menu, sender, anchor, button)
@@ -104,13 +103,13 @@ local function ShowMountDropdown(index, anchorTo, offsetX, offsetY)
         return;
     end
 
-    EDDM.ToggleDropDownMenu(1, nil, _G[ADDON_NAME .. "MountOptionsMenu"], anchorTo, offsetX, offsetY)
+    MSA_ToggleDropDownMenu(1, nil, _G[ADDON_NAME .. "MountOptionsMenu"], anchorTo, offsetX, offsetY)
     PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
 end
 
 ADDON:RegisterLoadUICallback(function()
-    local menu = EDDM.UIDropDownMenu_Create(ADDON_NAME .. "MountOptionsMenu", MountJournal)
-    EDDM.UIDropDownMenu_Initialize(menu, InitializeMountOptionsMenu, "MENU")
+    local menu = MSA_DropDownMenu_Create(ADDON_NAME .. "MountOptionsMenu", MountJournal)
+    MSA_DropDownMenu_Initialize(menu, InitializeMountOptionsMenu, "MENU")
 
     local buttons = MountJournal.ListScrollFrame.buttons
     for buttonIndex = 1, #buttons do
