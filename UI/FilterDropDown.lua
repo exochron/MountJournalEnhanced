@@ -225,9 +225,11 @@ local function InitializeFilterDropDown(filterMenu, level)
             MountJournal_UpdateMountList()
         end
         MSA_DropDownMenu_AddButton(info, level)
-        MSA_DropDownMenu_AddButton(CreateSpace(), level)
 
-        MSA_DropDownMenu_AddButton(CreateFilterCategory(CLUB_FINDER_SORT_BY, SETTING_SORT), level)
+        if ADDON.settings.ui.enableSortOptions then
+            MSA_DropDownMenu_AddButton(CreateSpace(), level)
+            MSA_DropDownMenu_AddButton(CreateFilterCategory(CLUB_FINDER_SORT_BY, SETTING_SORT), level)
+        end
     elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_SOURCE) then
         local settings = ADDON.settings.filter[SETTING_SOURCE]
         AddCheckAllAndNoneInfo(settings, level)

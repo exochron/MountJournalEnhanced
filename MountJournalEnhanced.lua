@@ -1,7 +1,7 @@
 local ADDON_NAME, ADDON = ...
 
 ADDON.hooks = {}
-ADDON.indexMap = {}
+local indexMap
 
 local function SearchIsActive()
     local searchString = MountJournal.searchBox:GetText()
@@ -19,11 +19,11 @@ function ADDON:MapIndex(index)
         return index
     end
 
-    if (not self.indexMap) then
+    if nil == indexMap then
         self:UpdateIndexMap()
     end
 
-    return self.indexMap[index]
+    return indexMap[index]
 end
 
 local function C_MountJournal_GetNumDisplayedMounts()
@@ -31,11 +31,11 @@ local function C_MountJournal_GetNumDisplayedMounts()
         return ADDON.hooks["GetNumDisplayedMounts"]()
     end
 
-    if (not ADDON.indexMap) then
+    if nil == indexMap then
         ADDON:UpdateIndexMap()
     end
 
-    return #ADDON.indexMap
+    return #indexMap
 end
 
 local function C_MountJournal_GetDisplayedMountInfo(index)
@@ -126,12 +126,13 @@ function ADDON:LoadUI()
     MountJournal_UpdateMountList()
 
     local frame = CreateFrame("frame");
-    frame:RegisterEvent("SPELL_UPDATE_USABLE")
+    frame:RegisterEvent("ZONE_CHANGED")
+    frame:RegisterEvent("ZONE_CHANGED_INDOORS")
     frame:RegisterEvent("MOUNT_JOURNAL_USABILITY_CHANGED")
     frame:RegisterEvent("MOUNT_JOURNAL_SEARCH_UPDATED")
     frame:SetScript("OnEvent", function(sender, ...)
-        if (CollectionsJournal:IsShown()) then
-            ADDON:UpdateIndexMap()
+        if CollectionsJournal:IsShown() then
+            ADDON:UpdateIndexMap(true)
             MountJournal_UpdateMountList()
         end
     end);
@@ -148,62 +149,67 @@ local function mapMountType(mountId)
     end
 end
 
-function ADDON:UpdateIndexMap()
-    local indexMap = {}
-
-    if not SearchIsActive() then
+function ADDON:UpdateIndexMap(calledFromEvent)
+    if nil == indexMap or not SearchIsActive() then
+        local map = {}
         for i = 1, self.hooks["GetNumDisplayedMounts"]() do
             if ADDON:FilterMount(i) then
-                indexMap[#indexMap + 1] = i
+                map[#map + 1] = i
             end
         end
 
-        table.sort(indexMap, function(a, b)
+        if calledFromEvent and nil ~= indexMap and #map == #indexMap then
+            return
+        end
 
-            if a == b then
-                return false
-            end
+        if ADDON.settings.ui.enableSortOptions then
+            table.sort(map, function(a, b)
 
-            local result = false
-            local nameA, spellIdA, _, _, _, _, isFavoriteA, _, _, _, isCollectedA, mountIdA = ADDON.hooks["GetDisplayedMountInfo"](a)
-            local nameB, spellIdB, _, _, _, _, isFavoriteB, _, _, _, isCollectedB, mountIdB = ADDON.hooks["GetDisplayedMountInfo"](b)
-
-            if ADDON.settings.sort.favoritesOnTop and isFavoriteA ~= isFavoriteB then
-                return isFavoriteA and not isFavoriteB
-            end
-            if ADDON.settings.sort.unownedOnBottom and isCollectedA ~= isCollectedB then
-                return isCollectedA and not isCollectedB
-            end
-
-            if ADDON.settings.sort.by == 'name' then
-                result = strcmputf8i(nameA, nameB) < 0
-            elseif ADDON.settings.sort.by == 'type' then
-                local mountTypeA = mapMountType(mountIdA)
-                local mountTypeB = mapMountType(mountIdB)
-
-                if mountTypeA == mountTypeB then
-                    result = strcmputf8i(nameA, nameB) < 0
-                elseif mountTypeA == "flying" then
-                    result = true
-                elseif mountTypeA == "ground" then
-                    result = (mountTypeB == "underwater")
-                elseif mountTypeA == "underwater" then
-                    result = false
+                if a == b then
+                    return false
                 end
 
-            elseif ADDON.settings.sort.by == 'expansion' then
-                result = mountIdA < mountIdB
-            end
+                local result = false
+                local nameA, _, _, _, _, _, isFavoriteA, _, _, _, isCollectedA, mountIdA = ADDON.hooks["GetDisplayedMountInfo"](a)
+                local nameB, _, _, _, _, _, isFavoriteB, _, _, _, isCollectedB, mountIdB = ADDON.hooks["GetDisplayedMountInfo"](b)
 
-            if ADDON.settings.sort.descending then
-                result = not result
-            end
+                if ADDON.settings.sort.favoritesOnTop and isFavoriteA ~= isFavoriteB then
+                    return isFavoriteA and not isFavoriteB
+                end
+                if ADDON.settings.sort.unownedOnBottom and isCollectedA ~= isCollectedB then
+                    return isCollectedA and not isCollectedB
+                end
 
-            return result
-        end)
+                if ADDON.settings.sort.by == 'name' then
+                    result = strcmputf8i(nameA, nameB) < 0
+                elseif ADDON.settings.sort.by == 'type' then
+                    local mountTypeA = mapMountType(mountIdA)
+                    local mountTypeB = mapMountType(mountIdB)
+
+                    if mountTypeA == mountTypeB then
+                        result = strcmputf8i(nameA, nameB) < 0
+                    elseif mountTypeA == "flying" then
+                        result = true
+                    elseif mountTypeA == "ground" then
+                        result = (mountTypeB == "underwater")
+                    elseif mountTypeA == "underwater" then
+                        result = false
+                    end
+
+                elseif ADDON.settings.sort.by == 'expansion' then
+                    result = mountIdA < mountIdB
+                end
+
+                if ADDON.settings.sort.descending then
+                    result = not result
+                end
+
+                return result
+            end)
+        end
+
+        indexMap = map
     end
-
-    self.indexMap = indexMap
 end
 
 function ADDON:Hook(obj, name, func)
