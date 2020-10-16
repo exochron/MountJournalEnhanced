@@ -73,4 +73,10 @@ ADDON:RegisterBehaviourSetting('personalFilter', false, L.SETTING_PERSONAL_FILTE
         ADDON:UpdateIndexMap()
     end
 end)
+
+ADDON:RegisterUISetting('enableSortOptions', true, L.SETTING_CUSTOM_SORT_OPTIONS, function ()
+    if ADDON.initialized then
+        ADDON:UpdateIndexMap()
+    end
+end)
 --endregion
