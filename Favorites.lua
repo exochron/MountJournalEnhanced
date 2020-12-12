@@ -107,24 +107,25 @@ local function FetchDisplayedMountIds()
 end
 
 local function InitializeDropDown(menu, level)
-    local info = MSA_DropDownMenu_CreateInfo()
-    info.keepShownOnClick = false
-    info.isNotRadio = true
-    info.notCheckable = true
-    info.hasArrow = false
+    local info = {
+        keepShownOnClick = false,
+        isNotRadio = true,
+        notCheckable = true,
+        hasArrow = false,
+    }
 
     if level == 1 then
         info.text = L['FAVOR_DISPLAYED']
         info.func = function()
             RunSetFavorites(FetchDisplayedMountIds())
         end
-        MSA_DropDownMenu_AddButton(info, level)
+        UIDropDownMenu_AddButton(info, level)
 
         info.text = UNCHECK_ALL
         info.func = function()
             RunSetFavorites({})
         end
-        MSA_DropDownMenu_AddButton(info, level)
+        UIDropDownMenu_AddButton(info, level)
 
         info.text = L["FAVOR_PER_CHARACTER"]
         info.notCheckable = false
@@ -132,13 +133,13 @@ local function InitializeDropDown(menu, level)
         info.func = function(_, _, _, value)
             ADDON:ApplySetting('favoritePerChar', not value)
         end
-        MSA_DropDownMenu_AddButton(info, level)
+        UIDropDownMenu_AddButton(info, level)
     end
 end
 
 local function BuildStarButton()
-    local menu = MSA_DropDownMenu_Create(ADDON_NAME .. "FavorMenu", MountJournal)
-    MSA_DropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
+    local menu = CreateFrame("Frame", ADDON_NAME .. "FavorMenu", MountJournal, "UIDropDownMenuTemplate")
+    UIDropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
 
     local AceGUI = LibStub("AceGUI-3.0")
 
@@ -163,7 +164,7 @@ local function BuildStarButton()
         GameTooltip:Hide()
     end);
     starButton:SetCallback("OnClick", function()
-        MSA_ToggleDropDownMenu(1, nil, menu, starButton.frame, 0, 10)
+        ToggleDropDownMenu(1, nil, menu, starButton.frame, 0, 10)
     end)
 
     starButton.frame:Show()

@@ -1,7 +1,7 @@
 local ADDON_NAME, ADDON = ...
 
 ADDON.hooks = {}
-local indexMap
+local indexMap = {}
 
 local function SearchIsActive()
     local searchString = MountJournal.searchBox:GetText()
@@ -19,7 +19,7 @@ function ADDON:MapIndex(index)
         return index
     end
 
-    if nil == indexMap then
+    if not indexMap then
         self:UpdateIndexMap()
     end
 
@@ -31,7 +31,7 @@ local function C_MountJournal_GetNumDisplayedMounts()
         return ADDON.hooks["GetNumDisplayedMounts"]()
     end
 
-    if nil == indexMap then
+    if not indexMap then
         ADDON:UpdateIndexMap()
     end
 
@@ -43,9 +43,8 @@ local function C_MountJournal_GetDisplayedMountInfo(index)
     local mappedIndex = ADDON:MapIndex(index)
     if nil ~= mappedIndex then
         creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = ADDON.hooks["GetDisplayedMountInfo"](mappedIndex)
+        isUsable = isUsable and IsUsableSpell(spellId)
     end
-
-    isUsable = isUsable and IsUsableSpell(spellId)
 
     return creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h
 end
@@ -150,15 +149,16 @@ local function mapMountType(mountId)
 end
 
 function ADDON:UpdateIndexMap(calledFromEvent)
-    if nil == indexMap or not SearchIsActive() then
-        local map = {}
+    local map = {}
+
+    if not SearchIsActive() then
         for i = 1, self.hooks["GetNumDisplayedMounts"]() do
             if ADDON:FilterMount(i) then
                 map[#map + 1] = i
             end
         end
 
-        if calledFromEvent and nil ~= indexMap and #map == #indexMap then
+        if calledFromEvent and #map == #indexMap then
             return
         end
 
@@ -207,9 +207,9 @@ function ADDON:UpdateIndexMap(calledFromEvent)
                 return result
             end)
         end
-
-        indexMap = map
     end
+
+    indexMap = map
 end
 
 function ADDON:Hook(obj, name, func)
