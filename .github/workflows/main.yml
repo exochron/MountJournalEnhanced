@@ -6,6 +6,7 @@ name: Package and release
 # this part can be heavily customized to your liking, like targeting only tags that match a certain word,
 # other branches or even pullrequests.
 on:
+  workflow_dispatch:
   push:
     tags:
       - '**'

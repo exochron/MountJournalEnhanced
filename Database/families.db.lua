@@ -1015,7 +1015,6 @@ ADDON.DB.Family = {
 [290134] = true, -- Hogrus, Swine of Good Fortune
 [332478] = true, -- Blisterback Bloodtusk
 [332480] = true, -- Gorespine
-[332482] = true, -- Bonecleaver's Skullboar
 [332484] = true, -- Lurid Bloodtusk
 },
 ["Camels"] = {
