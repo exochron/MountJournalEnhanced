@@ -70,7 +70,7 @@ local function FavorMounts(mountIds, finishedCallback)
         end
     end
     if ADDON.initialized then
-        ADDON:UpdateIndexMap()
+        ADDON:UpdateIndex()
         MountJournal_UpdateMountList()
     end
 

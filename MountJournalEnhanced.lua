@@ -14,14 +14,19 @@ end
 
 --region C_MountJournal Hooks
 
+-- maps index to mountID
 local function MapIndex(index)
     -- index=0 => SummonRandomButton
-    if SearchIsActive() or index == 0 then
-        return index
+    if index == 0 then
+        return 0
+    end
+
+    if SearchIsActive() then
+        return select(12, ADDON.hooks["GetDisplayedMountInfo"](index))
     end
 
     if nil == indexMap then
-        ADDON:UpdateIndexMap()
+        ADDON:UpdateIndex()
     end
 
     return indexMap[index]
@@ -33,7 +38,7 @@ local function C_MountJournal_GetNumDisplayedMounts()
     end
 
     if nil == indexMap then
-        ADDON:UpdateIndexMap()
+        ADDON:UpdateIndex()
     end
 
     return #indexMap
@@ -41,20 +46,16 @@ end
 
 local function C_MountJournal_GetDisplayedMountInfo(index)
     local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h
-    local mappedIndex = MapIndex(index)
-    if nil ~= mappedIndex then
-        creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = ADDON.hooks["GetDisplayedMountInfo"](mappedIndex)
-        isUsable = isUsable and IsUsableSpell(spellId)
+    local mappedMountId = MapIndex(index)
+    if mappedMountId > 0 then
+        creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = C_MountJournal.GetMountInfoByID(mappedMountId)
+    else
+        creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = ADDON.hooks["GetDisplayedMountInfo"](index)
     end
+
+    isUsable = isUsable and IsUsableSpell(spellId)
 
     return creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h
-end
-
-local function C_MountJournal_GetDisplayedMountInfoExtra(index)
-    local _, _, _, _, _, _, _, _, _, _, _, mountId = C_MountJournal.GetDisplayedMountInfo(index)
-    if mountId then
-        return C_MountJournal.GetMountInfoExtraByID(mountId)
-    end
 end
 
 local function Hook(obj, name, func)
@@ -62,10 +63,19 @@ local function Hook(obj, name, func)
     obj[name] = func
 end
 
+local function HookWithMountId(originalFuncName, mappedFuncName)
+    Hook(C_MountJournal, originalFuncName, function(index, arg1, arg2)
+        local mountId = MapIndex(index)
+        if mountId > 0 then
+            return C_MountJournal[mappedFuncName](mountId, arg1, arg2)
+        end
+    end)
+end
 local function HookWithMappedIndex(functionName)
     Hook(C_MountJournal, functionName, function(index, arg1, arg2)
-        local mappedIndex = MapIndex(index)
-        if nil ~= mappedIndex then
+        local mountId = MapIndex(index)
+        if mountId > 0 then
+            local mappedIndex = tIndexOf(indexMap, mountId)
             return ADDON.hooks[functionName](mappedIndex, arg1, arg2)
         end
     end)
@@ -74,12 +84,12 @@ end
 local function RegisterMountJournalHooks()
     Hook(C_MountJournal, "GetNumDisplayedMounts", C_MountJournal_GetNumDisplayedMounts)
     Hook(C_MountJournal, "GetDisplayedMountInfo", C_MountJournal_GetDisplayedMountInfo)
-    Hook(C_MountJournal, "GetDisplayedMountInfoExtra", C_MountJournal_GetDisplayedMountInfoExtra)
+    HookWithMountId("GetDisplayedMountInfoExtra", "GetMountInfoExtraByID")
+    HookWithMountId("GetDisplayedMountAllCreatureDisplayInfo", "GetMountAllCreatureDisplayInfoByID")
     HookWithMappedIndex("SetIsFavorite")
-    hooksecurefunc(C_MountJournal, "SetIsFavorite", ADDON.UpdateIndexMap)
+    hooksecurefunc(C_MountJournal, "SetIsFavorite", ADDON.UpdateIndex)
     HookWithMappedIndex("GetIsFavorite")
     HookWithMappedIndex("Pickup")
-    HookWithMappedIndex("GetDisplayedMountAllCreatureDisplayInfo")
 end
 
 --endregion Hooks
@@ -102,7 +112,7 @@ end
 local function LoadUI()
     RegisterMountJournalHooks()
 
-    ADDON:UpdateIndexMap()
+    ADDON:UpdateIndex()
     MountJournal_UpdateMountList()
 
     local frame = CreateFrame("frame");
@@ -112,7 +122,7 @@ local function LoadUI()
     frame:RegisterEvent("MOUNT_JOURNAL_SEARCH_UPDATED")
     frame:SetScript("OnEvent", function(sender, ...)
         if CollectionsJournal:IsShown() then
-            ADDON:UpdateIndexMap(true)
+            ADDON:UpdateIndex(true)
             MountJournal_UpdateMountList()
         end
     end);
@@ -129,13 +139,14 @@ local function mapMountType(mountId)
     end
 end
 
-function ADDON:UpdateIndexMap(calledFromEvent)
+function ADDON:UpdateIndex(calledFromEvent)
     local map = {}
 
     if not SearchIsActive() then
         for i = 1, self.hooks["GetNumDisplayedMounts"]() do
-            if ADDON:FilterMount(i) then
-                map[#map + 1] = i
+            local mountId = select(12, ADDON.hooks["GetDisplayedMountInfo"](i))
+            if ADDON:FilterMount(mountId) then
+                map[#map + 1] = mountId
             end
         end
 
@@ -144,15 +155,15 @@ function ADDON:UpdateIndexMap(calledFromEvent)
         end
 
         if ADDON.settings.ui.enableSortOptions then
-            table.sort(map, function(a, b)
+            table.sort(map, function(mountIdA, mountIdB)
 
-                if a == b then
+                if mountIdA == mountIdB then
                     return false
                 end
 
                 local result = false
-                local nameA, _, _, _, _, _, isFavoriteA, _, _, _, isCollectedA, mountIdA = ADDON.hooks["GetDisplayedMountInfo"](a)
-                local nameB, _, _, _, _, _, isFavoriteB, _, _, _, isCollectedB, mountIdB = ADDON.hooks["GetDisplayedMountInfo"](b)
+                local nameA, _, _, _, _, _, isFavoriteA, _, _, _, isCollectedA = C_MountJournal.GetMountInfoByID(mountIdA)
+                local nameB, _, _, _, _, _, isFavoriteB, _, _, _, isCollectedB = C_MountJournal.GetMountInfoByID(mountIdB)
 
                 if ADDON.settings.sort.favoritesOnTop and isFavoriteA ~= isFavoriteB then
                     return isFavoriteA and not isFavoriteB
@@ -162,7 +173,7 @@ function ADDON:UpdateIndexMap(calledFromEvent)
                 end
 
                 if ADDON.settings.sort.by == 'name' then
-                    result = strcmputf8i(nameA, nameB) < 0
+                    result = strcmputf8i(nameA, nameB) < 0 -- still not comparing Umlauts right :(
                 elseif ADDON.settings.sort.by == 'type' then
                     local mountTypeA = mapMountType(mountIdA)
                     local mountTypeB = mapMountType(mountIdB)

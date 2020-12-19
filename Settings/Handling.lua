@@ -56,7 +56,7 @@ ADDON:RegisterBehaviourSetting('personalHiddenMounts', false, L.SETTING_PERSONAL
     end
 
     if ADDON.initialized then
-        ADDON:UpdateIndexMap()
+        ADDON:UpdateIndex()
     end
 end)
 
@@ -70,13 +70,13 @@ ADDON:RegisterBehaviourSetting('personalFilter', false, L.SETTING_PERSONAL_FILTE
     end
 
     if ADDON.initialized then
-        ADDON:UpdateIndexMap()
+        ADDON:UpdateIndex()
     end
 end)
 
 ADDON:RegisterUISetting('enableSortOptions', true, L.SETTING_CUSTOM_SORT_OPTIONS, function ()
     if ADDON.initialized then
-        ADDON:UpdateIndexMap()
+        ADDON:UpdateIndex()
     end
 end)
 --endregion

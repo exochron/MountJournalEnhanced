@@ -186,9 +186,9 @@ function ADDON:FilterMountsByType(spellId, mountID)
     return result
 end
 
-function ADDON:FilterMount(index)
+function ADDON:FilterMount(mountId)
 
-    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, isFiltered, isCollected, mountId = ADDON.hooks["GetDisplayedMountInfo"](index)
+    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, isFiltered, isCollected = C_MountJournal.GetMountInfoByID(mountId)
 
     if (FilterHiddenMounts(spellId) and
             FilterFavoriteMounts(isFavorite) and

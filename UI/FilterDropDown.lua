@@ -33,7 +33,7 @@ local function CreateFilterInfo(text, filterKey, filterSettings, callback)
         end
         info.func = function(_, arg1, arg2, value)
             arg1[filterKey] = arg2 or value
-            ADDON:UpdateIndexMap()
+            ADDON:UpdateIndex()
             MountJournal_UpdateMountList()
             UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
 
@@ -95,7 +95,7 @@ local function SetAllSubFilters(settings, switch)
     end
 
     UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
-    ADDON:UpdateIndexMap()
+    ADDON:UpdateIndex()
     MountJournal_UpdateMountList()
 end
 
@@ -212,7 +212,7 @@ local function InitializeFilterDropDown(filterMenu, level)
         info.keepShownOnClick = false
         info.func = function(_, _, _, value)
             ADDON:ResetFilterSettings()
-            ADDON:UpdateIndexMap()
+            ADDON:UpdateIndex()
             MountJournal_UpdateMountList()
         end
         UIDropDownMenu_AddButton(info, level)
@@ -320,7 +320,7 @@ local function InitializeFilterDropDown(filterMenu, level)
         info.keepShownOnClick = false
         info.func = function(_, _, _, value)
             ADDON:ResetSortSettings()
-            ADDON:UpdateIndexMap()
+            ADDON:UpdateIndex()
             MountJournal_UpdateMountList()
         end
         UIDropDownMenu_AddButton(info, level)

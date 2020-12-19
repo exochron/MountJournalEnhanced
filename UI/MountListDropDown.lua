@@ -59,7 +59,7 @@ local function InitializeMountOptionsMenu(sender, level)
                 text = SHOW,
                 func = function()
                     ADDON.settings.hiddenMounts[spellId] = nil
-                    ADDON:UpdateIndexMap()
+                    ADDON:UpdateIndex()
                     MountJournal_UpdateMountList()
                 end
             }
@@ -68,7 +68,7 @@ local function InitializeMountOptionsMenu(sender, level)
                 text = HIDE,
                 func = function()
                     ADDON.settings.hiddenMounts[spellId] = true
-                    ADDON:UpdateIndexMap()
+                    ADDON:UpdateIndex()
                     MountJournal_UpdateMountList()
                 end,
             }
