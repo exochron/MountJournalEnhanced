@@ -130,20 +130,11 @@ local function LoadUI()
     FireCallbacks(loadUICallbacks)
 end
 
-local function mapMountType(mountId)
-    local _, _, _, _, mountType = C_MountJournal.GetMountInfoExtraByID(mountId)
-    for category, values in pairs(ADDON.DB.Type) do
-        if values.typeIDs and tContains(values.typeIDs, mountType) then
-            return category
-        end
-    end
-end
-
 function ADDON:UpdateIndex(calledFromEvent)
     local map = {}
 
     if not SearchIsActive() then
-        for i = 1, self.hooks["GetNumDisplayedMounts"]() do
+        for i = 1, ADDON.hooks["GetNumDisplayedMounts"]() do
             local mountId = select(12, ADDON.hooks["GetDisplayedMountInfo"](i))
             if ADDON:FilterMount(mountId) then
                 map[#map + 1] = mountId
@@ -154,51 +145,7 @@ function ADDON:UpdateIndex(calledFromEvent)
             return
         end
 
-        if ADDON.settings.ui.enableSortOptions then
-            table.sort(map, function(mountIdA, mountIdB)
-
-                if mountIdA == mountIdB then
-                    return false
-                end
-
-                local result = false
-                local nameA, _, _, _, _, _, isFavoriteA, _, _, _, isCollectedA = C_MountJournal.GetMountInfoByID(mountIdA)
-                local nameB, _, _, _, _, _, isFavoriteB, _, _, _, isCollectedB = C_MountJournal.GetMountInfoByID(mountIdB)
-
-                if ADDON.settings.sort.favoritesOnTop and isFavoriteA ~= isFavoriteB then
-                    return isFavoriteA and not isFavoriteB
-                end
-                if ADDON.settings.sort.unownedOnBottom and isCollectedA ~= isCollectedB then
-                    return isCollectedA and not isCollectedB
-                end
-
-                if ADDON.settings.sort.by == 'name' then
-                    result = strcmputf8i(nameA, nameB) < 0 -- still not comparing Umlauts right :(
-                elseif ADDON.settings.sort.by == 'type' then
-                    local mountTypeA = mapMountType(mountIdA)
-                    local mountTypeB = mapMountType(mountIdB)
-
-                    if mountTypeA == mountTypeB then
-                        result = strcmputf8i(nameA, nameB) < 0
-                    elseif mountTypeA == "flying" then
-                        result = true
-                    elseif mountTypeA == "ground" then
-                        result = (mountTypeB == "underwater")
-                    elseif mountTypeA == "underwater" then
-                        result = false
-                    end
-
-                elseif ADDON.settings.sort.by == 'expansion' then
-                    result = mountIdA < mountIdB
-                end
-
-                if ADDON.settings.sort.descending then
-                    result = not result
-                end
-
-                return result
-            end)
-        end
+        map = ADDON:SortMounts(map)
     end
 
     indexMap = map

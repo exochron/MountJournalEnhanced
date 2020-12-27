@@ -30,6 +30,7 @@ Database\restrictions.db.lua
 
 PlayerConditions.lua
 Filters.lua
+Sort.lua
 MountJournalEnhanced.lua
 Settings\Handling.lua
 Settings\Migration.lua
