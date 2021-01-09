@@ -14,23 +14,13 @@ local SETTING_EXPANSION = "expansion"
 local SETTING_HIDDEN = "hidden"
 local SETTING_SORT = "sort"
 
-local function CreateSpace()
-    local info = MSA_DropDownMenu_CreateInfo()
-    info.hasArrow = false
-    info.dist = 0
-    info.isTitle = true
-    info.isUninteractable = true
-    info.notCheckable = true
-
-    return info
-end
-
 local function CreateFilterInfo(text, filterKey, filterSettings, callback)
-    local info = MSA_DropDownMenu_CreateInfo()
-    info.keepShownOnClick = true
-    info.isNotRadio = true
-    info.hasArrow = false
-    info.text = text
+    local info = {
+        keepShownOnClick = true,
+        isNotRadio = true,
+        hasArrow = false,
+        text = text,
+    }
 
     if filterKey then
         if not filterSettings then
@@ -43,9 +33,9 @@ local function CreateFilterInfo(text, filterKey, filterSettings, callback)
         end
         info.func = function(_, arg1, arg2, value)
             arg1[filterKey] = arg2 or value
-            ADDON:UpdateIndexMap()
+            ADDON:UpdateIndex()
             MountJournal_UpdateMountList()
-            MSA_DropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
+            UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
 
             if callback then
                 callback(value)
@@ -104,8 +94,8 @@ local function SetAllSubFilters(settings, switch)
         end
     end
 
-    MSA_DropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
-    ADDON:UpdateIndexMap()
+    UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
+    ADDON:UpdateIndex()
     MountJournal_UpdateMountList()
 end
 
@@ -123,12 +113,13 @@ local function RefreshCategoryButton(button, isNotRadio)
 end
 
 local function CreateInfoWithMenu(text, filterKey, settings)
-    local info = MSA_DropDownMenu_CreateInfo()
-    info.text = text
-    info.value = filterKey
-    info.keepShownOnClick = true
-    info.notCheckable = false
-    info.hasArrow = true
+    local info = {
+        text = text,
+        value = filterKey,
+        keepShownOnClick = true,
+        notCheckable = false,
+        hasArrow = true,
+    }
 
     local hasTrue, hasFalse = CheckSetting(settings)
     info.isNotRadio = not hasTrue or not hasFalse
@@ -154,13 +145,13 @@ local function AddCheckAllAndNoneInfo(settings, level)
     info.func = function()
         SetAllSubFilters(settings, true)
     end
-    MSA_DropDownMenu_AddButton(info, level)
+    UIDropDownMenu_AddButton(info, level)
 
     info = CreateFilterInfo(UNCHECK_ALL)
     info.func = function()
         SetAllSubFilters(settings, false)
     end
-    MSA_DropDownMenu_AddButton(info, level)
+    UIDropDownMenu_AddButton(info, level)
 end
 
 local function ShouldDisplayFamily(spellIds)
@@ -187,87 +178,87 @@ local function InitializeFilterDropDown(filterMenu, level)
     if (level == 1) then
         info = CreateFilterInfo(COLLECTED, SETTING_COLLECTED, nil, function(value)
             if (value) then
-                MSA_DropDownMenu_EnableButton(1, 2)
-                MSA_DropDownMenu_EnableButton(1, 3)
+                UIDropDownMenu_EnableButton(1, 2)
+                UIDropDownMenu_EnableButton(1, 3)
             else
-                MSA_DropDownMenu_DisableButton(1, 2)
-                MSA_DropDownMenu_DisableButton(1, 3)
+                UIDropDownMenu_DisableButton(1, 2)
+                UIDropDownMenu_DisableButton(1, 3)
             end
         end)
-        MSA_DropDownMenu_AddButton(info, level)
+        UIDropDownMenu_AddButton(info, level)
 
         info = CreateFilterInfo(FAVORITES_FILTER, SETTING_ONLY_FAVORITES)
         info.leftPadding = 16
         info.disabled = not ADDON.settings.filter.collected
-        MSA_DropDownMenu_AddButton(info, level)
-        info = CreateFilterInfo(L["Only usable"], SETTING_ONLY_USEABLE)
+        UIDropDownMenu_AddButton(info, level)
+        info = CreateFilterInfo(PET_JOURNAL_FILTER_USABLE_ONLY, SETTING_ONLY_USEABLE)
         info.leftPadding = 16
         info.disabled = not ADDON.settings.filter.collected
-        MSA_DropDownMenu_AddButton(info, level)
+        UIDropDownMenu_AddButton(info, level)
 
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(NOT_COLLECTED, SETTING_NOT_COLLECTED), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Only tradable"], SETTING_ONLY_TRADABLE), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Hidden"], SETTING_HIDDEN), level)
-        MSA_DropDownMenu_AddButton(CreateSpace(), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(NOT_COLLECTED, SETTING_NOT_COLLECTED), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(L["Only tradable"], SETTING_ONLY_TRADABLE), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(L["Hidden"], SETTING_HIDDEN), level)
+        UIDropDownMenu_AddSpace(level)
 
-        MSA_DropDownMenu_AddButton(CreateFilterCategory(SOURCES, SETTING_SOURCE), level)
-        MSA_DropDownMenu_AddButton(CreateFilterCategory(TYPE, SETTING_MOUNT_TYPE), level)
-        MSA_DropDownMenu_AddButton(CreateFilterCategory(FACTION, SETTING_FACTION), level)
-        MSA_DropDownMenu_AddButton(CreateFilterCategory(L["Family"], SETTING_FAMILY), level)
-        MSA_DropDownMenu_AddButton(CreateFilterCategory(EXPANSION_FILTER_TEXT, SETTING_EXPANSION), level)
-        MSA_DropDownMenu_AddButton(CreateSpace(), level)
+        UIDropDownMenu_AddButton(CreateFilterCategory(SOURCES, SETTING_SOURCE), level)
+        UIDropDownMenu_AddButton(CreateFilterCategory(TYPE, SETTING_MOUNT_TYPE), level)
+        UIDropDownMenu_AddButton(CreateFilterCategory(FACTION, SETTING_FACTION), level)
+        UIDropDownMenu_AddButton(CreateFilterCategory(L["Family"], SETTING_FAMILY), level)
+        UIDropDownMenu_AddButton(CreateFilterCategory(EXPANSION_FILTER_TEXT, SETTING_EXPANSION), level)
+        UIDropDownMenu_AddSpace(level)
 
         info = CreateFilterInfo(L["Reset filters"])
         info.keepShownOnClick = false
         info.func = function(_, _, _, value)
             ADDON:ResetFilterSettings()
-            ADDON:UpdateIndexMap()
+            ADDON:UpdateIndex()
             MountJournal_UpdateMountList()
         end
-        MSA_DropDownMenu_AddButton(info, level)
+        UIDropDownMenu_AddButton(info, level)
 
         if ADDON.settings.ui.enableSortOptions then
-            MSA_DropDownMenu_AddButton(CreateSpace(), level)
-            MSA_DropDownMenu_AddButton(CreateFilterCategory(CLUB_FINDER_SORT_BY, SETTING_SORT), level)
+            UIDropDownMenu_AddSpace(level)
+            UIDropDownMenu_AddButton(CreateFilterCategory(CLUB_FINDER_SORT_BY, SETTING_SORT), level)
         end
-    elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_SOURCE) then
+    elseif (UIDROPDOWNMENU_MENU_VALUE == SETTING_SOURCE) then
         local settings = ADDON.settings.filter[SETTING_SOURCE]
         AddCheckAllAndNoneInfo(settings, level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_1, "Drop", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_2, "Quest", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_3, "Vendor", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_4, "Profession", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(INSTANCE, "Instance", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(REPUTATION, "Reputation", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_6, "Achievement", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_1, "Drop", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_2, "Quest", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_3, "Vendor", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_4, "Profession", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(INSTANCE, "Instance", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(REPUTATION, "Reputation", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_6, "Achievement", settings), level)
 
         if select(4, GetBuildInfo()) >= 90000 then
-            MSA_DropDownMenu_AddButton(CreateFilterInfo(GetCategoryInfo(15441), "Covenants", settings), level)
+            UIDropDownMenu_AddButton(CreateFilterInfo(GetCategoryInfo(15441), "Covenants", settings), level)
         end
 
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(ISLANDS_HEADER, "Island Expedition", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(GARRISON_LOCATION_TOOLTIP, "Garrison", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(PVP, "PVP", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(CLASS, "Class", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_7, "World Event", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Black Market"], "Black Market", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_10, "Shop", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_8, "Promotion", settings), level)
-    elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_MOUNT_TYPE) then
+        UIDropDownMenu_AddButton(CreateFilterInfo(ISLANDS_HEADER, "Island Expedition", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(GARRISON_LOCATION_TOOLTIP, "Garrison", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(PVP, "PVP", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(CLASS, "Class", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_7, "World Event", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(L["Black Market"], "Black Market", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_10, "Shop", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_8, "Promotion", settings), level)
+    elseif (UIDROPDOWNMENU_MENU_VALUE == SETTING_MOUNT_TYPE) then
         local settings = ADDON.settings.filter[SETTING_MOUNT_TYPE]
         AddCheckAllAndNoneInfo(settings, level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Flying"], "flying", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Ground"], "ground", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Underwater"], "underwater", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Transform"], "transform", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(MINIMAP_TRACKING_REPAIR, "repair", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L["Passenger"], "passenger", settings), level)
-    elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_FACTION) then
+        UIDropDownMenu_AddButton(CreateFilterInfo(L["Flying"], "flying", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(L["Ground"], "ground", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(L["Underwater"], "underwater", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(L["Transform"], "transform", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(MINIMAP_TRACKING_REPAIR, "repair", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(L["Passenger"], "passenger", settings), level)
+    elseif (UIDROPDOWNMENU_MENU_VALUE == SETTING_FACTION) then
         local settings = ADDON.settings.filter[SETTING_FACTION]
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(FACTION_ALLIANCE, "alliance", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(FACTION_HORDE, "horde", settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(NPC_NAMES_DROPDOWN_NONE, "noFaction", settings), level)
-    elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_FAMILY) then
+        UIDropDownMenu_AddButton(CreateFilterInfo(FACTION_ALLIANCE, "alliance", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(FACTION_HORDE, "horde", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(NPC_NAMES_DROPDOWN_NONE, "noFaction", settings), level)
+    elseif (UIDROPDOWNMENU_MENU_VALUE == SETTING_FAMILY) then
         local settings = ADDON.settings.filter[SETTING_FAMILY]
         local sortedFamilies, hasSubFamilies = {}, {}
         AddCheckAllAndNoneInfo(settings, level)
@@ -289,60 +280,60 @@ local function InitializeFilterDropDown(filterMenu, level)
 
         for _, family in pairs(sortedFamilies) do
             if hasSubFamilies[family] then
-                MSA_DropDownMenu_AddButton(CreateInfoWithMenu(L[family] or family, family, settings[family]), level)
+                UIDropDownMenu_AddButton(CreateInfoWithMenu(L[family] or family, family, settings[family]), level)
             else
-                MSA_DropDownMenu_AddButton(CreateFilterInfo(L[family] or family, family, settings), level)
+                UIDropDownMenu_AddButton(CreateFilterInfo(L[family] or family, family, settings), level)
             end
         end
-    elseif (MSA_DROPDOWNMENU_MENU_VALUE == SETTING_EXPANSION) then
+    elseif (UIDROPDOWNMENU_MENU_VALUE == SETTING_EXPANSION) then
         local settings = ADDON.settings.filter[SETTING_EXPANSION]
         AddCheckAllAndNoneInfo(settings, level)
         for i = 0, #ADDON.DB.Expansion do
-            MSA_DropDownMenu_AddButton(CreateFilterInfo(_G["EXPANSION_NAME" .. i], i, settings), level)
+            UIDropDownMenu_AddButton(CreateFilterInfo(_G["EXPANSION_NAME" .. i], i, settings), level)
         end
-    elseif (level == 3 and ADDON.DB.Family[MSA_DROPDOWNMENU_MENU_VALUE]) then
-        local settings = ADDON.settings.filter[SETTING_FAMILY][MSA_DROPDOWNMENU_MENU_VALUE]
+    elseif (level == 3 and ADDON.DB.Family[UIDROPDOWNMENU_MENU_VALUE]) then
+        local settings = ADDON.settings.filter[SETTING_FAMILY][UIDROPDOWNMENU_MENU_VALUE]
         local sortedFamilies = {}
-        for family, _ in pairs(ADDON.DB.Family[MSA_DROPDOWNMENU_MENU_VALUE]) do
+        for family, _ in pairs(ADDON.DB.Family[UIDROPDOWNMENU_MENU_VALUE]) do
             table.insert(sortedFamilies, family)
         end
         table.sort(sortedFamilies, function(a, b)
             return (L[a] or a) < (L[b] or b)
         end)
         for _, family in pairs(sortedFamilies) do
-            if ShouldDisplayFamily(ADDON.DB.Family[MSA_DROPDOWNMENU_MENU_VALUE][family]) then
-                MSA_DropDownMenu_AddButton(CreateFilterInfo(L[family] or family, family, settings), level)
+            if ShouldDisplayFamily(ADDON.DB.Family[UIDROPDOWNMENU_MENU_VALUE][family]) then
+                UIDropDownMenu_AddButton(CreateFilterInfo(L[family] or family, family, settings), level)
             end
         end
-    elseif MSA_DROPDOWNMENU_MENU_VALUE == SETTING_SORT then
+    elseif UIDROPDOWNMENU_MENU_VALUE == SETTING_SORT then
         local settings = ADDON.settings[SETTING_SORT]
-        MSA_DropDownMenu_AddButton(CreateFilterRadio(NAME, "by", settings, 'name'), level)
-        MSA_DropDownMenu_AddButton(CreateFilterRadio(TYPE, "by", settings, 'type'), level)
-        MSA_DropDownMenu_AddButton(CreateFilterRadio(EXPANSION_FILTER_TEXT, "by", settings, 'expansion'), level)
-        MSA_DropDownMenu_AddButton(CreateSpace(), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L.SORT_REVERSE, 'descending', settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L.SORT_FAVORITES_FIRST, 'favoritesOnTop', settings), level)
-        MSA_DropDownMenu_AddButton(CreateFilterInfo(L.SORT_UNOWNED_BOTTOM, 'unownedOnBottom', settings), level)
-        MSA_DropDownMenu_AddButton(CreateSpace(), level)
+        UIDropDownMenu_AddButton(CreateFilterRadio(NAME, "by", settings, 'name'), level)
+        UIDropDownMenu_AddButton(CreateFilterRadio(TYPE, "by", settings, 'type'), level)
+        UIDropDownMenu_AddButton(CreateFilterRadio(EXPANSION_FILTER_TEXT, "by", settings, 'expansion'), level)
+        UIDropDownMenu_AddSpace(level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(L.SORT_REVERSE, 'descending', settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(L.SORT_FAVORITES_FIRST, 'favoritesOnTop', settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(L.SORT_UNOWNED_BOTTOM, 'unownedOnBottom', settings), level)
+        UIDropDownMenu_AddSpace(level)
 
         info = CreateFilterInfo(NEWBIE_TOOLTIP_STOPWATCH_RESETBUTTON)
         info.keepShownOnClick = false
         info.func = function(_, _, _, value)
             ADDON:ResetSortSettings()
-            ADDON:UpdateIndexMap()
+            ADDON:UpdateIndex()
             MountJournal_UpdateMountList()
         end
-        MSA_DropDownMenu_AddButton(info, level)
+        UIDropDownMenu_AddButton(info, level)
     end
 end
 
 ADDON:RegisterLoadUICallback(function()
-    local menu = MSA_DropDownMenu_Create(ADDON_NAME .. "FilterMenu", MountJournalFilterButton)
-    MSA_DropDownMenu_Initialize(menu, InitializeFilterDropDown, "MENU")
+    local menu = CreateFrame("Frame", ADDON_NAME .. "FilterMenu", MountJournalFilterButton, "UIDropDownMenuTemplate")
+    UIDropDownMenu_Initialize(menu, InitializeFilterDropDown, "MENU")
 
     MountJournalFilterButton:SetScript("OnMouseDown", function(sender, button)
         UIMenuButtonStretchMixin.OnMouseDown(sender, button);
         PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-        MSA_ToggleDropDownMenu(1, nil, menu, sender, 74, 15)
+        ToggleDropDownMenu(1, nil, menu, sender, 74, 15)
     end)
 end)

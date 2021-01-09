@@ -4,8 +4,9 @@ This is an interface addon for World of Warcraft. It extends the ingame mount jo
 
 ### Features
 
-+ Filter mounts by extended source, faction, type, family or expansion
++ Filter mounts by an extended source, faction, type, family or expansion
 + Filter unusable or unwanted mounts
++ Sort mounts by name, type or expansion (or in reverse)
 + Saves filter options
 + Double click list entry to summon mount
 + Compact mount list
@@ -22,6 +23,9 @@ This is an interface addon for World of Warcraft. It extends the ingame mount jo
 ### Fixes also
 + the ridiculous fly in animation of the rider
 
-Have you any problems or do you have some suggestions? Please let me know in the [issue tracker](https://www.curseforge.com/wow/addons/mount-journal-enhanced/issues).
+### Help wanted
 
-You can also help me to [localize the addon into your language](https://www.curseforge.com/wow/addons/mount-journal-enhanced/localization).
+- Have you found any bug or do you have some suggestions? Please let us know in the issue tracker on [Curseforge](https://www.curseforge.com/wow/addons/mount-journal-enhanced/issues) or [GitHub](https://github.com/exochron/MountJournalEnhanced/issues).
+- Is your language still missing some texts? You can localize the addon into your language on [Curseforge](https://www.curseforge.com/wow/addons/mount-journal-enhanced/localization).
+- Want to try out some cool new stuff earlier than everybody else? Just switch to the Beta-Channel in your Addon Updater and let us know of anything you might find in our issue tracker. After a few days without bugs the same version goes stable for everybody else.
+- Are you interested in developing addons as well? Then come join us at [GutHub](https://github.com/exochron/MountJournalEnhanced). And don't worry about knowing nothing of LUA. It's easy to learn. ;-)

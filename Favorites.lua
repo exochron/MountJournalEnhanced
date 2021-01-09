@@ -1,22 +1,13 @@
 local ADDON_NAME, ADDON = ...
 
 -- TODOs:
--- Option: Autofavorite new mounts; even those learned during offline time
+-- Option: Auto favorite new mounts; even those learned during offline time
 -- (Favorite Menu at SummonRandomFavoriteButton?)
 
 local L = ADDON.L
 local starButton
 
-ADDON:RegisterBehaviourSetting(
-        'favoritePerChar',
-        false,
-        L.SETTING_FAVORITE_PER_CHAR,
-        function()
-            ADDON:CollectFavoredMounts()
-        end
-)
-
-function ADDON:CollectFavoredMounts()
+local function CollectFavoredMounts()
     local personalFavored = {}
     if ADDON.settings.favoritePerChar then
         local mountIds = C_MountJournal.GetMountIDs()
@@ -30,8 +21,6 @@ function ADDON:CollectFavoredMounts()
 
     ADDON.settings.favoredMounts = personalFavored
     MJEPersonalSettings.favoredMounts = personalFavored
-
-    return personalFavored
 end
 
 local function FavorMounts(mountIds, finishedCallback)
@@ -69,18 +58,18 @@ local function FavorMounts(mountIds, finishedCallback)
             break
         end
     end
-    if ADDON.initialized then
-        ADDON:UpdateIndexMap()
-        MountJournal_UpdateMountList()
-    end
 
     if hasUpdate then
         C_Timer.After(1, function()
             FavorMounts(mountIds, finishedCallback)
         end)
-    elseif finishedCallback then
+    else
         if starButton then
             starButton:SetDisabled(false)
+        end
+        if ADDON.initialized then
+            ADDON:UpdateIndex()
+            MountJournal_UpdateMountList()
         end
         finishedCallback()
     end
@@ -107,24 +96,25 @@ local function FetchDisplayedMountIds()
 end
 
 local function InitializeDropDown(menu, level)
-    local info = MSA_DropDownMenu_CreateInfo()
-    info.keepShownOnClick = false
-    info.isNotRadio = true
-    info.notCheckable = true
-    info.hasArrow = false
+    local info = {
+        keepShownOnClick = false,
+        isNotRadio = true,
+        notCheckable = true,
+        hasArrow = false,
+    }
 
     if level == 1 then
         info.text = L['FAVOR_DISPLAYED']
         info.func = function()
             RunSetFavorites(FetchDisplayedMountIds())
         end
-        MSA_DropDownMenu_AddButton(info, level)
+        UIDropDownMenu_AddButton(info, level)
 
         info.text = UNCHECK_ALL
         info.func = function()
             RunSetFavorites({})
         end
-        MSA_DropDownMenu_AddButton(info, level)
+        UIDropDownMenu_AddButton(info, level)
 
         info.text = L["FAVOR_PER_CHARACTER"]
         info.notCheckable = false
@@ -132,13 +122,13 @@ local function InitializeDropDown(menu, level)
         info.func = function(_, _, _, value)
             ADDON:ApplySetting('favoritePerChar', not value)
         end
-        MSA_DropDownMenu_AddButton(info, level)
+        UIDropDownMenu_AddButton(info, level)
     end
 end
 
 local function BuildStarButton()
-    local menu = MSA_DropDownMenu_Create(ADDON_NAME .. "FavorMenu", MountJournal)
-    MSA_DropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
+    local menu = CreateFrame("Frame", ADDON_NAME .. "FavorMenu", MountJournal, "UIDropDownMenuTemplate")
+    UIDropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
 
     local AceGUI = LibStub("AceGUI-3.0")
 
@@ -158,12 +148,12 @@ local function BuildStarButton()
         GameTooltip:SetPoint("BOTTOM", sender.frame, "TOP", 0, -4)
         GameTooltip:SetText(FAVORITES)
         GameTooltip:Show()
-    end);
+    end)
     starButton:SetCallback("OnLeave", function(sender)
         GameTooltip:Hide()
-    end);
+    end)
     starButton:SetCallback("OnClick", function()
-        MSA_ToggleDropDownMenu(1, nil, menu, starButton.frame, 0, 10)
+        ToggleDropDownMenu(1, nil, menu, starButton.frame, 0, 10)
     end)
 
     starButton.frame:Show()
@@ -173,18 +163,21 @@ local function BuildStarButton()
     searchBox:SetPoint("TOPLEFT", MountJournal.LeftInset, "TOPLEFT", 27, -9)
     searchBox:SetSize(133, 20)
 end
-ADDON:RegisterLoadUICallback(BuildStarButton)
 
 --endregion
+
+ADDON:RegisterBehaviourSetting( 'favoritePerChar', false, L.SETTING_FAVORITE_PER_CHAR, CollectFavoredMounts )
 
 -- resetting personal favored mounts
 ADDON:RegisterLoginCallback(function()
     if ADDON.settings.favoritePerChar then
         FavorMounts(ADDON.settings.favoredMounts, function()
             -- not quite performant but so far best solution
-            hooksecurefunc(C_MountJournal, "SetIsFavorite", ADDON.CollectFavoredMounts)
+            hooksecurefunc(C_MountJournal, "SetIsFavorite", CollectFavoredMounts)
         end)
     else
-        hooksecurefunc(C_MountJournal, "SetIsFavorite", ADDON.CollectFavoredMounts)
+        hooksecurefunc(C_MountJournal, "SetIsFavorite", CollectFavoredMounts)
     end
 end)
+
+ADDON:RegisterLoadUICallback(BuildStarButton)
