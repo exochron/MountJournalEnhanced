@@ -73,10 +73,14 @@ local function HookWithMountId(originalFuncName, mappedFuncName)
 end
 local function HookWithMappedIndex(functionName)
     Hook(C_MountJournal, functionName, function(index, arg1, arg2)
-        local mountId = MapIndex(index)
-        if mountId > 0 then
-            local mappedIndex = tIndexOf(indexMap, mountId)
-            return ADDON.hooks[functionName](mappedIndex, arg1, arg2)
+        if SearchIsActive() then
+            return ADDON.hooks[functionName](index, arg1, arg2)
+        else
+            local mountId = MapIndex(index)
+            if mountId > 0 then
+                local mappedIndex = tIndexOf(indexMap, mountId)
+                return ADDON.hooks[functionName](mappedIndex, arg1, arg2)
+            end
         end
     end)
 end
@@ -87,7 +91,9 @@ local function RegisterMountJournalHooks()
     HookWithMountId("GetDisplayedMountInfoExtra", "GetMountInfoExtraByID")
     HookWithMountId("GetDisplayedMountAllCreatureDisplayInfo", "GetMountAllCreatureDisplayInfoByID")
     HookWithMappedIndex("SetIsFavorite")
-    hooksecurefunc(C_MountJournal, "SetIsFavorite", ADDON.UpdateIndex)
+    hooksecurefunc(C_MountJournal, "SetIsFavorite", function()
+        ADDON:UpdateIndex() -- dont forward parameters
+    end)
     HookWithMappedIndex("GetIsFavorite")
     HookWithMappedIndex("Pickup")
 end

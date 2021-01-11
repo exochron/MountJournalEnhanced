@@ -110,7 +110,6 @@ end
 
 function ADDON:SortMounts(ids)
     if ADDON.settings.ui.enableSortOptions then
-        print("start sorting")
         table.sort(ids, function(mountIdA, mountIdB)
 
             if mountIdA == mountIdB then
