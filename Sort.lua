@@ -110,7 +110,9 @@ end
 
 function ADDON:SortMounts(ids)
     if ADDON.settings.ui.enableSortOptions then
-        table.sort(ids, function(mountIdA, mountIdB)
+        table.sort(ids, function(dataA, dataB)
+            local mountIdA = dataA[1]
+            local mountIdB = dataB[1]
 
             if mountIdA == mountIdB then
                 return false

@@ -14,8 +14,7 @@ end
 
 --region C_MountJournal Hooks
 
--- maps index to mountID
-local function MapIndex(index)
+local function MapIndexToMountId(index)
     -- index=0 => SummonRandomButton
     if index == 0 then
         return 0
@@ -29,7 +28,20 @@ local function MapIndex(index)
         ADDON:UpdateIndex()
     end
 
-    return indexMap[index]
+    return indexMap[index][1]
+end
+
+local function MapIndex(index)
+    -- index=0 => SummonRandomButton
+    if index == 0 or SearchIsActive() then
+        return index
+    end
+
+    if nil == indexMap then
+        ADDON:UpdateIndex()
+    end
+
+    return indexMap[index][2]
 end
 
 local function C_MountJournal_GetNumDisplayedMounts()
@@ -46,7 +58,7 @@ end
 
 local function C_MountJournal_GetDisplayedMountInfo(index)
     local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h
-    local mappedMountId = MapIndex(index)
+    local mappedMountId = MapIndexToMountId(index)
     if mappedMountId > 0 then
         creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = C_MountJournal.GetMountInfoByID(mappedMountId)
     else
@@ -65,7 +77,7 @@ end
 
 local function HookWithMountId(originalFuncName, mappedFuncName)
     Hook(C_MountJournal, originalFuncName, function(index, arg1, arg2)
-        local mountId = MapIndex(index)
+        local mountId = MapIndexToMountId(index)
         if mountId > 0 then
             return C_MountJournal[mappedFuncName](mountId, arg1, arg2)
         end
@@ -73,15 +85,7 @@ local function HookWithMountId(originalFuncName, mappedFuncName)
 end
 local function HookWithMappedIndex(functionName)
     Hook(C_MountJournal, functionName, function(index, arg1, arg2)
-        if SearchIsActive() then
-            return ADDON.hooks[functionName](index, arg1, arg2)
-        else
-            local mountId = MapIndex(index)
-            if mountId > 0 then
-                local mappedIndex = tIndexOf(indexMap, mountId)
-                return ADDON.hooks[functionName](mappedIndex, arg1, arg2)
-            end
-        end
+        return ADDON.hooks[functionName](MapIndex(index), arg1, arg2)
     end)
 end
 
@@ -90,12 +94,12 @@ local function RegisterMountJournalHooks()
     Hook(C_MountJournal, "GetDisplayedMountInfo", C_MountJournal_GetDisplayedMountInfo)
     HookWithMountId("GetDisplayedMountInfoExtra", "GetMountInfoExtraByID")
     HookWithMountId("GetDisplayedMountAllCreatureDisplayInfo", "GetMountAllCreatureDisplayInfoByID")
+    HookWithMappedIndex("Pickup")
+    HookWithMappedIndex("GetIsFavorite")
     HookWithMappedIndex("SetIsFavorite")
     hooksecurefunc(C_MountJournal, "SetIsFavorite", function()
         ADDON:UpdateIndex() -- dont forward parameters
     end)
-    HookWithMappedIndex("GetIsFavorite")
-    HookWithMappedIndex("Pickup")
 end
 
 --endregion Hooks
@@ -143,7 +147,7 @@ function ADDON:UpdateIndex(calledFromEvent)
         for i = 1, ADDON.hooks["GetNumDisplayedMounts"]() do
             local mountId = select(12, ADDON.hooks["GetDisplayedMountInfo"](i))
             if ADDON:FilterMount(mountId) then
-                map[#map + 1] = mountId
+                map[#map + 1] = {mountId, i}
             end
         end
 
