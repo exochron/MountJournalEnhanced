@@ -146,6 +146,30 @@ function ADDON:SortMounts(ids)
 
         elseif ADDON.settings.sort.by == 'expansion' then
             result = mountIdA < mountIdB
+        elseif ADDON.settings.sort.by == 'learned_date' then
+            local _, _, _, _, learnedA = ADDON:GetMountStatistics(mountIdA)
+            local _, _, _, _, learnedB = ADDON:GetMountStatistics(mountIdB)
+            if learnedA == learnedB then
+                result = CompareNames(nameA, mountIdA, nameB, mountIdB)
+                if ADDON.settings.sort.descending then
+                    result = not result
+                end
+            elseif learnedA and learnedB then
+                result = learnedA < learnedB
+            elseif learnedB then
+                result = true
+            end
+        elseif ADDON.settings.sort.by == 'usage_count' then
+            local countA = ADDON:GetMountStatistics(mountIdA) or 0
+            local countB = ADDON:GetMountStatistics(mountIdB) or 0
+            if countA == countB then
+                result = CompareNames(nameA, mountIdA, nameB, mountIdB)
+                if ADDON.settings.sort.descending then
+                    result = not result
+                end
+            else
+                result = countA < countB
+            end
         end
 
         if ADDON.settings.sort.descending then

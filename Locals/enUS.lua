@@ -26,6 +26,8 @@ L["TASK_FAVOR_START"] = "[MJE] Reapplying stars all over your mounts. Please wai
 L["Transform"] = "Transform"
 L["Underwater"] = "Underwater"
 L["FILTER_SECRET"] = "Hidden by the game"
+L["SORT_BY_LEARNED_DATE"] = "Date of receipt"
+L["SORT_BY_USAGE_COUNT"] = "Count of usage"
 
 -- Families
 L["Airplanes"] = "Airplanes"

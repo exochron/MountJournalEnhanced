@@ -331,6 +331,10 @@ local function InitializeFilterDropDown(filterMenu, level)
         UIDropDownMenu_AddButton(CreateFilterRadio(NAME, "by", settings, 'name'), level)
         UIDropDownMenu_AddButton(CreateFilterRadio(TYPE, "by", settings, 'type'), level)
         UIDropDownMenu_AddButton(CreateFilterRadio(EXPANSION_FILTER_TEXT, "by", settings, 'expansion'), level)
+        if ADDON.settings.trackUsageStats then
+            UIDropDownMenu_AddButton(CreateFilterRadio(L.SORT_BY_LEARNED_DATE, "by", settings, 'learned_date'), level)
+            UIDropDownMenu_AddButton(CreateFilterRadio(L.SORT_BY_USAGE_COUNT, "by", settings, 'usage_count'), level)
+        end
         UIDropDownMenu_AddSpace(level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L.SORT_REVERSE, 'descending', settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L.SORT_FAVORITES_FIRST, 'favoritesOnTop', settings), level)
