@@ -244,10 +244,8 @@ local function InitializeFilterDropDown(filterMenu, level)
         end
         UIDropDownMenu_AddButton(info, level)
 
-        if ADDON.settings.ui.enableSortOptions then
-            UIDropDownMenu_AddSpace(level)
-            UIDropDownMenu_AddButton(CreateFilterCategory(CLUB_FINDER_SORT_BY, SETTING_SORT), level)
-        end
+        UIDropDownMenu_AddSpace(level)
+        UIDropDownMenu_AddButton(CreateFilterCategory(CLUB_FINDER_SORT_BY, SETTING_SORT), level)
     elseif UIDROPDOWNMENU_MENU_VALUE == SETTING_SOURCE then
         local settings = ADDON.settings.filter[SETTING_SOURCE]
         AddCheckAllAndNoneInfo(settings, level)

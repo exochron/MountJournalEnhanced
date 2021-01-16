@@ -39,7 +39,6 @@ local function PrepareDefaults()
             moveEquipmentSlot = true,
             previewButton = true,
             showPersonalCount = true,
-            enableSortOptions = true,
         },
 
         favoritePerChar = false,
