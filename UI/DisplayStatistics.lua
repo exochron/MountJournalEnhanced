@@ -32,12 +32,13 @@ local function formatDistance(length)
 end
 
 local function generateText(mountId)
+    -- see: https://wow.gamepedia.com/UI_escape_sequences
     local text = ''
     local useCount, lastUseTime, travelTime, travelDistance, learnedTime = ADDON:GetMountStatistics(mountId)
     if useCount ~= nil then
         if useCount > 0 then
             -- interface/icons/achievement_guildperk_mountup
-            text = '|T413588:0|t' .. useCount..'x'
+            text = '|T413588:0|t' .. useCount .. 'x'
         end
         if travelTime > 0 then
             -- interface/icons/spell_nature_timestop
@@ -48,9 +49,8 @@ local function generateText(mountId)
             text = text .. '  |T1817485:0|t' .. formatDistance(travelDistance)
         end
         if learnedTime then
-            -- interface/buttons/ui-checkbox-check
             local data = date('*t', learnedTime)
-            text = text .. "  |T130751:0|t" .. FormatShortDate(data.day, data.month, data.year)
+            text = text .. "  |A:auctionhouse-icon-checkmark:0:0|a" .. FormatShortDate(data.day, data.month, data.year)
         end
     end
     return text
