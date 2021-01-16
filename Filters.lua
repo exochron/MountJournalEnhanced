@@ -11,7 +11,7 @@ local function FilterByName(searchString, name, mountId)
     local pos = strfind(name, searchString, 1, true)
     local result = pos ~= nil
 
-    if result == false then
+    if result == false and ADDON.settings.searchInDescription then
         local _, description, sourceText = C_MountJournal.GetMountInfoExtraByID(mountId)
         description = description:lower()
         pos = strfind(description, searchString, 1, true)

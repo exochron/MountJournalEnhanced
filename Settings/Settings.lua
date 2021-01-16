@@ -25,6 +25,7 @@ local function PrepareDefaults()
     local defaultSettings = {
 
         trackUsageStats = true,
+        searchInDescription = true,
 
         personalUi = false,
         ui = {
@@ -137,6 +138,7 @@ ADDON:RegisterLoginCallback(function()
     ADDON:ApplySetting('personalUi', MJEPersonalSettings.personalUi)
     ADDON:ApplySetting('personalHiddenMounts', MJEPersonalSettings.personalHiddenMounts)
     ADDON:ApplySetting('personalFilter', MJEPersonalSettings.personalFilter)
+    ADDON:ApplySetting('searchInDescription', MJEPersonalSettings.searchInDescription)
 
     ADDON.settings.favoritePerChar = MJEPersonalSettings.favoritePerChar
     ADDON.settings.favoredMounts = MJEPersonalSettings.favoredMounts

@@ -74,9 +74,11 @@ ADDON:RegisterBehaviourSetting('personalFilter', false, L.SETTING_PERSONAL_FILTE
     end
 end)
 
+ADDON:RegisterBehaviourSetting('searchInDescription', true, L.SETTING_SEARCH_MORE)
+--endregion
+
 ADDON:RegisterUISetting('enableSortOptions', true, L.SETTING_CUSTOM_SORT_OPTIONS, function ()
     if ADDON.initialized then
         ADDON:UpdateIndex()
     end
 end)
---endregion
