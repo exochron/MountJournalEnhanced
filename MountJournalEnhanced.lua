@@ -3,25 +3,12 @@ local ADDON_NAME, ADDON = ...
 ADDON.hooks = {}
 local indexMap -- initialize with nil, so we know if it's not ready yet and not just empty
 
-local function SearchIsActive()
-    local searchString = MountJournal.searchBox:GetText()
-    if not searchString or string.len(searchString) == 0 then
-        return false
-    end
-
-    return true
-end
-
 --region C_MountJournal Hooks
 
 local function MapIndexToMountId(index)
     -- index=0 => SummonRandomButton
     if index == 0 then
         return 0
-    end
-
-    if SearchIsActive() then
-        return select(12, ADDON.hooks["GetDisplayedMountInfo"](index))
     end
 
     if nil == indexMap then
@@ -33,7 +20,7 @@ end
 
 local function MapIndex(index)
     -- index=0 => SummonRandomButton
-    if index == 0 or SearchIsActive() then
+    if index == 0 then
         return index
     end
 
@@ -45,10 +32,6 @@ local function MapIndex(index)
 end
 
 local function C_MountJournal_GetNumDisplayedMounts()
-    if SearchIsActive() then
-        return ADDON.hooks["GetNumDisplayedMounts"]()
-    end
-
     if nil == indexMap then
         ADDON:UpdateIndex()
     end
@@ -85,7 +68,10 @@ local function HookWithMountId(originalFuncName, mappedFuncName)
 end
 local function HookWithMappedIndex(functionName)
     Hook(C_MountJournal, functionName, function(index, arg1, arg2)
-        return ADDON.hooks[functionName](MapIndex(index), arg1, arg2)
+        index = MapIndex(index)
+        if index > 0 then
+            return ADDON.hooks[functionName](index, arg1, arg2)
+        end
     end)
 end
 
@@ -137,28 +123,35 @@ local function LoadUI()
         end
     end);
 
+    MountJournal.searchBox:SetScript("OnTextChanged", function()
+        SearchBoxTemplate_OnTextChanged(MountJournal.searchBox)
+        ADDON:UpdateIndex(true)
+        MountJournal_UpdateMountList()
+    end)
+
     FireCallbacks(loadUICallbacks)
 end
 
 function ADDON:UpdateIndex(calledFromEvent)
     local map = {}
 
-    if not SearchIsActive() then
-        for i = 1, ADDON.hooks["GetNumDisplayedMounts"]() do
-            local mountId = select(12, ADDON.hooks["GetDisplayedMountInfo"](i))
-            if ADDON:FilterMount(mountId) then
-                map[#map + 1] = {mountId, i}
-            end
-        end
-
-        if calledFromEvent and nil ~= indexMap and #map == #indexMap then
-            return
-        end
-
-        map = ADDON:SortMounts(map)
+    local searchString = MountJournal.searchBox:GetText() or ""
+    if searchString ~= "" then
+        searchString = searchString:lower()
     end
 
-    indexMap = map
+    for i = 1, ADDON.hooks["GetNumDisplayedMounts"]() do
+        local mountId = select(12, ADDON.hooks["GetDisplayedMountInfo"](i))
+        if ADDON:FilterMount(mountId, searchString) then
+            map[#map + 1] = {mountId, i}
+        end
+    end
+
+    if calledFromEvent and nil ~= indexMap and #map == #indexMap then
+        return
+    end
+
+    indexMap = ADDON:SortMounts(map)
 end
 
 local function ResetIngameFilter()
