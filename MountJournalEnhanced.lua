@@ -69,7 +69,7 @@ end
 local function HookWithMappedIndex(functionName)
     Hook(C_MountJournal, functionName, function(index, arg1, arg2)
         index = MapIndex(index)
-        if index > 0 then
+        if index then
             return ADDON.hooks[functionName](index, arg1, arg2)
         end
     end)
@@ -134,6 +134,7 @@ end
 
 function ADDON:UpdateIndex(calledFromEvent)
     local map = {}
+    local handledMounts = {}
 
     local searchString = MountJournal.searchBox:GetText() or ""
     if searchString ~= "" then
@@ -143,7 +144,17 @@ function ADDON:UpdateIndex(calledFromEvent)
     for i = 1, ADDON.hooks["GetNumDisplayedMounts"]() do
         local mountId = select(12, ADDON.hooks["GetDisplayedMountInfo"](i))
         if ADDON:FilterMount(mountId, searchString) then
-            map[#map + 1] = {mountId, i}
+            map[#map + 1] = { mountId, i }
+        end
+        handledMounts[mountId] = true
+    end
+
+    for _, mountId in ipairs(C_MountJournal.GetMountIDs()) do
+        if not handledMounts[mountId]
+                and not ADDON.DB.Ignored[mountId]
+                and ADDON:FilterMount(mountId, searchString)
+        then
+            map[#map + 1] = { mountId }
         end
     end
 

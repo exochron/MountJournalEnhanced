@@ -12,6 +12,7 @@ local SETTING_FACTION = "faction"
 local SETTING_FAMILY = "family"
 local SETTING_EXPANSION = "expansion"
 local SETTING_HIDDEN = "hidden"
+local SETTING_HIDDEN_INGAME = "hiddenIngame"
 local SETTING_SORT = "sort"
 
 local function CreateFilterInfo(text, filterKey, filterSettings, callback)
@@ -172,12 +173,22 @@ local function ShouldDisplayFamily(spellIds)
     return false
 end
 
+local function HasUserHiddenMounts()
+    for _, value in pairs(ADDON.settings.hiddenMounts) do
+        if value == true then
+            return true
+        end
+    end
+
+    return false
+end
+
 local function InitializeFilterDropDown(filterMenu, level)
     local info
 
-    if (level == 1) then
+    if level == 1 then
         info = CreateFilterInfo(COLLECTED, SETTING_COLLECTED, nil, function(value)
-            if (value) then
+            if value then
                 UIDropDownMenu_EnableButton(1, 2)
                 UIDropDownMenu_EnableButton(1, 3)
             else
@@ -196,9 +207,25 @@ local function InitializeFilterDropDown(filterMenu, level)
         info.disabled = not ADDON.settings.filter.collected
         UIDropDownMenu_AddButton(info, level)
 
-        UIDropDownMenu_AddButton(CreateFilterInfo(NOT_COLLECTED, SETTING_NOT_COLLECTED), level)
+        info = CreateFilterInfo(NOT_COLLECTED, SETTING_NOT_COLLECTED, nil, function(value)
+            if value then
+                UIDropDownMenu_EnableButton(1, 5)
+            else
+                UIDropDownMenu_DisableButton(1, 5)
+            end
+        end)
+        UIDropDownMenu_AddButton(info, level)
+        info = CreateFilterInfo(L.FILTER_SECRET, SETTING_HIDDEN_INGAME)
+        info.leftPadding = 16
+        info.disabled = not ADDON.settings.filter.notCollected
+        UIDropDownMenu_AddButton(info, level)
+
         UIDropDownMenu_AddButton(CreateFilterInfo(L["Only tradable"], SETTING_ONLY_TRADABLE), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(L["Hidden"], SETTING_HIDDEN), level)
+
+        if ADDON.settings.filter[SETTING_HIDDEN] or HasUserHiddenMounts() then
+            UIDropDownMenu_AddButton(CreateFilterInfo(L["Hidden"], SETTING_HIDDEN), level)
+        end
+
         UIDropDownMenu_AddSpace(level)
 
         UIDropDownMenu_AddButton(CreateFilterCategory(SOURCES, SETTING_SOURCE), level)
@@ -221,7 +248,7 @@ local function InitializeFilterDropDown(filterMenu, level)
             UIDropDownMenu_AddSpace(level)
             UIDropDownMenu_AddButton(CreateFilterCategory(CLUB_FINDER_SORT_BY, SETTING_SORT), level)
         end
-    elseif (UIDROPDOWNMENU_MENU_VALUE == SETTING_SOURCE) then
+    elseif UIDROPDOWNMENU_MENU_VALUE == SETTING_SOURCE then
         local settings = ADDON.settings.filter[SETTING_SOURCE]
         AddCheckAllAndNoneInfo(settings, level)
         UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_1, "Drop", settings), level)
@@ -231,11 +258,7 @@ local function InitializeFilterDropDown(filterMenu, level)
         UIDropDownMenu_AddButton(CreateFilterInfo(INSTANCE, "Instance", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(REPUTATION, "Reputation", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_6, "Achievement", settings), level)
-
-        if select(4, GetBuildInfo()) >= 90000 then
-            UIDropDownMenu_AddButton(CreateFilterInfo(GetCategoryInfo(15441), "Covenants", settings), level)
-        end
-
+        UIDropDownMenu_AddButton(CreateFilterInfo(GetCategoryInfo(15441), "Covenants", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(ISLANDS_HEADER, "Island Expedition", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(GARRISON_LOCATION_TOOLTIP, "Garrison", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(PVP, "PVP", settings), level)

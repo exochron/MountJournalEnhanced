@@ -71,6 +71,7 @@ local function PrepareDefaults()
             family = {},
             expansion = {},
             hidden = false,
+            hiddenIngame = false,
         },
 
         sort = {

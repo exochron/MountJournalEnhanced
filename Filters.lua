@@ -27,8 +27,11 @@ local function FilterByName(searchString, name, mountId)
     return result
 end
 
-local function FilterHiddenMounts(spellId)
+local function FilterUserHiddenMounts(spellId)
     return ADDON.settings.filter.hidden or not ADDON.settings.hiddenMounts[spellId]
+end
+local function FilterIngameHiddenMounts(shouldHideOnChar)
+    return not shouldHideOnChar or ADDON.settings.filter.hiddenIngame
 end
 
 local function FilterFavoriteMounts(isFavorite)
@@ -209,11 +212,12 @@ end
 
 function ADDON:FilterMount(mountId, searchText)
 
-    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, isFiltered, isCollected = C_MountJournal.GetMountInfoByID(mountId)
+    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, shouldHideOnChar, isCollected = C_MountJournal.GetMountInfoByID(mountId)
 
     if (searchText ~= "" and FilterByName(searchText, creatureName, mountId))
             or (searchText == "" and
-            FilterHiddenMounts(spellId) and
+            FilterUserHiddenMounts(spellId) and
+            FilterIngameHiddenMounts(shouldHideOnChar) and
             FilterFavoriteMounts(isFavorite) and
             FilterUsableMounts(spellId, isUsable) and
             FilterTradableMounts(spellId) and
