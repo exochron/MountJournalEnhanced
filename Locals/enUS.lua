@@ -28,6 +28,7 @@ L["Underwater"] = "Underwater"
 L["FILTER_SECRET"] = "Hidden by the game"
 L["SORT_BY_LEARNED_DATE"] = "Date of receipt"
 L["SORT_BY_USAGE_COUNT"] = "Count of usage"
+L["SORT_BY_LAST_USAGE"] = "Last usage"
 
 -- Families
 L["Airplanes"] = "Airplanes"

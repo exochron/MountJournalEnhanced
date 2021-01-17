@@ -117,6 +117,7 @@ function ADDON:SortMounts(ids)
             return false
         end
 
+        local doNotDescend = false
         local result = false
         local nameA, _, _, _, _, _, isFavoriteA, _, _, _, isCollectedA = C_MountJournal.GetMountInfoByID(mountIdA)
         local nameB, _, _, _, _, _, isFavoriteB, _, _, _, isCollectedB = C_MountJournal.GetMountInfoByID(mountIdB)
@@ -151,28 +152,35 @@ function ADDON:SortMounts(ids)
             local _, _, _, _, learnedB = ADDON:GetMountStatistics(mountIdB)
             if learnedA == learnedB then
                 result = CompareNames(nameA, mountIdA, nameB, mountIdB)
-                if ADDON.settings.sort.descending then
-                    result = not result
-                end
+                doNotDescend = true
             elseif learnedA and learnedB then
                 result = learnedA < learnedB
             elseif learnedB then
                 result = true
             end
         elseif ADDON.settings.sort.by == 'usage_count' then
-            local countA = ADDON:GetMountStatistics(mountIdA) or 0
-            local countB = ADDON:GetMountStatistics(mountIdB) or 0
+            local countA = ADDON:GetMountStatistics(mountIdA)
+            local countB = ADDON:GetMountStatistics(mountIdB)
             if countA == countB then
                 result = CompareNames(nameA, mountIdA, nameB, mountIdB)
-                if ADDON.settings.sort.descending then
-                    result = not result
-                end
+                doNotDescend = true
             else
                 result = countA < countB
             end
+        elseif ADDON.settings.sort.by == 'last_usage' then
+            local _, lastA = ADDON:GetMountStatistics(mountIdA)
+            local _, lastB = ADDON:GetMountStatistics(mountIdB)
+            if lastA == lastB then
+                result = CompareNames(nameA, mountIdA, nameB, mountIdB)
+                doNotDescend = true
+            elseif lastA and lastB then
+                result = lastA > lastB
+            elseif lastA then
+                result = true
+            end
         end
 
-        if ADDON.settings.sort.descending then
+        if ADDON.settings.sort.descending and not doNotDescend then
             result = not result
         end
 

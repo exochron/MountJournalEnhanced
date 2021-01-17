@@ -334,6 +334,7 @@ local function InitializeFilterDropDown(filterMenu, level)
         if ADDON.settings.trackUsageStats then
             UIDropDownMenu_AddButton(CreateFilterRadio(L.SORT_BY_LEARNED_DATE, "by", settings, 'learned_date'), level)
             UIDropDownMenu_AddButton(CreateFilterRadio(L.SORT_BY_USAGE_COUNT, "by", settings, 'usage_count'), level)
+            UIDropDownMenu_AddButton(CreateFilterRadio(L.SORT_BY_LAST_USAGE, "by", settings, 'last_usage'), level)
         end
         UIDropDownMenu_AddSpace(level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L.SORT_REVERSE, 'descending', settings), level)

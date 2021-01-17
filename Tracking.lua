@@ -12,6 +12,8 @@ function ADDON:GetMountStatistics(mountId)
         local blob = MJETrackingData[mountId]
         return blob[INDEX_USE_COUNT], blob[INDEX_LAST_USE_TIME], blob[INDEX_TRAVEL_TIME], blob[INDEX_TRAVEL_DISTANCE], blob[INDEX_LEARNED_TIME]
     end
+
+    return 0, nil, 0, 0, nil
 end
 
 local function initData(mountId)
