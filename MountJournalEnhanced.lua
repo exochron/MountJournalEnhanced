@@ -28,6 +28,10 @@ local function MapIndexToMountId(index)
         ADDON:UpdateIndex()
     end
 
+    if nil == indexMap[index] then
+        return 0
+    end
+
     return indexMap[index][1]
 end
 
