@@ -15,7 +15,7 @@ local function MapIndexToMountId(index)
         ADDON:UpdateIndex()
     end
 
-    return indexMap[index][1]
+    return indexMap[index] and indexMap[index][1] or nil
 end
 
 local function MapIndex(index)
@@ -28,7 +28,7 @@ local function MapIndex(index)
         ADDON:UpdateIndex()
     end
 
-    return indexMap[index][2]
+    return indexMap[index] and indexMap[index][2] or nil
 end
 
 local function C_MountJournal_GetNumDisplayedMounts()
@@ -42,7 +42,7 @@ end
 local function C_MountJournal_GetDisplayedMountInfo(index)
     local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h
     local mappedMountId = MapIndexToMountId(index)
-    if mappedMountId > 0 then
+    if mappedMountId then
         creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = C_MountJournal.GetMountInfoByID(mappedMountId)
     else
         creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = ADDON.hooks["GetDisplayedMountInfo"](index)
@@ -61,7 +61,7 @@ end
 local function HookWithMountId(originalFuncName, mappedFuncName)
     Hook(C_MountJournal, originalFuncName, function(index, arg1, arg2)
         local mountId = MapIndexToMountId(index)
-        if mountId > 0 then
+        if mountId then
             return C_MountJournal[mappedFuncName](mountId, arg1, arg2)
         end
     end)
