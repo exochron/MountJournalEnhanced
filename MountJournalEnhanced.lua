@@ -4,79 +4,56 @@ ADDON.hooks = {}
 local indexMap -- initialize with nil, so we know if it's not ready yet and not just empty
 
 --region C_MountJournal Hooks
-
-local function MapIndexToMountId(index)
-    -- index=0 => SummonRandomButton
-    if index == 0 then
-        return 0
-    end
-
-    if nil == indexMap then
-        ADDON:UpdateIndex()
-    end
-
-    return indexMap[index] and indexMap[index][1] or nil
-end
-
-local function MapIndex(index)
+local function MapIndex(index, toMountId)
     -- index=0 => SummonRandomButton
     if index == 0 then
         return index
     end
 
-    if nil == indexMap then
-        ADDON:UpdateIndex()
-    end
-
-    return indexMap[index] and indexMap[index][2] or nil
-end
-
-local function C_MountJournal_GetNumDisplayedMounts()
-    if nil == indexMap then
-        ADDON:UpdateIndex()
-    end
-
-    return #indexMap
+    return indexMap[index] and indexMap[index][toMountId and 1 or 2] or nil
 end
 
 local function C_MountJournal_GetDisplayedMountInfo(index)
-    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h
-    local mappedMountId = MapIndexToMountId(index)
+    local mappedMountId = MapIndex(index, true)
     if mappedMountId then
-        creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = C_MountJournal.GetMountInfoByID(mappedMountId)
-    else
-        creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = ADDON.hooks["GetDisplayedMountInfo"](index)
+        local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = C_MountJournal.GetMountInfoByID(mappedMountId)
+        isUsable = isUsable and IsUsableSpell(spellId)
+
+        return creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h
     end
-
-    isUsable = isUsable and IsUsableSpell(spellId)
-
-    return creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h
 end
 
 local function Hook(obj, name, func)
     ADDON.hooks[name] = obj[name]
-    obj[name] = func
-end
+    obj[name] = function(...)
+        if nil == indexMap then
+            ADDON:UpdateIndex()
+        end
 
+        return func(...)
+    end
+end
 local function HookWithMountId(originalFuncName, mappedFuncName)
-    Hook(C_MountJournal, originalFuncName, function(index, arg1, arg2)
-        local mountId = MapIndexToMountId(index)
+    Hook(C_MountJournal, originalFuncName, function(index, ...)
+        local mountId = MapIndex(index, true)
         if mountId then
-            return C_MountJournal[mappedFuncName](mountId, arg1, arg2)
+            return C_MountJournal[mappedFuncName](mountId, ...)
         end
     end)
 end
 local function HookWithMappedIndex(functionName)
-    Hook(C_MountJournal, functionName, function(index, arg1, arg2)
-        index = MapIndex(index)
+    Hook(C_MountJournal, functionName, function(index, ...)
+        index = MapIndex(index, false)
         if index then
-            return ADDON.hooks[functionName](index, arg1, arg2)
+            return ADDON.hooks[functionName](index, ...)
         end
     end)
 end
 
 local function RegisterMountJournalHooks()
-    Hook(C_MountJournal, "GetNumDisplayedMounts", C_MountJournal_GetNumDisplayedMounts)
+    Hook(C_MountJournal, "GetNumDisplayedMounts", function()
+        return #indexMap
+    end)
     Hook(C_MountJournal, "GetDisplayedMountInfo", C_MountJournal_GetDisplayedMountInfo)
     HookWithMountId("GetDisplayedMountInfoExtra", "GetMountInfoExtraByID")
     HookWithMountId("GetDisplayedMountAllCreatureDisplayInfo", "GetMountAllCreatureDisplayInfoByID")
