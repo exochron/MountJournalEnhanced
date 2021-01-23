@@ -187,6 +187,9 @@ local function InitializeFilterDropDown(filterMenu, level)
     local info
 
     if level == 1 then
+        UIDropDownMenu_AddButton(CreateFilterCategory(CLUB_FINDER_SORT_BY, SETTING_SORT), level)
+        UIDropDownMenu_AddSpace(level)
+
         info = CreateFilterInfo(COLLECTED, SETTING_COLLECTED, nil, function(value)
             if value then
                 UIDropDownMenu_EnableButton(1, 2)
@@ -243,9 +246,6 @@ local function InitializeFilterDropDown(filterMenu, level)
             MountJournal_UpdateMountList()
         end
         UIDropDownMenu_AddButton(info, level)
-
-        UIDropDownMenu_AddSpace(level)
-        UIDropDownMenu_AddButton(CreateFilterCategory(CLUB_FINDER_SORT_BY, SETTING_SORT), level)
     elseif UIDROPDOWNMENU_MENU_VALUE == SETTING_SOURCE then
         local settings = ADDON.settings.filter[SETTING_SOURCE]
         AddCheckAllAndNoneInfo(settings, level)
@@ -331,11 +331,24 @@ local function InitializeFilterDropDown(filterMenu, level)
         UIDropDownMenu_AddButton(CreateFilterRadio(NAME, "by", settings, 'name'), level)
         UIDropDownMenu_AddButton(CreateFilterRadio(TYPE, "by", settings, 'type'), level)
         UIDropDownMenu_AddButton(CreateFilterRadio(EXPANSION_FILTER_TEXT, "by", settings, 'expansion'), level)
-        if ADDON.settings.trackUsageStats then
-            UIDropDownMenu_AddButton(CreateFilterRadio(L.SORT_BY_LEARNED_DATE, "by", settings, 'learned_date'), level)
-            UIDropDownMenu_AddButton(CreateFilterRadio(L.SORT_BY_USAGE_COUNT, "by", settings, 'usage_count'), level)
-            UIDropDownMenu_AddButton(CreateFilterRadio(L.SORT_BY_LAST_USAGE, "by", settings, 'last_usage'), level)
-        end
+
+        local trackingEnabled = ADDON.settings.trackUsageStats
+        info = CreateFilterRadio(L.SORT_BY_USAGE_COUNT, "by", settings, 'usage_count')
+        info.disabled = not trackingEnabled
+        UIDropDownMenu_AddButton(info, level)
+        info = CreateFilterRadio(L.SORT_BY_LAST_USAGE, "by", settings, 'last_usage')
+        info.disabled = not trackingEnabled
+        UIDropDownMenu_AddButton(info, level)
+        info = CreateFilterRadio(L.SORT_BY_LEARNED_DATE, "by", settings, 'learned_date')
+        info.disabled = not trackingEnabled
+        UIDropDownMenu_AddButton(info, level)
+        info = CreateFilterRadio(L.SORT_BY_TRAVEL_DURATION, "by", settings, 'travel_duration')
+        info.disabled = not trackingEnabled
+        UIDropDownMenu_AddButton(info, level)
+        info = CreateFilterRadio(L.SORT_BY_TRAVEL_DISTANCE, "by", settings, 'travel_distance')
+        info.disabled = not trackingEnabled
+        UIDropDownMenu_AddButton(info, level)
+
         UIDropDownMenu_AddSpace(level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L.SORT_REVERSE, 'descending', settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L.SORT_FAVORITES_FIRST, 'favoritesOnTop', settings), level)

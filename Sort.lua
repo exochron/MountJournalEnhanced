@@ -1,5 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
+--region transliterate string
 local translitCache = {}
 local translitTable = {
     ["À"] = "A",
@@ -94,6 +95,7 @@ local function TransliterateName(name, id)
 
     return name
 end
+--endregion
 
 local function CompareNames(nameA, idA, nameB, idB)
     return TransliterateName(nameA, idA) < TransliterateName(nameB, idB)
@@ -107,6 +109,14 @@ local function mapMountType(mountId)
         end
     end
 end
+
+local TrackingIndex = {
+    usage_count = 1,
+    last_usage = 2,
+    travel_duration = 3,
+    travel_distance = 4,
+    learned_date = 5,
+}
 
 function ADDON:SortMounts(ids)
     table.sort(ids, function(dataA, dataB)
@@ -129,9 +139,11 @@ function ADDON:SortMounts(ids)
             return isCollectedA and not isCollectedB
         end
 
-        if ADDON.settings.sort.by == 'name' then
+        local sortBy = ADDON.settings.sort.by
+
+        if sortBy == 'name' then
             result = CompareNames(nameA, mountIdA, nameB, mountIdB)
-        elseif ADDON.settings.sort.by == 'type' then
+        elseif sortBy == 'type' then
             local mountTypeA = mapMountType(mountIdA)
             local mountTypeB = mapMountType(mountIdB)
 
@@ -145,38 +157,20 @@ function ADDON:SortMounts(ids)
                 result = false
             end
 
-        elseif ADDON.settings.sort.by == 'expansion' then
+        elseif sortBy == 'expansion' then
             result = mountIdA < mountIdB
-        elseif ADDON.settings.sort.by == 'learned_date' then
-            local _, _, _, _, learnedA = ADDON:GetMountStatistics(mountIdA)
-            local _, _, _, _, learnedB = ADDON:GetMountStatistics(mountIdB)
-            if learnedA == learnedB then
+
+        elseif TrackingIndex[sortBy] then
+            local index = TrackingIndex[sortBy]
+            local valueA = select(index, ADDON:GetMountStatistics(mountIdA)) or 0
+            local valueB = select(index, ADDON:GetMountStatistics(mountIdB)) or 0
+            if valueA == valueB then
                 result = CompareNames(nameA, mountIdA, nameB, mountIdB)
                 doNotDescend = true
-            elseif learnedA and learnedB then
-                result = learnedA < learnedB
-            elseif learnedB then
-                result = true
-            end
-        elseif ADDON.settings.sort.by == 'usage_count' then
-            local countA = ADDON:GetMountStatistics(mountIdA)
-            local countB = ADDON:GetMountStatistics(mountIdB)
-            if countA == countB then
-                result = CompareNames(nameA, mountIdA, nameB, mountIdB)
-                doNotDescend = true
+            elseif sortBy == 'learned_date' or sortBy == 'last_usage' then
+                result = valueA > valueB
             else
-                result = countA < countB
-            end
-        elseif ADDON.settings.sort.by == 'last_usage' then
-            local _, lastA = ADDON:GetMountStatistics(mountIdA)
-            local _, lastB = ADDON:GetMountStatistics(mountIdB)
-            if lastA == lastB then
-                result = CompareNames(nameA, mountIdA, nameB, mountIdB)
-                doNotDescend = true
-            elseif lastA and lastB then
-                result = lastA > lastB
-            elseif lastA then
-                result = true
+                result = valueA < valueB
             end
         end
 
