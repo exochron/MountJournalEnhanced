@@ -37,11 +37,11 @@ end
 
 local function BuildWheelButton()
     local button = CreateFrame("Button", nil, MountJournal, "UIMenuButtonStretchTemplate")
-    button:SetWidth(20)
-    button:SetHeight(20)
+    button:SetWidth(24)
+    button:SetHeight(24)
 
     if CollectionsJournalPortrait:IsShown() and CollectionsJournalPortrait:GetAlpha() > 0.0 then
-        button:SetPoint("TOPLEFT", MountJournal, "TOPLEFT", 60, -1)
+        button:SetPoint("TOPLEFT", MountJournal, "TOPLEFT", 56, 1)
     else
         -- ElvUI hack
         button:SetPoint("TOPLEFT", MountJournal, "TOPLEFT", 3, -1)
