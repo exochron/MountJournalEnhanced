@@ -50,7 +50,7 @@ end
 ADDON:RegisterUISetting('enableCursorKeys', true, ADDON.L.SETTING_CURSOR_KEYS)
 
 ADDON:RegisterLoadUICallback(function()
-    -- I had issues handling the keyboard directly at the MountJournal frame. So I used ListScrollFrame instead.
+    -- I had issues handling the input directly at the MountJournal frame. So I'm using ListScrollFrame instead.
     MountJournal.ListScrollFrame:SetPropagateKeyboardInput(true)
     MountJournal.ListScrollFrame:EnableKeyboard(true)
     MountJournal.ListScrollFrame:SetScript("OnKeyDown", function(self, key)
@@ -69,5 +69,18 @@ ADDON:RegisterLoadUICallback(function()
             end
         end
         self:SetPropagateKeyboardInput(true)
+    end)
+
+    MountJournal.ListScrollFrame.scrollDown:RegisterForClicks("LeftButtonUp", "LeftButtonDown", "RightButtonUp");
+    MountJournal.ListScrollFrame.scrollDown:HookScript("OnClick", function(self, button, isDown)
+        if button == "RightButton" and not isDown then
+            MountJournal.ListScrollFrame.scrollBar:SetValue(MountJournal.ListScrollFrame.range, true)
+        end
+    end)
+    MountJournal.ListScrollFrame.scrollUp:RegisterForClicks("LeftButtonUp", "LeftButtonDown", "RightButtonUp");
+    MountJournal.ListScrollFrame.scrollUp:HookScript("OnClick", function(self, button, isDown)
+        if button == "RightButton" and not isDown then
+            MountJournal.ListScrollFrame.scrollBar:SetValue(0, true)
+        end
     end)
 end)

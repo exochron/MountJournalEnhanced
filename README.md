@@ -17,6 +17,7 @@ This is an interface addon for World of Warcraft. It extends the ingame mount jo
 + Freely rotate display camera around mount
 + Trigger /mountspecial in display
 + Browse through mounts with Up/Down arrow keys
++ Right Click on scroll buttons to quickly scroll to the top/bottom  
 + Track, display and sort by some usage statistics
 + Favor all filtered mounts at once or unset them all.
 + Save favorites per character.
