@@ -73,7 +73,7 @@ local function InitButton(button, frame, relativeTo, tooltip, tooltipText)
     button:SetScript("OnEnter", function()
         frame:SetAlpha(1)
         frame:Show()
-        helpTooltip:SetOwner(button, "ANCHOR_TOP")
+        helpTooltip:SetOwner(button, "ANCHOR_BOTTOM")
         helpTooltip:SetText(tooltip, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
         if tooltipText then
             helpTooltip:AddLine(tooltipText, _, _, _, 1, 1)
