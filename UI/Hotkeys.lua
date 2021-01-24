@@ -21,13 +21,13 @@ end
 local function ScrollToIndex(index)
     local buttonHeight = MountJournal.ListScrollFrame.buttonHeight
     local totalHeight = buttonHeight * (index - 1)
-    local scrollFrameHeight = MountJournal.ListScrollFrame:GetHeight()
+    local scrollFrameHeight = MountJournal.ListScrollFrame:GetHeight() - (buttonHeight / 4)
 
-    local offset = MountJournal.ListScrollFrame.scrollBar:GetValue();
-    if (totalHeight + buttonHeight > offset + scrollFrameHeight) then
-        offset = totalHeight + buttonHeight - scrollFrameHeight;
-    elseif (totalHeight < offset) then
-        offset = totalHeight;
+    local offset = MountJournal.ListScrollFrame.scrollBar:GetValue()
+    if totalHeight + buttonHeight > offset + scrollFrameHeight then
+        offset = totalHeight + buttonHeight - scrollFrameHeight
+    elseif totalHeight < offset then
+        offset = totalHeight
     end
 
     MountJournal.ListScrollFrame.scrollBar:SetValue(offset)
