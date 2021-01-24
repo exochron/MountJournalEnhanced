@@ -1,5 +1,8 @@
 local ADDON_NAME, ADDON = ...
 
+-- UI:
+-- * RightClick on Scroll buttons to scroll to the top/bottom
+
 -- Keyboard Shortcuts:
 -- UP: Select Previous Mount
 -- DOWN: Select Next Mount
@@ -27,7 +30,7 @@ local function ScrollToIndex(index)
         offset = totalHeight;
     end
 
-    MountJournal.ListScrollFrame.scrollBar:SetValue(offset, true)
+    MountJournal.ListScrollFrame.scrollBar:SetValue(offset)
 end
 
 local function Select(step, totalDisplayed)
@@ -74,13 +77,13 @@ ADDON:RegisterLoadUICallback(function()
     MountJournal.ListScrollFrame.scrollDown:RegisterForClicks("LeftButtonUp", "LeftButtonDown", "RightButtonUp");
     MountJournal.ListScrollFrame.scrollDown:HookScript("OnClick", function(self, button, isDown)
         if button == "RightButton" and not isDown then
-            MountJournal.ListScrollFrame.scrollBar:SetValue(MountJournal.ListScrollFrame.range, true)
+            MountJournal.ListScrollFrame.scrollBar:SetValue(MountJournal.ListScrollFrame.range)
         end
     end)
     MountJournal.ListScrollFrame.scrollUp:RegisterForClicks("LeftButtonUp", "LeftButtonDown", "RightButtonUp");
     MountJournal.ListScrollFrame.scrollUp:HookScript("OnClick", function(self, button, isDown)
         if button == "RightButton" and not isDown then
-            MountJournal.ListScrollFrame.scrollBar:SetValue(0, true)
+            MountJournal.ListScrollFrame.scrollBar:SetValue(0)
         end
     end)
 end)
