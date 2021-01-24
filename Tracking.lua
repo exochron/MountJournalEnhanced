@@ -8,10 +8,8 @@ local HBD = LibStub("HereBeDragons-2.0")
 local currentMount, startZone, startPositionX, startPositionY, travelTicker
 
 function ADDON:GetMountStatistics(mountId)
-    if MJETrackingData[mountId] then
-        local blob = MJETrackingData[mountId]
-        return blob[INDEX_USE_COUNT], blob[INDEX_LAST_USE_TIME], blob[INDEX_TRAVEL_TIME], blob[INDEX_TRAVEL_DISTANCE], blob[INDEX_LEARNED_TIME]
-    end
+    local blob = MJETrackingData[mountId] or {}
+    return (blob[INDEX_USE_COUNT] or 0), (blob[INDEX_LAST_USE_TIME] or nil), (blob[INDEX_TRAVEL_TIME] or 0), (blob[INDEX_TRAVEL_DISTANCE] or 0), (blob[INDEX_LEARNED_TIME] or nil)
 end
 
 local function initData(mountId)

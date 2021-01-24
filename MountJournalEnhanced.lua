@@ -3,94 +3,57 @@ local ADDON_NAME, ADDON = ...
 ADDON.hooks = {}
 local indexMap -- initialize with nil, so we know if it's not ready yet and not just empty
 
-local function SearchIsActive()
-    local searchString = MountJournal.searchBox:GetText()
-    if not searchString or string.len(searchString) == 0 then
-        return false
-    end
-
-    return true
-end
-
 --region C_MountJournal Hooks
-
-local function MapIndexToMountId(index)
+local function MapIndex(index, toMountId)
     -- index=0 => SummonRandomButton
     if index == 0 then
-        return 0
-    end
-
-    if SearchIsActive() then
-        return select(12, ADDON.hooks["GetDisplayedMountInfo"](index))
-    end
-
-    if nil == indexMap then
-        ADDON:UpdateIndex()
-    end
-
-    return indexMap[index][1]
-end
-
-local function MapIndex(index)
-    -- index=0 => SummonRandomButton
-    if index == 0 or SearchIsActive() then
         return index
     end
 
-    if nil == indexMap then
-        ADDON:UpdateIndex()
-    end
-
-    return indexMap[index][2]
-end
-
-local function C_MountJournal_GetNumDisplayedMounts()
-    if SearchIsActive() then
-        return ADDON.hooks["GetNumDisplayedMounts"]()
-    end
-
-    if nil == indexMap then
-        ADDON:UpdateIndex()
-    end
-
-    return #indexMap
+    return indexMap[index] and indexMap[index][toMountId and 1 or 2] or nil
 end
 
 local function C_MountJournal_GetDisplayedMountInfo(index)
-    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h
-    local mappedMountId = MapIndexToMountId(index)
-    if mappedMountId > 0 then
-        creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = C_MountJournal.GetMountInfoByID(mappedMountId)
-    else
-        creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = ADDON.hooks["GetDisplayedMountInfo"](index)
+    local mappedMountId = MapIndex(index, true)
+    if mappedMountId then
+        local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = C_MountJournal.GetMountInfoByID(mappedMountId)
+        isUsable = isUsable and IsUsableSpell(spellId)
+
+        return creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h
     end
-
-    isUsable = isUsable and IsUsableSpell(spellId)
-
-    return creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h
 end
 
 local function Hook(obj, name, func)
     ADDON.hooks[name] = obj[name]
-    obj[name] = func
-end
+    obj[name] = function(...)
+        if nil == indexMap then
+            ADDON:UpdateIndex()
+        end
 
+        return func(...)
+    end
+end
 local function HookWithMountId(originalFuncName, mappedFuncName)
-    Hook(C_MountJournal, originalFuncName, function(index, arg1, arg2)
-        local mountId = MapIndexToMountId(index)
-        if mountId > 0 then
-            return C_MountJournal[mappedFuncName](mountId, arg1, arg2)
+    Hook(C_MountJournal, originalFuncName, function(index, ...)
+        local mountId = MapIndex(index, true)
+        if mountId then
+            return C_MountJournal[mappedFuncName](mountId, ...)
         end
     end)
 end
 local function HookWithMappedIndex(functionName)
-    Hook(C_MountJournal, functionName, function(index, arg1, arg2)
-        return ADDON.hooks[functionName](MapIndex(index), arg1, arg2)
+    Hook(C_MountJournal, functionName, function(index, ...)
+        index = MapIndex(index, false)
+        if index then
+            return ADDON.hooks[functionName](index, ...)
+        end
     end)
 end
 
 local function RegisterMountJournalHooks()
-    Hook(C_MountJournal, "GetNumDisplayedMounts", C_MountJournal_GetNumDisplayedMounts)
+    Hook(C_MountJournal, "GetNumDisplayedMounts", function()
+        return #indexMap
+    end)
     Hook(C_MountJournal, "GetDisplayedMountInfo", C_MountJournal_GetDisplayedMountInfo)
     HookWithMountId("GetDisplayedMountInfoExtra", "GetMountInfoExtraByID")
     HookWithMountId("GetDisplayedMountAllCreatureDisplayInfo", "GetMountAllCreatureDisplayInfoByID")
@@ -137,28 +100,46 @@ local function LoadUI()
         end
     end);
 
+    MountJournal.searchBox:SetScript("OnTextChanged", function()
+        SearchBoxTemplate_OnTextChanged(MountJournal.searchBox)
+        ADDON:UpdateIndex(true)
+        MountJournal_UpdateMountList()
+    end)
+
     FireCallbacks(loadUICallbacks)
 end
 
 function ADDON:UpdateIndex(calledFromEvent)
     local map = {}
+    local handledMounts = {}
 
-    if not SearchIsActive() then
-        for i = 1, ADDON.hooks["GetNumDisplayedMounts"]() do
-            local mountId = select(12, ADDON.hooks["GetDisplayedMountInfo"](i))
-            if ADDON:FilterMount(mountId) then
-                map[#map + 1] = {mountId, i}
-            end
-        end
-
-        if calledFromEvent and nil ~= indexMap and #map == #indexMap then
-            return
-        end
-
-        map = ADDON:SortMounts(map)
+    local searchString = MountJournal.searchBox:GetText() or ""
+    if searchString ~= "" then
+        searchString = searchString:lower()
     end
 
-    indexMap = map
+    for i = 1, ADDON.hooks["GetNumDisplayedMounts"]() do
+        local mountId = select(12, ADDON.hooks["GetDisplayedMountInfo"](i))
+        if ADDON:FilterMount(mountId, searchString) then
+            map[#map + 1] = { mountId, i }
+        end
+        handledMounts[mountId] = true
+    end
+
+    for _, mountId in ipairs(C_MountJournal.GetMountIDs()) do
+        if not handledMounts[mountId]
+                and not ADDON.DB.Ignored[mountId]
+                and ADDON:FilterMount(mountId, searchString)
+        then
+            map[#map + 1] = { mountId }
+        end
+    end
+
+    if calledFromEvent and nil ~= indexMap and #map == #indexMap then
+        return
+    end
+
+    indexMap = ADDON:SortMounts(map)
 end
 
 local function ResetIngameFilter()

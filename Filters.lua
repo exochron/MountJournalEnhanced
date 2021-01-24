@@ -6,8 +6,32 @@ local ExpansionDB = ADDON.DB.Expansion
 local TypeDB = ADDON.DB.Type
 local TradableDB = ADDON.DB.Tradable
 
-local function FilterHiddenMounts(spellId)
+local function FilterByName(searchString, name, mountId)
+    name = name:lower()
+    local pos = strfind(name, searchString, 1, true)
+    local result = pos ~= nil
+
+    if result == false and ADDON.settings.searchInDescription then
+        local _, description, sourceText = C_MountJournal.GetMountInfoExtraByID(mountId)
+        description = description:lower()
+        pos = strfind(description, searchString, 1, true)
+        result = pos ~= nil
+
+        if result == false then
+            sourceText = sourceText:lower()
+            pos = strfind(sourceText, searchString, 1, true)
+            result = pos ~= nil
+        end
+    end
+
+    return result
+end
+
+local function FilterUserHiddenMounts(spellId)
     return ADDON.settings.filter.hidden or not ADDON.settings.hiddenMounts[spellId]
+end
+local function FilterIngameHiddenMounts(shouldHideOnChar)
+    return not shouldHideOnChar or ADDON.settings.filter.hiddenIngame
 end
 
 local function FilterFavoriteMounts(isFavorite)
@@ -186,11 +210,14 @@ function ADDON:FilterMountsByType(spellId, mountID)
     return result
 end
 
-function ADDON:FilterMount(mountId)
+function ADDON:FilterMount(mountId, searchText)
 
-    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, isFiltered, isCollected = C_MountJournal.GetMountInfoByID(mountId)
+    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, shouldHideOnChar, isCollected = C_MountJournal.GetMountInfoByID(mountId)
 
-    if (FilterHiddenMounts(spellId) and
+    if (searchText ~= "" and FilterByName(searchText, creatureName, mountId))
+            or (searchText == "" and
+            FilterUserHiddenMounts(spellId) and
+            FilterIngameHiddenMounts(shouldHideOnChar) and
             FilterFavoriteMounts(isFavorite) and
             FilterUsableMounts(spellId, isUsable) and
             FilterTradableMounts(spellId) and
@@ -199,7 +226,9 @@ function ADDON:FilterMount(mountId)
             self:FilterMountsBySource(spellId, sourceType) and
             self:FilterMountsByType(spellId, mountId) and
             self:FilterMountsByFamily(spellId) and
-            self:FilterMountsByExpansion(spellId)) then
+            self:FilterMountsByExpansion(spellId)
+    )
+    then
         return true
     end
 

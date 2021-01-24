@@ -1378,11 +1378,9 @@ ADDON.DB.Expansion = {
         [255695] = true, -- Seabraid Stallion - Battle for Azeroth CE
         [255696] = true, -- Gilded Ravasaurn - Battle for Azeroth CE
         [326390] = true, -- Steamscale Incinerator
-    }
-}
+    },
 
-if select(4, GetBuildInfo()) >= 90000 then
-    ADDON.DB.Expansion[8] = {
+    [8] = { -- Shadowlands
         ["minID"] = 320001,
         ["maxID"] = 999999,
         [307932] = true, -- Ensorcelled Everwyrm
@@ -1398,7 +1396,7 @@ if select(4, GetBuildInfo()) >= 90000 then
         [312754] = true, -- Battle Gargon Vrednic
         [312753] = true, -- Hopecrusher Gargon
     }
-end
+}
 
 ADDON.DB.Type = {
     -- https://wow.gamepedia.com/API_C_MountJournal.GetMountInfoExtraByID
@@ -1440,38 +1438,39 @@ ADDON.DB.Type = {
 }
 
 -- used as filter for debug output
+-- mountId as Index
 ADDON.DB.Ignored = {
-    [459] = true, -- Gray Wolf
-    [468] = true, -- White Stallion
-    [578] = true, -- Black Wolf
-    [579] = true, -- Red Wolf
-    [581] = true, -- Winter Wolf
-    [8980] = true, -- Skeletal Horse
-    [6896] = true, -- Black Ram
-    [10790] = true, -- Tiger
-    [10795] = true, -- Ivory Raptor
-    [15780] = true, -- Green Mechanostrider
-    [18363] = true, -- Riding Kodo
-    [25863] = true, -- Black Qiraji Battle Tank
-    [26655] = true, -- Black Qiraji Battle Tank
-    [28828] = true, -- Nether Drake
-    [33630] = true, -- Blue Mechanostrider
-    [44317] = true, -- Merciless Nether Drake
-    [59572] = true, -- Black Polar Bear
-    [60136] = true, -- Grand Caravan Mammoth
-    [60140] = true, -- Grand Caravan Mammoth
-    [62048] = true, -- Black Dragonhawk Mount
-    [64656] = true, -- Blue Skeletal Warhorse
-    [123182] = true, -- White Riding Yak
-    [127209] = true, -- Black Riding Yak
-    [127213] = true, -- Brown Riding Yak
+    [7] = true, -- Gray Wolf
+    [8] = true, -- White Stallion
+    [12] = true, -- Black Wolf
+    [13] = true, -- Red Wolf
+    [15] = true, -- Winter Wolf
+    [28] = true, -- Skeletal Horse
+    [22] = true, -- Black Ram
+    [32] = true, -- Tiger
+    [35] = true, -- Ivory Raptor
+    [43] = true, -- Green Mechanostrider
+    [70] = true, -- Riding Kodo
+    [116] = true, -- Black Qiraji Battle Tank
+    [121] = true, -- Black Qiraji Battle Tank
+    [123] = true, -- Nether Drake
+    [145] = true, -- Blue Mechanostrider
+    [206] = true, -- Merciless Nether Drake
+    [251] = true, -- Black Polar Bear
+    [273] = true, -- Grand Caravan Mammoth
+    [274] = true, -- Grand Caravan Mammoth
+    [293] = true, -- Black Dragonhawk Mount
+    [308] = true, -- Blue Skeletal Warhorse
+    [462] = true, -- White Riding Yak
+    [484] = true, -- Black Riding Yak
+    [485] = true, -- Brown Riding Yak
 
     -- ghost
-    [55164] = true, -- Swift Spectral Gryphon
-    [194046] = true, -- Swift Spectral Rylak
-    [239363] = true, -- Swift Spectral Hippogryph
-    [302794] = true, -- Swift Spectral Fathom Ray
-    [302795] = true, -- Swift Spectral Magnetocraft
-    [302796] = true, -- Swift Spectral Armored Gryphon
-    [302797] = true, -- Swift Spectral Pterrordax
+    [238] = true, -- Swift Spectral Gryphon
+    [776] = true, -- Swift Spectral Rylak
+    [934] = true, -- Swift Spectral Hippogryph
+    [1269] = true, -- Swift Spectral Fathom Ray
+    [1270] = true, -- Swift Spectral Magnetocraft
+    [1271] = true, -- Swift Spectral Armored Gryphon
+    [1272] = true, -- Swift Spectral Pterrordax
 }

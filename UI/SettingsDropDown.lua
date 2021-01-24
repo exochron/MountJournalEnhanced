@@ -36,25 +36,29 @@ local function InitializeDropDown(menu, level)
 end
 
 local function BuildWheelButton()
-    local AceGUI = LibStub("AceGUI-3.0")
+    local button = CreateFrame("Button", nil, MountJournal, "UIMenuButtonStretchTemplate")
+    button:SetWidth(24)
+    button:SetHeight(24)
 
-    local button = AceGUI:Create("Icon")
-    button:SetParent({ content = MountJournal })
-    button:SetWidth(18)
-    button:SetHeight(18)
-
-    if (CollectionsJournalPortrait:IsShown() and CollectionsJournalPortrait:GetAlpha() > 0.0) then
-        button:SetPoint("TOPLEFT", MountJournal, "TOPLEFT", 60, -1)
+    if CollectionsJournalPortrait:IsShown() and CollectionsJournalPortrait:GetAlpha() > 0.0 then
+        button:SetPoint("TOPLEFT", MountJournal, "TOPLEFT", 56, 1)
     else
+        -- ElvUI hack
         button:SetPoint("TOPLEFT", MountJournal, "TOPLEFT", 3, -1)
     end
 
-    button.image:SetAtlas("mechagon-projects")
-    button.image:SetWidth(20)
-    button.image:SetHeight(20)
-    button.image:SetPoint("TOP", 0, 0)
+    local tex = button:CreateTexture(nil, "ARTWORK")
+    tex:SetPoint("TOPLEFT", button, "TOPLEFT", 3, -3)
+    tex:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -3, 3)
+    tex:SetAtlas("mechagon-projects")
+    tex:SetDesaturated(true)
 
-    button.frame:Show()
+    button:SetHighlightAtlas("mechagon-projects", "ADD")
+    tex = button:GetHighlightTexture()
+    tex:SetPoint("TOPLEFT", button, "TOPLEFT", 3, -3)
+    tex:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -3, 3)
+    tex:SetAlpha(0.35)
+    tex:SetBlendMode("ADD")
 
     return button
 end
@@ -64,8 +68,8 @@ ADDON:RegisterLoadUICallback(function()
 
     local menu = CreateFrame("Frame", ADDON_NAME .. "SettingsMenu", MountJournal, "UIDropDownMenuTemplate")
     UIDropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
-    button:SetCallback("OnClick", function(sender)
+    button:HookScript("OnClick", function(sender)
         PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-        ToggleDropDownMenu(1, nil, menu, button.frame, 0, 0)
+        ToggleDropDownMenu(1, nil, menu, button, 0, 0)
     end)
 end)

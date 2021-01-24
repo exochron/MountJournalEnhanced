@@ -143,14 +143,14 @@ local function BuildStarButton()
     starButton.image:SetHeight(25)
     starButton.image:SetPoint("TOP", 0, 0)
 
-    starButton:SetCallback("OnEnter", function(sender)
-        GameTooltip:SetOwner(sender.frame, "ANCHOR_NONE")
-        GameTooltip:SetPoint("BOTTOM", sender.frame, "TOP", 0, -4)
-        GameTooltip:SetText(FAVORITES)
-        GameTooltip:Show()
+    local tooltip = CreateFrame("GameTooltip", "MJEFavoritesToolTip", starButton.frame, "SharedNoHeaderTooltipTemplate")
+    starButton:SetCallback("OnEnter", function()
+        tooltip:SetOwner(starButton.frame, "ANCHOR_TOP")
+        tooltip:SetText(FAVORITES)
+        tooltip:Show()
     end)
-    starButton:SetCallback("OnLeave", function(sender)
-        GameTooltip:Hide()
+    starButton:SetCallback("OnLeave", function()
+        tooltip:Hide()
     end)
     starButton:SetCallback("OnClick", function()
         ToggleDropDownMenu(1, nil, menu, starButton.frame, 0, 10)
@@ -166,7 +166,7 @@ end
 
 --endregion
 
-ADDON:RegisterBehaviourSetting( 'favoritePerChar', false, L.SETTING_FAVORITE_PER_CHAR, CollectFavoredMounts )
+ADDON:RegisterBehaviourSetting('favoritePerChar', false, L.SETTING_FAVORITE_PER_CHAR, CollectFavoredMounts)
 
 -- resetting personal favored mounts
 ADDON:RegisterLoginCallback(function()

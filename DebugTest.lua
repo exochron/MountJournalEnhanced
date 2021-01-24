@@ -1,14 +1,15 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 local IgnoredDB = ADDON.DB.Ignored
 
 local function RunDebugTest()
     local mounts = {}
     local mountIDs = C_MountJournal.GetMountIDs()
-    for i, mountID in ipairs(mountIDs) do
+    for _, mountID in ipairs(mountIDs) do
         local name, spellID, icon, active, isUsable, sourceType = C_MountJournal.GetMountInfoByID(mountID)
-        mounts[spellID] = {
+        mounts[mountID] = {
             name = name,
+            spellID = spellID,
             mountID = mountID,
             sourceType = sourceType,
         }
@@ -34,19 +35,19 @@ local function RunDebugTest()
         ADDON.settings.filter.mountType[key] = false
     end
 
-    for spellID, data in pairs(mounts) do
-        if not IgnoredDB[spellID] then
-            if ADDON:FilterMountsBySource(spellID, data.sourceType) then
-                print("[MJE] New mount: " .. data.name .. " (" .. spellID .. ", " .. data.mountID .. ", " .. data.sourceType .. ") ")
+    for _, data in pairs(mounts) do
+        if not IgnoredDB[data.mountID] then
+            if ADDON:FilterMountsBySource(data.spellID, data.sourceType) then
+                print("[MJE] New mount: " .. data.name .. " (" .. data.spellID .. ", " .. data.mountID .. ", " .. data.sourceType .. ") ")
             end
-            if ADDON:FilterMountsByFamily(spellID) then
-                print("[MJE] No family info for mount: " .. data.name .. " (" .. spellID .. ", " .. data.mountID .. ")")
+            if ADDON:FilterMountsByFamily(data.spellID) then
+                print("[MJE] No family info for mount: " .. data.name .. " (" .. data.spellID .. ", " .. data.mountID .. ")")
             end
-            if ADDON:FilterMountsByExpansion(spellID) then
-                print("[MJE] No expansion info for mount: " .. data.name .. " (" .. spellID .. ", " .. data.mountID .. ")")
+            if ADDON:FilterMountsByExpansion(data.spellID) then
+                print("[MJE] No expansion info for mount: " .. data.name .. " (" .. data.spellID .. ", " .. data.mountID .. ")")
             end
-            if ADDON:FilterMountsByType(spellID, data.mountID) then
-                print("[MJE] New mount type for mount \"" .. data.name .. "\" (" .. spellID .. ", " .. data.mountID .. ") ")
+            if ADDON:FilterMountsByType(data.spellID, data.mountID) then
+                print("[MJE] New mount type for mount \"" .. data.name .. "\" (" .. data.spellID .. ", " .. data.mountID .. ") ")
             end
         end
     end
@@ -58,17 +59,17 @@ local function RunDebugTest()
         MJEGlobalSettings.filter = ADDON.settings.filter
     end
 
-    for _, expansionMounts in pairs(ADDON.DB.Expansion) do
-        for id, _ in pairs(expansionMounts) do
-            if id ~= "minID" and id ~= "maxID" and not mounts[id] then
-                print("[MJE] Old expansion info for mount: " .. id)
-            end
-        end
-    end
+    --for _, expansionMounts in pairs(ADDON.DB.Expansion) do
+    --    for id, _ in pairs(expansionMounts) do
+    --        if id ~= "minID" and id ~= "maxID" and not mounts[id] then
+    --            print("[MJE] Old expansion info for mount: " .. id)
+    --        end
+    --    end
+    --end
 
-    for id, name in pairs(IgnoredDB) do
-        if not mounts[id] then
-            print("[MJE] Old ignore entry for mount: " .. id)
+    for mountId, _ in pairs(IgnoredDB) do
+        if not mounts[mountId] then
+            print("[MJE] Old ignore entry for mount: " .. mountId)
         end
     end
 end

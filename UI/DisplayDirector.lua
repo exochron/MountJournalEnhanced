@@ -18,6 +18,8 @@ local ADDON_NAME, ADDON = ...
 --618=MountSelfIdle -- for isSelfMount
 --636=mountspecial
 
+local helpTooltip
+
 local function HideOriginalElements()
     local scene = MountJournal.MountDisplay.ModelScene
     scene.RotateLeftButton:Hide()
@@ -66,14 +68,21 @@ local function InitButton(button, frame, relativeTo, tooltip, tooltipText)
     else
         button:SetPoint("LEFT", 2, 0)
     end
-    button.tooltip = tooltip
-    if tooltipText then
-        button.tooltipText = tooltipText
-    end
-    button:HookScript("OnEnter", function()
+
+    -- overwrite default tooltip handling (which might cause taint)
+    button:SetScript("OnEnter", function()
+        frame:SetAlpha(1)
         frame:Show()
-        GameTooltip:ClearAllPoints()
-        GameTooltip:SetPoint("TOP", button, "BOTTOM")
+        helpTooltip:SetOwner(button, "ANCHOR_BOTTOM")
+        helpTooltip:SetText(tooltip, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
+        if tooltipText then
+            helpTooltip:AddLine(tooltipText, _, _, _, 1, 1)
+        end
+        helpTooltip:Show()
+    end)
+    button:SetScript("OnLeave", function()
+        frame:SetAlpha(0.5)
+        helpTooltip:Hide()
     end)
 end
 
@@ -113,6 +122,9 @@ local function BuildCameraButton(frame, relativeTo, tooltip, tooltipText, camera
         return MountJournal.MountDisplay.ModelScene:GetActiveCamera()
     end
 
+    button:HookScript("OnMouseDown", ModelControlButtonMixin.OnMouseDown)
+    button:HookScript("OnMouseUp", ModelControlButtonMixin.OnMouseUp)
+
     return button
 end
 
@@ -121,6 +133,8 @@ local function BuildCameraPanel()
 
     local frame = BuildControlContainer(166)
     frame:SetPoint("BOTTOM", 0, 15)
+
+    helpTooltip = CreateFrame("GameTooltip", "MJEDisplayHelpToolTip", frame, "SharedNoHeaderTooltipTemplate")
 
     local scene = MountJournal.MountDisplay.ModelScene
     scene:HookScript("OnEnter", function()

@@ -34,7 +34,7 @@ local function InitializeMountOptionsMenu(sender, level)
 
     if not needsFanfare and isCollected then
         local isFavorite, canFavorite = C_MountJournal.GetIsFavorite(menuMountIndex)
-        info = { disabled = not canFavorite }
+        info = {notCheckable = true, disabled = not canFavorite }
 
         if isFavorite then
             info.text = BATTLE_PET_UNFAVORITE
@@ -56,6 +56,7 @@ local function InitializeMountOptionsMenu(sender, level)
     if spellId then
         if ADDON.settings.hiddenMounts[spellId] then
             info = {
+                notCheckable = true,
                 text = SHOW,
                 func = function()
                     ADDON.settings.hiddenMounts[spellId] = nil
@@ -65,6 +66,7 @@ local function InitializeMountOptionsMenu(sender, level)
             }
         else
             info = {
+                notCheckable = true,
                 text = HIDE,
                 func = function()
                     ADDON.settings.hiddenMounts[spellId] = true
@@ -76,7 +78,7 @@ local function InitializeMountOptionsMenu(sender, level)
         UIDropDownMenu_AddButton(info, level)
     end
 
-    UIDropDownMenu_AddButton({text = CANCEL}, level)
+    UIDropDownMenu_AddButton({text = CANCEL, notCheckable = true,}, level)
 end
 
 local function OnClick(sender, anchor, button)

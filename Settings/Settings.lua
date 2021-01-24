@@ -25,6 +25,7 @@ local function PrepareDefaults()
     local defaultSettings = {
 
         trackUsageStats = true,
+        searchInDescription = true,
 
         personalUi = false,
         ui = {
@@ -38,7 +39,6 @@ local function PrepareDefaults()
             moveEquipmentSlot = true,
             previewButton = true,
             showPersonalCount = true,
-            enableSortOptions = true,
         },
 
         favoritePerChar = false,
@@ -71,12 +71,14 @@ local function PrepareDefaults()
             family = {},
             expansion = {},
             hidden = false,
+            hiddenIngame = false,
         },
 
         sort = {
             by = 'name', -- name|type|expansion
             descending = false,
             favoritesOnTop = true,
+            unusableToBottom = false,
             unownedOnBottom = true,
         },
     }
@@ -136,6 +138,7 @@ ADDON:RegisterLoginCallback(function()
     ADDON:ApplySetting('personalUi', MJEPersonalSettings.personalUi)
     ADDON:ApplySetting('personalHiddenMounts', MJEPersonalSettings.personalHiddenMounts)
     ADDON:ApplySetting('personalFilter', MJEPersonalSettings.personalFilter)
+    ADDON:ApplySetting('searchInDescription', MJEPersonalSettings.searchInDescription)
 
     ADDON.settings.favoritePerChar = MJEPersonalSettings.favoritePerChar
     ADDON.settings.favoredMounts = MJEPersonalSettings.favoredMounts

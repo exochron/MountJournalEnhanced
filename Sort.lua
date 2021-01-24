@@ -1,5 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
+--region transliterate string
 local translitCache = {}
 local translitTable = {
     ["À"] = "A",
@@ -94,6 +95,7 @@ local function TransliterateName(name, id)
 
     return name
 end
+--endregion
 
 local function CompareNames(nameA, idA, nameB, idB)
     return TransliterateName(nameA, idA) < TransliterateName(nameB, idB)
@@ -108,54 +110,79 @@ local function mapMountType(mountId)
     end
 end
 
+local TrackingIndex = {
+    usage_count = 1,
+    last_usage = 2,
+    travel_duration = 3,
+    travel_distance = 4,
+    learned_date = 5,
+}
+
 function ADDON:SortMounts(ids)
-    if ADDON.settings.ui.enableSortOptions then
-        table.sort(ids, function(dataA, dataB)
-            local mountIdA = dataA[1]
-            local mountIdB = dataB[1]
+    table.sort(ids, function(dataA, dataB)
+        local mountIdA = dataA[1]
+        local mountIdB = dataB[1]
 
-            if mountIdA == mountIdB then
-                return false
-            end
+        if mountIdA == mountIdB then
+            return false
+        end
 
-            local result = false
-            local nameA, _, _, _, _, _, isFavoriteA, _, _, _, isCollectedA = C_MountJournal.GetMountInfoByID(mountIdA)
-            local nameB, _, _, _, _, _, isFavoriteB, _, _, _, isCollectedB = C_MountJournal.GetMountInfoByID(mountIdB)
+        local doNotDescend = false
+        local result = false
+        local nameA, _, _, _, isUsableA, _, isFavoriteA, _, _, _, isCollectedA = C_MountJournal.GetMountInfoByID(mountIdA)
+        local nameB, _, _, _, isUsableB, _, isFavoriteB, _, _, _, isCollectedB = C_MountJournal.GetMountInfoByID(mountIdB)
 
-            if ADDON.settings.sort.favoritesOnTop and isFavoriteA ~= isFavoriteB then
-                return isFavoriteA and not isFavoriteB
-            end
-            if ADDON.settings.sort.unownedOnBottom and isCollectedA ~= isCollectedB then
-                return isCollectedA and not isCollectedB
-            end
+        if ADDON.settings.sort.favoritesOnTop and isFavoriteA ~= isFavoriteB then
+            return isFavoriteA and not isFavoriteB
+        end
+        if ADDON.settings.sort.unusableToBottom and isUsableA ~= isUsableB then
+            return isUsableA and not isUsableB
+        end
+        if ADDON.settings.sort.unownedOnBottom and isCollectedA ~= isCollectedB then
+            return isCollectedA and not isCollectedB
+        end
 
-            if ADDON.settings.sort.by == 'name' then
+        local sortBy = ADDON.settings.sort.by
+
+        if sortBy == 'name' then
+            result = CompareNames(nameA, mountIdA, nameB, mountIdB)
+        elseif sortBy == 'type' then
+            local mountTypeA = mapMountType(mountIdA)
+            local mountTypeB = mapMountType(mountIdB)
+
+            if mountTypeA == mountTypeB then
                 result = CompareNames(nameA, mountIdA, nameB, mountIdB)
-            elseif ADDON.settings.sort.by == 'type' then
-                local mountTypeA = mapMountType(mountIdA)
-                local mountTypeB = mapMountType(mountIdB)
-
-                if mountTypeA == mountTypeB then
-                    result = CompareNames(nameA, mountIdA, nameB, mountIdB)
-                elseif mountTypeA == "flying" then
-                    result = true
-                elseif mountTypeA == "ground" then
-                    result = (mountTypeB == "underwater")
-                elseif mountTypeA == "underwater" then
-                    result = false
-                end
-
-            elseif ADDON.settings.sort.by == 'expansion' then
-                result = mountIdA < mountIdB
+            elseif mountTypeA == "flying" then
+                result = true
+            elseif mountTypeA == "ground" then
+                result = (mountTypeB == "underwater")
+            elseif mountTypeA == "underwater" then
+                result = false
             end
 
-            if ADDON.settings.sort.descending then
-                result = not result
-            end
+        elseif sortBy == 'expansion' then
+            result = mountIdA < mountIdB
 
-            return result
-        end)
-    end
+        elseif TrackingIndex[sortBy] then
+            local index = TrackingIndex[sortBy]
+            local valueA = select(index, ADDON:GetMountStatistics(mountIdA)) or 0
+            local valueB = select(index, ADDON:GetMountStatistics(mountIdB)) or 0
+            if valueA == valueB then
+                result = CompareNames(nameA, mountIdA, nameB, mountIdB)
+                doNotDescend = true
+            elseif sortBy == 'learned_date' or sortBy == 'last_usage' then
+                result = valueA > valueB
+            else
+                result = valueA < valueB
+            end
+        end
+
+        if ADDON.settings.sort.descending and not doNotDescend then
+            result = not result
+        end
+
+        return result
+    end)
 
     return ids
 end
