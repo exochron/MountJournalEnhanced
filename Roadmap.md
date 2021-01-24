@@ -1,6 +1,6 @@
 ### Next
+- automatic favor new mounts 
 - switch through mount variation (eg. High Priest's Lightsworn Seeker: C_MountJournal.GetMountAllCreatureDisplayInfoByID(861))
-- scroll to top/bottom (like in Rematch)
 
 ### More Ideas:
 - more animation control in display (start/pause, movements, with sound effects)

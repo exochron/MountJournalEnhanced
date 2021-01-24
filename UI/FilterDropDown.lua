@@ -352,6 +352,7 @@ local function InitializeFilterDropDown(filterMenu, level)
         UIDropDownMenu_AddSpace(level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L.SORT_REVERSE, 'descending', settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L.SORT_FAVORITES_FIRST, 'favoritesOnTop', settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(L.SORT_UNUSABLE_BOTTOM, 'unusableToBottom', settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L.SORT_UNOWNED_BOTTOM, 'unownedOnBottom', settings), level)
         UIDropDownMenu_AddSpace(level)
 

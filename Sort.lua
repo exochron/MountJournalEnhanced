@@ -129,11 +129,14 @@ function ADDON:SortMounts(ids)
 
         local doNotDescend = false
         local result = false
-        local nameA, _, _, _, _, _, isFavoriteA, _, _, _, isCollectedA = C_MountJournal.GetMountInfoByID(mountIdA)
-        local nameB, _, _, _, _, _, isFavoriteB, _, _, _, isCollectedB = C_MountJournal.GetMountInfoByID(mountIdB)
+        local nameA, _, _, _, isUsableA, _, isFavoriteA, _, _, _, isCollectedA = C_MountJournal.GetMountInfoByID(mountIdA)
+        local nameB, _, _, _, isUsableB, _, isFavoriteB, _, _, _, isCollectedB = C_MountJournal.GetMountInfoByID(mountIdB)
 
         if ADDON.settings.sort.favoritesOnTop and isFavoriteA ~= isFavoriteB then
             return isFavoriteA and not isFavoriteB
+        end
+        if ADDON.settings.sort.unusableToBottom and isUsableA ~= isUsableB then
+            return isUsableA and not isUsableB
         end
         if ADDON.settings.sort.unownedOnBottom and isCollectedA ~= isCollectedB then
             return isCollectedA and not isCollectedB

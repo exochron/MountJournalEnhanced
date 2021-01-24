@@ -78,6 +78,7 @@ local function PrepareDefaults()
             by = 'name', -- name|type|expansion
             descending = false,
             favoritesOnTop = true,
+            unusableToBottom = false,
             unownedOnBottom = true,
         },
     }
