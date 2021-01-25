@@ -153,25 +153,14 @@ end
 ResetIngameFilter()
 
 local frame = CreateFrame("Frame")
-frame:RegisterEvent("ADDON_LOADED")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function(self, event, arg1)
-    local doInit = false
-    if event == "PLAYER_LOGIN" then
-        ResetIngameFilter()
-        FireCallbacks(loginCallbacks)
-        if MountJournal then
-            doInit = true
-        end
-    elseif event == "ADDON_LOADED" and arg1 == "Blizzard_Collections" then
-        if not ADDON.initialized and ADDON.settings then
-            doInit = true
-        end
-    end
-
-    if doInit then
-        frame:UnregisterEvent("ADDON_LOADED")
-        LoadUI()
-        ADDON.initialized = true
-    end
+    ResetIngameFilter()
+    FireCallbacks(loginCallbacks)
 end)
+
+EventRegistry:RegisterCallback("MountJournal.OnShow", function()
+    EventRegistry:UnregisterCallback("MountJournal.OnShow", ADDON_NAME .. ".init")
+    LoadUI()
+    ADDON.initialized = true
+end, ADDON_NAME .. ".init")

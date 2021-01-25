@@ -1,4 +1,4 @@
-local _, ADDON = ...
+local ADDON_NAME, ADDON = ...
 
 local IgnoredDB = ADDON.DB.Ignored
 
@@ -79,3 +79,14 @@ ADDON:RegisterLoadUICallback(function()
         RunDebugTest()
     end
 end)
+
+EventRegistry:RegisterCallback("MountJournal.OnShow", function()
+    if ADDON.settings.ui.debugMode then
+        if not issecurevariable(MountJournal, "currentItem") then
+            print("currentItem is tainted")
+        end
+        if not issecurevariable(MountJournal, "SlotButton") then
+            print("SlotButton is tainted")
+        end
+    end
+end, ADDON_NAME .. ".debug")
