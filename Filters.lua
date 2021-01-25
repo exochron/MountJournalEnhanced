@@ -214,6 +214,10 @@ function ADDON:FilterMount(mountId, searchText)
 
     local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, shouldHideOnChar, isCollected = C_MountJournal.GetMountInfoByID(mountId)
 
+    if ADDON.DB.Ignored[mountId] and not isCollected then
+        return false
+    end
+
     if (searchText ~= "" and FilterByName(searchText, creatureName, mountId))
             or (searchText == "" and
             FilterUserHiddenMounts(spellId) and

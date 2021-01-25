@@ -111,26 +111,14 @@ end
 
 function ADDON:UpdateIndex(calledFromEvent)
     local map = {}
-    local handledMounts = {}
 
     local searchString = MountJournal.searchBox:GetText() or ""
     if searchString ~= "" then
         searchString = searchString:lower()
     end
 
-    for i = 1, ADDON.hooks["GetNumDisplayedMounts"]() do
-        local mountId = select(12, ADDON.hooks["GetDisplayedMountInfo"](i))
-        if ADDON:FilterMount(mountId, searchString) then
-            map[#map + 1] = { mountId, i }
-        end
-        handledMounts[mountId] = true
-    end
-
     for _, mountId in ipairs(C_MountJournal.GetMountIDs()) do
-        if not handledMounts[mountId]
-                and not ADDON.DB.Ignored[mountId]
-                and ADDON:FilterMount(mountId, searchString)
-        then
+        if ADDON:FilterMount(mountId, searchString) then
             map[#map + 1] = { mountId }
         end
     end

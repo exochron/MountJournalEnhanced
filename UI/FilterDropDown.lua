@@ -192,11 +192,11 @@ local function InitializeFilterDropDown(filterMenu, level)
 
         info = CreateFilterInfo(COLLECTED, SETTING_COLLECTED, nil, function(value)
             if value then
-                UIDropDownMenu_EnableButton(1, 2)
-                UIDropDownMenu_EnableButton(1, 3)
+                UIDropDownMenu_EnableButton(1, 4)
+                UIDropDownMenu_EnableButton(1, 5)
             else
-                UIDropDownMenu_DisableButton(1, 2)
-                UIDropDownMenu_DisableButton(1, 3)
+                UIDropDownMenu_DisableButton(1, 4)
+                UIDropDownMenu_DisableButton(1, 5)
             end
         end)
         UIDropDownMenu_AddButton(info, level)
@@ -212,9 +212,9 @@ local function InitializeFilterDropDown(filterMenu, level)
 
         info = CreateFilterInfo(NOT_COLLECTED, SETTING_NOT_COLLECTED, nil, function(value)
             if value then
-                UIDropDownMenu_EnableButton(1, 5)
+                UIDropDownMenu_EnableButton(1, 7)
             else
-                UIDropDownMenu_DisableButton(1, 5)
+                UIDropDownMenu_DisableButton(1, 7)
             end
         end)
         UIDropDownMenu_AddButton(info, level)
