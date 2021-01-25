@@ -11,7 +11,7 @@ local function FetchCurrentSelectedIndex(totalDisplayed)
     local target = MountJournal.selectedSpellID
 
     for i = 1, totalDisplayed do
-        local _, spellId = C_MountJournal.GetDisplayedMountInfo(i)
+        local _, spellId = ADDON.Api.GetDisplayedMountInfo(i)
         if spellId == target then
             return i
         end
@@ -59,7 +59,7 @@ ADDON:RegisterLoadUICallback(function()
     MountJournal.ListScrollFrame:SetScript("OnKeyDown", function(self, key)
         local totalDisplayed
         if (key == "DOWN" or key == "UP") and ADDON.settings.ui.enableCursorKeys and not IsModifierKeyDown() then
-            totalDisplayed = C_MountJournal.GetNumDisplayedMounts()
+            totalDisplayed = ADDON.Api.GetNumDisplayedMounts()
             if totalDisplayed > 0 then
                 local step = 1
                 if key == "UP" then

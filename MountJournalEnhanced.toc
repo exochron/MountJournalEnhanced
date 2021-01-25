@@ -28,6 +28,7 @@ Database\families.db.lua
 Database\tradable.db.lua
 Database\restrictions.db.lua
 
+ApiMap.lua
 PlayerConditions.lua
 Filters.lua
 Sort.lua

@@ -10,7 +10,7 @@ local function HookScrollUpdate(self, totalHeight, displayedHeight)
         local button = MountJournal.ListScrollFrame.buttons[2]
 
         local height = button:GetHeight()
-        totalHeight = C_MountJournal.GetNumDisplayedMounts() * height
+        totalHeight = ADDON.Api.GetNumDisplayedMounts() * height
 
         local _, _, _, _, yOfs = button:GetPoint(1)
         if (yOfs ~= 0) then
