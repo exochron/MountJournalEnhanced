@@ -1,14 +1,14 @@
 local ADDON_NAME, ADDON = ...
 
-local menuMountIndex
+local menuMountId
 
 local function InitializeMountOptionsMenu(sender, level)
 
-    if not menuMountIndex then
+    if not menuMountId then
         return
     end
 
-    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountId = ADDON.Api.GetDisplayedMountInfo(menuMountIndex)
+    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountId = C_MountJournal.GetMountInfoByID(menuMountId)
 
     local info = { notCheckable = true }
 
@@ -25,7 +25,7 @@ local function InitializeMountOptionsMenu(sender, level)
 
     info.func = function()
         if needsFanfare then
-            MountJournal_Select(menuMountIndex)
+            MountJournal_SelectByMountID(menuMountId)
         end
         MountJournalMountButton_UseMount(mountId)
     end
@@ -33,20 +33,20 @@ local function InitializeMountOptionsMenu(sender, level)
     UIDropDownMenu_AddButton(info, level)
 
     if not needsFanfare and isCollected then
-        local isFavorite, canFavorite = ADDON.Api.GetIsFavorite(menuMountIndex)
+        local isFavorite, canFavorite = ADDON.Api.GetIsFavoriteByID(menuMountId)
         info = {notCheckable = true, disabled = not canFavorite }
 
         if isFavorite then
             info.text = BATTLE_PET_UNFAVORITE
             info.func = function()
-                ADDON.Api.SetIsFavorite(menuMountIndex, false)
-                MountJournal_UpdateMountList()
+                ADDON.Api.SetIsFavoriteByID(menuMountId, false)
+                ADDON:UpdateMountList()
             end
         else
             info.text = BATTLE_PET_FAVORITE
             info.func = function()
-                ADDON.Api.SetIsFavorite(menuMountIndex, true)
-                MountJournal_UpdateMountList()
+                ADDON.Api.SetIsFavoriteByID(menuMountId, true)
+                ADDON:UpdateMountList()
             end
         end
 
@@ -61,7 +61,7 @@ local function InitializeMountOptionsMenu(sender, level)
                 func = function()
                     ADDON.settings.hiddenMounts[spellId] = nil
                     ADDON:UpdateIndex()
-                    MountJournal_UpdateMountList()
+                    ADDON:UpdateMountList()
                 end
             }
         else
@@ -71,7 +71,7 @@ local function InitializeMountOptionsMenu(sender, level)
                 func = function()
                     ADDON.settings.hiddenMounts[spellId] = true
                     ADDON:UpdateIndex()
-                    MountJournal_UpdateMountList()
+                    ADDON:UpdateMountList()
                 end,
             }
         end
@@ -82,8 +82,8 @@ local function InitializeMountOptionsMenu(sender, level)
 end
 
 local function OnClick(sender, anchor, button)
-    if button ~= "LeftButton" and sender.index then
-        menuMountIndex = sender.index;
+    if button ~= "LeftButton" and sender.MJE_mountID then
+        menuMountId = sender.MJE_mountID;
         ToggleDropDownMenu(1, nil, _G[ADDON_NAME .. "MountOptionsMenu"], anchor, 0, 0)
     end
 end

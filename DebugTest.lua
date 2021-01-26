@@ -82,11 +82,36 @@ end)
 
 EventRegistry:RegisterCallback("MountJournal.OnShow", function()
     if ADDON.settings.ui.debugMode then
-        if not issecurevariable(MountJournal, "currentItem") then
-            print("currentItem is tainted")
+        local blacklist= {}
+        local check = function()
+            if not issecurevariable("MountJournal") and not blacklist["MJ"] then
+                print("MountJournal is tainted")
+                blacklist["MJ"] = true
+            end
+            for key, val in pairs(MountJournal) do
+                if not issecurevariable(MountJournal, key) and not blacklist[key] then
+                    print(key .. " is tainted")
+                    blacklist[key] = true
+                elseif issecurevariable(MountJournal, key) and blacklist[key] then
+                    print(key .. " is not tainted anymore")
+                    blacklist[key] = nil
+                end
+            end
+            for key, val in pairs(MountJournal.ListScrollFrame) do
+                if not issecurevariable(MountJournal, key) and not blacklist[key] then
+                    print(key .. " is tainted")
+                    blacklist[key] = true
+                elseif issecurevariable(MountJournal, key) and blacklist[key] then
+                    print(key .. " is not tainted anymore")
+                    blacklist[key] = nil
+                end
+            end
+
+            if not issecurevariable(MountJournal.ListScrollFrame.buttons, 1) then
+                print("first button is tainted")
+            end
         end
-        if not issecurevariable(MountJournal, "SlotButton") then
-            print("SlotButton is tainted")
-        end
+        C_Timer.NewTicker(0.3, check)
     end
+    EventRegistry:UnregisterCallback("MountJournal.OnShow", ADDON_NAME .. ".debug")
 end, ADDON_NAME .. ".debug")

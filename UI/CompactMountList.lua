@@ -146,7 +146,7 @@ end
 
 ADDON:RegisterUISetting('compactMountList', true, ADDON.L.SETTING_COMPACT_LIST, function(flag)
     if (MountJournal) then
-        if (flag) then
+        if flag then
             ModifyListButtons()
         else
             RestoreListButtons()
@@ -167,7 +167,7 @@ end)
 
 -- UI Pack fix  (eg. ElvUI, TukUI)
 ADDON.UI:RegisterUIOverhaulCallback(function(self)
-    if (doInit and self == MountJournal) then
+    if doInit and self == MountJournal then
         doInit = false
         GenerateButtons()
         SetupScrollFix()

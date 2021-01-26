@@ -17,7 +17,7 @@ end
 
 local function LoadUI()
     ADDON:UpdateIndex()
-    MountJournal_UpdateMountList()
+    ADDON:UpdateMountList()
 
     local frame = CreateFrame("frame");
     frame:RegisterEvent("ZONE_CHANGED")
@@ -27,14 +27,14 @@ local function LoadUI()
     frame:SetScript("OnEvent", function(sender, ...)
         if CollectionsJournal:IsShown() then
             ADDON:UpdateIndex(true)
-            MountJournal_UpdateMountList()
+            ADDON:UpdateMountList()
         end
     end);
 
     MountJournal.searchBox:SetScript("OnTextChanged", function()
         SearchBoxTemplate_OnTextChanged(MountJournal.searchBox)
         ADDON:UpdateIndex(true)
-        MountJournal_UpdateMountList()
+        ADDON:UpdateMountList()
     end)
 end
 

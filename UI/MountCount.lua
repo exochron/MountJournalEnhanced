@@ -149,7 +149,7 @@ ADDON:RegisterUISetting('showPersonalCount', true, ADDON.L.SETTING_MOUNT_COUNT, 
             end
 
             --to trigger update function
-            MountJournal_UpdateMountList()
+            ADDON:UpdateMountList()
         end
     end
 end)

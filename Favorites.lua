@@ -64,7 +64,7 @@ local function FavorMounts(mountIds, finishedCallback)
         end
         if ADDON.initialized then
             ADDON:UpdateIndex()
-            MountJournal_UpdateMountList()
+            ADDON:UpdateMountList()
         end
         finishedCallback()
     end

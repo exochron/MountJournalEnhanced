@@ -35,7 +35,7 @@ local function CreateFilterInfo(text, filterKey, filterSettings, callback)
         info.func = function(_, arg1, arg2, value)
             arg1[filterKey] = arg2 or value
             ADDON:UpdateIndex()
-            MountJournal_UpdateMountList()
+            ADDON:UpdateMountList()
             UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
 
             if callback then
@@ -97,7 +97,7 @@ local function SetAllSubFilters(settings, switch)
 
     UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
     ADDON:UpdateIndex()
-    MountJournal_UpdateMountList()
+    ADDON:UpdateMountList()
 end
 
 local function RefreshCategoryButton(button, isNotRadio)
@@ -243,7 +243,7 @@ local function InitializeFilterDropDown(filterMenu, level)
         info.func = function(_, _, _, value)
             ADDON:ResetFilterSettings()
             ADDON:UpdateIndex()
-            MountJournal_UpdateMountList()
+            ADDON:UpdateMountList()
         end
         UIDropDownMenu_AddButton(info, level)
     elseif UIDROPDOWNMENU_MENU_VALUE == SETTING_SOURCE then
@@ -361,7 +361,7 @@ local function InitializeFilterDropDown(filterMenu, level)
         info.func = function(_, _, _, value)
             ADDON:ResetSortSettings()
             ADDON:UpdateIndex()
-            MountJournal_UpdateMountList()
+            ADDON:UpdateMountList()
         end
         UIDropDownMenu_AddButton(info, level)
     end

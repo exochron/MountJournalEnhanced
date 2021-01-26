@@ -28,11 +28,11 @@ Database\families.db.lua
 Database\tradable.db.lua
 Database\restrictions.db.lua
 
-ApiMap.lua
 PlayerConditions.lua
 Filters.lua
 Sort.lua
 MountJournalEnhanced.lua
+ApiMap.lua
 Settings\Handling.lua
 Settings\Migration.lua
 Settings\Settings.lua
@@ -43,7 +43,7 @@ SlashCommand.lua
 DebugTest.lua
 
 UI\Functions.lua
-UI\CompactMountList.lua
+# UI\CompactMountList.lua is tainting :(
 UI\AchievementPoints.lua
 UI\MountCount.lua
 UI\DisplayDirector.lua
