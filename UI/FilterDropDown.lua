@@ -15,7 +15,7 @@ local SETTING_HIDDEN = "hidden"
 local SETTING_HIDDEN_INGAME = "hiddenIngame"
 local SETTING_SORT = "sort"
 
-local function CreateFilterInfo(text, filterKey, filterSettings, callback)
+local function CreateFilterInfo(text, filterKey, filterSettings, toggleButtons)
     local info = {
         keepShownOnClick = true,
         isNotRadio = true,
@@ -32,14 +32,23 @@ local function CreateFilterInfo(text, filterKey, filterSettings, callback)
         info.checked = function(self)
             return self.arg1[filterKey]
         end
-        info.func = function(_, arg1, arg2, value)
+        info.func = function(self, arg1, arg2, value)
             arg1[filterKey] = arg2 or value
             ADDON:UpdateIndex()
             MountJournal_UpdateMountList()
             UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
 
-            if callback then
-                callback(value)
+            if toggleButtons then
+                local name = self:GetName()
+                local x = tonumber(string.match(name, "%d+"))
+                local y = tonumber(string.match(name, "%d+$"))
+                for _, toggleNext in ipairs(toggleButtons) do
+                    if value then
+                        UIDropDownMenu_EnableButton(x, y + toggleNext)
+                    else
+                        UIDropDownMenu_DisableButton(x, y + toggleNext)
+                    end
+                end
             end
         end
     else
@@ -190,15 +199,7 @@ local function InitializeFilterDropDown(filterMenu, level)
         UIDropDownMenu_AddButton(CreateFilterCategory(CLUB_FINDER_SORT_BY, SETTING_SORT), level)
         UIDropDownMenu_AddSpace(level)
 
-        info = CreateFilterInfo(COLLECTED, SETTING_COLLECTED, nil, function(value)
-            if value then
-                UIDropDownMenu_EnableButton(1, 2)
-                UIDropDownMenu_EnableButton(1, 3)
-            else
-                UIDropDownMenu_DisableButton(1, 2)
-                UIDropDownMenu_DisableButton(1, 3)
-            end
-        end)
+        info = CreateFilterInfo(COLLECTED, SETTING_COLLECTED, nil, { 1, 2 })
         UIDropDownMenu_AddButton(info, level)
 
         info = CreateFilterInfo(FAVORITES_FILTER, SETTING_ONLY_FAVORITES)
@@ -210,13 +211,7 @@ local function InitializeFilterDropDown(filterMenu, level)
         info.disabled = not ADDON.settings.filter.collected
         UIDropDownMenu_AddButton(info, level)
 
-        info = CreateFilterInfo(NOT_COLLECTED, SETTING_NOT_COLLECTED, nil, function(value)
-            if value then
-                UIDropDownMenu_EnableButton(1, 5)
-            else
-                UIDropDownMenu_DisableButton(1, 5)
-            end
-        end)
+        info = CreateFilterInfo(NOT_COLLECTED, SETTING_NOT_COLLECTED, nil, { 1 })
         UIDropDownMenu_AddButton(info, level)
         info = CreateFilterInfo(L.FILTER_SECRET, SETTING_HIDDEN_INGAME)
         info.leftPadding = 16
