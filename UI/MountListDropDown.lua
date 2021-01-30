@@ -8,7 +8,7 @@ local function InitializeMountOptionsMenu(sender, level)
         return
     end
 
-    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountId = C_MountJournal.GetMountInfoByID(menuMountId)
+    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountId = ADDON.Api.GetMountInfoByID(menuMountId)
 
     local info = { notCheckable = true }
 
@@ -82,8 +82,8 @@ local function InitializeMountOptionsMenu(sender, level)
 end
 
 local function OnClick(sender, anchor, button)
-    if button ~= "LeftButton" and sender.MJE_mountID then
-        menuMountId = sender.MJE_mountID;
+    if button ~= "LeftButton" then
+        menuMountId = sender.mountID;
         ToggleDropDownMenu(1, nil, _G[ADDON_NAME .. "MountOptionsMenu"], anchor, 0, 0)
     end
 end
@@ -92,9 +92,7 @@ ADDON:RegisterLoadUICallback(function()
     local menu = CreateFrame("Frame", ADDON_NAME .. "MountOptionsMenu", MountJournal, "UIDropDownMenuTemplate")
     UIDropDownMenu_Initialize(menu, InitializeMountOptionsMenu, "MENU")
 
-    local buttons = MountJournal.ListScrollFrame.buttons
-    for buttonIndex = 1, #buttons do
-        local button = buttons[buttonIndex]
+    for _, button in pairs(MountJournal.MJE_ListScrollFrame.buttons) do
         button:HookScript("OnClick", function(sender, mouseButton)
             OnClick(sender, sender, mouseButton)
         end)

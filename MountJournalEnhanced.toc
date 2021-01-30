@@ -42,15 +42,15 @@ Tracking.lua
 SlashCommand.lua
 DebugTest.lua
 
+UI\Templates.xml
 UI\Functions.lua
+UI\EnhancedList.lua
 # UI\CompactMountList.lua is tainting :(
 UI\AchievementPoints.lua
 UI\MountCount.lua
 UI\DisplayDirector.lua
-UI\DoubleClick.lua
 UI\EquipmentSlot.lua
 UI\FilterDropDown.lua
-UI\HiddenIcon.lua
 UI\DisplayCamera.lua
 UI\DisplayStatistics.lua
 UI\Hotkeys.lua

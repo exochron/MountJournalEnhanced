@@ -8,29 +8,14 @@ local ADDON_NAME, ADDON = ...
 -- DOWN: Select Next Mount
 
 local function FetchCurrentSelectedIndex(totalDisplayed)
-    local target = MountJournal.selectedSpellID
+    local target = MountJournal.selectedMountID
 
     for i = 1, totalDisplayed do
-        local _, spellId = ADDON.Api.GetDisplayedMountInfo(i)
-        if spellId == target then
+        local mountId = select(12, ADDON.Api.GetDisplayedMountInfo(i))
+        if mountId == target then
             return i
         end
     end
-end
-
-local function ScrollToIndex(index)
-    local buttonHeight = MountJournal.ListScrollFrame.buttonHeight
-    local totalHeight = buttonHeight * (index - 1)
-    local scrollFrameHeight = MountJournal.ListScrollFrame:GetHeight() - (buttonHeight / 4)
-
-    local offset = MountJournal.ListScrollFrame.scrollBar:GetValue()
-    if totalHeight + buttonHeight > offset + scrollFrameHeight then
-        offset = totalHeight + buttonHeight - scrollFrameHeight
-    elseif totalHeight < offset then
-        offset = totalHeight
-    end
-
-    MountJournal.ListScrollFrame.scrollBar:SetValue(offset)
 end
 
 local function Select(step, totalDisplayed)
@@ -46,17 +31,20 @@ local function Select(step, totalDisplayed)
             index = totalDisplayed
         end
     end
-    MountJournal_Select(index)
-    ScrollToIndex(index)
+
+    local mountId = select(12, ADDON.Api.GetDisplayedMountInfo(index))
+    ADDON:SetSelected(mountId)
 end
 
 ADDON:RegisterUISetting('enableCursorKeys', true, ADDON.L.SETTING_CURSOR_KEYS)
 
 ADDON:RegisterLoadUICallback(function()
+    local scrollFrame = MountJournal.MJE_ListScrollFrame
+
     -- I had issues handling the input directly at the MountJournal frame. So I'm using ListScrollFrame instead.
-    MountJournal.ListScrollFrame:SetPropagateKeyboardInput(true)
-    MountJournal.ListScrollFrame:EnableKeyboard(true)
-    MountJournal.ListScrollFrame:SetScript("OnKeyDown", function(self, key)
+    scrollFrame:SetPropagateKeyboardInput(true)
+    scrollFrame:EnableKeyboard(true)
+    scrollFrame:SetScript("OnKeyDown", function(self, key)
         local totalDisplayed
         if (key == "DOWN" or key == "UP") and ADDON.settings.ui.enableCursorKeys and not IsModifierKeyDown() then
             totalDisplayed = ADDON.Api.GetNumDisplayedMounts()
@@ -74,16 +62,16 @@ ADDON:RegisterLoadUICallback(function()
         self:SetPropagateKeyboardInput(true)
     end)
 
-    MountJournal.ListScrollFrame.scrollDown:RegisterForClicks("LeftButtonUp", "LeftButtonDown", "RightButtonUp");
-    MountJournal.ListScrollFrame.scrollDown:HookScript("OnClick", function(self, button, isDown)
+    scrollFrame.scrollDown:RegisterForClicks("LeftButtonUp", "LeftButtonDown", "RightButtonUp");
+    scrollFrame.scrollDown:HookScript("OnClick", function(self, button, isDown)
         if button == "RightButton" and not isDown then
-            MountJournal.ListScrollFrame.scrollBar:SetValue(MountJournal.ListScrollFrame.range)
+            scrollFrame.scrollBar:SetValue(scrollFrame.range)
         end
     end)
-    MountJournal.ListScrollFrame.scrollUp:RegisterForClicks("LeftButtonUp", "LeftButtonDown", "RightButtonUp");
-    MountJournal.ListScrollFrame.scrollUp:HookScript("OnClick", function(self, button, isDown)
+    scrollFrame.scrollUp:RegisterForClicks("LeftButtonUp", "LeftButtonDown", "RightButtonUp");
+    scrollFrame.scrollUp:HookScript("OnClick", function(self, button, isDown)
         if button == "RightButton" and not isDown then
-            MountJournal.ListScrollFrame.scrollBar:SetValue(0)
+            scrollFrame.scrollBar:SetValue(0)
         end
     end)
 end)

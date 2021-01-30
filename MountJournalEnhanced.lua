@@ -17,7 +17,6 @@ end
 
 local function LoadUI()
     ADDON:UpdateIndex()
-    ADDON:UpdateMountList()
 
     local frame = CreateFrame("frame");
     frame:RegisterEvent("ZONE_CHANGED")
