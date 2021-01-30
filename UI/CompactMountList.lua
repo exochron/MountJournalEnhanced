@@ -6,8 +6,8 @@ local MOUNT_BUTTON_HEIGHT = 29
 local scrollBarMinMaxHandler
 
 local function HookScrollUpdate(self, totalHeight, displayedHeight)
-    if self == MountJournal.ListScrollFrame then
-        local button = MountJournal.ListScrollFrame.buttons[2]
+    if self == MountJournal.MJE_ListScrollFrame then
+        local button = MountJournal.MJE_ListScrollFrame.buttons[2]
 
         local height = button:GetHeight()
         totalHeight = ADDON.Api.GetNumDisplayedMounts() * height
@@ -45,29 +45,15 @@ local function HookScrollUpdate(self, totalHeight, displayedHeight)
 end
 
 local function SetupScrollFix()
-    scrollBarMinMaxHandler = MountJournal.ListScrollFrame.scrollBar.SetMinMaxValues
-    MountJournal.ListScrollFrame.scrollBar.SetMinMaxValues = function()
+    scrollBarMinMaxHandler = MountJournal.MJE_ListScrollFrame.scrollBar.SetMinMaxValues
+    MountJournal.MJE_ListScrollFrame.scrollBar.SetMinMaxValues = function()
     end
     hooksecurefunc("HybridScrollFrame_Update", HookScrollUpdate)
 end
 --endregion
 
-local function GenerateButtons()
-    local scrollFrame = MountJournal.ListScrollFrame
-    local buttons = scrollFrame.buttons
-
-    -- first generate some buttons
-    local height = buttons[1]:GetHeight()
-    buttons[1]:SetHeight(21)
-    HybridScrollFrame_CreateButtons(scrollFrame, "MountListButtonTemplate")
-
-    -- then change back
-    buttons[1]:SetHeight(height)
-    HybridScrollFrame_CreateButtons(scrollFrame, "MountListButtonTemplate")
-end
-
 local function ModifyListButtons()
-    local scrollFrame = MountJournal.ListScrollFrame
+    local scrollFrame = MountJournal.MJE_ListScrollFrame
     local buttons = scrollFrame.buttons
 
     ADDON.UI:SavePoint(buttons[1])
@@ -80,7 +66,7 @@ local function ModifyListButtons()
 
     local previousButton
     for _, button in pairs(scrollFrame.buttons) do
-        if (previousButton) then
+        if previousButton then
             ADDON.UI:SavePoint(button)
             ADDON.UI:SaveSize(button)
 
@@ -97,7 +83,7 @@ local function ModifyListButtons()
         button.icon:ClearAllPoints()
         button.icon:SetPoint("RIGHT", button, "LEFT", -2, 0)
 
-        if (button.backdrop) then
+        if button.backdrop then
             -- ElvUI customization
             button.backdrop:SetInside(button, 0, 0)
             button.icon:SetSize(MOUNT_BUTTON_HEIGHT - 2, MOUNT_BUTTON_HEIGHT - 2)
@@ -123,7 +109,7 @@ local function ModifyListButtons()
 end
 
 local function RestoreListButtons()
-    local scrollFrame = MountJournal.ListScrollFrame
+    local scrollFrame = MountJournal.MJE_ListScrollFrame
 
     for _, button in pairs(scrollFrame.buttons) do
         ADDON.UI:RestorePoint(button)
@@ -135,7 +121,7 @@ local function RestoreListButtons()
         ADDON.UI:RestorePoint(button.new)
         ADDON.UI:RestorePoint(button.factionIcon)
 
-        if (button.backdrop) then
+        if button.backdrop then
             -- ElvUI customization
             button.backdrop:SetInside(button, 3, 3)
         end
@@ -145,7 +131,7 @@ local function RestoreListButtons()
 end
 
 ADDON:RegisterUISetting('compactMountList', true, ADDON.L.SETTING_COMPACT_LIST, function(flag)
-    if (MountJournal) then
+    if MountJournal then
         if flag then
             ModifyListButtons()
         else
@@ -159,7 +145,6 @@ local doInit = true
 ADDON:RegisterLoadUICallback(function()
     if doInit then
         doInit = false
-        GenerateButtons()
         SetupScrollFix()
     end
     ADDON:ApplySetting('compactMountList', ADDON.settings.ui.compactMountList)
@@ -169,7 +154,6 @@ end)
 ADDON.UI:RegisterUIOverhaulCallback(function(self)
     if doInit and self == MountJournal then
         doInit = false
-        GenerateButtons()
         SetupScrollFix()
     end
 end)

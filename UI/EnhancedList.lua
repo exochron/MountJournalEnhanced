@@ -1,6 +1,5 @@
 local ADDON_NAME, ADDON = ...
 
-local MOUNT_BUTTON_HEIGHT = 46
 local MOUNT_FACTION_TEXTURES = {
     [0] = "MountJournalIcons-Horde",
     [1] = "MountJournalIcons-Alliance"
@@ -117,12 +116,12 @@ function ADDON:UpdateMountList()
         end
     end
 
-    local totalHeight = numDisplayedMounts * MOUNT_BUTTON_HEIGHT;
+    local totalHeight = numDisplayedMounts * ADDON:GetMountButtonHeight()
     HybridScrollFrame_Update(scrollFrame, totalHeight, scrollFrame:GetHeight());
 end
 
 function ADDON:GetMountButtonHeight()
-    return MOUNT_BUTTON_HEIGHT
+    return 46
 end
 
 local function GetMountButtonByMountID(mountID)
@@ -155,7 +154,7 @@ function ADDON:SetSelected(selectedMountID)
     local inView
     local button = GetMountButtonByMountID(selectedMountID)
     if button then
-        inView = button:GetTop() >= scrollFrame:GetBottom() and button:GetBottom() <= scrollFrame:GetTop()
+        inView = button:GetTop() > (scrollFrame:GetBottom() + 3) and button:GetBottom() < (scrollFrame:GetTop() - 3)
     else
         inView = false
     end

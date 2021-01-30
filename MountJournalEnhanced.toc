@@ -45,7 +45,7 @@ DebugTest.lua
 UI\Templates.xml
 UI\Functions.lua
 UI\EnhancedList.lua
-# UI\CompactMountList.lua is tainting :(
+UI\CompactMountList.lua
 UI\AchievementPoints.lua
 UI\MountCount.lua
 UI\DisplayDirector.lua
