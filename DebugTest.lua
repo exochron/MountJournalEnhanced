@@ -6,7 +6,7 @@ local function RunDebugTest()
     local mounts = {}
     local mountIDs = C_MountJournal.GetMountIDs()
     for _, mountID in ipairs(mountIDs) do
-        local name, spellID, icon, active, isUsable, sourceType = C_MountJournal.GetMountInfoByID(mountID)
+        local name, spellID, _, _, _, sourceType = C_MountJournal.GetMountInfoByID(mountID)
         mounts[mountID] = {
             name = name,
             spellID = spellID,

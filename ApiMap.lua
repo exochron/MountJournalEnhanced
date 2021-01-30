@@ -4,14 +4,6 @@ ADDON.Api = {}
 
 local indexMap -- initialize with nil, so we know if it's not ready yet and not just empty
 
-local function OwnIndexToOriginal(index)
-    -- index=0 => SummonRandomButton
-    if index == 0 then
-        return index
-    end
-
-    return indexMap[index] and indexMap[index][2] or nil
-end
 local function OwnIndexToMountId(index)
     -- index=0 => SummonRandomButton
     if index == 0 then
@@ -19,15 +11,6 @@ local function OwnIndexToMountId(index)
     end
 
     return indexMap[index] and indexMap[index][1] or nil
-end
-local function MountIdToOwnIndex(mountId)
-    for i, blob in ipairs(indexMap) do
-        if blob[1] == mountId then
-            return i
-        end
-    end
-
-    return nil
 end
 local function MountIdToOriginalIndex(mountId)
     for i, blob in ipairs(indexMap) do
@@ -63,36 +46,6 @@ function ADDON.Api.GetDisplayedMountInfo(index)
         return ADDON.Api.GetMountInfoByID(mappedMountId)
     end
 end
-function ADDON.Api.GetDisplayedMountInfoExtra(index, ...)
-    if nil == indexMap then
-        ADDON:UpdateIndex()
-    end
-
-    local mountId = OwnIndexToMountId(index)
-    if mountId then
-        return C_MountJournal.GetMountInfoExtraByID(mountId, ...)
-    end
-end
-function ADDON.Api.GetDisplayedMountAllCreatureDisplayInfo(index, ...)
-    if nil == indexMap then
-        ADDON:UpdateIndex()
-    end
-
-    local mountId = OwnIndexToMountId(index)
-    if mountId then
-        return C_MountJournal.GetMountAllCreatureDisplayInfoByID(mountId, ...)
-    end
-end
-function ADDON.Api.Pickup(index, ...)
-    if nil == indexMap then
-        ADDON:UpdateIndex()
-    end
-
-    index = OwnIndexToOriginal(index)
-    if index then
-        return C_MountJournal.Pickup(index, ...)
-    end
-end
 function ADDON.Api.PickupByID(mountId, ...)
     if nil == indexMap then
         ADDON:UpdateIndex()
@@ -103,16 +56,6 @@ function ADDON.Api.PickupByID(mountId, ...)
         return C_MountJournal.Pickup(index, ...)
     end
 end
-function ADDON.Api.GetIsFavorite(index, ...)
-    if nil == indexMap then
-        ADDON:UpdateIndex()
-    end
-
-    index = OwnIndexToOriginal(index)
-    if index then
-        return C_MountJournal.GetIsFavorite(index, ...)
-    end
-end
 function ADDON.Api.GetIsFavoriteByID(mountId, ...)
     if nil == indexMap then
         ADDON:UpdateIndex()
@@ -121,16 +64,6 @@ function ADDON.Api.GetIsFavoriteByID(mountId, ...)
     local index = MountIdToOriginalIndex(mountId)
     if index then
         return C_MountJournal.GetIsFavorite(index, ...)
-    end
-end
-function ADDON.Api.SetIsFavorite(index, ...)
-    if nil == indexMap then
-        ADDON:UpdateIndex()
-    end
-
-    index = OwnIndexToOriginal(index)
-    if index then
-        return C_MountJournal.SetIsFavorite(index, ...)
     end
 end
 function ADDON.Api.SetIsFavoriteByID(mountId, ...)

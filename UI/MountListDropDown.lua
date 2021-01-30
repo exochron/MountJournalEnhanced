@@ -25,7 +25,7 @@ local function InitializeMountOptionsMenu(sender, level)
 
     info.func = function()
         if needsFanfare then
-            MountJournal_SelectByMountID(menuMountId)
+            ADDON:SetSelected(menuMountId)
         end
         MountJournalMountButton_UseMount(mountId)
     end
