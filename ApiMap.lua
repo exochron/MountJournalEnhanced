@@ -77,7 +77,6 @@ function ADDON.Api.SetIsFavoriteByID(mountId, ...)
     end
 end
 
-
 function ADDON:UpdateIndex(calledFromEvent)
     local map = {}
     local handledMounts = {}

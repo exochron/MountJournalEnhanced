@@ -145,7 +145,7 @@ local function GetMountDisplayIndexByMountID(mountID)
 end
 -- from https://www.townlong-yak.com/framexml/live/Blizzard_Collections/Blizzard_MountCollection.lua#652
 function ADDON:SetSelected(selectedMountID)
-    MountJournal.selectedMountID = selectedMountID;
+    MountJournal.selectedMountID = selectedMountID; -- TODO: taints further with next OnShow()
     --MountJournal_HideMountDropdown();
     ADDON:UpdateMountList()
     MountJournal_UpdateMountDisplay()
@@ -222,6 +222,8 @@ local function SetupButtons(scrollFrame)
     end
 end
 
+local doCheckOverhaul = false
+
 ADDON:RegisterLoadUICallback(function()
     MountJournal.ListScrollFrame:Hide()
     MountJournal.MJE_ListScrollFrame = CreateFrame("ScrollFrame", "MJE_ListScrollFrame", MountJournal, "MJE_ListScrollFrameTemplate")
@@ -231,4 +233,16 @@ ADDON:RegisterLoadUICallback(function()
     SetupButtons(MountJournal.MJE_ListScrollFrame)
 
     hooksecurefunc("MountJournal_UpdateMountList", ADDON.UpdateMountList)
+
+    if doCheckOverhaul and ElvUI then
+        local E = unpack(ElvUI)
+        E:GetModule('Skins'):HandleScrollBar(MountJournal.MJE_ListScrollFrame.scrollBar)
+        -- TODO: ScrollList is not styled yet :(
+    end
+end)
+
+ADDON.UI:RegisterUIOverhaulCallback(function(self)
+    if self == MountJournal then
+        doCheckOverhaul = true
+    end
 end)

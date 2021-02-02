@@ -140,20 +140,13 @@ ADDON:RegisterUISetting('compactMountList', true, ADDON.L.SETTING_COMPACT_LIST, 
     end
 end)
 
-local doInit = true
-
 ADDON:RegisterLoadUICallback(function()
-    if doInit then
-        doInit = false
-        SetupScrollFix()
-    end
+    SetupScrollFix()
     ADDON:ApplySetting('compactMountList', ADDON.settings.ui.compactMountList)
 end)
 
 -- UI Pack fix  (eg. ElvUI, TukUI)
 ADDON.UI:RegisterUIOverhaulCallback(function(self)
-    if doInit and self == MountJournal then
-        doInit = false
-        SetupScrollFix()
+    if self == MountJournal then
     end
 end)
