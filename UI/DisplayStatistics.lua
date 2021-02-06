@@ -64,7 +64,7 @@ ADDON:RegisterLoadUICallback(function()
         if selectedMount and statsText then
             local text = ''
             if ADDON.settings.ui.showUsageStatistics then
-                text = generateText(MountJournal.selectedMount)
+                text = generateText(selectedMount)
             end
             statsText:SetText(text)
         end
