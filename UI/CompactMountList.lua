@@ -2,56 +2,6 @@ local ADDON_NAME, ADDON = ...
 
 local MOUNT_BUTTON_HEIGHT = 29
 
---region scroll handling
-local scrollBarMinMaxHandler
-
-local function HookScrollUpdate(self, totalHeight, displayedHeight)
-    if self == MountJournal.MJE_ListScrollFrame then
-        local button = MountJournal.MJE_ListScrollFrame.buttons[2]
-
-        local height = button:GetHeight()
-        totalHeight = ADDON.Api.GetNumDisplayedMounts() * height
-
-        local _, _, _, _, yOfs = button:GetPoint(1)
-        if (yOfs ~= 0) then
-            yOfs = -yOfs
-            local countButtons = self:GetHeight() / height
-            totalHeight = totalHeight + (countButtons * yOfs)
-        end
-
-        local range = floor(totalHeight - self:GetHeight() + 0.5);
-
-        if (range > 0 and self.scrollBar) then
-            local minVal, maxVal = self.scrollBar:GetMinMaxValues();
-            if (math.floor(self.scrollBar:GetValue()) >= math.floor(maxVal)) then
-                scrollBarMinMaxHandler(self.scrollBar, 0, range)
-                if (math.floor(self.scrollBar:GetValue()) ~= math.floor(range)) then
-                    self.scrollBar:SetValue(range);
-                else
-                    HybridScrollFrame_SetOffset(self, range); -- If we've scrolled to the bottom, we need to recalculate the offset.
-                end
-            else
-                scrollBarMinMaxHandler(self.scrollBar, 0, range)
-            end
-            self.scrollBar:Enable();
-            HybridScrollFrame_UpdateButtonStates(self);
-            self.scrollBar:Show();
-        end
-
-        self.totalHeight = totalHeight
-        self.range = range
-        self:UpdateScrollChildRect()
-    end
-end
-
-local function SetupScrollFix()
-    scrollBarMinMaxHandler = MountJournal.MJE_ListScrollFrame.scrollBar.SetMinMaxValues
-    MountJournal.MJE_ListScrollFrame.scrollBar.SetMinMaxValues = function()
-    end
-    hooksecurefunc("HybridScrollFrame_Update", HookScrollUpdate)
-end
---endregion
-
 local function ModifyListButtons()
     local scrollFrame = MountJournal.MJE_ListScrollFrame
     local buttons = scrollFrame.buttons
@@ -141,12 +91,5 @@ ADDON:RegisterUISetting('compactMountList', true, ADDON.L.SETTING_COMPACT_LIST, 
 end)
 
 ADDON:RegisterLoadUICallback(function()
-    SetupScrollFix()
     ADDON:ApplySetting('compactMountList', ADDON.settings.ui.compactMountList)
-end)
-
--- UI Pack fix  (eg. ElvUI, TukUI)
-ADDON.UI:RegisterUIOverhaulCallback(function(self)
-    if self == MountJournal then
-    end
 end)

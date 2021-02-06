@@ -1,11 +1,16 @@
 local ADDON_NAME, ADDON = ...
 
+local function getMountButtonHeight()
+    return MountJournal.MJE_ListScrollFrame.buttonHeight
+end
+
 local MOUNT_FACTION_TEXTURES = {
     [0] = "MountJournalIcons-Horde",
     [1] = "MountJournalIcons-Alliance"
 };
 -- from https://www.townlong-yak.com/framexml/live/Blizzard_Collections/Blizzard_MountCollection.lua#386
 function ADDON.UI:UpdateMountList()
+    local deltaY = 0
     local showMounts = C_MountJournal.GetNumMounts() > 0
 
     local scrollFrame = MountJournal.MJE_ListScrollFrame
@@ -114,87 +119,15 @@ function ADDON.UI:UpdateMountList()
                 button.DragButton.IsHidden:SetShown(false)
             end
         end
+
+        _, _, _, _, deltaY = button:GetPoint(1)
     end
 
-    local totalHeight = numDisplayedMounts * ADDON.UI:GetMountButtonHeight()
+    local totalHeight = numDisplayedMounts * getMountButtonHeight()
+    if deltaY ~= 0 then
+        totalHeight = totalHeight - ((scrollFrame:GetHeight() / getMountButtonHeight()) * deltaY)
+    end
     HybridScrollFrame_Update(scrollFrame, totalHeight, scrollFrame:GetHeight());
-end
-
-function ADDON.UI:GetMountButtonHeight()
-    return 46
-end
-
--- from https://www.townlong-yak.com/framexml/live/Blizzard_Collections/Blizzard_MountCollection.lua#533
-function ADDON.UI:UpdateMountDisplay(forceSceneChange)
-    if (ADDON.Api:GetSelected()) then
-        local creatureName, spellID, icon, active, isUsable, sourceType = C_MountJournal.GetMountInfoByID(ADDON.Api:GetSelected());
-        local needsFanfare = C_MountJournal.NeedsFanfare(ADDON.Api:GetSelected());
-        if (MountJournal.MountDisplay.MJE_lastDisplayed ~= spellID or forceSceneChange) then
-            local creatureDisplayID, descriptionText, sourceText, isSelfMount, _, modelSceneID, animID, spellVisualKitID, disablePlayerMountPreview = C_MountJournal.GetMountInfoExtraByID(ADDON.Api:GetSelected());
-            if not creatureDisplayID then
-                local randomSelection = false;
-                creatureDisplayID = MountJournalMountButton_ChooseFallbackMountToDisplay(ADDON.Api:GetSelected(), randomSelection);
-            end
-            MountJournal.MountDisplay.InfoButton.Name:SetText(creatureName);
-            if needsFanfare then
-                MountJournal.MountDisplay.InfoButton.New:Show();
-                MountJournal.MountDisplay.InfoButton.NewGlow:Show();
-                local offsetX = math.min(MountJournal.MountDisplay.InfoButton.Name:GetStringWidth(), MountJournal.MountDisplay.InfoButton.Name:GetWidth());
-                MountJournal.MountDisplay.InfoButton.New:SetPoint("LEFT", MountJournal.MountDisplay.InfoButton.Name, "LEFT", offsetX + 8, 0);
-                MountJournal.MountDisplay.InfoButton.Icon:SetTexture(COLLECTIONS_FANFARE_ICON);
-            else
-                MountJournal.MountDisplay.InfoButton.New:Hide();
-                MountJournal.MountDisplay.InfoButton.NewGlow:Hide();
-                MountJournal.MountDisplay.InfoButton.Icon:SetTexture(icon);
-            end
-            MountJournal.MountDisplay.InfoButton.Source:SetText(sourceText);
-            MountJournal.MountDisplay.InfoButton.Lore:SetText(descriptionText)
-            MountJournal.MountDisplay.MJE_lastDisplayed = spellID;
-            MountJournal.MountDisplay.ModelScene:TransitionToModelSceneID(modelSceneID, CAMERA_TRANSITION_TYPE_IMMEDIATE, CAMERA_MODIFICATION_TYPE_MAINTAIN, forceSceneChange);
-            MountJournal.MountDisplay.ModelScene:PrepareForFanfare(needsFanfare);
-            local mountActor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped");
-            if mountActor then
-                mountActor:SetModelByCreatureDisplayID(creatureDisplayID);
-                -- mount self idle animation
-                if (isSelfMount) then
-                    mountActor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_NONE);
-                    mountActor:SetAnimation(618); -- MountSelfIdle
-                else
-                    mountActor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_ANIM);
-                    mountActor:SetAnimation(0);
-                end
-                local showPlayer = GetCVarBool("mountJournalShowPlayer");
-                if not disablePlayerMountPreview and not showPlayer then
-                    disablePlayerMountPreview = true;
-                end
-                MountJournal.MountDisplay.ModelScene:AttachPlayerToMount(mountActor, animID, isSelfMount, disablePlayerMountPreview, spellVisualKitID);
-            end
-        end
-        MountJournal.MountDisplay.ModelScene:Show();
-        MountJournal.MountDisplay.YesMountsTex:Show();
-        MountJournal.MountDisplay.InfoButton:Show();
-        MountJournal.MountDisplay.NoMountsTex:Hide();
-        MountJournal.MountDisplay.NoMounts:Hide();
-        if (needsFanfare) then
-            MountJournal.MountButton:SetText(UNWRAP)
-            MountJournal.MountButton:Enable();
-        elseif (active) then
-            MountJournal.MountButton:SetText(BINDING_NAME_DISMOUNT);
-            MountJournal.MountButton:SetEnabled(isUsable);
-        else
-            MountJournal.MountButton:SetText(MOUNT);
-            MountJournal.MountButton:SetEnabled(isUsable);
-        end
-    else
-        MountJournal.MountDisplay.InfoButton:Hide();
-        MountJournal.MountDisplay.ModelScene:Hide();
-        MountJournal.MountDisplay.YesMountsTex:Hide();
-        MountJournal.MountDisplay.NoMountsTex:Show();
-        MountJournal.MountDisplay.NoMounts:Show();
-        MountJournal.MountButton:SetEnabled(false);
-    end
-
-    EventRegistry:TriggerEvent("MountJournal.OnUpdateMountDisplay");
 end
 
 local function SetupButtons(scrollFrame)
@@ -281,15 +214,15 @@ function ADDON.UI:ScrollToSelected()
         local inView
         local button = GetMountButtonByMountID(selectedMountID)
         if button then
-            inView = button:GetTop() > (scrollFrame:GetBottom() + 3) and button:GetBottom() < (scrollFrame:GetTop() - 3)
+            local delta = getMountButtonHeight() * 0.666 -- next button should be at least visible for 2/3
+            inView = button:GetTop() > (scrollFrame:GetBottom() + delta) and button:GetBottom() < (scrollFrame:GetTop() - delta)
         else
             inView = false
         end
         if not inView then
             local mountIndex = GetMountDisplayIndexByMountID(selectedMountID)
             if mountIndex then
-                --todo something is fucked up
-                HybridScrollFrame_ScrollToIndex(scrollFrame, mountIndex, ADDON.UI.GetMountButtonHeight);
+                HybridScrollFrame_ScrollToIndex(scrollFrame, mountIndex, getMountButtonHeight);
             end
         end
     end
@@ -306,7 +239,6 @@ ADDON:RegisterLoadUICallback(function()
     SetupButtons(MountJournal.MJE_ListScrollFrame)
 
     hooksecurefunc("MountJournal_UpdateMountList", ADDON.UI.UpdateMountList)
-    hooksecurefunc("MountJournal_UpdateMountDisplay", ADDON.UI.UpdateMountDisplay)
 
     if doCheckOverhaul and ElvUI then
         local E = unpack(ElvUI)
