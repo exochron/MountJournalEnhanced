@@ -11,7 +11,7 @@ local function FetchCurrentSelectedIndex(totalDisplayed)
     local target = ADDON.Api:GetSelected()
 
     for i = 1, totalDisplayed do
-        local mountId = select(12, ADDON.Api.GetDisplayedMountInfo(i))
+        local mountId = select(12, ADDON.Api:GetDisplayedMountInfo(i))
         if mountId == target then
             return i
         end
@@ -32,7 +32,7 @@ local function Select(step, totalDisplayed)
         end
     end
 
-    local mountId = select(12, ADDON.Api.GetDisplayedMountInfo(index))
+    local mountId = select(12, ADDON.Api:GetDisplayedMountInfo(index))
     ADDON.Api:SetSelected(mountId)
 end
 
@@ -47,7 +47,7 @@ ADDON:RegisterLoadUICallback(function()
     scrollFrame:HookScript("OnKeyDown", function(self, key)
         local totalDisplayed
         if (key == "DOWN" or key == "UP") and ADDON.settings.ui.enableCursorKeys and not IsModifierKeyDown() then
-            totalDisplayed = ADDON.Api.GetNumDisplayedMounts()
+            totalDisplayed = ADDON.Api:GetNumDisplayedMounts()
             if totalDisplayed > 0 then
                 local step = 1
                 if key == "UP" then

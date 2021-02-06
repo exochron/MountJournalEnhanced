@@ -59,4 +59,8 @@ EventRegistry:RegisterCallback("MountJournal.OnShow", function()
     LoadUI()
     FireCallbacks(loadUICallbacks)
     ADDON.initialized = true
+
+    if ADDON.Api:GetSelected() == nil then
+        ADDON.Api:SetSelected(select(12, ADDON.Api:GetDisplayedMountInfo(1)))
+    end
 end, ADDON_NAME .. ".init")

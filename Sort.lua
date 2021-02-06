@@ -129,8 +129,8 @@ function ADDON:SortMounts(ids)
 
         local doNotDescend = false
         local result = false
-        local nameA, _, _, _, isUsableA, _, isFavoriteA, _, _, _, isCollectedA = ADDON.Api.GetMountInfoByID(mountIdA)
-        local nameB, _, _, _, isUsableB, _, isFavoriteB, _, _, _, isCollectedB = ADDON.Api.GetMountInfoByID(mountIdB)
+        local nameA, _, _, _, isUsableA, _, isFavoriteA, _, _, _, isCollectedA = ADDON.Api:GetMountInfoByID(mountIdA)
+        local nameB, _, _, _, isUsableB, _, isFavoriteB, _, _, _, isCollectedB = ADDON.Api:GetMountInfoByID(mountIdB)
 
         if ADDON.settings.sort.favoritesOnTop and isFavoriteA ~= isFavoriteB then
             return isFavoriteA and not isFavoriteB

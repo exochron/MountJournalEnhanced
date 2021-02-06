@@ -83,7 +83,7 @@ local function CreateCharacterMountCount()
         end
 
         if ADDON.settings.ui.showPersonalCount then
-            local displayCount = ADDON.Api.GetNumDisplayedMounts()
+            local displayCount = ADDON.Api:GetNumDisplayedMounts()
 
             if value ~= lastOriginalValue
                     or (displayCount == lastTotalCount and lastDisplayCount ~= nil and lastDisplayCount < displayCount)
@@ -104,7 +104,7 @@ local function CreateCharacterMountCount()
                 lastDisplayCount = displayCount
                 local collectedFilter = 0
                 for index = 1, displayCount do
-                    local _, _, _, _, _, _, _, _, _, _, isCollected = ADDON.Api.GetDisplayedMountInfo(index)
+                    local _, _, _, _, _, _, _, _, _, _, isCollected = ADDON.Api:GetDisplayedMountInfo(index)
                     if isCollected then
                         collectedFilter = collectedFilter + 1
                     end

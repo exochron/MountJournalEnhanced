@@ -8,7 +8,7 @@ local function InitializeMountOptionsMenu(sender, level)
         return
     end
 
-    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountId = ADDON.Api.GetMountInfoByID(menuMountId)
+    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountId = ADDON.Api:GetMountInfoByID(menuMountId)
 
     local info = { notCheckable = true }
 
@@ -33,19 +33,19 @@ local function InitializeMountOptionsMenu(sender, level)
     UIDropDownMenu_AddButton(info, level)
 
     if not needsFanfare and isCollected then
-        local isFavorite, canFavorite = ADDON.Api.GetIsFavoriteByID(menuMountId)
+        local isFavorite, canFavorite = ADDON.Api:GetIsFavoriteByID(menuMountId)
         info = {notCheckable = true, disabled = not canFavorite }
 
         if isFavorite then
             info.text = BATTLE_PET_UNFAVORITE
             info.func = function()
-                ADDON.Api.SetIsFavoriteByID(menuMountId, false)
+                ADDON.Api:SetIsFavoriteByID(menuMountId, false)
                 ADDON.UI:UpdateMountList()
             end
         else
             info.text = BATTLE_PET_FAVORITE
             info.func = function()
-                ADDON.Api.SetIsFavoriteByID(menuMountId, true)
+                ADDON.Api:SetIsFavoriteByID(menuMountId, true)
                 ADDON.UI:UpdateMountList()
             end
         end

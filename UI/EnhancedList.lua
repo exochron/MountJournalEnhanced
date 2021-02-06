@@ -20,13 +20,13 @@ function ADDON.UI:UpdateMountList()
     local offset = HybridScrollFrame_GetOffset(scrollFrame);
     local buttons = scrollFrame.buttons;
 
-    local numDisplayedMounts = ADDON.Api.GetNumDisplayedMounts()
+    local numDisplayedMounts = ADDON.Api:GetNumDisplayedMounts()
     for i = 1, #buttons do
         local button = buttons[i];
         local displayIndex = i + offset;
         if (displayIndex <= numDisplayedMounts and showMounts) then
             local index = displayIndex;
-            local creatureName, spellID, icon, active, isUsable, sourceType, isFavorite, isFactionSpecific, faction, isFiltered, isCollected, mountID = ADDON.Api.GetDisplayedMountInfo(index)
+            local creatureName, spellID, icon, active, isUsable, sourceType, isFavorite, isFactionSpecific, faction, isFiltered, isCollected, mountID = ADDON.Api:GetDisplayedMountInfo(index)
             local needsFanfare = C_MountJournal.NeedsFanfare(mountID);
             button.name:SetText(creatureName);
             button.icon:SetTexture(needsFanfare and COLLECTIONS_FANFARE_ICON or icon);
@@ -163,11 +163,11 @@ local function SetupButtons(scrollFrame)
                 local spellLink = GetSpellLink(parent.spellID)
                 ChatEdit_InsertLink(spellLink)
             else
-                ADDON.Api.PickupByID(parent.mountID)
+                ADDON.Api:PickupByID(parent.mountID)
             end
         end)
         button.DragButton:SetScript("OnDragStart", function(self)
-            ADDON.Api.PickupByID(self:GetParent().mountID)
+            ADDON.Api:PickupByID(self:GetParent().mountID)
         end)
 
         button:HookScript("OnDoubleClick", function(sender, button)
@@ -197,8 +197,8 @@ local function GetMountButtonByMountID(mountID)
     end
 end
 local function GetMountDisplayIndexByMountID(mountID)
-    for i = 1, ADDON.Api.GetNumDisplayedMounts() do
-        local currentMountID = select(12, ADDON.Api.GetDisplayedMountInfo(i))
+    for i = 1, ADDON.Api:GetNumDisplayedMounts() do
+        local currentMountID = select(12, ADDON.Api:GetDisplayedMountInfo(i))
         if currentMountID == mountID then
             return i;
         end

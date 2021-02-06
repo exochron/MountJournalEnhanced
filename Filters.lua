@@ -212,7 +212,7 @@ end
 
 function ADDON:FilterMount(mountId, searchText)
 
-    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, shouldHideOnChar, isCollected = ADDON.Api.GetMountInfoByID(mountId)
+    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, shouldHideOnChar, isCollected = ADDON.Api:GetMountInfoByID(mountId)
 
     if ADDON.DB.Ignored[mountId] and not isCollected then
         return false

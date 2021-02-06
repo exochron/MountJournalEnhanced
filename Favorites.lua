@@ -81,8 +81,8 @@ end
 
 local function FetchDisplayedMountIds()
     local mountIds = {}
-    for index = 1, ADDON.Api.GetNumDisplayedMounts() do
-        local _, _, _, _, _, _, _, _, _, _, isCollected, mountId = ADDON.Api.GetDisplayedMountInfo(index)
+    for index = 1, ADDON.Api:GetNumDisplayedMounts() do
+        local _, _, _, _, _, _, _, _, _, _, isCollected, mountId = ADDON.Api:GetDisplayedMountInfo(index)
         if isCollected then
             mountIds[#mountIds + 1] = mountId
         end

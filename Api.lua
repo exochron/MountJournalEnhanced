@@ -22,7 +22,7 @@ local function MountIdToOriginalIndex(mountId)
     return nil
 end
 
-function ADDON.Api.GetNumDisplayedMounts()
+function ADDON.Api:GetNumDisplayedMounts()
     if nil == indexMap then
         ADDON.Api:UpdateIndex()
     end
@@ -30,23 +30,23 @@ function ADDON.Api.GetNumDisplayedMounts()
     return #indexMap
 end
 
-function ADDON.Api.GetMountInfoByID(mountId)
+function ADDON.Api:GetMountInfoByID(mountId)
     local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = C_MountJournal.GetMountInfoByID(mountId)
     isUsable = isUsable and IsUsableSpell(spellId)
 
     return creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h
 end
-function ADDON.Api.GetDisplayedMountInfo(index)
+function ADDON.Api:GetDisplayedMountInfo(index)
     if nil == indexMap then
         ADDON.Api:UpdateIndex()
     end
 
     local mappedMountId = OwnIndexToMountId(index)
     if mappedMountId then
-        return ADDON.Api.GetMountInfoByID(mappedMountId)
+        return ADDON.Api:GetMountInfoByID(mappedMountId)
     end
 end
-function ADDON.Api.PickupByID(mountId, ...)
+function ADDON.Api:PickupByID(mountId, ...)
     if nil == indexMap then
         ADDON.Api:UpdateIndex()
     end
@@ -56,7 +56,7 @@ function ADDON.Api.PickupByID(mountId, ...)
         return C_MountJournal.Pickup(index, ...)
     end
 end
-function ADDON.Api.GetIsFavoriteByID(mountId, ...)
+function ADDON.Api:GetIsFavoriteByID(mountId, ...)
     if nil == indexMap then
         ADDON.Api:UpdateIndex()
     end
@@ -66,7 +66,7 @@ function ADDON.Api.GetIsFavoriteByID(mountId, ...)
         return C_MountJournal.GetIsFavorite(index, ...)
     end
 end
-function ADDON.Api.SetIsFavoriteByID(mountId, ...)
+function ADDON.Api:SetIsFavoriteByID(mountId, ...)
     if nil == indexMap then
         ADDON.Api:UpdateIndex()
     end
