@@ -2,8 +2,29 @@ local ADDON_NAME, ADDON = ...
 
 local IgnoredDB = ADDON.DB.Ignored
 
-local function print(text)
-    _G.print("[MJE] " .. text)
+local function print(...)
+    _G.print("[MJE]", ...)
+end
+
+ADDON.Debug = {}
+
+local lastProfileTimes = {}
+local lastProfileCounts = {}
+--- to actually use this enable the cvar: scriptProfile
+function ADDON.Debug:ProfileFunction(func, includeSubroutines)
+    local lastTime = lastProfileTimes[func] or 0
+    local lastCount = lastProfileCounts[func] or 0
+    local totalTime, totalCount = GetFunctionCPUUsage(ADDON.SortMounts, includeSubroutines)
+    if totalCount > lastCount then
+        print("current call time: "..(totalTime-lastTime), "total call time: " .. totalTime, "total call count " .. totalCount)
+        lastProfileTimes[func] = totalTime
+        lastProfileCounts[func] = totalCount
+    end
+end
+function ADDON.Debug:WatchFunction(func, includeSubroutines)
+    C_Timer.NewTicker(5, function()
+        ADDON.Debug:ProfileFunction(func, includeSubroutines)
+    end)
 end
 
 local function testDatabase()

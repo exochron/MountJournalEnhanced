@@ -1,8 +1,26 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 ADDON.Api = {}
 
-local indexMap -- initialize with nil, so we know if it's not ready yet and not just empty
+local mountIdToOriginalIndex = {}
+local orderedMountIds -- initialize with nil, so we know if it's not ready yet and not just empty
+
+local function collectMountIds()
+    ADDON:ResetIngameFilter()
+
+    local list = {}
+    for _, mountId in ipairs(C_MountJournal.GetMountIDs()) do
+        list[mountId] = false
+    end
+
+    local count = C_MountJournal.GetNumDisplayedMounts()
+    for i = 1, count do
+        local mountId = select(12, C_MountJournal.GetDisplayedMountInfo(i))
+        list[mountId] = i
+    end
+
+    mountIdToOriginalIndex = list
+end
 
 local function OwnIndexToMountId(index)
     -- index=0 => SummonRandomButton
@@ -10,24 +28,27 @@ local function OwnIndexToMountId(index)
         return index
     end
 
-    return indexMap[index] and indexMap[index][1] or nil
+    return orderedMountIds[index] or nil
 end
 local function MountIdToOriginalIndex(mountId)
-    for i, blob in ipairs(indexMap) do
-        if blob[1] == mountId then
-            return blob[2] or nil
+    local index = mountIdToOriginalIndex[mountId] or nil
+
+    if index then
+        local displayedMountId = select(12, C_MountJournal.GetDisplayedMountInfo(index))
+        if displayedMountId ~= mountId then
+            collectMountIds()
         end
     end
 
-    return nil
+    return index
 end
 
 function ADDON.Api:GetNumDisplayedMounts()
-    if nil == indexMap then
+    if nil == orderedMountIds then
         ADDON.Api:UpdateIndex()
     end
 
-    return #indexMap
+    return #orderedMountIds
 end
 
 function ADDON.Api:GetMountInfoByID(mountId)
@@ -37,7 +58,7 @@ function ADDON.Api:GetMountInfoByID(mountId)
     return creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h
 end
 function ADDON.Api:GetDisplayedMountInfo(index)
-    if nil == indexMap then
+    if nil == orderedMountIds then
         ADDON.Api:UpdateIndex()
     end
 
@@ -47,66 +68,44 @@ function ADDON.Api:GetDisplayedMountInfo(index)
     end
 end
 function ADDON.Api:PickupByID(mountId, ...)
-    if nil == indexMap then
-        ADDON.Api:UpdateIndex()
-    end
-
     local index = MountIdToOriginalIndex(mountId)
     if index then
         return C_MountJournal.Pickup(index, ...)
     end
 end
 function ADDON.Api:GetIsFavoriteByID(mountId, ...)
-    if nil == indexMap then
-        ADDON.Api:UpdateIndex()
-    end
-
     local index = MountIdToOriginalIndex(mountId)
     if index then
         return C_MountJournal.GetIsFavorite(index, ...)
     end
 end
 function ADDON.Api:SetIsFavoriteByID(mountId, ...)
-    if nil == indexMap then
-        ADDON.Api:UpdateIndex()
-    end
-
     local index = MountIdToOriginalIndex(mountId)
     if index then
-        return C_MountJournal.SetIsFavorite(index, ...)
+        C_MountJournal.SetIsFavorite(index, ...)
+        collectMountIds()
     end
 end
 
 function ADDON.Api:UpdateIndex(calledFromEvent)
-    local map = {}
-    local handledMounts = {}
-
     local searchString = MountJournal.searchBox:GetText() or ""
     if searchString ~= "" then
         searchString = searchString:lower()
     end
 
-    for i = 1, C_MountJournal.GetNumDisplayedMounts() do
-        local mountId = select(12, C_MountJournal.GetDisplayedMountInfo(i))
-        if ADDON:FilterMount(mountId, searchString) then
-            map[#map + 1] = { mountId, i }
-        end
-        handledMounts[mountId] = true
-    end
-
+    local list = {}
     for _, mountId in ipairs(C_MountJournal.GetMountIDs()) do
-        if not handledMounts[mountId] and ADDON:FilterMount(mountId, searchString) then
-            map[#map + 1] = { mountId }
+        if ADDON:FilterMount(mountId, searchString) then
+            list[#list+1] = mountId
         end
     end
 
-    if calledFromEvent and nil ~= indexMap and #map == #indexMap then
+    if calledFromEvent and nil ~= orderedMountIds and #list == #orderedMountIds then
         return
     end
 
-    indexMap = ADDON:SortMounts(map)
+    orderedMountIds = ADDON:SortMounts(list)
 end
-
 
 local selectedMount
 function ADDON.Api:SetSelected(selectedMountID)
@@ -124,9 +123,9 @@ end
 function ADDON.Api:UseMount(mountID)
     if mountID then
         local creatureName, spellID, icon, active = C_MountJournal.GetMountInfoByID(mountID);
-        if ( active ) then
+        if (active) then
             C_MountJournal.Dismiss();
-        elseif ( C_MountJournal.NeedsFanfare(mountID) ) then
+        elseif (C_MountJournal.NeedsFanfare(mountID)) then
             local function OnFinishedCallback()
                 C_MountJournal.ClearFanfare(mountID);
                 --MountJournal_HideMountDropdown();
@@ -139,3 +138,7 @@ function ADDON.Api:UseMount(mountID)
         end
     end
 end
+
+ADDON:RegisterLoginCallback(function()
+    collectMountIds()
+end)

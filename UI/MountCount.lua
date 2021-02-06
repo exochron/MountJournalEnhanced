@@ -1,5 +1,7 @@
 local _, ADDON = ...
 
+-- TODO: updates dont work anymore
+
 local doStrip = false
 
 local function isPersonalMount(spellId, faction, hasRidingSkill)

@@ -119,18 +119,36 @@ local TrackingIndex = {
 }
 
 function ADDON:SortMounts(ids)
-    table.sort(ids, function(dataA, dataB)
-        local mountIdA = dataA[1]
-        local mountIdB = dataB[1]
+    local sortBy = ADDON.settings.sort.by
 
+    local collectedData = {}
+    for _, mountId  in ipairs(ids) do
+        local name, _, _, _, isUsable, _, isFavorite, _, _, _, isCollected = ADDON.Api:GetMountInfoByID(mountId)
+        local mountType
+        if sortBy == 'type' then
+            mountType = mapMountType(mountId)
+        end
+
+        collectedData[mountId]= {name, isUsable, isFavorite, isCollected, mountType}
+    end
+
+    table.sort(ids, function(mountIdA, mountIdB)
         if mountIdA == mountIdB then
             return false
         end
 
         local doNotDescend = false
         local result = false
-        local nameA, _, _, _, isUsableA, _, isFavoriteA, _, _, _, isCollectedA = ADDON.Api:GetMountInfoByID(mountIdA)
-        local nameB, _, _, _, isUsableB, _, isFavoriteB, _, _, _, isCollectedB = ADDON.Api:GetMountInfoByID(mountIdB)
+
+        local nameA = collectedData[mountIdA][1]
+        local isUsableA = collectedData[mountIdA][2]
+        local isFavoriteA = collectedData[mountIdA][3]
+        local isCollectedA = collectedData[mountIdA][4]
+
+        local nameB = collectedData[mountIdB][1]
+        local isUsableB = collectedData[mountIdB][2]
+        local isFavoriteB = collectedData[mountIdB][3]
+        local isCollectedB = collectedData[mountIdB][4]
 
         if ADDON.settings.sort.favoritesOnTop and isFavoriteA ~= isFavoriteB then
             return isFavoriteA and not isFavoriteB
@@ -142,16 +160,15 @@ function ADDON:SortMounts(ids)
             return isCollectedA and not isCollectedB
         end
 
-        local sortBy = ADDON.settings.sort.by
-
         if sortBy == 'name' then
             result = CompareNames(nameA, mountIdA, nameB, mountIdB)
         elseif sortBy == 'type' then
-            local mountTypeA = mapMountType(mountIdA)
-            local mountTypeB = mapMountType(mountIdB)
+            local mountTypeA = collectedData[mountIdA][5]
+            local mountTypeB = collectedData[mountIdB][5]
 
             if mountTypeA == mountTypeB then
                 result = CompareNames(nameA, mountIdA, nameB, mountIdB)
+                doNotDescend = true
             elseif mountTypeA == "flying" then
                 result = true
             elseif mountTypeA == "ground" then

@@ -37,7 +37,7 @@ local function LoadUI()
     end)
 end
 
-local function ResetIngameFilter()
+function ADDON:ResetIngameFilter()
     -- reset default filter settings
     C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true)
     C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, true)
@@ -45,12 +45,12 @@ local function ResetIngameFilter()
     C_MountJournal.SetAllSourceFilters(true)
     C_MountJournal.SetSearch("")
 end
-ResetIngameFilter()
+ADDON:ResetIngameFilter()
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function(self, event, arg1)
-    ResetIngameFilter()
+    ADDON:ResetIngameFilter()
     FireCallbacks(loginCallbacks)
 end)
 

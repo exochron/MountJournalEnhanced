@@ -40,12 +40,14 @@ local function InitializeMountOptionsMenu(sender, level)
             info.text = BATTLE_PET_UNFAVORITE
             info.func = function()
                 ADDON.Api:SetIsFavoriteByID(menuMountId, false)
+                ADDON.Api:UpdateIndex()
                 ADDON.UI:UpdateMountList()
             end
         else
             info.text = BATTLE_PET_FAVORITE
             info.func = function()
                 ADDON.Api:SetIsFavoriteByID(menuMountId, true)
+                ADDON.Api:UpdateIndex()
                 ADDON.UI:UpdateMountList()
             end
         end
