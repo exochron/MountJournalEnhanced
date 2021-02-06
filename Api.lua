@@ -24,7 +24,7 @@ end
 
 function ADDON.Api.GetNumDisplayedMounts()
     if nil == indexMap then
-        ADDON:UpdateIndex()
+        ADDON.Api:UpdateIndex()
     end
 
     return #indexMap
@@ -38,7 +38,7 @@ function ADDON.Api.GetMountInfoByID(mountId)
 end
 function ADDON.Api.GetDisplayedMountInfo(index)
     if nil == indexMap then
-        ADDON:UpdateIndex()
+        ADDON.Api:UpdateIndex()
     end
 
     local mappedMountId = OwnIndexToMountId(index)
@@ -48,7 +48,7 @@ function ADDON.Api.GetDisplayedMountInfo(index)
 end
 function ADDON.Api.PickupByID(mountId, ...)
     if nil == indexMap then
-        ADDON:UpdateIndex()
+        ADDON.Api:UpdateIndex()
     end
 
     local index = MountIdToOriginalIndex(mountId)
@@ -58,7 +58,7 @@ function ADDON.Api.PickupByID(mountId, ...)
 end
 function ADDON.Api.GetIsFavoriteByID(mountId, ...)
     if nil == indexMap then
-        ADDON:UpdateIndex()
+        ADDON.Api:UpdateIndex()
     end
 
     local index = MountIdToOriginalIndex(mountId)
@@ -68,7 +68,7 @@ function ADDON.Api.GetIsFavoriteByID(mountId, ...)
 end
 function ADDON.Api.SetIsFavoriteByID(mountId, ...)
     if nil == indexMap then
-        ADDON:UpdateIndex()
+        ADDON.Api:UpdateIndex()
     end
 
     local index = MountIdToOriginalIndex(mountId)
@@ -77,7 +77,7 @@ function ADDON.Api.SetIsFavoriteByID(mountId, ...)
     end
 end
 
-function ADDON:UpdateIndex(calledFromEvent)
+function ADDON.Api:UpdateIndex(calledFromEvent)
     local map = {}
     local handledMounts = {}
 
@@ -105,4 +105,17 @@ function ADDON:UpdateIndex(calledFromEvent)
     end
 
     indexMap = ADDON:SortMounts(map)
+end
+
+
+local selectedMount
+function ADDON.Api:SetSelected(selectedMountID)
+    selectedMount = selectedMountID
+    --MountJournal_HideMountDropdown();
+    ADDON.UI:UpdateMountList()
+    ADDON.UI:UpdateMountDisplay()
+    ADDON.UI:ScrollToSelected()
+end
+function ADDON.Api:GetSelected()
+    return selectedMount
 end

@@ -63,8 +63,8 @@ local function FavorMounts(mountIds, finishedCallback)
             starButton:SetDisabled(false)
         end
         if ADDON.initialized then
-            ADDON:UpdateIndex()
-            ADDON:UpdateMountList()
+            ADDON.Api:UpdateIndex()
+            ADDON.UI:UpdateMountList()
         end
         finishedCallback()
     end

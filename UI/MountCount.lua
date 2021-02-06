@@ -149,7 +149,7 @@ ADDON:RegisterUISetting('showPersonalCount', true, ADDON.L.SETTING_MOUNT_COUNT, 
             end
 
             --to trigger update function
-            ADDON:UpdateMountList()
+            ADDON.UI:UpdateMountList()
         end
     end
 end)

@@ -56,7 +56,7 @@ ADDON:RegisterBehaviourSetting('personalHiddenMounts', false, L.SETTING_PERSONAL
     end
 
     if ADDON.initialized then
-        ADDON:UpdateIndex()
+        ADDON.Api:UpdateIndex()
     end
 end)
 
@@ -70,7 +70,7 @@ ADDON:RegisterBehaviourSetting('personalFilter', false, L.SETTING_PERSONAL_FILTE
     end
 
     if ADDON.initialized then
-        ADDON:UpdateIndex()
+        ADDON.Api:UpdateIndex()
     end
 end)
 

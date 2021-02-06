@@ -3,11 +3,11 @@ local ADDON_NAME, ADDON = ...
 ADDON:RegisterUISetting('showShopButton', true, ADDON.L.SETTING_SHOP_BUTTON)
 
 local function ToggleShopButton()
-    if (MountJournal) then
+    if MountJournal then
         local frame = MountJournal.MountDisplay.InfoButton.Shop
         if (frame) then
-            if (ADDON.settings.ui.showShopButton and MountJournal.selectedMountID) then
-                local _, _, _, _, _, sourceType, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(MountJournal.selectedMountID)
+            if ADDON.settings.ui.showShopButton and ADDON.Api:GetSelected() then
+                local _, _, _, _, _, sourceType, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(ADDON.Api:GetSelected())
                 if not isCollected and sourceType == 10 then
                     frame:Show()
                     return
@@ -36,9 +36,7 @@ local function CreateShopButton()
 
     MountJournal.MountDisplay.InfoButton.Shop = frame
 
-    hooksecurefunc("MountJournal_UpdateMountDisplay", function(sender, level)
-        ToggleShopButton()
-    end)
+    EventRegistry:RegisterCallback("MountJournal.OnUpdateMountDisplay", ToggleShopButton, ADDON_NAME .. 'ShopButton')
 end
 
 ADDON:RegisterLoadUICallback(CreateShopButton)

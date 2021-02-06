@@ -25,7 +25,7 @@ local function InitializeMountOptionsMenu(sender, level)
 
     info.func = function()
         if needsFanfare then
-            ADDON:SetSelected(menuMountId)
+            ADDON.Api:SetSelected(menuMountId)
         end
         MountJournalMountButton_UseMount(mountId)
     end
@@ -40,13 +40,13 @@ local function InitializeMountOptionsMenu(sender, level)
             info.text = BATTLE_PET_UNFAVORITE
             info.func = function()
                 ADDON.Api.SetIsFavoriteByID(menuMountId, false)
-                ADDON:UpdateMountList()
+                ADDON.UI:UpdateMountList()
             end
         else
             info.text = BATTLE_PET_FAVORITE
             info.func = function()
                 ADDON.Api.SetIsFavoriteByID(menuMountId, true)
-                ADDON:UpdateMountList()
+                ADDON.UI:UpdateMountList()
             end
         end
 
@@ -60,8 +60,8 @@ local function InitializeMountOptionsMenu(sender, level)
                 text = SHOW,
                 func = function()
                     ADDON.settings.hiddenMounts[spellId] = nil
-                    ADDON:UpdateIndex()
-                    ADDON:UpdateMountList()
+                    ADDON.Api:UpdateIndex()
+                    ADDON.UI:UpdateMountList()
                 end
             }
         else
@@ -70,8 +70,8 @@ local function InitializeMountOptionsMenu(sender, level)
                 text = HIDE,
                 func = function()
                     ADDON.settings.hiddenMounts[spellId] = true
-                    ADDON:UpdateIndex()
-                    ADDON:UpdateMountList()
+                    ADDON.Api:UpdateIndex()
+                    ADDON.UI:UpdateMountList()
                 end,
             }
         end

@@ -5,7 +5,7 @@ local MOUNT_FACTION_TEXTURES = {
     [1] = "MountJournalIcons-Alliance"
 };
 -- from https://www.townlong-yak.com/framexml/live/Blizzard_Collections/Blizzard_MountCollection.lua#386
-function ADDON:UpdateMountList()
+function ADDON.UI:UpdateMountList()
     local showMounts = C_MountJournal.GetNumMounts() > 0
 
     local scrollFrame = MountJournal.MJE_ListScrollFrame
@@ -37,7 +37,7 @@ function ADDON:UpdateMountList()
                 button.DragButton.ActiveTexture:Hide();
             end
             button:Show();
-            if (MountJournal.selectedMountID == mountID) then
+            if (ADDON.Api:GetSelected() == mountID) then
                 button.selected = true;
                 button.selectedTexture:Show();
             else
@@ -116,54 +116,85 @@ function ADDON:UpdateMountList()
         end
     end
 
-    local totalHeight = numDisplayedMounts * ADDON:GetMountButtonHeight()
+    local totalHeight = numDisplayedMounts * ADDON.UI:GetMountButtonHeight()
     HybridScrollFrame_Update(scrollFrame, totalHeight, scrollFrame:GetHeight());
 end
 
-function ADDON:GetMountButtonHeight()
+function ADDON.UI:GetMountButtonHeight()
     return 46
 end
 
-local function GetMountButtonByMountID(mountID)
-    local scrollFrame = MountJournal.MJE_ListScrollFrame
-    local buttons = scrollFrame.buttons;
-    for i = 1, #buttons do
-        local button = buttons[i];
-        if button.mountID == mountID then
-            return button;
+-- from https://www.townlong-yak.com/framexml/live/Blizzard_Collections/Blizzard_MountCollection.lua#533
+function ADDON.UI:UpdateMountDisplay(forceSceneChange)
+    if (ADDON.Api:GetSelected()) then
+        local creatureName, spellID, icon, active, isUsable, sourceType = C_MountJournal.GetMountInfoByID(ADDON.Api:GetSelected());
+        local needsFanfare = C_MountJournal.NeedsFanfare(ADDON.Api:GetSelected());
+        if (MountJournal.MountDisplay.MJE_lastDisplayed ~= spellID or forceSceneChange) then
+            local creatureDisplayID, descriptionText, sourceText, isSelfMount, _, modelSceneID, animID, spellVisualKitID, disablePlayerMountPreview = C_MountJournal.GetMountInfoExtraByID(ADDON.Api:GetSelected());
+            if not creatureDisplayID then
+                local randomSelection = false;
+                creatureDisplayID = MountJournalMountButton_ChooseFallbackMountToDisplay(ADDON.Api:GetSelected(), randomSelection);
+            end
+            MountJournal.MountDisplay.InfoButton.Name:SetText(creatureName);
+            if needsFanfare then
+                MountJournal.MountDisplay.InfoButton.New:Show();
+                MountJournal.MountDisplay.InfoButton.NewGlow:Show();
+                local offsetX = math.min(MountJournal.MountDisplay.InfoButton.Name:GetStringWidth(), MountJournal.MountDisplay.InfoButton.Name:GetWidth());
+                MountJournal.MountDisplay.InfoButton.New:SetPoint("LEFT", MountJournal.MountDisplay.InfoButton.Name, "LEFT", offsetX + 8, 0);
+                MountJournal.MountDisplay.InfoButton.Icon:SetTexture(COLLECTIONS_FANFARE_ICON);
+            else
+                MountJournal.MountDisplay.InfoButton.New:Hide();
+                MountJournal.MountDisplay.InfoButton.NewGlow:Hide();
+                MountJournal.MountDisplay.InfoButton.Icon:SetTexture(icon);
+            end
+            MountJournal.MountDisplay.InfoButton.Source:SetText(sourceText);
+            MountJournal.MountDisplay.InfoButton.Lore:SetText(descriptionText)
+            MountJournal.MountDisplay.MJE_lastDisplayed = spellID;
+            MountJournal.MountDisplay.ModelScene:TransitionToModelSceneID(modelSceneID, CAMERA_TRANSITION_TYPE_IMMEDIATE, CAMERA_MODIFICATION_TYPE_MAINTAIN, forceSceneChange);
+            MountJournal.MountDisplay.ModelScene:PrepareForFanfare(needsFanfare);
+            local mountActor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped");
+            if mountActor then
+                mountActor:SetModelByCreatureDisplayID(creatureDisplayID);
+                -- mount self idle animation
+                if (isSelfMount) then
+                    mountActor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_NONE);
+                    mountActor:SetAnimation(618); -- MountSelfIdle
+                else
+                    mountActor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_ANIM);
+                    mountActor:SetAnimation(0);
+                end
+                local showPlayer = GetCVarBool("mountJournalShowPlayer");
+                if not disablePlayerMountPreview and not showPlayer then
+                    disablePlayerMountPreview = true;
+                end
+                MountJournal.MountDisplay.ModelScene:AttachPlayerToMount(mountActor, animID, isSelfMount, disablePlayerMountPreview, spellVisualKitID);
+            end
         end
-    end
-end
-local function GetMountDisplayIndexByMountID(mountID)
-    for i = 1, ADDON.Api.GetNumDisplayedMounts() do
-        local currentMountID = select(12, ADDON.Api.GetDisplayedMountInfo(i))
-        if currentMountID == mountID then
-            return i;
+        MountJournal.MountDisplay.ModelScene:Show();
+        MountJournal.MountDisplay.YesMountsTex:Show();
+        MountJournal.MountDisplay.InfoButton:Show();
+        MountJournal.MountDisplay.NoMountsTex:Hide();
+        MountJournal.MountDisplay.NoMounts:Hide();
+        if (needsFanfare) then
+            MountJournal.MountButton:SetText(UNWRAP)
+            MountJournal.MountButton:Enable();
+        elseif (active) then
+            MountJournal.MountButton:SetText(BINDING_NAME_DISMOUNT);
+            MountJournal.MountButton:SetEnabled(isUsable);
+        else
+            MountJournal.MountButton:SetText(MOUNT);
+            MountJournal.MountButton:SetEnabled(isUsable);
         end
-    end
-    return nil;
-end
--- from https://www.townlong-yak.com/framexml/live/Blizzard_Collections/Blizzard_MountCollection.lua#652
-function ADDON:SetSelected(selectedMountID)
-    MountJournal.selectedMountID = selectedMountID; -- TODO: taints further with next OnShow()
-    --MountJournal_HideMountDropdown();
-    ADDON:UpdateMountList()
-    MountJournal_UpdateMountDisplay()
-
-    local scrollFrame = MountJournal.MJE_ListScrollFrame
-    local inView
-    local button = GetMountButtonByMountID(selectedMountID)
-    if button then
-        inView = button:GetTop() > (scrollFrame:GetBottom() + 3) and button:GetBottom() < (scrollFrame:GetTop() - 3)
     else
-        inView = false
+        MountJournal.MountDisplay.InfoButton:Hide();
+        MountJournal.MountDisplay.ModelScene:Hide();
+        MountJournal.MountDisplay.YesMountsTex:Hide();
+        MountJournal.MountDisplay.NoMountsTex:Show();
+        MountJournal.MountDisplay.NoMounts:Show();
+        MountJournal.MountButton:SetEnabled(false);
     end
-    if not inView then
-        local mountIndex = GetMountDisplayIndexByMountID(selectedMountID)
-        if mountIndex then
-            HybridScrollFrame_ScrollToIndex(scrollFrame, mountIndex, ADDON.GetMountButtonHeight);
-        end
-    end
+
+    EventRegistry:TriggerEvent("MountJournal.OnUpdateMountDisplay");
 end
 
 local function SetupButtons(scrollFrame)
@@ -188,8 +219,8 @@ local function SetupButtons(scrollFrame)
                 -- No MacroFrame exception :>
                 local spellLink = GetSpellLink(self.spellID)
                 ChatEdit_InsertLink(spellLink)
-            elseif (self.mountID ~= MountJournal.selectedMountID) then
-                ADDON:SetSelected(self.mountID);
+            elseif (self.mountID ~= ADDON.Api:GetSelected()) then
+                ADDON.Api:SetSelected(self.mountID);
             end
         end)
         button.DragButton:SetScript("OnClick", function(self, button)
@@ -222,27 +253,64 @@ local function SetupButtons(scrollFrame)
     end
 end
 
+local function GetMountButtonByMountID(mountID)
+    local scrollFrame = MountJournal.MJE_ListScrollFrame
+    local buttons = scrollFrame.buttons;
+    for i = 1, #buttons do
+        local button = buttons[i];
+        if button.mountID == mountID then
+            return button;
+        end
+    end
+end
+local function GetMountDisplayIndexByMountID(mountID)
+    for i = 1, ADDON.Api.GetNumDisplayedMounts() do
+        local currentMountID = select(12, ADDON.Api.GetDisplayedMountInfo(i))
+        if currentMountID == mountID then
+            return i;
+        end
+    end
+    return nil;
+end
+function ADDON.UI:ScrollToSelected()
+    local selectedMountID = ADDON.Api:GetSelected()
+
+    local scrollFrame = MountJournal.MJE_ListScrollFrame
+    if scrollFrame and selectedMountID then
+
+        local inView
+        local button = GetMountButtonByMountID(selectedMountID)
+        if button then
+            inView = button:GetTop() > (scrollFrame:GetBottom() + 3) and button:GetBottom() < (scrollFrame:GetTop() - 3)
+        else
+            inView = false
+        end
+        if not inView then
+            local mountIndex = GetMountDisplayIndexByMountID(selectedMountID)
+            if mountIndex then
+                --todo something is fucked up
+                HybridScrollFrame_ScrollToIndex(scrollFrame, mountIndex, ADDON.UI.GetMountButtonHeight);
+            end
+        end
+    end
+end
+
 local doCheckOverhaul = false
 
 ADDON:RegisterLoadUICallback(function()
     MountJournal.ListScrollFrame:Hide()
     MountJournal.MJE_ListScrollFrame = CreateFrame("ScrollFrame", "MJE_ListScrollFrame", MountJournal, "MJE_ListScrollFrameTemplate")
     MountJournal.MJE_ListScrollFrame.scrollBar.doNotHide = true
-    MountJournal.MJE_ListScrollFrame.update = ADDON.UpdateMountList
+    MountJournal.MJE_ListScrollFrame.update = ADDON.UI.UpdateMountList
 
     SetupButtons(MountJournal.MJE_ListScrollFrame)
 
-    hooksecurefunc("MountJournal_UpdateMountList", ADDON.UpdateMountList)
+    hooksecurefunc("MountJournal_UpdateMountList", ADDON.UI.UpdateMountList)
+    hooksecurefunc("MountJournal_UpdateMountDisplay", ADDON.UI.UpdateMountDisplay)
 
     if doCheckOverhaul and ElvUI then
         local E = unpack(ElvUI)
         E:GetModule('Skins'):HandleScrollBar(MountJournal.MJE_ListScrollFrame.scrollBar)
-        -- TODO: ScrollList is not styled yet :(
-    end
-end)
-
-ADDON.UI:RegisterUIOverhaulCallback(function(self)
-    if self == MountJournal then
-        doCheckOverhaul = true
+        -- TODO: MJE_ListScrollFrame is not styled yet :(
     end
 end)

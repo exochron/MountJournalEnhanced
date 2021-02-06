@@ -8,7 +8,7 @@ local ADDON_NAME, ADDON = ...
 -- DOWN: Select Next Mount
 
 local function FetchCurrentSelectedIndex(totalDisplayed)
-    local target = MountJournal.selectedMountID
+    local target = ADDON.Api:GetSelected()
 
     for i = 1, totalDisplayed do
         local mountId = select(12, ADDON.Api.GetDisplayedMountInfo(i))
@@ -33,7 +33,7 @@ local function Select(step, totalDisplayed)
     end
 
     local mountId = select(12, ADDON.Api.GetDisplayedMountInfo(index))
-    ADDON:SetSelected(mountId)
+    ADDON.Api:SetSelected(mountId)
 end
 
 ADDON:RegisterUISetting('enableCursorKeys', true, ADDON.L.SETTING_CURSOR_KEYS)

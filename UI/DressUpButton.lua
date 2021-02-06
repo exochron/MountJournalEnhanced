@@ -23,7 +23,7 @@ local function createJournalButton(ParentFrame)
                 local mountId = ParentFrame.mountId;
                 if mountId then
                     SetCollectionsJournalShown(true, COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS);
-                    ADDON:SetSelected(mountId)
+                    ADDON.Api:SetSelected(mountId)
                 end
             end
         end)

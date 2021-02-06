@@ -32,7 +32,7 @@ PlayerConditions.lua
 Filters.lua
 Sort.lua
 MountJournalEnhanced.lua
-ApiMap.lua
+Api.lua
 Settings\Handling.lua
 Settings\Migration.lua
 Settings\Settings.lua

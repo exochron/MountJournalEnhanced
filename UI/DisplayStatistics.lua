@@ -59,13 +59,15 @@ end
 ADDON:RegisterLoadUICallback(function()
     local statsText = setupFontString()
 
-    hooksecurefunc("MountJournal_UpdateMountDisplay", function()
-        if MountJournal.selectedMountID and statsText then
+    local callback = function()
+        local selectedMount = ADDON.Api:GetSelected()
+        if selectedMount and statsText then
             local text = ''
             if ADDON.settings.ui.showUsageStatistics then
-                text = generateText(MountJournal.selectedMountID)
+                text = generateText(MountJournal.selectedMount)
             end
             statsText:SetText(text)
         end
-    end)
+    end
+    EventRegistry:RegisterCallback("MountJournal.OnUpdateMountDisplay", callback, ADDON_NAME .. 'DisplayStatistics')
 end)

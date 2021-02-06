@@ -29,12 +29,13 @@ end
 
 -- Switching mounts still starts the Animationkit. So we have to stop it.
 local function SetupModelActor()
-    hooksecurefunc("MountJournal_UpdateMountDisplay", function(sender, level)
+    local callback = function(sender, level)
         local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
         if actor then
             actor:StopAnimationKit()
         end
-    end)
+    end
+    EventRegistry:RegisterCallback("MountJournal.OnUpdateMountDisplay", callback, ADDON_NAME .. 'DisplayDirector')
 end
 
 local function BuildControlContainer(width)
