@@ -44,7 +44,7 @@ ADDON:RegisterLoadUICallback(function()
     -- I had issues handling the input directly at the MountJournal frame. So I'm using ListScrollFrame instead.
     scrollFrame:SetPropagateKeyboardInput(true)
     scrollFrame:EnableKeyboard(true)
-    scrollFrame:SetScript("OnKeyDown", function(self, key)
+    scrollFrame:HookScript("OnKeyDown", function(self, key)
         local totalDisplayed
         if (key == "DOWN" or key == "UP") and ADDON.settings.ui.enableCursorKeys and not IsModifierKeyDown() then
             totalDisplayed = ADDON.Api.GetNumDisplayedMounts()

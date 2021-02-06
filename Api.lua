@@ -119,3 +119,23 @@ end
 function ADDON.Api:GetSelected()
     return selectedMount
 end
+
+-- from https://www.townlong-yak.com/framexml/live/Blizzard_Collections/Blizzard_MountCollection.lua#668
+function ADDON.Api:UseMount(mountID)
+    if mountID then
+        local creatureName, spellID, icon, active = C_MountJournal.GetMountInfoByID(mountID);
+        if ( active ) then
+            C_MountJournal.Dismiss();
+        elseif ( C_MountJournal.NeedsFanfare(mountID) ) then
+            local function OnFinishedCallback()
+                C_MountJournal.ClearFanfare(mountID);
+                --MountJournal_HideMountDropdown();
+                ADDON.UI:UpdateMountList()
+                ADDON.UI:UpdateMountDisplay()
+            end
+            MountJournal.MountDisplay.ModelScene:StartUnwrapAnimation(OnFinishedCallback);
+        else
+            C_MountJournal.SummonByID(mountID);
+        end
+    end
+end

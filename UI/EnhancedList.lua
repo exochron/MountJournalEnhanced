@@ -172,7 +172,7 @@ local function SetupButtons(scrollFrame)
 
         button:HookScript("OnDoubleClick", function(sender, button)
             if button == "LeftButton" then
-                C_MountJournal.SummonByID(sender.mountID)
+                ADDON.Api:UseMount(sender.mountID)
             end
         end)
 
