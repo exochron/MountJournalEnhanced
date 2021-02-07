@@ -160,7 +160,14 @@ local function BuildCameraPanel()
     local char = BuildCheckButton(frame, special, MOUNT_JOURNAL_PLAYER, nil, PlayerPreviewToggle.OnShow)
     char.icon:SetTexture(386865) -- interface/friendsframe/ui-toast-toasticons.blp
     char.icon:SetTexCoord(0.04, 0.58, 0.04, 0.92, 0.21, 0.58, 0.21, 0.92)
-    char:HookScript("OnClick", PlayerPreviewToggle.OnClick)
+    char:HookScript("OnClick", function(self)
+        if self:GetChecked() then
+            SetCVar("mountJournalShowPlayer", 1)
+        else
+            SetCVar("mountJournalShowPlayer", 0)
+        end
+        ADDON.UI:UpdateMountDisplay(true)
+    end)
 
     local zoomIn = BuildCameraButton(frame, char, ZOOM_IN, KEY_MOUSEWHEELUP, ORBIT_CAMERA_MOUSE_MODE_ZOOM, 0.9)
     zoomIn.icon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
