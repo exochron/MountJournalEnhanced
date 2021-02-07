@@ -27,55 +27,30 @@ function ADDON.Debug:WatchFunction(name, func, includeSubroutines)
     end)
 end
 
-local function testDatabase()
-    local mounts = {}
-    local mountIDs = C_MountJournal.GetMountIDs()
-    for _, mountID in ipairs(mountIDs) do
-        local name, spellID, _, _, _, sourceType = C_MountJournal.GetMountInfoByID(mountID)
-        mounts[mountID] = {
-            name = name,
-            spellID = spellID,
-            mountID = mountID,
-            sourceType = sourceType,
-        }
-    end
-
-    local filterSettingsBackup = CopyTable(ADDON.settings.filter)
-    for key, _ in pairs(ADDON.settings.filter.source) do
-        ADDON.settings.filter.source[key] = false
-    end
-    for key, value in pairs(ADDON.settings.filter.family) do
+local function runFilterTest(testName)
+    ADDON:ResetFilterSettings()
+    for key, value in pairs(ADDON.settings.filter[testName]) do
         if type(value) == "table" then
             for subKey, _ in pairs(value) do
-                ADDON.settings.filter.family[key][subKey] = false
+                ADDON.settings.filter[testName][key][subKey] = false
             end
         else
-            ADDON.settings.filter.family[key] = false
+            ADDON.settings.filter[testName][key] = false
         end
     end
-    for key, _ in pairs(ADDON.settings.filter.expansion) do
-        ADDON.settings.filter.expansion[key] = false
+    for _, mountId in ipairs(ADDON:FilterMounts()) do
+        local name, spellID, _, _, _, sourceType = C_MountJournal.GetMountInfoByID(mountId)
+        print("No ".. testName .." info for mount: " .. name .. " (" .. spellID .. ", " .. mountId .. ", " .. sourceType .. ") ")
     end
-    for key, _ in pairs(ADDON.settings.filter.mountType) do
-        ADDON.settings.filter.mountType[key] = false
-    end
+end
 
-    for _, data in pairs(mounts) do
-        if not IgnoredDB[data.mountID] then
-            if ADDON:FilterMountsBySource(data.spellID, data.sourceType) then
-                print("New mount: " .. data.name .. " (" .. data.spellID .. ", " .. data.mountID .. ", " .. data.sourceType .. ") ")
-            end
-            if ADDON:FilterMountsByFamily(data.spellID) then
-                print("No family info for mount: " .. data.name .. " (" .. data.spellID .. ", " .. data.mountID .. ")")
-            end
-            if ADDON:FilterMountsByExpansion(data.spellID) then
-                print("No expansion info for mount: " .. data.name .. " (" .. data.spellID .. ", " .. data.mountID .. ")")
-            end
-            if ADDON:FilterMountsByType(data.spellID, data.mountID) then
-                print("New mount type for mount \"" .. data.name .. "\" (" .. data.spellID .. ", " .. data.mountID .. ") ")
-            end
-        end
-    end
+local function testDatabase()
+    local filterSettingsBackup = CopyTable(ADDON.settings.filter)
+
+    runFilterTest("source")
+    runFilterTest("mountType")
+    runFilterTest("family")
+    runFilterTest("expansion")
 
     ADDON.settings.filter = CopyTable(filterSettingsBackup)
     if ADDON.settings.personalFilter then
@@ -93,7 +68,8 @@ local function testDatabase()
     --end
 
     for mountId, _ in pairs(IgnoredDB) do
-        if not mounts[mountId] then
+        local name = C_MountJournal.GetMountInfoByID(mountId)
+        if not name then
             print("Old ignore entry for mount: " .. mountId)
         end
     end

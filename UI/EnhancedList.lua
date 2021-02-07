@@ -246,3 +246,9 @@ ADDON:RegisterLoadUICallback(function()
         -- TODO: MJE_ListScrollFrame is not styled yet :(
     end
 end)
+
+ADDON.UI:RegisterUIOverhaulCallback(function(self)
+    if self == MountJournal then
+        doCheckOverhaul = true
+    end
+end)
