@@ -11,6 +11,7 @@ local function createJournalButton(ParentFrame)
         button:SetParent({ content = ParentFrame })
         button:SetText(ADDON.L["Show in Collections"])
         button:SetAutoWidth(true)
+        button:SetHeight(22)
         if (ParentFrame == SideDressUpFrame) then
             button.frame:SetFrameStrata("HIGH")
             button:SetPoint("BOTTOM", SideDressUpModel, "BOTTOM", 0, 0)
@@ -42,13 +43,13 @@ end
 local inititalized = false
 
 ADDON:RegisterUISetting('previewButton', true, ADDON.L.SETTING_PREVIEW_LINK, function(flag)
-    if (flag and not inititalized) then
+    if flag and not inititalized then
         createJournalButton(DressUpFrame)
         createJournalButton(SideDressUpFrame)
 
         hooksecurefunc("DressUpMount", function(mountId)
             if mountId then
-                if (SideDressUpFrame.parentFrame and SideDressUpFrame.parentFrame:IsShown()) then
+                if SideDressUpFrame.parentFrame and SideDressUpFrame.parentFrame:IsShown() then
                     SideDressUpFrame:SetAttribute("mountID", mountId)
                 else
                     DressUpFrame:SetAttribute("mountID", mountId)
