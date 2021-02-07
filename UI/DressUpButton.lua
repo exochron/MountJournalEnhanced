@@ -20,7 +20,7 @@ local function createJournalButton(ParentFrame)
 
         button:SetCallback("OnClick", function()
             if (ParentFrame.mode == "mount") then
-                local mountId = ParentFrame.mountId;
+                local mountId = ParentFrame:GetAttribute("mountID")
                 if mountId then
                     SetCollectionsJournalShown(true, COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS);
                     ADDON.Api:SetSelected(mountId)
@@ -49,9 +49,9 @@ ADDON:RegisterUISetting('previewButton', true, ADDON.L.SETTING_PREVIEW_LINK, fun
         hooksecurefunc("DressUpMount", function(mountId)
             if mountId then
                 if (SideDressUpFrame.parentFrame and SideDressUpFrame.parentFrame:IsShown()) then
-                    SideDressUpFrame.mountId = mountId
+                    SideDressUpFrame:SetAttribute("mountID", mountId)
                 else
-                    DressUpFrame.mountId = mountId
+                    DressUpFrame:SetAttribute("mountID", mountId)
                 end
             end
         end)

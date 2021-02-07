@@ -1,6 +1,4 @@
-local _, ADDON = ...
-
--- TODO: updates dont work anymore
+local ADDON_NAME, ADDON = ...
 
 local doStrip = false
 
@@ -29,7 +27,7 @@ local function count()
     local total, owned, personal, personalTotal = 0, 0, 0, 0
     for _, mountID in ipairs(mountIDs) do
         local _, spellId, _, _, _, _, _, _, faction, hideOnChar, isCollected = C_MountJournal.GetMountInfoByID(mountID)
-        if hideOnChar == false then
+        if hideOnChar == false or ADDON.settings.filter.hiddenIngame then
             total = total + 1
 
             local isPersonal = isPersonalMount(spellId, faction, hasSkill)
@@ -77,33 +75,22 @@ local function CreateCharacterMountCount()
     frame.uniqueCount:ClearAllPoints()
     frame.uniqueCount:SetPoint("RIGHT", frame, -6, 0)
 
-    local lastOriginalValue, lastDisplayCount, lastTotalCount
-    hooksecurefunc(MountJournal.MountCount.Count, "SetText", function(_, value, _, _, _, isRecursiveCall)
+    local updateTexts = function(_, value, _, _, _, isRecursiveCall)
 
-        if isRecursiveCall then
+        if true == isRecursiveCall then
             return
         end
 
         if ADDON.settings.ui.showPersonalCount then
             local displayCount = ADDON.Api:GetNumDisplayedMounts()
 
-            if value ~= lastOriginalValue
-                    or (displayCount == lastTotalCount and lastDisplayCount ~= nil and lastDisplayCount < displayCount)
-                    or (displayCount == 0 and lastDisplayCount ~= nil)
-            then
-                lastOriginalValue = value
-                lastDisplayCount = nil
-                local personal, personalTotal, owned, totalCount = count()
-                lastTotalCount = totalCount
-                frame.uniqueCount:SetText(generateText(personal, personalTotal))
+            local personal, personalTotal, owned, totalCount = count()
+            frame.uniqueCount:SetText(generateText(personal, personalTotal))
 
-                if displayCount == 0 or displayCount == totalCount then
-                    MountJournal.MountCount.Label:SetText(TOTAL_MOUNTS)
-                    MountJournal.MountCount.Count.SetText(MountJournal.MountCount.Count, generateText(owned, totalCount), nil, nil, nil, true)
-                end
-            end
-            if displayCount > 0 and displayCount < lastTotalCount and displayCount ~= lastDisplayCount then
-                lastDisplayCount = displayCount
+            if displayCount == 0 or displayCount == totalCount then
+                MountJournal.MountCount.Label:SetText(TOTAL_MOUNTS)
+                MountJournal.MountCount.Count.SetText(MountJournal.MountCount.Count, generateText(owned, totalCount), nil, nil, nil, true)
+            else
                 local collectedFilter = 0
                 for index = 1, displayCount do
                     local _, _, _, _, _, _, _, _, _, _, isCollected = ADDON.Api:GetDisplayedMountInfo(index)
@@ -114,10 +101,11 @@ local function CreateCharacterMountCount()
                 MountJournal.MountCount.Label:SetText(FILTER)
                 MountJournal.MountCount.Count.SetText(MountJournal.MountCount.Count, generateText(collectedFilter, displayCount), nil, nil, nil, true)
             end
-        else
-            lastOriginalValue, lastDisplayCount, lastTotalCount = nil
         end
-    end)
+    end
+    hooksecurefunc(MountJournal.MountCount.Count, "SetText", updateTexts)
+    EventRegistry:RegisterCallback("MountJournal.OnFilterUpdate", updateTexts, ADDON_NAME .. 'MountCount')
+    updateTexts()
 
     return frame
 end

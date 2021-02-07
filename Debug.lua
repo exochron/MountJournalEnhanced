@@ -11,19 +11,19 @@ ADDON.Debug = {}
 local lastProfileTimes = {}
 local lastProfileCounts = {}
 --- to actually use this enable the cvar: scriptProfile
-function ADDON.Debug:ProfileFunction(func, includeSubroutines)
-    local lastTime = lastProfileTimes[func] or 0
-    local lastCount = lastProfileCounts[func] or 0
-    local totalTime, totalCount = GetFunctionCPUUsage(ADDON.SortMounts, includeSubroutines)
+function ADDON.Debug:ProfileFunction(name, func, includeSubroutines)
+    local lastTime = lastProfileTimes[name] or 0
+    local lastCount = lastProfileCounts[name] or 0
+    local totalTime, totalCount = GetFunctionCPUUsage(func, includeSubroutines)
     if totalCount > lastCount then
-        print("current call time: "..(totalTime-lastTime), "total call time: " .. totalTime, "total call count " .. totalCount)
-        lastProfileTimes[func] = totalTime
-        lastProfileCounts[func] = totalCount
+        print("*" .. name .. "*", "current_time=" .. (totalTime - lastTime), "total_time=" .. totalTime, "total_count=" .. totalCount)
+        lastProfileTimes[name] = totalTime
+        lastProfileCounts[name] = totalCount
     end
 end
-function ADDON.Debug:WatchFunction(func, includeSubroutines)
+function ADDON.Debug:WatchFunction(name, func, includeSubroutines)
     C_Timer.NewTicker(5, function()
-        ADDON.Debug:ProfileFunction(func, includeSubroutines)
+        ADDON.Debug:ProfileFunction(name, func, includeSubroutines)
     end)
 end
 

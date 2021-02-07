@@ -40,7 +40,7 @@ Settings\OptionsPanel.lua
 Favorites.lua
 Tracking.lua
 SlashCommand.lua
-DebugTest.lua
+Debug.lua
 
 UI\Templates.xml
 UI\Functions.lua

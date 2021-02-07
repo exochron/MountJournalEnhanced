@@ -88,23 +88,14 @@ function ADDON.Api:SetIsFavoriteByID(mountId, ...)
 end
 
 function ADDON.Api:UpdateIndex(calledFromEvent)
-    local searchString = MountJournal.searchBox:GetText() or ""
-    if searchString ~= "" then
-        searchString = searchString:lower()
-    end
+    local list = ADDON:FilterMounts()
+    --ADDON.Debug:ProfileFunction("filter", ADDON.FilterMounts, true)
 
-    local list = {}
-    for _, mountId in ipairs(C_MountJournal.GetMountIDs()) do
-        if ADDON:FilterMount(mountId, searchString) then
-            list[#list+1] = mountId
-        end
+    if true ~= calledFromEvent or nil == orderedMountIds or #list ~= #orderedMountIds then
+        orderedMountIds = ADDON:SortMounts(list)
+        EventRegistry:TriggerEvent("MountJournal.OnFilterUpdate")
+        --ADDON.Debug:ProfileFunction("sort", ADDON.SortMounts, true)
     end
-
-    if calledFromEvent and nil ~= orderedMountIds and #list == #orderedMountIds then
-        return
-    end
-
-    orderedMountIds = ADDON:SortMounts(list)
 end
 
 local selectedMount
