@@ -1,5 +1,7 @@
 local ADDON_NAME, ADDON = ...
 
+local IgnoredDB = ADDON.DB.Ignored
+
 local function print(...)
     _G.print("[MJE]", ...)
 end
@@ -64,6 +66,13 @@ local function testDatabase()
     --        end
     --    end
     --end
+
+    for mountId, _ in pairs(IgnoredDB) do
+        local name = C_MountJournal.GetMountInfoByID(mountId)
+        if not name then
+            print("Old ignore entry for mount: " .. mountId)
+        end
+    end
 end
 
 local taintedList = {}

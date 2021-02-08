@@ -1436,3 +1436,41 @@ ADDON.DB.Type = {
         [307263] = true, -- Explorer's Dunetrekker
     },
 }
+
+-- used as filter for debug output
+-- mountId as Index
+ADDON.DB.Ignored = {
+    [7] = true, -- Gray Wolf
+    [8] = true, -- White Stallion
+    [12] = true, -- Black Wolf
+    [13] = true, -- Red Wolf
+    [15] = true, -- Winter Wolf
+    [28] = true, -- Skeletal Horse
+    [22] = true, -- Black Ram
+    [32] = true, -- Tiger
+    [35] = true, -- Ivory Raptor
+    [43] = true, -- Green Mechanostrider
+    [70] = true, -- Riding Kodo
+    [116] = true, -- Black Qiraji Battle Tank
+    [121] = true, -- Black Qiraji Battle Tank
+    [123] = true, -- Nether Drake
+    [145] = true, -- Blue Mechanostrider
+    [206] = true, -- Merciless Nether Drake
+    [251] = true, -- Black Polar Bear
+    [273] = true, -- Grand Caravan Mammoth
+    [274] = true, -- Grand Caravan Mammoth
+    [293] = true, -- Black Dragonhawk Mount
+    [308] = true, -- Blue Skeletal Warhorse
+    [462] = true, -- White Riding Yak
+    [484] = true, -- Black Riding Yak
+    [485] = true, -- Brown Riding Yak
+
+    -- ghost
+    [238] = true, -- Swift Spectral Gryphon
+    [776] = true, -- Swift Spectral Rylak
+    [934] = true, -- Swift Spectral Hippogryph
+    [1269] = true, -- Swift Spectral Fathom Ray
+    [1270] = true, -- Swift Spectral Magnetocraft
+    [1271] = true, -- Swift Spectral Armored Gryphon
+    [1272] = true, -- Swift Spectral Pterrordax
+}
