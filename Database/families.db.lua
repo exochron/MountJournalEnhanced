@@ -226,6 +226,7 @@ ADDON.DB.Family = {
 [229486] = true, -- Vicious War Bear
 [229487] = true, -- Vicious War Bear
 [288438] = true, -- Blackpaw
+[341821] = true, -- Snowstorm
 },
 ["Foxes"] = {
 [171850] = true, -- Llothien Prowler
@@ -1071,6 +1072,9 @@ ADDON.DB.Family = {
 [242874] = true, -- Highmountain Elderhorn
 [258060] = true, -- Highmountain Thunderhoof
 [288712] = true, -- Stonehide Elderhorn
+},
+["Ox"] = {
+[308087] = true, -- Lucky Yun
 },
 ["Rhinos"] = {
 [74918] = true, -- Wooly White Rhino
