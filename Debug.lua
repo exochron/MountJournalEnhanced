@@ -1,7 +1,5 @@
 local ADDON_NAME, ADDON = ...
 
-local IgnoredDB = ADDON.DB.Ignored
-
 local function print(...)
     _G.print("[MJE]", ...)
 end
@@ -44,11 +42,21 @@ local function runFilterTest(testName)
     end
 end
 
+local function checkDBForOldMountIds(index)
+    for mountId, _ in pairs(ADDON.DB[index]) do
+        local name = C_MountJournal.GetMountInfoByID(mountId)
+        if not name then
+            print(index..":", "old entry for mount: " .. mountId)
+        end
+    end
+end
+
 local function testDatabase()
     local filterSettingsBackup = CopyTable(ADDON.settings.filter)
 
     runFilterTest("source")
     runFilterTest("mountType")
+    runFilterTest("faction")
     runFilterTest("family")
     runFilterTest("expansion")
 
@@ -67,12 +75,7 @@ local function testDatabase()
     --    end
     --end
 
-    for mountId, _ in pairs(IgnoredDB) do
-        local name = C_MountJournal.GetMountInfoByID(mountId)
-        if not name then
-            print("Old ignore entry for mount: " .. mountId)
-        end
-    end
+    checkDBForOldMountIds("Ignored")
 end
 
 local taintedList = {}

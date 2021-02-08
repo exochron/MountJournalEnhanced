@@ -5,6 +5,7 @@ local SourceDB = ADDON.DB.Source
 local ExpansionDB = ADDON.DB.Expansion
 local TypeDB = ADDON.DB.Type
 local TradableDB = ADDON.DB.Tradable
+local IgnoredDB = ADDON.DB.Ignored
 
 local function FilterByName(searchString, name, mountId)
     name = name:lower()
@@ -30,8 +31,8 @@ end
 local function FilterUserHiddenMounts(spellId)
     return ADDON.settings.filter.hidden or not ADDON.settings.hiddenMounts[spellId]
 end
-local function FilterIngameHiddenMounts(shouldHideOnChar)
-    return not shouldHideOnChar or ADDON.settings.filter.hiddenIngame
+local function FilterIngameHiddenMounts(shouldHideOnChar, mountId)
+    return not shouldHideOnChar or (ADDON.settings.filter.hiddenIngame and not IgnoredDB[mountId])
 end
 
 local function FilterFavoriteMounts(isFavorite)
@@ -214,7 +215,7 @@ function ADDON:FilterMounts()
 
         for _, mountId in ipairs(ids) do
             local creatureName, _, _, _, _, _, _, _, _, shouldHideOnChar = ADDON.Api:GetMountInfoByID(mountId)
-            if FilterByName(searchText, creatureName, mountId) and FilterIngameHiddenMounts(shouldHideOnChar) then
+            if FilterIngameHiddenMounts(shouldHideOnChar, mountId) and FilterByName(searchText, creatureName, mountId) then
                 result[#result + 1] = mountId
             end
         end
@@ -241,17 +242,17 @@ function ADDON:FilterMounts()
 
         for _, mountId in ipairs(ids) do
             local _, spellId, _, _, isUsable, sourceType, isFavorite, isFaction, faction, shouldHideOnChar, isCollected = ADDON.Api:GetMountInfoByID(mountId)
-            if FilterUserHiddenMounts(spellId) and
-                    FilterIngameHiddenMounts(shouldHideOnChar) and
-                    FilterFavoriteMounts(isFavorite) and
-                    FilterUsableMounts(isUsable) and
-                    FilterTradableMounts(spellId) and
-                    FilterCollectedMounts(isCollected) and
-                    FilterByFaction(isFaction, faction) and
-                    (allSettingsSource or FilterBySource(spellId, sourceType, preparedSource)) and
-                    (allSettingsType or FilterByType(spellId, mountId, preparedTypes)) and
-                    (allSettingsFamily or FilterByFamily(spellId, preparedFamily)) and
-                    (allSettingsExpansion or FilterByExpansion(spellId, preparedExpansion))
+            if FilterUserHiddenMounts(spellId)
+                    and FilterIngameHiddenMounts(shouldHideOnChar, mountId)
+                    and FilterFavoriteMounts(isFavorite)
+                    and FilterUsableMounts(isUsable)
+                    and FilterTradableMounts(spellId)
+                    and FilterCollectedMounts(isCollected)
+                    and FilterByFaction(isFaction, faction)
+                    and (allSettingsSource or FilterBySource(spellId, sourceType, preparedSource))
+                    and (allSettingsType or FilterByType(spellId, mountId, preparedTypes))
+                    and (allSettingsFamily or FilterByFamily(spellId, preparedFamily))
+                    and (allSettingsExpansion or FilterByExpansion(spellId, preparedExpansion))
             then
                 result[#result + 1] = mountId
             end

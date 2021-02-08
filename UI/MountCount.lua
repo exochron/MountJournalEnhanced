@@ -27,7 +27,7 @@ local function count()
     local total, owned, personal, personalTotal = 0, 0, 0, 0
     for _, mountID in ipairs(mountIDs) do
         local _, spellId, _, _, _, _, _, _, faction, hideOnChar, isCollected = C_MountJournal.GetMountInfoByID(mountID)
-        if hideOnChar == false or ADDON.settings.filter.hiddenIngame then
+        if hideOnChar == false or (ADDON.settings.filter.hiddenIngame and not ADDON.DB.Ignored[mountID]) then
             total = total + 1
 
             local isPersonal = isPersonalMount(spellId, faction, hasSkill)
