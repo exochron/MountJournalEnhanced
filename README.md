@@ -15,13 +15,12 @@ This is an interface addon for World of Warcraft. It extends the ingame mount jo
 + Display count of character specific mounts
 + Display mount related achievement points
 + Freely rotate display camera around mount
-+ Trigger /mountspecial in display
++ Trigger /mountspecial within the display
 + Browse through mounts with Up/Down arrow keys
-+ Right Click on scroll buttons to quickly scroll to the top/bottom  
-+ Track, display and sort by some usage statistics
++ Right Click on scroll buttons to quickly go to the top or bottom  
++ Track, display and sort by your usage statistics
 + Favor all filtered mounts at once or unset them all.
 + Save favorites per character.
-+ Works with most UI-Packs (like ElvUI or Tukui)
 
 ### Fixes also
 + the ridiculous fly in animation of the rider
