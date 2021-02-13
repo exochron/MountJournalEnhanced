@@ -55,12 +55,15 @@ frame:SetScript("OnEvent", function(self, event, arg1)
 end)
 
 EventRegistry:RegisterCallback("MountJournal.OnShow", function()
-    EventRegistry:UnregisterCallback("MountJournal.OnShow", ADDON_NAME .. ".init")
-    LoadUI()
-    FireCallbacks(loadUICallbacks)
-    ADDON.initialized = true
+    -- MountJournal gets always initially shown before switching to the actual tab.
+    if CollectionsJournal.selectedTab == 1 then
+        EventRegistry:UnregisterCallback("MountJournal.OnShow", ADDON_NAME .. ".init")
+        LoadUI()
+        FireCallbacks(loadUICallbacks)
+        ADDON.initialized = true
 
-    if ADDON.Api:GetSelected() == nil then
-        ADDON.Api:SetSelected(select(12, ADDON.Api:GetDisplayedMountInfo(1)))
+        if ADDON.Api:GetSelected() == nil then
+            ADDON.Api:SetSelected(select(12, ADDON.Api:GetDisplayedMountInfo(1)))
+        end
     end
 end, ADDON_NAME .. ".init")
