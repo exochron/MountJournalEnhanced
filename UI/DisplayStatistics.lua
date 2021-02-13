@@ -1,6 +1,8 @@
 local ADDON_NAME, ADDON = ...
 
-ADDON:RegisterUISetting('showUsageStatistics', true, ADDON.L.SETTING_SHOW_USAGE)
+ADDON:RegisterUISetting('showUsageStatistics', true, ADDON.L.SETTING_SHOW_USAGE, function()
+    ADDON.UI:UpdateMountDisplay()
+end)
 
 local function setupFontString()
     local frame = MountJournal.MountDisplay.InfoButton

@@ -1,6 +1,8 @@
 local ADDON_NAME, ADDON = ...
 
-ADDON:RegisterUISetting('showShopButton', true, ADDON.L.SETTING_SHOP_BUTTON)
+ADDON:RegisterUISetting('showShopButton', true, ADDON.L.SETTING_SHOP_BUTTON, function()
+    ADDON.UI:UpdateMountDisplay()
+end)
 
 local function ToggleShopButton()
     if MountJournal then
