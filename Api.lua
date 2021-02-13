@@ -2,8 +2,8 @@ local _, ADDON = ...
 
 ADDON.Api = {}
 
-local mountIdToOriginalIndex = {}
-local orderedMountIds -- initialize with nil, so we know if it's not ready yet and not just empty
+--region mountIdToOriginalIndex
+local mountIdToOriginalIndex
 
 local function collectMountIds()
     ADDON:ResetIngameFilter()
@@ -19,28 +19,43 @@ local function collectMountIds()
         list[mountId] = i
     end
 
-    mountIdToOriginalIndex = list
+    return list
 end
 
-local function OwnIndexToMountId(index)
-    -- index=0 => SummonRandomButton
-    if index == 0 then
-        return index
+local function MountIdToOriginalIndex(mountId, recursionCounter)
+    if nil == mountIdToOriginalIndex then
+        mountIdToOriginalIndex = collectMountIds()
     end
 
-    return orderedMountIds[index] or nil
-end
-local function MountIdToOriginalIndex(mountId)
     local index = mountIdToOriginalIndex[mountId] or nil
 
     if index then
         local displayedMountId = select(12, C_MountJournal.GetDisplayedMountInfo(index))
         if displayedMountId ~= mountId then
-            collectMountIds()
+            mountIdToOriginalIndex = nil
+            recursionCounter = recursionCounter or 1
+            if recursionCounter < 4 then
+                return MountIdToOriginalIndex(mountId, recursionCounter + 1)
+            end
         end
     end
 
     return index
+end
+--endregion
+
+local orderedMountIds -- initialize with nil, so we know if it's not ready yet and not just empty
+local function OwnIndexToMountId(index)
+    if nil == orderedMountIds then
+        ADDON.Api:UpdateIndex()
+    end
+
+    -- index=0 => SummonRandomButton
+    if index == 0 then
+        return 0
+    end
+
+    return orderedMountIds[index] or nil
 end
 
 function ADDON.Api:GetNumDisplayedMounts()
@@ -58,10 +73,6 @@ function ADDON.Api:GetMountInfoByID(mountId)
     return creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h
 end
 function ADDON.Api:GetDisplayedMountInfo(index)
-    if nil == orderedMountIds then
-        ADDON.Api:UpdateIndex()
-    end
-
     local mappedMountId = OwnIndexToMountId(index)
     if mappedMountId then
         return ADDON.Api:GetMountInfoByID(mappedMountId)
@@ -83,7 +94,7 @@ function ADDON.Api:SetIsFavoriteByID(mountId, ...)
     local index = MountIdToOriginalIndex(mountId)
     if index then
         C_MountJournal.SetIsFavorite(index, ...)
-        collectMountIds()
+        mountIdToOriginalIndex = nil
     end
 end
 
@@ -129,7 +140,3 @@ function ADDON.Api:UseMount(mountID)
         end
     end
 end
-
-ADDON:RegisterLoginCallback(function()
-    collectMountIds()
-end)
