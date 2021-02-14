@@ -35,17 +35,19 @@ local function InitializeDropDown(menu, level)
     end
 end
 
+local withoutStyle=false
 local function BuildWheelButton()
-    local button = CreateFrame("Button", nil, MountJournal, "UIMenuButtonStretchTemplate")
+
+    local template
+    if not withoutStyle then
+        template = "UIMenuButtonStretchTemplate"
+    end
+
+    local button = CreateFrame("Button", nil, MountJournal, template)
+
     button:SetWidth(24)
     button:SetHeight(24)
-
-    if CollectionsJournalPortrait:IsShown() and CollectionsJournalPortrait:GetAlpha() > 0.0 then
-        button:SetPoint("TOPLEFT", MountJournal, "TOPLEFT", 56, 1)
-    else
-        -- ElvUI hack
-        button:SetPoint("TOPLEFT", MountJournal, "TOPLEFT", 3, -1)
-    end
+    button:SetPoint("RIGHT", CollectionsJournal.CloseButton, "LEFT", 0, 0)
 
     local tex = button:CreateTexture(nil, "ARTWORK")
     tex:SetPoint("TOPLEFT", button, "TOPLEFT", 3, -3)
@@ -72,4 +74,10 @@ ADDON:RegisterLoadUICallback(function()
         PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
         ToggleDropDownMenu(1, nil, menu, button, 0, 0)
     end)
+end)
+
+ADDON.UI:RegisterUIOverhaulCallback(function(frame)
+    if frame == CollectionsJournal then
+        withoutStyle=true
+    end
 end)

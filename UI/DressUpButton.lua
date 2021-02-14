@@ -11,6 +11,7 @@ local function createJournalButton(ParentFrame)
         button:SetParent({ content = ParentFrame })
         button:SetText(ADDON.L["Show in Collections"])
         button:SetAutoWidth(true)
+        button:SetHeight(22)
         if (ParentFrame == SideDressUpFrame) then
             button.frame:SetFrameStrata("HIGH")
             button:SetPoint("BOTTOM", SideDressUpModel, "BOTTOM", 0, 0)
@@ -20,10 +21,10 @@ local function createJournalButton(ParentFrame)
 
         button:SetCallback("OnClick", function()
             if (ParentFrame.mode == "mount") then
-                local mountId = ParentFrame.mountId;
+                local mountId = ParentFrame:GetAttribute("mountID")
                 if mountId then
                     SetCollectionsJournalShown(true, COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS);
-                    MountJournal_SelectByMountID(mountId)
+                    ADDON.Api:SetSelected(mountId)
                 end
             end
         end)
@@ -42,16 +43,16 @@ end
 local inititalized = false
 
 ADDON:RegisterUISetting('previewButton', true, ADDON.L.SETTING_PREVIEW_LINK, function(flag)
-    if (flag and not inititalized) then
+    if flag and not inititalized then
         createJournalButton(DressUpFrame)
         createJournalButton(SideDressUpFrame)
 
         hooksecurefunc("DressUpMount", function(mountId)
             if mountId then
-                if (SideDressUpFrame.parentFrame and SideDressUpFrame.parentFrame:IsShown()) then
-                    SideDressUpFrame.mountId = mountId
+                if SideDressUpFrame.parentFrame and SideDressUpFrame.parentFrame:IsShown() then
+                    SideDressUpFrame:SetAttribute("mountID", mountId)
                 else
-                    DressUpFrame.mountId = mountId
+                    DressUpFrame:SetAttribute("mountID", mountId)
                 end
             end
         end)

@@ -1,3 +1,4 @@
+
 ### Next
 - automatic favor new mounts 
 - switch through mount variation (eg. High Priest's Lightsworn Seeker: C_MountJournal.GetMountAllCreatureDisplayInfoByID(861))

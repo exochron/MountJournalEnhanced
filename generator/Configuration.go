@@ -302,6 +302,7 @@ func LoadConfig() config {
 					{Name: "Elekks", Wcm: []string{"Elekks"}},
 					{Name: "Mammoths", Wcm: []string{"Mammoths"}},
 					{Name: "Moose", Wcm: []string{"Elderhorns"}},
+					{Name: "Ox", Wcm: []string{"Oxen"}},
 					{Name: "Rhinos", Wcm: []string{"Rhinos"}},
 					{Name: "Riverbeasts", Wcm: []string{"Riverbeasts"}},
 					{Name: "Runestag", Wcm: []string{"Runestags"}},

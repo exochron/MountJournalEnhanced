@@ -1,4 +1,4 @@
-local _, ADDON = ...
+local ADDON_NAME, ADDON = ...
 
 local doStrip = false
 
@@ -27,7 +27,7 @@ local function count()
     local total, owned, personal, personalTotal = 0, 0, 0, 0
     for _, mountID in ipairs(mountIDs) do
         local _, spellId, _, _, _, _, _, _, faction, hideOnChar, isCollected = C_MountJournal.GetMountInfoByID(mountID)
-        if hideOnChar == false then
+        if hideOnChar == false or (ADDON.settings.filter.hiddenIngame and not ADDON.DB.Ignored[mountID]) then
             total = total + 1
 
             local isPersonal = isPersonalMount(spellId, faction, hasSkill)
@@ -75,45 +75,37 @@ local function CreateCharacterMountCount()
     frame.uniqueCount:ClearAllPoints()
     frame.uniqueCount:SetPoint("RIGHT", frame, -6, 0)
 
-    local lastOriginalValue, lastDisplayCount, lastTotalCount, original_CountSetText
-    original_CountSetText = MountJournal.MountCount.Count.SetText
-    MountJournal.MountCount.Count.SetText = function(_, value)
+    local updateTexts = function(_, value, _, _, _, isRecursiveCall)
+
+        if true == isRecursiveCall then
+            return
+        end
 
         if ADDON.settings.ui.showPersonalCount then
-            local displayCount = C_MountJournal.GetNumDisplayedMounts()
+            local displayCount = ADDON.Api:GetNumDisplayedMounts()
 
-            if value ~= lastOriginalValue
-                    or (displayCount == lastTotalCount and lastDisplayCount ~= nil and lastDisplayCount < displayCount)
-                    or (displayCount == 0 and lastDisplayCount ~= nil)
-            then
-                lastOriginalValue = value
-                lastDisplayCount = nil
-                local personal, personalTotal, owned, totalCount = count()
-                lastTotalCount = totalCount
-                frame.uniqueCount:SetText(generateText(personal, personalTotal))
+            local personal, personalTotal, owned, totalCount = count()
+            frame.uniqueCount:SetText(generateText(personal, personalTotal))
 
-                if displayCount == 0 or displayCount == totalCount then
-                    MountJournal.MountCount.Label:SetText(TOTAL_MOUNTS)
-                    original_CountSetText(MountJournal.MountCount.Count, generateText(owned, totalCount))
-                end
-            end
-            if displayCount > 0 and displayCount < lastTotalCount and displayCount ~= lastDisplayCount then
-                lastDisplayCount = displayCount
+            if displayCount == 0 or displayCount == totalCount then
+                MountJournal.MountCount.Label:SetText(TOTAL_MOUNTS)
+                MountJournal.MountCount.Count.SetText(MountJournal.MountCount.Count, generateText(owned, totalCount), nil, nil, nil, true)
+            else
                 local collectedFilter = 0
                 for index = 1, displayCount do
-                    local _, _, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetDisplayedMountInfo(index)
+                    local _, _, _, _, _, _, _, _, _, _, isCollected = ADDON.Api:GetDisplayedMountInfo(index)
                     if isCollected then
                         collectedFilter = collectedFilter + 1
                     end
                 end
                 MountJournal.MountCount.Label:SetText(FILTER)
-                original_CountSetText(MountJournal.MountCount.Count, generateText(collectedFilter, displayCount))
+                MountJournal.MountCount.Count.SetText(MountJournal.MountCount.Count, generateText(collectedFilter, displayCount), nil, nil, nil, true)
             end
-        else
-            original_CountSetText(MountJournal.MountCount.Count, value)
-            lastOriginalValue, lastDisplayCount, lastTotalCount = nil
         end
     end
+    hooksecurefunc(MountJournal.MountCount.Count, "SetText", updateTexts)
+    EventRegistry:RegisterCallback("MountJournal.OnFilterUpdate", updateTexts, ADDON_NAME .. 'MountCount')
+    updateTexts()
 
     return frame
 end
@@ -147,7 +139,7 @@ ADDON:RegisterUISetting('showPersonalCount', true, ADDON.L.SETTING_MOUNT_COUNT, 
             end
 
             --to trigger update function
-            MountJournal_UpdateMountList()
+            ADDON.UI:UpdateMountList()
         end
     end
 end)
@@ -157,7 +149,7 @@ ADDON:RegisterLoadUICallback(function()
 end)
 
 ADDON.UI:RegisterUIOverhaulCallback(function(self)
-    if (self == MountJournal.MountCount) then
+    if self == MountJournal.MountCount then
         doStrip = true
     end
 end)

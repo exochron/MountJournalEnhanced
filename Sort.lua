@@ -119,18 +119,54 @@ local TrackingIndex = {
 }
 
 function ADDON:SortMounts(ids)
-    table.sort(ids, function(dataA, dataB)
-        local mountIdA = dataA[1]
-        local mountIdB = dataB[1]
+    local sortBy = ADDON.settings.sort.by
 
+    local fanfareCount = C_MountJournal.GetNumMountsNeedingFanfare()
+    local collectedData = {}
+    for _, mountId in ipairs(ids) do
+        local name, _, _, _, isUsable, _, isFavorite, _, _, _, isCollected = ADDON.Api:GetMountInfoByID(mountId)
+
+        local needsFanfare
+        if isCollected and fanfareCount > 0 then
+            needsFanfare = C_MountJournal.NeedsFanfare(mountId)
+            if needsFanfare then
+                fanfareCount = fanfareCount - 1
+            end
+        end
+
+        local sortValue
+        if sortBy == 'type' then
+            sortValue = mapMountType(mountId)
+        elseif TrackingIndex[sortBy] then
+            sortValue = select(TrackingIndex[sortBy], ADDON:GetMountStatistics(mountId)) or 0
+        end
+
+        collectedData[mountId] = { name, isUsable, isFavorite, isCollected, needsFanfare, sortValue }
+    end
+
+    table.sort(ids, function(mountIdA, mountIdB)
         if mountIdA == mountIdB then
             return false
         end
 
         local doNotDescend = false
         local result = false
-        local nameA, _, _, _, isUsableA, _, isFavoriteA, _, _, _, isCollectedA = C_MountJournal.GetMountInfoByID(mountIdA)
-        local nameB, _, _, _, isUsableB, _, isFavoriteB, _, _, _, isCollectedB = C_MountJournal.GetMountInfoByID(mountIdB)
+
+        local nameA = collectedData[mountIdA][1]
+        local isUsableA = collectedData[mountIdA][2]
+        local isFavoriteA = collectedData[mountIdA][3]
+        local isCollectedA = collectedData[mountIdA][4]
+        local needsFanfareA = collectedData[mountIdA][5]
+
+        local nameB = collectedData[mountIdB][1]
+        local isUsableB = collectedData[mountIdB][2]
+        local isFavoriteB = collectedData[mountIdB][3]
+        local isCollectedB = collectedData[mountIdB][4]
+        local needsFanfareB = collectedData[mountIdB][5]
+
+        if needsFanfareA ~= needsFanfareB then
+            return needsFanfareA and not needsFanfareB
+        end
 
         if ADDON.settings.sort.favoritesOnTop and isFavoriteA ~= isFavoriteB then
             return isFavoriteA and not isFavoriteB
@@ -142,16 +178,15 @@ function ADDON:SortMounts(ids)
             return isCollectedA and not isCollectedB
         end
 
-        local sortBy = ADDON.settings.sort.by
-
         if sortBy == 'name' then
             result = CompareNames(nameA, mountIdA, nameB, mountIdB)
         elseif sortBy == 'type' then
-            local mountTypeA = mapMountType(mountIdA)
-            local mountTypeB = mapMountType(mountIdB)
+            local mountTypeA = collectedData[mountIdA][6]
+            local mountTypeB = collectedData[mountIdB][6]
 
             if mountTypeA == mountTypeB then
                 result = CompareNames(nameA, mountIdA, nameB, mountIdB)
+                doNotDescend = true
             elseif mountTypeA == "flying" then
                 result = true
             elseif mountTypeA == "ground" then
@@ -164,9 +199,8 @@ function ADDON:SortMounts(ids)
             result = mountIdA < mountIdB
 
         elseif TrackingIndex[sortBy] then
-            local index = TrackingIndex[sortBy]
-            local valueA = select(index, ADDON:GetMountStatistics(mountIdA)) or 0
-            local valueB = select(index, ADDON:GetMountStatistics(mountIdB)) or 0
+            local valueA = collectedData[mountIdA][6]
+            local valueB = collectedData[mountIdB][6]
             if valueA == valueB then
                 result = CompareNames(nameA, mountIdA, nameB, mountIdB)
                 doNotDescend = true

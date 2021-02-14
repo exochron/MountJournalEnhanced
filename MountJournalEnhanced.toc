@@ -32,6 +32,7 @@ PlayerConditions.lua
 Filters.lua
 Sort.lua
 MountJournalEnhanced.lua
+Api.lua
 Settings\Handling.lua
 Settings\Migration.lua
 Settings\Settings.lua
@@ -39,17 +40,19 @@ Settings\OptionsPanel.lua
 Favorites.lua
 Tracking.lua
 SlashCommand.lua
-DebugTest.lua
+Debug.lua
 
+UI\Templates.xml
 UI\Functions.lua
+UI\EnhancedList.lua
+UI\EnhancedDisplay.lua
+UI\EnhancedMountButton.lua
 UI\CompactMountList.lua
 UI\AchievementPoints.lua
 UI\MountCount.lua
 UI\DisplayDirector.lua
-UI\DoubleClick.lua
 UI\EquipmentSlot.lua
 UI\FilterDropDown.lua
-UI\HiddenIcon.lua
 UI\DisplayCamera.lua
 UI\DisplayStatistics.lua
 UI\Hotkeys.lua

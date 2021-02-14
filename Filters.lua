@@ -5,6 +5,7 @@ local SourceDB = ADDON.DB.Source
 local ExpansionDB = ADDON.DB.Expansion
 local TypeDB = ADDON.DB.Type
 local TradableDB = ADDON.DB.Tradable
+local IgnoredDB = ADDON.DB.Ignored
 
 local function FilterByName(searchString, name, mountId)
     name = name:lower()
@@ -30,16 +31,16 @@ end
 local function FilterUserHiddenMounts(spellId)
     return ADDON.settings.filter.hidden or not ADDON.settings.hiddenMounts[spellId]
 end
-local function FilterIngameHiddenMounts(shouldHideOnChar)
-    return not shouldHideOnChar or ADDON.settings.filter.hiddenIngame
+local function FilterIngameHiddenMounts(shouldHideOnChar, mountId)
+    return not shouldHideOnChar or (ADDON.settings.filter.hiddenIngame and not IgnoredDB[mountId])
 end
 
 local function FilterFavoriteMounts(isFavorite)
     return isFavorite or not ADDON.settings.filter.onlyFavorites or not ADDON.settings.filter.collected
 end
 
-local function FilterUsableMounts(spellId, isUsable)
-    return not ADDON.settings.filter.onlyUsable or (isUsable and IsUsableSpell(spellId))
+local function FilterUsableMounts(isUsable)
+    return not ADDON.settings.filter.onlyUsable or isUsable
 end
 
 local function FilterTradableMounts(spellId)
@@ -108,19 +109,39 @@ local function CheckMountInList(settings, sourceData, spellId)
     return nil
 end
 
-function ADDON:FilterMountsBySource(spellId, sourceType)
+local function prepareSettings(settings, sourceData)
 
-    local settingsResult = CheckAllSettings(self.settings.filter.source)
-    if settingsResult then
-        return true
+    local result = {}
+    for key, sourceList in pairs(sourceData) do
+        if settings[key] ~= nil then
+
+            if type(settings[key]) == "table" then
+                for subId, subValue in pairs(prepareSettings(settings[key], sourceData[key])) do
+                    result[subId] = subValue
+                end
+            else
+                for id, _ in pairs(sourceList) do
+                    result[id] = settings[key]
+                end
+            end
+        end
     end
 
-    local mountResult = CheckMountInList(self.settings.filter.source, SourceDB, spellId)
-    if mountResult ~= nil then
-        return mountResult
+    return result
+end
+
+local function FilterByFaction(isFaction, faction)
+    return (ADDON.settings.filter.faction.noFaction and not isFaction)
+            or (ADDON.settings.filter.faction.alliance and faction == 1)
+            or (ADDON.settings.filter.faction.horde and faction == 0)
+end
+
+local function FilterBySource(spellId, sourceType, preparedSettings)
+    if preparedSettings[spellId] ~= nil then
+        return preparedSettings[spellId]
     end
 
-    for source, value in pairs(self.settings.filter.source) do
+    for source, value in pairs(ADDON.settings.filter.source) do
         if SourceDB[source] and SourceDB[source]["sourceType"]
                 and tContains(SourceDB[source]["sourceType"], sourceType) then
             return value
@@ -130,40 +151,20 @@ function ADDON:FilterMountsBySource(spellId, sourceType)
     return true
 end
 
-local function FilterMountsByFaction(isFaction, faction)
-    return (ADDON.settings.filter.faction.noFaction and not isFaction
-            or ADDON.settings.filter.faction.alliance and faction == 1
-            or ADDON.settings.filter.faction.horde and faction == 0)
+local function FilterByFamily(spellId, preparedSettings)
+    if preparedSettings[spellId] ~= nil then
+        return preparedSettings[spellId]
+    end
+
+    return true
 end
 
-function ADDON:FilterMountsByFamily(spellId)
-
-    local settingsResult = CheckAllSettings(self.settings.filter.family)
-    if settingsResult then
-        return true
+local function FilterByExpansion(spellId, preparedSettings)
+    if preparedSettings[spellId] ~= nil then
+        return preparedSettings[spellId]
     end
 
-    local mountResult = CheckMountInList(self.settings.filter.family, FamilyDB, spellId)
-    if mountResult then
-        return true
-    end
-
-    return mountResult == nil
-end
-
-function ADDON:FilterMountsByExpansion(spellId)
-
-    local settingsResult = CheckAllSettings(self.settings.filter.expansion)
-    if settingsResult then
-        return true
-    end
-
-    local mountResult = CheckMountInList(self.settings.filter.expansion, ExpansionDB, spellId)
-    if mountResult ~= nil then
-        return mountResult
-    end
-
-    for expansion, value in pairs(self.settings.filter.expansion) do
+    for expansion, value in pairs(ADDON.settings.filter.expansion) do
         if ExpansionDB[expansion] and
                 ExpansionDB[expansion]["minID"] <= spellId and
                 spellId <= ExpansionDB[expansion]["maxID"] then
@@ -174,25 +175,19 @@ function ADDON:FilterMountsByExpansion(spellId)
     return false
 end
 
-function ADDON:FilterMountsByType(spellId, mountID)
-    local settingsResult = CheckAllSettings(self.settings.filter.mountType)
-    if settingsResult then
-        return true
-    end
-
-    local mountResult = CheckMountInList(self.settings.filter.mountType, TypeDB, spellId)
-    if mountResult == true then
+local function FilterByType(spellId, mountID, preparedSettings)
+    if preparedSettings[spellId] then
         return true
     end
 
     local _, _, _, isSelfMount, mountType = C_MountJournal.GetMountInfoExtraByID(mountID)
 
-    if (self.settings.filter.mountType.transform and isSelfMount) then
+    if (ADDON.settings.filter.mountType.transform and isSelfMount) then
         return true
     end
 
     local result
-    for category, value in pairs(self.settings.filter.mountType) do
+    for category, value in pairs(ADDON.settings.filter.mountType) do
         if TypeDB[category] and
                 TypeDB[category].typeIDs and
                 tContains(TypeDB[category].typeIDs, mountType) then
@@ -202,35 +197,67 @@ function ADDON:FilterMountsByType(spellId, mountID)
 
     if result == nil then
         result = true
-        if mountResult ~= nil then
-            result = mountResult
+        if preparedSettings[spellId] ~= nil then
+            result = preparedSettings[spellId]
         end
     end
 
     return result
 end
 
-function ADDON:FilterMount(mountId, searchText)
+function ADDON:FilterMounts()
+    local result = {}
+    local ids = C_MountJournal.GetMountIDs()
 
-    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, shouldHideOnChar, isCollected = C_MountJournal.GetMountInfoByID(mountId)
+    local searchText = MountJournal.searchBox:GetText() or ""
+    if searchText ~= "" then
+        searchText = searchText:lower()
 
-    if (searchText ~= "" and FilterByName(searchText, creatureName, mountId))
-            or (searchText == "" and
-            FilterUserHiddenMounts(spellId) and
-            FilterIngameHiddenMounts(shouldHideOnChar) and
-            FilterFavoriteMounts(isFavorite) and
-            FilterUsableMounts(spellId, isUsable) and
-            FilterTradableMounts(spellId) and
-            FilterCollectedMounts(isCollected) and
-            FilterMountsByFaction(isFaction, faction) and
-            self:FilterMountsBySource(spellId, sourceType) and
-            self:FilterMountsByType(spellId, mountId) and
-            self:FilterMountsByFamily(spellId) and
-            self:FilterMountsByExpansion(spellId)
-    )
-    then
-        return true
+        for _, mountId in ipairs(ids) do
+            local creatureName, _, _, _, _, _, _, _, _, shouldHideOnChar = ADDON.Api:GetMountInfoByID(mountId)
+            if FilterIngameHiddenMounts(shouldHideOnChar, mountId) and FilterByName(searchText, creatureName, mountId) then
+                result[#result + 1] = mountId
+            end
+        end
+    else
+        local allSettingsSource, preparedSource = CheckAllSettings(ADDON.settings.filter.source)
+        if not preparedSource then
+            preparedSource = prepareSettings(ADDON.settings.filter.source, SourceDB)
+        end
+
+        local allSettingsType, preparedTypes = CheckAllSettings(ADDON.settings.filter.mountType)
+        if not allSettingsType then
+            preparedTypes = prepareSettings(ADDON.settings.filter.mountType, TypeDB)
+        end
+
+        local allSettingsFamily, preparedFamily = CheckAllSettings(ADDON.settings.filter.family)
+        if not allSettingsFamily then
+            preparedFamily = prepareSettings(ADDON.settings.filter.family, FamilyDB)
+        end
+
+        local allSettingsExpansion, preparedExpansion = CheckAllSettings(ADDON.settings.filter.expansion)
+        if not allSettingsExpansion then
+            preparedExpansion = prepareSettings(ADDON.settings.filter.expansion, ExpansionDB)
+        end
+
+        for _, mountId in ipairs(ids) do
+            local _, spellId, _, _, isUsable, sourceType, isFavorite, isFaction, faction, shouldHideOnChar, isCollected = ADDON.Api:GetMountInfoByID(mountId)
+            if FilterUserHiddenMounts(spellId)
+                    and FilterIngameHiddenMounts(shouldHideOnChar, mountId)
+                    and FilterFavoriteMounts(isFavorite)
+                    and FilterUsableMounts(isUsable)
+                    and FilterTradableMounts(spellId)
+                    and FilterCollectedMounts(isCollected)
+                    and FilterByFaction(isFaction, faction)
+                    and (allSettingsSource or FilterBySource(spellId, sourceType, preparedSource))
+                    and (allSettingsType or FilterByType(spellId, mountId, preparedTypes))
+                    and (allSettingsFamily or FilterByFamily(spellId, preparedFamily))
+                    and (allSettingsExpansion or FilterByExpansion(spellId, preparedExpansion))
+            then
+                result[#result + 1] = mountId
+            end
+        end
     end
 
-    return false
+    return result
 end

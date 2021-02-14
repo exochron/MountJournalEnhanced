@@ -1,6 +1,8 @@
 local ADDON_NAME, ADDON = ...
 
-ADDON:RegisterUISetting('showUsageStatistics', true, ADDON.L.SETTING_SHOW_USAGE)
+ADDON:RegisterUISetting('showUsageStatistics', true, ADDON.L.SETTING_SHOW_USAGE, function()
+    ADDON.UI:UpdateMountDisplay()
+end)
 
 local function setupFontString()
     local frame = MountJournal.MountDisplay.InfoButton
@@ -59,13 +61,15 @@ end
 ADDON:RegisterLoadUICallback(function()
     local statsText = setupFontString()
 
-    hooksecurefunc("MountJournal_UpdateMountDisplay", function()
-        if MountJournal.selectedMountID and statsText then
+    local callback = function()
+        local selectedMount = ADDON.Api:GetSelected()
+        if selectedMount and statsText then
             local text = ''
             if ADDON.settings.ui.showUsageStatistics then
-                text = generateText(MountJournal.selectedMountID)
+                text = generateText(selectedMount)
             end
             statsText:SetText(text)
         end
-    end)
+    end
+    EventRegistry:RegisterCallback("MountJournal.OnUpdateMountDisplay", callback, ADDON_NAME .. 'DisplayStatistics')
 end)
