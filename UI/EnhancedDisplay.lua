@@ -78,4 +78,13 @@ end
 
 ADDON:RegisterLoadUICallback(function()
     hooksecurefunc("MountJournal_UpdateMountDisplay", ADDON.UI.UpdateMountDisplay)
+
+    -- overwrite default handler
+    MountJournal.MountDisplay.ModelScene:SetScript("OnMouseUp", function(self, button)
+        self:OnMouseUp(button)
+
+        if ADDON.Api:GetSelected() and C_MountJournal.NeedsFanfare(ADDON.Api:GetSelected()) then
+            ADDON.Api:UseMount(ADDON.Api:GetSelected())
+        end
+    end)
 end)
