@@ -1,7 +1,9 @@
 local ADDON_NAME, ADDON = ...
 
 ADDON:RegisterUISetting('showUsageStatistics', true, ADDON.L.SETTING_SHOW_USAGE, function()
-    ADDON.UI:UpdateMountDisplay()
+    if ADDON.initialized then
+        ADDON.UI:UpdateMountDisplay()
+    end
 end)
 
 local function setupFontString()

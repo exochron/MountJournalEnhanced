@@ -1,7 +1,9 @@
 local ADDON_NAME, ADDON = ...
 
 ADDON:RegisterUISetting('showShopButton', true, ADDON.L.SETTING_SHOP_BUTTON, function()
-    ADDON.UI:UpdateMountDisplay()
+    if ADDON.initialized then
+        ADDON.UI:UpdateMountDisplay()
+    end
 end)
 
 local function ToggleShopButton()

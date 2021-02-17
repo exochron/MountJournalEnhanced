@@ -59,8 +59,8 @@ EventRegistry:RegisterCallback("MountJournal.OnShow", function()
     if CollectionsJournal.selectedTab == 1 then
         EventRegistry:UnregisterCallback("MountJournal.OnShow", ADDON_NAME .. ".init")
         LoadUI()
-        FireCallbacks(loadUICallbacks)
         ADDON.initialized = true
+        FireCallbacks(loadUICallbacks)
 
         if ADDON.Api:GetSelected() == nil then
             ADDON.Api:SetSelected(select(12, ADDON.Api:GetDisplayedMountInfo(1)))

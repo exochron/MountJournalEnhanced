@@ -113,7 +113,7 @@ end
 local frame
 
 ADDON:RegisterUISetting('showPersonalCount', true, ADDON.L.SETTING_MOUNT_COUNT, function(flag)
-    if MountJournal then
+    if ADDON.initialized then
         if not frame and flag then
             frame = CreateCharacterMountCount()
 

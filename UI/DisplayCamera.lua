@@ -3,7 +3,7 @@ local ADDON_NAME, ADDON = ...
 -- unlock Y rotation with mouse
 
 ADDON:RegisterUISetting('unlockDisplayCamera', true, ADDON.L.SETTING_YCAMERA, function(flag)
-    if (MountJournal) then
+    if ADDON.initialized then
         local cam = MountJournal.MountDisplay.ModelScene:GetActiveCamera()
         if cam then
             if flag then
