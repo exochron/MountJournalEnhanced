@@ -21,6 +21,7 @@ This is an interface addon for World of Warcraft. It extends the ingame mount jo
 + Track, display and sort by your usage statistics
 + Favor all filtered mounts at once or unset them all.
 + Save favorites per character.
++ Works with ElvUI
 
 ### Fixes also
 + the ridiculous fly in animation of the rider
