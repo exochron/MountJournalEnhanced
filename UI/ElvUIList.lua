@@ -11,21 +11,11 @@ ADDON.UI:RegisterUIOverhaulCallback(function(self)
     end
 end)
 
---region shameless copy of ElvUI (https://git.tukui.org/elvui/elvui/-/blob/development/ElvUI/Modules/Skins/Blizzard/Collectables.lua)
--- apparently that's their way to do so. (https://git.tukui.org/elvui/elvui/-/issues/2375)
-
-local function petNameColor(iconBorder, r, g, b)
-    local parent = iconBorder:GetParent()
-    if not parent.name then return end
-
-    if parent.isDead and parent.isDead:IsShown() then
-        parent.name:SetTextColor(0.9, 0.3, 0.3)
-    elseif r and parent.owned then
-        parent.name:SetTextColor(r, g, b)
-    else
-        parent.name:SetTextColor(0.4, 0.4, 0.4)
-    end
+local function petNameColor()
 end
+
+--region shameless copy of ElvUI (https://git.tukui.org/elvui/elvui/-/blob/development/ElvUI/Modules/Skins/Blizzard/Collectables.lua)
+-- apparently that's their way to do so: https://git.tukui.org/elvui/elvui/-/issues/2375
 
 local function mountNameColor(self)
     local button = self:GetParent()

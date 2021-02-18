@@ -209,7 +209,7 @@ function ADDON:FilterMounts()
     local result = {}
     local ids = C_MountJournal.GetMountIDs()
 
-    local searchText = MountJournal.searchBox:GetText() or ""
+    local searchText = MountJournal and MountJournal.searchBox:GetText() or ""
     if searchText ~= "" then
         searchText = searchText:lower()
 

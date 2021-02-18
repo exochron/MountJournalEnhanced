@@ -49,9 +49,14 @@ ADDON:ResetIngameFilter()
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
+frame:RegisterEvent("NEW_MOUNT_ADDED")
 frame:SetScript("OnEvent", function(self, event, arg1)
-    ADDON:ResetIngameFilter()
-    FireCallbacks(loginCallbacks)
+    if event == "PLAYER_LOGIN" then
+        ADDON:ResetIngameFilter()
+        FireCallbacks(loginCallbacks)
+    elseif event == "NEW_MOUNT_ADDED" then
+        ADDON.Api:UpdateIndex()
+    end
 end)
 
 EventRegistry:RegisterCallback("MountJournal.OnShow", function()

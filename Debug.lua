@@ -38,7 +38,7 @@ local function runFilterTest(testName)
     end
     for _, mountId in ipairs(ADDON:FilterMounts()) do
         local name, spellID, _, _, _, sourceType = C_MountJournal.GetMountInfoByID(mountId)
-        print("No ".. testName .." info for mount: " .. name .. " (" .. spellID .. ", " .. mountId .. ", " .. sourceType .. ") ")
+        print("No " .. testName .. " info for mount: " .. name .. " (" .. spellID .. ", " .. mountId .. ", " .. sourceType .. ") ")
     end
 end
 
@@ -46,7 +46,7 @@ local function checkDBForOldMountIds(index)
     for mountId, _ in pairs(ADDON.DB[index]) do
         local name = C_MountJournal.GetMountInfoByID(mountId)
         if not name then
-            print(index..":", "old entry for mount: " .. mountId)
+            print(index .. ":", "old entry for mount: " .. mountId)
         end
     end
 end
@@ -79,22 +79,36 @@ local function testDatabase()
 end
 
 local taintedList = {}
+local function checkTaintedTable(tbl, parentPath, taintedList)
+    for key, val in pairs(tbl) do
+        if type(key) == "number" or (type(key) == "string" and not key:match("MJE_")) then
+            local isSecure, taintedBy = issecurevariable(tbl, key)
+            if not isSecure and taintedList[key] ~= true then
+                print(key .. " got tainted within " .. parentPath .. " by: " .. taintedBy)
+                taintedList[key] = true
+            elseif isSecure and taintedList[key] == true then
+                print(key .. " is not tainted within " .. parentPath .. " anymore")
+                taintedList[key] = nil
+            end
+
+            if taintedList[key] ~= true and type(val) == "table" and key ~= "owningScene" and key ~= "parent" and key ~= "ModelScene" and key ~= "shoppingTooltips" then
+                if taintedList[key] == nil then
+                    taintedList[key] = {}
+                end
+                taintedList[key] = checkTaintedTable(val, parentPath .. "." .. key, taintedList[key])
+            end
+        end
+    end
+
+    return taintedList
+end
 local function checkForTaint()
     local isSecure, taintedBy = issecurevariable("MountJournal")
     if not isSecure and not taintedList["MountJournal"] then
         print("MountJournal got tainted by: " .. taintedBy)
         taintedList["MountJournal"] = true
     end
-    for key, _ in pairs(MountJournal) do
-        isSecure, taintedBy = issecurevariable(MountJournal, key)
-        if not isSecure and not taintedList[key] and not key:match("MJE_") then
-            print(key .. " got tainted within MountJournal by: " .. taintedBy)
-            taintedList[key] = true
-        elseif isSecure and taintedList[key] then
-            print(key .. " is not tainted within MountJournal anymore")
-            taintedList[key] = nil
-        end
-    end
+    taintedList = checkTaintedTable(MountJournal, "MountJournal", taintedList)
 end
 
 ADDON:RegisterLoadUICallback(function()
