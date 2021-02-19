@@ -1,6 +1,11 @@
+### Todos:
+still tainting:
+  - with unloaded collections: learn a mount and click the alert: MountJournal.ListScrollFrame.offset is tainted
+
 
 ### Next
-- automatic favor new mounts 
+- automatic favor new mounts
+- special summon animation
 - switch through mount variation (eg. High Priest's Lightsworn Seeker: C_MountJournal.GetMountAllCreatureDisplayInfoByID(861))
 
 ### More Ideas:

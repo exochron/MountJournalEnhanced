@@ -91,7 +91,7 @@ local function checkTaintedTable(tbl, parentPath, taintedList)
                 taintedList[key] = nil
             end
 
-            if taintedList[key] ~= true and type(val) == "table" and key ~= "owningScene" and key ~= "parent" and key ~= "ModelScene" and key ~= "shoppingTooltips" then
+            if taintedList[key] ~= true and type(val) == "table" and key ~= "parent" and key ~= "ModelScene" and key ~= "tooltipFrame" then
                 if taintedList[key] == nil then
                     taintedList[key] = {}
                 end

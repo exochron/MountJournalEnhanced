@@ -230,7 +230,7 @@ end
 
 ADDON:RegisterLoadUICallback(function()
     MountJournal.ListScrollFrame:Hide()
-    MountJournal.MJE_ListScrollFrame = CreateFrame("ScrollFrame", "MJE_ListScrollFrame", MountJournal, "MJE_ListScrollFrameTemplate")
+    MountJournal.MJE_ListScrollFrame = CreateFrame("ScrollFrame", "MountJournalEnhancedListScrollFrame", MountJournal, "MJE_ListScrollFrameTemplate")
     MountJournal.MJE_ListScrollFrame.scrollBar.doNotHide = true
     MountJournal.MJE_ListScrollFrame.update = ADDON.UI.UpdateMountList
 
