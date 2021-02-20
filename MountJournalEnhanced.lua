@@ -59,16 +59,20 @@ frame:SetScript("OnEvent", function(self, event, arg1)
     end
 end)
 
-EventRegistry:RegisterCallback("MountJournal.OnShow", function()
-    -- MountJournal gets always initially shown before switching to the actual tab.
-    if CollectionsJournal.selectedTab == 1 then
-        EventRegistry:UnregisterCallback("MountJournal.OnShow", ADDON_NAME .. ".init")
-        LoadUI()
-        ADDON.initialized = true
-        FireCallbacks(loadUICallbacks)
+hooksecurefunc(EventRegistry, "TriggerEvent", function(self, event)
+    if event == "MountJournal.OnShow" then
+        -- MountJournal gets always initially shown before switching to the actual tab.
+        if CollectionsJournal.selectedTab == 1 and not ADDON.initialized then
+            LoadUI()
+            ADDON.initialized = true
+            FireCallbacks(loadUICallbacks)
 
-        if ADDON.Api:GetSelected() == nil then
-            ADDON.Api:SetSelected(select(12, ADDON.Api:GetDisplayedMountInfo(1)))
+            if ADDON.Api:GetSelected() == nil then
+                ADDON.Api:SetSelected(select(12, ADDON.Api:GetDisplayedMountInfo(1)))
+            end
         end
     end
-end, ADDON_NAME .. ".init")
+end)
+-- Why not to use EventRegistry:RegisterCallback() :
+-- Every third party Handler will introduce taint in the subsequent process. Although the event is triggered at the end
+-- of OnShow, there can still be an automatic mount selection or something else, which will be tainted as well.

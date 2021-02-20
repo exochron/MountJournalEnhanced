@@ -7,6 +7,7 @@ still tainting:
 - automatic favor new mounts
 - special summon animation
 - switch through mount variation (eg. High Priest's Lightsworn Seeker: C_MountJournal.GetMountAllCreatureDisplayInfoByID(861))
+- open interface option from wheel menu
 
 ### More Ideas:
 - more animation control in display (start/pause, movements, with sound effects)

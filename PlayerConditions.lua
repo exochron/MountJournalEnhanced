@@ -35,7 +35,7 @@ function ADDON.playerIsClass(class)
 end
 
 local playerRace
--- see https://wow.gamepedia.com/API_UnitRace for all rece names
+-- see https://wow.gamepedia.com/API_UnitRace for all race names
 function ADDON.playerIsRace(race)
     if playerRace == nil then
         playerRace = select(2, UnitRace("player"))
