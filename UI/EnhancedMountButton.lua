@@ -1,6 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
-ADDON.Events:RegisterCallback("loadUI", function()
+ADDON:RegisterLoadUICallback(function()
     MountJournal.MountButton:SetScript("OnClick", function()
         ADDON.Api:UseMount(ADDON.Api:GetSelected())
     end)
@@ -26,4 +26,4 @@ ADDON.Events:RegisterCallback("loadUI", function()
         end
         GameTooltip:Show();
     end)
-end, "enhanced.mountbutton")
+end)

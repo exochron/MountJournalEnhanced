@@ -60,7 +60,7 @@ local function generateText(mountId)
     return text
 end
 
-ADDON.Events:RegisterCallback("loadUI", function()
+ADDON:RegisterLoadUICallback(function()
     local statsText = setupFontString()
 
     local callback = function()
@@ -74,4 +74,4 @@ ADDON.Events:RegisterCallback("loadUI", function()
         end
     end
     EventRegistry:RegisterCallback("MountJournal.OnUpdateMountDisplay", callback, ADDON_NAME .. 'DisplayStatistics')
-end, "display.statistics")
+end)

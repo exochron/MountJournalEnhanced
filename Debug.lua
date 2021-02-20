@@ -111,11 +111,11 @@ local function checkForTaint()
     taintedList = checkTaintedTable(MountJournal, "MountJournal", taintedList)
 end
 
-ADDON.Events:RegisterCallback("loadUI", function()
+ADDON:RegisterLoadUICallback(function()
     if ADDON.settings.ui.debugMode then
         testDatabase()
 
         checkForTaint()
         C_Timer.NewTicker(1, checkForTaint)
     end
-end, "debug")
+end)

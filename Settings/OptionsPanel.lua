@@ -50,7 +50,7 @@ local function BuildFrame(uiLabels, behaviourLabels)
     return frame
 end
 
-ADDON.Events:RegisterCallback("login", function()
+ADDON:RegisterLoginCallback(function()
     local uiLabels, behaviourLabels = ADDON:GetSettingLabels()
 
     local group = BuildFrame(uiLabels, behaviourLabels)
@@ -84,4 +84,4 @@ ADDON.Events:RegisterCallback("login", function()
     end)
     group:SetCallback("default", ADDON.ResetSettings)
     InterfaceOptions_AddCategory(group.frame)
-end, "settings.panel")
+end)

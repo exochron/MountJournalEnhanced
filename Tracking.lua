@@ -84,7 +84,7 @@ frame:SetScript("OnEvent", function(self, event, arg1)
     end
 end)
 
-ADDON.Events:RegisterCallback("login", checkMountEvent, "tracking")
+ADDON:RegisterLoginCallback(checkMountEvent)
 ADDON:RegisterBehaviourSetting('trackUsageStats', true, ADDON.L.SETTING_TRACK_USAGE, function(flag)
     MJEGlobalSettings.trackUsageStats = flag
 end)
@@ -121,4 +121,4 @@ local function parseLearnedDateFromAchievements()
         end
     end
 end
-ADDON.Events:RegisterCallback("loadUI", parseLearnedDateFromAchievements, "tracking")
+ADDON:RegisterLoadUICallback(parseLearnedDateFromAchievements)

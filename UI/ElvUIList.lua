@@ -169,11 +169,11 @@ local function JournalScrollButtons(frame)
 end
 --endregion
 
-ADDON.Events:RegisterCallback("loadUI", function()
+ADDON:RegisterLoadUICallback(function()
     if doCheckOverhaul and ElvUI then
         E, L, V, P, G = unpack(ElvUI)
         local S = E:GetModule('Skins')
         S:HandleScrollBar(MountJournal.MJE_ListScrollFrame.scrollBar)
         JournalScrollButtons(MountJournal.MJE_ListScrollFrame)
     end
-end, "ElvUI.list")
+end)

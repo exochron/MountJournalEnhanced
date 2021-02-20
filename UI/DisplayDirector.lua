@@ -201,8 +201,8 @@ local function BuildCameraPanel()
     end)
 end
 
-ADDON.Events:RegisterCallback("loadUI", function()
+ADDON:RegisterLoadUICallback(function()
     HideOriginalElements()
     SetupModelActor()
     BuildCameraPanel()
-end, "display.director")
+end)

@@ -23,4 +23,6 @@ local function fixInitialRiderBlend()
     end
 end
 
-ADDON.Events:RegisterCallback("loadUI", fixInitialRiderBlend, "UIfixes")
+ADDON:RegisterLoadUICallback(function()
+    fixInitialRiderBlend()
+end)

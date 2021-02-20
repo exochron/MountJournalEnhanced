@@ -34,6 +34,7 @@ Sort.lua
 MountJournalEnhanced.lua
 Api.lua
 Settings\Handling.lua
+Settings\Migration.lua
 Settings\Settings.lua
 Settings\OptionsPanel.lua
 Favorites.lua

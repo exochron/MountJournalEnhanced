@@ -147,7 +147,7 @@ local function setupHooks()
     end)
 end
 
-ADDON.Events:RegisterCallback("login", function()
+ADDON:RegisterLoginCallback(function()
     if MountJournal then
         setupHooks()
     else
@@ -159,4 +159,4 @@ ADDON.Events:RegisterCallback("login", function()
             end
         end)
     end
-end, "api")
+end)

@@ -144,9 +144,9 @@ ADDON:RegisterUISetting('showPersonalCount', true, ADDON.L.SETTING_MOUNT_COUNT, 
     end
 end)
 
-ADDON.Events:RegisterCallback("loadUI", function()
+ADDON:RegisterLoadUICallback(function()
     ADDON:ApplySetting('showPersonalCount', ADDON.settings.ui.showPersonalCount)
-end, "count")
+end)
 
 ADDON.UI:RegisterUIOverhaulCallback(function(self)
     if self == MountJournal.MountCount then

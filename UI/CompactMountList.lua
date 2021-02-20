@@ -90,6 +90,6 @@ ADDON:RegisterUISetting('compactMountList', true, ADDON.L.SETTING_COMPACT_LIST, 
     end
 end)
 
-ADDON.Events:RegisterCallback("loadUI", function()
+ADDON:RegisterLoadUICallback(function()
     ADDON:ApplySetting('compactMountList', ADDON.settings.ui.compactMountList)
-end, "compactlist")
+end)

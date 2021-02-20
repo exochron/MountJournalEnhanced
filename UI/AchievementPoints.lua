@@ -96,6 +96,6 @@ ADDON:RegisterUISetting('showAchievementPoints', true, ADDON.L.SETTING_ACHIEVEME
     end
 end)
 
-ADDON.Events:RegisterCallback("loadUI", function()
+ADDON:RegisterLoadUICallback(function()
     ADDON:ApplySetting('showAchievementPoints', ADDON.settings.ui.showAchievementPoints)
-end, "achievements")
+end)

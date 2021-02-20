@@ -164,7 +164,7 @@ end
 ADDON:RegisterBehaviourSetting('favoritePerChar', false, L.SETTING_FAVORITE_PER_CHAR, CollectFavoredMounts)
 
 -- resetting personal favored mounts
-ADDON.Events:RegisterCallback("login", function()
+ADDON:RegisterLoginCallback(function()
     if ADDON.settings.favoritePerChar then
         FavorMounts(ADDON.settings.favoredMounts, function()
             -- not quite performant but so far best solution
@@ -173,6 +173,6 @@ ADDON.Events:RegisterCallback("login", function()
     else
         hooksecurefunc(C_MountJournal, "SetIsFavorite", CollectFavoredMounts)
     end
-end, "favorites")
+end)
 
-ADDON.Events:RegisterCallback("loadUI", BuildStarButton, "favorites")
+ADDON:RegisterLoadUICallback(BuildStarButton)
