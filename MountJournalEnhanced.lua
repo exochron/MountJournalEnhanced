@@ -54,6 +54,7 @@ frame:SetScript("OnEvent", function(self, event, arg1)
     if event == "PLAYER_LOGIN" then
         ADDON:ResetIngameFilter()
         FireCallbacks(loginCallbacks)
+        loginCallbacks = nil
     elseif event == "NEW_MOUNT_ADDED" then
         ADDON.Api:UpdateIndex()
     end
@@ -66,6 +67,7 @@ hooksecurefunc(EventRegistry, "TriggerEvent", function(self, event)
             LoadUI()
             ADDON.initialized = true
             FireCallbacks(loadUICallbacks)
+            loadUICallbacks = nil
 
             if ADDON.Api:GetSelected() == nil then
                 ADDON.Api:SetSelected(select(12, ADDON.Api:GetDisplayedMountInfo(1)))
