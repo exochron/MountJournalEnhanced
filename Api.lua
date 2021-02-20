@@ -104,7 +104,7 @@ function ADDON.Api:UpdateIndex(calledFromEvent)
 
     if true ~= calledFromEvent or nil == orderedMountIds or #list ~= #orderedMountIds then
         orderedMountIds = ADDON:SortMounts(list)
-        EventRegistry:TriggerEvent("MountJournal.OnFilterUpdate")
+        ADDON.Events:TriggerEvent("OnFilterUpdate")
         --ADDON.Debug:ProfileFunction("sort", ADDON.SortMounts, true)
     end
 end

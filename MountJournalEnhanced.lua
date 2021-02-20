@@ -1,5 +1,9 @@
 local ADDON_NAME, ADDON = ...
 
+ADDON.Events = CreateFromMixins(CallbackRegistryMixin)
+ADDON.Events:OnLoad()
+ADDON.Events:SetUndefinedEventsAllowed(true)
+
 --region callbacks
 local loginCallbacks, loadUICallbacks = {}, {}
 function ADDON:RegisterLoginCallback(func)

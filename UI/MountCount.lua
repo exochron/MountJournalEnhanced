@@ -104,7 +104,7 @@ local function CreateCharacterMountCount()
         end
     end
     hooksecurefunc(MountJournal.MountCount.Count, "SetText", updateTexts)
-    EventRegistry:RegisterCallback("MountJournal.OnFilterUpdate", updateTexts, ADDON_NAME .. 'MountCount')
+    ADDON.Events:RegisterCallback("OnFilterUpdate", updateTexts, ADDON_NAME .. 'MountCount')
     updateTexts()
 
     return frame

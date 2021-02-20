@@ -73,7 +73,7 @@ function ADDON.UI:UpdateMountDisplay(forceSceneChange)
         MountJournal.MountButton:SetEnabled(false);
     end
 
-    EventRegistry:TriggerEvent("MountJournal.OnUpdateMountDisplay");
+    ADDON.Events:TriggerEvent("OnUpdateMountDisplay")
 end
 
 ADDON:RegisterLoadUICallback(function()

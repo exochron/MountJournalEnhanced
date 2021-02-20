@@ -73,5 +73,5 @@ ADDON:RegisterLoadUICallback(function()
             statsText:SetText(text)
         end
     end
-    EventRegistry:RegisterCallback("MountJournal.OnUpdateMountDisplay", callback, ADDON_NAME .. 'DisplayStatistics')
+    ADDON.Events:RegisterCallback("OnUpdateMountDisplay", callback, ADDON_NAME .. 'DisplayStatistics')
 end)
