@@ -42,4 +42,4 @@ local function CreateShopButton()
     EventRegistry:RegisterCallback("MountJournal.OnUpdateMountDisplay", ToggleShopButton, ADDON_NAME .. 'ShopButton')
 end
 
-ADDON:RegisterLoadUICallback(CreateShopButton)
+ADDON.Events:RegisterCallback("loadUI", CreateShopButton, "shop")

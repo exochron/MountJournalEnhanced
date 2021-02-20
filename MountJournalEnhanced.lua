@@ -1,19 +1,9 @@
 local ADDON_NAME, ADDON = ...
 
---region callbacks
-local loginCallbacks, loadUICallbacks = {}, {}
-function ADDON:RegisterLoginCallback(func)
-    table.insert(loginCallbacks, func)
-end
-function ADDON:RegisterLoadUICallback(func)
-    table.insert(loadUICallbacks, func)
-end
-local function FireCallbacks(callbacks)
-    for _, callback in pairs(callbacks) do
-        callback()
-    end
-end
---endregion
+-- see: https://www.townlong-yak.com/framexml/ptr/CallbackRegistry.lua
+ADDON.Events = CreateFromMixins(CallbackRegistryMixin)
+ADDON.Events:OnLoad()
+ADDON.Events:SetUndefinedEventsAllowed(true)
 
 local function LoadUI()
     ADDON.Api:UpdateIndex()
@@ -53,7 +43,7 @@ frame:RegisterEvent("NEW_MOUNT_ADDED")
 frame:SetScript("OnEvent", function(self, event, arg1)
     if event == "PLAYER_LOGIN" then
         ADDON:ResetIngameFilter()
-        FireCallbacks(loginCallbacks)
+        ADDON.Events:TriggerEvent("login")
     elseif event == "NEW_MOUNT_ADDED" then
         ADDON.Api:UpdateIndex()
     end
@@ -65,7 +55,7 @@ hooksecurefunc(EventRegistry, "TriggerEvent", function(self, event)
         if CollectionsJournal.selectedTab == 1 and not ADDON.initialized then
             LoadUI()
             ADDON.initialized = true
-            FireCallbacks(loadUICallbacks)
+            ADDON.Events:TriggerEvent("loadUI")
 
             if ADDON.Api:GetSelected() == nil then
                 ADDON.Api:SetSelected(select(12, ADDON.Api:GetDisplayedMountInfo(1)))

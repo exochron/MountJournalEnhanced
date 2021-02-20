@@ -33,7 +33,7 @@ local function SetupCamera()
     end
 end
 
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("loadUI", function()
     SetupCamera()
     hooksecurefunc(MountJournal.MountDisplay.ModelScene, "SetActiveCamera", SetupCamera)
-end)
+end, "display.camera")

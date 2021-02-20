@@ -34,6 +34,6 @@ ADDON:RegisterUISetting('moveEquipmentSlot', true, ADDON.L.SETTING_MOVE_EQUIPMEN
     end
 end)
 
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("loadUI", function()
     ADDON:ApplySetting('moveEquipmentSlot', ADDON.settings.ui.moveEquipmentSlot)
-end)
+end, "equipment")

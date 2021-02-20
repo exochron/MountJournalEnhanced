@@ -90,7 +90,7 @@ local function OnClick(sender, anchor, button)
     end
 end
 
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("loadUI", function()
     local menu = CreateFrame("Frame", ADDON_NAME .. "MountOptionsMenu", MountJournal, "UIDropDownMenuTemplate")
     UIDropDownMenu_Initialize(menu, InitializeMountOptionsMenu, "MENU")
 
@@ -102,4 +102,4 @@ ADDON:RegisterLoadUICallback(function()
             OnClick(sender:GetParent(), sender, mouseButton)
         end)
     end
-end)
+end, "list-ddm")

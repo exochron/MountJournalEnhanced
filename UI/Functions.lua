@@ -79,6 +79,6 @@ local function hookStripTextures()
         end
     end
 end
-ADDON:RegisterLoginCallback(hookStripTextures)
+ADDON.Events:RegisterCallback("login", hookStripTextures, "ElvUI")
 
 --endregion

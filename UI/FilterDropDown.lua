@@ -362,7 +362,7 @@ local function InitializeFilterDropDown(filterMenu, level)
     end
 end
 
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("loadUI", function()
     local menu = CreateFrame("Frame", ADDON_NAME .. "FilterMenu", MountJournalFilterButton, "UIDropDownMenuTemplate")
     UIDropDownMenu_Initialize(menu, InitializeFilterDropDown, "MENU")
 
@@ -371,4 +371,4 @@ ADDON:RegisterLoadUICallback(function()
         PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
         ToggleDropDownMenu(1, nil, menu, sender, 74, 15)
     end)
-end)
+end, "filter-ddm")

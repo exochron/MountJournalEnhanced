@@ -38,7 +38,7 @@ end
 
 ADDON:RegisterUISetting('enableCursorKeys', true, ADDON.L.SETTING_CURSOR_KEYS)
 
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("loadUI", function()
     local scrollFrame = MountJournal.MJE_ListScrollFrame
 
     -- I had issues handling the input directly at the MountJournal frame. So I'm using ListScrollFrame instead.
@@ -74,4 +74,4 @@ ADDON:RegisterLoadUICallback(function()
             scrollFrame.scrollBar:SetValue(0)
         end
     end)
-end)
+end, "hotkeys")
