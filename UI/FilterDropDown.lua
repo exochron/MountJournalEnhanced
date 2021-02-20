@@ -363,12 +363,17 @@ local function InitializeFilterDropDown(filterMenu, level)
 end
 
 ADDON:RegisterLoadUICallback(function()
-    local menu = CreateFrame("Frame", ADDON_NAME .. "FilterMenu", MountJournalFilterButton, "UIDropDownMenuTemplate")
-    UIDropDownMenu_Initialize(menu, InitializeFilterDropDown, "MENU")
+    local menu
 
     MountJournalFilterButton:SetScript("OnMouseDown", function(sender, button)
         UIMenuButtonStretchMixin.OnMouseDown(sender, button);
         PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+
+        if menu == nil then
+            menu = CreateFrame("Frame", ADDON_NAME .. "FilterMenu", MountJournalFilterButton, "UIDropDownMenuTemplate")
+            UIDropDownMenu_Initialize(menu, InitializeFilterDropDown, "MENU")
+        end
+
         ToggleDropDownMenu(1, nil, menu, sender, 74, 15)
     end)
 end)
