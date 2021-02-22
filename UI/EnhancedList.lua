@@ -228,8 +228,9 @@ function ADDON.UI:ScrollToSelected()
     end
 end
 
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("preloadUI", function()
     MountJournal.ListScrollFrame:Hide()
+    ADDON.Events:RegisterCallback("checkTaint", ADDON.Debug.CheckListTaint, "after hide")
     MountJournal.MJE_ListScrollFrame = CreateFrame("ScrollFrame", "MountJournalEnhancedListScrollFrame", MountJournal, "MJE_ListScrollFrameTemplate")
     MountJournal.MJE_ListScrollFrame.scrollBar.doNotHide = true
     MountJournal.MJE_ListScrollFrame.update = ADDON.UI.UpdateMountList
@@ -237,4 +238,6 @@ ADDON:RegisterLoadUICallback(function()
     SetupButtons(MountJournal.MJE_ListScrollFrame)
 
     hooksecurefunc("MountJournal_UpdateMountList", ADDON.UI.UpdateMountList)
-end)
+
+    ADDON.UI:StyleListWithElvUI(MountJournal.MJE_ListScrollFrame)
+end, "enhanced list")

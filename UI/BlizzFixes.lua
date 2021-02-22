@@ -23,6 +23,6 @@ local function fixInitialRiderBlend()
     end
 end
 
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("loadUI", function()
     fixInitialRiderBlend()
-end)
+end, "blizz plz fix")

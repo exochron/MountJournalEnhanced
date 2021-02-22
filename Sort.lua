@@ -119,7 +119,7 @@ local TrackingIndex = {
 }
 
 function ADDON:SortMounts(ids)
-    local sortBy = ADDON.settings.sort.by
+    local sortBy = ADDON.settings.sort.by or 'name'
 
     local fanfareCount = C_MountJournal.GetNumMountsNeedingFanfare()
     local collectedData = {}

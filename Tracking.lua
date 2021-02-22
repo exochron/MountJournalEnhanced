@@ -74,17 +74,16 @@ end
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_MOUNT_DISPLAY_CHANGED") -- player mounts or dismounts
-frame:RegisterEvent("NEW_MOUNT_ADDED")
-frame:SetScript("OnEvent", function(self, event, arg1)
-    if event == 'PLAYER_MOUNT_DISPLAY_CHANGED' then
-        checkMountEvent()
-    elseif event == 'NEW_MOUNT_ADDED' and arg1 and ADDON.settings.trackUsageStats then
-        local blob = initData(arg1)
+frame:SetScript("OnEvent", checkMountEvent)
+
+ADDON.Events:RegisterCallback("OnLogin", checkMountEvent, "tracking")
+ADDON.Events:RegisterCallback("OnNewMount", function(mountId)
+    if mountId and ADDON.settings.trackUsageStats then
+        local blob = initData(mountId)
         blob[INDEX_LEARNED_TIME] = GetServerTime()
     end
-end)
+end, "tracking")
 
-ADDON:RegisterLoginCallback(checkMountEvent)
 ADDON:RegisterBehaviourSetting('trackUsageStats', true, ADDON.L.SETTING_TRACK_USAGE, function(flag)
     MJEGlobalSettings.trackUsageStats = flag
 end)
@@ -121,4 +120,4 @@ local function parseLearnedDateFromAchievements()
         end
     end
 end
-ADDON:RegisterLoadUICallback(parseLearnedDateFromAchievements)
+ADDON.Events:RegisterCallback("preloadUI", BuildStarButton, "tracking")

@@ -65,7 +65,7 @@ local function BuildWheelButton()
     return button
 end
 
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("loadUI", function()
     local button = BuildWheelButton()
 
     local menu
@@ -78,7 +78,7 @@ ADDON:RegisterLoadUICallback(function()
 
         ToggleDropDownMenu(1, nil, menu, button, 0, 0)
     end)
-end)
+end, "settings wheel")
 
 ADDON.UI:RegisterUIOverhaulCallback(function(frame)
     if frame == CollectionsJournal then

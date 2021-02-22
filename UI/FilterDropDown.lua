@@ -362,7 +362,7 @@ local function InitializeFilterDropDown(filterMenu, level)
     end
 end
 
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("loadUI", function()
     local menu
 
     MountJournalFilterButton:SetScript("OnMouseDown", function(sender, button)
@@ -376,4 +376,4 @@ ADDON:RegisterLoadUICallback(function()
 
         ToggleDropDownMenu(1, nil, menu, sender, 74, 15)
     end)
-end)
+end, "filter dropdown")

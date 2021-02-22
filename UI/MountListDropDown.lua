@@ -83,7 +83,7 @@ local function InitializeMountOptionsMenu(sender, level)
     UIDropDownMenu_AddButton({text = CANCEL, notCheckable = true,}, level)
 end
 
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("loadUI", function()
     local menu
     local OnClick = function(sender, anchor, button)
         if button ~= "LeftButton" then
@@ -105,4 +105,4 @@ ADDON:RegisterLoadUICallback(function()
             OnClick(sender:GetParent(), sender, mouseButton)
         end)
     end
-end)
+end, "mount dropdown")

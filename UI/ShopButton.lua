@@ -42,4 +42,4 @@ local function CreateShopButton()
     ADDON.Events:RegisterCallback("OnUpdateMountDisplay", ToggleShopButton, ADDON_NAME .. 'ShopButton')
 end
 
-ADDON:RegisterLoadUICallback(CreateShopButton)
+ADDON.Events:RegisterCallback("loadUI", CreateShopButton, "shop")

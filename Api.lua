@@ -111,11 +111,13 @@ end
 
 local selectedMount
 function ADDON.Api:SetSelected(selectedMountID)
-    selectedMount = selectedMountID
-    --MountJournal_HideMountDropdown();
-    ADDON.UI:UpdateMountList()
-    ADDON.UI:UpdateMountDisplay()
-    ADDON.UI:ScrollToSelected()
+    if selectedMount ~= selectedMountID then
+        selectedMount = selectedMountID
+        --MountJournal_HideMountDropdown();
+        ADDON.UI:UpdateMountList()
+        ADDON.UI:UpdateMountDisplay()
+        ADDON.UI:ScrollToSelected()
+    end
 end
 function ADDON.Api:GetSelected()
     return selectedMount
@@ -142,12 +144,12 @@ function ADDON.Api:UseMount(mountID)
 end
 
 local function setupHooks()
-    hooksecurefunc("MountJournal_SetSelected", function(mountId, spellId)
+    hooksecurefunc("MountJournal_SelectByMountID", function(mountId)
         ADDON.Api:SetSelected(mountId)
     end)
 end
 
-ADDON:RegisterLoginCallback(function()
+ADDON.Events:RegisterCallback("OnLogin", function()
     if MountJournal then
         setupHooks()
     else
@@ -155,8 +157,9 @@ ADDON:RegisterLoginCallback(function()
         frame:RegisterEvent("ADDON_LOADED")
         frame:SetScript("OnEvent", function(self, event, addon)
             if MountJournal then
+                frame:UnregisterAllEvents()
                 setupHooks()
             end
         end)
     end
-end)
+end, "api hooks")

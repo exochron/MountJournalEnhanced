@@ -76,7 +76,7 @@ function ADDON.UI:UpdateMountDisplay(forceSceneChange)
     ADDON.Events:TriggerEvent("OnUpdateMountDisplay")
 end
 
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("preloadUI", function()
     hooksecurefunc("MountJournal_UpdateMountDisplay", ADDON.UI.UpdateMountDisplay)
 
     -- overwrite default handler
@@ -87,4 +87,4 @@ ADDON:RegisterLoadUICallback(function()
             ADDON.Api:UseMount(ADDON.Api:GetSelected())
         end
     end)
-end)
+end, "enhanced display")
