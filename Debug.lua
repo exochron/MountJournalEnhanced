@@ -121,7 +121,7 @@ ADDON.Events:RegisterCallback("postloadUI", function()
 end, "debug")
 
 function ADDON.Debug:CheckListTaint(process)
-    if MountJournal and MountJournal.ListScrollFrame then
+    if MountJournal and MountJournal.ListScrollFrame and ADDON.settings.ui.debugMode then
 
         local isSecure, taintedBy = issecurevariable(MountJournal.ListScrollFrame, "offset")
         if not isSecure and taintedList["ListScrollFrame"]["offset"] ~= true then
@@ -142,20 +142,18 @@ function ADDON.Debug:CheckListTaint(process)
         end
     end
 end
-hooksecurefunc("HybridScrollFrame_GetOffset", function(list)
-    if MountJournal and list == MountJournal.ListScrollFrame then
-        ADDON.Debug:CheckListTaint("HybridScrollFrame_GetOffset")
-    end
-end)
-hooksecurefunc("HybridScrollFrame_SetOffset", function(list)
-    if MountJournal and list == MountJournal.ListScrollFrame then
-        ADDON.Debug:CheckListTaint("HybridScrollFrame_SetOffset")
-    end
-end)
-hooksecurefunc("HybridScrollFrame_Update", function(list)
-    if MountJournal and list == MountJournal.ListScrollFrame then
-        ADDON.Debug:CheckListTaint("HybridScrollFrame_Update")
-    end
-end)
-
-ADDON.Events:RegisterCallback("checkTaint", ADDON.Debug.CheckListTaint, "debug")
+--hooksecurefunc("HybridScrollFrame_GetOffset", function(list)
+--    if MountJournal and list == MountJournal.ListScrollFrame then
+--        ADDON.Debug:CheckListTaint("HybridScrollFrame_GetOffset")
+--    end
+--end)
+--hooksecurefunc("HybridScrollFrame_SetOffset", function(list)
+--    if MountJournal and list == MountJournal.ListScrollFrame then
+--        ADDON.Debug:CheckListTaint("HybridScrollFrame_SetOffset")
+--    end
+--end)
+--hooksecurefunc("HybridScrollFrame_Update", function(list)
+--    if MountJournal and list == MountJournal.ListScrollFrame then
+--        ADDON.Debug:CheckListTaint("HybridScrollFrame_Update")
+--    end
+--end)

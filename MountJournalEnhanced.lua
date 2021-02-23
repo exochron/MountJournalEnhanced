@@ -5,10 +5,10 @@ ADDON.Events = CreateFromMixins(CallbackRegistryMixin)
 ADDON.Events:OnLoad()
 ADDON.Events:SetUndefinedEventsAllowed(true)
 
-local function LoadUI()
+local function InitUI()
     ADDON.Api:UpdateIndex()
 
-    local frame = CreateFrame("frame");
+    local frame = CreateFrame("frame")
     frame:RegisterEvent("ZONE_CHANGED")
     frame:RegisterEvent("ZONE_CHANGED_INDOORS")
     frame:RegisterEvent("MOUNT_JOURNAL_USABILITY_CHANGED")
@@ -43,40 +43,41 @@ frame:RegisterEvent("NEW_MOUNT_ADDED")
 frame:SetScript("OnEvent", function(self, event, ...)
     if event == "PLAYER_LOGIN" then
         ADDON:ResetIngameFilter()
-        ADDON.Events:TriggerEvent("checkTaint", "pre-init")
         ADDON.Events:TriggerEvent("OnInit")
-        ADDON.Events:TriggerEvent("checkTaint", "pre-login")
+        --ADDON.Debug:CheckListTaint("pre-login")
         ADDON.Events:TriggerEvent("OnLogin")
-        ADDON.Events:TriggerEvent("checkTaint", "post-login")
+        --ADDON.Debug:CheckListTaint("post-login")
+        ADDON.Events:UnregisterAllCallbacksByEvent("OnInit")
+        ADDON.Events:UnregisterAllCallbacksByEvent("OnLogin")
     elseif event == "NEW_MOUNT_ADDED" then
         ADDON.Api:UpdateIndex()
-        ADDON.Events:TriggerEvent("checkTaint", "pre-newMount")
+        --ADDON.Debug:CheckListTaint("pre-newMount")
         ADDON.Events:TriggerEvent("OnNewMount", ...)
-        ADDON.Events:TriggerEvent("checkTaint", "post-newMount")
+        --ADDON.Debug:CheckListTaint("post-newMount")
     end
 end)
 
-hooksecurefunc(EventRegistry, "TriggerEvent", function(self, event)
-    if event == "MountJournal.OnShow" then
-        -- MountJournal gets always initially shown before switching to the actual tab.
-        if CollectionsJournal.selectedTab == 1 and not ADDON.initialized then
-            LoadUI()
-            ADDON.initialized = true
+EventRegistry:RegisterCallback("MountJournal.OnShow", function()
+    -- MountJournal gets always initially shown before switching to the actual tab.
+    if CollectionsJournal.selectedTab == 1 and not ADDON.initialized then
+        EventRegistry:UnregisterCallback("MountJournal.OnShow", ADDON_NAME)
+        InitUI()
+        ADDON.initialized = true
 
-            ADDON.Events:TriggerEvent("checkTaint", "pre preloadUI")
-            ADDON.Events:TriggerEvent("preloadUI")
-            ADDON.Events:TriggerEvent("checkTaint", "pre loadUI")
-            ADDON.Events:TriggerEvent("loadUI")
-            ADDON.Events:TriggerEvent("checkTaint", "pre postloadUI")
-            ADDON.Events:TriggerEvent("postloadUI")
-            ADDON.Events:TriggerEvent("checkTaint", "post postloadUI")
+        --ADDON.Debug:CheckListTaint("pre preloadUI")
+        ADDON.Events:TriggerEvent("preloadUI")
+        --ADDON.Debug:CheckListTaint("pre loadUI")
+        ADDON.Events:TriggerEvent("loadUI")
+        --ADDON.Debug:CheckListTaint("pre postloadUI")
+        ADDON.Events:TriggerEvent("postloadUI")
+        --ADDON.Debug:CheckListTaint("post postloadUI")
 
-            if ADDON.Api:GetSelected() == nil then
-                ADDON.Api:SetSelected(select(12, ADDON.Api:GetDisplayedMountInfo(1)))
-            end
+        ADDON.Events:UnregisterAllCallbacksByEvent("preloadUI")
+        ADDON.Events:UnregisterAllCallbacksByEvent("loadUI")
+        ADDON.Events:UnregisterAllCallbacksByEvent("postloadUI")
+
+        if ADDON.Api:GetSelected() == nil then
+            ADDON.Api:SetSelected(select(12, ADDON.Api:GetDisplayedMountInfo(1)))
         end
     end
-end)
--- Why not to use EventRegistry:RegisterCallback() :
--- Every third party Handler will introduce taint in the subsequent process. Although the event is triggered at the end
--- of OnShow, there can still be an automatic mount selection or something else, which will be tainted as well.
+end, ADDON_NAME)
