@@ -1,7 +1,9 @@
 local ADDON_NAME, ADDON = ...
 
 ADDON:RegisterUISetting('showUsageStatistics', true, ADDON.L.SETTING_SHOW_USAGE, function()
-    ADDON.UI:UpdateMountDisplay()
+    if ADDON.initialized then
+        ADDON.UI:UpdateMountDisplay()
+    end
 end)
 
 local function setupFontString()
@@ -58,7 +60,7 @@ local function generateText(mountId)
     return text
 end
 
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("loadUI", function()
     local statsText = setupFontString()
 
     local callback = function()
@@ -71,5 +73,5 @@ ADDON:RegisterLoadUICallback(function()
             statsText:SetText(text)
         end
     end
-    EventRegistry:RegisterCallback("MountJournal.OnUpdateMountDisplay", callback, ADDON_NAME .. 'DisplayStatistics')
-end)
+    ADDON.Events:RegisterCallback("OnUpdateMountDisplay", callback, ADDON_NAME .. 'DisplayStatistics')
+end, "display statistics")

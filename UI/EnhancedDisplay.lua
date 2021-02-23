@@ -5,7 +5,7 @@ local ADDON_NAME, ADDON = ...
 ---
 --- from https://www.townlong-yak.com/framexml/live/Blizzard_Collections/Blizzard_MountCollection.lua#533
 function ADDON.UI:UpdateMountDisplay(forceSceneChange)
-    if (ADDON.Api:GetSelected()) then
+    if (ADDON.initialized and ADDON.Api:GetSelected()) then
         local creatureName, spellID, icon, active, isUsable, sourceType = C_MountJournal.GetMountInfoByID(ADDON.Api:GetSelected());
         local needsFanfare = C_MountJournal.NeedsFanfare(ADDON.Api:GetSelected());
         if (MountJournal.MountDisplay.MJE_lastDisplayed ~= spellID or forceSceneChange) then
@@ -73,10 +73,10 @@ function ADDON.UI:UpdateMountDisplay(forceSceneChange)
         MountJournal.MountButton:SetEnabled(false);
     end
 
-    EventRegistry:TriggerEvent("MountJournal.OnUpdateMountDisplay");
+    ADDON.Events:TriggerEvent("OnUpdateMountDisplay")
 end
 
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("preloadUI", function()
     hooksecurefunc("MountJournal_UpdateMountDisplay", ADDON.UI.UpdateMountDisplay)
 
     -- overwrite default handler
@@ -87,4 +87,4 @@ ADDON:RegisterLoadUICallback(function()
             ADDON.Api:UseMount(ADDON.Api:GetSelected())
         end
     end)
-end)
+end, "enhanced display")

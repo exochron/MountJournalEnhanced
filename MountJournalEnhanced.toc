@@ -34,7 +34,6 @@ Sort.lua
 MountJournalEnhanced.lua
 Api.lua
 Settings\Handling.lua
-Settings\Migration.lua
 Settings\Settings.lua
 Settings\OptionsPanel.lua
 Favorites.lua
@@ -44,6 +43,8 @@ Debug.lua
 
 UI\Templates.xml
 UI\Functions.lua
+UI\ElvUIList.lua
+
 UI\EnhancedList.lua
 UI\EnhancedDisplay.lua
 UI\EnhancedMountButton.lua

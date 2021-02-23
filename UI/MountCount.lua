@@ -104,7 +104,7 @@ local function CreateCharacterMountCount()
         end
     end
     hooksecurefunc(MountJournal.MountCount.Count, "SetText", updateTexts)
-    EventRegistry:RegisterCallback("MountJournal.OnFilterUpdate", updateTexts, ADDON_NAME .. 'MountCount')
+    ADDON.Events:RegisterCallback("OnFilterUpdate", updateTexts, ADDON_NAME .. 'MountCount')
     updateTexts()
 
     return frame
@@ -113,7 +113,7 @@ end
 local frame
 
 ADDON:RegisterUISetting('showPersonalCount', true, ADDON.L.SETTING_MOUNT_COUNT, function(flag)
-    if MountJournal then
+    if ADDON.initialized then
         if not frame and flag then
             frame = CreateCharacterMountCount()
 
@@ -144,9 +144,9 @@ ADDON:RegisterUISetting('showPersonalCount', true, ADDON.L.SETTING_MOUNT_COUNT, 
     end
 end)
 
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("loadUI", function()
     ADDON:ApplySetting('showPersonalCount', ADDON.settings.ui.showPersonalCount)
-end)
+end, "mount count")
 
 ADDON.UI:RegisterUIOverhaulCallback(function(self)
     if self == MountJournal.MountCount then

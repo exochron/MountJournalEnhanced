@@ -126,7 +126,7 @@ local function CombineSettings(settings, defaultSettings)
 end
 
 -- Settings have to be loaded during PLAYER_LOGIN
-ADDON:RegisterLoginCallback(function()
+ADDON.Events:RegisterCallback("OnInit", function()
     local defaultSettings = PrepareDefaults()
     defaultFilterStates = CopyTable(defaultSettings.filter)
     defaultSortStates = CopyTable(defaultSettings.sort)
@@ -143,4 +143,4 @@ ADDON:RegisterLoginCallback(function()
     ADDON.settings.favoritePerChar = MJEPersonalSettings.favoritePerChar
     ADDON.settings.favoredMounts = MJEPersonalSettings.favoredMounts
     ADDON.settings.trackUsageStats = MJEGlobalSettings.trackUsageStats
-end)
+end, "settings init")

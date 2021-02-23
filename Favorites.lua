@@ -122,9 +122,6 @@ local function InitializeDropDown(menu, level)
 end
 
 local function BuildStarButton()
-    local menu = CreateFrame("Frame", ADDON_NAME .. "FavorMenu", MountJournal, "UIDropDownMenuTemplate")
-    UIDropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
-
     local AceGUI = LibStub("AceGUI-3.0")
 
     starButton = AceGUI:Create("Icon")
@@ -147,7 +144,14 @@ local function BuildStarButton()
     starButton:SetCallback("OnLeave", function()
         tooltip:Hide()
     end)
+
+    local menu
     starButton:SetCallback("OnClick", function()
+        if menu == nil then
+            menu = CreateFrame("Frame", ADDON_NAME .. "FavorMenu", MountJournal, "UIDropDownMenuTemplate")
+            UIDropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
+        end
+
         ToggleDropDownMenu(1, nil, menu, starButton.frame, 0, 10)
     end)
 
@@ -164,7 +168,7 @@ end
 ADDON:RegisterBehaviourSetting('favoritePerChar', false, L.SETTING_FAVORITE_PER_CHAR, CollectFavoredMounts)
 
 -- resetting personal favored mounts
-ADDON:RegisterLoginCallback(function()
+ADDON.Events:RegisterCallback("OnLogin", function()
     if ADDON.settings.favoritePerChar then
         FavorMounts(ADDON.settings.favoredMounts, function()
             -- not quite performant but so far best solution
@@ -173,6 +177,6 @@ ADDON:RegisterLoginCallback(function()
     else
         hooksecurefunc(C_MountJournal, "SetIsFavorite", CollectFavoredMounts)
     end
-end)
+end, "favorite hooks")
 
-ADDON:RegisterLoadUICallback(BuildStarButton)
+ADDON.Events:RegisterCallback("loadUI", BuildStarButton, "favorites")

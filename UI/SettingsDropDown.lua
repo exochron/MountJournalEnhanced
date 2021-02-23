@@ -65,16 +65,20 @@ local function BuildWheelButton()
     return button
 end
 
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("loadUI", function()
     local button = BuildWheelButton()
 
-    local menu = CreateFrame("Frame", ADDON_NAME .. "SettingsMenu", MountJournal, "UIDropDownMenuTemplate")
-    UIDropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
+    local menu
     button:HookScript("OnClick", function(sender)
         PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+        if menu == nil then
+            menu = CreateFrame("Frame", ADDON_NAME .. "SettingsMenu", MountJournal, "UIDropDownMenuTemplate")
+            UIDropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
+        end
+
         ToggleDropDownMenu(1, nil, menu, button, 0, 0)
     end)
-end)
+end, "settings wheel")
 
 ADDON.UI:RegisterUIOverhaulCallback(function(frame)
     if frame == CollectionsJournal then

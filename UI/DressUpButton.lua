@@ -61,6 +61,6 @@ ADDON:RegisterUISetting('previewButton', true, ADDON.L.SETTING_PREVIEW_LINK, fun
     end
 end)
 
-ADDON:RegisterLoginCallback(function()
+ADDON.Events:RegisterCallback("OnLogin", function()
     ADDON:ApplySetting('previewButton', ADDON.settings.ui.previewButton)
-end)
+end, "dressUp")

@@ -81,7 +81,7 @@ local function RestoreListButtons()
 end
 
 ADDON:RegisterUISetting('compactMountList', true, ADDON.L.SETTING_COMPACT_LIST, function(flag)
-    if MountJournal then
+    if ADDON.initialized then
         if flag then
             ModifyListButtons()
         else
@@ -90,6 +90,6 @@ ADDON:RegisterUISetting('compactMountList', true, ADDON.L.SETTING_COMPACT_LIST, 
     end
 end)
 
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("loadUI", function()
     ADDON:ApplySetting('compactMountList', ADDON.settings.ui.compactMountList)
-end)
+end, "compact")

@@ -104,18 +104,20 @@ function ADDON.Api:UpdateIndex(calledFromEvent)
 
     if true ~= calledFromEvent or nil == orderedMountIds or #list ~= #orderedMountIds then
         orderedMountIds = ADDON:SortMounts(list)
-        EventRegistry:TriggerEvent("MountJournal.OnFilterUpdate")
+        ADDON.Events:TriggerEvent("OnFilterUpdate")
         --ADDON.Debug:ProfileFunction("sort", ADDON.SortMounts, true)
     end
 end
 
 local selectedMount
 function ADDON.Api:SetSelected(selectedMountID)
-    selectedMount = selectedMountID
-    --MountJournal_HideMountDropdown();
-    ADDON.UI:UpdateMountList()
-    ADDON.UI:UpdateMountDisplay()
-    ADDON.UI:ScrollToSelected()
+    if selectedMount ~= selectedMountID then
+        selectedMount = selectedMountID
+        --MountJournal_HideMountDropdown();
+        ADDON.UI:UpdateMountList()
+        ADDON.UI:UpdateMountDisplay()
+        ADDON.UI:ScrollToSelected()
+    end
 end
 function ADDON.Api:GetSelected()
     return selectedMount
@@ -140,3 +142,24 @@ function ADDON.Api:UseMount(mountID)
         end
     end
 end
+
+local function setupHooks()
+    hooksecurefunc("MountJournal_SelectByMountID", function(mountId)
+        ADDON.Api:SetSelected(mountId)
+    end)
+end
+
+ADDON.Events:RegisterCallback("OnLogin", function()
+    if MountJournal then
+        setupHooks()
+    else
+        local frame = CreateFrame("Frame")
+        frame:RegisterEvent("ADDON_LOADED")
+        frame:SetScript("OnEvent", function(self, event, addon)
+            if MountJournal then
+                frame:UnregisterAllEvents()
+                setupHooks()
+            end
+        end)
+    end
+end, "api hooks")

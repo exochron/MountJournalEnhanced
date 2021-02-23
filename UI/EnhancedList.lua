@@ -228,27 +228,18 @@ function ADDON.UI:ScrollToSelected()
     end
 end
 
-local doCheckOverhaul = false
-
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("preloadUI", function()
     MountJournal.ListScrollFrame:Hide()
-    MountJournal.MJE_ListScrollFrame = CreateFrame("ScrollFrame", "MJE_ListScrollFrame", MountJournal, "MJE_ListScrollFrameTemplate")
+    --ADDON.Debug:CheckListTaint("after list hide")
+    MountJournal.MJE_ListScrollFrame = CreateFrame("ScrollFrame", "MountJournalEnhancedListScrollFrame", MountJournal, "MJE_ListScrollFrameTemplate")
     MountJournal.MJE_ListScrollFrame.scrollBar.doNotHide = true
     MountJournal.MJE_ListScrollFrame.update = ADDON.UI.UpdateMountList
 
+    --ADDON.Debug:CheckListTaint("before list buttons")
     SetupButtons(MountJournal.MJE_ListScrollFrame)
+    --ADDON.Debug:CheckListTaint("after list buttons")
 
     hooksecurefunc("MountJournal_UpdateMountList", ADDON.UI.UpdateMountList)
 
-    if doCheckOverhaul and ElvUI then
-        local E = unpack(ElvUI)
-        E:GetModule('Skins'):HandleScrollBar(MountJournal.MJE_ListScrollFrame.scrollBar)
-        -- TODO: MJE_ListScrollFrame is not styled yet :(
-    end
-end)
-
-ADDON.UI:RegisterUIOverhaulCallback(function(self)
-    if self == MountJournal then
-        doCheckOverhaul = true
-    end
-end)
+    ADDON.UI:StyleListWithElvUI(MountJournal.MJE_ListScrollFrame)
+end, "enhanced list")

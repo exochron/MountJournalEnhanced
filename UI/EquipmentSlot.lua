@@ -3,10 +3,10 @@ local ADDON_NAME, ADDON = ...
 local originalParent
 
 ADDON:RegisterUISetting('moveEquipmentSlot', true, ADDON.L.SETTING_MOVE_EQUIPMENT, function(flag)
-    if (MountJournal) then
+    if ADDON.initialized then
         local button = MountJournal.SlotButton
 
-        if (flag) then
+        if flag then
             -- backup frame settings
             ADDON.UI:SavePoint(button)
             ADDON.UI:SavePoint(MountJournal.LeftInset, "BOTTOMLEFT")
@@ -23,7 +23,7 @@ ADDON:RegisterUISetting('moveEquipmentSlot', true, ADDON.L.SETTING_MOVE_EQUIPMEN
             MountJournal.LeftInset:SetPoint("BOTTOMLEFT", 4, 26)
             MountJournal.RightInset:SetPoint("BOTTOMLEFT", MountJournal.LeftInset, "BOTTOMRIGHT", 20, 0)
         else
-            if (originalParent) then
+            if originalParent then
                 button:SetParent(originalParent)
             end
             ADDON.UI:RestorePoint(button)
@@ -34,6 +34,6 @@ ADDON:RegisterUISetting('moveEquipmentSlot', true, ADDON.L.SETTING_MOVE_EQUIPMEN
     end
 end)
 
-ADDON:RegisterLoadUICallback(function()
+ADDON.Events:RegisterCallback("loadUI", function()
     ADDON:ApplySetting('moveEquipmentSlot', ADDON.settings.ui.moveEquipmentSlot)
-end)
+end, "equipment slot")

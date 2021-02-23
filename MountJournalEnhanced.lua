@@ -1,24 +1,14 @@
 local ADDON_NAME, ADDON = ...
 
---region callbacks
-local loginCallbacks, loadUICallbacks = {}, {}
-function ADDON:RegisterLoginCallback(func)
-    table.insert(loginCallbacks, func)
-end
-function ADDON:RegisterLoadUICallback(func)
-    table.insert(loadUICallbacks, func)
-end
-local function FireCallbacks(callbacks)
-    for _, callback in pairs(callbacks) do
-        callback()
-    end
-end
---endregion
+-- see: https://www.townlong-yak.com/framexml/ptr/CallbackRegistry.lua
+ADDON.Events = CreateFromMixins(CallbackRegistryMixin)
+ADDON.Events:OnLoad()
+ADDON.Events:SetUndefinedEventsAllowed(true)
 
-local function LoadUI()
+local function InitUI()
     ADDON.Api:UpdateIndex()
 
-    local frame = CreateFrame("frame");
+    local frame = CreateFrame("frame")
     frame:RegisterEvent("ZONE_CHANGED")
     frame:RegisterEvent("ZONE_CHANGED_INDOORS")
     frame:RegisterEvent("MOUNT_JOURNAL_USABILITY_CHANGED")
@@ -49,21 +39,45 @@ ADDON:ResetIngameFilter()
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
-frame:SetScript("OnEvent", function(self, event, arg1)
-    ADDON:ResetIngameFilter()
-    FireCallbacks(loginCallbacks)
+frame:RegisterEvent("NEW_MOUNT_ADDED")
+frame:SetScript("OnEvent", function(self, event, ...)
+    if event == "PLAYER_LOGIN" then
+        ADDON:ResetIngameFilter()
+        ADDON.Events:TriggerEvent("OnInit")
+        --ADDON.Debug:CheckListTaint("pre-login")
+        ADDON.Events:TriggerEvent("OnLogin")
+        --ADDON.Debug:CheckListTaint("post-login")
+        ADDON.Events:UnregisterAllCallbacksByEvent("OnInit")
+        ADDON.Events:UnregisterAllCallbacksByEvent("OnLogin")
+    elseif event == "NEW_MOUNT_ADDED" then
+        ADDON.Api:UpdateIndex()
+        --ADDON.Debug:CheckListTaint("pre-newMount")
+        ADDON.Events:TriggerEvent("OnNewMount", ...)
+        --ADDON.Debug:CheckListTaint("post-newMount")
+    end
 end)
 
 EventRegistry:RegisterCallback("MountJournal.OnShow", function()
     -- MountJournal gets always initially shown before switching to the actual tab.
-    if CollectionsJournal.selectedTab == 1 then
-        EventRegistry:UnregisterCallback("MountJournal.OnShow", ADDON_NAME .. ".init")
-        LoadUI()
-        FireCallbacks(loadUICallbacks)
+    if CollectionsJournal.selectedTab == 1 and not ADDON.initialized then
+        EventRegistry:UnregisterCallback("MountJournal.OnShow", ADDON_NAME)
+        InitUI()
         ADDON.initialized = true
+
+        --ADDON.Debug:CheckListTaint("pre preloadUI")
+        ADDON.Events:TriggerEvent("preloadUI")
+        --ADDON.Debug:CheckListTaint("pre loadUI")
+        ADDON.Events:TriggerEvent("loadUI")
+        --ADDON.Debug:CheckListTaint("pre postloadUI")
+        ADDON.Events:TriggerEvent("postloadUI")
+        --ADDON.Debug:CheckListTaint("post postloadUI")
+
+        ADDON.Events:UnregisterAllCallbacksByEvent("preloadUI")
+        ADDON.Events:UnregisterAllCallbacksByEvent("loadUI")
+        ADDON.Events:UnregisterAllCallbacksByEvent("postloadUI")
 
         if ADDON.Api:GetSelected() == nil then
             ADDON.Api:SetSelected(select(12, ADDON.Api:GetDisplayedMountInfo(1)))
         end
     end
-end, ADDON_NAME .. ".init")
+end, ADDON_NAME)
