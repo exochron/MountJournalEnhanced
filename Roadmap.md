@@ -1,4 +1,6 @@
 ### Todos:
+- resetting the same setting breaks the ui sometimes
+
 still tainting:
   - with unloaded collections: learn a mount and click the alert: MountJournal.ListScrollFrame.offset is tainted
 
@@ -16,3 +18,4 @@ still tainting:
 - option: auto favorite new mounts; even those learned during offline time/on alts
 - favorite groups / custom filter groups
 - favorite menu at SummonRandomFavoriteButton?
+- link to wowhead
