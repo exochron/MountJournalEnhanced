@@ -8,10 +8,12 @@ ADDON:RegisterUISetting('moveEquipmentSlot', true, ADDON.L.SETTING_MOVE_EQUIPMEN
 
         if flag then
             -- backup frame settings
-            ADDON.UI:SavePoint(button)
-            ADDON.UI:SavePoint(MountJournal.LeftInset, "BOTTOMLEFT")
-            ADDON.UI:SavePoint(MountJournal.RightInset, "BOTTOMLEFT")
-            originalParent = button:GetParent()
+            if nil == originalParent then
+                ADDON.UI:SavePoint(button)
+                ADDON.UI:SavePoint(MountJournal.LeftInset, "BOTTOMLEFT")
+                ADDON.UI:SavePoint(MountJournal.RightInset, "BOTTOMLEFT")
+                originalParent = button:GetParent()
+            end
 
             -- move button
             button:SetParent(MountJournal.MountDisplay)
