@@ -1,6 +1,4 @@
 ### Todos:
-- resetting the same setting breaks the ui sometimes
-
 still tainting:
   - with unloaded collections: learn a mount and click the alert: MountJournal.ListScrollFrame.offset is tainted
 

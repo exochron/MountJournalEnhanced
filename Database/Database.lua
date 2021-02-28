@@ -120,7 +120,7 @@ ADDON.DB.Source = {
         [334352] = true, -- Wildseed Cradle - Ardenweald - Treasure
         [336038] = true, -- Callow Flayedwing (?)
         [339588] = true, -- Sinrunner Blanchy (?)
-        [342335] = true, -- Ascended Skymane - Bastion - Treasure
+        [344228] = true, -- Battle-Bound Warhound - Theatre of Pain
         [344574] = true, -- Bulbous Necroray - Necroray Egg
         [344575] = true, -- Pestilent Necroray - Necroray Egg
         [344576] = true, -- Infested Necroray - Necroray Egg
@@ -294,7 +294,6 @@ ADDON.DB.Source = {
         [290718] = true, -- Aerial Unit R-21/X - Mechagon
         [299158] = true, -- Mechagon Peacekeeper - Mechagon
         [336036] = true, -- Marrowfang - The Necrotic Wake
-        [344228] = true, -- Battle-Bound Warhound - Theatre of Pain
 
         -- Raid
         [25953] = true, -- Blue Qiraji Battle Tank - Temple of Ahn'Qiraj
@@ -471,6 +470,7 @@ ADDON.DB.Source = {
         [332923] = true, -- Inquisition Gargon - The Avowed
         [341639] = true, -- Court Sinrunner -- Court of Harvesters
         [342334] = true, -- Gilded Prowler - The Ascended
+        [342335] = true, -- Ascended Skymane - Bastion - Bastion supplies
         [342666] = true, -- Amber Ardenmoth - Wild Hunt Supplies (paragon)
 
         ------------------------------
