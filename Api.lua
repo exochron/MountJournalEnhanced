@@ -139,23 +139,9 @@ function ADDON.Api:UseMount(mountID)
     end
 end
 
-local function setupHooks()
+ADDON.Events:RegisterCallback("OnJournalLoaded", function()
+    -- setup hooks
     hooksecurefunc("MountJournal_SelectByMountID", function(mountId)
         ADDON.Api:SetSelected(mountId)
     end)
-end
-
-ADDON.Events:RegisterCallback("OnLogin", function()
-    if MountJournal then
-        setupHooks()
-    else
-        local frame = CreateFrame("Frame")
-        frame:RegisterEvent("ADDON_LOADED")
-        frame:SetScript("OnEvent", function(self, event, addon)
-            if MountJournal then
-                frame:UnregisterAllEvents()
-                setupHooks()
-            end
-        end)
-    end
 end, "api hooks")

@@ -40,7 +40,13 @@ ADDON:ResetIngameFilter()
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:RegisterEvent("NEW_MOUNT_ADDED")
+frame:RegisterEvent("ADDON_LOADED")
 frame:SetScript("OnEvent", function(self, event, ...)
+    if MountJournal then
+        frame:UnregisterEvent("ADDON_LOADED")
+        ADDON.Events:TriggerEvent("OnJournalLoaded")
+    end
+
     if event == "PLAYER_LOGIN" then
         ADDON:ResetIngameFilter()
         ADDON.Events:TriggerEvent("OnInit")
