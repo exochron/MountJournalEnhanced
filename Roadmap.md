@@ -4,10 +4,10 @@ still tainting:
 
 
 ### Next
-- automatic favor new mounts
+- covenant player conditions/restrictions
+- custom faction icon / restriction icon (gh#49)
 - special summon animation
 - switch through mount variation (eg. High Priest's Lightsworn Seeker: C_MountJournal.GetMountAllCreatureDisplayInfoByID(861))
-- open interface option from wheel menu
 
 ### More Ideas:
 - more animation control in display (start/pause, movements, with sound effects)
@@ -16,4 +16,4 @@ still tainting:
 - option: auto favorite new mounts; even those learned during offline time/on alts
 - favorite groups / custom filter groups
 - favorite menu at SummonRandomFavoriteButton?
-- link to wowhead
+- link to wowhead (?)

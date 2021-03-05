@@ -9,10 +9,6 @@ local function collectMountIds()
     ADDON:ResetIngameFilter()
 
     local list = {}
-    for _, mountId in ipairs(C_MountJournal.GetMountIDs()) do
-        list[mountId] = false
-    end
-
     local count = C_MountJournal.GetNumDisplayedMounts()
     for i = 1, count do
         local mountId = select(12, C_MountJournal.GetDisplayedMountInfo(i))
