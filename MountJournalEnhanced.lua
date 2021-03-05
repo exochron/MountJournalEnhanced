@@ -45,6 +45,7 @@ frame:SetScript("OnEvent", function(self, event, ...)
     if MountJournal then
         frame:UnregisterEvent("ADDON_LOADED")
         ADDON.Events:TriggerEvent("OnJournalLoaded")
+        ADDON.Events:UnregisterAllCallbacksByEvent("OnJournalLoaded")
     end
 
     if event == "PLAYER_LOGIN" then
