@@ -43,8 +43,8 @@ local function FilterUsableMounts(isUsable)
     return not ADDON.settings.filter.onlyUsable or isUsable
 end
 
-local function FilterTradableMounts(spellId)
-    return not ADDON.settings.filter.onlyTradable or TradableDB[spellId]
+local function FilterTradableMounts(mountId)
+    return not ADDON.settings.filter.onlyTradable or TradableDB[mountId]
 end
 
 local function FilterCollectedMounts(collected)
@@ -246,7 +246,7 @@ function ADDON:FilterMounts()
                     and FilterIngameHiddenMounts(shouldHideOnChar, mountId)
                     and FilterFavoriteMounts(isFavorite)
                     and FilterUsableMounts(isUsable)
-                    and FilterTradableMounts(spellId)
+                    and FilterTradableMounts(mountId)
                     and FilterCollectedMounts(isCollected)
                     and FilterByFaction(isFaction, faction)
                     and (allSettingsSource or FilterBySource(spellId, sourceType, preparedSource))

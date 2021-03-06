@@ -43,7 +43,7 @@ func ExportTradeable(mounts map[int]mount) {
 	for _, k := range keys {
 		mount := mounts[k]
 		if mount.ItemIsTradeable == true {
-			file.WriteString("[" + strconv.Itoa(m.ID) + "] = true, -- " + m.Name + "\n")
+			file.WriteString("[" + strconv.Itoa(mount.ID) + "] = true, -- " + mount.Name + "\n")
 		}
 	}
 
@@ -102,7 +102,7 @@ func ExportConditions(mounts map[int]mount) {
 					file.WriteString(condition.Value + ",")
 				}
 
-				file.WriteString("},")
+				file.WriteString("}, ")
 			}
 
 			file.WriteString(" }, -- " + mount.Name + "\n")
