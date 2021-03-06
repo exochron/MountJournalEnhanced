@@ -1,7 +1,8 @@
 package condition
 
-type Condition interface {
-	ToString() string
+type Condition struct {
+	Type  string
+	Value string
 }
 
 func NewConditions(conditionData map[string]string) [][]Condition {
@@ -21,6 +22,11 @@ func NewConditions(conditionData map[string]string) [][]Condition {
 	races := checkRace(conditionData["RaceMask"])
 	if len(races) > 0 {
 		result = append(result, races)
+	}
+
+	covenants := checkCovenant(conditionData["CovenantID"])
+	if len(covenants) > 0 {
+		result = append(result, covenants)
 	}
 
 	return result

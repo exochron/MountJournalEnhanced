@@ -2,35 +2,15 @@ local ADDON_NAME, ADDON = ...
 
 local doStrip = false
 
-local function isPersonalMount(spellId, faction, hasRidingSkill)
-
-    -- without riding skill you can only ride heirloom chopper and sea or riding turtle
-    if hasRidingSkill == false and spellId ~= 179244 and spellId ~= 179245 and spellId ~= 30174 and spellId ~= 64731 then
-        return false
-    end
-
-    if faction ~= nil and false == ADDON.playerIsFaction(faction) then
-        return false
-    end
-
-    if ADDON.DB.Restrictions[spellId] == nil then
-        return true
-    end
-
-    return ADDON.DB.Restrictions[spellId]()
-end
-
 local function count()
-    local hasSkill = IsSpellKnown(33388) or IsSpellKnown(33391) or IsSpellKnown(34090) or IsSpellKnown(34091) or IsSpellKnown(90265)  -- Riding skils
-
     local mountIDs = C_MountJournal.GetMountIDs()
     local total, owned, personal, personalTotal = 0, 0, 0, 0
     for _, mountID in ipairs(mountIDs) do
-        local _, spellId, _, _, _, _, _, _, faction, hideOnChar, isCollected = C_MountJournal.GetMountInfoByID(mountID)
+        local _, _, _, _, _, _, _, _, faction, hideOnChar, isCollected = C_MountJournal.GetMountInfoByID(mountID)
         if hideOnChar == false or (ADDON.settings.filter.hiddenIngame and not ADDON.DB.Ignored[mountID]) then
             total = total + 1
 
-            local isPersonal = isPersonalMount(spellId, faction, hasSkill)
+            local isPersonal = ADDON.IsPersonalMount(mountID, faction)
 
             if isPersonal then
                 personalTotal = personalTotal + 1

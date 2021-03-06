@@ -989,7 +989,6 @@ ADDON.DB.Family = {
 [153489] = true, -- Iron Skyreaver
 [191633] = true, -- Soaring Skyterror
 [288495] = true, -- Ashenvale Chimaera
-[318052] = true, -- Deathbringer's Flayedwing
 [336036] = true, -- Marrowfang
 [336038] = true, -- Callow Flayedwing
 [336039] = true, -- Gruesome Flayedwing
