@@ -39,7 +39,7 @@ local function ModifyListButtons()
 
         button.factionIcon:ClearAllPoints()
         button.factionIcon:SetPoint('TOPRIGHT', -2, -2)
-        button.factionIcon:SetPoint('TOPLEFT', button, "TOPRIGHT", -2 - MOUNT_BUTTON_HEIGHT, -2)
+        button.factionIcon:SetPoint('TOPLEFT', button, "TOPRIGHT", 2 - MOUNT_BUTTON_HEIGHT, -2)
         button.factionIcon:SetPoint('BOTTOMRIGHT', -2, 2)
 
         previousButton = button

@@ -102,7 +102,7 @@ func ExportConditions(mounts map[int]mount) {
 					file.WriteString(condition.Value + ",")
 				}
 
-				file.WriteString("}, ")
+				file.WriteString("},")
 			}
 
 			file.WriteString(" }, -- " + mount.Name + "\n")

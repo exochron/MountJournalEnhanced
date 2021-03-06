@@ -7,6 +7,9 @@ func checkClass(classMask string) []Condition {
 	var result []Condition
 
 	mask, _ := strconv.Atoi(classMask)
+	if mask&0x1 > 0 {
+		result = append(result, Condition{"class", "\"WARRIOR\""})
+	}
 	if mask&0x2 > 0 {
 		result = append(result, Condition{"class", "\"PALADIN\""})
 	}

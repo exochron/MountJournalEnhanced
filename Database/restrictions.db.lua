@@ -27,6 +27,7 @@ ADDON.DB.Restrictions = {
 [864] = { ["class"]={"MONK",}, }, -- Ban-Lu, Grandmaster's Companion
 [865] = { ["class"]={"HUNTER",}, }, -- Huntmaster's Loyal Wolfhawk
 [866] = { ["class"]={"DEATHKNIGHT",}, }, -- Deathlord's Vilebrood Vanquisher
+[867] = { ["class"]={"WARRIOR",}, }, -- Battlelord's Bloodthirsty War Wyrm
 [868] = { ["class"]={"DEMONHUNTER",}, }, -- Slayer's Felbroken Shrieker
 [870] = { ["class"]={"HUNTER",}, }, -- Huntmaster's Fierce Wolfhawk
 [872] = { ["class"]={"HUNTER",}, }, -- Huntmaster's Dire Wolfhawk
