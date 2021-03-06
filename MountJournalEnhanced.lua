@@ -57,10 +57,8 @@ frame:SetScript("OnEvent", function(self, event, ...)
         ADDON.Events:UnregisterAllCallbacksByEvent("OnInit")
         ADDON.Events:UnregisterAllCallbacksByEvent("OnLogin")
     elseif event == "NEW_MOUNT_ADDED" then
-        ADDON.Api:UpdateIndex()
-        --ADDON.Debug:CheckListTaint("pre-newMount")
         ADDON.Events:TriggerEvent("OnNewMount", ...)
-        --ADDON.Debug:CheckListTaint("post-newMount")
+        ADDON.Api:UpdateIndex()
     end
 end)
 

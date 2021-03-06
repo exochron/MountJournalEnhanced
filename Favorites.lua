@@ -137,7 +137,7 @@ local function InitializeDropDown(menu, level)
             ADDON:ApplySetting('autoFavor', value)
         end
     }
-    UIDropDownMenu_AddButton(button, level)
+    --UIDropDownMenu_AddButton(button, level)
 end
 
 local function BuildStarButton()
@@ -176,7 +176,8 @@ end
 
 ADDON:RegisterBehaviourSetting('favoritePerChar', false, L.SETTING_FAVORITE_PER_CHAR, CollectFavoredMounts)
 
-ADDON:RegisterBehaviourSetting('autoFavor', false, L.SETTING_AUTO_FAVOR)
+-- TODO: doesn't work yet
+--ADDON:RegisterBehaviourSetting('autoFavor', false, L.SETTING_AUTO_FAVOR)
 ADDON.Events:RegisterCallback("OnNewMount", function(_, mountId)
     if ADDON.settings.autoFavor and mountId then
         ADDON.Api:SetIsFavoriteByID(mountId, true)
