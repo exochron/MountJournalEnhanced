@@ -8,7 +8,7 @@ import (
 )
 
 func (m mount) WriteToFile(file *os.File) {
-	file.WriteString("[" + strconv.Itoa(m.SpellID) + "] = true, -- " + m.Name + "\n")
+	file.WriteString("[" + strconv.Itoa(m.ID) + "] = true, -- " + m.Name + "\n")
 }
 
 func prepareLuaDB(filename string, varname string) *os.File {
@@ -43,7 +43,7 @@ func ExportTradeable(mounts map[int]mount) {
 	for _, k := range keys {
 		mount := mounts[k]
 		if mount.ItemIsTradeable == true {
-			file.WriteString("[" + strconv.Itoa(mount.ID) + "] = true, -- " + mount.Name + "\n")
+			mount.WriteToFile(file)
 		}
 	}
 
