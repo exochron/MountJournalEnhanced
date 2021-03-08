@@ -164,6 +164,8 @@ function ADDON.UI:UpdateMountList()
             button.background:SetVertexColor(1, 1, 1, 1);
             button.iconBorder:Hide();
 
+            button.ClassIcon:Hide()
+            button.HalfFactionIcon:Hide()
             if button.DragButton.IsHidden then
                 button.DragButton.IsHidden:SetShown(false)
             end
@@ -293,12 +295,12 @@ ADDON.Events:RegisterCallback("preloadUI", function()
     --ADDON.Debug:CheckListTaint("after list hide")
     MountJournal.MJE_ListScrollFrame = CreateFrame("ScrollFrame", "MountJournalEnhancedListScrollFrame", MountJournal, "MJE_ListScrollFrameTemplate")
     MountJournal.MJE_ListScrollFrame.scrollBar.doNotHide = true
-    MountJournal.MJE_ListScrollFrame.update = ADDON.UI.UpdateMountList
 
     --ADDON.Debug:CheckListTaint("before list buttons")
     SetupButtons(MountJournal.MJE_ListScrollFrame)
     --ADDON.Debug:CheckListTaint("after list buttons")
 
+    MountJournal.MJE_ListScrollFrame.update = ADDON.UI.UpdateMountList
     hooksecurefunc("MountJournal_UpdateMountList", ADDON.UI.UpdateMountList)
 
     ADDON.UI:StyleListWithElvUI(MountJournal.MJE_ListScrollFrame)
