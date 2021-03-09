@@ -43,8 +43,8 @@ local function FilterUsableMounts(isUsable)
     return not ADDON.settings.filter.onlyUsable or isUsable
 end
 
-local function FilterTradableMounts(spellId)
-    return not ADDON.settings.filter.onlyTradable or TradableDB[spellId]
+local function FilterTradableMounts(mountId)
+    return not ADDON.settings.filter.onlyTradable or TradableDB[mountId]
 end
 
 local function FilterCollectedMounts(collected)
@@ -151,9 +151,9 @@ local function FilterBySource(spellId, sourceType, preparedSettings)
     return true
 end
 
-local function FilterByFamily(spellId, preparedSettings)
-    if preparedSettings[spellId] ~= nil then
-        return preparedSettings[spellId]
+local function FilterByFamily(mountId, preparedSettings)
+    if preparedSettings[mountId] ~= nil then
+        return preparedSettings[mountId]
     end
 
     return true
@@ -246,12 +246,12 @@ function ADDON:FilterMounts()
                     and FilterIngameHiddenMounts(shouldHideOnChar, mountId)
                     and FilterFavoriteMounts(isFavorite)
                     and FilterUsableMounts(isUsable)
-                    and FilterTradableMounts(spellId)
+                    and FilterTradableMounts(mountId)
                     and FilterCollectedMounts(isCollected)
                     and FilterByFaction(isFaction, faction)
                     and (allSettingsSource or FilterBySource(spellId, sourceType, preparedSource))
                     and (allSettingsType or FilterByType(spellId, mountId, preparedTypes))
-                    and (allSettingsFamily or FilterByFamily(spellId, preparedFamily))
+                    and (allSettingsFamily or FilterByFamily(mountId, preparedFamily))
                     and (allSettingsExpansion or FilterByExpansion(spellId, preparedExpansion))
             then
                 result[#result + 1] = mountId

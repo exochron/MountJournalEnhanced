@@ -42,6 +42,7 @@ local function PrepareDefaults()
         },
 
         favoritePerChar = false,
+        autoFavor = false,
         favoredMounts = {},
 
         hiddenMounts = {},
@@ -141,6 +142,7 @@ ADDON.Events:RegisterCallback("OnInit", function()
     ADDON:ApplySetting('searchInDescription', MJEPersonalSettings.searchInDescription)
 
     ADDON.settings.favoritePerChar = MJEPersonalSettings.favoritePerChar
+    ADDON.settings.autoFavor = MJEPersonalSettings.autoFavor
     ADDON.settings.favoredMounts = MJEPersonalSettings.favoredMounts
     ADDON.settings.trackUsageStats = MJEGlobalSettings.trackUsageStats
 end, "settings init")

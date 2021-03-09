@@ -40,7 +40,14 @@ ADDON:ResetIngameFilter()
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:RegisterEvent("NEW_MOUNT_ADDED")
+frame:RegisterEvent("ADDON_LOADED")
 frame:SetScript("OnEvent", function(self, event, ...)
+    if MountJournal then
+        frame:UnregisterEvent("ADDON_LOADED")
+        ADDON.Events:TriggerEvent("OnJournalLoaded")
+        ADDON.Events:UnregisterAllCallbacksByEvent("OnJournalLoaded")
+    end
+
     if event == "PLAYER_LOGIN" then
         ADDON:ResetIngameFilter()
         ADDON.Events:TriggerEvent("OnInit")
@@ -50,10 +57,8 @@ frame:SetScript("OnEvent", function(self, event, ...)
         ADDON.Events:UnregisterAllCallbacksByEvent("OnInit")
         ADDON.Events:UnregisterAllCallbacksByEvent("OnLogin")
     elseif event == "NEW_MOUNT_ADDED" then
-        ADDON.Api:UpdateIndex()
-        --ADDON.Debug:CheckListTaint("pre-newMount")
         ADDON.Events:TriggerEvent("OnNewMount", ...)
-        --ADDON.Debug:CheckListTaint("post-newMount")
+        ADDON.Api:UpdateIndex()
     end
 end)
 

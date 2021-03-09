@@ -1,5 +1,7 @@
 local ADDON_NAME, ADDON = ...
 
+local RestrictionsDB = ADDON.DB.Restrictions
+
 local function getMountButtonHeight()
     return MountJournal.MJE_ListScrollFrame.buttonHeight
 end
@@ -8,6 +10,27 @@ local MOUNT_FACTION_TEXTURES = {
     [0] = "MountJournalIcons-Horde",
     [1] = "MountJournalIcons-Alliance"
 };
+local COVENANT_TEXTURES = {
+    [1] = "covenantchoice-panel-sigil-kyrian",
+    [2] = "covenantchoice-panel-sigil-venthyr",
+    [3] = "covenantchoice-panel-sigil-nightfae",
+    [4] = "covenantchoice-panel-sigil-necrolords",
+}
+local CLASS_TEXTURES = {
+    ["DEATHKNIGHT"] = "Artifacts-DeathKnightFrost-BG-Rune",
+    ["DEMONHUNTER"] = "Artifacts-DemonHunter-BG-rune",
+    ["DRUID"] = "Artifacts-Druid-BG-rune",
+    ["HUNTER"] = "Artifacts-Hunter-BG-rune",
+    ["MAGE"] = "Artifacts-MageArcane-BG-rune",
+    ["MONK"] = "Artifacts-Monk-BG-rune",
+    ["PALADIN"] = "Artifacts-Paladin-BG-rune",
+    ["PRIEST"] = "Artifacts-Priest-BG-rune",
+    ["ROGUE"] = "Artifacts-Rogue-BG-rune",
+    ["SHAMAN"] = "Artifacts-Shaman-BG-rune",
+    ["WARLOCK"] = "Artifacts-Warlock-BG-rune",
+    ["WARRIOR"] = "Artifacts-Warrior-BG-rune",
+}
+
 -- from https://www.townlong-yak.com/framexml/live/Blizzard_Collections/Blizzard_MountCollection.lua#386
 function ADDON.UI:UpdateMountList()
     local deltaY = 0
@@ -83,9 +106,35 @@ function ADDON.UI:UpdateMountList()
             if (isFactionSpecific) then
                 button.factionIcon:SetAtlas(MOUNT_FACTION_TEXTURES[faction], true);
                 button.factionIcon:Show();
+                button.factionIcon:SetAlpha(1.0)
+            elseif RestrictionsDB[mountID] and RestrictionsDB[mountID].covenant then
+                button.factionIcon:SetAtlas(COVENANT_TEXTURES[RestrictionsDB[mountID].covenant[1]], false)
+                button.factionIcon:SetAlpha(0.4)
+                button.factionIcon:Show()
             else
                 button.factionIcon:Hide();
             end
+            if RestrictionsDB[mountID] and RestrictionsDB[mountID].class then
+                button.ClassIcon:SetAtlas(CLASS_TEXTURES[RestrictionsDB[mountID].class[1]], false)
+                if button.factionIcon:IsShown() then
+                    button.factionIcon:Hide()
+                    button.HalfFactionIcon:SetAtlas(button.factionIcon:GetAtlas(), false);
+                    button.HalfFactionIcon:Show()
+
+                    button.ClassIcon:SetPoint("BOTTOMRIGHT", button.factionIcon, "BOTTOM")
+                    button.ClassIcon:SetTexCoord(0, 0.5, 0, 1)
+                else
+                    button.HalfFactionIcon:Hide()
+                    button.ClassIcon:SetTexCoord(0, 1, 0, 1)
+                    button.ClassIcon:SetPoint("BOTTOMRIGHT", button.factionIcon, "BOTTOMRIGHT")
+                end
+
+                button.ClassIcon:Show()
+            else
+                button.ClassIcon:Hide()
+                button.HalfFactionIcon:Hide()
+            end
+
             if (button.showingTooltip) then
                 MountJournalMountButton_UpdateTooltip(button);
             end
@@ -115,6 +164,8 @@ function ADDON.UI:UpdateMountList()
             button.background:SetVertexColor(1, 1, 1, 1);
             button.iconBorder:Hide();
 
+            button.ClassIcon:Hide()
+            button.HalfFactionIcon:Hide()
             if button.DragButton.IsHidden then
                 button.DragButton.IsHidden:SetShown(false)
             end
@@ -183,6 +234,17 @@ local function SetupButtons(scrollFrame)
         button.DragButton.IsHidden:SetPoint("CENTER", button.DragButton, "CENTER", 0, 0)
         button.DragButton.IsHidden:SetDrawLayer("OVERLAY", 1)
         button.DragButton.IsHidden:SetShown(false)
+
+        button.factionIcon:SetWidth(44)
+
+        button.HalfFactionIcon = button:CreateTexture(nil, "BORDER")
+        button.HalfFactionIcon:SetTexCoord(0.5, 1, 0, 1)
+        button.HalfFactionIcon:SetPoint("TOPLEFT", button.factionIcon, "TOP")
+        button.HalfFactionIcon:SetPoint("BOTTOMRIGHT", button.factionIcon, "BOTTOMRIGHT")
+
+        button.ClassIcon = button:CreateTexture(nil, "BORDER")
+        button.ClassIcon:SetPoint("TOPLEFT", button.factionIcon, "TOPLEFT")
+        button.ClassIcon:SetPoint("BOTTOMRIGHT", button.factionIcon, "BOTTOMRIGHT")
     end
 end
 
@@ -233,12 +295,12 @@ ADDON.Events:RegisterCallback("preloadUI", function()
     --ADDON.Debug:CheckListTaint("after list hide")
     MountJournal.MJE_ListScrollFrame = CreateFrame("ScrollFrame", "MountJournalEnhancedListScrollFrame", MountJournal, "MJE_ListScrollFrameTemplate")
     MountJournal.MJE_ListScrollFrame.scrollBar.doNotHide = true
-    MountJournal.MJE_ListScrollFrame.update = ADDON.UI.UpdateMountList
 
     --ADDON.Debug:CheckListTaint("before list buttons")
     SetupButtons(MountJournal.MJE_ListScrollFrame)
     --ADDON.Debug:CheckListTaint("after list buttons")
 
+    MountJournal.MJE_ListScrollFrame.update = ADDON.UI.UpdateMountList
     hooksecurefunc("MountJournal_UpdateMountList", ADDON.UI.UpdateMountList)
 
     ADDON.UI:StyleListWithElvUI(MountJournal.MJE_ListScrollFrame)

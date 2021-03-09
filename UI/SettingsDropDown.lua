@@ -1,38 +1,48 @@
 local ADDON_NAME, ADDON = ...
 
-local function CreateTitle()
+local function InitializeDropDown(menu, level)
     local title = GetAddOnMetadata(ADDON_NAME, "Title")
-    return {
+
+    local button = {
         isTitle = 1,
         text = title,
         notCheckable = 1,
     }
-end
-
-local function CreateCheck(text, setting)
-    return {
-        keepShownOnClick = true,
-        isNotRadio = true,
-        hasArrow = false,
-        text = text,
-        notCheckable = false,
-        checked = ADDON.settings.ui[setting],
-        func = function(_, _, _, value)
-            ADDON:ApplySetting(setting, value)
-        end,
-    }
-end
-
-local function InitializeDropDown(menu, level)
-    UIDropDownMenu_AddButton(CreateTitle(), level)
+    UIDropDownMenu_AddButton(button, level)
 
     local uiLabels, _ = ADDON:GetSettingLabels()
     for _, labelData in ipairs(uiLabels) do
         local setting, label = labelData[1], labelData[2]
-        if (ADDON.settings.ui[setting] ~= nil) then
-            UIDropDownMenu_AddButton(CreateCheck(label, setting), level)
+        if ADDON.settings.ui[setting] ~= nil then
+            button = {
+                keepShownOnClick = true,
+                isNotRadio = true,
+                hasArrow = false,
+                text = label,
+                notCheckable = false,
+                checked = ADDON.settings.ui[setting],
+                func = function(_, _, _, value)
+                    ADDON:ApplySetting(setting, value)
+                end,
+            }
+            UIDropDownMenu_AddButton(button, level)
         end
     end
+
+    UIDropDownMenu_AddSpace( level)
+
+    button = {
+        isNotRadio = true,
+        notCheckable = true,
+        hasArrow = false,
+        text = ADDON.L.DISPLAY_ALL_SETTINGS,
+        justifyH = "CENTER",
+        func = function(_, _, _, value)
+            InterfaceOptionsFrame_OpenToCategory(title)
+            InterfaceOptionsFrame_OpenToCategory(title)
+        end,
+    }
+    UIDropDownMenu_AddButton(button, level)
 end
 
 local withoutStyle=false

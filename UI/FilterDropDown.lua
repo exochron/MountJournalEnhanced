@@ -164,18 +164,15 @@ local function AddCheckAllAndNoneInfo(settings, level)
     UIDropDownMenu_AddButton(info, level)
 end
 
-local function ShouldDisplayFamily(spellIds)
-    if #spellIds > 5 then
+local function ShouldDisplayFamily(mountIds)
+    if ADDON.settings.filter[SETTING_HIDDEN_INGAME] then
         return true
     end
 
-    for spellId, _ in pairs(spellIds) do
-        local mountId = C_MountJournal.GetMountFromSpell(spellId)
-        if mountId then
-            local _, _, _, _, _, _, _, _, _, shouldHideOnChar = C_MountJournal.GetMountInfoByID(mountId)
-            if shouldHideOnChar == false then
-                return true
-            end
+    for mountId, _ in pairs(mountIds) do
+        local _, _, _, _, _, _, _, _, _, shouldHideOnChar = C_MountJournal.GetMountInfoByID(mountId)
+        if shouldHideOnChar == false then
+            return true
         end
     end
 
@@ -310,16 +307,16 @@ local function InitializeFilterDropDown(filterMenu, level)
     elseif (level == 3 and ADDON.DB.Family[UIDROPDOWNMENU_MENU_VALUE]) then
         local settings = ADDON.settings.filter[SETTING_FAMILY][UIDROPDOWNMENU_MENU_VALUE]
         local sortedFamilies = {}
-        for family, _ in pairs(ADDON.DB.Family[UIDROPDOWNMENU_MENU_VALUE]) do
-            table.insert(sortedFamilies, family)
+        for family, familyIds in pairs(ADDON.DB.Family[UIDROPDOWNMENU_MENU_VALUE]) do
+            if ShouldDisplayFamily(familyIds) then
+                table.insert(sortedFamilies, family)
+            end
         end
         table.sort(sortedFamilies, function(a, b)
             return (L[a] or a) < (L[b] or b)
         end)
         for _, family in pairs(sortedFamilies) do
-            if ShouldDisplayFamily(ADDON.DB.Family[UIDROPDOWNMENU_MENU_VALUE][family]) then
-                UIDropDownMenu_AddButton(CreateFilterInfo(L[family] or family, family, settings), level)
-            end
+            UIDropDownMenu_AddButton(CreateFilterInfo(L[family] or family, family, settings), level)
         end
     elseif UIDROPDOWNMENU_MENU_VALUE == SETTING_SORT then
         local settings = ADDON.settings[SETTING_SORT]

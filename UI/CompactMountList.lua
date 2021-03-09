@@ -6,9 +6,6 @@ local function ModifyListButtons()
     local scrollFrame = MountJournal.MJE_ListScrollFrame
     local buttons = scrollFrame.buttons
 
-    ADDON.UI:SavePoint(buttons[1])
-    ADDON.UI:SaveSize(buttons[1])
-
     buttons[1]:SetHeight(MOUNT_BUTTON_HEIGHT)
     buttons[1]:ClearAllPoints()
     buttons[1]:SetPoint("TOPLEFT", scrollFrame.scrollChild, "TOPLEFT", 33, 0)
@@ -17,16 +14,10 @@ local function ModifyListButtons()
     local previousButton
     for _, button in pairs(scrollFrame.buttons) do
         if previousButton then
-            ADDON.UI:SavePoint(button)
-            ADDON.UI:SaveSize(button)
-
             button:ClearAllPoints()
             button:SetPoint("TOPLEFT", previousButton, "BOTTOMLEFT", 0, -1)
         end
 
-        ADDON.UI:SaveSize(button.DragButton)
-        ADDON.UI:SaveSize(button.icon)
-        ADDON.UI:SavePoint(button.icon)
         button:SetSize(221, MOUNT_BUTTON_HEIGHT)
         button.DragButton:SetSize(MOUNT_BUTTON_HEIGHT, MOUNT_BUTTON_HEIGHT)
         button.icon:SetSize(MOUNT_BUTTON_HEIGHT, MOUNT_BUTTON_HEIGHT)
@@ -39,26 +30,36 @@ local function ModifyListButtons()
             button.icon:SetSize(MOUNT_BUTTON_HEIGHT - 2, MOUNT_BUTTON_HEIGHT - 2)
         end
 
-        ADDON.UI:SavePoint(button.name)
         button.name:ClearAllPoints()
         button.name:SetPoint("LEFT", button, "LEFT", 10, 0)
         button.name:SetPoint("RIGHT", button, "RIGHT", -10, 0)
 
-        ADDON.UI:SavePoint(button.new)
         button.new:ClearAllPoints()
         button.new:SetPoint("CENTER", button.DragButton)
 
-        ADDON.UI:SavePoint(button.factionIcon)
         button.factionIcon:ClearAllPoints()
         button.factionIcon:SetPoint('TOPRIGHT', -2, -2)
-        button.factionIcon:SetPoint('TOPLEFT', button, "TOPRIGHT", -2 - MOUNT_BUTTON_HEIGHT, -2)
+        button.factionIcon:SetPoint('TOPLEFT', button, "TOPRIGHT", 2 - MOUNT_BUTTON_HEIGHT, -2)
         button.factionIcon:SetPoint('BOTTOMRIGHT', -2, 2)
 
         previousButton = button
     end
 end
 
-local function RestoreListButtons()
+local function SaveLayout()
+    local scrollFrame = MountJournal.MJE_ListScrollFrame
+    for _, button in pairs(scrollFrame.buttons) do
+        ADDON.UI:SavePoint(button)
+        ADDON.UI:SaveSize(button)
+        ADDON.UI:SaveSize(button.DragButton)
+        ADDON.UI:SaveSize(button.icon)
+        ADDON.UI:SavePoint(button.icon)
+        ADDON.UI:SavePoint(button.name)
+        ADDON.UI:SavePoint(button.new)
+        ADDON.UI:SavePoint(button.factionIcon)
+    end
+end
+local function RestoreLayout()
     local scrollFrame = MountJournal.MJE_ListScrollFrame
 
     for _, button in pairs(scrollFrame.buttons) do
@@ -80,12 +81,17 @@ local function RestoreListButtons()
     HybridScrollFrame_CreateButtons(scrollFrame, "MountListButtonTemplate")
 end
 
+local saved = false
 ADDON:RegisterUISetting('compactMountList', true, ADDON.L.SETTING_COMPACT_LIST, function(flag)
     if ADDON.initialized then
         if flag then
+            if not saved then
+                SaveLayout()
+                saved = true
+            end
             ModifyListButtons()
         else
-            RestoreListButtons()
+            RestoreLayout()
         end
     end
 end)

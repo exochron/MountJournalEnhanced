@@ -8,7 +8,7 @@ import (
 )
 
 func (m mount) WriteToFile(file *os.File) {
-	file.WriteString("[" + strconv.Itoa(m.SpellID) + "] = true, -- " + m.Name + "\n")
+	file.WriteString("[" + strconv.Itoa(m.ID) + "] = true, -- " + m.Name + "\n")
 }
 
 func prepareLuaDB(filename string, varname string) *os.File {
@@ -92,25 +92,20 @@ func ExportConditions(mounts map[int]mount) {
 		mount := mounts[k]
 		if len(mount.PlayerConditions) > 0 {
 
-			file.WriteString("[" + strconv.Itoa(mount.SpellID) + "] = function() return ")
+			file.WriteString("[" + strconv.Itoa(mount.ID) + "] = {")
 
-			for i, group := range mount.PlayerConditions{
-				if i > 0 {
-					file.WriteString(" and ")
-				}
-				file.WriteString("(")
+			for _, group := range mount.PlayerConditions {
 
-				for j, condition := range group{
-					if j > 0 {
-						file.WriteString(" or ")
-					}
-					file.WriteString(condition.ToString())
+				file.WriteString(" [\"" + group[0].Type + "\"]={")
+
+				for _, condition := range group {
+					file.WriteString(condition.Value + ",")
 				}
 
-				file.WriteString(")")
+				file.WriteString("},")
 			}
 
-			file.WriteString(" end, -- " + mount.Name + "\n")
+			file.WriteString(" }, -- " + mount.Name + "\n")
 		}
 	}
 

@@ -1,48 +1,81 @@
 local ADDON_NAME, ADDON = ...
 
 ADDON.DB.Restrictions = {
-[5784] = function() return (ADDON.playerIsClass("WARLOCK")) end, -- Felsteed
-[13819] = function() return (ADDON.playerIsClass("PALADIN")) end, -- Warhorse
-[23161] = function() return (ADDON.playerIsClass("WARLOCK")) end, -- Dreadsteed
-[23214] = function() return (ADDON.playerIsClass("PALADIN")) end, -- Charger
-[34767] = function() return (ADDON.playerIsClass("PALADIN")) and (ADDON.playerIsRace("BloodElf")) end, -- Thalassian Charger
-[34769] = function() return (ADDON.playerIsClass("PALADIN")) and (ADDON.playerIsRace("BloodElf")) end, -- Thalassian Warhorse
-[44151] = function() return (ADDON.playerHasProfession(202)) end, -- Turbo-Charged Flying Machine
-[44153] = function() return (ADDON.playerHasProfession(202)) end, -- Flying Machine
-[48778] = function() return (ADDON.playerIsClass("DEATHKNIGHT")) end, -- Acherus Deathcharger
-[54729] = function() return (ADDON.playerIsClass("DEATHKNIGHT")) end, -- Winged Steed of the Ebon Blade
-[61309] = function() return (ADDON.playerHasProfession(197)) end, -- Magnificent Flying Carpet
-[61451] = function() return (ADDON.playerHasProfession(197)) end, -- Flying Carpet
-[66906] = function() return (ADDON.playerIsClass("PALADIN")) end, -- Argent Charger
-[69820] = function() return (ADDON.playerIsClass("PALADIN")) and (ADDON.playerIsRace("Tauren")) end, -- Sunwalker Kodo
-[69826] = function() return (ADDON.playerIsClass("PALADIN")) and (ADDON.playerIsRace("Tauren")) end, -- Great Sunwalker Kodo
-[73629] = function() return (ADDON.playerIsClass("PALADIN")) and (ADDON.playerIsRace("Draenei") or ADDON.playerIsRace("LightforgedDraenei")) end, -- Exarch's Elekk
-[73630] = function() return (ADDON.playerIsClass("PALADIN")) and (ADDON.playerIsRace("Draenei") or ADDON.playerIsRace("LightforgedDraenei")) end, -- Great Exarch's Elekk
-[75596] = function() return (ADDON.playerHasProfession(197)) end, -- Frosty Flying Carpet
-[169952] = function() return (ADDON.playerHasProfession(197)) end, -- Creeping Carpet
-[171844] = function() return (ADDON.playerHasProfession(165)) end, -- Dustmane Direwolf
-[200175] = function() return (ADDON.playerIsClass("DEMONHUNTER")) end, -- Felsaber
-[229376] = function() return (ADDON.playerIsClass("MAGE")) end, -- Archmage's Prismatic Disc
-[229377] = function() return (ADDON.playerIsClass("PRIEST")) end, -- High Priest's Lightsworn Seeker
-[229385] = function() return (ADDON.playerIsClass("MONK")) end, -- Ban-Lu, Grandmaster's Companion
-[229386] = function() return (ADDON.playerIsClass("HUNTER")) end, -- Huntmaster's Loyal Wolfhawk
-[229387] = function() return (ADDON.playerIsClass("DEATHKNIGHT")) end, -- Deathlord's Vilebrood Vanquisher
-[229417] = function() return (ADDON.playerIsClass("DEMONHUNTER")) end, -- Slayer's Felbroken Shrieker
-[229438] = function() return (ADDON.playerIsClass("HUNTER")) end, -- Huntmaster's Fierce Wolfhawk
-[229439] = function() return (ADDON.playerIsClass("HUNTER")) end, -- Huntmaster's Dire Wolfhawk
-[231434] = function() return (ADDON.playerIsClass("ROGUE")) end, -- Shadowblade's Murderous Omen
-[231435] = function() return (ADDON.playerIsClass("PALADIN")) end, -- Highlord's Golden Charger
-[231442] = function() return (ADDON.playerIsClass("SHAMAN")) end, -- Farseer's Raging Tempest
-[231523] = function() return (ADDON.playerIsClass("ROGUE")) end, -- Shadowblade's Lethal Omen
-[231524] = function() return (ADDON.playerIsClass("ROGUE")) end, -- Shadowblade's Baneful Omen
-[231525] = function() return (ADDON.playerIsClass("ROGUE")) end, -- Shadowblade's Crimson Omen
-[231587] = function() return (ADDON.playerIsClass("PALADIN")) end, -- Highlord's Vengeful Charger
-[231588] = function() return (ADDON.playerIsClass("PALADIN")) end, -- Highlord's Vigilant Charger
-[231589] = function() return (ADDON.playerIsClass("PALADIN")) end, -- Highlord's Valorous Charger
-[232412] = function() return (ADDON.playerIsClass("WARLOCK")) end, -- Netherlord's Chaotic Wrathsteed
-[238452] = function() return (ADDON.playerIsClass("WARLOCK")) end, -- Netherlord's Brimstone Wrathsteed
-[238454] = function() return (ADDON.playerIsClass("WARLOCK")) end, -- Netherlord's Accursed Wrathsteed
-[270562] = function() return (ADDON.playerIsClass("PALADIN")) and (ADDON.playerIsRace("DarkIronDwarf")) end, -- Darkforge Ram
-[270564] = function() return (ADDON.playerIsClass("PALADIN")) and (ADDON.playerIsRace("Dwarf") or ADDON.playerIsRace("DarkIronDwarf")) end, -- Dawnforge Ram
-[290608] = function() return (ADDON.playerIsClass("PALADIN")) and (ADDON.playerIsRace("ZandalariTroll")) end, -- Crusader's Direhorn
+[17] = { ["class"]={"WARLOCK",}, }, -- Felsteed
+[41] = { ["class"]={"PALADIN",}, }, -- Warhorse
+[83] = { ["class"]={"WARLOCK",}, }, -- Dreadsteed
+[84] = { ["class"]={"PALADIN",}, }, -- Charger
+[149] = { ["class"]={"PALADIN",}, ["race"]={"BloodElf",}, }, -- Thalassian Charger
+[150] = { ["class"]={"PALADIN",}, ["race"]={"BloodElf",}, }, -- Thalassian Warhorse
+[204] = { ["skill"]={202,}, }, -- Turbo-Charged Flying Machine
+[205] = { ["skill"]={202,}, }, -- Flying Machine
+[221] = { ["class"]={"DEATHKNIGHT",}, }, -- Acherus Deathcharger
+[236] = { ["class"]={"DEATHKNIGHT",}, }, -- Winged Steed of the Ebon Blade
+[279] = { ["skill"]={197,}, }, -- Magnificent Flying Carpet
+[285] = { ["skill"]={197,}, }, -- Flying Carpet
+[338] = { ["class"]={"PALADIN",}, }, -- Argent Charger
+[350] = { ["class"]={"PALADIN",}, ["race"]={"Tauren",}, }, -- Sunwalker Kodo
+[351] = { ["class"]={"PALADIN",}, ["race"]={"Tauren",}, }, -- Great Sunwalker Kodo
+[367] = { ["class"]={"PALADIN",}, ["race"]={"Draenei","LightforgedDraenei",}, }, -- Exarch's Elekk
+[368] = { ["class"]={"PALADIN",}, ["race"]={"Draenei","LightforgedDraenei",}, }, -- Great Exarch's Elekk
+[375] = { ["skill"]={197,}, }, -- Frosty Flying Carpet
+[603] = { ["skill"]={197,}, }, -- Creeping Carpet
+[650] = { ["skill"]={165,}, }, -- Dustmane Direwolf
+[780] = { ["class"]={"DEMONHUNTER",}, }, -- Felsaber
+[860] = { ["class"]={"MAGE",}, }, -- Archmage's Prismatic Disc
+[861] = { ["class"]={"PRIEST",}, }, -- High Priest's Lightsworn Seeker
+[864] = { ["class"]={"MONK",}, }, -- Ban-Lu, Grandmaster's Companion
+[865] = { ["class"]={"HUNTER",}, }, -- Huntmaster's Loyal Wolfhawk
+[866] = { ["class"]={"DEATHKNIGHT",}, }, -- Deathlord's Vilebrood Vanquisher
+[867] = { ["class"]={"WARRIOR",}, }, -- Battlelord's Bloodthirsty War Wyrm
+[868] = { ["class"]={"DEMONHUNTER",}, }, -- Slayer's Felbroken Shrieker
+[870] = { ["class"]={"HUNTER",}, }, -- Huntmaster's Fierce Wolfhawk
+[872] = { ["class"]={"HUNTER",}, }, -- Huntmaster's Dire Wolfhawk
+[884] = { ["class"]={"ROGUE",}, }, -- Shadowblade's Murderous Omen
+[885] = { ["class"]={"PALADIN",}, }, -- Highlord's Golden Charger
+[888] = { ["class"]={"SHAMAN",}, }, -- Farseer's Raging Tempest
+[889] = { ["class"]={"ROGUE",}, }, -- Shadowblade's Lethal Omen
+[890] = { ["class"]={"ROGUE",}, }, -- Shadowblade's Baneful Omen
+[891] = { ["class"]={"ROGUE",}, }, -- Shadowblade's Crimson Omen
+[892] = { ["class"]={"PALADIN",}, }, -- Highlord's Vengeful Charger
+[893] = { ["class"]={"PALADIN",}, }, -- Highlord's Vigilant Charger
+[894] = { ["class"]={"PALADIN",}, }, -- Highlord's Valorous Charger
+[898] = { ["class"]={"WARLOCK",}, }, -- Netherlord's Chaotic Wrathsteed
+[930] = { ["class"]={"WARLOCK",}, }, -- Netherlord's Brimstone Wrathsteed
+[931] = { ["class"]={"WARLOCK",}, }, -- Netherlord's Accursed Wrathsteed
+[1046] = { ["class"]={"PALADIN",}, ["race"]={"DarkIronDwarf",}, }, -- Darkforge Ram
+[1047] = { ["class"]={"PALADIN",}, ["race"]={"Dwarf","DarkIronDwarf",}, }, -- Dawnforge Ram
+[1225] = { ["class"]={"PALADIN",}, ["race"]={"ZandalariTroll",}, }, -- Crusader's Direhorn
+[1298] = { ["covenant"]={2,}, }, -- Hopecrusher Gargon
+[1299] = { ["covenant"]={2,}, }, -- Battle Gargon Vrednic
+[1302] = { ["covenant"]={3,}, }, -- Dreamlight Runestag
+[1303] = { ["covenant"]={3,}, }, -- Enchanted Dreamlight Runestag
+[1354] = { ["covenant"]={3,}, }, -- Shadeleaf Runestag
+[1355] = { ["covenant"]={3,}, }, -- Wakener's Runestag
+[1356] = { ["covenant"]={3,}, }, -- Winterborn Runestag
+[1357] = { ["covenant"]={3,}, }, -- Enchanted Shadeleaf Runestag
+[1358] = { ["covenant"]={3,}, }, -- Enchanted Wakener's Runestag
+[1359] = { ["covenant"]={3,}, }, -- Enchanted Winterborn Runestag
+[1364] = { ["covenant"]={4,}, }, -- War-Bred Tauralus
+[1365] = { ["covenant"]={4,}, }, -- Plaguerot Tauralus
+[1366] = { ["covenant"]={4,}, }, -- Bonehoof Tauralus
+[1367] = { ["covenant"]={4,}, }, -- Chosen Tauralus
+[1368] = { ["covenant"]={4,}, }, -- Armored War-Bred Tauralus
+[1369] = { ["covenant"]={4,}, }, -- Armored Plaguerot Tauralus
+[1370] = { ["covenant"]={4,}, }, -- Armored Bonehoof Tauralus
+[1371] = { ["covenant"]={4,}, }, -- Armored Chosen Tauralus
+[1382] = { ["covenant"]={2,}, }, -- Inquisition Gargon
+[1384] = { ["covenant"]={2,}, }, -- Sinfall Gargon
+[1385] = { ["covenant"]={2,}, }, -- Crypt Gargon
+[1387] = { ["covenant"]={2,}, }, -- Desire's Battle Gargon
+[1388] = { ["covenant"]={2,}, }, -- Gravestone Battle Gargon
+[1389] = { ["covenant"]={2,}, }, -- Battle Gargon Silessa
+[1394] = { ["covenant"]={1,}, }, -- Phalynx of Loyalty
+[1395] = { ["covenant"]={1,}, }, -- Phalynx of Humility
+[1396] = { ["covenant"]={1,}, }, -- Phalynx of Courage
+[1398] = { ["covenant"]={1,}, }, -- Phalynx of Purity
+[1399] = { ["covenant"]={1,}, }, -- Eternal Phalynx of Purity
+[1400] = { ["covenant"]={1,}, }, -- Eternal Phalynx of Courage
+[1401] = { ["covenant"]={1,}, }, -- Eternal Phalynx of Loyalty
+[1402] = { ["covenant"]={1,}, }, -- Eternal Phalynx of Humility
 }

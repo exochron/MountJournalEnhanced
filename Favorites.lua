@@ -73,9 +73,9 @@ end
 --region Star Button
 
 local function RunSetFavorites(mountIds)
-    print(L['TASK_FAVOR_START'])
+    print(L.TASK_FAVOR_START)
     FavorMounts(mountIds, function()
-        print(L['TASK_END'])
+        print(L.TASK_END)
     end)
 end
 
@@ -91,34 +91,53 @@ local function FetchDisplayedMountIds()
 end
 
 local function InitializeDropDown(menu, level)
-    local info = {
-        keepShownOnClick = false,
-        isNotRadio = true,
-        notCheckable = true,
-        hasArrow = false,
-    }
 
-    if level == 1 then
-        info.text = L['FAVOR_DISPLAYED']
-        info.func = function()
+    local button = { isTitle = 1, text = FAVORITES, notCheckable = 1, }
+    UIDropDownMenu_AddButton(button, level)
+
+    button = {
+        keepShownOnClick = false,
+        notCheckable = true,
+        text = L.FAVOR_DISPLAYED,
+        func = function()
             RunSetFavorites(FetchDisplayedMountIds())
         end
-        UIDropDownMenu_AddButton(info, level)
+    }
+    UIDropDownMenu_AddButton(button, level)
 
-        info.text = UNCHECK_ALL
-        info.func = function()
+    button = {
+        keepShownOnClick = false,
+        notCheckable = true,
+        text = UNCHECK_ALL,
+        func = function()
             RunSetFavorites({})
         end
-        UIDropDownMenu_AddButton(info, level)
+    }
+    UIDropDownMenu_AddButton(button, level)
 
-        info.text = L["FAVOR_PER_CHARACTER"]
-        info.notCheckable = false
-        info.checked = ADDON.settings.favoritePerChar
-        info.func = function(_, _, _, value)
-            ADDON:ApplySetting('favoritePerChar', not value)
+    button = {
+        keepShownOnClick = true,
+        isNotRadio = true,
+        notCheckable = false,
+        checked = ADDON.settings.favoritePerChar,
+        text = L.FAVOR_PER_CHARACTER,
+        func = function(_, _, _, value)
+            ADDON:ApplySetting('favoritePerChar', value)
         end
-        UIDropDownMenu_AddButton(info, level)
-    end
+    }
+    UIDropDownMenu_AddButton(button, level)
+
+    button = {
+        keepShownOnClick = true,
+        isNotRadio = true,
+        notCheckable = false,
+        checked = ADDON.settings.autoFavor,
+        text = L.FAVOR_AUTO,
+        func = function(_, _, _, value)
+            ADDON:ApplySetting('autoFavor', value)
+        end
+    }
+    --UIDropDownMenu_AddButton(button, level)
 end
 
 local function BuildStarButton()
@@ -134,16 +153,6 @@ local function BuildStarButton()
     starButton.image:SetWidth(25)
     starButton.image:SetHeight(25)
     starButton.image:SetPoint("TOP", 0, 0)
-
-    local tooltip = CreateFrame("GameTooltip", "MJEFavoritesToolTip", starButton.frame, "SharedNoHeaderTooltipTemplate")
-    starButton:SetCallback("OnEnter", function()
-        tooltip:SetOwner(starButton.frame, "ANCHOR_TOP")
-        tooltip:SetText(FAVORITES)
-        tooltip:Show()
-    end)
-    starButton:SetCallback("OnLeave", function()
-        tooltip:Hide()
-    end)
 
     local menu
     starButton:SetCallback("OnClick", function()
@@ -166,6 +175,14 @@ end
 --endregion
 
 ADDON:RegisterBehaviourSetting('favoritePerChar', false, L.SETTING_FAVORITE_PER_CHAR, CollectFavoredMounts)
+
+-- TODO: doesn't work yet
+--ADDON:RegisterBehaviourSetting('autoFavor', false, L.SETTING_AUTO_FAVOR)
+ADDON.Events:RegisterCallback("OnNewMount", function(_, mountId)
+    if ADDON.settings.autoFavor and mountId then
+        ADDON.Api:SetIsFavoriteByID(mountId, true)
+    end
+end, "autoFavor")
 
 -- resetting personal favored mounts
 ADDON.Events:RegisterCallback("OnLogin", function()
