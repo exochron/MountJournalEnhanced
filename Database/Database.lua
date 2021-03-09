@@ -161,6 +161,7 @@ ADDON.DB.Source = {
         [333027] = true, -- Loyal Gorger - Revendreth
         [334391] = true, -- Phalynx of Courage - kyrian campaign quest
         [334406] = true, -- Eternal Phalynx of Courage - kyrian campaign quest
+        [344577] = true, -- Bound Shadehound (secret)
 
         ------------------------------
         -- Alliance ------------------

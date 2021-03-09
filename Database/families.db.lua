@@ -252,6 +252,7 @@ ADDON.DB.Family = {
 [1304] = true, -- Mawsworn Soulhunter
 [1422] = true, -- Warstitched Darkhound
 [1437] = true, -- Battle-Bound Warhound
+[1441] = true, -- Bound Shadehound
 [1442] = true, -- Corridor Creeper
 },
 ["Hyenas"] = {
