@@ -165,7 +165,7 @@ local function AddCheckAllAndNoneInfo(settings, level)
 end
 
 local function ShouldDisplayFamily(mountIds)
-    if ADDON.settings.hiddenIngame then
+    if ADDON.settings.filter[SETTING_HIDDEN_INGAME] then
         return true
     end
 

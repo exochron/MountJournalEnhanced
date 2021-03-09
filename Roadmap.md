@@ -4,8 +4,7 @@ still tainting:
 
 
 ### Next
-- covenant player conditions/restrictions
-- custom faction icon / restriction icon (gh#49)
+- automatic favor new mounts
 - special summon animation
 - switch through mount variation (eg. High Priest's Lightsworn Seeker: C_MountJournal.GetMountAllCreatureDisplayInfoByID(861))
 
