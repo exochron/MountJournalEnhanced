@@ -65,8 +65,9 @@ frame:SetScript("OnEvent", function(self, event, ...)
         ADDON.Events:UnregisterEvents({"OnInit", "OnLogin"})
     elseif event == "NEW_MOUNT_ADDED" then
         -- mount infos are not properly updated in current frame
+        local param1, param2, param3 = ...
         C_Timer.After(1, function()
-            ADDON.Events:TriggerEvent("OnNewMount", ...)
+            ADDON.Events:TriggerEvent("OnNewMount", param1, param2, param3)
             ADDON.Api:UpdateIndex()
         end)
     end
