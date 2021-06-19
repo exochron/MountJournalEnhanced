@@ -40,6 +40,7 @@ ADDON.DB.Family = {
 [1376] = true, -- Silvertip Dredwing
 [1310] = true, -- Horrid Dredwing
 [1377] = true, -- Rampart Screecher
+[1378] = true, -- Harvester's Dredwing
 },
 ["Birds"] = {
 ["Albatross"] = {
@@ -87,6 +88,10 @@ ADDON.DB.Family = {
 },
 ["Mechanical Birds"] = {
 [1224] = true, -- Wonderwing 2.0
+[1436] = true, -- Battle-Hardened Aquilon
+[1492] = true, -- Elysian Aquilon
+[1493] = true, -- Foresworn Aquilon
+[1494] = true, -- Ascendant's Aquilon
 },
 ["Pandaren Phoenixes"] = {
 [503] = true, -- Crimson Pandaren Phoenix
@@ -254,6 +259,7 @@ ADDON.DB.Family = {
 [1437] = true, -- Battle-Bound Warhound
 [1441] = true, -- Bound Shadehound
 [1442] = true, -- Corridor Creeper
+[1477] = true, -- Undying Darkhound
 },
 ["Hyenas"] = {
 [928] = true, -- Dune Scavenger
@@ -444,6 +450,7 @@ ADDON.DB.Family = {
 [548] = true, -- Armored Red Dragonhawk
 [549] = true, -- Armored Blue Dragonhawk
 [778] = true, -- Eclipse Dragonhawk
+[1471] = true, -- Vengeance
 },
 ["Drakes"] = {
 ["Cloud Serpents"] = {
@@ -549,6 +556,7 @@ ADDON.DB.Family = {
 [866] = true, -- Deathlord's Vilebrood Vanquisher
 [883] = true, -- Smoldering Ember Wyrm
 [1363] = true, -- Sinful Gladiator's Soul Eater
+[1480] = true, -- Unchained Gladiator's Soul Eater
 },
 ["Wind Drakes"] = {
 [392] = true, -- Drake of the East Wind
@@ -572,11 +580,6 @@ ADDON.DB.Family = {
 [606] = true, -- Core Hound
 [797] = true, -- Steelbound Devourer
 [1048] = true, -- Dark Iron Core Hound
-},
-["Elementals"] = {
-[888] = true, -- Farseer's Raging Tempest
-[1219] = true, -- Glacial Tidestorm
-[1419] = true, -- Sintouched Deathwalker
 },
 ["Phoenixes"] = {
 [183] = true, -- Ashes of Al'ar
@@ -609,6 +612,13 @@ ADDON.DB.Family = {
 [948] = true, -- Demonic Gladiator's Storm Dragon
 [1212] = true, -- Island Thunderscale
 [1314] = true, -- Drake of the Four Winds
+},
+["Others"] = {
+[888] = true, -- Farseer's Raging Tempest
+[1219] = true, -- Glacial Tidestorm
+[1419] = true, -- Sintouched Deathwalker
+[1458] = true, -- Wandering Ancient
+[1520] = true, -- Soultwisted Deathwalker
 },
 },
 ["Feathermanes"] = {
@@ -748,6 +758,7 @@ ADDON.DB.Family = {
 [1360] = true, -- Shimmermist Runner
 [1413] = true, -- Dauntless Duskrunner
 [1426] = true, -- Ascended Skymane
+[1511] = true, -- Maelie, the Wanderer
 },
 ["Mechanical Steeds"] = {
 [552] = true, -- Ironbound Wraithcharger
@@ -802,6 +813,10 @@ ADDON.DB.Family = {
 [1196] = true, -- Vicious Black Bonesteed
 [1213] = true, -- Risen Mare
 [1414] = true, -- Sinrunner Blanchy
+[1416] = true, -- Mawsworn Charger
+[1500] = true, -- Sanctum Gloomcharger
+[1501] = true, -- Soulbound Gloomcharger
+[1502] = true, -- Fallen Charger
 },
 },
 ["Humanoids"] = {
@@ -841,6 +856,15 @@ ADDON.DB.Family = {
 [1362] = true, -- Spinemaw Gladechewer
 [1392] = true, -- Pale Acidmaw
 [1420] = true, -- Umbral Scythehorn
+[1459] = true, -- Vicious War Gorm
+[1460] = true, -- Vicious War Gorm
+[1476] = true, -- Wild Hunt Legsplitter
+},
+["Flies"] = {
+[1449] = true, -- Lord of the Corpseflies
+[1495] = true, -- Maldraxxian Corpsefly
+[1496] = true, -- Regal Corpsefly
+[1497] = true, -- Battlefield Swarmer
 },
 ["Krolusks"] = {
 [933] = true, -- Obsidian Krolusk
@@ -966,6 +990,12 @@ ADDON.DB.Family = {
 [1256] = true, -- Snapdragon Kelpstalker
 [1255] = true, -- Deepcoral Snapdragon
 },
+["Shardhides"] = {
+[1455] = true, -- Beryl Shardhide
+[1505] = true, -- Amber Shardhide
+[1506] = true, -- Crimson Shardhide
+[1507] = true, -- Darkmaul
+},
 ["Turtles"] = {
 [125] = true, -- Riding Turtle
 [312] = true, -- Sea Turtle
@@ -984,6 +1014,9 @@ ADDON.DB.Family = {
 [847] = true, -- Arcadian War Turtle
 [900] = true, -- Vicious War Turtle
 [901] = true, -- Vicious War Turtle
+},
+["Others"] = {
+[1444] = true, -- Viridian Phase-Hunter
 },
 },
 ["Rylaks"] = {
@@ -1119,12 +1152,20 @@ ADDON.DB.Family = {
 ["Discs"] = {
 [509] = true, -- Red Flying Cloud
 [860] = true, -- Archmage's Prismatic Disc
+[1446] = true, -- Tazavesh Gearglider
+[1481] = true, -- Cartel Master's Gearglider
 },
 ["Gyrocopters"] = {
 [204] = true, -- Turbo-Charged Flying Machine
 [205] = true, -- Flying Machine
 [304] = true, -- Mimiron's Head
 [1028] = true, -- Mecha-Mogul Mk2
+},
+["Hands"] = {
+[1417] = true, -- Hand of Hrestimorak
+[1475] = true, -- Hand of Bahmethra
+[1503] = true, -- Hand of Nilganihmaht
+[1504] = true, -- Hand of Salaranga
 },
 ["Hovercraft"] = {
 [999] = true, -- Xiwyllag ATV
@@ -1160,6 +1201,10 @@ ADDON.DB.Family = {
 [1400] = true, -- Eternal Phalynx of Courage
 [1401] = true, -- Eternal Phalynx of Loyalty
 [1402] = true, -- Eternal Phalynx of Humility
+[1436] = true, -- Battle-Hardened Aquilon
+[1492] = true, -- Elysian Aquilon
+[1493] = true, -- Foresworn Aquilon
+[1494] = true, -- Ascendant's Aquilon
 },
 ["Mechanostriders"] = {
 [39] = true, -- Red Mechanostrider
