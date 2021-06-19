@@ -1,8 +1,7 @@
 local ADDON_NAME, ADDON = ...
 
--- TODOs:
--- Option: Auto favorite new mounts; even those learned during offline time
--- (Favorite Menu at SummonRandomFavoriteButton?)
+-- TODO:
+-- - (Favorite Menu at SummonRandomFavoriteButton?)
 
 local L = ADDON.L
 local starButton
@@ -90,7 +89,7 @@ local function FetchDisplayedMountIds()
     return mountIds
 end
 
-local function InitializeDropDown(menu, level)
+local function InitializeDropDown(_, level)
 
     local button = { isTitle = 1, text = FAVORITES, notCheckable = 1, }
     UIDropDownMenu_AddButton(button, level)
@@ -137,7 +136,7 @@ local function InitializeDropDown(menu, level)
             ADDON:ApplySetting('autoFavor', value)
         end
     }
-    --UIDropDownMenu_AddButton(button, level)
+    UIDropDownMenu_AddButton(button, level)
 end
 
 local function BuildStarButton()
@@ -176,8 +175,7 @@ end
 
 ADDON:RegisterBehaviourSetting('favoritePerChar', false, L.SETTING_FAVORITE_PER_CHAR, CollectFavoredMounts)
 
--- TODO: doesn't work yet
---ADDON:RegisterBehaviourSetting('autoFavor', false, L.SETTING_AUTO_FAVOR)
+ADDON:RegisterBehaviourSetting('autoFavor', false, L.SETTING_AUTO_FAVOR)
 ADDON.Events:RegisterCallback("OnNewMount", function(_, mountId)
     if ADDON.settings.autoFavor and mountId then
         ADDON.Api:SetIsFavoriteByID(mountId, true)

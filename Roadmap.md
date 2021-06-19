@@ -4,7 +4,6 @@ still tainting:
 
 
 ### Next
-- automatic favor new mounts
 - special summon animation
 - switch through mount variation (eg. High Priest's Lightsworn Seeker: C_MountJournal.GetMountAllCreatureDisplayInfoByID(861))
 
