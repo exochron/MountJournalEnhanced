@@ -4,6 +4,7 @@ local ADDON_NAME, ADDON = ...
 ADDON.Events = CreateFromMixins(CallbackRegistryMixin)
 ADDON.Events:OnLoad()
 ADDON.Events:SetUndefinedEventsAllowed(true)
+-- remove after 9.1 release
 if not ADDON.Events.UnregisterEvents then
     ADDON.Events.UnregisterEvents = function(events)
         for event in pairs(events) do
@@ -63,8 +64,11 @@ frame:SetScript("OnEvent", function(self, event, ...)
         --ADDON.Debug:CheckListTaint("post-login")
         ADDON.Events:UnregisterEvents({"OnInit", "OnLogin"})
     elseif event == "NEW_MOUNT_ADDED" then
-        ADDON.Events:TriggerEvent("OnNewMount", ...)
-        ADDON.Api:UpdateIndex()
+        -- mount infos are not properly updated in current frame
+        C_Timer.After(1, function()
+            ADDON.Events:TriggerEvent("OnNewMount", ...)
+            ADDON.Api:UpdateIndex()
+        end)
     end
 end)
 
