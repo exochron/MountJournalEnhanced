@@ -1280,6 +1280,12 @@ ADDON.DB.Family = {
 [1246] = true, -- Ironclad Frostclaw
 [1285] = true, -- Frostwolf Snarler
 },
+["Wilderlings"] = {
+[1484] = true, -- Ardenweald Wilderling
+[1485] = true, -- Autumnal Wilderling
+[1486] = true, -- Winter Wilderling
+[1487] = true, -- Summer Wilderling
+},
 ["Wolves"] = {
 [12] = true, -- Black Wolf
 [13] = true, -- Red Wolf

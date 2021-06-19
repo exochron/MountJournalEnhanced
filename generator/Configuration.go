@@ -351,6 +351,7 @@ func LoadConfig() config {
 					{Name: "Dire Wolves", Wcm: []string{"Wolves"}, Icons: []string{"wolfdraenor", "orcclanworg"}, Spells: []int{171851}}, // Garn Nighthowl
 					{Name: "Undead Wolves", Wcm: []string{"Undead Wolves"}},
 					{Name: "War Wolves", Wcm: []string{"Wolves"}, Icons: []string{"hordepvpmount", "alliancewolf", "armoredwolf", "frostwolfhowler"}, Spells: []int{306421}}, // Frostwolf Snarler
+					{Name: "Wilderlings", Wcm: []string{"Wilderlings"},},
 					{Name: "Wolves", Wcm: []string{"Wolves"}, Icons: []string{"direwolf"}, Spells: []int{16081}},                                                             // Arctic Wolf
 				},
 			},

@@ -135,8 +135,11 @@ ADDON.DB.Source = {
         [353859] = true, -- Summer Wilderling - Korthia - Escaped Wilderling
         [353877] = true, -- Foresworn Aquilon - Korthia - Wild Worldcracker
         [354353] = true, -- Fallen Charger - The Maw - Fallen Charger
+        [354354] = true, -- Hand of Nilganihmaht - The Maw - secret/treasure hunt
         [354357] = true, -- Crimson Shardhide - Korthia - Malbog
         [354360] = true, -- Garnet Razorwing - Korthia - Reliwik the Defiant
+        [354361] = true, -- Dusklight Razorwing - Korthia - random eggs
+        [354362] = true, -- Maelie the Wanderer - Korthia - treasure quest chain
         [356501] = true, -- Rampaging Mauler - Korthia - Konthrogz the Obliterator
     },
 
@@ -514,6 +517,7 @@ ADDON.DB.Source = {
         [347251] = true, -- Soaring Razorwing - Korthia - The Archivists' Codex - Tier 6
         [347536] = true, -- Tamed Mauler - Korthia - Supplies of the Archivists' Codex
         [347810] = true, -- Beryl Shardhide - Korthia - Death's Advance Supplies
+        [354352] = true, -- Soulbound Gloomcharger - The Maw - Mysterious Gift from Ve'nari
         [354356] = true, -- Amber Shardhide - Korthia - Death's Advance
         [354359] = true, -- Fierce Razorwing - Korthia - Death's Advance Supplies
 
@@ -919,13 +923,17 @@ ADDON.DB.Source = {
         [336064] = true, -- Dauntless Duskrunner - generic covenant feature
         [340503] = true, -- Umbral Scythehorn - night fae feature vendor
         [343550] = true, -- Battle-Hardened Aquilon - kyrian korthia vendor
+        [353856] = true, -- Ardenweald Wilderling - night fae renown 45
         [353857] = true, -- Autumnal Wilderling - night fae renown vendor
         [353858] = true, -- Winter Wilderling - night fae korthia vendor
         [353866] = true, -- Obsidian Gravewing - venthyr renown vendor
+        [353872] = true, -- Sinfall Gravewing - venthyr renown 45
         [353873] = true, -- Pale Gravewing - venthyr korthia vendor
+        [353875] = true, -- Elysian Aquilon - kirian renown 45
         [353880] = true, -- Ascendant's Aquilon - kyrian renown vendor
-        [353884] = true, -- Regal Corpsefly - undying army renown vendor
-        [353885] = true, -- Battlefield Swarmer - undying army korthia vendor
+        [353883] = true, -- Maldraxxian Corpsefly - necrolord renown 45
+        [353884] = true, -- Regal Corpsefly - necrolord renown vendor
+        [353885] = true, -- Battlefield Swarmer - necrolord korthia vendor
     },
 
     ["Island Expedition"] = {
@@ -1369,6 +1377,7 @@ ADDON.DB.FeatsOfStrength = {
     [262027] = 13958, -- Corrupted Gladiator's Proto-Drake
     [264058] = 14183, -- Mighty Caravan Brutosaur
     [332400] = 14816, -- Sinful Gladiator's Soul Eater
+    [353036] = 14999, -- Unchained Gladiator's Soul Eater
 }
 
 ADDON.DB.Expansion = {
