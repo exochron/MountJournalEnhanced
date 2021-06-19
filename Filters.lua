@@ -117,11 +117,15 @@ local function prepareSettings(settings, sourceData)
 
             if type(settings[key]) == "table" then
                 for subId, subValue in pairs(prepareSettings(settings[key], sourceData[key])) do
-                    result[subId] = subValue
+                    if not result[subId] then -- if it was somewhere true than keep it true.
+                        result[subId] = subValue
+                    end
                 end
             else
                 for id, _ in pairs(sourceList) do
-                    result[id] = settings[key]
+                    if not result[id] then
+                        result[id] = settings[key]
+                    end
                 end
             end
         end

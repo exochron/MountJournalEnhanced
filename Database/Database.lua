@@ -1418,6 +1418,7 @@ ADDON.DB.Expansion = {
         [312759] = true, -- Dreamlight Runestag
         [312754] = true, -- Battle Gargon Vrednic
         [312753] = true, -- Hopecrusher Gargon
+        [312777] = true, -- Silvertip Dredwing
     }
 }
 

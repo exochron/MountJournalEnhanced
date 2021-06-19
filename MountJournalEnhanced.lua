@@ -4,6 +4,13 @@ local ADDON_NAME, ADDON = ...
 ADDON.Events = CreateFromMixins(CallbackRegistryMixin)
 ADDON.Events:OnLoad()
 ADDON.Events:SetUndefinedEventsAllowed(true)
+if not ADDON.Events.UnregisterEvents then
+    ADDON.Events.UnregisterEvents = function(events)
+        for event in pairs(events) do
+            ADDON.Events:UnregisterAllCallbacksByEvent(event)
+        end
+    end
+end
 
 local function InitUI()
     ADDON.Api:UpdateIndex()
@@ -45,7 +52,7 @@ frame:SetScript("OnEvent", function(self, event, ...)
     if MountJournal then
         frame:UnregisterEvent("ADDON_LOADED")
         ADDON.Events:TriggerEvent("OnJournalLoaded")
-        ADDON.Events:UnregisterAllCallbacksByEvent("OnJournalLoaded")
+        ADDON.Events:UnregisterEvents({"OnJournalLoaded"})
     end
 
     if event == "PLAYER_LOGIN" then
@@ -54,8 +61,7 @@ frame:SetScript("OnEvent", function(self, event, ...)
         --ADDON.Debug:CheckListTaint("pre-login")
         ADDON.Events:TriggerEvent("OnLogin")
         --ADDON.Debug:CheckListTaint("post-login")
-        ADDON.Events:UnregisterAllCallbacksByEvent("OnInit")
-        ADDON.Events:UnregisterAllCallbacksByEvent("OnLogin")
+        ADDON.Events:UnregisterEvents({"OnInit", "OnLogin"})
     elseif event == "NEW_MOUNT_ADDED" then
         ADDON.Events:TriggerEvent("OnNewMount", ...)
         ADDON.Api:UpdateIndex()
@@ -77,9 +83,7 @@ EventRegistry:RegisterCallback("MountJournal.OnShow", function()
         ADDON.Events:TriggerEvent("postloadUI")
         --ADDON.Debug:CheckListTaint("post postloadUI")
 
-        ADDON.Events:UnregisterAllCallbacksByEvent("preloadUI")
-        ADDON.Events:UnregisterAllCallbacksByEvent("loadUI")
-        ADDON.Events:UnregisterAllCallbacksByEvent("postloadUI")
+        ADDON.Events:UnregisterEvents({"preloadUI", "loadUI", "postloadUI"})
 
         if ADDON.Api:GetSelected() == nil then
             ADDON.Api:SetSelected(select(12, ADDON.Api:GetDisplayedMountInfo(1)))

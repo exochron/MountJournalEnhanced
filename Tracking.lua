@@ -120,4 +120,4 @@ local function parseLearnedDateFromAchievements()
         end
     end
 end
-ADDON.Events:RegisterCallback("preloadUI", BuildStarButton, "tracking")
+ADDON.Events:RegisterCallback("preloadUI", parseLearnedDateFromAchievements, "tracking")
