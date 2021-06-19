@@ -18,7 +18,7 @@ if (tonumber(UI_DROPDOWN_ENABLE_ART_PATCH_VERSION) or 0) < 1 then
     end)
 end
 
--- The Portrait icon in the collections window is a bit so small. You can actually see the edges of the icon within.
+-- The Portrait icon in the collections window is a bit too small. You can actually see the edges of the icon within.
 -- This fix makes the icon a bit bigger. So it properly fills the gaps within the circle.
 if (tonumber(UI_COLLECTIONS_PORTRAIT_SIZE_VERSION) or 0) < 1 then
     UI_COLLECTIONS_PORTRAIT_SIZE_VERSION = 1
