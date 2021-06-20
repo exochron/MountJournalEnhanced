@@ -1,12 +1,31 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
+
+-- can we skip known useless updates because its called a second time immediately anyway?
+local function shouldSkipUpdate()
+    local callTrace = debugstack(0, 0, 4)
+    if string.find(callTrace, "AlertFrameSystems.lua") then
+        -- our update gets called 3 times with a click on popup for new mount. it even taints with PrepareForFanfare.
+        if string.find(callTrace, "SetCollectionsJournalShown") then
+            return true
+        end
+
+        if string.find(callTrace, "MountJournal_SelectByMountID") -- the original select call
+                and not string.find(callTrace, "Api.lua") -- our hooked api
+        then
+            return true
+        end
+    end
+
+    return false
+end
 
 --- This is the hooked version of MountJournal_UpdateMountDisplay() which calls the Api.
 --- The whole reason for this is to avoid some code taint.
 ---
 --- from https://www.townlong-yak.com/framexml/live/Blizzard_Collections/Blizzard_MountCollection.lua#533
 function ADDON.UI:UpdateMountDisplay(forceSceneChange)
-    if (ADDON.initialized and ADDON.Api:GetSelected()) then
-        local creatureName, spellID, icon, active, isUsable, sourceType = C_MountJournal.GetMountInfoByID(ADDON.Api:GetSelected());
+    if ADDON.initialized and ADDON.Api:GetSelected() and not shouldSkipUpdate() then
+        local creatureName, spellID, icon, active, isUsable, _ = C_MountJournal.GetMountInfoByID(ADDON.Api:GetSelected());
         local needsFanfare = C_MountJournal.NeedsFanfare(ADDON.Api:GetSelected());
         if (MountJournal.MountDisplay.MJE_lastDisplayed ~= spellID or forceSceneChange) then
             local creatureDisplayID, descriptionText, sourceText, isSelfMount, _, modelSceneID, animID, spellVisualKitID, disablePlayerMountPreview = C_MountJournal.GetMountInfoExtraByID(ADDON.Api:GetSelected());

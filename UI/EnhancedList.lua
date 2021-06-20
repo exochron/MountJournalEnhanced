@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 local RestrictionsDB = ADDON.DB.Restrictions
 
@@ -49,7 +49,7 @@ function ADDON.UI:UpdateMountList()
         local displayIndex = i + offset;
         if (displayIndex <= numDisplayedMounts and showMounts) then
             local index = displayIndex;
-            local creatureName, spellID, icon, active, isUsable, sourceType, isFavorite, isFactionSpecific, faction, isFiltered, isCollected, mountID = ADDON.Api:GetDisplayedMountInfo(index)
+            local creatureName, spellID, icon, active, isUsable, _, isFavorite, isFactionSpecific, faction, _, isCollected, mountID = ADDON.Api:GetDisplayedMountInfo(index)
             local needsFanfare = C_MountJournal.NeedsFanfare(mountID);
             button.name:SetText(creatureName);
             button.icon:SetTexture(needsFanfare and COLLECTIONS_FANFARE_ICON or icon);
@@ -195,9 +195,9 @@ local function SetupButtons(scrollFrame)
     buttons[1]:SetHeight(height)
     HybridScrollFrame_CreateButtons(scrollFrame, "MountListButtonTemplate")
 
-    for i, button in ipairs(buttons) do
-        button:SetScript("OnClick", function(self, button)
-            if button ~= "LeftButton" then
+    for _, button in ipairs(buttons) do
+        button:SetScript("OnClick", function(self, clickButton)
+            if clickButton ~= "LeftButton" then
                 -- right click is handled in MountListDropDown.lua
             elseif IsModifiedClick("CHATLINK") then
                 -- No MacroFrame exception :>
@@ -207,9 +207,9 @@ local function SetupButtons(scrollFrame)
                 ADDON.Api:SetSelected(self.mountID);
             end
         end)
-        button.DragButton:SetScript("OnClick", function(self, button)
+        button.DragButton:SetScript("OnClick", function(self, clickButton)
             local parent = self:GetParent();
-            if button ~= "LeftButton" then
+            if clickButton ~= "LeftButton" then
             elseif IsModifiedClick("CHATLINK") then
                 local spellLink = GetSpellLink(parent.spellID)
                 ChatEdit_InsertLink(spellLink)
@@ -221,8 +221,8 @@ local function SetupButtons(scrollFrame)
             ADDON.Api:PickupByID(self:GetParent().mountID)
         end)
 
-        button:HookScript("OnDoubleClick", function(sender, button)
-            if button == "LeftButton" then
+        button:HookScript("OnDoubleClick", function(sender, clickButton)
+            if clickButton == "LeftButton" then
                 ADDON.Api:UseMount(sender.mountID)
             end
         end)
@@ -292,13 +292,10 @@ end
 
 ADDON.Events:RegisterCallback("preloadUI", function()
     MountJournal.ListScrollFrame:Hide()
-    --ADDON.Debug:CheckListTaint("after list hide")
     MountJournal.MJE_ListScrollFrame = CreateFrame("ScrollFrame", "MountJournalEnhancedListScrollFrame", MountJournal, "MJE_ListScrollFrameTemplate")
     MountJournal.MJE_ListScrollFrame.scrollBar.doNotHide = true
 
-    --ADDON.Debug:CheckListTaint("before list buttons")
     SetupButtons(MountJournal.MJE_ListScrollFrame)
-    --ADDON.Debug:CheckListTaint("after list buttons")
 
     MountJournal.MJE_ListScrollFrame.update = ADDON.UI.UpdateMountList
     hooksecurefunc("MountJournal_UpdateMountList", ADDON.UI.UpdateMountList)
