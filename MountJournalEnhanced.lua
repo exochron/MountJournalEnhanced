@@ -5,7 +5,7 @@ ADDON.Events = CreateFromMixins(CallbackRegistryMixin)
 ADDON.Events:OnLoad()
 ADDON.Events:SetUndefinedEventsAllowed(true)
 -- remove after 9.1 release
-if not ADDON.Events.UnregisterEvents then
+if ADDON.Events.UnregisterAllCallbacksByEvent then
     ADDON.Events.UnregisterEvents = function(events)
         for event in pairs(events) do
             ADDON.Events:UnregisterAllCallbacksByEvent(event)
