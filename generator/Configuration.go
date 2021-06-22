@@ -46,6 +46,7 @@ func LoadConfig() config {
 		},
 
 		// family based on http://www.warcraftmounts.com/gallery.php + https://wow.gamepedia.com/Beast
+		// try to keep naming in singular
 		FamilyMap: []familyConfig{
 			{
 				Name: "Amphibian",
@@ -136,6 +137,14 @@ func LoadConfig() config {
 				},
 			},
 			{
+				Name: "Devourer",
+				SubFamily: []familyConfig{
+					{Name: "Animite", Wcm: []string{"Animites"}},
+                    {Name: "Gorger", Wcm: []string{"Anima Gorgers"}},
+                    {Name: "Mauler", Wcm: []string{"Devourer Maulers"}},
+				},
+			},
+			{
 				Name: "Dinosaurs",
 				SubFamily: []familyConfig{
 					{Name: "Brutosaurs", Wcm: []string{"Brutosaurs"}},
@@ -192,6 +201,7 @@ func LoadConfig() config {
 					{Name: "Stingrays", Wcm: []string{"Stingrays"}},
 				},
 			},
+            {Name: "Gargoyle", Wcm: []string{"Gargoyles"}},
 			{
 				Name: "Horses",
 				SubFamily: []familyConfig{
@@ -289,6 +299,7 @@ func LoadConfig() config {
 					{Name: "Stingrays", Wcm: []string{"Stingrays"}},
 				},
 			},
+            {Name: "Razorwing", Wcm: []string{"Razorwings"}},
 			{
 				Name: "Reptiles",
 				SubFamily: []familyConfig{

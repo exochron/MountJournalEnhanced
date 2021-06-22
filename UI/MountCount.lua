@@ -48,12 +48,12 @@ local function CreateCharacterMountCount()
 
     frame.staticText = frame:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
     frame.staticText:ClearAllPoints()
-    frame.staticText:SetPoint("LEFT", frame, 6, 0)
+    frame.staticText:SetPoint("LEFT", frame, 5, 0)
     frame.staticText:SetText(CHARACTER)
 
     frame.uniqueCount = frame:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
     frame.uniqueCount:ClearAllPoints()
-    frame.uniqueCount:SetPoint("RIGHT", frame, -6, 0)
+    frame.uniqueCount:SetPoint("RIGHT", frame, -5, 0)
 
     local updateTexts = function(_, value, _, _, _, isRecursiveCall)
 
@@ -109,8 +109,9 @@ ADDON:RegisterUISetting('showPersonalCount', true, ADDON.L.SETTING_MOUNT_COUNT, 
             if flag then
                 MountJournal.MountCount:SetSize(130, 19)
                 MountJournal.MountCount:SetPoint("TOPLEFT", 70, -41)
-                MountJournal.MountCount.Label:SetPoint("LEFT", 6, 0)
-                MountJournal.MountCount.Count:SetPoint("RIGHT", -6, 0)
+                MountJournal.MountCount.Label:ClearAllPoints()
+                MountJournal.MountCount.Label:SetPoint("LEFT", 5, 0)
+                MountJournal.MountCount.Count:SetPoint("RIGHT", -5, 0)
             else
                 ADDON.UI:RestoreSize(MountJournal.MountCount)
                 ADDON.UI:RestorePoint(MountJournal.MountCount)

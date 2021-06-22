@@ -381,6 +381,20 @@ ADDON.DB.Family = {
 [954] = true, -- Shackled Ur'zul
 },
 },
+["Devourer"] = {
+["Animite"] = {
+[1309] = true, -- Chittering Animite
+[1379] = true, -- Endmire Flyer
+},
+["Gorger"] = {
+[1391] = true, -- Loyal Gorger
+[1443] = true, -- Voracious Gorger
+},
+["Mauler"] = {
+[1454] = true, -- Tamed Mauler
+[1514] = true, -- Rampaging Mauler
+},
+},
 ["Dinosaurs"] = {
 ["Brutosaurs"] = {
 [1039] = true, -- Mighty Caravan Brutosaur
@@ -696,6 +710,11 @@ ADDON.DB.Family = {
 [1166] = true, -- Great Sea Ray
 },
 },
+["Gargoyle"] = {
+[1489] = true, -- Obsidian Gravewing
+[1490] = true, -- Sinfall Gravewing
+[1491] = true, -- Pale Gravewing
+},
 ["Horses"] = {
 ["Chargers"] = {
 [41] = true, -- Warhorse
@@ -938,6 +957,12 @@ ADDON.DB.Family = {
 [855] = true, -- Darkwater Skate
 [1166] = true, -- Great Sea Ray
 },
+},
+["Razorwing"] = {
+[1450] = true, -- Soaring Razorwing
+[1508] = true, -- Fierce Razorwing
+[1509] = true, -- Garnet Razorwing
+[1510] = true, -- Dusklight Razorwing
 },
 ["Reptiles"] = {
 ["Basilisks"] = {
