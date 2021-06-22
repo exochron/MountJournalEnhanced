@@ -77,7 +77,7 @@ frame:RegisterEvent("PLAYER_MOUNT_DISPLAY_CHANGED") -- player mounts or dismount
 frame:SetScript("OnEvent", checkMountEvent)
 
 ADDON.Events:RegisterCallback("OnLogin", checkMountEvent, "tracking")
-ADDON.Events:RegisterCallback("OnNewMount", function(mountId)
+ADDON.Events:RegisterCallback("OnNewMount", function(_, mountId)
     if mountId and ADDON.settings.trackUsageStats then
         local blob = initData(mountId)
         blob[INDEX_LEARNED_TIME] = GetServerTime()
