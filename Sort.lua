@@ -126,7 +126,7 @@ function ADDON:SortMounts(ids)
     for _, mountId in ipairs(ids) do
         local name, _, _, _, isUsable, _, isFavorite, _, _, _, isCollected = ADDON.Api:GetMountInfoByID(mountId)
 
-        local needsFanfare
+        local needsFanfare = false
         if isCollected and fanfareCount > 0 then
             needsFanfare = C_MountJournal.NeedsFanfare(mountId)
             if needsFanfare then

@@ -46,6 +46,7 @@ func LoadConfig() config {
 		},
 
 		// family based on http://www.warcraftmounts.com/gallery.php + https://wow.gamepedia.com/Beast
+		// try to keep naming in singular
 		FamilyMap: []familyConfig{
 			{
 				Name: "Amphibian",
@@ -136,6 +137,14 @@ func LoadConfig() config {
 				},
 			},
 			{
+				Name: "Devourer",
+				SubFamily: []familyConfig{
+					{Name: "Animite", Wcm: []string{"Animites"}},
+                    {Name: "Gorger", Wcm: []string{"Anima Gorgers"}},
+                    {Name: "Mauler", Wcm: []string{"Devourer Maulers"}},
+				},
+			},
+			{
 				Name: "Dinosaurs",
 				SubFamily: []familyConfig{
 					{Name: "Brutosaurs", Wcm: []string{"Brutosaurs"}},
@@ -167,11 +176,11 @@ func LoadConfig() config {
 				Name: "Elementals",
 				SubFamily: []familyConfig{
 					{Name: "Core Hounds", Wcm: []string{"Core Hounds"}},
-					{Name: "Elementals", Wcm: []string{"Elementals"}},
 					{Name: "Phoenixes", Wcm: []string{"Phoenixes"}},
 					{Name: "Sabers", Wcm: []string{"Flamesabers"}},
 					{Name: "Stone Drakes", Wcm: []string{"Stone Drakes"}},
 					{Name: "Wind Drakes", Wcm: []string{"Wind Drakes"}},
+					{Name: "Others", Wcm: []string{"Elementals", "Ancients"}},
 				},
 			},
 			{
@@ -192,6 +201,7 @@ func LoadConfig() config {
 					{Name: "Stingrays", Wcm: []string{"Stingrays"}},
 				},
 			},
+            {Name: "Gargoyle", Wcm: []string{"Gargoyles"}},
 			{
 				Name: "Horses",
 				SubFamily: []familyConfig{
@@ -244,7 +254,20 @@ func LoadConfig() config {
 					{Name: "Animite", Wcm: []string{"Animites"}},
 					{Name: "Aqir Flyers", Wcm: []string{"Aqir Flyers"}},
 					{Name: "Bees", Wcm: []string{"Bees"}},
-					{Name: "Gorm", Wcm: []string{"Gorm"}},
+					{
+					    Name: "Gorm",
+					    Wcm: []string{"Gorm"},
+                        Spells: []int{ // somehow WCM has currently wrong mount ids for gorm
+                            334364, // Spinemaw Gladechewer
+                            312763, // Darkwarren Hardshell
+                            334365, // Pale Acidmaw
+                            340503, // Umbral Scythehorn
+                            348769, // Vicious War
+                            348770, // Vicious War Gorm
+                            352441, // Wild Hunt Legsplitter
+                        },
+					},
+					{Name: "Flies", Wcm: []string{"Flies"}},
 					{Name: "Krolusks", Wcm: []string{"Krolusks"}},
 					{Name: "Moth", Wcm: []string{"Moths"}},
 					{Name: "Ravagers", Wcm: []string{"Ravagers"}},
@@ -276,6 +299,7 @@ func LoadConfig() config {
 					{Name: "Stingrays", Wcm: []string{"Stingrays"}},
 				},
 			},
+            {Name: "Razorwing", Wcm: []string{"Razorwings"}},
 			{
 				Name: "Reptiles",
 				SubFamily: []familyConfig{
@@ -286,7 +310,9 @@ func LoadConfig() config {
 					{Name: "N'Zoth Serpents", Wcm: []string{"N'Zoth Serpents"}},
 					{Name: "Sea Serpents", Wcm: []string{"Sea Serpents"}},
 					{Name: "Snapdragons", Wcm: []string{"Snapdragons"}},
+					{Name: "Shardhides", Wcm: []string{"Shardhides"}},
 					{Name: "Turtles", Wcm: []string{"Dragon Turtles", "Sea Turtles", "Turtles"}},
+					{Name: "Others", Wcm: []string{"Warp Stalkers"}},
 				},
 			},
 			{
@@ -317,6 +343,7 @@ func LoadConfig() config {
 					{Name: "Carpets", Wcm: []string{"Flying Carpets"}},
 					{Name: "Discs", Wcm: []string{"Discs"}},
 					{Name: "Gyrocopters", Wcm: []string{"Gyrocopters"}},
+					{Name: "Hands", Wcm: []string{"Undead Hands"}},
 					{Name: "Hovercraft", Wcm: []string{"Hovercraft"}},
 					{Name: "Jet Aerial Units", Wcm: []string{"Jet Aerial Units"}},
 					{Name: "Kites", Wcm: []string{"Kites"}},
@@ -335,6 +362,7 @@ func LoadConfig() config {
 					{Name: "Dire Wolves", Wcm: []string{"Wolves"}, Icons: []string{"wolfdraenor", "orcclanworg"}, Spells: []int{171851}}, // Garn Nighthowl
 					{Name: "Undead Wolves", Wcm: []string{"Undead Wolves"}},
 					{Name: "War Wolves", Wcm: []string{"Wolves"}, Icons: []string{"hordepvpmount", "alliancewolf", "armoredwolf", "frostwolfhowler"}, Spells: []int{306421}}, // Frostwolf Snarler
+					{Name: "Wilderlings", Wcm: []string{"Wilderlings"},},
 					{Name: "Wolves", Wcm: []string{"Wolves"}, Icons: []string{"direwolf"}, Spells: []int{16081}},                                                             // Arctic Wolf
 				},
 			},

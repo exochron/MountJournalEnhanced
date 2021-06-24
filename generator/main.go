@@ -2,7 +2,7 @@ package main
 
 func main() {
 	conf := LoadConfig()
-	mounts := LoadFromWoWTools("Retail")
+	mounts := LoadFromWoWTools("PTR")
 
 	for _, ignoreSpellId := range conf.Ignored {
 		delete(mounts, ignoreSpellId)

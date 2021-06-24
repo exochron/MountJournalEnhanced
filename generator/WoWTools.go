@@ -78,17 +78,31 @@ func getCSV(table string, build string) map[int]map[string]string {
 	return results
 }
 
-func loadTradeableItems(build string) map[int]bool {
+func loadTradeableItems(build string) map[int]int {
 	itemSparseCsv := getCSV("ItemSparse", build)
 
-	items := map[int]bool{}
+	result := map[int]int{}
+	items := map[int]struct{}{}
 	for itemId, record := range itemSparseCsv {
 		if record["Bonding"] == "0" {
-			items[itemId] = true
+			items[itemId] = struct{}{}
 		}
 	}
 
-	return items
+    itemEffects := getCSV("ItemEffect", build)
+    itemXEffectsCsv := getCSV("ItemXItemEffect", build)
+    for _, record := range itemXEffectsCsv {
+        effectId, _ := strconv.Atoi(record["ItemEffectID"])
+        itemId, _ := strconv.Atoi(record["ItemID"])
+        if _, ok := items[itemId]; ok {
+            if effectData, ok := itemEffects[effectId]; ok && effectData["TriggerType"] == "6" {
+                spellId, _ := strconv.Atoi(effectData["SpellID"])
+                result[itemId] = spellId
+            }
+        }
+    }
+
+	return result
 }
 
 func loadIconFiles() map[int]string {
@@ -144,19 +158,11 @@ func LoadFromWoWTools(branch string) map[int]mount {
 	}
 
 	tradeableItems := loadTradeableItems(build)
-	itemEffectsCsv := getCSV("ItemEffect", build)
-	for _, record := range itemEffectsCsv {
-		// LegacySlotIndex == 1 and TriggerType == 6(Learn Spell)
-		if record["LegacySlotIndex"] == "1" && record["TriggerType"] == "6" {
-			spellId, _ := strconv.Atoi(record["SpellID"])
-			if mount, ok := mounts[spellId]; ok {
-				itemId, _ := strconv.Atoi(record["ParentItemID"])
-				if _, ok := tradeableItems[itemId]; ok {
-					mount.ItemIsTradeable = true
-					mounts[spellId] = mount
-				}
-			}
-		}
+	for _, spellId := range tradeableItems {
+        if mount, ok := mounts[spellId]; ok {
+            mount.ItemIsTradeable = true
+            mounts[spellId] = mount
+        }
 	}
 
 	iconFiles := loadIconFiles()

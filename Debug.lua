@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 local function print(...)
     _G.print("[MJE]", ...)
@@ -79,28 +79,28 @@ local function testDatabase()
 end
 
 local taintedList = {}
-local function checkTaintedTable(tbl, parentPath, taintedList)
+local function checkTaintedTable(tbl, parentPath, currentList)
     for key, val in pairs(tbl) do
         if type(key) == "number" or (type(key) == "string" and not key:match("MJE_")) then
             local isSecure, taintedBy = issecurevariable(tbl, key)
-            if not isSecure and taintedList[key] ~= true then
+            if not isSecure and currentList[key] ~= true then
                 print(key .. " got tainted within " .. parentPath .. " by: " .. taintedBy)
-                taintedList[key] = true
-            elseif isSecure and taintedList[key] == true then
+                currentList[key] = true
+            elseif isSecure and currentList[key] == true then
                 print(key .. " is not tainted within " .. parentPath .. " anymore")
-                taintedList[key] = nil
+                currentList[key] = nil
             end
 
-            if taintedList[key] ~= true and type(val) == "table" and key ~= "parent" and key ~= "ModelScene" and key ~= "tooltipFrame" then
-                if taintedList[key] == nil then
-                    taintedList[key] = {}
+            if currentList[key] ~= true and type(val) == "table" and key ~= "parent" and key ~= "ModelScene" and key ~= "tooltipFrame" then
+                if currentList[key] == nil then
+                    currentList[key] = {}
                 end
-                taintedList[key] = checkTaintedTable(val, parentPath .. "." .. key, taintedList[key])
+                currentList[key] = checkTaintedTable(val, parentPath .. "." .. key, currentList[key])
             end
         end
     end
 
-    return taintedList
+    return currentList
 end
 local function checkForTaint()
     local isSecure, taintedBy = issecurevariable("MountJournal")
@@ -122,38 +122,17 @@ end, "debug")
 
 function ADDON.Debug:CheckListTaint(process)
     if MountJournal and MountJournal.ListScrollFrame and ADDON.settings.ui.debugMode then
+        taintedList.ListScrollFrame = taintedList.ListScrollFrame or {}
 
-        local isSecure, taintedBy = issecurevariable(MountJournal.ListScrollFrame, "offset")
-        if not isSecure and taintedList["ListScrollFrame"]["offset"] ~= true then
-            print("offset got tainted within MountJournal.ListScrollFrame by: " .. taintedBy .. " after " .. process)
-            taintedList["ListScrollFrame"]["offset"] = true
+        local isTrue = function(val)
+            return val == true
         end
 
-        isSecure, taintedBy = issecurevariable(MountJournal.ListScrollFrame, "range")
-        if not isSecure and taintedList["ListScrollFrame"]["range"] ~= true then
-            print("range got tainted within MountJournal.ListScrollFrame by: " .. taintedBy .. " after " .. process)
-            taintedList["ListScrollFrame"]["range"] = true
-        end
-
-        isSecure, taintedBy = issecurevariable(MountJournal.ListScrollFrame, "totalHeight")
-        if not isSecure and taintedList["ListScrollFrame"]["totalHeight"] ~= true then
-            print("totalHeight got tainted within MountJournal.ListScrollFrame by: " .. taintedBy .. " after " .. process)
-            taintedList["ListScrollFrame"]["totalHeight"] = true
+        if not ContainsIf(taintedList.ListScrollFrame, isTrue) then
+            checkTaintedTable(MountJournal.ListScrollFrame, process .. " - MountJournal.ListScrollFrame", taintedList)
+            if ContainsIf(taintedList.ListScrollFrame, isTrue) then
+                print("Call stack:\n" .. debugstack())
+            end
         end
     end
 end
---hooksecurefunc("HybridScrollFrame_GetOffset", function(list)
---    if MountJournal and list == MountJournal.ListScrollFrame then
---        ADDON.Debug:CheckListTaint("HybridScrollFrame_GetOffset")
---    end
---end)
---hooksecurefunc("HybridScrollFrame_SetOffset", function(list)
---    if MountJournal and list == MountJournal.ListScrollFrame then
---        ADDON.Debug:CheckListTaint("HybridScrollFrame_SetOffset")
---    end
---end)
---hooksecurefunc("HybridScrollFrame_Update", function(list)
---    if MountJournal and list == MountJournal.ListScrollFrame then
---        ADDON.Debug:CheckListTaint("HybridScrollFrame_Update")
---    end
---end)

@@ -78,4 +78,19 @@ ADDON.DB.Restrictions = {
 [1400] = { ["covenant"]={1,}, }, -- Eternal Phalynx of Courage
 [1401] = { ["covenant"]={1,}, }, -- Eternal Phalynx of Loyalty
 [1402] = { ["covenant"]={1,}, }, -- Eternal Phalynx of Humility
+[1436] = { ["covenant"]={1,}, }, -- Battle-Hardened Aquilon
+[1449] = { ["covenant"]={4,}, }, -- Lord of the Corpseflies
+[1484] = { ["covenant"]={3,}, }, -- Ardenweald Wilderling
+[1485] = { ["covenant"]={3,}, }, -- Autumnal Wilderling
+[1486] = { ["covenant"]={3,}, }, -- Winter Wilderling
+[1487] = { ["covenant"]={3,}, }, -- Summer Wilderling
+[1489] = { ["covenant"]={2,}, }, -- Obsidian Gravewing
+[1490] = { ["covenant"]={2,}, }, -- Sinfall Gravewing
+[1491] = { ["covenant"]={2,}, }, -- Pale Gravewing
+[1492] = { ["covenant"]={1,}, }, -- Elysian Aquilon
+[1493] = { ["covenant"]={1,}, }, -- Foresworn Aquilon
+[1494] = { ["covenant"]={1,}, }, -- Ascendant's Aquilon
+[1495] = { ["covenant"]={4,}, }, -- Maldraxxian Corpsefly
+[1496] = { ["covenant"]={4,}, }, -- Regal Corpsefly
+[1497] = { ["covenant"]={4,}, }, -- Battlefield Swarmer
 }
