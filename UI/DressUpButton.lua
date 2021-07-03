@@ -1,6 +1,6 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
-local function createJournalButton(ParentFrame)
+local function createJournalButton(ParentFrame, ...)
 
     -- the addon DressUp replaces DressUpFrame entirely and doesn't have a ModelScene
     if ParentFrame.ModelScene then
@@ -12,16 +12,12 @@ local function createJournalButton(ParentFrame)
         button:SetText(ADDON.L["Show in Collections"])
         button:SetAutoWidth(true)
         button:SetHeight(22)
-        if (ParentFrame == SideDressUpFrame) then
-            button.frame:SetFrameStrata("HIGH")
-            button:SetPoint("BOTTOM", SideDressUpModel, "BOTTOM", 0, 0)
-        else
-            button:SetPoint("BOTTOMLEFT", ParentFrame, "BOTTOMLEFT", 7, 4)
-        end
+        button:SetPoint(...)
 
-        button:SetCallback("OnClick", function()
-            if (ParentFrame.mode == "mount") then
-                local mountId = ParentFrame:GetAttribute("mountID")
+        button:SetCallback("OnClick", function(self)
+            local parentFrame = self.parent.content
+            if parentFrame.mode == "mount" then
+                local mountId = parentFrame:GetAttribute("mountID")
                 if mountId then
                     SetCollectionsJournalShown(true, COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS);
                     ADDON.Api:SetSelected(mountId)
@@ -44,16 +40,11 @@ local inititalized = false
 
 ADDON:RegisterUISetting('previewButton', true, ADDON.L.SETTING_PREVIEW_LINK, function(flag)
     if flag and not inititalized then
-        createJournalButton(DressUpFrame)
-        createJournalButton(SideDressUpFrame)
+        createJournalButton(DressUpFrame, "BOTTOMLEFT", DressUpFrame, "BOTTOMLEFT", 7, 4)
 
         hooksecurefunc("DressUpMount", function(mountId)
             if mountId then
-                if SideDressUpFrame.parentFrame and SideDressUpFrame.parentFrame:IsShown() then
-                    SideDressUpFrame:SetAttribute("mountID", mountId)
-                else
-                    DressUpFrame:SetAttribute("mountID", mountId)
-                end
+                DressUpFrame:SetAttribute("mountID", mountId)
             end
         end)
 

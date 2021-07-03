@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 ADDON.DB.Family = {
 ["Amphibian"] = {
@@ -111,6 +111,7 @@ ADDON.DB.Family = {
 [415] = true, -- Pureblood Fire Hawk
 [416] = true, -- Felfire Hawk
 [417] = true, -- Corrupted Fire Hawk
+[1456] = true, -- Sapphire Skyblazer
 },
 ["Roc"] = {
 [1350] = true, -- Colossal Slaughterclaw
@@ -601,6 +602,7 @@ ADDON.DB.Family = {
 [415] = true, -- Pureblood Fire Hawk
 [416] = true, -- Felfire Hawk
 [417] = true, -- Corrupted Fire Hawk
+[1456] = true, -- Sapphire Skyblazer
 },
 ["Sabers"] = {
 [896] = true, -- Primal Flamesaber

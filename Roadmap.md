@@ -1,7 +1,3 @@
-### Todos:
-still tainting:
-  - with unloaded collections: learn a mount and click the alert: MountJournal.ListScrollFrame.offset is tainted
-
 
 ### Next
 - special summon animation
@@ -15,3 +11,5 @@ still tainting:
 - favorite groups / custom filter groups
 - favorite menu at SummonRandomFavoriteButton?
 - link to wowhead (?)
+- display Rarity / x Percentage of all worldwide players have that (Retail) - if I can find a nice source for that
+- Mount Score Rating (based on rarity?)
