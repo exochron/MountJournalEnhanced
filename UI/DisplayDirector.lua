@@ -146,8 +146,8 @@ local function BuildCameraPanel()
     end)
 
     local special = BuildButton(frame, nil, "/mountspecial")
-    special.icon:SetTexture("Interface/QuestTypeIcons")
-    special.icon:SetTexCoord(0, 0.14285714285714285714285714285714, 0.275, 0.575)
+    special.icon:SetTexture("Interface/GossipFrame/CampaignGossipIcons") -- from atlas: campaignavailablequesticon
+    special.icon:SetTexCoord(0.1875, 0.421875, 0.37, 0.85)
     special:HookScript("OnClick", function()
         local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
         if actor then
@@ -160,6 +160,7 @@ local function BuildCameraPanel()
     local char = BuildCheckButton(frame, special, MOUNT_JOURNAL_PLAYER, nil, PlayerPreviewToggle.OnShow)
     char.icon:SetTexture(386865) -- interface/friendsframe/ui-toast-toasticons.blp
     char.icon:SetTexCoord(0.04, 0.58, 0.04, 0.92, 0.21, 0.58, 0.21, 0.92)
+    char.icon:SetVertexColor(1, 0.7, 0.1)
     char:HookScript("OnClick", function(self)
         if self:GetChecked() then
             SetCVar("mountJournalShowPlayer", 1)
