@@ -4,14 +4,6 @@ local ADDON_NAME, ADDON = ...
 ADDON.Events = CreateFromMixins(CallbackRegistryMixin)
 ADDON.Events:OnLoad()
 ADDON.Events:SetUndefinedEventsAllowed(true)
--- remove after 9.1 release
-if ADDON.Events.UnregisterAllCallbacksByEvent then
-    ADDON.Events.UnregisterEvents = function(events)
-        for event in pairs(events) do
-            ADDON.Events:UnregisterAllCallbacksByEvent(event)
-        end
-    end
-end
 
 local function InitUI()
     ADDON.Api:UpdateIndex()
@@ -80,7 +72,6 @@ EventRegistry:RegisterCallback("MountJournal.OnShow", function()
         ADDON.Events:TriggerEvent("preloadUI")
         ADDON.Events:TriggerEvent("loadUI")
         ADDON.Events:TriggerEvent("postloadUI")
-
         ADDON.Events:UnregisterEvents({"preloadUI", "loadUI", "postloadUI"})
 
         if ADDON.Api:GetSelected() == nil then

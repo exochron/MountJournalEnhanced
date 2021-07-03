@@ -10,13 +10,16 @@ type familyConfig struct {
 }
 
 type config struct {
+    WoWToolsChannel string
 	Ignored []int
-
 	FamilyMap []familyConfig
 }
 
 func LoadConfig() config {
 	return config{
+
+	    WoWToolsChannel: "Retail",
+
 		Ignored: []int{
 			459,    // Gray Wolf
 			581,    // Winter Wolf

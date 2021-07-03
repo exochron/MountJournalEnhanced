@@ -19,7 +19,7 @@ func prepareLuaDB(filename string, varname string) *os.File {
 		log.Fatal(err)
 	}
 
-	file.WriteString("local ADDON_NAME, ADDON = ...\n\n")
+	file.WriteString("local _, ADDON = ...\n\n")
 	file.WriteString("ADDON.DB." + varname + " = {\n")
 
 	return file
