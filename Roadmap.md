@@ -1,5 +1,6 @@
 
 ### Next
+- new filter: recent additions
 - special summon animation
 - activate sound effects (with global setting)
 

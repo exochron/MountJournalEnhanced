@@ -1,28 +1,28 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 ADDON.UI = {}
 
 --region frame point handling
 
-local SAVE_KEY_POINTS = 'MJE_SavedPoints'
+local savedPoints = {}
 
 ---SavePoint
 ---@param frame table
 ---@param savePoint string|nil TOP|BOTTOM|.. or nil. nil saves all current points
 function ADDON.UI:SavePoint(frame, savePoint)
 
-    if not frame[SAVE_KEY_POINTS] or not savePoint then
-        frame[SAVE_KEY_POINTS] = {}
+    if not savedPoints[frame] or not savePoint then
+        savedPoints[frame] = {}
     end
 
     for i = 1, frame:GetNumPoints() do
         local point, relativeTo, relativePoint, xOfs, yOfs = frame:GetPoint(i)
         if point == savePoint then
-            frame[SAVE_KEY_POINTS][point] = { point, relativeTo, relativePoint, xOfs, yOfs }
+            savedPoints[frame][point] = { point, relativeTo, relativePoint, xOfs, yOfs }
             break
         end
         if not savePoint then
-            frame[SAVE_KEY_POINTS][point] = { point, relativeTo, relativePoint, xOfs, yOfs }
+            savedPoints[frame][point] = { point, relativeTo, relativePoint, xOfs, yOfs }
         end
     end
 end
@@ -31,11 +31,11 @@ end
 ---@param frame table
 ---@param savePoint string|nil TOP|BOTTOM|.. or nil. nil resores all saved points
 function ADDON.UI:RestorePoint(frame, savePoint)
-    if savePoint and frame[SAVE_KEY_POINTS] and frame[SAVE_KEY_POINTS][savePoint] then
-        frame:SetPoint(unpack(frame[SAVE_KEY_POINTS][savePoint]))
-    elseif not savePoint and frame[SAVE_KEY_POINTS] then
+    if savePoint and savedPoints[frame] and savedPoints[frame][savePoint] then
+        frame:SetPoint(unpack(savedPoints[frame][savePoint]))
+    elseif not savePoint and savedPoints[frame] then
         frame:ClearAllPoints()
-        for _, v in pairs(frame[SAVE_KEY_POINTS]) do
+        for _, v in pairs(savedPoints[frame]) do
             frame:SetPoint(unpack(v))
         end
     end
@@ -45,16 +45,16 @@ end
 
 --region frame size handling
 
-local SAVE_KEY_SIZE = 'MJE_SavedSize'
+local savedSize = {}
 
 function ADDON.UI:SaveSize(frame)
     local w, h = frame:GetSize()
-    frame[SAVE_KEY_SIZE] = { w, h }
+    savedSize[frame] = { w, h }
 end
 
 function ADDON.UI:RestoreSize(frame)
-    if frame[SAVE_KEY_SIZE] then
-        frame:SetSize(frame[SAVE_KEY_SIZE][1], frame[SAVE_KEY_SIZE][2])
+    if savedSize[frame] then
+        frame:SetSize(savedSize[frame][1], savedSize[frame][2])
     end
 end
 

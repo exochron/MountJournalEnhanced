@@ -27,6 +27,7 @@ end
 
 local function runFilterTest(testName)
     ADDON:ResetFilterSettings()
+    ADDON.settings.filter.hiddenIngame = true
     for key, value in pairs(ADDON.settings.filter[testName]) do
         if type(value) == "table" then
             for subKey, _ in pairs(value) do
@@ -42,11 +43,17 @@ local function runFilterTest(testName)
     end
 end
 
-local function checkDBForOldMountIds(index)
-    for mountId, _ in pairs(ADDON.DB[index]) do
-        local name = C_MountJournal.GetMountInfoByID(mountId)
-        if not name then
-            print(index .. ":", "old entry for mount: " .. mountId)
+local function checkDBForOldMountIds(tbl, index)
+    for mountId, value in pairs(tbl) do
+        if true ~= value and "table" == type(value) then
+            checkDBForOldMountIds(value, index)
+        elseif mountId == 1 then
+            break -- just a regular list
+        elseif "number" == type(mountId) then
+            local name = C_MountJournal.GetMountInfoByID(mountId)
+            if not name then
+                print(index .. ":", "old entry for mount: " .. mountId)
+            end
         end
     end
 end
@@ -67,15 +74,9 @@ local function testDatabase()
         MJEGlobalSettings.filter = ADDON.settings.filter
     end
 
-    --for _, expansionMounts in pairs(ADDON.DB.Expansion) do
-    --    for id, _ in pairs(expansionMounts) do
-    --        if id ~= "minID" and id ~= "maxID" and not mounts[id] then
-    --            print("Old expansion info for mount: " .. id)
-    --        end
-    --    end
-    --end
-
-    checkDBForOldMountIds("Ignored")
+    checkDBForOldMountIds(ADDON.DB.Expansion, "Expansion")
+    checkDBForOldMountIds(ADDON.DB.Type, "Type")
+    checkDBForOldMountIds(ADDON.DB.Ignored, "Ignored")
 end
 
 local taintedList = {}

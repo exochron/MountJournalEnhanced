@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 ADDON.DB = {}
 
@@ -1384,84 +1384,85 @@ ADDON.DB.Expansion = {
 
     [0] = { -- Classic
         ["minID"] = 0,
-        ["maxID"] = 30000,
+        ["maxID"] = 122,
     },
 
     [1] = { -- The Burning Crusade
-        ["minID"] = 30001,
-        ["maxID"] = 50000,
-        [58983] = true, -- Big Blizzard Bear
+        ["minID"] = 123,
+        ["maxID"] = 226,
+        [241] = true, -- Brutal Nether Drake
+        [243] = true, -- Big Blizzard Bear
     },
 
     [2] = { -- Wrath of the Lich King
-        ["minID"] = 50001,
-        ["maxID"] = 76000,
-        [48778] = true, -- Acherus Deathcharger
-        [46197] = true, -- X-51 Nether-Rocket
-        [46199] = true, -- X-51 Nether-Rocket X-TREME
+        ["minID"] = 227,
+        ["maxID"] = 382,
+        [211] = true, -- X-51 Nether-Rocket
+        [212] = true, -- X-51 Nether-Rocket X-TREME
+        [221] = true, -- Acherus Deathcharger
     },
 
     [3] = { -- Cataclysm
-        ["minID"] = 76001,
-        ["maxID"] = 113120,
-        [71810] = true, -- Wrathful Gladiator's Frost Wyrm
-        [75207] = true, -- Abyssal Seahorse
+        ["minID"] = 383,
+        ["maxID"] = 447,
+        [358] = true, -- Wrathful Gladiator's Frost Wyrm
+        [373] = true, -- Abyssal Seahorse
     },
 
     [4] = { -- Mists of Pandaria
-        ["minID"] = 113121,
-        ["maxID"] = 160000,
+        ["minID"] = 448,
+        ["maxID"] = 571,
     },
 
     [5] = { -- Warlords of Draenor
-        ["minID"] = 160001,
-        ["maxID"] = 193000,
-        [142910] = true, -- Ironbound Wraithcharger
-        [194464] = true, -- Eclipse Dragonhawk
-        [201098] = true, -- Infinite Timereaver
-        [155741] = true, -- Dread Raven - Warlords of Draenor Collector's Edition
+        ["minID"] = 572,
+        ["maxID"] = 772,
+        [454] = true, -- Cindermane Charger
+        [552] = true, -- Ironbound Wraithcharger
+        [778] = true, -- Eclipse Dragonhawk
+        [781] = true, -- Infinite Timereaver
     },
 
     [6] = { -- Legion
-        ["minID"] = 193001,
-        ["maxID"] = 254500,
-        [171827] = true, -- Hellfire Infernal
-        [171850] = true, -- Llothien Prowler
-        [127165] = true, -- Yu'lei, Daughter of Jade
-        [189998] = true, -- Illidari Felstalker - Legion Collector's Edition
-        [259395] = true, -- Shu-zen, the Divine Sentinel
+        ["minID"] = 773,
+        ["maxID"] = 991,
+        [476] = true, -- Yu'lei, Daughter of Jade
+        [633] = true, -- Hellfire Infernal
+        [656] = true, -- Llothien Prowler
+        [663] = true, -- Bloodfang Widow
+        [763] = true, -- Illidari Felstalker - Legion Collector's Edition
+        [1006] = true, -- Lightforged Felcrusher
+        [1007] = true, -- Highmountain Thunderhoof
+        [1008] = true, -- Nightborne Manasaber
+        [1009] = true, -- Starcursed Voidstrider
+        [1011] = true, -- Shu-zen, the Divine Sentinel
     },
 
     [7] = { -- Battle for Azeroth
-        ["minID"] = 254501,
-        ["maxID"] = 320000,
-        [213350] = true, -- Frostshard  Infernal
-        [237286] = true, -- Dune Scavenger
-        [237287] = true, -- Alabaster Hyena
-        [239049] = true, -- Obsidian Krolusk
-        [243795] = true, -- Leaping Veinseeker
-        [250735] = true, -- Bloodgorged Crawg
-        [255695] = true, -- Seabraid Stallion - Battle for Azeroth CE
-        [255696] = true, -- Gilded Ravasaurn - Battle for Azeroth CE
-        [326390] = true, -- Steamscale Incinerator
+        ["minID"] = 993,
+        ["maxID"] = 1329,
+        [926] = true, -- Alabaster Hyena
+        [928] = true, -- Dune Scavenger
+        [933] = true, -- Obsidian Krolusk
+        [956] = true, -- Leaping Veinseeker
+        [963] = true, -- Bloodgorged Crawg
+        [1346] = true, -- Steamscale Incinerator
     },
 
     [8] = { -- Shadowlands
-        ["minID"] = 320001,
+        ["minID"] = 1330,
         ["maxID"] = 999999,
-        [307932] = true, -- Ensorcelled Everwyrm
-        [318051] = true, -- Silky Shimmermoth
-        [318052] = true, -- Deathbringer's Flayedwing
-        [312776] = true, -- Chittering Animite
-        [312765] = true, -- Sundancer
-        [312767] = true, -- Swift Gloomhoof
-        [312763] = true, -- Darkwarren Hardshell
-        [312762] = true, -- Mawsworn Soulhunter
-        [312761] = true, -- Enchanted Dreamlight Runestag
-        [312759] = true, -- Dreamlight Runestag
-        [312754] = true, -- Battle Gargon Vrednic
-        [312753] = true, -- Hopecrusher Gargon
-        [312777] = true, -- Silvertip Dredwing
+        [1289] = true, -- Ensorcelled Everwyrm
+        [1298] = true, -- Hopecrusher Gargon
+        [1299] = true, -- Battle Gargon Vrednic
+        [1302] = true, -- Dreamlight Runestag
+        [1303] = true, -- Enchanted Dreamlight Runestag
+        [1304] = true, -- Mawsworn Soulhunter
+        [1305] = true, -- Darkwarren Hardshell
+        [1306] = true, -- Swift Gloomhoof
+        [1307] = true, -- Sundancer
+        [1309] = true, -- Chittering Animite
+        [1310] = true, -- Horrid Dredwing
     }
 }
 
@@ -1477,34 +1478,34 @@ ADDON.DB.Type = {
         typeIDs = { 231, 232, 254 },
     },
     repair = {
-        [61425] = true, -- Traveler's Tundra Mammoth (Alliance)
-        [61447] = true, -- Traveler's Tundra Mammoth (Horde)
-        [122708] = true, -- Grand Expedition Yak
-        [264058] = true, -- Mighty Caravan Brutosaur
+        [280] = true, -- Traveler's Tundra Mammoth (Alliance)
+        [284] = true, -- Traveler's Tundra Mammoth (Horde)
+        [460] = true, -- Grand Expedition Yak
+        [1039] = true, -- Mighty Caravan Brutosaur
     },
     passenger = {
-        [61425] = true, -- Traveler's Tundra Mammoth (Alliance)
-        [61447] = true, -- Traveler's Tundra Mammoth (Horde)
-        [122708] = true, -- Grand Expedition Yak
-        [61469] = true, -- Grand Ice Mammoth
-        [61470] = true, -- Grand Ice Mammoth
-        [61465] = true, -- Grand Black War Mammoth
-        [61467] = true, -- Grand Black War Mammoth
-        [121820] = true, -- Obsidian Nightwing
-        [93326] = true, -- Sandstone Drake
-        [55531] = true, -- Mechano-Hog
-        [60424] = true, -- Mekgineer's Chopper
-        [75973] = true, -- X-53 Touring Rocket
-        [245723] = true, -- Stormwind Skychaser - Blizzcon 2017
-        [245725] = true, -- Orgrimmar Interceptor - Blizzcon 2017
-        [261395] = true, -- The Hivemind
-        [264058] = true, -- Mighty Caravan Brutosaur
-        [307256] = true, -- Explorer's Jungle Hopper
-        [307263] = true, -- Explorer's Dunetrekker
+        [240] = true, -- Mechano-Hog
+        [275] = true, -- Mekgineer's Chopper
+        [280] = true, -- Traveler's Tundra Mammoth (Alliance)
+        [284] = true, -- Traveler's Tundra Mammoth (Horde)
+        [286] = true, -- Grand Black War Mammoth
+        [287] = true, -- Grand Black War Mammoth
+        [288] = true, -- Grand Ice Mammoth
+        [289] = true, -- Grand Ice Mammoth
+        [382] = true, -- X-53 Touring Rocket
+        [407] = true, -- Sandstone Drake
+        [455] = true, -- Obsidian Nightwing
+        [460] = true, -- Grand Expedition Yak
+        [959] = true, -- Stormwind Skychaser - Blizzcon 2017
+        [960] = true, -- Orgrimmar Interceptor - Blizzcon 2017
+        [1025] = true, -- The Hivemind
+        [1039] = true, -- Mighty Caravan Brutosaur
+        [1287] = true, -- Explorer's Jungle Hopper
+        [1288] = true, -- Explorer's Dunetrekker
     },
 }
 
--- used as filter for debug output
+-- used as filter
 -- mountId as Index
 ADDON.DB.Ignored = {
     [7] = true, -- Gray Wolf
