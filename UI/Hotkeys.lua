@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 -- UI:
 -- * RightClick on Scroll buttons to scroll to the top/bottom
@@ -63,13 +63,13 @@ ADDON.Events:RegisterCallback("loadUI", function()
     end)
 
     scrollFrame.scrollDown:RegisterForClicks("LeftButtonUp", "LeftButtonDown", "RightButtonUp");
-    scrollFrame.scrollDown:HookScript("OnClick", function(self, button, isDown)
+    scrollFrame.scrollDown:HookScript("OnClick", function(_, button, isDown)
         if button == "RightButton" and not isDown then
             scrollFrame.scrollBar:SetValue(scrollFrame.range)
         end
     end)
     scrollFrame.scrollUp:RegisterForClicks("LeftButtonUp", "LeftButtonDown", "RightButtonUp");
-    scrollFrame.scrollUp:HookScript("OnClick", function(self, button, isDown)
+    scrollFrame.scrollUp:HookScript("OnClick", function(_, button, isDown)
         if button == "RightButton" and not isDown then
             scrollFrame.scrollBar:SetValue(0)
         end
