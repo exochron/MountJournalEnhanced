@@ -27,7 +27,6 @@ end
 
 local function runFilterTest(testName)
     ADDON:ResetFilterSettings()
-    ADDON.settings.filter.hiddenIngame = true
     for key, value in pairs(ADDON.settings.filter[testName]) do
         if type(value) == "table" then
             for subKey, _ in pairs(value) do
@@ -37,6 +36,7 @@ local function runFilterTest(testName)
             ADDON.settings.filter[testName][key] = false
         end
     end
+    ADDON.settings.filter.hiddenIngame = true
     for _, mountId in ipairs(ADDON:FilterMounts()) do
         local name, spellID, _, _, _, sourceType = C_MountJournal.GetMountInfoByID(mountId)
         print("No " .. testName .. " info for mount: " .. name .. " (" .. spellID .. ", " .. mountId .. ", " .. sourceType .. ") ")

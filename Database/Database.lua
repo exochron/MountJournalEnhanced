@@ -121,12 +121,11 @@ ADDON.DB.Source = {
         [336045] = true, -- Predatory Plagueroc - Maldraxxus - Gieger
         [339588] = true, -- Sinrunner Blanchy - treasure quest chain
         [339632] = true, -- Arboreal Gulper - Ardenweald - Humon'gozz
+        [342335] = true, -- Ascended Skymane - Bastion - Kyrian drop
         [344228] = true, -- Battle-Bound Warhound - Theatre of Pain
         [344574] = true, -- Bulbous Necroray - Necroray Egg
         [344575] = true, -- Pestilent Necroray - Necroray Egg
         [344576] = true, -- Infested Necroray - Necroray Egg
-        [346141] = true, -- Slime Serpent (secret)
-        [354358] = true, -- Darkmaul - Korthia - Darkmaul treasure quest
         [347250] = true, -- Lord of the Corpseflies - Korthia - Fleshwing
         [352309] = true, -- Hand of Bahmethra - The Maw -Tormentors of Torghast
         [353859] = true, -- Summer Wilderling - Korthia - Escaped Wilderling
@@ -134,6 +133,7 @@ ADDON.DB.Source = {
         [354353] = true, -- Fallen Charger - The Maw - Fallen Charger
         [354354] = true, -- Hand of Nilganihmaht - The Maw - secret/treasure hunt
         [354357] = true, -- Crimson Shardhide - Korthia - Malbog
+        [354358] = true, -- Darkmaul - Korthia - Darkmaul treasure quest
         [354360] = true, -- Garnet Razorwing - Korthia - Reliwik the Defiant
         [354361] = true, -- Dusklight Razorwing - Korthia - random eggs
         [354362] = true, -- Maelie the Wanderer - Korthia - treasure quest chain
@@ -335,6 +335,7 @@ ADDON.DB.Source = {
         [290718] = true, -- Aerial Unit R-21/X - Mechagon
         [299158] = true, -- Mechagon Peacekeeper - Mechagon
         [336036] = true, -- Marrowfang - The Necrotic Wake
+        [346141] = true, -- Slime Serpent - Plaguefall (secret)
         [353263] = true, -- Cartel Master's Gearglider - Tazavesh, the Veiled Market
 
         -- Raid
@@ -376,6 +377,7 @@ ADDON.DB.Source = {
         [289555] = true, -- Glacial Tidestorm - Battle of Dazar'alor
         [302143] = true, -- Uncorrupted Voidwing - Heroic? N'Zoth, Ny'alotha
         [308814] = true, -- Ny'alotha Allseer - Mythic N'Zoth, Ny'alotha
+        [351195] = true, -- Vengeance - Sylvanas Mythic
         [354351] = true, -- Sanctum Gloomcharger - The Nine, Sanctum of Domination
     },
 
@@ -513,7 +515,6 @@ ADDON.DB.Source = {
         [332923] = true, -- Inquisition Gargon - The Avowed
         [341639] = true, -- Court Sinrunner -- Court of Harvesters
         [342334] = true, -- Gilded Prowler - The Ascended
-        [342335] = true, -- Ascended Skymane - Bastion - Bastion supplies
         [342666] = true, -- Amber Ardenmoth - Wild Hunt Supplies (paragon)
         [347251] = true, -- Soaring Razorwing - Korthia - The Archivists' Codex - Tier 6
         [347536] = true, -- Tamed Mauler - Korthia - Supplies of the Archivists' Codex
@@ -1218,9 +1219,14 @@ ADDON.DB.Source = {
     },
 
     ["World Event"] = {
-        sourceType = { 7 },
+        -- https://wow.tools/dbc/?dbc=mount#page=1&colFilter[6]=6
+        --sourceType = { 7 }, -- cant use it, because some mounts are missassigned
         -- Love is in the Air
         [71342] = true, -- Big Love Rocket
+        [102350] = true, -- Swift Lovebird
+
+        -- Noblegarden
+        [102349] = true, -- Swift Springstrider
 
         -- Brewfest
         [43899] = true, -- Brewfest Ram
@@ -1231,6 +1237,9 @@ ADDON.DB.Source = {
         -- Hallow's End
         [48025] = true, -- Headless Horseman's Mount
 
+        -- Winter Veil
+        [191314] = true, -- Minion of Grumpus
+
         -- Darkmoon Faire
         [103081] = true, -- Darkmoon Dancing Bear
         [102346] = true, -- Swift Forest Strider
@@ -1239,6 +1248,9 @@ ADDON.DB.Source = {
 
         -- Timewalking
         [127165] = true, -- Yu'lei, Daughter of Jade
+        [142910] = true, -- Ironbound Wraithcharger
+        [194464] = true, -- Eclipse Dragonhawk
+        [201098] = true, -- Infinite Timereaver
         [294568] = true, -- Beastlord's Irontusk
         [294569] = true, -- Beastlord's Warwolf
 
