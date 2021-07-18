@@ -35,6 +35,7 @@ L["TASK_FAVOR_START"] = "[MJE] Reapplying stars all over your mounts. Please wai
 L["TOGGLE_COLOR"] = "Show next color variation"
 L["Transform"] = "Transform"
 L["Underwater"] = "Underwater"
+L["FILTER_ONLY_LATEST"] = "Only latest additions"
 L["FILTER_SECRET"] = "Hidden by the game"
 
 -- Families

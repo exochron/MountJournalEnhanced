@@ -55,6 +55,7 @@ local function PrepareDefaults()
             onlyFavorites = false,
             onlyUsable = false,
             onlyTradable = false,
+            onlyRecent = false,
             source = {},
             faction = {
                 alliance = true,

@@ -6,6 +6,7 @@ local ExpansionDB = ADDON.DB.Expansion
 local TypeDB = ADDON.DB.Type
 local TradableDB = ADDON.DB.Tradable
 local IgnoredDB = ADDON.DB.Ignored
+local RecentDB = ADDON.DB.Recent
 
 local function FilterByName(searchString, name, mountId)
     name = name:lower()
@@ -45,6 +46,10 @@ end
 
 local function FilterTradableMounts(mountId)
     return not ADDON.settings.filter.onlyTradable or TradableDB[mountId]
+end
+
+local function FilterRecentMounts(mountId)
+    return not ADDON.settings.filter.onlyRecent or (RecentDB.minID <= mountId and not tContains(RecentDB.blacklist, mountId))
 end
 
 local function FilterCollectedMounts(collected)
@@ -251,6 +256,7 @@ function ADDON:FilterMounts()
                     and FilterFavoriteMounts(isFavorite)
                     and FilterUsableMounts(isUsable)
                     and FilterTradableMounts(mountId)
+                    and FilterRecentMounts(mountId)
                     and FilterCollectedMounts(isCollected)
                     and FilterByFaction(isFaction, faction)
                     and (allSettingsSource or FilterBySource(spellId, sourceType, preparedSource))

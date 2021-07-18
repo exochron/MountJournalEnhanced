@@ -111,7 +111,6 @@ ADDON.DB.Source = {
         [332478] = true, -- Blisterback Bloodtusk - Maldraxxus - Warbringer Mal'korak
         [332480] = true, -- Gorespine - Maldraxxus - Nerissa Heartless
         [332882] = true, -- Horrid Dredwing - Revendreth - Harika the Horrid
-        [332904] = true, -- Harvester's Dredwing - The Maw - Harvester's War Chest
         [332905] = true, -- Endmire Flyer - Revendreth - Famu the Infinite
         [334352] = true, -- Wildseed Cradle - Ardenweald - Treasure
         [334364] = true, -- Spinemaw Gladechewer - Ardenweald - Gormtamer Tizo
@@ -130,8 +129,6 @@ ADDON.DB.Source = {
         [354358] = true, -- Darkmaul - Korthia - Darkmaul treasure quest
         [347250] = true, -- Lord of the Corpseflies - Korthia - Fleshwing
         [352309] = true, -- Hand of Bahmethra - The Maw -Tormentors of Torghast
-        [352441] = true, -- Wild Hunt Legsplitter - Night Fae Assault
-        [352742] = true, -- Undying Darkhound - Undying Army Assault
         [353859] = true, -- Summer Wilderling - Korthia - Escaped Wilderling
         [353877] = true, -- Foresworn Aquilon - Korthia - Wild Worldcracker
         [354353] = true, -- Fallen Charger - The Maw - Fallen Charger
@@ -141,6 +138,7 @@ ADDON.DB.Source = {
         [354361] = true, -- Dusklight Razorwing - Korthia - random eggs
         [354362] = true, -- Maelie the Wanderer - Korthia - treasure quest chain
         [356501] = true, -- Rampaging Mauler - Korthia - Konthrogz the Obliterator
+        [215545] = true, -- Mastercraft Gravewing -- Korthia - venthyr boss
     },
 
     ["Quest"] = {
@@ -156,10 +154,10 @@ ADDON.DB.Source = {
         [127154] = true, -- Onyx Cloud Serpent - Quest Surprise Attack!, needs reputation to be able to accept the quest
         [138640] = true, -- Bone-White Primal Raptor - A Mountain of Giant Dinosaur Bones
         [171850] = true, -- Llothien Prowler - Volpin the Elusive
+        [213158] = true, -- Predatory Bloodgazer - Bloodgazer Reunion
+        [213163] = true, -- Snowfeather Hunter - Snowfeather Reunion
         [213164] = true, -- Brilliant Direbeak - Direbeak Reunion
         [213165] = true, -- Viridian Sharptalon - Sharptalon Reunion
-        [213163] = true, -- Snowfeather Hunter - Snowfeather Reunion
-        [213158] = true, -- Predatory Bloodgazer - Bloodgazer Reunion
         [215159] = true, -- Long-Forgotten Hippogryph - Ephemeral Crystal x5
         [230987] = true, -- Arcanist's Manasaber - Fate of the Nightborne
         [239770] = true, -- Black Qiraji War Tank - newer high res version of the Black Qiraji Battle Tank
@@ -172,11 +170,14 @@ ADDON.DB.Source = {
         [316802] = true, -- Springfur Alpaca - Uldum
         [332455] = true, -- War-Bred Tauralus - necrolord campaign quest
         [332462] = true, -- Armored War-Bred Tauralus - necrolord covenant quest
+        [332904] = true, -- Harvester's Dredwing - Venthyr Assault
         [332932] = true, -- Crypt Gargon - venthyr campaign quest
         [333027] = true, -- Loyal Gorger - Revendreth
         [334391] = true, -- Phalynx of Courage - kyrian campaign quest
         [334406] = true, -- Eternal Phalynx of Courage - kyrian campaign quest
         [344577] = true, -- Bound Shadehound (secret)
+        [352441] = true, -- Wild Hunt Legsplitter - Night Fae Assault
+        [352742] = true, -- Undying Darkhound - Necrolord Assault
 
         ------------------------------
         -- Alliance ------------------
@@ -1379,6 +1380,11 @@ ADDON.DB.FeatsOfStrength = {
     [1039] = 14183, -- Mighty Caravan Brutosaur
     [1363] = 14816, -- Sinful Gladiator's Soul Eater
     [1480] = 14999, -- Unchained Gladiator's Soul Eater
+}
+
+ADDON.DB.Recent = {
+    ["minID"] = GetBuildInfo() == "9.1.0" and 1446 or 1521,
+    ["blacklist"] = { 1458 }, -- Wandering Ancient
 }
 
 ADDON.DB.Expansion = {
