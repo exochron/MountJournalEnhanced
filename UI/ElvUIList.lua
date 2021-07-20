@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 local doCheckOverhaul = false
 
@@ -16,7 +16,7 @@ end
 
 --region shameless copy of ElvUI (https://git.tukui.org/elvui/elvui/-/blob/development/ElvUI/Modules/Skins/Blizzard/Collectables.lua)
 -- apparently that's their way to do so: https://git.tukui.org/elvui/elvui/-/issues/2375
-
+-- coco-from: https://git.tukui.org/elvui/elvui/-/raw/development/ElvUI/Modules/Skins/Blizzard/Collectables.lua local function mountNameColor(self)
 local function mountNameColor(self)
     local button = self:GetParent()
     local name = button.name
@@ -40,18 +40,18 @@ local function selectedTextureSetShown(texture, shown) -- used sets list
     local parent = texture:GetParent()
     local icon = parent.icon or parent.Icon
     if shown then
-        parent.backdrop:SetBackdropBorderColor(1, .8, .1)
+        parent:SetBackdropBorderColor(1, .8, .1)
         icon.backdrop:SetBackdropBorderColor(1, .8, .1)
     else
         local r, g, b = unpack(E.media.bordercolor)
-        parent.backdrop:SetBackdropBorderColor(r, g, b)
+        parent:SetBackdropBorderColor(r, g, b)
         icon.backdrop:SetBackdropBorderColor(r, g, b)
     end
 end
 
 local function selectedTextureShow(texture) -- used for pets/mounts
     local parent = texture:GetParent()
-    parent.backdrop:SetBackdropBorderColor(1, .8, .1)
+    parent:SetBackdropBorderColor(1, .8, .1)
     parent.icon.backdrop:SetBackdropBorderColor(1, .8, .1)
 end
 
@@ -59,7 +59,7 @@ local function selectedTextureHide(texture) -- used for pets/mounts
     local parent = texture:GetParent()
     if not parent.hovered then
         local r, g, b = unpack(E.media.bordercolor)
-        parent.backdrop:SetBackdropBorderColor(r, g, b)
+        parent:SetBackdropBorderColor(r, g, b)
         parent.icon.backdrop:SetBackdropBorderColor(r, g, b)
     end
 
@@ -68,11 +68,10 @@ local function selectedTextureHide(texture) -- used for pets/mounts
     end
 end
 
-
 local function buttonOnEnter(button)
     local r, g, b = unpack(E.media.rgbvaluecolor)
     local icon = button.icon or button.Icon
-    button.backdrop:SetBackdropBorderColor(r, g, b)
+    button:SetBackdropBorderColor(r, g, b)
     icon.backdrop:SetBackdropBorderColor(r, g, b)
     button.hovered = true
 end
@@ -80,21 +79,20 @@ end
 local function buttonOnLeave(button)
     local icon = button.icon or button.Icon
     if button.selected or (button.SelectedTexture and button.SelectedTexture:IsShown()) then
-        button.backdrop:SetBackdropBorderColor(1, .8, .1)
+        button:SetBackdropBorderColor(1, .8, .1)
         icon.backdrop:SetBackdropBorderColor(1, .8, .1)
     else
         local r, g, b = unpack(E.media.bordercolor)
-        button.backdrop:SetBackdropBorderColor(r, g, b)
+        button:SetBackdropBorderColor(r, g, b)
         icon.backdrop:SetBackdropBorderColor(r, g, b)
     end
     button.hovered = nil
 end
 
-
 local function JournalScrollButtons(frame)
     for i, bu in ipairs(frame.buttons) do
         bu:StripTextures()
-        bu:CreateBackdrop('Transparent', nil, nil, true, nil, nil, true, true)
+        bu:SetTemplate('Transparent', nil, nil, true)
         bu:Size(210, 42)
 
         local point, relativeTo, relativePoint, xOffset, yOffset = bu:GetPoint()
@@ -128,7 +126,6 @@ local function JournalScrollButtons(frame)
         end
 
         if frame:GetParent() == _G.WardrobeCollectionFrame.SetsCollectionFrame then
-            bu.setList = true
             bu.Favorite:SetAtlas('PetJournal-FavoritesIcon', true)
             bu.Favorite:Point('TOPLEFT', bu.Icon, 'TOPLEFT', -8, 8)
 
@@ -167,6 +164,7 @@ local function JournalScrollButtons(frame)
         end
     end
 end
+-- coco-until: function S:Blizzard_Collections()
 --endregion
 
 function ADDON.UI:StyleListWithElvUI(scrollFrame)

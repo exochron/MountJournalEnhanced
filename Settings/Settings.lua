@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 MJEPersonalSettings = MJEPersonalSettings or {}
 MJEGlobalSettings = MJEGlobalSettings or {}
@@ -55,6 +55,7 @@ local function PrepareDefaults()
             onlyFavorites = false,
             onlyUsable = false,
             onlyTradable = false,
+            onlyRecent = false,
             source = {},
             faction = {
                 alliance = true,

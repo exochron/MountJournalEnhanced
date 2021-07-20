@@ -6,6 +6,7 @@ local SETTING_ONLY_FAVORITES = "onlyFavorites"
 local SETTING_NOT_COLLECTED = "notCollected"
 local SETTING_ONLY_USEABLE = "onlyUsable"
 local SETTING_ONLY_TRADABLE = "onlyTradable"
+local SETTING_ONLY_RECENT = "onlyRecent"
 local SETTING_SOURCE = "source"
 local SETTING_MOUNT_TYPE = "mountType"
 local SETTING_FACTION = "faction"
@@ -189,7 +190,7 @@ local function HasUserHiddenMounts()
     return false
 end
 
-local function InitializeFilterDropDown(filterMenu, level)
+local function InitializeFilterDropDown(_, level)
     local info
 
     if level == 1 then
@@ -215,6 +216,7 @@ local function InitializeFilterDropDown(filterMenu, level)
         info.disabled = not ADDON.settings.filter.notCollected
         UIDropDownMenu_AddButton(info, level)
 
+        UIDropDownMenu_AddButton(CreateFilterInfo(L.FILTER_ONLY_LATEST, SETTING_ONLY_RECENT), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L["Only tradable"], SETTING_ONLY_TRADABLE), level)
 
         if ADDON.settings.filter[SETTING_HIDDEN] or HasUserHiddenMounts() then
@@ -232,7 +234,7 @@ local function InitializeFilterDropDown(filterMenu, level)
 
         info = CreateFilterInfo(L["Reset filters"])
         info.keepShownOnClick = false
-        info.func = function(_, _, _, value)
+        info.func = function()
             ADDON:ResetFilterSettings()
             ADDON.Api:UpdateIndex()
             ADDON.UI:UpdateMountList()
@@ -350,7 +352,7 @@ local function InitializeFilterDropDown(filterMenu, level)
 
         info = CreateFilterInfo(NEWBIE_TOOLTIP_STOPWATCH_RESETBUTTON)
         info.keepShownOnClick = false
-        info.func = function(_, _, _, value)
+        info.func = function()
             ADDON:ResetSortSettings()
             ADDON.Api:UpdateIndex()
             ADDON.UI:UpdateMountList()

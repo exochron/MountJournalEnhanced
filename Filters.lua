@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 local FamilyDB = ADDON.DB.Family
 local SourceDB = ADDON.DB.Source
@@ -6,6 +6,7 @@ local ExpansionDB = ADDON.DB.Expansion
 local TypeDB = ADDON.DB.Type
 local TradableDB = ADDON.DB.Tradable
 local IgnoredDB = ADDON.DB.Ignored
+local RecentDB = ADDON.DB.Recent
 
 local function FilterByName(searchString, name, mountId)
     name = name:lower()
@@ -45,6 +46,10 @@ end
 
 local function FilterTradableMounts(mountId)
     return not ADDON.settings.filter.onlyTradable or TradableDB[mountId]
+end
+
+local function FilterRecentMounts(mountId)
+    return not ADDON.settings.filter.onlyRecent or (RecentDB.minID <= mountId and not tContains(RecentDB.blacklist, mountId))
 end
 
 local function FilterCollectedMounts(collected)
@@ -163,15 +168,15 @@ local function FilterByFamily(mountId, preparedSettings)
     return true
 end
 
-local function FilterByExpansion(spellId, preparedSettings)
-    if preparedSettings[spellId] ~= nil then
-        return preparedSettings[spellId]
+local function FilterByExpansion(mountId, preparedSettings)
+    if preparedSettings[mountId] ~= nil then
+        return preparedSettings[mountId]
     end
 
     for expansion, value in pairs(ADDON.settings.filter.expansion) do
         if ExpansionDB[expansion] and
-                ExpansionDB[expansion]["minID"] <= spellId and
-                spellId <= ExpansionDB[expansion]["maxID"] then
+                ExpansionDB[expansion]["minID"] <= mountId and
+                mountId <= ExpansionDB[expansion]["maxID"] then
             return value
         end
     end
@@ -179,14 +184,14 @@ local function FilterByExpansion(spellId, preparedSettings)
     return false
 end
 
-local function FilterByType(spellId, mountID, preparedSettings)
-    if preparedSettings[spellId] then
+local function FilterByType(mountID, preparedSettings)
+    if preparedSettings[mountID] then
         return true
     end
 
     local _, _, _, isSelfMount, mountType = C_MountJournal.GetMountInfoExtraByID(mountID)
 
-    if (ADDON.settings.filter.mountType.transform and isSelfMount) then
+    if ADDON.settings.filter.mountType.transform and isSelfMount then
         return true
     end
 
@@ -201,8 +206,8 @@ local function FilterByType(spellId, mountID, preparedSettings)
 
     if result == nil then
         result = true
-        if preparedSettings[spellId] ~= nil then
-            result = preparedSettings[spellId]
+        if preparedSettings[mountID] ~= nil then
+            result = preparedSettings[mountID]
         end
     end
 
@@ -251,12 +256,13 @@ function ADDON:FilterMounts()
                     and FilterFavoriteMounts(isFavorite)
                     and FilterUsableMounts(isUsable)
                     and FilterTradableMounts(mountId)
+                    and FilterRecentMounts(mountId)
                     and FilterCollectedMounts(isCollected)
                     and FilterByFaction(isFaction, faction)
                     and (allSettingsSource or FilterBySource(spellId, sourceType, preparedSource))
-                    and (allSettingsType or FilterByType(spellId, mountId, preparedTypes))
+                    and (allSettingsType or FilterByType(mountId, preparedTypes))
                     and (allSettingsFamily or FilterByFamily(mountId, preparedFamily))
-                    and (allSettingsExpansion or FilterByExpansion(spellId, preparedExpansion))
+                    and (allSettingsExpansion or FilterByExpansion(mountId, preparedExpansion))
             then
                 result[#result + 1] = mountId
             end

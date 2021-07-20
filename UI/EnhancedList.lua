@@ -108,8 +108,10 @@ function ADDON.UI:UpdateMountList()
                 button.factionIcon:Show();
                 button.factionIcon:SetAlpha(1.0)
             elseif RestrictionsDB[mountID] and RestrictionsDB[mountID].covenant then
+                local h = button:GetHeight()-2
                 button.factionIcon:SetAtlas(COVENANT_TEXTURES[RestrictionsDB[mountID].covenant[1]], false)
-                button.factionIcon:SetAlpha(0.4)
+                button.factionIcon:SetAlpha(0.6)
+                button.factionIcon:SetSize(h * 0.8, h)
                 button.factionIcon:Show()
             else
                 button.factionIcon:Hide();

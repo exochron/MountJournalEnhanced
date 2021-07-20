@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 ADDON.DB = {}
 
@@ -101,6 +101,7 @@ ADDON.DB.Source = {
         [316723] = true, -- Xinlao - Vale of Eternal Blossoms
 
         -- Shadowlands
+        [215545] = true, -- Mastercraft Gravewing - Korthia - venthyr drop: Gravewing Crystal
         [312753] = true, -- Hopecrusher Gargon - Venthyr drop: Hopecrusher
         [312762] = true, -- Mawsworn Soulhunter - The Maw - Gorged Shadehound
         [312765] = true, -- Sundancer - Bastion - Sundancer
@@ -110,8 +111,7 @@ ADDON.DB.Source = {
         [332466] = true, -- Armored Bonehoof Tauralus - necrolord drop: Sabriel
         [332478] = true, -- Blisterback Bloodtusk - Maldraxxus - Warbringer Mal'korak
         [332480] = true, -- Gorespine - Maldraxxus - Nerissa Heartless
-        [332882] = true, -- Horrid Dredwing - Revendreth - Harika the Horrid
-        [332904] = true, -- Harvester's Dredwing - The Maw - Harvester's War Chest
+        [332882] = true, -- Horrid Dredwing - Revendreth - venthyr drop: Harika the Horrid
         [332905] = true, -- Endmire Flyer - Revendreth - Famu the Infinite
         [334352] = true, -- Wildseed Cradle - Ardenweald - Treasure
         [334364] = true, -- Spinemaw Gladechewer - Ardenweald - Gormtamer Tizo
@@ -119,27 +119,21 @@ ADDON.DB.Source = {
         [334433] = true, -- Silverwind Larion - Bastion - Treasure
         [336038] = true, -- Callow Flayedwing - Random Egg drop in Maldraxxus
         [336042] = true, -- Hulking Deathroc - Maldraxxus - Violet Mistake
-        [336045] = true, -- Predatory Plagueroc - Maldraxxus - Gieger
-        [339588] = true, -- Sinrunner Blanchy - treasure quest chain
+        [336045] = true, -- Predatory Plagueroc - Maldraxxus - Gieger for necrolord
         [339632] = true, -- Arboreal Gulper - Ardenweald - Humon'gozz
+        [342335] = true, -- Ascended Skymane - Bastion - Kyrian drop
         [344228] = true, -- Battle-Bound Warhound - Theatre of Pain
         [344574] = true, -- Bulbous Necroray - Necroray Egg
         [344575] = true, -- Pestilent Necroray - Necroray Egg
         [344576] = true, -- Infested Necroray - Necroray Egg
-        [346141] = true, -- Slime Serpent (secret)
-        [354358] = true, -- Darkmaul - Korthia - Darkmaul treasure quest
-        [347250] = true, -- Lord of the Corpseflies - Korthia - Fleshwing
+        [347250] = true, -- Lord of the Corpseflies - Korthia - necrolord drop: Fleshwing
         [352309] = true, -- Hand of Bahmethra - The Maw -Tormentors of Torghast
-        [352441] = true, -- Wild Hunt Legsplitter - Night Fae Assault
-        [352742] = true, -- Undying Darkhound - Undying Army Assault
         [353859] = true, -- Summer Wilderling - Korthia - Escaped Wilderling
         [353877] = true, -- Foresworn Aquilon - Korthia - Wild Worldcracker
         [354353] = true, -- Fallen Charger - The Maw - Fallen Charger
         [354354] = true, -- Hand of Nilganihmaht - The Maw - secret/treasure hunt
         [354357] = true, -- Crimson Shardhide - Korthia - Malbog
         [354360] = true, -- Garnet Razorwing - Korthia - Reliwik the Defiant
-        [354361] = true, -- Dusklight Razorwing - Korthia - random eggs
-        [354362] = true, -- Maelie the Wanderer - Korthia - treasure quest chain
         [356501] = true, -- Rampaging Mauler - Korthia - Konthrogz the Obliterator
     },
 
@@ -156,10 +150,10 @@ ADDON.DB.Source = {
         [127154] = true, -- Onyx Cloud Serpent - Quest Surprise Attack!, needs reputation to be able to accept the quest
         [138640] = true, -- Bone-White Primal Raptor - A Mountain of Giant Dinosaur Bones
         [171850] = true, -- Llothien Prowler - Volpin the Elusive
+        [213158] = true, -- Predatory Bloodgazer - Bloodgazer Reunion
+        [213163] = true, -- Snowfeather Hunter - Snowfeather Reunion
         [213164] = true, -- Brilliant Direbeak - Direbeak Reunion
         [213165] = true, -- Viridian Sharptalon - Sharptalon Reunion
-        [213163] = true, -- Snowfeather Hunter - Snowfeather Reunion
-        [213158] = true, -- Predatory Bloodgazer - Bloodgazer Reunion
         [215159] = true, -- Long-Forgotten Hippogryph - Ephemeral Crystal x5
         [230987] = true, -- Arcanist's Manasaber - Fate of the Nightborne
         [239770] = true, -- Black Qiraji War Tank - newer high res version of the Black Qiraji Battle Tank
@@ -172,11 +166,18 @@ ADDON.DB.Source = {
         [316802] = true, -- Springfur Alpaca - Uldum
         [332455] = true, -- War-Bred Tauralus - necrolord campaign quest
         [332462] = true, -- Armored War-Bred Tauralus - necrolord covenant quest
+        [332904] = true, -- Harvester's Dredwing - Venthyr Assault
         [332932] = true, -- Crypt Gargon - venthyr campaign quest
         [333027] = true, -- Loyal Gorger - Revendreth
         [334391] = true, -- Phalynx of Courage - kyrian campaign quest
         [334406] = true, -- Eternal Phalynx of Courage - kyrian campaign quest
+        [339588] = true, -- Sinrunner Blanchy - treasure quest chain
         [344577] = true, -- Bound Shadehound (secret)
+        [352441] = true, -- Wild Hunt Legsplitter - Night Fae Assault
+        [352742] = true, -- Undying Darkhound - Necrolord Assault
+        [354358] = true, -- Darkmaul - Korthia - Darkmaul treasure quest
+        [354361] = true, -- Dusklight Razorwing - Korthia - random eggs
+        [354362] = true, -- Maelie the Wanderer - Korthia - treasure quest chain
 
         ------------------------------
         -- Alliance ------------------
@@ -334,6 +335,7 @@ ADDON.DB.Source = {
         [290718] = true, -- Aerial Unit R-21/X - Mechagon
         [299158] = true, -- Mechagon Peacekeeper - Mechagon
         [336036] = true, -- Marrowfang - The Necrotic Wake
+        [346141] = true, -- Slime Serpent - Plaguefall (secret)
         [353263] = true, -- Cartel Master's Gearglider - Tazavesh, the Veiled Market
 
         -- Raid
@@ -375,6 +377,7 @@ ADDON.DB.Source = {
         [289555] = true, -- Glacial Tidestorm - Battle of Dazar'alor
         [302143] = true, -- Uncorrupted Voidwing - Heroic? N'Zoth, Ny'alotha
         [308814] = true, -- Ny'alotha Allseer - Mythic N'Zoth, Ny'alotha
+        [351195] = true, -- Vengeance - Sylvanas Mythic
         [354351] = true, -- Sanctum Gloomcharger - The Nine, Sanctum of Domination
     },
 
@@ -512,7 +515,6 @@ ADDON.DB.Source = {
         [332923] = true, -- Inquisition Gargon - The Avowed
         [341639] = true, -- Court Sinrunner -- Court of Harvesters
         [342334] = true, -- Gilded Prowler - The Ascended
-        [342335] = true, -- Ascended Skymane - Bastion - Bastion supplies
         [342666] = true, -- Amber Ardenmoth - Wild Hunt Supplies (paragon)
         [347251] = true, -- Soaring Razorwing - Korthia - The Archivists' Codex - Tier 6
         [347536] = true, -- Tamed Mauler - Korthia - Supplies of the Archivists' Codex
@@ -888,6 +890,8 @@ ADDON.DB.Source = {
         [341766] = true, -- Warstitched Darkhound
         [341776] = true, -- Highwind Darkmane
 
+        [215545] = true, -- Mastercraft Gravewing - Korthia - venthyr drop: Gravewing Crystal
+        [312753] = true, -- Hopecrusher Gargon - Venthyr drop: Hopecrusher
         [312754] = true, -- Battle Gargon Vrednic - venthyr campaign quest
         [312759] = true, -- Dreamlight Runestag - night fae campaign quest
         [312761] = true, -- Enchanted Dreamlight Runestag - night fae campaign quest
@@ -900,16 +904,21 @@ ADDON.DB.Source = {
         [332248] = true, -- Enchanted Winterborn Runestag - night fae feature vendor
         [332455] = true, -- War-Bred Tauralus - necrolord campaign quest
         [332456] = true, -- Plaguerot Tauralus - necrolord renown vendor
+        [332457] = true, -- Bonehoof Tauralus - necrolord drop: Tahonta
         [332460] = true, -- Chosen Tauralus - necrolord achievement: The Gang's All Here
         [332462] = true, -- Armored War-Bred Tauralus - necrolord covenant quest
         [332464] = true, -- Armored Plaguerot Tauralus - necrolord renown vendor
+        [332466] = true, -- Armored Bonehoof Tauralus - necrolord drop: Sabriel
         [332467] = true, -- Armored Chosen Tauralus - necrolord feature achievement: Things To Do When You're Dead
+        [332882] = true, -- Horrid Dredwing - Revendreth - venthyr drop: Harika the Horrid
+        [332923] = true, -- Inquisition Gargon - The Avowed (venthyr)
         [332927] = true, -- Sinfall Gargon - venthyr renown vendor
         [332932] = true, -- Crypt Gargon - venthyr campaign quest
         [332949] = true, -- Desire's Battle Gargon - venthyr feature
         [333021] = true, -- Gravestone Battle Armor - venthyr renown vendor
         [333023] = true, -- Battle Gargon Silessa - venthyr feature
         [334365] = true, -- Pale Acidmaw - generic covenant feature
+        [334366] = true, -- Wild Glimmerfur Prowler - Ardenweald - Valfir the Unrelenting for night fae
         [334382] = true, -- Phalynx of Loyalty - kyrian covenant feature
         [334386] = true, -- Phalynx of Humility - kyrian renown vendor
         [334391] = true, -- Phalynx of Courage - kyrian campaign quest
@@ -920,16 +929,21 @@ ADDON.DB.Source = {
         [334409] = true, -- Eternal Phalynx of Humility - kyrian feature vendor
         [336039] = true, -- Gruesome Flayedwing - generic covenant feature
         [336041] = true, -- Bonesewn Fleshroc - necrolord feature
+        [336045] = true, -- Predatory Plagueroc - Maldraxxus - Gieger for necrolord
         [336064] = true, -- Dauntless Duskrunner - generic covenant feature
         [340503] = true, -- Umbral Scythehorn - night fae feature vendor
+        [342667] = true, -- Vibrant Flutterwing - night fae feature vendor
         [343550] = true, -- Battle-Hardened Aquilon - kyrian korthia vendor
+        [347250] = true, -- Lord of the Corpseflies - Korthia - necrolord drop: Fleshwing
         [353856] = true, -- Ardenweald Wilderling - night fae renown 45
         [353857] = true, -- Autumnal Wilderling - night fae renown vendor
         [353858] = true, -- Winter Wilderling - night fae korthia vendor
+        [353859] = true, -- Summer Wilderling - Korthia - Escaped Wilderling for night fae
         [353866] = true, -- Obsidian Gravewing - venthyr renown vendor
         [353872] = true, -- Sinfall Gravewing - venthyr renown 45
         [353873] = true, -- Pale Gravewing - venthyr korthia vendor
-        [353875] = true, -- Elysian Aquilon - kirian renown 45
+        [353875] = true, -- Elysian Aquilon - kyrian renown 45
+        [353877] = true, -- Foresworn Aquilon - Korthia - Wild Worldcracker for Kyrian
         [353880] = true, -- Ascendant's Aquilon - kyrian renown vendor
         [353883] = true, -- Maldraxxian Corpsefly - necrolord renown 45
         [353884] = true, -- Regal Corpsefly - necrolord renown vendor
@@ -1040,6 +1054,7 @@ ADDON.DB.Source = {
         [262024] = true, -- Notorious Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 3
         [262027] = true, -- Corrupted Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 4
         [332400] = true, -- Sinful Gladiator's Soul Eater - Sinful Gladiator: Shadowlands Season 1
+        [353036] = true, -- Unchained Gladiator's Soul Eater - Sinful Gladiator: Shadowlands Season 2
 
         -- Prestige Reward
         [222202] = true, -- Prestigious Bronze Courser
@@ -1216,9 +1231,14 @@ ADDON.DB.Source = {
     },
 
     ["World Event"] = {
-        sourceType = { 7 },
+        -- https://wow.tools/dbc/?dbc=mount#page=1&colFilter[6]=6
+        --sourceType = { 7 }, -- cant use it, because some mounts are missassigned
         -- Love is in the Air
         [71342] = true, -- Big Love Rocket
+        [102350] = true, -- Swift Lovebird
+
+        -- Noblegarden
+        [102349] = true, -- Swift Springstrider
 
         -- Brewfest
         [43899] = true, -- Brewfest Ram
@@ -1229,6 +1249,9 @@ ADDON.DB.Source = {
         -- Hallow's End
         [48025] = true, -- Headless Horseman's Mount
 
+        -- Winter Veil
+        [191314] = true, -- Minion of Grumpus
+
         -- Darkmoon Faire
         [103081] = true, -- Darkmoon Dancing Bear
         [102346] = true, -- Swift Forest Strider
@@ -1237,6 +1260,9 @@ ADDON.DB.Source = {
 
         -- Timewalking
         [127165] = true, -- Yu'lei, Daughter of Jade
+        [142910] = true, -- Ironbound Wraithcharger
+        [194464] = true, -- Eclipse Dragonhawk
+        [201098] = true, -- Infinite Timereaver
         [294568] = true, -- Beastlord's Irontusk
         [294569] = true, -- Beastlord's Warwolf
 
@@ -1320,148 +1346,154 @@ ADDON.DB.Source = {
 }
 
 ADDON.DB.FeatsOfStrength = {
-    -- from https://wowhead.com/mount-feats-of-strength (58)
-    -- spellId => AchievementId
-    [17229] = 3356, -- Winterspring Frostsaber
-    [17481] = 729, -- Deathcharger's Reins
-    [24242] = 881, -- Swift Razzashi Raptor
-    [24252] = 880, -- Swift Zulian Tiger
-    [26656] = 416, -- Scarab Lord
-    [36702] = 882, -- Fiery Warhorse's Reins
-    [37015] = 886, -- Swift Nether Drake
-    [40192] = 885, -- Ashes of Al'ar
-    [41252] = 883, -- Reins of the Raven Lord
-    [44744] = 887, -- Merciless Nether Drake
-    [46628] = 884, -- Swift White Hawkstrider
-    [48025] = 980, -- The Horseman's Reins
-    [49193] = 888, -- Vengeful Nether Drake
-    [49322] = 1436, -- Friends In High Places
-    [58615] = 2316, -- Brutal Nether Drake
-    [61465] = 2081, -- Grand Black War Mammoth
-    [61467] = 2081, -- Grand Black War Mammoth
-    [63796] = 4626, -- And I'll Form the Head!
-    [64659] = 3357, -- Venomhide Ravasaur
-    [64927] = 3096, -- Deadly Gladiator's Frost Wyrm
-    [65439] = 3756, -- Furious Gladiator's Frost Wyrm
-    [67336] = 3757, -- Relentless Gladiator's Frost Wyrm
-    [71342] = 4627, -- Big Love Rocket
-    [71810] = 4600, -- Wrathful Gladiator's Frost Wyrm
-    [72286] = 4625, -- Invincible's Reins
-    [75973] = 4832, -- Friends In Even Higher Places
-    [88750] = 5767, -- Scourer of the Eternal Sands
-    [101282] = 6003, -- Vicious Gladiator's Twilight Drake
-    [101821] = 6322, -- Ruthless Gladiator's Twilight Drake
-    [121820] = 8213, -- Friends In Places Higher Yet
-    [124550] = 6741, -- Cataclysmic Gladiator's Twilight Drake
-    [138640] = 8092, -- Bone-White Primal Raptor
-    [139407] = 8216, -- Malevolent Gladiator's Cloud Serpent
-    [148618] = 8678, -- Tyrannical Gladiator's Cloud Serpent
-    [148619] = 8705, -- Grievous Gladiator's Cloud Serpent
-    [148620] = 8707, -- Prideful Gladiator's Cloud Serpent
-    [149801] = 8794, -- Friends In Places Even Higher Than That
-    [171847] = 9925, -- Friends In Places Yet Even Higher Than That
-    [186828] = 9229, -- Primal Gladiator's Felblood Gronnling
-    [189043] = 10137, -- Wild Gladiator's Felblood Gronnling
-    [189044] = 10146, -- Warmongering Gladiator's Felblood Gronnling
-    [227986] = 10999, -- Vindictive Gladiator's Storm Dragon
-    [227988] = 11000, -- Fearless Gladiator's Storm Dragon
-    [227989] = 11001, -- Cruel Gladiator's Storm Dragon
-    [227991] = 11002, -- Ferocious Gladiator's Storm Dragon
-    [227994] = 13450, -- Fierce Gladiator's Storm Dragon
-    [227995] = 12139, -- Dominating Gladiator's Storm Dragon
-    [239767] = 424, -- Why? Because It's Red
-    [243201] = 12140, -- Demonic Gladiator's Storm Dragon
-    [262022] = 13093, -- Dread Gladiator's Proto-Drake
-    [262023] = 13202, -- Sinister Gladiator's Proto-Drake
-    [262024] = 13632, -- Notorious Gladiator's Proto-Drake
-    [262027] = 13958, -- Corrupted Gladiator's Proto-Drake
-    [264058] = 14183, -- Mighty Caravan Brutosaur
-    [332400] = 14816, -- Sinful Gladiator's Soul Eater
-    [353036] = 14999, -- Unchained Gladiator's Soul Eater
+    -- from https://wowhead.com/mount-feats-of-strength (60)
+    -- mountId => AchievementId
+    [55] = 3356, -- Winterspring Frostsaber
+    [69] = 729, -- Deathcharger's Reins
+    [110] = 881, -- Swift Razzashi Raptor
+    [111] = 880, -- Swift Zulian Tiger
+    [122] = 416, -- Scarab Lord
+    [168] = 882, -- Fiery Warhorse's Reins
+    [169] = 886, -- Swift Nether Drake
+    [183] = 885, -- Ashes of Al'ar
+    [185] = 883, -- Reins of the Raven Lord
+    [207] = 887, -- Merciless Nether Drake
+    [213] = 884, -- Swift White Hawkstrider
+    [219] = 980, -- The Horseman's Reins
+    [223] = 888, -- Vengeful Nether Drake
+    [224] = 1436, -- Friends In High Places
+    [241] = 2316, -- Brutal Nether Drake
+    [286] = 2081, -- Grand Black War Mammoth
+    [287] = 2081, -- Grand Black War Mammoth
+    [304] = 4626, -- And I'll Form the Head!
+    [311] = 3357, -- Venomhide Ravasaur
+    [313] = 3096, -- Deadly Gladiator's Frost Wyrm
+    [317] = 3756, -- Furious Gladiator's Frost Wyrm
+    [340] = 3757, -- Relentless Gladiator's Frost Wyrm
+    [352] = 4627, -- Big Love Rocket
+    [358] = 4600, -- Wrathful Gladiator's Frost Wyrm
+    [363] = 4625, -- Invincible's Reins
+    [382] = 4832, -- Friends In Even Higher Places
+    [400] = 5767, -- Scourer of the Eternal Sands
+    [424] = 6003, -- Vicious Gladiator's Twilight Drake
+    [428] = 6322, -- Ruthless Gladiator's Twilight Drake
+    [454] = 9925, -- Friends In Places Yet Even Higher Than That
+    [455] = 8213, -- Friends In Places Higher Yet
+    [467] = 6741, -- Cataclysmic Gladiator's Twilight Drake
+    [537] = 8092, -- Bone-White Primal Raptor
+    [541] = 8216, -- Malevolent Gladiator's Cloud Serpent
+    [562] = 8678, -- Tyrannical Gladiator's Cloud Serpent
+    [563] = 8705, -- Grievous Gladiator's Cloud Serpent
+    [564] = 8707, -- Prideful Gladiator's Cloud Serpent
+    [568] = 8794, -- Friends In Places Even Higher Than That
+    [759] = 9229, -- Primal Gladiator's Felblood Gronnling
+    [760] = 10137, -- Wild Gladiator's Felblood Gronnling
+    [761] = 10146, -- Warmongering Gladiator's Felblood Gronnling
+    [848] = 10999, -- Vindictive Gladiator's Storm Dragon
+    [849] = 11000, -- Fearless Gladiator's Storm Dragon
+    [850] = 11001, -- Cruel Gladiator's Storm Dragon
+    [851] = 11002, -- Ferocious Gladiator's Storm Dragon
+    [852] = 13450, -- Fierce Gladiator's Storm Dragon
+    [853] = 12139, -- Dominating Gladiator's Storm Dragon
+    [936] = 424, -- Why? Because It's Red
+    [948] = 12140, -- Demonic Gladiator's Storm Dragon
+    [1030] = 13093, -- Dread Gladiator's Proto-Drake
+    [1031] = 13202, -- Sinister Gladiator's Proto-Drake
+    [1032] = 13632, -- Notorious Gladiator's Proto-Drake
+    [1035] = 13958, -- Corrupted Gladiator's Proto-Drake
+    [1039] = 14183, -- Mighty Caravan Brutosaur
+    [1363] = 14816, -- Sinful Gladiator's Soul Eater
+    [1480] = 14999, -- Unchained Gladiator's Soul Eater
+}
+
+ADDON.DB.Recent = {
+    ["minID"] = GetBuildInfo() == "9.1.0" and 1446 or 1521,
+    ["blacklist"] = { 1458 }, -- Wandering Ancient
 }
 
 ADDON.DB.Expansion = {
 
     [0] = { -- Classic
         ["minID"] = 0,
-        ["maxID"] = 30000,
+        ["maxID"] = 122,
     },
 
     [1] = { -- The Burning Crusade
-        ["minID"] = 30001,
-        ["maxID"] = 50000,
-        [58983] = true, -- Big Blizzard Bear
+        ["minID"] = 123,
+        ["maxID"] = 226,
+        [241] = true, -- Brutal Nether Drake
+        [243] = true, -- Big Blizzard Bear
     },
 
     [2] = { -- Wrath of the Lich King
-        ["minID"] = 50001,
-        ["maxID"] = 76000,
-        [48778] = true, -- Acherus Deathcharger
-        [46197] = true, -- X-51 Nether-Rocket
-        [46199] = true, -- X-51 Nether-Rocket X-TREME
+        ["minID"] = 227,
+        ["maxID"] = 382,
+        [211] = true, -- X-51 Nether-Rocket
+        [212] = true, -- X-51 Nether-Rocket X-TREME
+        [221] = true, -- Acherus Deathcharger
     },
 
     [3] = { -- Cataclysm
-        ["minID"] = 76001,
-        ["maxID"] = 113120,
-        [71810] = true, -- Wrathful Gladiator's Frost Wyrm
-        [75207] = true, -- Abyssal Seahorse
+        ["minID"] = 383,
+        ["maxID"] = 447,
+        [358] = true, -- Wrathful Gladiator's Frost Wyrm
+        [373] = true, -- Abyssal Seahorse
     },
 
     [4] = { -- Mists of Pandaria
-        ["minID"] = 113121,
-        ["maxID"] = 160000,
+        ["minID"] = 448,
+        ["maxID"] = 571,
     },
 
     [5] = { -- Warlords of Draenor
-        ["minID"] = 160001,
-        ["maxID"] = 193000,
-        [142910] = true, -- Ironbound Wraithcharger
-        [194464] = true, -- Eclipse Dragonhawk
-        [201098] = true, -- Infinite Timereaver
-        [155741] = true, -- Dread Raven - Warlords of Draenor Collector's Edition
+        ["minID"] = 572,
+        ["maxID"] = 772,
+        [454] = true, -- Cindermane Charger
+        [552] = true, -- Ironbound Wraithcharger
+        [778] = true, -- Eclipse Dragonhawk
+        [781] = true, -- Infinite Timereaver
     },
 
     [6] = { -- Legion
-        ["minID"] = 193001,
-        ["maxID"] = 254500,
-        [171827] = true, -- Hellfire Infernal
-        [171850] = true, -- Llothien Prowler
-        [127165] = true, -- Yu'lei, Daughter of Jade
-        [189998] = true, -- Illidari Felstalker - Legion Collector's Edition
-        [259395] = true, -- Shu-zen, the Divine Sentinel
+        ["minID"] = 773,
+        ["maxID"] = 991,
+        [476] = true, -- Yu'lei, Daughter of Jade
+        [633] = true, -- Hellfire Infernal
+        [656] = true, -- Llothien Prowler
+        [663] = true, -- Bloodfang Widow
+        [763] = true, -- Illidari Felstalker - Legion Collector's Edition
+        [1006] = true, -- Lightforged Felcrusher
+        [1007] = true, -- Highmountain Thunderhoof
+        [1008] = true, -- Nightborne Manasaber
+        [1009] = true, -- Starcursed Voidstrider
+        [1011] = true, -- Shu-zen, the Divine Sentinel
     },
 
     [7] = { -- Battle for Azeroth
-        ["minID"] = 254501,
-        ["maxID"] = 320000,
-        [213350] = true, -- Frostshard  Infernal
-        [237286] = true, -- Dune Scavenger
-        [237287] = true, -- Alabaster Hyena
-        [239049] = true, -- Obsidian Krolusk
-        [243795] = true, -- Leaping Veinseeker
-        [250735] = true, -- Bloodgorged Crawg
-        [255695] = true, -- Seabraid Stallion - Battle for Azeroth CE
-        [255696] = true, -- Gilded Ravasaurn - Battle for Azeroth CE
-        [326390] = true, -- Steamscale Incinerator
+        ["minID"] = 993,
+        ["maxID"] = 1329,
+        [926] = true, -- Alabaster Hyena
+        [928] = true, -- Dune Scavenger
+        [933] = true, -- Obsidian Krolusk
+        [956] = true, -- Leaping Veinseeker
+        [963] = true, -- Bloodgorged Crawg
+        [1346] = true, -- Steamscale Incinerator
     },
 
     [8] = { -- Shadowlands
-        ["minID"] = 320001,
+        ["minID"] = 1330,
         ["maxID"] = 999999,
-        [307932] = true, -- Ensorcelled Everwyrm
-        [318051] = true, -- Silky Shimmermoth
-        [318052] = true, -- Deathbringer's Flayedwing
-        [312776] = true, -- Chittering Animite
-        [312765] = true, -- Sundancer
-        [312767] = true, -- Swift Gloomhoof
-        [312763] = true, -- Darkwarren Hardshell
-        [312762] = true, -- Mawsworn Soulhunter
-        [312761] = true, -- Enchanted Dreamlight Runestag
-        [312759] = true, -- Dreamlight Runestag
-        [312754] = true, -- Battle Gargon Vrednic
-        [312753] = true, -- Hopecrusher Gargon
-        [312777] = true, -- Silvertip Dredwing
+        [1289] = true, -- Ensorcelled Everwyrm
+        [1298] = true, -- Hopecrusher Gargon
+        [1299] = true, -- Battle Gargon Vrednic
+        [1302] = true, -- Dreamlight Runestag
+        [1303] = true, -- Enchanted Dreamlight Runestag
+        [1304] = true, -- Mawsworn Soulhunter
+        [1305] = true, -- Darkwarren Hardshell
+        [1306] = true, -- Swift Gloomhoof
+        [1307] = true, -- Sundancer
+        [1309] = true, -- Chittering Animite
+        [1310] = true, -- Horrid Dredwing
     }
 }
 
@@ -1477,34 +1509,34 @@ ADDON.DB.Type = {
         typeIDs = { 231, 232, 254 },
     },
     repair = {
-        [61425] = true, -- Traveler's Tundra Mammoth (Alliance)
-        [61447] = true, -- Traveler's Tundra Mammoth (Horde)
-        [122708] = true, -- Grand Expedition Yak
-        [264058] = true, -- Mighty Caravan Brutosaur
+        [280] = true, -- Traveler's Tundra Mammoth (Alliance)
+        [284] = true, -- Traveler's Tundra Mammoth (Horde)
+        [460] = true, -- Grand Expedition Yak
+        [1039] = true, -- Mighty Caravan Brutosaur
     },
     passenger = {
-        [61425] = true, -- Traveler's Tundra Mammoth (Alliance)
-        [61447] = true, -- Traveler's Tundra Mammoth (Horde)
-        [122708] = true, -- Grand Expedition Yak
-        [61469] = true, -- Grand Ice Mammoth
-        [61470] = true, -- Grand Ice Mammoth
-        [61465] = true, -- Grand Black War Mammoth
-        [61467] = true, -- Grand Black War Mammoth
-        [121820] = true, -- Obsidian Nightwing
-        [93326] = true, -- Sandstone Drake
-        [55531] = true, -- Mechano-Hog
-        [60424] = true, -- Mekgineer's Chopper
-        [75973] = true, -- X-53 Touring Rocket
-        [245723] = true, -- Stormwind Skychaser - Blizzcon 2017
-        [245725] = true, -- Orgrimmar Interceptor - Blizzcon 2017
-        [261395] = true, -- The Hivemind
-        [264058] = true, -- Mighty Caravan Brutosaur
-        [307256] = true, -- Explorer's Jungle Hopper
-        [307263] = true, -- Explorer's Dunetrekker
+        [240] = true, -- Mechano-Hog
+        [275] = true, -- Mekgineer's Chopper
+        [280] = true, -- Traveler's Tundra Mammoth (Alliance)
+        [284] = true, -- Traveler's Tundra Mammoth (Horde)
+        [286] = true, -- Grand Black War Mammoth
+        [287] = true, -- Grand Black War Mammoth
+        [288] = true, -- Grand Ice Mammoth
+        [289] = true, -- Grand Ice Mammoth
+        [382] = true, -- X-53 Touring Rocket
+        [407] = true, -- Sandstone Drake
+        [455] = true, -- Obsidian Nightwing
+        [460] = true, -- Grand Expedition Yak
+        [959] = true, -- Stormwind Skychaser - Blizzcon 2017
+        [960] = true, -- Orgrimmar Interceptor - Blizzcon 2017
+        [1025] = true, -- The Hivemind
+        [1039] = true, -- Mighty Caravan Brutosaur
+        [1287] = true, -- Explorer's Jungle Hopper
+        [1288] = true, -- Explorer's Dunetrekker
     },
 }
 
--- used as filter for debug output
+-- used as filter
 -- mountId as Index
 ADDON.DB.Ignored = {
     [7] = true, -- Gray Wolf

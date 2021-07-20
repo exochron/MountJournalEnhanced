@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 local INDEX_USE_COUNT, INDEX_LAST_USE_TIME, INDEX_TRAVEL_TIME, INDEX_TRAVEL_DISTANCE, INDEX_LEARNED_TIME = 1, 2, 3, 4, 5
 
@@ -88,36 +88,40 @@ ADDON:RegisterBehaviourSetting('trackUsageStats', true, ADDON.L.SETTING_TRACK_US
     MJEGlobalSettings.trackUsageStats = flag
 end)
 
-local function parseLearnedDateFromAchievements()
-    if ADDON.settings.trackUsageStats then
-        local lists = { ADDON.DB.Source.Achievement, ADDON.DB.FeatsOfStrength }
-        for _, list in pairs(lists) do
-            for spellId, achievementIds in pairs(list) do
-                if achievementIds ~= true then
-                    local mountId = C_MountJournal.GetMountFromSpell(spellId)
-                    if mountId and (not MJETrackingData[mountId] or not MJETrackingData[mountId][INDEX_LEARNED_TIME]) then
-                        local collected = select(11, C_MountJournal.GetMountInfoByID(mountId))
-                        if collected then
-                            if type(achievementIds) == "number" then
-                                achievementIds = { achievementIds }
-                            end
-                            for _, achievementId in ipairs(achievementIds) do
-                                local _, _, _, completed, month, day, year = GetAchievementInfo(achievementId)
-                                if completed then
-                                    local blob = initData(mountId)
-                                    blob[INDEX_LEARNED_TIME] = time({
-                                        ["year"] = 2000 + year,
-                                        ["month"] = month,
-                                        ["day"] = day,
-                                    })
-                                    break
-                                end
-                            end
-                        end
-                    end
+local function parseLearnedDateForMount(mountId, achievementIds)
+    if mountId and (not MJETrackingData[mountId] or not MJETrackingData[mountId][INDEX_LEARNED_TIME]) then
+        local collected = select(11, C_MountJournal.GetMountInfoByID(mountId))
+        if collected then
+            for _, achievementId in ipairs(achievementIds) do
+                local _, _, _, completed, month, day, year = GetAchievementInfo(achievementId)
+                if completed then
+                    local blob = initData(mountId)
+                    blob[INDEX_LEARNED_TIME] = time({
+                        ["year"] = 2000 + year,
+                        ["month"] = month,
+                        ["day"] = day,
+                    })
+                    break
                 end
             end
         end
     end
 end
-ADDON.Events:RegisterCallback("preloadUI", parseLearnedDateFromAchievements, "tracking")
+local function parseLearnedDates()
+    if ADDON.settings.trackUsageStats then
+        for spellId, achievementIds in pairs(ADDON.DB.Source.Achievement) do
+            if achievementIds ~= true then
+                local mountId = C_MountJournal.GetMountFromSpell(spellId)
+                if type(achievementIds) == "number" then
+                    achievementIds = { achievementIds }
+                end
+                parseLearnedDateForMount(mountId, achievementIds)
+            end
+        end
+
+        for mountId, achievementId in pairs(ADDON.DB.FeatsOfStrength) do
+            parseLearnedDateForMount(mountId, { achievementId })
+        end
+    end
+end
+ADDON.Events:RegisterCallback("preloadUI", parseLearnedDates, "tracking")

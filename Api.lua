@@ -105,18 +105,22 @@ function ADDON.Api:UpdateIndex(calledFromEvent)
     end
 end
 
-local selectedMount
-function ADDON.Api:SetSelected(selectedMountID)
+local selectedMount, selectedCreature
+function ADDON.Api:SetSelected(selectedMountID, selectedVariation)
     if selectedMount ~= selectedMountID then
         selectedMount = selectedMountID
+        selectedCreature = selectedVariation or nil
         --MountJournal_HideMountDropdown();
         ADDON.UI:UpdateMountList()
         ADDON.UI:UpdateMountDisplay()
         ADDON.UI:ScrollToSelected()
+    elseif selectedCreature ~= selectedVariation then
+        selectedCreature = selectedVariation or nil
+        ADDON.UI:UpdateMountDisplay(true)
     end
 end
 function ADDON.Api:GetSelected()
-    return selectedMount
+    return selectedMount, selectedCreature
 end
 
 -- from https://www.townlong-yak.com/framexml/live/Blizzard_Collections/Blizzard_MountCollection.lua#668

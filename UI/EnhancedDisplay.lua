@@ -25,13 +25,18 @@ end
 --- from https://www.townlong-yak.com/framexml/live/Blizzard_Collections/Blizzard_MountCollection.lua#533
 function ADDON.UI:UpdateMountDisplay(forceSceneChange)
     if ADDON.initialized and ADDON.Api:GetSelected() and not shouldSkipUpdate() then
-        local creatureName, spellID, icon, active, isUsable, _ = C_MountJournal.GetMountInfoByID(ADDON.Api:GetSelected());
-        local needsFanfare = C_MountJournal.NeedsFanfare(ADDON.Api:GetSelected());
+        local mountID, mountVariation = ADDON.Api:GetSelected()
+        local creatureName, spellID, icon, active, isUsable, _ = C_MountJournal.GetMountInfoByID(mountID);
+        local needsFanfare = C_MountJournal.NeedsFanfare(mountID);
         if (MountJournal.MountDisplay.MJE_lastDisplayed ~= spellID or forceSceneChange) then
-            local creatureDisplayID, descriptionText, sourceText, isSelfMount, _, modelSceneID, animID, spellVisualKitID, disablePlayerMountPreview = C_MountJournal.GetMountInfoExtraByID(ADDON.Api:GetSelected());
+            local creatureDisplayID, descriptionText, sourceText, isSelfMount, _, modelSceneID, animID, spellVisualKitID, disablePlayerMountPreview = C_MountJournal.GetMountInfoExtraByID(mountID);
             if not creatureDisplayID then
                 local randomSelection = false;
-                creatureDisplayID = MountJournalMountButton_ChooseFallbackMountToDisplay(ADDON.Api:GetSelected(), randomSelection);
+                creatureDisplayID = MountJournalMountButton_ChooseFallbackMountToDisplay(mountID, randomSelection);
+            end
+            if mountVariation then
+                local creatureData = C_MountJournal.GetMountAllCreatureDisplayInfoByID(mountID)
+                creatureDisplayID = creatureData[mountVariation].creatureDisplayID or creatureDisplayID
             end
             MountJournal.MountDisplay.InfoButton.Name:SetText(creatureName);
             if needsFanfare then

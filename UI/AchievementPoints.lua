@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 local function CreateAchievementPoints()
     local MOUNT_ACHIEVEMENT_CATEGORY = 15248
@@ -51,7 +51,7 @@ local function CreateAchievementPoints()
         else
             local onLoadAddon = CreateFrame("FRAME")
             onLoadAddon:RegisterEvent("ADDON_LOADED")
-            onLoadAddon:SetScript("OnEvent", function(self, event, arg1)
+            onLoadAddon:SetScript("OnEvent", function(_, _, arg1)
                 if arg1 == "Blizzard_AchievementUI" then
                     local doSwitch = true
                     AchievementFrame:HookScript("OnShow", function ()
@@ -75,7 +75,7 @@ local function CreateAchievementPoints()
     end)
 
     frame:RegisterEvent("ACHIEVEMENT_EARNED")
-    frame:SetScript("OnEvent", function(self, event, ...)
+    frame:SetScript("OnEvent", function()
         frame.staticText:SetText(GetCategoryAchievementPoints(MOUNT_ACHIEVEMENT_CATEGORY, true))
     end)
 
