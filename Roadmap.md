@@ -17,7 +17,7 @@
 
 ### Stupid Ideas :D
 (maybe for april fool's)
-- googly eyes (like in ow)
+- googly eyes (like in overwatch)
 - who's that mount:
   - Only Display, but the mount is completly black
   - multiple choice (4?); never use an alternative option of the same family
