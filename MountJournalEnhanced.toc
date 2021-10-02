@@ -53,5 +53,6 @@ UI\Hotkeys.lua
 UI\MountListDropDown.lua
 UI\SettingsDropDown.lua
 UI\DressUpButton.lua
+UI\Resize.lua
 UI\ShopButton.lua
 UI\BlizzFixes.lua
