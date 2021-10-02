@@ -22,6 +22,7 @@ ADDON.DB.Restrictions = {
 [603] = { ["skill"]={197,}, }, -- Creeping Carpet
 [650] = { ["skill"]={165,}, }, -- Dustmane Direwolf
 [780] = { ["class"]={"DEMONHUNTER",}, }, -- Felsaber
+[803] = { ["covenant"]={2,}, }, -- Mastercraft Gravewing
 [860] = { ["class"]={"MAGE",}, }, -- Archmage's Prismatic Disc
 [861] = { ["class"]={"PRIEST",}, }, -- High Priest's Lightsworn Seeker
 [864] = { ["class"]={"MONK",}, }, -- Ban-Lu, Grandmaster's Companion
@@ -88,7 +89,7 @@ ADDON.DB.Restrictions = {
 [1490] = { ["covenant"]={2,}, }, -- Sinfall Gravewing
 [1491] = { ["covenant"]={2,}, }, -- Pale Gravewing
 [1492] = { ["covenant"]={1,}, }, -- Elysian Aquilon
-[1493] = { ["covenant"]={1,}, }, -- Foresworn Aquilon
+[1493] = { ["covenant"]={1,}, }, -- Forsworn Aquilon
 [1494] = { ["covenant"]={1,}, }, -- Ascendant's Aquilon
 [1495] = { ["covenant"]={4,}, }, -- Maldraxxian Corpsefly
 [1496] = { ["covenant"]={4,}, }, -- Regal Corpsefly

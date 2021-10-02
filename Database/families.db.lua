@@ -90,7 +90,7 @@ ADDON.DB.Family = {
 [1224] = true, -- Wonderwing 2.0
 [1436] = true, -- Battle-Hardened Aquilon
 [1492] = true, -- Elysian Aquilon
-[1493] = true, -- Foresworn Aquilon
+[1493] = true, -- Forsworn Aquilon
 [1494] = true, -- Ascendant's Aquilon
 },
 ["Pandaren Phoenixes"] = {
@@ -669,6 +669,7 @@ ADDON.DB.Family = {
 [846] = true, -- Leyfeather Hippogryph
 [943] = true, -- Cloudwing Hippogryph
 [1054] = true, -- Teldrassil Hippogryph
+[1521] = true, -- Val'sharah Hippogryph
 },
 ["Larion"] = {
 [1404] = true, -- Silverwind Larion
@@ -713,6 +714,7 @@ ADDON.DB.Family = {
 },
 },
 ["Gargoyle"] = {
+[803] = true, -- Mastercraft Gravewing
 [1489] = true, -- Obsidian Gravewing
 [1490] = true, -- Sinfall Gravewing
 [1491] = true, -- Pale Gravewing
@@ -930,6 +932,7 @@ ADDON.DB.Family = {
 ["Rats"] = {
 [804] = true, -- Ratstallion
 [1290] = true, -- Squeakers, the Trickster
+[1513] = true, -- Sarge's Tale
 },
 ["Rays"] = {
 ["Fathom Rays"] = {
@@ -1169,6 +1172,9 @@ ADDON.DB.Family = {
 ["Assault Wagons"] = {
 [1193] = true, -- Meat Wagon
 },
+["Book"] = {
+[1532] = true, -- Soaring Spelltome
+},
 ["Carpets"] = {
 [279] = true, -- Magnificent Flying Carpet
 [285] = true, -- Flying Carpet
@@ -1230,7 +1236,7 @@ ADDON.DB.Family = {
 [1402] = true, -- Eternal Phalynx of Humility
 [1436] = true, -- Battle-Hardened Aquilon
 [1492] = true, -- Elysian Aquilon
-[1493] = true, -- Foresworn Aquilon
+[1493] = true, -- Forsworn Aquilon
 [1494] = true, -- Ascendant's Aquilon
 },
 ["Mechanostriders"] = {
@@ -1267,7 +1273,7 @@ ADDON.DB.Family = {
 ["Rockets"] = {
 [211] = true, -- X-51 Nether-Rocket
 [212] = true, -- X-51 Nether-Rocket X-TREME
-[352] = true, -- Big Love Rocket
+[352] = true, -- X-45 Heartbreaker
 [382] = true, -- X-53 Touring Rocket
 [469] = true, -- Depleted-Kyparium Rocket
 [470] = true, -- Geosynchronous World Spinner

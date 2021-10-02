@@ -343,6 +343,7 @@ func LoadConfig() config {
 					{Name: "Airplanes", Wcm: []string{"Airplanes"}},
 					{Name: "Airships", Wcm: []string{"Skyships", "Zeppelins", "Flying Ships"}},
 					{Name: "Assault Wagons", Wcm: []string{"Assault Wagons"}},
+					{Name: "Book", Wcm: []string{"Books"}},
 					{Name: "Carpets", Wcm: []string{"Flying Carpets"}},
 					{Name: "Discs", Wcm: []string{"Discs"}},
 					{Name: "Gyrocopters", Wcm: []string{"Gyrocopters"}},
