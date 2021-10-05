@@ -242,7 +242,7 @@ elseif locale == "koKR" then
     --@localization(locale="koKR", namespace="Settings", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="koKR", namespace="Families", format="lua_additive_table", handle-unlocalized=comment)@
 
-elseif locale == "prBR" then
+elseif locale == "ptBR" then
     ADDON.isMetric = true
     --@localization(locale="ptBR", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="ptBR", namespace="Settings", format="lua_additive_table", handle-unlocalized=comment)@
