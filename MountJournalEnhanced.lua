@@ -34,6 +34,9 @@ function ADDON:ResetIngameFilter()
     C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, true)
     C_MountJournal.SetAllSourceFilters(true)
     C_MountJournal.SetSearch("")
+    if C_MountJournal.SetAllTypeFilters then -- TODO: remove if after 9.1.5 release
+        C_MountJournal.SetAllTypeFilters(true)
+    end
 end
 ADDON:ResetIngameFilter()
 

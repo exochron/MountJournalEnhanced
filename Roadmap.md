@@ -6,6 +6,7 @@
 - activate sound effects in display (with global setting)
 - more animation control in display (start/pause, movements, with sound effects)
 - color filter
+- gamepad support (?)
 - variation filter (undead, mech, elemental, magic...)
 - proper favorite profiles with one global profile
 - favorite groups / custom filter groups
@@ -14,3 +15,14 @@
 - display Rarity / x Percentage of all worldwide players have that (Retail) - if I can find a nice source for that
 - Mount Score Rating (based on rarity?)
 - disable sound effects of mounts (currently no api for that)
+
+### Stupid Ideas :D
+(maybe for april fool's)
+- googly eyes (like in overwatch)
+- who's that mount:
+  - Only Display, but the mount is completly black
+  - multiple choice (4?); never use an alternative option of the same family
+  - 10? rounds
+- Pimp my Mount (more effects in display like) 
+    - underbody lightning
+    - sun glasses for mount

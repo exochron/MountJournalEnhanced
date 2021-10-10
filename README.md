@@ -22,6 +22,7 @@ This is an interface addon for World of Warcraft. It extends the ingame mount jo
 + Favor all filtered mounts at once or unset them all.
 + Save favorites per character.
 + Auto-favor new learned mounts.
++ Resize the journal window.
 + Works with ElvUI
 
 ### Fixes also

@@ -24,7 +24,7 @@ func NewConditions(conditionData map[string]string) [][]Condition {
 		result = append(result, races)
 	}
 
-	covenants := checkCovenant(conditionData["CovenantID"])
+	covenants := checkCovenant(conditionData)
 	if len(covenants) > 0 {
 		result = append(result, covenants)
 	}

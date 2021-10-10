@@ -20,7 +20,7 @@ L["Passenger"] = "Passenger"
 L["Reset filters"] = "Reset filters"
 L["ROTATE_DOWN"] = "Rotate Down"
 L["ROTATE_UP"] = "Rotate Up"
-L["Show in Collections"] = "Show in Collections"
+L["DRESSUP_LABEL"] = "Journal"
 L["SORT_BY_LEARNED_DATE"] = "Date of receipt"
 L["SORT_BY_USAGE_COUNT"] = "Count of usage"
 L["SORT_BY_LAST_USAGE"] = "Last usage"
@@ -54,6 +54,7 @@ L["Bees"] = "Bees"
 L["Birds"] = "Birds"
 L["Blood Ticks"] = "Blood Ticks"
 L["Boars"] = "Boars"
+L["Book"] = "Book"
 L["Bovids"] = "Bovids"
 L["Brutosaurs"] = "Brutosaurs"
 L["Camels"] = "Camels"
@@ -198,6 +199,7 @@ L["Yetis"] = "Yetis"
 
 -- Settings
 L["DISPLAY_ALL_SETTINGS"] = "Display all settings"
+L["RESET_WINDOW_SIZE"] = "Reset journal size"
 L["SETTING_ACHIEVEMENT_POINTS"] = "Show achievement points"
 L["SETTING_AUTO_FAVOR"] = "Automatically set new mounts as favorite"
 L["SETTING_COMPACT_LIST"] = "Compact mount list"
@@ -240,7 +242,7 @@ elseif locale == "koKR" then
     --@localization(locale="koKR", namespace="Settings", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="koKR", namespace="Families", format="lua_additive_table", handle-unlocalized=comment)@
 
-elseif locale == "prBR" then
+elseif locale == "ptBR" then
     ADDON.isMetric = true
     --@localization(locale="ptBR", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="ptBR", namespace="Settings", format="lua_additive_table", handle-unlocalized=comment)@

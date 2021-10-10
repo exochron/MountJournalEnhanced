@@ -812,6 +812,7 @@ ADDON.DB.Source = {
         [258060] = 12245, -- Highmountain Thunderhoof - Allied Races: Highmountain Tauren
         [258845] = 12244, -- Nightborne Manasaber - Allied Races: Nightborne
         [259202] = 12242, -- Starcursed Voidstrider - Allied Races: Void Elf
+        [359318] = 15310, -- Soaring Spelltome - A Tour of Towers
 
         -- Battle for Azeroth
         [213350] = { 12931, 12932 }, -- Frostshard Infernal - No Stable Big Enough
@@ -1265,6 +1266,8 @@ ADDON.DB.Source = {
         [201098] = true, -- Infinite Timereaver
         [294568] = true, -- Beastlord's Irontusk
         [294569] = true, -- Beastlord's Warwolf
+        [359013] = true, -- Val'sharah Hippogryph
+        [359318] = true, -- Soaring Spelltome - A Tour of Towers
 
         -- Call of the Scarab (Micro)
         [239766] = true, -- Blue Qiraji War Tank

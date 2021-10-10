@@ -1,6 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
-local function InitializeDropDown(menu, level)
+local function InitializeDropDown(_, level)
     local title = GetAddOnMetadata(ADDON_NAME, "Title")
 
     local button = {
@@ -29,7 +29,7 @@ local function InitializeDropDown(menu, level)
         end
     end
 
-    UIDropDownMenu_AddSpace( level)
+    UIDropDownMenu_AddSpace(level)
 
     button = {
         isNotRadio = true,
@@ -37,9 +37,20 @@ local function InitializeDropDown(menu, level)
         hasArrow = false,
         text = ADDON.L.DISPLAY_ALL_SETTINGS,
         justifyH = "CENTER",
-        func = function(_, _, _, value)
+        func = function()
             InterfaceOptionsFrame_OpenToCategory(title)
             InterfaceOptionsFrame_OpenToCategory(title)
+        end,
+    }
+    UIDropDownMenu_AddButton(button, level)
+    button = {
+        isNotRadio = true,
+        notCheckable = true,
+        hasArrow = false,
+        text = ADDON.L.RESET_WINDOW_SIZE,
+        justifyH = "CENTER",
+        func = function()
+            ADDON.UI:RestoreWindowSize()
         end,
     }
     UIDropDownMenu_AddButton(button, level)
@@ -79,7 +90,7 @@ ADDON.Events:RegisterCallback("loadUI", function()
     local button = BuildWheelButton()
 
     local menu
-    button:HookScript("OnClick", function(sender)
+    button:HookScript("OnClick", function()
         PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
         if menu == nil then
             menu = CreateFrame("Frame", ADDON_NAME .. "SettingsMenu", MountJournal, "UIDropDownMenuTemplate")

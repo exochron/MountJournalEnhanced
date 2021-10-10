@@ -226,7 +226,7 @@ local function InitializeFilterDropDown(_, level)
         UIDropDownMenu_AddSpace(level)
 
         UIDropDownMenu_AddButton(CreateFilterCategory(SOURCES, SETTING_SOURCE), level)
-        UIDropDownMenu_AddButton(CreateFilterCategory(TYPE, SETTING_MOUNT_TYPE), level)
+        UIDropDownMenu_AddButton(CreateFilterCategory(MOUNT_JOURNAL_FILTER_TYPE or TYPE, SETTING_MOUNT_TYPE), level)
         UIDropDownMenu_AddButton(CreateFilterCategory(FACTION, SETTING_FACTION), level)
         UIDropDownMenu_AddButton(CreateFilterCategory(L["Family"], SETTING_FAMILY), level)
         UIDropDownMenu_AddButton(CreateFilterCategory(EXPANSION_FILTER_TEXT, SETTING_EXPANSION), level)
@@ -262,9 +262,10 @@ local function InitializeFilterDropDown(_, level)
     elseif (UIDROPDOWNMENU_MENU_VALUE == SETTING_MOUNT_TYPE) then
         local settings = ADDON.settings.filter[SETTING_MOUNT_TYPE]
         AddCheckAllAndNoneInfo(settings, level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(L["Flying"], "flying", settings), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(L["Ground"], "ground", settings), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(L["Underwater"], "underwater", settings), level)
+        -- TODO: remove translations after 9.1.5 release
+        UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_FLYING or L["Flying"], "flying", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_GROUND or L["Ground"], "ground", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_AQUATIC or L["Underwater"], "underwater", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L["Transform"], "transform", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(MINIMAP_TRACKING_REPAIR, "repair", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L["Passenger"], "passenger", settings), level)

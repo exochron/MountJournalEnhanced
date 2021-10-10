@@ -191,7 +191,7 @@ local function SetupButtons(scrollFrame)
     local buttons = scrollFrame.buttons
     -- generate more buttons with smaller height
     local height = buttons[1]:GetHeight()
-    buttons[1]:SetHeight(height / 3)
+    buttons[1]:SetHeight(height / 7)
     HybridScrollFrame_CreateButtons(scrollFrame, "MountListButtonTemplate")
     -- switch back to original height
     buttons[1]:SetHeight(height)
