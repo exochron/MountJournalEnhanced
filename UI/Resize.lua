@@ -11,20 +11,18 @@ end
 local function BuildResizeButton()
     local button = CreateFrame("Button", nil, MountJournal)
     button:SetSize(20, 20)
-    button:SetPoint("BOTTOMRIGHT", -1, -1)
+    button:SetPoint("BOTTOMRIGHT", -2, -2)
     button:SetNormalTexture('Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Up')
     button:SetHighlightTexture('Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Highlight')
     button:SetPushedTexture('Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Down')
-
-    button:SetMovable(true)
-    button:EnableMouse(true)
-    button:RegisterForDrag("LeftButton")
     button:SetDontSavePosition()
 
-    button:SetScript("OnDragStart", function()
-        CollectionsJournal:StartSizing("bottomright")
+    -- /tinspect CollectionsJournal
+    -- /run CollectionsJournal:SetResizable(1);CollectionsJournal:StartSizing()
+    button:SetScript("OnMouseDown", function()
+        CollectionsJournal:StartSizing("BOTTOMRIGHT") -- TODO: doesn't work on PTR :(
     end)
-    button:SetScript("OnDragStop", function()
+    button:SetScript("OnMouseUp", function()
         CollectionsJournal:StopMovingOrSizing()
     end)
 
@@ -38,6 +36,7 @@ ADDON.Events:RegisterCallback("loadUI", function()
     ADDON.UI:SaveSize(CJ)
     ADDON.UI:SavePoint(CJ)
     CJ:SetMinResize(CJ:GetWidth(), CJ:GetHeight())
+    CJ:SetClampedToScreen(true)
 
     local handler = function(_, activate)
         button:SetShown(activate)
@@ -65,9 +64,8 @@ ADDON.Events:RegisterCallback("loadUI", function()
 end, "Resize")
 
 EventRegistry:RegisterCallback("MountJournal.OnShow", function()
-    local CJ = CollectionsJournal
-    if CJ.selectedTab == 1 then
-        CJ:SetResizable(true)
+    if CollectionsJournal.selectedTab == 1 then
+        CollectionsJournal:SetResizable(true)
     end
 end, ADDON_NAME .. '_Resize')
 EventRegistry:RegisterCallback("MountJournal.OnHide", function()
