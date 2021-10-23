@@ -183,6 +183,7 @@ ADDON.DB.Family = {
 [967] = true, -- Umber Ruinstrider
 [970] = true, -- Maddened Chaosrunner
 [986] = true, -- Bleakhoof Ruinstrider
+[1568] = true, -- Lightforged Ruinstrider
 },
 ["Talbuks"] = {
 [151] = true, -- Dark War Talbuk

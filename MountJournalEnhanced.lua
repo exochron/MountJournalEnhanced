@@ -67,7 +67,7 @@ end)
 
 EventRegistry:RegisterCallback("MountJournal.OnShow", function()
     -- MountJournal gets always initially shown before switching to the actual tab.
-    if CollectionsJournal.selectedTab == 1 and not ADDON.initialized then
+    if CollectionsJournal.selectedTab == COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS and not ADDON.initialized then
         EventRegistry:UnregisterCallback("MountJournal.OnShow", ADDON_NAME)
         InitUI()
         ADDON.initialized = true
