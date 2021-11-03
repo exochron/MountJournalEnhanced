@@ -183,6 +183,8 @@ ADDON.DB.Family = {
 [967] = true, -- Umber Ruinstrider
 [970] = true, -- Maddened Chaosrunner
 [986] = true, -- Bleakhoof Ruinstrider
+[1567] = true, -- Lightforged Ruinstrider
+[1568] = true, -- Lightforged Ruinstrider
 },
 ["Talbuks"] = {
 [151] = true, -- Dark War Talbuk
@@ -306,6 +308,7 @@ ADDON.DB.Family = {
 [780] = true, -- Felsaber
 [896] = true, -- Primal Flamesaber
 [949] = true, -- Luminous Starseeker
+[1330] = true, -- Sunwarmed Furline
 },
 ["Sabers"] = {
 [26] = true, -- Striped Frostsaber

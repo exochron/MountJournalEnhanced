@@ -1186,6 +1186,7 @@ ADDON.DB.Source = {
         [270564] = true, -- Dawnforge Ram
         [270562] = true, -- Darkforge Ram
         [290608] = true, -- Crusader's Direhorn
+        [363613] = true, -- Lightforged Ruinstrider
 
         -- Priest
         [229377] = true, -- High Priest's Lightsworn Seeker

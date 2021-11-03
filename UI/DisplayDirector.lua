@@ -149,7 +149,9 @@ local function BuildCameraPanel()
 
     local scene = MountJournal.MountDisplay.ModelScene
     scene:HookScript("OnEnter", function()
-        container:Show()
+        if ADDON.Api:GetSelected() then
+            container:Show()
+        end
     end)
     scene:HookScript("OnLeave", function()
         container:Hide()
@@ -247,10 +249,12 @@ end, "display director")
 
 ADDON.Events:RegisterCallback("OnUpdateMountDisplay", function()
     local mountID = ADDON.Api:GetSelected()
-    local creatureData = C_MountJournal.GetMountAllCreatureDisplayInfoByID(mountID)
-    local _, _, _, isSelfMount = C_MountJournal.GetMountInfoExtraByID(mountID);
-    buttons[2]:SetShown(not isSelfMount) -- char toggle
-    buttons[3]:SetShown(#creatureData > 1) -- color toggle
+    if mountID then
+        local creatureData = C_MountJournal.GetMountAllCreatureDisplayInfoByID(mountID)
+        local _, _, _, isSelfMount = C_MountJournal.GetMountInfoExtraByID(mountID)
+        buttons[2]:SetShown(not isSelfMount) -- char toggle
+        buttons[3]:SetShown(#creatureData > 1) -- color toggle
 
-    UpdateContainer()
+        UpdateContainer()
+    end
 end, "display director")

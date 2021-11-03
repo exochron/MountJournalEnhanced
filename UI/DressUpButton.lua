@@ -15,12 +15,7 @@ local function createJournalButton()
             button:SetWidth(81)
         end
         button:SetHeight(22)
-        if DressUpFrame.LinkButton then
-            button:SetPoint("LEFT", DressUpFrame.LinkButton, "RIGHT", 2, 0)
-        else
-            -- TODO: remove after 9.1.5 release
-            button:SetPoint("BOTTOMLEFT", DressUpFrame, "BOTTOMLEFT", 7, 4)
-        end
+        button:SetPoint("BOTTOMLEFT", DressUpFrame, "BOTTOMLEFT", 7, 4)
 
         button:SetCallback("OnClick", function(self)
             local parentFrame = self.parent.content

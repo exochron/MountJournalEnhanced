@@ -95,7 +95,7 @@ func LoadConfig() config {
 					{Name: "Clefthooves", Wcm: []string{"Clefthooves"}},
 					{Name: "Goats", Wcm: []string{"Goats"}},
 					{Name: "Rams", Wcm: []string{"Rams"}},
-					{Name: "Ruinstriders", Wcm: []string{"Talbuks"}, Icons: []string{"argustalbukmount"}},
+					{Name: "Ruinstriders", Wcm: []string{"Talbuks"}, Icons: []string{"argustalbukmount", "paladin_divinesteed", "lightforgedtalbuk"}},
 					{Name: "Talbuks", Wcm: []string{"Talbuks"}, Icons: []string{"foot_centaur", "talbukdraenor"}},
 					{Name: "Tauralus", Wcm: []string{"Tauraluses"}},
 					{Name: "Yaks", Wcm: []string{"Yaks"}},
@@ -119,7 +119,7 @@ func LoadConfig() config {
 					{Name: "Lions", Wcm: []string{"Cats"}, Icons: []string{"lion", "goldenking"}, Spells: []int{98727}},                     // Winged Guardian
 					{Name: "Manasabers", Wcm: []string{"Cats"}, Icons: []string{"suramarmount", "nightborneracial"}, Spells: []int{180545}}, // Mystic Runesaber
 					{Name: "Mechanical Cats", Wcm: []string{"Mechanical Cats"}},
-					{Name: "Others", Wcm: []string{"Flamesabers", "Panthara", "Felsabers", "Undead Cats"}},
+					{Name: "Others", Wcm: []string{"Flamesabers", "Panthara", "Felsabers", "Undead Cats"}, Spells: []int{317177}}, // Sunwarmed Furline
 					{Name: "Sabers", Wcm: []string{"Cats"}, Icons: []string{"blackpanther", "whitetiger", "pinktiger", "nightsaber2", "saber3mount"}},
 					{Name: "Stone Cats", Wcm: []string{"Flying Stone Cats"}, Spells: []int{98727}}, // Winged Guardian
 					{Name: "Tigers", Wcm: []string{"Cats", "Undead Cats"}, Icons: []string{"monkmount", "spectraltiger", "siberiantiger", "warnightsaber", "jungletiger"}},

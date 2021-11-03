@@ -17,13 +17,24 @@ local function BuildResizeButton()
     button:SetPushedTexture('Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Down')
     button:SetDontSavePosition()
 
-    -- /tinspect CollectionsJournal
-    -- /run CollectionsJournal:SetResizable(1);CollectionsJournal:StartSizing()
+    local ticker
     button:SetScript("OnMouseDown", function()
-        CollectionsJournal:StartSizing("BOTTOMRIGHT") -- TODO: doesn't work on PTR :(
+        --CollectionsJournal:StartSizing("BOTTOMRIGHT") -- doesn't work since 9.1.5
+        local lastX, lastY = GetCursorPosition()
+        ticker = C_Timer.NewTicker(0.05, function()
+            local currentX, currentY = GetCursorPosition()
+            local w, h = CollectionsJournal:GetSize()
+            local minW, minH = CollectionsJournal:GetMinResize()
+            CollectionsJournal:SetSize(max(w - lastX + currentX, minW), max(h + lastY - currentY, minH))
+            lastX = currentX
+            lastY = currentY
+        end)
     end)
     button:SetScript("OnMouseUp", function()
-        CollectionsJournal:StopMovingOrSizing()
+        --CollectionsJournal:StopMovingOrSizing()
+        if ticker then
+            ticker:Cancel()
+        end
     end)
 
     return button
@@ -41,7 +52,7 @@ ADDON.Events:RegisterCallback("loadUI", function()
     local handler = function(_, activate)
         button:SetShown(activate)
 
-        if activate and not InCombatLockdown() and CJ.selectedTab == 1 then
+        if activate and not InCombatLockdown() and CJ.selectedTab == COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS then
             local setting = ADDON.settings.ui.windowSize
             if setting[1] > 0 and setting[2] > 0 then
                 CJ:SetSize(setting[1], setting[2])
@@ -57,14 +68,14 @@ ADDON.Events:RegisterCallback("loadUI", function()
     handler(CJ, CJ:IsResizable())
 
     CJ:HookScript("OnSizeChanged", function(_, width, height)
-        if CJ:IsResizable() and CJ.selectedTab == 1 then
+        if CJ:IsResizable() and CJ.selectedTab == COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS then
             ADDON.settings.ui.windowSize = { width, height }
         end
     end)
 end, "Resize")
 
 EventRegistry:RegisterCallback("MountJournal.OnShow", function()
-    if CollectionsJournal.selectedTab == 1 then
+    if CollectionsJournal.selectedTab == COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS then
         CollectionsJournal:SetResizable(true)
     end
 end, ADDON_NAME .. '_Resize')
@@ -80,7 +91,7 @@ f:SetScript("OnEvent", function(_, event)
     if CJ then
         if event == "PLAYER_REGEN_DISABLED" then
             CJ:SetResizable(false)
-        elseif event == "PLAYER_REGEN_ENABLED" and CJ.selectedTab == 1 then
+        elseif event == "PLAYER_REGEN_ENABLED" and CJ.selectedTab == COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS then
             CJ:SetResizable(true)
         end
     end

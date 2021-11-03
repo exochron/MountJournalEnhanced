@@ -94,4 +94,5 @@ ADDON.DB.Restrictions = {
 [1495] = { ["covenant"]={4,}, }, -- Maldraxxian Corpsefly
 [1496] = { ["covenant"]={4,}, }, -- Regal Corpsefly
 [1497] = { ["covenant"]={4,}, }, -- Battlefield Swarmer
+[1568] = { ["class"]={"PALADIN",}, ["race"]={"LightforgedDraenei",}, }, -- Lightforged Ruinstrider
 }
