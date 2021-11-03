@@ -262,10 +262,9 @@ local function InitializeFilterDropDown(_, level)
     elseif (UIDROPDOWNMENU_MENU_VALUE == SETTING_MOUNT_TYPE) then
         local settings = ADDON.settings.filter[SETTING_MOUNT_TYPE]
         AddCheckAllAndNoneInfo(settings, level)
-        -- TODO: remove translations after 9.1.5 release
-        UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_FLYING or L["Flying"], "flying", settings), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_GROUND or L["Ground"], "ground", settings), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_AQUATIC or L["Underwater"], "underwater", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_FLYING, "flying", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_GROUND, "ground", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_AQUATIC, "underwater", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L["Transform"], "transform", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(MINIMAP_TRACKING_REPAIR, "repair", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L["Passenger"], "passenger", settings), level)
