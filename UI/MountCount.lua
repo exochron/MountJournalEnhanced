@@ -6,19 +6,21 @@ local function count()
     local mountIDs = C_MountJournal.GetMountIDs()
     local total, owned, personal, personalTotal = 0, 0, 0, 0
     for _, mountID in ipairs(mountIDs) do
-        local _, _, _, _, _, _, _, _, faction, hideOnChar, isCollected = C_MountJournal.GetMountInfoByID(mountID)
+        local _, _, _, _, isUsable, _, _, _, faction, hideOnChar, isCollected = C_MountJournal.GetMountInfoByID(mountID)
         if hideOnChar == false or (ADDON.settings.filter.hiddenIngame and not ADDON.DB.Ignored[mountID]) then
             total = total + 1
 
-            local isPersonal = ADDON.IsPersonalMount(mountID, faction)
+            if not isUsable then
+                isUsable = ADDON.IsPersonalMount(mountID, faction)
+            end
 
-            if isPersonal then
+            if isUsable then
                 personalTotal = personalTotal + 1
             end
 
             if isCollected then
                 owned = owned + 1
-                if isPersonal then
+                if isUsable then
                     personal = personal + 1
                 end
             end
@@ -55,7 +57,7 @@ local function CreateCharacterMountCount()
     frame.uniqueCount:ClearAllPoints()
     frame.uniqueCount:SetPoint("RIGHT", frame, -5, 0)
 
-    local updateTexts = function(_, value, _, _, _, isRecursiveCall)
+    local updateTexts = function(_, _, _, _, _, isRecursiveCall)
 
         if true == isRecursiveCall then
             return

@@ -1,6 +1,6 @@
 # Mount Journal Enhanced
 
-This is an interface addon for World of Warcraft. It extends the ingame mount journal with some cool stuff.
+This addon extends the ingame mount journal with some cool stuff.
 
 ### Features
 
@@ -17,12 +17,12 @@ This is an interface addon for World of Warcraft. It extends the ingame mount jo
 + Freely rotate display camera around mount
 + Trigger /mountspecial within the display
 + Browse through mounts with Up/Down arrow keys
-+ Right Click on scroll buttons to quickly go to the top or bottom  
++ Right Click on scroll buttons to quickly go to the top or bottom
 + Track, display and sort by your usage statistics
-+ Favor all filtered mounts at once or unset them all.
-+ Save favorites per character.
-+ Auto-favor new learned mounts.
-+ Resize the journal window.
++ Favor all filtered mounts at once or unset them all
++ Save favorites per character
++ Auto-favor new learned mounts
++ Resize the journal window
 + Works with ElvUI
 
 ### Fixes also

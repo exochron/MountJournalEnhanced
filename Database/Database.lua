@@ -1503,6 +1503,7 @@ ADDON.DB.Expansion = {
 
 ADDON.DB.Type = {
     -- https://wow.gamepedia.com/API_C_MountJournal.GetMountInfoExtraByID
+    -- https://wow.tools/dbc/?dbc=mounttype
     ground = {
         typeIDs = { 230, 231, 241, 269, 284 },
     },
