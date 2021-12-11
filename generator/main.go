@@ -4,8 +4,8 @@ func main() {
 	conf := LoadConfig()
 	mounts := LoadFromWoWTools(conf.WoWToolsChannel)
 
-	for _, ignoreSpellId := range conf.Ignored {
-		delete(mounts, ignoreSpellId)
+	for _, ignoredId := range conf.Ignored {
+		delete(mounts, ignoredId)
 	}
 
 	wcmMap := LoadMountFamilies()

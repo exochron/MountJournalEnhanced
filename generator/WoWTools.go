@@ -89,18 +89,18 @@ func loadTradeableItems(build string) map[int]int {
 		}
 	}
 
-    itemEffects := getCSV("ItemEffect", build)
-    itemXEffectsCsv := getCSV("ItemXItemEffect", build)
-    for _, record := range itemXEffectsCsv {
-        effectId, _ := strconv.Atoi(record["ItemEffectID"])
-        itemId, _ := strconv.Atoi(record["ItemID"])
-        if _, ok := items[itemId]; ok {
-            if effectData, ok := itemEffects[effectId]; ok && effectData["TriggerType"] == "6" {
-                spellId, _ := strconv.Atoi(effectData["SpellID"])
-                result[itemId] = spellId
-            }
-        }
-    }
+	itemEffects := getCSV("ItemEffect", build)
+	itemXEffectsCsv := getCSV("ItemXItemEffect", build)
+	for _, record := range itemXEffectsCsv {
+		effectId, _ := strconv.Atoi(record["ItemEffectID"])
+		itemId, _ := strconv.Atoi(record["ItemID"])
+		if _, ok := items[itemId]; ok {
+			if effectData, ok := itemEffects[effectId]; ok && effectData["TriggerType"] == "6" {
+				spellId, _ := strconv.Atoi(effectData["SpellID"])
+				result[itemId] = spellId
+			}
+		}
+	}
 
 	return result
 }
@@ -138,6 +138,7 @@ func LoadFromWoWTools(branch string) map[int]mount {
 
 	mountCsv := getCSV("Mount", build)
 	mounts := map[int]mount{}
+	spellToMount := map[int]int{}
 	for _, record := range mountCsv {
 		id, _ := strconv.Atoi(record["ID"])
 		spellId, _ := strconv.Atoi(record["SourceSpellID"])
@@ -147,7 +148,7 @@ func LoadFromWoWTools(branch string) map[int]mount {
 			mountConditions = condition.NewConditions(playerCondition)
 		}
 
-		mounts[spellId] = mount{
+		mounts[id] = mount{
 			id,
 			spellId,
 			record["Name_lang"],
@@ -155,24 +156,27 @@ func LoadFromWoWTools(branch string) map[int]mount {
 			false,
 			mountConditions,
 		}
+		spellToMount[spellId] = id
 	}
 
 	tradeableItems := loadTradeableItems(build)
 	for _, spellId := range tradeableItems {
-        if mount, ok := mounts[spellId]; ok {
-            mount.ItemIsTradeable = true
-            mounts[spellId] = mount
-        }
+		if id, ok := spellToMount[spellId]; ok {
+			mount := mounts[id]
+			mount.ItemIsTradeable = true
+			mounts[id] = mount
+		}
 	}
 
 	iconFiles := loadIconFiles()
 	spellMiscCsv := getCSV("SpellMisc", build)
 	for _, record := range spellMiscCsv {
 		spellId, _ := strconv.Atoi(record["SpellID"])
-		if mount, ok := mounts[spellId]; ok {
+		if id, ok := spellToMount[spellId]; ok {
 			fileId, _ := strconv.Atoi(record["SpellIconFileDataID"])
+			mount := mounts[id]
 			mount.Icon = iconFiles[fileId]
-			mounts[spellId] = mount
+			mounts[id] = mount
 		}
 	}
 

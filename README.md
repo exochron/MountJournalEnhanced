@@ -1,9 +1,7 @@
 # Mount Journal Enhanced
-
 This addon extends the ingame mount journal with some cool stuff.
 
-### Features
-
+## Features
 + Filter mounts by an extended source, faction, type, family or expansion
 + Filter unusable or unwanted mounts
 + Display mounts which are actually hidden by the game (TCG, PvP, secrets etc.)
@@ -25,12 +23,11 @@ This addon extends the ingame mount journal with some cool stuff.
 + Resize the journal window
 + Works with ElvUI
 
-### Fixes also
+## Fixes also
 + the ridiculous fly in animation of the rider
 
-### Help wanted
-
+## Help wanted
 - Have you found any bug or do you have some suggestions? Please let us know in the issue tracker on [Curseforge](https://www.curseforge.com/wow/addons/mount-journal-enhanced/issues) or [GitHub](https://github.com/exochron/MountJournalEnhanced/issues).
 - Is your language still missing some texts? You can localize the addon into your language on [Curseforge](https://www.curseforge.com/wow/addons/mount-journal-enhanced/localization).
 - Want to try out some cool new stuff earlier than everybody else? Just switch to the Beta-Channel in your Addon Updater and let us know of anything you might find in our issue tracker. After a few days without bugs the same version goes stable for everybody else.
-- Are you interested in developing addons as well? Then come join us at [GutHub](https://github.com/exochron/MountJournalEnhanced). Don't worry about knowing nothing of LUA. It's easy to learn. ;-)
+- Are you interested in developing addons as well? Then come join us at [GitHub](https://github.com/exochron/MountJournalEnhanced). Don't worry about knowing nothing of LUA. It's easy to learn. ;-)

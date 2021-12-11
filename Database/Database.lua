@@ -1411,8 +1411,8 @@ ADDON.DB.FeatsOfStrength = {
 }
 
 ADDON.DB.Recent = {
-    ["minID"] = GetBuildInfo() == "9.1.0" and 1446 or 1521,
-    ["blacklist"] = { 1458 }, -- Wandering Ancient
+    ["minID"] = 1521,
+    ["blacklist"] = { },
 }
 
 ADDON.DB.Expansion = {
