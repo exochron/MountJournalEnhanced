@@ -1,12 +1,9 @@
 package condition
 
-import "strconv"
-
-func checkClass(classMask string) []Condition {
+func checkClass(mask int) []Condition {
 
 	var result []Condition
 
-	mask, _ := strconv.Atoi(classMask)
 	if mask&0x1 > 0 {
 		result = append(result, Condition{"class", "\"WARRIOR\""})
 	}

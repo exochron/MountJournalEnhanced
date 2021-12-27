@@ -5,26 +5,26 @@ type Condition struct {
 	Value string
 }
 
-func NewConditions(conditionData map[string]string) [][]Condition {
+func NewConditions(race_mask int64, failure_description string, class_mask int32, skill_id int32) [][]Condition {
 
 	var result [][]Condition
 
-	classes := checkClass(conditionData["ClassMask"])
+	classes := checkClass(int(class_mask))
 	if len(classes) > 0 {
 		result = append(result, classes)
 	}
 
-	skills := checkSkill(conditionData["SkillID[0]"])
+	skills := checkSkill(int(skill_id))
 	if len(skills) > 0 {
 		result = append(result, skills)
 	}
 
-	races := checkRace(conditionData["RaceMask"])
+	races := checkRace(race_mask)
 	if len(races) > 0 {
 		result = append(result, races)
 	}
 
-	covenants := checkCovenant(conditionData)
+	covenants := checkCovenant(failure_description)
 	if len(covenants) > 0 {
 		result = append(result, covenants)
 	}

@@ -1,8 +1,10 @@
 package condition
 
-func checkSkill(skillID string) []Condition {
-	if skillID != "0" {
-		skill := Condition{"skill", skillID}
+import "fmt"
+
+func checkSkill(skillID int) []Condition {
+	if skillID != 0 {
+		skill := Condition{"skill", fmt.Sprint(skillID)}
 		return []Condition{skill}
 	}
 	return nil

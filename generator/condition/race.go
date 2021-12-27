@@ -1,12 +1,9 @@
 package condition
 
-import "strconv"
-
-func checkRace(raceMask string) []Condition {
+func checkRace(mask int64) []Condition {
 
 	var result []Condition
 
-	mask, _ := strconv.Atoi(raceMask)
 	if mask == 6130900294268439629 || mask == -6184943489809468494 {
 		// skip full faction masks
 		return result
