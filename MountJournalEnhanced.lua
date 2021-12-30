@@ -38,6 +38,7 @@ function ADDON:ResetIngameFilter()
 end
 ADDON:ResetIngameFilter()
 
+local loggedIn = false
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:RegisterEvent("NEW_MOUNT_ADDED")
@@ -49,12 +50,15 @@ frame:SetScript("OnEvent", function(_, event, ...)
         ADDON.Events:UnregisterEvents({"OnJournalLoaded"})
     end
 
-    if event == "PLAYER_LOGIN" then
+    if not loggedIn and IsLoggedIn() then
+        loggedIn = true
         ADDON:ResetIngameFilter()
         ADDON.Events:TriggerEvent("OnInit")
         ADDON.Events:TriggerEvent("OnLogin")
         ADDON.Events:UnregisterEvents({"OnInit", "OnLogin"})
-    elseif event == "NEW_MOUNT_ADDED" then
+    end
+
+    if event == "NEW_MOUNT_ADDED" then
         local param1, param2, param3 = ...
         C_Timer.After(1, function() -- mount infos are not properly updated in current frame
             ADDON.Events:TriggerEvent("OnNewMount", param1, param2, param3)

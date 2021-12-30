@@ -12,6 +12,15 @@ type mount struct {
 	Icon             string
 	ItemIsTradeable  bool
 	PlayerConditions [][]condition.Condition
+	Colors           [][]uint8
+}
+
+func (m *mount) AddColor(r, g, b uint8) {
+	c := make([]uint8, 3)
+	c[0] = r
+	c[1] = g
+	c[2] = b
+	m.Colors = append(m.Colors, c)
 }
 
 func ids_as_map(ids []int32) map[int32]int32 {
@@ -49,6 +58,7 @@ func collectMounts(
 			)
 		}
 
+		var colors [][]uint8
 		mounts[id] = mount{
 			id,
 			spellId,
@@ -56,6 +66,7 @@ func collectMounts(
 			"",
 			false,
 			mountConditions,
+			colors,
 		}
 		spellToMount[spellId] = id
 	}

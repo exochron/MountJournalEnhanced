@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"sort"
@@ -105,6 +106,28 @@ func ExportConditions(mounts map[int]mount) {
 				file.WriteString("},")
 			}
 
+			file.WriteString(" }, -- " + mount.Name + "\n")
+		}
+	}
+
+	file.WriteString("}")
+
+	defer file.Close()
+}
+
+func ExportColors(mounts map[int]mount) {
+
+	file := prepareLuaDB("colors.db.lua", "Colors")
+
+	keys := getOrderedKeys(mounts)
+
+	for _, k := range keys {
+		mount := mounts[k]
+		if len(mount.Colors) > 0 {
+			file.WriteString("[" + strconv.Itoa(mount.ID) + "] = {")
+			for _, group := range mount.Colors {
+				file.WriteString(fmt.Sprintf(" {%v,%v,%v},", group[0], group[1], group[2]))
+			}
 			file.WriteString(" }, -- " + mount.Name + "\n")
 		}
 	}

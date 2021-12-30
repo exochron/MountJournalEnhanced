@@ -7,6 +7,7 @@ local TypeDB = ADDON.DB.Type
 local TradableDB = ADDON.DB.Tradable
 local IgnoredDB = ADDON.DB.Ignored
 local RecentDB = ADDON.DB.Recent
+local ColorsDB = ADDON.DB.Colors
 
 local function FilterByName(searchString, name, mountId)
     name = name:lower()
@@ -54,6 +55,30 @@ end
 
 local function FilterCollectedMounts(collected)
     return (ADDON.settings.filter.collected and collected) or (ADDON.settings.filter.notCollected and not collected)
+end
+
+local function FilterByColor(mountID)
+
+    local filter = ADDON.settings.filter.color
+    if filter == nil then
+        return true
+    end
+
+    local squaredDistance = 16384 -- 128*128
+    local mountColors = ColorsDB[mountID]
+    if mountColors then
+        for _, mountColor in pairs(mountColors) do
+            local dr = mountColor[1] - filter[1]
+            local dg = mountColor[2] - filter[2]
+            local db = mountColor[3] - filter[3]
+
+            if (dr * dr) + (dg * dg) + (db * db) <= squaredDistance then
+                return true
+            end
+        end
+    end
+
+    return false
 end
 
 local function CheckAllSettings(settings)
@@ -263,6 +288,7 @@ function ADDON:FilterMounts()
                     and (allSettingsType or FilterByType(mountId, preparedTypes))
                     and (allSettingsFamily or FilterByFamily(mountId, preparedFamily))
                     and (allSettingsExpansion or FilterByExpansion(mountId, preparedExpansion))
+                    and FilterByColor(mountId)
             then
                 result[#result + 1] = mountId
             end

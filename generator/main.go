@@ -28,10 +28,18 @@ func main() {
 		delete(mounts, ignoredId)
 	}
 
+	mounts = CollectTextures(
+		mounts,
+		casc,
+		db2reader.ParseDB2(casc.LoadDB2("mountxdisplay")),
+		db2reader.ParseDB2(casc.LoadDB2("creaturedisplayinfo")),
+	)
+
 	wcmMap := LoadMountFamilies()
 	conf.FamilyMap = GroupByFamily(conf.FamilyMap, mounts, wcmMap)
 
 	ExportTradeable(mounts)
 	ExportFamilies(conf.FamilyMap)
 	ExportConditions(mounts)
+	ExportColors(mounts)
 }

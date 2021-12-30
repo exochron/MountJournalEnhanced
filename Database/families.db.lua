@@ -463,6 +463,7 @@ ADDON.DB.Family = {
 ["Dragonhawks"] = {
 [291] = true, -- Blue Dragonhawk
 [292] = true, -- Red Dragonhawk
+[293] = true, -- Illidari Doomhawk
 [330] = true, -- Sunreaver Dragonhawk
 [412] = true, -- Amani Dragonhawk
 [548] = true, -- Armored Red Dragonhawk
