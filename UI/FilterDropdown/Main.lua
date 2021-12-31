@@ -1,5 +1,6 @@
 local ADDON_NAME, ADDON = ...
-local L = ADDON.L
+
+ADDON.UI.FDD = {}
 
 local SETTING_COLLECTED = "collected"
 local SETTING_ONLY_FAVORITES = "onlyFavorites"
@@ -15,8 +16,9 @@ local SETTING_EXPANSION = "expansion"
 local SETTING_HIDDEN = "hidden"
 local SETTING_HIDDEN_INGAME = "hiddenIngame"
 local SETTING_SORT = "sort"
+local SETTING_COLOR = "color"
 
-local function CreateFilterInfo(text, filterKey, filterSettings, toggleButtons)
+function ADDON.UI.FDD:CreateFilterInfo(text, filterKey, filterSettings, toggleButtons)
     local info = {
         keepShownOnClick = true,
         isNotRadio = true,
@@ -58,16 +60,8 @@ local function CreateFilterInfo(text, filterKey, filterSettings, toggleButtons)
 
     return info
 end
-
-local function CreateFilterRadio(text, filterKey, filterSettings, filterValue)
-    local info = CreateFilterInfo(text, filterKey, filterSettings)
-    info.isNotRadio = false
-    info.arg2 = filterValue
-    info.checked = function(self)
-        return self.arg1[filterKey] == filterValue
-    end
-
-    return info
+local CreateFilterInfo = function(...)
+    return ADDON.UI.FDD.CreateFilterInfo(ADDON.UI.FDD, ...)
 end
 
 local function CreateFilterCategory(text, value)
@@ -78,23 +72,7 @@ local function CreateFilterCategory(text, value)
     return info
 end
 
-local function CheckSetting(settings)
-    local hasTrue, hasFalse = false, false
-    for _, v in pairs(settings) do
-        if (v == true) then
-            hasTrue = true
-        elseif v == false then
-            hasFalse = true
-        end
-        if hasTrue and hasFalse then
-            break
-        end
-    end
-
-    return hasTrue, hasFalse
-end
-
-local function SetAllSubFilters(settings, switch)
+function ADDON.UI.FDD:SetAllSubFilters(settings, switch)
     for key, value in pairs(settings) do
         if type(value) == "table" then
             for subKey, _ in pairs(value) do
@@ -110,74 +88,18 @@ local function SetAllSubFilters(settings, switch)
     ADDON.UI:UpdateMountList()
 end
 
-local function RefreshCategoryButton(button, isNotRadio)
-    local buttonName = button:GetName()
-    local buttonCheck = _G[buttonName .. "Check"]
-
-    if isNotRadio then
-        buttonCheck:SetTexCoord(0.0, 0.5, 0.0, 0.5);
-    else
-        buttonCheck:SetTexCoord(0.0, 0.5, 0.5, 1.0);
-    end
-
-    button.isNotRadio = isNotRadio
-end
-
-local function CreateInfoWithMenu(text, filterKey, settings)
-    local info = {
-        text = text,
-        value = filterKey,
-        keepShownOnClick = true,
-        notCheckable = false,
-        hasArrow = true,
-    }
-
-    local hasTrue, hasFalse = CheckSetting(settings)
-    info.isNotRadio = not hasTrue or not hasFalse
-
-    info.checked = function(button)
-        local hasTrue, hasFalse = CheckSetting(settings)
-        RefreshCategoryButton(button, not hasTrue or not hasFalse)
-        return hasTrue
-    end
-    info.func = function(button, _, _, value)
-        if button.isNotRadio == value then
-            SetAllSubFilters(settings, true)
-        elseif true == button.isNotRadio and false == value then
-            SetAllSubFilters(settings, false)
-        end
-    end
-
-    return info
-end
-
 local function AddCheckAllAndNoneInfo(settings, level)
     local info = CreateFilterInfo(CHECK_ALL)
     info.func = function()
-        SetAllSubFilters(settings, true)
+        ADDON.UI.FDD:SetAllSubFilters(settings, true)
     end
     UIDropDownMenu_AddButton(info, level)
 
     info = CreateFilterInfo(UNCHECK_ALL)
     info.func = function()
-        SetAllSubFilters(settings, false)
+        ADDON.UI.FDD:SetAllSubFilters(settings, false)
     end
     UIDropDownMenu_AddButton(info, level)
-end
-
-local function ShouldDisplayFamily(mountIds)
-    if ADDON.settings.filter[SETTING_HIDDEN_INGAME] then
-        return true
-    end
-
-    for mountId, _ in pairs(mountIds) do
-        local _, _, _, _, _, _, _, _, _, shouldHideOnChar = C_MountJournal.GetMountInfoByID(mountId)
-        if shouldHideOnChar == false then
-            return true
-        end
-    end
-
-    return false
 end
 
 local function HasUserHiddenMounts()
@@ -191,9 +113,10 @@ local function HasUserHiddenMounts()
 end
 
 local function InitializeFilterDropDown(_, level)
-    local info
+    local L = ADDON.L
 
     if level == 1 then
+        local info
         UIDropDownMenu_AddButton(CreateFilterCategory(CLUB_FINDER_SORT_BY, SETTING_SORT), level)
         UIDropDownMenu_AddSpace(level)
 
@@ -230,9 +153,12 @@ local function InitializeFilterDropDown(_, level)
         UIDropDownMenu_AddButton(CreateFilterCategory(FACTION, SETTING_FACTION), level)
         UIDropDownMenu_AddButton(CreateFilterCategory(L["Family"], SETTING_FAMILY), level)
         UIDropDownMenu_AddButton(CreateFilterCategory(EXPANSION_FILTER_TEXT, SETTING_EXPANSION), level)
+        UIDropDownMenu_AddButton(CreateFilterCategory(COLOR, SETTING_COLOR), level)
+
         UIDropDownMenu_AddSpace(level)
 
         info = CreateFilterInfo(L["Reset filters"])
+        info.justifyH = "CENTER"
         info.keepShownOnClick = false
         info.func = function()
             ADDON:ResetFilterSettings()
@@ -240,7 +166,7 @@ local function InitializeFilterDropDown(_, level)
             ADDON.UI:UpdateMountList()
         end
         UIDropDownMenu_AddButton(info, level)
-    elseif UIDROPDOWNMENU_MENU_VALUE == SETTING_SOURCE then
+    elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_SOURCE then
         local settings = ADDON.settings.filter[SETTING_SOURCE]
         AddCheckAllAndNoneInfo(settings, level)
         UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_1, "Drop", settings), level)
@@ -259,7 +185,7 @@ local function InitializeFilterDropDown(_, level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L["Black Market"], "Black Market", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_10, "Shop", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_8, "Promotion", settings), level)
-    elseif (UIDROPDOWNMENU_MENU_VALUE == SETTING_MOUNT_TYPE) then
+    elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_MOUNT_TYPE then
         local settings = ADDON.settings.filter[SETTING_MOUNT_TYPE]
         AddCheckAllAndNoneInfo(settings, level)
         UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_FLYING, "flying", settings), level)
@@ -268,96 +194,26 @@ local function InitializeFilterDropDown(_, level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L["Transform"], "transform", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(MINIMAP_TRACKING_REPAIR, "repair", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L["Passenger"], "passenger", settings), level)
-    elseif (UIDROPDOWNMENU_MENU_VALUE == SETTING_FACTION) then
+    elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_FACTION then
         local settings = ADDON.settings.filter[SETTING_FACTION]
         UIDropDownMenu_AddButton(CreateFilterInfo(FACTION_ALLIANCE, "alliance", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(FACTION_HORDE, "horde", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(NPC_NAMES_DROPDOWN_NONE, "noFaction", settings), level)
-    elseif (UIDROPDOWNMENU_MENU_VALUE == SETTING_FAMILY) then
-        local settings = ADDON.settings.filter[SETTING_FAMILY]
-        local sortedFamilies, hasSubFamilies = {}, {}
-        AddCheckAllAndNoneInfo(settings, level)
-
-        for family, mainConfig in pairs(ADDON.DB.Family) do
-            hasSubFamilies[family] = false
-            for _, subConfig in pairs(mainConfig) do
-                if type(subConfig) == "table" then
-                    hasSubFamilies[family] = true
-                else
-                    break
-                end
-            end
-            table.insert(sortedFamilies, family)
-        end
-        table.sort(sortedFamilies, function(a, b)
-            return (L[a] or a) < (L[b] or b)
-        end)
-
-        for _, family in pairs(sortedFamilies) do
-            if hasSubFamilies[family] then
-                UIDropDownMenu_AddButton(CreateInfoWithMenu(L[family] or family, family, settings[family]), level)
-            else
-                UIDropDownMenu_AddButton(CreateFilterInfo(L[family] or family, family, settings), level)
-            end
-        end
-    elseif (UIDROPDOWNMENU_MENU_VALUE == SETTING_EXPANSION) then
+    elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_FAMILY then
+        AddCheckAllAndNoneInfo(ADDON.settings.filter[SETTING_FAMILY], level)
+        ADDON.UI.FDD:AddFamilyMenu(level)
+    elseif level == 3 and ADDON.DB.Family[UIDROPDOWNMENU_MENU_VALUE] then
+        ADDON.UI.FDD:AddFamilySubMenu(level, UIDROPDOWNMENU_MENU_VALUE)
+    elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_EXPANSION then
         local settings = ADDON.settings.filter[SETTING_EXPANSION]
         AddCheckAllAndNoneInfo(settings, level)
         for i = 0, #ADDON.DB.Expansion do
             UIDropDownMenu_AddButton(CreateFilterInfo(_G["EXPANSION_NAME" .. i], i, settings), level)
         end
-    elseif (level == 3 and ADDON.DB.Family[UIDROPDOWNMENU_MENU_VALUE]) then
-        local settings = ADDON.settings.filter[SETTING_FAMILY][UIDROPDOWNMENU_MENU_VALUE]
-        local sortedFamilies = {}
-        for family, familyIds in pairs(ADDON.DB.Family[UIDROPDOWNMENU_MENU_VALUE]) do
-            if ShouldDisplayFamily(familyIds) then
-                table.insert(sortedFamilies, family)
-            end
-        end
-        table.sort(sortedFamilies, function(a, b)
-            return (L[a] or a) < (L[b] or b)
-        end)
-        for _, family in pairs(sortedFamilies) do
-            UIDropDownMenu_AddButton(CreateFilterInfo(L[family] or family, family, settings), level)
-        end
-    elseif UIDROPDOWNMENU_MENU_VALUE == SETTING_SORT then
-        local settings = ADDON.settings[SETTING_SORT]
-        UIDropDownMenu_AddButton(CreateFilterRadio(NAME, "by", settings, 'name'), level)
-        UIDropDownMenu_AddButton(CreateFilterRadio(TYPE, "by", settings, 'type'), level)
-        UIDropDownMenu_AddButton(CreateFilterRadio(EXPANSION_FILTER_TEXT, "by", settings, 'expansion'), level)
-
-        local trackingEnabled = ADDON.settings.trackUsageStats
-        info = CreateFilterRadio(L.SORT_BY_USAGE_COUNT, "by", settings, 'usage_count')
-        info.disabled = not trackingEnabled
-        UIDropDownMenu_AddButton(info, level)
-        info = CreateFilterRadio(L.SORT_BY_LAST_USAGE, "by", settings, 'last_usage')
-        info.disabled = not trackingEnabled
-        UIDropDownMenu_AddButton(info, level)
-        info = CreateFilterRadio(L.SORT_BY_LEARNED_DATE, "by", settings, 'learned_date')
-        info.disabled = not trackingEnabled
-        UIDropDownMenu_AddButton(info, level)
-        info = CreateFilterRadio(L.SORT_BY_TRAVEL_DURATION, "by", settings, 'travel_duration')
-        info.disabled = not trackingEnabled
-        UIDropDownMenu_AddButton(info, level)
-        info = CreateFilterRadio(L.SORT_BY_TRAVEL_DISTANCE, "by", settings, 'travel_distance')
-        info.disabled = not trackingEnabled
-        UIDropDownMenu_AddButton(info, level)
-
-        UIDropDownMenu_AddSpace(level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(L.SORT_REVERSE, 'descending', settings), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(L.SORT_FAVORITES_FIRST, 'favoritesOnTop', settings), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(L.SORT_UNUSABLE_BOTTOM, 'unusableToBottom', settings), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(L.SORT_UNOWNED_BOTTOM, 'unownedOnBottom', settings), level)
-        UIDropDownMenu_AddSpace(level)
-
-        info = CreateFilterInfo(NEWBIE_TOOLTIP_STOPWATCH_RESETBUTTON)
-        info.keepShownOnClick = false
-        info.func = function()
-            ADDON:ResetSortSettings()
-            ADDON.Api:UpdateIndex()
-            ADDON.UI:UpdateMountList()
-        end
-        UIDropDownMenu_AddButton(info, level)
+    elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_COLOR then
+        ADDON.UI.FDD:AddColorMenu(level)
+    elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_SORT then
+        ADDON.UI.FDD:AddSortMenu(level)
     end
 end
 

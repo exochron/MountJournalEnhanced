@@ -2,6 +2,11 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
+ADDON.DB.Recent = {
+    ["minID"] = 1521,
+    ["blacklist"] = { },
+}
+
 ADDON.DB.Source = {
     ["Drop"] = {
         -- sourceType = 1
@@ -1345,6 +1350,7 @@ ADDON.DB.Source = {
         --  8 = promotion
         --  9 = TCG
 
+        [62048] = true, -- Illidari Doomhawk - 17th Anniversary
         [294197] = true, -- Obsidian Worldbreaker - 15th Anniversary
     },
 }
@@ -1408,11 +1414,6 @@ ADDON.DB.FeatsOfStrength = {
     [1039] = 14183, -- Mighty Caravan Brutosaur
     [1363] = 14816, -- Sinful Gladiator's Soul Eater
     [1480] = 14999, -- Unchained Gladiator's Soul Eater
-}
-
-ADDON.DB.Recent = {
-    ["minID"] = GetBuildInfo() == "9.1.0" and 1446 or 1521,
-    ["blacklist"] = { 1458 }, -- Wandering Ancient
 }
 
 ADDON.DB.Expansion = {
@@ -1563,7 +1564,6 @@ ADDON.DB.Ignored = {
     [251] = true, -- Black Polar Bear
     [273] = true, -- Grand Caravan Mammoth
     [274] = true, -- Grand Caravan Mammoth
-    [293] = true, -- Black Dragonhawk Mount
     [308] = true, -- Blue Skeletal Warhorse
     [462] = true, -- White Riding Yak
     [484] = true, -- Black Riding Yak

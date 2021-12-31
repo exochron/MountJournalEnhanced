@@ -1,3 +1,4 @@
 .idea/
 generator/*.db.lua
 generator/*.exe
+/generator/cache/

@@ -8,13 +8,13 @@ type FamilyCategory struct {
 	Mounts      map[int]mount
 }
 
-func matchBySpellId(mount mount, config []familyConfig) ([]familyConfig, bool) {
+func matchById(mount mount, config []familyConfig) ([]familyConfig, bool) {
 	hasMatch := false
 
 	for cKey, family := range config {
-		// check for spellId in config
-		for _, spellId := range family.Spells {
-			if spellId == mount.SpellID {
+		// check for mountId in config
+		for _, mountId := range family.Ids {
+			if mountId == mount.ID {
 				config[cKey].Mounts = append(family.Mounts, mount)
 				hasMatch = true
 			}
@@ -23,7 +23,7 @@ func matchBySpellId(mount mount, config []familyConfig) ([]familyConfig, bool) {
 		// do the same for all sub categories
 		if family.SubFamily != nil {
 			hasSubMatch := false
-			config[cKey].SubFamily, hasSubMatch = matchBySpellId(mount, family.SubFamily)
+			config[cKey].SubFamily, hasSubMatch = matchById(mount, family.SubFamily)
 			if hasSubMatch {
 				hasMatch = true
 			}
@@ -69,14 +69,14 @@ func matchByWcmFamily(mount mount, wcmMountFamily string, config []familyConfig)
 	return config, hasMatch
 }
 
-func GroupByFamily(config []familyConfig, mounts map[int]mount, wcmMap map[string]string) []familyConfig {
+func GroupByFamily(config []familyConfig, mounts map[int]*mount, wcmMap map[string]string) []familyConfig {
 
 	for _, mount := range mounts {
 		wasMatched := false
 		wcmFamily, isWcmMapped := wcmMap[strings.ToLower(mount.Name)]
-		config, wasMatched = matchBySpellId(mount, config)
+		config, wasMatched = matchById(*mount, config)
 		if false == wasMatched && isWcmMapped {
-			config, wasMatched = matchByWcmFamily(mount, wcmFamily, config)
+			config, wasMatched = matchByWcmFamily(*mount, wcmFamily, config)
 		}
 
 		if false == wasMatched {

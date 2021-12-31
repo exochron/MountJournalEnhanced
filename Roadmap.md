@@ -5,16 +5,15 @@
 ### More Ideas:
 - activate sound effects in display (with global setting)
 - more animation control in display (start/pause, movements, with sound effects)
-- color filter
 - gamepad support (?)
 - variation filter (undead, mech, elemental, magic...)
 - proper favorite profiles with one global profile
 - favorite groups / custom filter groups
 - favorite menu at SummonRandomFavoriteButton?
 - link to wowhead (?)
-- display Rarity / x Percentage of all worldwide players have that (Retail) - if I can find a nice source for that
+- display Rarity / x Percentage of all worldwide players have that (Retail) - if I can find a nice source for that (https://www.dataforazeroth.com/collections/mounts ?)
 - Mount Score Rating (based on rarity?)
-- disable sound effects of mounts (currently no api for that)
+- disable ingame sound effects of mounts (currently no api for that)
 
 ### Stupid Ideas :D
 (maybe for april fool's)
@@ -25,4 +24,4 @@
   - 10? rounds
 - Pimp my Mount (more effects in display like) 
     - underbody lightning
-    - sun glasses for mount
+    - sunglasses for mount
