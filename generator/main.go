@@ -28,7 +28,7 @@ func main() {
 		delete(mounts, ignoredId)
 	}
 
-	mounts = CollectTextures(
+	CollectTextures(
 		mounts,
 		casc,
 		db2reader.ParseDB2(casc.LoadDB2("mountxdisplay")),

@@ -1,5 +1,4 @@
 local ADDON_NAME, ADDON = ...
-local L = ADDON.L
 
 ADDON.UI.FDD = {}
 
@@ -114,6 +113,8 @@ local function HasUserHiddenMounts()
 end
 
 local function InitializeFilterDropDown(_, level)
+    local L = ADDON.L
+
     if level == 1 then
         local info
         UIDropDownMenu_AddButton(CreateFilterCategory(CLUB_FINDER_SORT_BY, SETTING_SORT), level)

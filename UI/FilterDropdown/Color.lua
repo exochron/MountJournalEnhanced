@@ -7,31 +7,48 @@ local function CreateSwatch()
         swatchFrame = CreateFrame("ColorSelect", nil, UIParent, "UIDropDownCustomMenuEntryTemplate")
         swatchFrame:SetSize(200, 138)
 
-        local colorWheel = swatchFrame:CreateTexture()
-        colorWheel:SetTexture("WheelTexture")
-        colorWheel:SetSize(128, 128)
-        colorWheel:SetPoint("TOPLEFT", 3, -10)
-        swatchFrame:SetColorWheelTexture(colorWheel)
-        local colorWheelThumb = swatchFrame:CreateTexture()
-        colorWheelThumb:SetTexture("Interface\\Buttons\\UI-ColorPicker-Buttons")
-        colorWheelThumb:SetTexCoord(0, 0.15625, 0, 0.625)
-        colorWheelThumb:SetSize(10, 10)
-        swatchFrame:SetColorWheelThumbTexture(colorWheelThumb)
-        local colorValue = swatchFrame:CreateTexture()
-        colorValue:SetTexture("ValueTexture")
-        colorValue:SetSize(32, 128)
-        colorValue:SetPoint("LEFT", colorWheel, "RIGHT", 24, 0)
-        swatchFrame:SetColorValueTexture(colorValue)
-        local colorValueThumb = swatchFrame:CreateTexture()
-        colorValueThumb:SetTexture("Interface\\Buttons\\UI-ColorPicker-Buttons")
-        colorValueThumb:SetTexCoord(0.25, 1.0, 0, 0.875)
-        colorValueThumb:SetSize(48, 14)
-        swatchFrame:SetColorValueThumbTexture(colorValueThumb)
+        swatchFrame.wheel = swatchFrame:CreateTexture()
+        swatchFrame.wheel:SetTexture("WheelTexture")
+        swatchFrame.wheel:SetSize(128, 128)
+        swatchFrame.wheel:SetPoint("TOPLEFT", 3, -10)
+        swatchFrame:SetColorWheelTexture(swatchFrame.wheel)
+
+        swatchFrame.wheelThumb = swatchFrame:CreateTexture()
+        swatchFrame.wheelThumb:SetTexture("Interface\\Buttons\\UI-ColorPicker-Buttons")
+        swatchFrame.wheelThumb:SetTexCoord(0, 0.15625, 0, 0.625)
+        swatchFrame.wheelThumb:SetSize(10, 10)
+        swatchFrame:SetColorWheelThumbTexture(swatchFrame.wheelThumb)
+
+        swatchFrame.value = swatchFrame:CreateTexture()
+        swatchFrame.value:SetTexture("ValueTexture")
+        swatchFrame.value:SetSize(32, 128)
+        swatchFrame.value:SetPoint("LEFT", swatchFrame.wheel, "RIGHT", 24, 0)
+        swatchFrame:SetColorValueTexture(swatchFrame.value)
+
+        swatchFrame.valueThumb = swatchFrame:CreateTexture()
+        swatchFrame.valueThumb:SetTexture("Interface\\Buttons\\UI-ColorPicker-Buttons")
+        swatchFrame.valueThumb:SetTexCoord(0.25, 1.0, 0, 0.875)
+        swatchFrame.valueThumb:SetSize(48, 14)
+        swatchFrame:SetColorValueThumbTexture(swatchFrame.valueThumb)
 
         swatchFrame:HookScript("OnColorSelect", function(_, r, g, b)
             ADDON.settings.filter.color = { r * 255, g * 255, b * 255 }
             ADDON.Api:UpdateIndex()
             ADDON.UI:UpdateMountList()
+        end)
+
+        swatchFrame:HookScript("OnShow", function(self)
+            local filter = ADDON.settings.filter.color
+            local isSet = (#filter == 3)
+            self.wheelThumb:SetShown(isSet)
+            self.valueThumb:SetShown(isSet)
+            if isSet then
+                self:SetColorRGB(filter[1] / 255, filter[2] / 255, filter[3] / 255)
+            end
+        end)
+        swatchFrame:HookScript("OnMouseDown", function()
+            swatchFrame.wheelThumb:Show()
+            swatchFrame.valueThumb:Show()
         end)
     end
 
@@ -47,7 +64,7 @@ function ADDON.UI.FDD:AddColorMenu(level)
         text = NEWBIE_TOOLTIP_STOPWATCH_RESETBUTTON,
         justifyH = "CENTER",
         func = function()
-            ADDON.settings.filter.color = nil
+            ADDON.settings.filter.color = { }
             ADDON.Api:UpdateIndex()
             ADDON.UI:UpdateMountList()
         end,

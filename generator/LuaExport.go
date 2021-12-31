@@ -26,7 +26,7 @@ func prepareLuaDB(filename string, varname string) *os.File {
 	return file
 }
 
-func getOrderedKeys(list map[int]mount) []int {
+func getOrderedKeys(list map[int]*mount) []int {
 	keys := make([]int, 0, len(list))
 	for k := range list {
 		keys = append(keys, k)
@@ -36,7 +36,7 @@ func getOrderedKeys(list map[int]mount) []int {
 	return keys
 }
 
-func ExportTradeable(mounts map[int]mount) {
+func ExportTradeable(mounts map[int]*mount) {
 	file := prepareLuaDB("tradable.db.lua", "Tradable")
 
 	keys := getOrderedKeys(mounts)
@@ -84,7 +84,7 @@ func ExportFamilies(config []familyConfig) {
 	defer file.Close()
 }
 
-func ExportConditions(mounts map[int]mount) {
+func ExportConditions(mounts map[int]*mount) {
 	file := prepareLuaDB("restrictions.db.lua", "Restrictions")
 
 	keys := getOrderedKeys(mounts)
@@ -115,7 +115,7 @@ func ExportConditions(mounts map[int]mount) {
 	defer file.Close()
 }
 
-func ExportColors(mounts map[int]mount) {
+func ExportColors(mounts map[int]*mount) {
 
 	file := prepareLuaDB("colors.db.lua", "Colors")
 

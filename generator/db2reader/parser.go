@@ -177,7 +177,7 @@ func (w wdc3_source) ReadString(id int32, field int) string {
 	return string(payload[string_offset:(int(string_offset) + end)])
 }
 
-func (w wdc3_source) ReadInt(id int32, field int) int32 {
+func (w wdc3_source) ReadInt(id int32, field int, array_index ...int) int32 {
 	var value int32
 
 	entry := w.id_map[id]
@@ -206,6 +206,9 @@ func (w wdc3_source) ReadInt(id int32, field int) int32 {
 		if field_info.payload_source == source_pallet {
 			value *= int32(4 * field_info.array_size)
 			value += int32(field_info.pallet_offset)
+			if len(array_index) == 1 {
+				value += int32(4 * array_index[0])
+			}
 			value = bytes_as_int32(w.source.PalletData[value : value+4])
 		} else if field_info.payload_source == source_common {
 			common_value, ok := field_info.common_map[id]

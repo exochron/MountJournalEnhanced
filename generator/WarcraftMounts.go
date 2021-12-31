@@ -2,26 +2,12 @@ package main
 
 import (
 	"html"
-	"io/ioutil"
-	"net/http"
 	"regexp"
 	"strings"
 )
 
-func getFromWCM() []byte {
-	resp, err := http.Get("https://www.warcraftmounts.com/gallery.php")
-	if err != nil {
-		print(err)
-	}
-
-	defer resp.Body.Close()
-
-	bytes, _ := ioutil.ReadAll(resp.Body)
-	return bytes
-}
-
 func LoadMountFamilies() map[string]string {
-	htmlBody := getFromWCM()
+	htmlBody := httpGet("https://www.warcraftmounts.com/gallery.php")
 
 	categoryReg := regexp.MustCompile(`(?Usi)<h5><a id='(.*)'>.*</div>\s+</span>`)
 	itemReg := regexp.MustCompile(`(?Usi)<img class='thumbimage' src='.*' alt='(.*)' />`)

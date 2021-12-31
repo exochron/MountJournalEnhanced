@@ -9,6 +9,8 @@ local IgnoredDB = ADDON.DB.Ignored
 local RecentDB = ADDON.DB.Recent
 local ColorsDB = ADDON.DB.Colors
 
+local cachedColor, cachedColorResults = {}, {}
+
 local function FilterByName(searchString, name, mountId)
     name = name:lower()
     local pos = strfind(name, searchString, 1, true)
@@ -60,11 +62,21 @@ end
 local function FilterByColor(mountID)
 
     local filter = ADDON.settings.filter.color
-    if filter == nil then
+    if #filter == 0 then
         return true
     end
 
-    local squaredDistance = 16384 -- 128*128
+    if cachedColor[1] == filter[1] and cachedColor[2] == filter[2] and cachedColor[3] == filter[3] then
+        local cachedResult = cachedColorResults[mountID]
+        if cachedResult ~= nil then
+            return cachedResult
+        end
+    else
+        cachedColor[1], cachedColor[2], cachedColor[3] = filter[1], filter[2], filter[3]
+        cachedColorResults = {}
+    end
+
+    local squaredDistance = 10000 -- =100*100 needs probably more fine tuning
     local mountColors = ColorsDB[mountID]
     if mountColors then
         for _, mountColor in pairs(mountColors) do
@@ -73,11 +85,13 @@ local function FilterByColor(mountID)
             local db = mountColor[3] - filter[3]
 
             if (dr * dr) + (dg * dg) + (db * db) <= squaredDistance then
+                cachedColorResults[mountID] = true
                 return true
             end
         end
     end
 
+    cachedColorResults[mountID] = false
     return false
 end
 
@@ -147,7 +161,8 @@ local function prepareSettings(settings, sourceData)
 
             if type(settings[key]) == "table" then
                 for subId, subValue in pairs(prepareSettings(settings[key], sourceData[key])) do
-                    if not result[subId] then -- if it was somewhere true than keep it true.
+                    if not result[subId] then
+                        -- if it was somewhere true than keep it true.
                         result[subId] = subValue
                     end
                 end

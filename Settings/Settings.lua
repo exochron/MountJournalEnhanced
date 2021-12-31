@@ -75,7 +75,7 @@ local function PrepareDefaults()
             expansion = {},
             hidden = false,
             hiddenIngame = false,
-            color = nil,
+            color = {},
         },
 
         sort = {

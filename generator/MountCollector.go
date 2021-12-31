@@ -16,11 +16,7 @@ type mount struct {
 }
 
 func (m *mount) AddColor(r, g, b uint8) {
-	c := make([]uint8, 3)
-	c[0] = r
-	c[1] = g
-	c[2] = b
-	m.Colors = append(m.Colors, c)
+	m.Colors = append(m.Colors, []uint8{r, g, b})
 }
 
 func ids_as_map(ids []int32) map[int32]int32 {
@@ -40,8 +36,8 @@ func collectMounts(
 	itemXItemEffectDB DBFile,
 	spellMiscDB DBFile,
 	listfile map[int]string,
-) map[int]mount {
-	mounts := map[int]mount{}
+) map[int]*mount {
+	mounts := map[int]*mount{}
 	spellToMount := map[int]int{}
 
 	for _, mountId := range mountDB.GetIDs() {
@@ -59,7 +55,7 @@ func collectMounts(
 		}
 
 		var colors [][]uint8
-		mounts[id] = mount{
+		mounts[id] = &mount{
 			id,
 			spellId,
 			mountDB.ReadString(mountId, 0),
@@ -79,9 +75,7 @@ func collectMounts(
 		// is mount spell && is TriggerType = OnUse(6) && is Bonding = 0
 		if mountID, ok := spellToMount[spellID]; ok && itemEffectDB.ReadInt(effectID, 1) == 6 {
 			if _, ok := itemSparseIDs[itemID]; ok && itemSparseDB.ReadInt(itemID, 54) == 0 {
-				mount := mounts[mountID]
-				mount.ItemIsTradeable = true
-				mounts[mountID] = mount
+				mounts[mountID].ItemIsTradeable = true
 			}
 		}
 	}
@@ -93,9 +87,7 @@ func collectMounts(
 			spellIconFileDataID := spellMiscDB.ReadInt(spellMiscID, 9)
 			filePath := listfile[int(spellIconFileDataID)]
 			find := regex.FindStringSubmatch(filePath)
-			mount := mounts[mountID]
-			mount.Icon = find[1]
-			mounts[mountID] = mount
+			mounts[mountID].Icon = find[1]
 		}
 	}
 
@@ -104,7 +96,7 @@ func collectMounts(
 
 type DBFile interface {
 	GetIDs() []int32
-	ReadInt(id int32, field int) int32
+	ReadInt(id int32, field int, array_index ...int) int32
 	ReadInt64(id int32, field int) int64
 	ReadString(id int32, field int) string
 }

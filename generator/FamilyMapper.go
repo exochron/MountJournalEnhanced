@@ -69,14 +69,14 @@ func matchByWcmFamily(mount mount, wcmMountFamily string, config []familyConfig)
 	return config, hasMatch
 }
 
-func GroupByFamily(config []familyConfig, mounts map[int]mount, wcmMap map[string]string) []familyConfig {
+func GroupByFamily(config []familyConfig, mounts map[int]*mount, wcmMap map[string]string) []familyConfig {
 
 	for _, mount := range mounts {
 		wasMatched := false
 		wcmFamily, isWcmMapped := wcmMap[strings.ToLower(mount.Name)]
-		config, wasMatched = matchById(mount, config)
+		config, wasMatched = matchById(*mount, config)
 		if false == wasMatched && isWcmMapped {
-			config, wasMatched = matchByWcmFamily(mount, wcmFamily, config)
+			config, wasMatched = matchByWcmFamily(*mount, wcmFamily, config)
 		}
 
 		if false == wasMatched {

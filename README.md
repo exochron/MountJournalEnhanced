@@ -2,7 +2,7 @@
 This addon extends the ingame mount journal with some cool stuff.
 
 ## Features
-+ Filter mounts by an extended source, faction, type, family or expansion
++ Filter mounts by an extended source, colors, faction, type, family or expansion
 + Filter unusable or unwanted mounts
 + Display mounts which are actually hidden by the game (TCG, PvP, secrets etc.)
 + Sort mounts by name, type or expansion (or in reverse)

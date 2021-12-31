@@ -2,6 +2,11 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
+ADDON.DB.Recent = {
+    ["minID"] = 1521,
+    ["blacklist"] = { },
+}
+
 ADDON.DB.Source = {
     ["Drop"] = {
         -- sourceType = 1
@@ -1409,11 +1414,6 @@ ADDON.DB.FeatsOfStrength = {
     [1039] = 14183, -- Mighty Caravan Brutosaur
     [1363] = 14816, -- Sinful Gladiator's Soul Eater
     [1480] = 14999, -- Unchained Gladiator's Soul Eater
-}
-
-ADDON.DB.Recent = {
-    ["minID"] = 1521,
-    ["blacklist"] = { },
 }
 
 ADDON.DB.Expansion = {
