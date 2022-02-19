@@ -10,6 +10,8 @@ github.com/muesli/clusters v0.0.0-20200529215643-2700303c1762/go.mod h1:mw5KDqUj
 github.com/muesli/kmeans v0.3.0 h1:cI2cpeS8m3pm+gTOdzl+7SlzZYSe+x0XoqXUyUvb1ro=
 github.com/muesli/kmeans v0.3.0/go.mod h1:eNyybq0tX9/iBEP6EMU4Y7dpmGK0uEhODdZpnG1a/iQ=
 github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646/go.mod h1:jpp1/29i3P1S/RLdc7JQKbRpFeM1dOBd8T9ki5s+AY8=
+github.com/nozzle/throttler v0.0.0-20180817012639-2ea982251481 h1:Up6+btDp321ZG5/zdSLo48H9Iaq0UQGthrhWC6pCxzE=
+github.com/nozzle/throttler v0.0.0-20180817012639-2ea982251481/go.mod h1:yKZQO8QE2bHlgozqWDiRVqTFlLQSj30K/6SAK8EeYFw=
 github.com/wcharczuk/go-chart/v2 v2.1.0/go.mod h1:yx7MvAVNcP/kN9lKXM/NTce4au4DFN99j6i1OwDclNA=
 golang.org/x/image v0.0.0-20200927104501-e162460cd6b5/go.mod h1:FeLwcggjj3mMvU+oOTbSwawSJRM1uh48EjtB4UJZlP0=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=

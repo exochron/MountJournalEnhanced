@@ -4,9 +4,10 @@ import (
 	"bytes"
 	"image/color"
 	"image/png"
-	"sync"
+// 	"sync"
 
 	"github.com/mccutchen/palettor"
+	"github.com/nozzle/throttler"
 )
 
 func to_rgb(c color.Color) (red, green, blue uint8) {
@@ -31,8 +32,8 @@ func to_rgb(c color.Color) (red, green, blue uint8) {
 	return red, green, blue
 }
 
-func collect_colors(mount *mount, textureFileID int, casc CascGateway, wg *sync.WaitGroup) {
-	defer wg.Done()
+func collect_colors(mount *mount, textureFileID int, casc CascGateway, t *throttler.Throttler) {
+	defer t.Done(nil)
 
 	pngFile := casc.CachedFile(int(textureFileID))
 	img, _ := png.Decode(bytes.NewReader(pngFile))
@@ -44,21 +45,20 @@ func collect_colors(mount *mount, textureFileID int, casc CascGateway, wg *sync.
 }
 
 func CollectTextures(mounts map[int]*mount, casc CascGateway, mountXDisplayDB DBFile, CreatureDisplayInfoDB DBFile) {
-	var wait_group sync.WaitGroup
+    displayDB := mountXDisplayDB.GetIDs()
+    t := throttler.New(10, len(displayDB) * 3)
 
-	for _, xDisplayID := range mountXDisplayDB.GetIDs() {
+	for _, xDisplayID := range displayDB {
 		mountID := int(mountXDisplayDB.ReadInt(xDisplayID, 2))
 		creatureDisplayID := mountXDisplayDB.ReadInt(xDisplayID, 0)
 		if mount, ok := mounts[mountID]; ok {
 			for i := 0; i < 3; i++ {
 				textureFileID := CreatureDisplayInfoDB.ReadInt(creatureDisplayID, 24, i)
 				if textureFileID > 0 {
-					wait_group.Add(1)
-					go collect_colors(mount, int(textureFileID), casc, &wait_group)
+					go collect_colors(mount, int(textureFileID), casc, t)
+					t.Throttle()
 				}
 			}
 		}
 	}
-
-	wait_group.Wait()
 }

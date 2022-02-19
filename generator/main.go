@@ -12,7 +12,7 @@ func main() {
 	listfile := LoadListfile()
 	fmt.Printf("done.\n")
 
-	casc := CascGateway{"wow", "enUS", "cache/"}
+	casc := CascGateway{conf.Product, "enUS", "cache/"}
 
 	mounts := collectMounts(
 		db2reader.ParseDB2(casc.LoadDB2("mount")),

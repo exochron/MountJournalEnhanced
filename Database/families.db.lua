@@ -11,6 +11,12 @@ ADDON.DB.Family = {
 [1206] = true, -- Blue Marsh Hopper
 [1207] = true, -- Yellow Marsh Hopper
 [1415] = true, -- Arboreal Gulper
+[1451] = true, -- Vicious War Croaker
+[1452] = true, -- Vicious War Croaker
+[1547] = true, -- Goldplate Bufonid
+[1569] = true, -- Patient Bufonid
+[1570] = true, -- Prototype Leaper
+[1571] = true, -- Russet Bufonid
 },
 },
 ["Arachnids"] = {
@@ -28,6 +34,9 @@ ADDON.DB.Family = {
 [663] = true, -- Bloodfang Widow
 [1351] = true, -- Vicious War Spider
 [1352] = true, -- Vicious War Spider
+[1541] = true, -- Genesis Crawler
+[1542] = true, -- Tarachnid Creeper
+[1543] = true, -- Ineffable Skitterer
 },
 },
 ["Bats"] = {
@@ -112,6 +121,11 @@ ADDON.DB.Family = {
 [416] = true, -- Felfire Hawk
 [417] = true, -- Corrupted Fire Hawk
 [1456] = true, -- Sapphire Skyblazer
+},
+["Raptora"] = {
+[1430] = true, -- Desertwing Hunter
+[1536] = true, -- Mawdapted Raptora
+[1537] = true, -- Raptora Swooper
 },
 ["Roc"] = {
 [1350] = true, -- Colossal Slaughterclaw
@@ -309,6 +323,7 @@ ADDON.DB.Family = {
 [896] = true, -- Primal Flamesaber
 [949] = true, -- Luminous Starseeker
 [1330] = true, -- Sunwarmed Furline
+[1531] = true, -- Wen Lo, the River's Edge
 },
 ["Sabers"] = {
 [26] = true, -- Striped Frostsaber
@@ -576,6 +591,7 @@ ADDON.DB.Family = {
 [883] = true, -- Smoldering Ember Wyrm
 [1363] = true, -- Sinful Gladiator's Soul Eater
 [1480] = true, -- Unchained Gladiator's Soul Eater
+[1572] = true, -- Cosmic Gladiator's Soul Eater
 },
 ["Wind Drakes"] = {
 [392] = true, -- Drake of the East Wind
@@ -639,6 +655,7 @@ ADDON.DB.Family = {
 [1419] = true, -- Sintouched Deathwalker
 [1458] = true, -- Wandering Ancient
 [1520] = true, -- Soultwisted Deathwalker
+[1544] = true, -- Wastewarped Deathwalker
 },
 },
 ["Feathermanes"] = {
@@ -925,6 +942,12 @@ ADDON.DB.Family = {
 [449] = true, -- Azure Water Strider
 [488] = true, -- Crimson Water Strider
 },
+["Wasp"] = {
+[1433] = true, -- Vespoid Flutterer
+[1535] = true, -- Bronzewing Vespoid
+[1534] = true, -- Buzz
+[1533] = true, -- Forged Spiteflyer
+},
 },
 ["Jellyfish"] = {
 [838] = true, -- Fathom Dweller
@@ -932,11 +955,19 @@ ADDON.DB.Family = {
 [1025] = true, -- The Hivemind
 [1169] = true, -- Surf Jelly
 [1293] = true, -- Ny'alotha Allseer
+[1434] = true, -- Deepstar Aurelid
+[1549] = true, -- Shimmering Aurelid
+[1551] = true, -- Cryptic Aurelid
 },
 ["Rats"] = {
 [804] = true, -- Ratstallion
 [1290] = true, -- Squeakers, the Trickster
 [1513] = true, -- Sarge's Tale
+[1566] = true, -- Colossal Ebonclaw Mawrat
+[1565] = true, -- Colossal Umbrahide Mawrat
+[1564] = true, -- Colossal Soulshredder Mawrat
+[1584] = true, -- Colossal Plaguespew Mawrat
+[1585] = true, -- Colossal Wraithbound Mawrat
 },
 ["Rays"] = {
 ["Fathom Rays"] = {
@@ -1061,6 +1092,12 @@ ADDON.DB.Family = {
 [1407] = true, -- Callow Flayedwing
 [1408] = true, -- Gruesome Flayedwing
 },
+["Snail"] = {
+[1448] = true, -- Serenade
+[1538] = true, -- Bronze Helicid
+[1539] = true, -- Unsuccessful Prototype Fleetpod
+[1540] = true, -- Scarlet Helicid
+},
 ["Ungulates"] = {
 ["Alpacas"] = {
 [1250] = true, -- Mollie
@@ -1091,6 +1128,12 @@ ADDON.DB.Family = {
 [400] = true, -- Grey Riding Camel
 [432] = true, -- White Riding Camel
 [1288] = true, -- Explorer's Dunetrekker
+},
+["Cervid"] = {
+[1431] = true, -- Pale Regal Cervid
+[1529] = true, -- Anointed Protostag
+[1528] = true, -- Sundered Zerethsteed
+[1526] = true, -- Deathrunner
 },
 ["Elekks"] = {
 [147] = true, -- Brown Elekk
@@ -1210,6 +1253,7 @@ ADDON.DB.Family = {
 ["Jet Aerial Units"] = {
 [1227] = true, -- Aerial Unit R-21/X
 [1254] = true, -- Rustbolt Resistor
+[1587] = true, -- Zereth Overseer
 },
 ["Kites"] = {
 [450] = true, -- Pandaren Kite
@@ -1290,7 +1334,14 @@ ADDON.DB.Family = {
 [1229] = true, -- Rusty Mechanocrawler
 [1252] = true, -- Mechagon Peacekeeper
 [1253] = true, -- Scrapforged Mechaspider
+[1552] = true, -- Carcinized Zerethsteed
 },
+},
+["Vombata"] = {
+[1522] = true, -- Heartlight Vombata
+[1523] = true, -- Curious Crystalsniffer
+[1524] = true, -- Darkened Vombata
+[1525] = true, -- Adorned Vombata
 },
 ["Wolves"] = {
 ["Dire Wolves"] = {
@@ -1305,6 +1356,11 @@ ADDON.DB.Family = {
 [657] = true, -- Garn Nighthowl
 [758] = true, -- Infernal Direwolf
 [1044] = true, -- Mag'har Direwolf
+},
+["Lupine"] = {
+[1466] = true, -- Vicious Warstalker
+[1465] = true, -- Vicious Warstalker
+[1580] = true, -- Heartbond Lupine
 },
 ["Undead Wolves"] = {
 [406] = true, -- Spectral Wolf
