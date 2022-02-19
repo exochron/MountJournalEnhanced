@@ -3,8 +3,8 @@ local _, ADDON = ...
 ADDON.DB = {}
 
 ADDON.DB.Recent = {
-    ["minID"] = 1521,
-    ["blacklist"] = { },
+    ["minID"] = 1522,
+    ["blacklist"] = { 1531, 1532 },
 }
 
 ADDON.DB.Source = {
@@ -140,6 +140,9 @@ ADDON.DB.Source = {
         [354357] = true, -- Crimson Shardhide - Korthia - Malbog
         [354360] = true, -- Garnet Razorwing - Korthia - Reliwik the Defiant
         [356501] = true, -- Rampaging Mauler - Korthia - Konthrogz the Obliterator
+        [342680] = true, -- Deepstar Aurelid - Hirukon - Zereth Mortis
+        [368105] = true, -- Colossal Plaguespew Mawrat - Rhuv, Gorger of Ruin - Zereth Mortis
+        [368128] = true, -- Colossal Wraithbound Mawrat - Zereth Mortis - treasure
     },
 
     ["Quest"] = {
@@ -183,6 +186,7 @@ ADDON.DB.Source = {
         [354358] = true, -- Darkmaul - Korthia - Darkmaul treasure quest
         [354361] = true, -- Dusklight Razorwing - Korthia - random eggs
         [354362] = true, -- Maelie the Wanderer - Korthia - treasure quest chain
+        [363701] = true, -- Patient Bufonid - Zereth Mortis - treasure quest chain
 
         ------------------------------
         -- Alliance ------------------
@@ -342,6 +346,7 @@ ADDON.DB.Source = {
         [336036] = true, -- Marrowfang - The Necrotic Wake
         [346141] = true, -- Slime Serpent - Plaguefall (secret)
         [353263] = true, -- Cartel Master's Gearglider - Tazavesh, the Veiled Market
+        [363178] = true, -- Colossal Umbrahide Mawrat - Torghast 13+
 
         -- Raid
         [25953] = true, -- Blue Qiraji Battle Tank - Temple of Ahn'Qiraj
@@ -384,6 +389,7 @@ ADDON.DB.Source = {
         [308814] = true, -- Ny'alotha Allseer - Mythic N'Zoth, Ny'alotha
         [351195] = true, -- Vengeance - Sylvanas Mythic
         [354351] = true, -- Sanctum Gloomcharger - The Nine, Sanctum of Domination
+        [368158] = true, -- Zereth Overseer - The Jailer, Sepulcher of the First Ones
     },
 
     ["Reputation"] = {
@@ -527,6 +533,8 @@ ADDON.DB.Source = {
         [354352] = true, -- Soulbound Gloomcharger - The Maw - Mysterious Gift from Ve'nari
         [354356] = true, -- Amber Shardhide - Korthia - Death's Advance
         [354359] = true, -- Fierce Razorwing - Korthia - Death's Advance Supplies
+        [359229] = true, -- Heartlight Vombata - Zereth Mortis - The Enlightened
+        [359276] = true, -- Anointed Protostag - Zereth Mortis - The Enlightened
 
         ------------------------------
         -- Alliance ------------------
@@ -856,6 +864,12 @@ ADDON.DB.Source = {
         [346554] = 15178, -- Tazavesh Gearglider - Fake It 'Til You Make It
         [354355] = 15064, -- Hand of Salaranga - Breaking the Chains
         [358319] = 15078, -- Soultwisted Deathwalker - Shadowlands Keystone Master: Season Two
+        [359379] = 15491, -- Shimmering Aurelid - Glory of the Sepulcher Raider
+        [359381] = 15336, -- Cryptic Aurelid - From A to Zereth
+        [359407] = 15499, -- Wastewarped Deathwalker - Shadowlands Keystone Master: Season Three
+        [359545] = 15470, -- Carcinized Zerethsteed - Ahead of the Curve: The Jailer
+        [363136] = 15254, -- Colossal Ebonclaw Mawrat - The Jailer's Gauntlet: Layer 4
+        [363297] = 15322, -- Colossal Soulshredder Mawrat - Flawless Master (Layer 16)
 
         ------------------------------
         -- Alliance ------------------
@@ -1061,6 +1075,7 @@ ADDON.DB.Source = {
         [262027] = true, -- Corrupted Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 4
         [332400] = true, -- Sinful Gladiator's Soul Eater - Sinful Gladiator: Shadowlands Season 1
         [353036] = true, -- Unchained Gladiator's Soul Eater - Sinful Gladiator: Shadowlands Season 2
+        [365559] = true, -- Cosmic Gladiator's Soul Eater - Gladiator: Shadowlands Season 3
 
         -- Prestige Reward
         [222202] = true, -- Prestigious Bronze Courser
@@ -1094,6 +1109,8 @@ ADDON.DB.Source = {
         [281888] = true, -- Vicious White Warsaber
         [327407] = true, -- Vicious War Spider
         [348770] = true, -- Vicious War Gorm
+        [347256] = true, -- Vicious War Croaker
+        [349824] = true, -- Vicious War Warstalker
 
         -- Achievement
         [60118] = true, -- Black War Bear - For The Alliance!
@@ -1137,6 +1154,8 @@ ADDON.DB.Source = {
         [281890] = true, -- Vicious Black Bonesteed
         [327408] = true, -- Vicious War Spider
         [348769] = true, -- Vicious War Gorm
+        [347255] = true, -- Vicious War Croaker
+        [349823] = true, -- Vicious War Warstalker
 
         -- Achievement
         [60119] = true, -- Black War Bear - For The Horde!
@@ -1414,6 +1433,7 @@ ADDON.DB.FeatsOfStrength = {
     [1039] = 14183, -- Mighty Caravan Brutosaur
     [1363] = 14816, -- Sinful Gladiator's Soul Eater
     [1480] = 14999, -- Unchained Gladiator's Soul Eater
+    [1572] = 15384, -- Cosmic Gladiator's Soul Eater
 }
 
 ADDON.DB.Expansion = {
@@ -1481,6 +1501,7 @@ ADDON.DB.Expansion = {
         [928] = true, -- Dune Scavenger
         [933] = true, -- Obsidian Krolusk
         [956] = true, -- Leaping Veinseeker
+        [958] = true, -- Spectral Pterrorwing
         [963] = true, -- Bloodgorged Crawg
         [1346] = true, -- Steamscale Incinerator
     },
@@ -1506,13 +1527,13 @@ ADDON.DB.Type = {
     -- https://wow.gamepedia.com/API_C_MountJournal.GetMountInfoExtraByID
     -- https://wow.tools/dbc/?dbc=mounttype
     ground = {
-        typeIDs = { 230, 231, 241, 269, 284 },
+        typeIDs = { 230, 231, 241, 269, 284, 408 },
     },
     flying = {
-        typeIDs = { 247, 248, 398 },
+        typeIDs = { 247, 248, 398, 407 },
     },
     underwater = {
-        typeIDs = { 231, 232, 254 },
+        typeIDs = { 231, 232, 254, 407 },
     },
     repair = {
         [280] = true, -- Traveler's Tundra Mammoth (Alliance)
