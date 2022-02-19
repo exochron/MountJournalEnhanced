@@ -54,8 +54,12 @@ func bytes_as_int64(data []byte) int64 {
 	return value
 }
 
-func (f field_preparation) read_from(data []byte) int32 {
+func (f field_preparation) read_from(data []byte, variable_offset ...int) int32 {
 	start := f.start_byte
+	if len(variable_offset) == 1 {
+		start += variable_offset[0]
+	}
+
 	var value int32 = bytes_as_int32(data[start : start+4])
 
 	value >>= int32(f.bit_offset)
@@ -157,20 +161,37 @@ func prepareWDC3(w WDC3) wdc3_source {
 func (w wdc3_source) ReadString(id int32, field int) string {
 	field_info := w.fields[field]
 	entry := w.id_map[id]
-	record := w.source.Sections[entry.section_number].records[entry.section_index]
-	string_offset := field_info.read_from(record)
+	record := w.fetch_record(entry)
+	section := w.source.Sections[entry.section_number]
 
-	string_offset -= int32(w.source.Header.record_size) * (int32(w.source.Header.record_count) - int32(entry.total_position))
-	string_offset += int32(field_info.start_byte)
-
+	var string_offset int32
 	var payload []byte
-	for sid, sectionHeader := range w.source.SectionHeaders {
-		if string_offset < int32(sectionHeader.string_table_size) {
-			payload = w.source.Sections[sid].string_data
-			break
-		}
 
-		string_offset -= int32(sectionHeader.string_table_size)
+	if len(section.offset_map) > 0 {
+		payload = record
+		// variable record of ItemSparse
+		slice_n_dice := record[8:] // starts with 64bit field
+		string_offset = 8
+
+		for i := 0; i < field-1; i++ {
+			pos := bytes.IndexByte(slice_n_dice, 0)
+			string_offset += int32(pos) + 1
+			slice_n_dice = slice_n_dice[pos+1:]
+		}
+	} else {
+		string_offset = field_info.read_from(record)
+
+		string_offset -= int32(w.source.Header.record_size) * (int32(w.source.Header.record_count) - int32(entry.total_position))
+		string_offset += int32(field_info.start_byte)
+
+		for sid, sectionHeader := range w.source.SectionHeaders {
+			if string_offset < int32(sectionHeader.string_table_size) {
+				payload = w.source.Sections[sid].string_data
+				break
+			}
+
+			string_offset -= int32(sectionHeader.string_table_size)
+		}
 	}
 
 	end := bytes.IndexByte(payload[string_offset:], 0)
@@ -191,14 +212,14 @@ func (w wdc3_source) ReadInt(id int32, field int, array_index ...int) int32 {
 			// variable record of ItemSparse
 			string_fields := 5         // has 5 variable string fields in front
 			slice_n_dice := record[8:] // also starts with 64bit field
-			// wen now calculate the diff bweteen the combined string lengths and the field definitions
+			// we now calculate the diff bweteen the combined string lengths and the field definitions
 			variable_offset := string_fields - (string_fields * 4) // (count of zero byte for each string) - (each string is defined as 32bit field)
 			for i := 0; i < string_fields; i++ {
 				pos := bytes.IndexByte(slice_n_dice, 0)
 				variable_offset += pos
 				slice_n_dice = slice_n_dice[pos+1:]
 			}
-			value = field_info.read_from(record[variable_offset:])
+			value = field_info.read_from(record, variable_offset)
 		} else {
 			value = field_info.read_from(record)
 		}
