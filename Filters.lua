@@ -52,7 +52,9 @@ local function FilterTradableMounts(mountId)
 end
 
 local function FilterRecentMounts(mountId)
-    return not ADDON.settings.filter.onlyRecent or (RecentDB.minID <= mountId and not tContains(RecentDB.blacklist, mountId))
+    return not ADDON.settings.filter.onlyRecent
+            or (RecentDB.minID <= mountId and not tContains(RecentDB.blacklist, mountId))
+            or tContains(RecentDB.whitelist, mountId)
 end
 
 local function FilterCollectedMounts(collected)

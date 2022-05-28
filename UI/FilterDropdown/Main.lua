@@ -18,6 +18,12 @@ local SETTING_HIDDEN_INGAME = "hiddenIngame"
 local SETTING_SORT = "sort"
 local SETTING_COLOR = "color"
 
+function ADDON.UI.FDD:UpdateResetVisibility()
+    if MountJournalFilterButton.ResetButton then
+        MountJournalFilterButton.ResetButton:SetShown(not ADDON.IsUsingDefaultFilters())
+    end
+end;
+
 function ADDON.UI.FDD:CreateFilterInfo(text, filterKey, filterSettings, toggleButtons)
     local info = {
         keepShownOnClick = true,
@@ -40,6 +46,7 @@ function ADDON.UI.FDD:CreateFilterInfo(text, filterKey, filterSettings, toggleBu
             ADDON.Api:UpdateIndex()
             ADDON.UI:UpdateMountList()
             UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
+            ADDON.UI.FDD:UpdateResetVisibility()
 
             if toggleButtons then
                 local name = self:GetName()
@@ -86,6 +93,7 @@ function ADDON.UI.FDD:SetAllSubFilters(settings, switch)
     UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
     ADDON.Api:UpdateIndex()
     ADDON.UI:UpdateMountList()
+    ADDON.UI.FDD:UpdateResetVisibility()
 end
 
 local function AddCheckAllAndNoneInfo(settings, level)
@@ -161,9 +169,7 @@ local function InitializeFilterDropDown(_, level)
         info.justifyH = "CENTER"
         info.keepShownOnClick = false
         info.func = function()
-            ADDON:ResetFilterSettings()
-            ADDON.Api:UpdateIndex()
-            ADDON.UI:UpdateMountList()
+            MountJournalFilterButton.resetFunction()
         end
         UIDropDownMenu_AddButton(info, level)
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_SOURCE then
@@ -231,4 +237,10 @@ ADDON.Events:RegisterCallback("loadUI", function()
 
         ToggleDropDownMenu(1, nil, menu, sender, 74, 15)
     end)
+    MountJournalFilterButton.resetFunction = function()
+        ADDON:ResetFilterSettings()
+        ADDON.Api:UpdateIndex()
+        ADDON.UI:UpdateMountList()
+    end
+    ADDON.UI.FDD:UpdateResetVisibility()
 end, "filter dropdown")

@@ -35,6 +35,7 @@ local function CreateSwatch()
             ADDON.settings.filter.color = { r * 255, g * 255, b * 255 }
             ADDON.Api:UpdateIndex()
             ADDON.UI:UpdateMountList()
+            ADDON.UI.FDD:UpdateResetVisibility()
         end)
 
         swatchFrame:HookScript("OnShow", function(self)
@@ -67,6 +68,7 @@ function ADDON.UI.FDD:AddColorMenu(level)
             ADDON.settings.filter.color = { }
             ADDON.Api:UpdateIndex()
             ADDON.UI:UpdateMountList()
+            ADDON.UI.FDD:UpdateResetVisibility()
         end,
     }
     UIDropDownMenu_AddButton(info, level)
