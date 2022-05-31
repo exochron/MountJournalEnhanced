@@ -4,6 +4,10 @@ MJEPersonalSettings = MJEPersonalSettings or {}
 MJEGlobalSettings = MJEGlobalSettings or {}
 local defaultFilterStates, defaultSortStates
 
+function ADDON.IsUsingDefaultFilters()
+    return tCompare(ADDON.settings.filter, defaultFilterStates, 3)
+end
+
 function ADDON:ResetFilterSettings()
     ADDON.settings.filter = CopyTable(defaultFilterStates)
     if ADDON.settings.personalFilter then
@@ -39,7 +43,7 @@ local function PrepareDefaults()
             moveEquipmentSlot = true,
             previewButton = true,
             showPersonalCount = true,
-            windowSize = {0,0},
+            windowSize = { 0, 0 },
         },
 
         favoritePerChar = false,

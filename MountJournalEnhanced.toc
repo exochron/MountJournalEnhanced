@@ -1,4 +1,4 @@
-## Interface: 90200
+## Interface: 90205
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron

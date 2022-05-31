@@ -3,8 +3,9 @@ local _, ADDON = ...
 ADDON.DB = {}
 
 ADDON.DB.Recent = {
-    ["minID"] = 1522,
-    ["blacklist"] = { 1531, 1532 },
+    ["minID"] = 1597,
+    ["blacklist"] = { },
+    ["whitelist"] = { 1405 },
 }
 
 ADDON.DB.Source = {
@@ -196,6 +197,7 @@ ADDON.DB.Source = {
         [259741] = true, -- Honeyback Harvester - Leaving the Hive: Harvester
         [274610] = true, -- Teldrassil Hippogryph - From the Ashes... (BfA PreQuest)
         [300147] = true, -- Deepcoral Snapdragon - Wild Tame
+        [369666] = true, -- Grimhowl - Good Fiery Boy
 
         ------------------------------
         -- Horde ---------------------
@@ -206,6 +208,7 @@ ADDON.DB.Source = {
         [267270] = true, -- Kua'fon - Down, But Not Out
         [297560] = true, -- Child of Torcali - Wander Not Alone
         [300146] = true, -- Snapdragon Kelpstalker - Good Girl
+        [370620] = true, -- Elusive Emerald Hawkstrider - Blood Knight
     },
 
     ["Vendor"] = {
@@ -870,6 +873,7 @@ ADDON.DB.Source = {
         [359545] = 15470, -- Carcinized Zerethsteed - Ahead of the Curve: The Jailer
         [363136] = 15254, -- Colossal Ebonclaw Mawrat - The Jailer's Gauntlet: Layer 4
         [363297] = 15322, -- Colossal Soulshredder Mawrat - Flawless Master (Layer 16)
+        [334482] = 15690, -- Restoration Deathwalker - Shadowlands Keystone Master: Season Four
 
         ------------------------------
         -- Alliance ------------------
@@ -1076,6 +1080,7 @@ ADDON.DB.Source = {
         [332400] = true, -- Sinful Gladiator's Soul Eater - Sinful Gladiator: Shadowlands Season 1
         [353036] = true, -- Unchained Gladiator's Soul Eater - Sinful Gladiator: Shadowlands Season 2
         [365559] = true, -- Cosmic Gladiator's Soul Eater - Gladiator: Shadowlands Season 3
+        [370346] = true, -- Eternal Gladiator's Soul Eater - Gladiator: Shadowlands Season 4
 
         -- Prestige Reward
         [222202] = true, -- Prestigious Bronze Courser
@@ -1375,7 +1380,7 @@ ADDON.DB.Source = {
 }
 
 ADDON.DB.FeatsOfStrength = {
-    -- from https://wowhead.com/mount-feats-of-strength (60)
+    -- from https://wowhead.com/mount-feats-of-strength (62)
     -- mountId => AchievementId
     [55] = 3356, -- Winterspring Frostsaber
     [69] = 729, -- Deathcharger's Reins
@@ -1434,6 +1439,7 @@ ADDON.DB.FeatsOfStrength = {
     [1363] = 14816, -- Sinful Gladiator's Soul Eater
     [1480] = 14999, -- Unchained Gladiator's Soul Eater
     [1572] = 15384, -- Cosmic Gladiator's Soul Eater
+    [1599] = 15612, -- Eternal Gladiator's Soul Eater
 }
 
 ADDON.DB.Expansion = {
@@ -1509,6 +1515,7 @@ ADDON.DB.Expansion = {
     [8] = { -- Shadowlands
         ["minID"] = 1330,
         ["maxID"] = 999999,
+        [803] = true, -- Mastercraft Gravewing
         [1289] = true, -- Ensorcelled Everwyrm
         [1298] = true, -- Hopecrusher Gargon
         [1299] = true, -- Battle Gargon Vrednic
@@ -1598,4 +1605,6 @@ ADDON.DB.Ignored = {
     [1270] = true, -- Swift Spectral Magnetocraft
     [1271] = true, -- Swift Spectral Armored Gryphon
     [1272] = true, -- Swift Spectral Pterrordax
+
+    [1578] = true, -- DNT Test Mount JZB
 }

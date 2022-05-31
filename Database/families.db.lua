@@ -94,6 +94,7 @@ ADDON.DB.Family = {
 [843] = true, -- Vicious Warstrider
 [877] = true, -- Ivory Hawkstrider
 [1009] = true, -- Starcursed Voidstrider
+[1600] = true, -- Elusive Emerald Hawkstrider
 },
 ["Mechanical Birds"] = {
 [1224] = true, -- Wonderwing 2.0
@@ -277,6 +278,7 @@ ADDON.DB.Family = {
 [1441] = true, -- Bound Shadehound
 [1442] = true, -- Corridor Creeper
 [1477] = true, -- Undying Darkhound
+[1597] = true, -- Grimhowl
 },
 ["Hyenas"] = {
 [928] = true, -- Dune Scavenger
@@ -592,6 +594,7 @@ ADDON.DB.Family = {
 [1363] = true, -- Sinful Gladiator's Soul Eater
 [1480] = true, -- Unchained Gladiator's Soul Eater
 [1572] = true, -- Cosmic Gladiator's Soul Eater
+[1599] = true, -- Eternal Gladiator's Soul Eater
 },
 ["Wind Drakes"] = {
 [392] = true, -- Drake of the East Wind
@@ -652,6 +655,7 @@ ADDON.DB.Family = {
 ["Others"] = {
 [888] = true, -- Farseer's Raging Tempest
 [1219] = true, -- Glacial Tidestorm
+[1405] = true, -- Restoration Deathwalker
 [1419] = true, -- Sintouched Deathwalker
 [1458] = true, -- Wandering Ancient
 [1520] = true, -- Soultwisted Deathwalker

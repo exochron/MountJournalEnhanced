@@ -152,12 +152,13 @@ type relationship_mapping struct {
 	entries     []relationsship_entry
 }
 
-func (e *relationship_mapping) Read(br *ByteReader) {
+func (e *relationship_mapping) Read(br *ByteReader, data_size uint32) {
 	e.num_entries = br.ReadUInt32()
 	e.min_id = br.ReadUInt32()
 	e.max_id = br.ReadUInt32()
-	e.entries = make([]relationsship_entry, e.num_entries)
-	for i := 0; i < int(e.num_entries); i++ {
+	actual_num := (data_size - 16) / 8
+	e.entries = make([]relationsship_entry, actual_num)
+	for i := 0; i < int(actual_num); i++ {
 		e.entries[i].Read(br)
 	}
 }
@@ -208,7 +209,7 @@ func (s *section) Read(br *ByteReader, head wdc3_header, section_head wdc3_secti
 	if section_head.relationship_data_size > 0 {
 		// In some tables, this relationship mapping replaced columns that were used only as a lookup, such as the SpellID in SpellX* tables.
 		s.relationship_map = relationship_mapping{}
-		s.relationship_map.Read(br)
+		s.relationship_map.Read(br, section_head.relationship_data_size)
 	}
 
 	s.offset_map_id_list = make([]uint32, section_head.offset_map_id_count)
