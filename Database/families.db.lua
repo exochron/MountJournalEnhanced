@@ -534,6 +534,7 @@ ADDON.DB.Family = {
 [1223] = true, -- Sylverian Dreamer
 [1240] = true, -- Obsidian Worldbreaker
 [1265] = true, -- Uncorrupted Voidwing
+[1556] = true, -- Tangled Dreamweaver
 },
 ["Grand Drakes"] = {
 [442] = true, -- Blazing Drake
@@ -558,6 +559,7 @@ ADDON.DB.Family = {
 [551] = true, -- Enchanted Fey Dragon
 [1289] = true, -- Ensorcelled Everwyrm
 [1346] = true, -- Steamscale Incinerator
+[1581] = true, -- Nether-Gorged Greatwyrm
 },
 ["Proto-Drakes"] = {
 [262] = true, -- Red Proto-Drake
