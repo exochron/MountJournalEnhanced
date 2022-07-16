@@ -1,5 +1,6 @@
 
 ### Next
+- personal favorites rework
 - special summon animation
 
 ### More Ideas:
