@@ -260,6 +260,16 @@ local function GetMountButtonByMountID(mountID)
         end
     end
 end
+function GetMountIDByMountButton(sourceButton)
+    local scrollFrame = MountJournal.MJE_ListScrollFrame
+    local buttons = scrollFrame.buttons;
+    for i = 1, #buttons do
+        local button = buttons[i];
+        if button == sourceButton then
+            return button.mountID;
+        end
+    end
+end
 local function GetMountDisplayIndexByMountID(mountID)
     for i = 1, ADDON.Api:GetNumDisplayedMounts() do
         local currentMountID = select(12, ADDON.Api:GetDisplayedMountInfo(i))
