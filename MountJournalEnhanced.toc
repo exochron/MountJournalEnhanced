@@ -2,7 +2,7 @@
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron
-## Version: @project-version@
+## Version: 2.18.2
 ## SavedVariablesPerCharacter: MountJournalEnhancedSettings, MJEPersonalSettings
 ## SavedVariables: MJEGlobalSettings, MJETrackingData
 ## X-Curse-Project-ID: 86372
@@ -60,3 +60,4 @@ UI\DressUpButton.lua
 UI\Resize.lua
 UI\ShopButton.lua
 UI\BlizzFixes.lua
+UI\Notes.lua

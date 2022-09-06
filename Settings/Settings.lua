@@ -89,6 +89,10 @@ local function PrepareDefaults()
             unusableToBottom = false,
             unownedOnBottom = true,
         },
+
+        notes = {
+            
+        },
     }
     for categoryName, _ in pairs(ADDON.DB.Source) do
         defaultSettings.filter.source[categoryName] = true
@@ -138,6 +142,7 @@ ADDON.Events:RegisterCallback("OnInit", function()
     local defaultSettings = PrepareDefaults()
     defaultFilterStates = CopyTable(defaultSettings.filter)
     defaultSortStates = CopyTable(defaultSettings.sort)
+    defaultNoteStates = CopyTable(defaultSettings.notes)
     CombineSettings(MJEGlobalSettings, defaultSettings)
     CombineSettings(MJEPersonalSettings, defaultSettings)
 
@@ -152,4 +157,5 @@ ADDON.Events:RegisterCallback("OnInit", function()
     ADDON.settings.autoFavor = MJEPersonalSettings.autoFavor
     ADDON.settings.favoredMounts = MJEPersonalSettings.favoredMounts
     ADDON.settings.trackUsageStats = MJEGlobalSettings.trackUsageStats
+    ADDON.settings.notes = MJEGlobalSettings.notes
 end, "settings init")
