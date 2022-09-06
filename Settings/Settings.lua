@@ -49,6 +49,7 @@ local function PrepareDefaults()
         favoritePerChar = false,
         autoFavor = false,
         favoredMounts = {},
+        notes = {},
 
         hiddenMounts = {},
         personalHiddenMounts = false,
@@ -88,10 +89,6 @@ local function PrepareDefaults()
             favoritesOnTop = true,
             unusableToBottom = false,
             unownedOnBottom = true,
-        },
-
-        notes = {
-            
         },
     }
     for categoryName, _ in pairs(ADDON.DB.Source) do
@@ -142,7 +139,6 @@ ADDON.Events:RegisterCallback("OnInit", function()
     local defaultSettings = PrepareDefaults()
     defaultFilterStates = CopyTable(defaultSettings.filter)
     defaultSortStates = CopyTable(defaultSettings.sort)
-    defaultNoteStates = CopyTable(defaultSettings.notes)
     CombineSettings(MJEGlobalSettings, defaultSettings)
     CombineSettings(MJEPersonalSettings, defaultSettings)
 

@@ -78,7 +78,6 @@ local function testDatabase()
     checkDBForOldMountIds(ADDON.DB.Expansion, "Expansion")
     checkDBForOldMountIds(ADDON.DB.Type, "Type")
     checkDBForOldMountIds(ADDON.DB.Ignored, "Ignored")
-    checkDBForOldMountIds(ADDON.DB.Notes, "Notes")
 end
 
 local taintedList = {}

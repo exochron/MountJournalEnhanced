@@ -1,55 +1,54 @@
 local _, ADDON = ...
 
-ADDON.notes = {}
-
 local AceGUI = LibStub("AceGUI-3.0")
 
-function ADDON.notes:createNotesFrame(spellId, creatureName)
+function ADDON.UI:CreateNotesFrame(mountId)
 
-    local note = AceGUI:Create("Window", "Set Note", UIParent)
+    local note = AceGUI:Create("Window")
 
     -- Create frame
-    note:SetTitle("Note for " .. creatureName)
-    note:SetHeight(80)
-    note:SetWidth(310)
-    note:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
-    note:SetLayout("Flow")
+    note:SetTitle(SET_NOTE)
+    note:SetHeight(150)
+    note:SetWidth(400)
+    note:SetCallback("OnClose", function(widget)
+        AceGUI:Release(widget)
+    end)
+    note:SetLayout("List")
     note:EnableResize(false)
 
     -- Create Edit Box
-    local editbox = AceGUI:Create("EditBox")
+    local editbox = AceGUI:Create("MultiLineEditBox")
     editbox:SetLabel("")
-    editbox:SetWidth(200)
-    editbox:SetMaxLetters(128)
-    editbox:SetCallback("OnAcquire", function(widget, event, text)
-        text = getNoteForMount(spellId)
-    end)
+    editbox:SetWidth(375)
+    editbox:SetText(ADDON.settings.notes[mountId] or "")
     editbox:DisableButton(true)
-    editbox:SetText(getNoteForMount(spellId))
     note:AddChild(editbox)
 
     -- Create button
     local button = AceGUI:Create("Button")
-    button:SetText("Save")
-    button:SetWidth(75)
-    button:SetCallback("OnClick", function() 
-        setNoteForMount(spellId, editbox:GetText())
+    button:SetText(SAVE)
+    button:SetWidth(375)
+    button:SetCallback("OnClick", function()
+        ADDON.settings.notes[mountId] = editbox:GetText()
         note:Hide()
     end)
     note:AddChild(button)
 
     -- Display
-    note:SetPoint("CENTER",0,0)
+    note:SetPoint("CENTER", 0, 0)
     note:Show()
-
+    editbox:SetFocus()
 end
 
-function getNoteForMount(spellId)
-    if ADDON.settings.notes[spellId] then
-        return ADDON.settings.notes[spellId]
-    end
-end
-
-function setNoteForMount(spellId, note)
-    ADDON.settings.notes[spellId] = note
-end
+ADDON.Events:RegisterCallback("OnLogin", function()
+    hooksecurefunc(GameTooltip, "SetMountBySpellID", function(tooltip, spellId)
+        local mountId = C_MountJournal.GetMountFromSpell(spellId)
+        if mountId then
+            local note = ADDON.settings.notes[mountId]
+            if note then
+                tooltip:AddLine(NOTE_COLON .. " " .. note, 0, 0.62109375, 0.41796875, true)
+                tooltip:Show()
+            end
+        end
+    end)
+end, "notes")
