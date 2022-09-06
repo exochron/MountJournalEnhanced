@@ -40,6 +40,7 @@ function ADDON.UI:CreateNotesFrame(mountId)
     editbox:SetFocus()
 end
 
+-- show notes in mount tooltips
 ADDON.Events:RegisterCallback("OnLogin", function()
     hooksecurefunc(GameTooltip, "SetMountBySpellID", function(tooltip, spellId)
         local mountId = C_MountJournal.GetMountFromSpell(spellId)
@@ -52,3 +53,31 @@ ADDON.Events:RegisterCallback("OnLogin", function()
         end
     end)
 end, "notes")
+
+-- show notes also in display
+local function setupFontString()
+    local frame = MountJournal.MountDisplay.InfoButton
+
+    local text = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+    text:SetPoint("TOPLEFT", frame.Lore, "BOTTOMLEFT", 0, -6)
+    text:SetSize(345, 0)
+    text:SetJustifyH("LEFT")
+
+    return text
+end
+ADDON.Events:RegisterCallback("loadUI", function()
+    local notesText = setupFontString()
+
+    local callback = function()
+        local mountId = ADDON.Api:GetSelected()
+        if mountId and notesText then
+            local text = ''
+            local note = ADDON.settings.notes[mountId]
+            if note then
+                text = "|c00FFD700" .. NOTE_COLON .. "|r " .. note
+            end
+            notesText:SetText(text)
+        end
+    end
+    ADDON.Events:RegisterCallback("OnUpdateMountDisplay", callback, 'DisplayNotes')
+end, "display statistics")
