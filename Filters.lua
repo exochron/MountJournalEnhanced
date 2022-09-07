@@ -31,6 +31,18 @@ local function FilterByName(searchString, name, mountId)
 
     return result
 end
+local function FilterByNote(searchString, mountId)
+    if ADDON.settings.searchInNotes then
+        local note = ADDON.settings.notes[mountId]
+        if note then
+            if strfind(note:lower(), searchString, 1, true) ~= nil then
+                return true
+            end
+        end
+    end
+
+    return false
+end
 
 local function FilterUserHiddenMounts(spellId)
     return ADDON.settings.filter.hidden or not ADDON.settings.hiddenMounts[spellId]
@@ -266,7 +278,12 @@ function ADDON:FilterMounts()
 
         for _, mountId in ipairs(ids) do
             local creatureName, _, _, _, _, _, _, _, _, shouldHideOnChar = ADDON.Api:GetMountInfoByID(mountId)
-            if FilterIngameHiddenMounts(shouldHideOnChar, mountId) and FilterByName(searchText, creatureName, mountId) then
+            if FilterIngameHiddenMounts(shouldHideOnChar, mountId) and
+                    (
+                            FilterByName(searchText, creatureName, mountId)
+                                    or FilterByNote(searchText, mountId)
+                    )
+            then
                 result[#result + 1] = mountId
             end
         end

@@ -22,6 +22,7 @@ This addon extends the ingame mount journal with some cool stuff.
 + Auto-favor new learned mounts
 + Resize the journal window
 + Works with ElvUI
++ Set own notes for each mount. They're played within mount tooltips and the journal display.
 
 ## Fixes also
 + the ridiculous fly in animation of the rider
