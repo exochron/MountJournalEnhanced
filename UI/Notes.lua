@@ -40,14 +40,24 @@ function ADDON.UI:CreateNotesFrame(mountId)
     editbox:SetFocus()
 end
 
+local function getLabelText(mountId)
+    local text = ''
+    local note = ADDON.settings.notes[mountId]
+    if note then
+        text = NORMAL_FONT_COLOR:WrapTextInColorCode(NOTE_COLON) .. HIGHLIGHT_FONT_COLOR:WrapTextInColorCode(note)
+    end
+
+    return text
+end
+
 -- show notes in mount tooltips
 ADDON.Events:RegisterCallback("OnLogin", function()
     hooksecurefunc(GameTooltip, "SetMountBySpellID", function(tooltip, spellId)
         local mountId = C_MountJournal.GetMountFromSpell(spellId)
         if mountId then
-            local note = ADDON.settings.notes[mountId]
-            if note then
-                tooltip:AddLine(NOTE_COLON .. " " .. note, 0, 0.62109375, 0.41796875, true)
+            local text = getLabelText(mountId)
+            if text then
+                tooltip:AddLine(text)
                 tooltip:Show()
             end
         end
@@ -71,12 +81,7 @@ ADDON.Events:RegisterCallback("loadUI", function()
     local callback = function()
         local mountId = ADDON.Api:GetSelected()
         if mountId and notesText then
-            local text = ''
-            local note = ADDON.settings.notes[mountId]
-            if note then
-                text = "|c00FFD700" .. NOTE_COLON .. "|r " .. note
-            end
-            notesText:SetText(text)
+            notesText:SetText(getLabelText(mountId))
         end
     end
     ADDON.Events:RegisterCallback("OnUpdateMountDisplay", callback, 'DisplayNotes')
