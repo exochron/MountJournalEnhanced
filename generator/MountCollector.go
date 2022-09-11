@@ -13,6 +13,7 @@ type mount struct {
 	ItemIsTradeable  bool
 	PlayerConditions [][]condition.Condition
 	Colors           [][]uint8
+	Rarity           *float32
 }
 
 func (m *mount) AddColor(r, g, b uint8) {
@@ -63,6 +64,7 @@ func collectMounts(
 			false,
 			mountConditions,
 			colors,
+			nil,
 		}
 		spellToMount[spellId] = id
 	}

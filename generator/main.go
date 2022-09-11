@@ -28,6 +28,10 @@ func main() {
 		delete(mounts, ignoredId)
 	}
 
+	for mountId, rarity := range LoadRarities() {
+		mounts[mountId].Rarity = rarity
+	}
+
 	CollectTextures(
 		mounts,
 		casc,
@@ -42,4 +46,5 @@ func main() {
 	ExportFamilies(conf.FamilyMap)
 	ExportConditions(mounts)
 	ExportColors(mounts)
+	ExportRarities(mounts)
 }

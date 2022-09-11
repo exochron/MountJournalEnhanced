@@ -136,3 +136,23 @@ func ExportColors(mounts map[int]*mount) {
 
 	defer file.Close()
 }
+
+func ExportRarities(mounts map[int]*mount) {
+
+	file := prepareLuaDB("rarities.db.lua", "Rarities")
+
+	keys := getOrderedKeys(mounts)
+
+	for _, k := range keys {
+		mount := mounts[k]
+		if mount.Rarity != nil {
+			file.WriteString("[" + strconv.Itoa(mount.ID) + "] = ")
+			file.WriteString(fmt.Sprintf("%v", *mount.Rarity))
+			file.WriteString(", -- " + mount.Name + "\n")
+		}
+	}
+
+	file.WriteString("}")
+
+	defer file.Close()
+}
