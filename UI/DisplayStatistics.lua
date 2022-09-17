@@ -71,12 +71,17 @@ local function setupContainer()
             L["STATS_TIP_TRAVEL_TIME_TEXT"]
     )
     container.TravelDistance = buildStat(container,
-            1817485,  -- interface/icons/ability_druid_dash_orange
+            1817485, -- interface/icons/ability_druid_dash_orange
             L["STATS_TIP_TRAVEL_DISTANCE_HEAD"]
     )
     container.LearnedDate = buildStat(container,
-            "auctionhouse-icon-checkmark",  -- interface/icons/ability_druid_dash_orange
+            "auctionhouse-icon-checkmark", -- interface/icons/ability_druid_dash_orange
             L["STATS_TIP_LEARNED_DATE_HEAD"]
+    )
+    container.Rarity = buildStat(container,
+            "Interface\\Addons\\MountJournalEnhanced\\UI\\rarityrader_logo",
+            L["STATS_TIP_RARITY_HEAD"],
+            string.gsub(L["STATS_TIP_RARITY_TEXT"], "{RR}", "|TInterface\\Addons\\MountJournalEnhanced\\UI\\rarityrader_logo:0|t Rarity Raider")
     )
 
     container:Hide()
@@ -127,6 +132,12 @@ local function updateContainer(mountId, container)
             container.LearnedDate.Text:SetText(FormatShortDate(data.day, data.month, data.year))
             displayed[#displayed + 1] = container.LearnedDate
         end
+    end
+
+    container.Rarity:SetShown(ADDON.DB.Rarities[mountId] ~= nil)
+    if ADDON.DB.Rarities[mountId] ~= nil then
+        container.Rarity.Text:SetText(ADDON.DB.Rarities[mountId] .. " %")
+        displayed[#displayed + 1] = container.Rarity
     end
 
     if #displayed > 0 then
