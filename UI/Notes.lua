@@ -85,4 +85,4 @@ ADDON.Events:RegisterCallback("loadUI", function()
         end
     end
     ADDON.Events:RegisterCallback("OnUpdateMountDisplay", callback, 'DisplayNotes')
-end, "display statistics")
+end, "display notes")
