@@ -33,12 +33,15 @@ local function BuildHeading(parent, text)
     return head
 end
 
-local function BuildFrame(uiLabels, behaviourLabels)
+local function BuildMainFrame(uiLabels, behaviourLabels)
     local title = GetAddOnMetadata(ADDON_NAME, "Title")
     local frame = AceGUI:Create("BlizOptionsGroup")
     frame:SetName(title)
     frame:SetTitle(title)
     frame:SetLayout("List")
+    frame.content:SetPoint("TOPLEFT", 20, -50)
+    frame.content:SetPoint("BOTTOMRIGHT", -20, 10)
+
     frame.checks = {}
 
     BuildHeading(frame, UIOPTIONS_MENU)
@@ -62,26 +65,15 @@ local function BuildFrame(uiLabels, behaviourLabels)
     return frame
 end
 
-local function buildLabel(text, hyperlinkHandler)
-    local label = AceGUI:Create("InteractiveLabel")
-    label:SetFontObject(GameFontHighlight)
-    label:SetText(text)
-    label:SetFullWidth(true)
-    if hyperlinkHandler then
-        label.frame:SetHyperlinksEnabled(true)
-        label.frame:HookScript("OnHyperlinkClick", hyperlinkHandler)
-    end
-
-    return label
-end
-
-local function buildAbout()
+local function BildAbout()
 
     local copybox
     local frame = AceGUI:Create("BlizOptionsGroup")
     frame:SetName("About", GetAddOnMetadata(ADDON_NAME, "Title"))
     frame:SetTitle("About")
     frame:SetLayout("List")
+    frame.content:SetPoint("TOPLEFT", 20, -50)
+    frame.content:SetPoint("BOTTOMRIGHT", -20, 10)
 
     local copyHandle = function(_, text)
         if not copybox then
@@ -96,34 +88,48 @@ local function buildAbout()
 
         copybox:SetText(text)
         copybox:SetFocus()
-        copybox:HighlightText(0,-1)
+        copybox:HighlightText(0, -1)
     end
     local link = function(url, text, icon)
         icon = icon and "|TInterface\\Addons\\MountJournalEnhanced\\UI\\icons\\" .. icon .. ":0|t " or ""
 
-        return "|cffffff00|H" .. url .. "|h" .. icon .."[".. text .. "]|h|r"
+        return "|cffffff00|H" .. url .. "|h" .. icon .. "[" .. text .. "]|h|r"
     end
+
+    local buildLabel = function(text)
+        local label = AceGUI:Create("InteractiveLabel")
+        label:SetFontObject(GameFontHighlight)
+        label:SetText(text)
+        label:SetFullWidth(true)
+        label.frame:SetHyperlinksEnabled(true)
+        label.frame:HookScript("OnHyperlinkClick", copyHandle)
+
+        frame:AddChild(label)
+    end
+
+    BuildHeading(frame, "About")
+
+
 
     BuildHeading(frame, "Acknowledgments")
 
-    frame:AddChild(buildLabel("First of all I would like to thank my dear friend. He initially started Mount Journal Enhanced. This addon wouldn't exist without him." .. "\n\n"))
-    frame:AddChild(buildLabel("Furthermore I'd like to thank all contributors, translators, feedback and idea givers. Your help is really very much appreciated." .. "\n\n"))
+    buildLabel("First of all I would like to thank my dear friend. He initially started Mount Journal Enhanced. This addon wouldn't exist without him." .. "\n\n")
+    buildLabel("Furthermore I'd like to thank all contributors, translators, feedback and idea givers. Your help is really very much appreciated." .. "\n\n")
 
-    frame:AddChild(buildLabel("Besides, it is important to give a special thank you to some community projects and websites. Without whose preliminary work it would be much harder to develop this addon.\n\n"))
-    frame:AddChild(buildLabel("- " .. link("https://rarityraider.com/", "Rarity Raider", "rarityraider") .. " for kindly providing their mount rarities.", copyHandle))
-    frame:AddChild(buildLabel("- " .. link("https://www.warcraftmounts.com/", "Warcraft Mounts", "warcraftmounts") .. " for their comprehensive family gallery.", copyHandle))
-    frame:AddChild(buildLabel("- " .. link("https://www.townlong-yak.com/framexml/live", "Townlong Yak", "townlong_yak") .. ", "
+    buildLabel("Besides, it is important to give a special thank you to some community projects and websites. Without whose preliminary work it would be much harder to develop this addon.\n\n")
+    buildLabel("- " .. link("https://rarityraider.com/", "Rarity Raider", "rarityraider") .. " for kindly providing their mount rarity percentages.")
+    buildLabel("- " .. link("https://www.warcraftmounts.com/", "Warcraft Mounts", "warcraftmounts") .. " for their comprehensive family gallery.")
+    buildLabel("- " .. link("https://www.townlong-yak.com/framexml/live", "Townlong Yak", "townlong_yak") .. ", "
             .. link("https://wow.tools/", "WoW.tools", "wow_tools")
             .. " and " .. link("https://wowdev.wiki/", "WoWDev wiki", "wowdev")
-            .. " for their awesome developer resources.", copyHandle))
-    frame:AddChild(buildLabel("- foxlit for " .. link("https://www.townlong-yak.com/addons/taintless", "TaintLess") .. ". This great little library is (sadly) essential for any bugless addon or client.", copyHandle))
-    frame:AddChild(buildLabel("- The Team of " .. link("https://www.wowace.com/projects/ace3", "Ace3") .. " for their developer friendly framework.", copyHandle))
-    frame:AddChild(buildLabel("- " .. link("https://www.wowace.com/projects/herebedragons", "HereBeDragons") .. " for providing a nice api to track player position.", copyHandle))
-    frame:AddChild(buildLabel("- The " .. link("https://github.com/BigWigsMods/packager/", "packager by BigWigsMods") .. " which really makes releasing new addon versions as simple as possible.", copyHandle))
+            .. " for their awesome developer resources.")
+    buildLabel("- foxlit for " .. link("https://www.townlong-yak.com/addons/taintless", "TaintLess") .. ". This great little library is (sadly) essential for any bugless addon or client.")
+    buildLabel("- The Team of " .. link("https://www.wowace.com/projects/ace3", "Ace3") .. " for their developer friendly framework.")
+    buildLabel("- " .. link("https://www.wowace.com/projects/herebedragons", "HereBeDragons") .. " for providing a nice api to keep track of the player position.")
+    buildLabel("- The " .. link("https://github.com/BigWigsMods/packager/", "packager by BigWigsMods") .. " which really makes releasing new addon versions as simple as possible.")
 
-    frame:AddChild(buildLabel("\n" .. "Last but not least I'd like to thank YOU for using Mount Journal Enhanced. If you like it, you should show it to your friends and guild mates. So they can enjoy it as well. :)"))
-
-    frame:AddChild(buildLabel("\n\n\n"))
+    buildLabel("\n" .. "Last but not least I'd like to thank YOU for using Mount Journal Enhanced. If you like it, you should show it to your friends and guild mates. So they can enjoy it as well. :)")
+    buildLabel("\n\n\n")
 
     return frame
 end
@@ -131,7 +137,7 @@ end
 ADDON.Events:RegisterCallback("OnLogin", function()
     local uiLabels, behaviourLabels = ADDON:GetSettingLabels()
 
-    local group = BuildFrame(uiLabels, behaviourLabels)
+    local group = BuildMainFrame(uiLabels, behaviourLabels)
     group:SetCallback("refresh", function(frame)
         for _, labelData in ipairs(uiLabels) do
             local setting = labelData[1]
@@ -163,5 +169,5 @@ ADDON.Events:RegisterCallback("OnLogin", function()
     group:SetCallback("default", ADDON.ResetSettings)
     InterfaceOptions_AddCategory(group.frame)
 
-    InterfaceOptions_AddCategory(buildAbout().frame)
+    InterfaceOptions_AddCategory(BildAbout().frame)
 end, "settings panel")
