@@ -1,11 +1,9 @@
 local ADDON_NAME, ADDON = ...
 
 local function InitializeDropDown(_, level)
-    local title = GetAddOnMetadata(ADDON_NAME, "Title")
-
     local button = {
         isTitle = 1,
-        text = title,
+        text = GetAddOnMetadata(ADDON_NAME, "Title"),
         notCheckable = 1,
     }
     UIDropDownMenu_AddButton(button, level)
@@ -37,10 +35,7 @@ local function InitializeDropDown(_, level)
         hasArrow = false,
         text = ADDON.L.DISPLAY_ALL_SETTINGS,
         justifyH = "CENTER",
-        func = function()
-            InterfaceOptionsFrame_OpenToCategory(title)
-            InterfaceOptionsFrame_OpenToCategory(title)
-        end,
+        func = ADDON.OpenOptions,
     }
     UIDropDownMenu_AddButton(button, level)
     button = {

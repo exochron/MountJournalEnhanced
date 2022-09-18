@@ -79,9 +79,9 @@ local function setupContainer()
             L["STATS_TIP_LEARNED_DATE_HEAD"]
     )
     container.Rarity = buildStat(container,
-            "Interface\\Addons\\MountJournalEnhanced\\UI\\rarityrader_logo",
+            "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\rarityraider",
             L["STATS_TIP_RARITY_HEAD"],
-            string.gsub(L["STATS_TIP_RARITY_TEXT"], "{RR}", "|TInterface\\Addons\\MountJournalEnhanced\\UI\\rarityrader_logo:0|t Rarity Raider")
+            string.gsub(L["STATS_TIP_RARITY_TEXT"], "{RR}", "|TInterface\\Addons\\MountJournalEnhanced\\UI\\icons\\rarityraider:0|t Rarity Raider")
     )
 
     container:Hide()
@@ -93,14 +93,14 @@ local function formatDistance(length)
     if ADDON.isMetric then
         length = length / 1.0936
         if length < 1000 then
-            return floor(length) .. 'm';
+            return floor(length) .. ' m';
         end
-        return floor(length / 1000) .. 'km';
+        return floor(length / 1000) .. ' km';
     else
         if length < 1760 then
-            return floor(length) .. 'yd';
+            return floor(length) .. ' yd';
         end
-        return floor(length / 1760) .. 'mi';
+        return floor(length / 1760) .. ' mi';
     end
 end
 
@@ -110,7 +110,7 @@ local function updateContainer(mountId, container)
     if useCount ~= nil then
         container.UsedCount:SetShown(useCount > 0)
         if useCount > 0 then
-            container.UsedCount.Text:SetText(useCount .. 'x')
+            container.UsedCount.Text:SetText(useCount .. ' x')
             displayed[#displayed + 1] = container.UsedCount
         end
 
