@@ -28,6 +28,7 @@ local function BuildHeading(parent, text)
     local head = AceGUI:Create("Heading")
     head:SetText(text)
     head:SetFullWidth(true)
+    head:SetHeight(35)
     parent:AddChild(head)
 
     return head
@@ -113,10 +114,10 @@ local function BildAbout()
             .. link("https://www.curseforge.com/wow/addons/mount-journal-enhanced/issues", "Curseforge") .. " or "
             .. link("https://github.com/exochron/MountJournalEnhanced/issues", "GitHub") .. ".")
     buildLabel("Is your language still missing some texts? You can help to localize this addon into your language on "
-            .. link("https://www.curseforge.com/wow/addons/mount-journal-enhanced/localization", "Curseforge") .. ".\n\n")
+            .. link("https://www.curseforge.com/wow/addons/mount-journal-enhanced/localization", "Curseforge"))
 
     BuildHeading(frame, "Acknowledgments")
-    buildLabel("\nFirst of all I would like to thank my dear friend. He initially started Mount Journal Enhanced. This addon wouldn't exist without him." .. "\n\n")
+    buildLabel("First of all I would like to thank my dear friend. He initially started Mount Journal Enhanced. This addon wouldn't exist without him." .. "\n\n")
     buildLabel("Furthermore I'd like to thank all contributors, translators, feedback and idea givers. Your help is really very much appreciated." .. "\n\n")
 
     buildLabel("Besides, it is important to give a special thank you to some community projects and websites. Without whose preliminary work it would be much harder to develop this addon.\n\n")
