@@ -69,8 +69,8 @@ local function BildAbout()
 
     local copybox
     local frame = AceGUI:Create("BlizOptionsGroup")
-    frame:SetName("About", GetAddOnMetadata(ADDON_NAME, "Title"))
-    frame:SetTitle("About")
+    frame:SetName(ADDON.L["SETTING_HEAD_ABOUT"], GetAddOnMetadata(ADDON_NAME, "Title"))
+    frame:SetTitle(ADDON.L["SETTING_HEAD_ABOUT"])
     frame:SetLayout("List")
     frame.content:SetPoint("TOPLEFT", 20, -50)
     frame.content:SetPoint("BOTTOMRIGHT", -20, 10)
@@ -93,7 +93,7 @@ local function BildAbout()
     local link = function(url, text, icon)
         icon = icon and "|TInterface\\Addons\\MountJournalEnhanced\\UI\\icons\\" .. icon .. ":0|t " or ""
 
-        return "|cffffff00|H" .. url .. "|h" .. icon .. "[" .. text .. "]|h|r"
+        return "|cff56B0FF|H" .. url .. "|h" .. icon .. "[" .. text .. "]|h|r"
     end
 
     local buildLabel = function(text)
@@ -107,13 +107,16 @@ local function BildAbout()
         frame:AddChild(label)
     end
 
-    BuildHeading(frame, "About")
-
-
+    buildLabel("|cffffd100" .. GAME_VERSION_LABEL .. ":|r " .. GetAddOnMetadata(ADDON_NAME, "Version") .. "\n\n")
+    buildLabel("|cffffd100" .. ADDON.L["SETTING_ABOUT_AUTHOR"] .. ":|r " .. GetAddOnMetadata(ADDON_NAME, "Author") .. "\n\n")
+    buildLabel("Have you found any bug or do you have some suggestions? Please let me know in the issue tracker on "
+            .. link("https://www.curseforge.com/wow/addons/mount-journal-enhanced/issues", "Curseforge") .. " or "
+            .. link("https://github.com/exochron/MountJournalEnhanced/issues", "GitHub") .. ".")
+    buildLabel("Is your language still missing some texts? You can help to localize this addon into your language on "
+            .. link("https://www.curseforge.com/wow/addons/mount-journal-enhanced/localization", "Curseforge") .. ".\n\n")
 
     BuildHeading(frame, "Acknowledgments")
-
-    buildLabel("First of all I would like to thank my dear friend. He initially started Mount Journal Enhanced. This addon wouldn't exist without him." .. "\n\n")
+    buildLabel("\nFirst of all I would like to thank my dear friend. He initially started Mount Journal Enhanced. This addon wouldn't exist without him." .. "\n\n")
     buildLabel("Furthermore I'd like to thank all contributors, translators, feedback and idea givers. Your help is really very much appreciated." .. "\n\n")
 
     buildLabel("Besides, it is important to give a special thank you to some community projects and websites. Without whose preliminary work it would be much harder to develop this addon.\n\n")
@@ -121,15 +124,15 @@ local function BildAbout()
     buildLabel("- " .. link("https://www.warcraftmounts.com/", "Warcraft Mounts", "warcraftmounts") .. " for their comprehensive family gallery.")
     buildLabel("- " .. link("https://www.townlong-yak.com/framexml/live", "Townlong Yak", "townlong_yak") .. ", "
             .. link("https://wow.tools/", "WoW.tools", "wow_tools")
-            .. " and " .. link("https://wowdev.wiki/", "WoWDev wiki", "wowdev")
+            .. " and the " .. link("https://wowdev.wiki/", "WoWDev wiki", "wowdev")
             .. " for their awesome developer resources.")
     buildLabel("- foxlit for " .. link("https://www.townlong-yak.com/addons/taintless", "TaintLess") .. ". This great little library is (sadly) essential for any bugless addon or client.")
     buildLabel("- The Team of " .. link("https://www.wowace.com/projects/ace3", "Ace3") .. " for their developer friendly framework.")
     buildLabel("- " .. link("https://www.wowace.com/projects/herebedragons", "HereBeDragons") .. " for providing a nice api to keep track of the player position.")
     buildLabel("- The " .. link("https://github.com/BigWigsMods/packager/", "packager by BigWigsMods") .. " which really makes releasing new addon versions as simple as possible.")
 
-    buildLabel("\n" .. "Last but not least I'd like to thank YOU for using Mount Journal Enhanced. If you like it, you should show it to your friends and guild mates. So they can enjoy it as well. :)")
-    buildLabel("\n\n\n")
+    buildLabel("\n" .. "Last but not least I'd like to thank YOU for using Mount Journal Enhanced. If you like it, you should show it to your friends and guild mates. So they can enjoy it as well. :-)")
+    buildLabel("\n\n\n") -- add some space for copybox
 
     return frame
 end

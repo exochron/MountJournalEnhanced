@@ -17,6 +17,7 @@ This addon extends the ingame mount journal with some cool stuff.
 + Browse through mounts with Up/Down arrow keys
 + Right Click on scroll buttons to quickly go to the top or bottom
 + Track, display and sort by your usage statistics
++ Shows mount rarity.
 + Favor all filtered mounts at once or unset them all
 + Save favorites per character
 + Auto-favor new learned mounts
@@ -28,7 +29,6 @@ This addon extends the ingame mount journal with some cool stuff.
 + the ridiculous fly in animation of the rider
 
 ## Help wanted
-- Have you found any bug or do you have some suggestions? Please let us know in the issue tracker on [Curseforge](https://www.curseforge.com/wow/addons/mount-journal-enhanced/issues) or [GitHub](https://github.com/exochron/MountJournalEnhanced/issues).
-- Is your language still missing some texts? You can localize the addon into your language on [Curseforge](https://www.curseforge.com/wow/addons/mount-journal-enhanced/localization).
-- Want to try out some cool new stuff earlier than everybody else? Just switch to the Beta-Channel in your Addon Updater and let us know of anything you might find in our issue tracker. After a few days without bugs the same version goes stable for everybody else.
-- Are you interested in developing addons as well? Then come join us at [GitHub](https://github.com/exochron/MountJournalEnhanced). Don't worry about knowing nothing of LUA. It's easy to learn. ;-)
+- Have you found any bug or do you have some suggestions? Please let me know in the issue tracker on [Curseforge](https://www.curseforge.com/wow/addons/mount-journal-enhanced/issues) or [GitHub](https://github.com/exochron/MountJournalEnhanced/issues).
+- Is your language still missing some texts? You can helpt to localize the addon into your language on [Curseforge](https://www.curseforge.com/wow/addons/mount-journal-enhanced/localization).
+- Are you interested in developing addons as well? Then come join me at [GitHub](https://github.com/exochron/MountJournalEnhanced). Don't worry about not knowing LUA. It's easy to learn. ;-)
