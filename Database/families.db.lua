@@ -578,6 +578,7 @@ ADDON.DB.Family = {
 [1031] = true, -- Sinister Gladiator's Proto-Drake
 [1032] = true, -- Notorious Gladiator's Proto-Drake
 [1035] = true, -- Corrupted Gladiator's Proto-Drake
+[1679] = true, -- Frostbrood Proto-Wyrm
 },
 ["Stone Drakes"] = {
 [391] = true, -- Volcanic Stone Drake
