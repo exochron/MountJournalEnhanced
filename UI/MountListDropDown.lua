@@ -80,11 +80,22 @@ local function InitializeMountOptionsMenu(sender, level)
         UIDropDownMenu_AddButton(info, level)
     end
 
+    info = {
+        notCheckable = true,
+        text = SET_NOTE,
+        func = function()
+            ADDON.UI:CreateNotesFrame(mountId)
+        end,
+    }
+    
+    UIDropDownMenu_AddButton(info, level)
+
     UIDropDownMenu_AddButton({text = CANCEL, notCheckable = true,}, level)
 end
 
 ADDON.Events:RegisterCallback("loadUI", function()
     local menu
+
     local OnClick = function(sender, anchor, button)
         if button ~= "LeftButton" then
             if menu == nil then

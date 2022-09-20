@@ -23,6 +23,7 @@
   - Only Display, but the mount is completly black
   - multiple choice (4?); never use an alternative option of the same family
   - 10? rounds
-- Pimp my Mount (more effects in display like) 
+- Pimp my Mount: more effects in display, like:
     - underbody lightning
     - sunglasses for mount
+- retro UI: like in WotLK

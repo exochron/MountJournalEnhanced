@@ -30,6 +30,7 @@ local function PrepareDefaults()
 
         trackUsageStats = true,
         searchInDescription = true,
+        searchInNotes = true,
 
         personalUi = false,
         ui = {
@@ -38,7 +39,7 @@ local function PrepareDefaults()
             showShopButton = false,
             compactMountList = true,
             unlockDisplayCamera = true,
-            showUsageStatistics = true,
+            showStatistics = true,
             enableCursorKeys = true,
             moveEquipmentSlot = true,
             previewButton = true,
@@ -49,6 +50,7 @@ local function PrepareDefaults()
         favoritePerChar = false,
         autoFavor = false,
         favoredMounts = {},
+        notes = {},
 
         hiddenMounts = {},
         personalHiddenMounts = false,
@@ -147,9 +149,11 @@ ADDON.Events:RegisterCallback("OnInit", function()
     ADDON:ApplySetting('personalHiddenMounts', MJEPersonalSettings.personalHiddenMounts)
     ADDON:ApplySetting('personalFilter', MJEPersonalSettings.personalFilter)
     ADDON:ApplySetting('searchInDescription', MJEPersonalSettings.searchInDescription)
+    ADDON:ApplySetting('searchInNotes', MJEPersonalSettings.searchInNotes)
 
     ADDON.settings.favoritePerChar = MJEPersonalSettings.favoritePerChar
     ADDON.settings.autoFavor = MJEPersonalSettings.autoFavor
     ADDON.settings.favoredMounts = MJEPersonalSettings.favoredMounts
     ADDON.settings.trackUsageStats = MJEGlobalSettings.trackUsageStats
+    ADDON.settings.notes = MJEGlobalSettings.notes
 end, "settings init")

@@ -5,7 +5,7 @@ ADDON.DB = {}
 ADDON.DB.Recent = {
     ["minID"] = 1597,
     ["blacklist"] = { },
-    ["whitelist"] = { 1405 },
+    ["whitelist"] = { 1405, 1576 },
 }
 
 ADDON.DB.Source = {
@@ -874,6 +874,7 @@ ADDON.DB.Source = {
         [363136] = 15254, -- Colossal Ebonclaw Mawrat - The Jailer's Gauntlet: Layer 4
         [363297] = 15322, -- Colossal Soulshredder Mawrat - Flawless Master (Layer 16)
         [334482] = 15690, -- Restoration Deathwalker - Shadowlands Keystone Master: Season Four
+        [366791] = 15684, -- Jigglesworth, Sr. - Fates of the Shadowlands Raids
 
         ------------------------------
         -- Alliance ------------------

@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"image/color"
 	"image/png"
-// 	"sync"
+	// 	"sync"
 
 	"github.com/mccutchen/palettor"
 	"github.com/nozzle/throttler"
@@ -45,8 +45,8 @@ func collect_colors(mount *mount, textureFileID int, casc CascGateway, t *thrott
 }
 
 func CollectTextures(mounts map[int]*mount, casc CascGateway, mountXDisplayDB DBFile, CreatureDisplayInfoDB DBFile) {
-    displayDB := mountXDisplayDB.GetIDs()
-    t := throttler.New(10, len(displayDB) * 3)
+	displayDB := mountXDisplayDB.GetIDs()
+	t := throttler.New(10, len(displayDB)*3)
 
 	for _, xDisplayID := range displayDB {
 		mountID := int(mountXDisplayDB.ReadInt(xDisplayID, 2))

@@ -326,6 +326,7 @@ ADDON.DB.Family = {
 [949] = true, -- Luminous Starseeker
 [1330] = true, -- Sunwarmed Furline
 [1531] = true, -- Wen Lo, the River's Edge
+[1576] = true, -- Jigglesworth Sr.
 },
 ["Sabers"] = {
 [26] = true, -- Striped Frostsaber
@@ -577,6 +578,7 @@ ADDON.DB.Family = {
 [1031] = true, -- Sinister Gladiator's Proto-Drake
 [1032] = true, -- Notorious Gladiator's Proto-Drake
 [1035] = true, -- Corrupted Gladiator's Proto-Drake
+[1679] = true, -- Frostbrood Proto-Wyrm
 },
 ["Stone Drakes"] = {
 [391] = true, -- Volcanic Stone Drake
@@ -1265,6 +1267,7 @@ ADDON.DB.Family = {
 [450] = true, -- Pandaren Kite
 [516] = true, -- Pandaren Kite
 [521] = true, -- Jade Pandaren Kite
+[1602] = true, -- Tuskarr Shoreglider
 },
 ["Mecha-suits"] = {
 [522] = true, -- Sky Golem

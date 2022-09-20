@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 SLASH_MOUNTJOURNALENHANCED1, SLASH_MOUNTJOURNALENHANCED2 = '/mountjournalenhanced', '/mje'
 function SlashCmdList.MOUNTJOURNALENHANCED(msg)
@@ -13,8 +13,6 @@ function SlashCmdList.MOUNTJOURNALENHANCED(msg)
     elseif msg == "reset size" then
         ADDON.UI:RestoreWindowSize()
     else
-        local title = GetAddOnMetadata(ADDON_NAME, "Title")
-        InterfaceOptionsFrame_OpenToCategory(title)
-        InterfaceOptionsFrame_OpenToCategory(title)
+        ADDON:OpenOptions()
     end
 end

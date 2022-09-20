@@ -90,7 +90,7 @@ familymap: [
     	{name: Lions, wcm: [Cats], icons: [lion, goldenking], ids: [421]},                     # Winged Guardian
     	{name: Manasabers, wcm: [Cats], icons: [suramarmount, nightborneracial], ids: [741]}, # Mystic Runesaber
     	{name: Mechanical Cats, wcm: [Mechanical Cats]},
-    	{name: Others, wcm: [Flamesabers, Panthara, Felsabers, Undead Cats], ids: [1330, 1531]}, # Sunwarmed Furline, Wen Lo
+    	{name: Others, wcm: [Flamesabers, Panthara, Felsabers, Undead Cats], ids: [1330, 1531, 1576]}, # Sunwarmed Furline, Wen Lo, Jigglesworth Sr.
     	{name: Sabers, wcm: [Cats], icons: [blackpanther, whitetiger, pinktiger, nightsaber2, saber3mount]},
     	{name: Stone Cats, wcm: [Flying Stone Cats], ids: [421]}, # Winged Guardian
     	{name: Tigers, wcm: [Cats, Undead Cats], icons: [monkmount, spectraltiger, siberiantiger, warnightsaber, jungletiger]},
@@ -285,7 +285,7 @@ familymap: [
 			{name: Hands, wcm: [Undead Hands]},
 			{name: Hovercraft, wcm: [Hovercraft]},
 			{name: Jet Aerial Units, wcm: [Jet Aerial Units]},
-			{name: Kites, wcm: [Kites]},
+			{name: Kites, wcm: [Kites, Gliders]},
 			{name: Mecha-suits, wcm: [Flying Mecha-suits]},
 			{name: Mechanical Animals, wcm: [Mechanical Scorpions, Mechanical Steeds, Mechanical Birds, Mechanical Cats, Mechanical Dragons]},
 			{name: Mechanostriders, wcm: [Mechanostriders]},
