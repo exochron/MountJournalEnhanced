@@ -33,7 +33,7 @@ local function CreateShopButton()
     frame:SetNormalAtlas('hud-microbutton-BStore-Up', true)
     frame:SetPushedAtlas('hud-microbutton-BStore-Down', true)
     frame:SetDisabledAtlas('hud-microbutton-BStore-Disabled', true)
-    frame:SetHighlightAtlas('hud-microbutton-highlight', true)
+    frame:SetHighlightAtlas('hud-microbutton-highlight')
 
     frame:HookScript("OnClick", function()
         SetStoreUIShown(true)

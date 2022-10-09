@@ -5,7 +5,7 @@ ADDON.Events:RegisterCallback("preloadUI", function()
         ADDON.Api:UseMount(ADDON.Api:GetSelected())
     end)
 
-    -- from https://www.townlong-yak.com/framexml/live/Blizzard_Collections/Blizzard_MountCollection.lua#692
+    -- from https://www.townlong-yak.com/framexml/live/Blizzard_Collections/Blizzard_MountCollection.lua#698
     MountJournal.MountButton:HookScript("OnEnter", function(self)
         local selectedMountID = ADDON.Api:GetSelected()
 

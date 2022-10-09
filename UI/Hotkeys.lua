@@ -1,25 +1,20 @@
 local _, ADDON = ...
 
--- UI:
--- * RightClick on Scroll buttons to scroll to the top/bottom
-
 -- Keyboard Shortcuts:
 -- UP: Select Previous Mount
 -- DOWN: Select Next Mount
 
-local function FetchCurrentSelectedIndex(totalDisplayed)
-    local target = ADDON.Api:GetSelected()
-
-    for i = 1, totalDisplayed do
-        local mountId = select(12, ADDON.Api:GetDisplayedMountInfo(i))
-        if mountId == target then
-            return i
-        end
+local function FetchCurrentSelectedIndex()
+    local target = MountJournal.selectedMountID
+    if target then
+        return MountJournal.ScrollBox:FindByPredicate(function(element)
+            return element.mountID == target
+        end)
     end
 end
 
 local function Select(step, totalDisplayed)
-    local currentIndex = FetchCurrentSelectedIndex(totalDisplayed)
+    local currentIndex = FetchCurrentSelectedIndex()
     local index
     if currentIndex == nil then
         index = 1
@@ -32,16 +27,21 @@ local function Select(step, totalDisplayed)
         end
     end
 
-    local mountId = select(12, ADDON.Api:GetDisplayedMountInfo(index))
-    ADDON.Api:SetSelected(mountId)
+    MountJournal.ScrollBox:ScrollToElementDataIndex(index)
+    local frame = MountJournal.ScrollBox:FindFrameByPredicate(function(frame)
+        return frame.index == index
+    end)
+    if frame then
+        frame:Click()
+    end
 end
 
 ADDON:RegisterUISetting('enableCursorKeys', true, ADDON.L.SETTING_CURSOR_KEYS)
 
 ADDON.Events:RegisterCallback("loadUI", function()
-    local scrollFrame = MountJournal.MJE_ListScrollFrame
+    local scrollFrame = MountJournal.ScrollBox
 
-    -- I had issues handling the input directly at the MountJournal frame. So I'm using ListScrollFrame instead.
+    -- I had issues handling the input directly at the MountJournal frame. So I'm using the ScrollFrame instead.
     scrollFrame:SetPropagateKeyboardInput(true)
     scrollFrame:EnableKeyboard(true)
     scrollFrame:HookScript("OnKeyDown", function(self, key)
@@ -60,18 +60,5 @@ ADDON.Events:RegisterCallback("loadUI", function()
             end
         end
         self:SetPropagateKeyboardInput(true)
-    end)
-
-    scrollFrame.scrollDown:RegisterForClicks("LeftButtonUp", "LeftButtonDown", "RightButtonUp");
-    scrollFrame.scrollDown:HookScript("OnClick", function(_, button, isDown)
-        if button == "RightButton" and not isDown then
-            scrollFrame.scrollBar:SetValue(scrollFrame.range)
-        end
-    end)
-    scrollFrame.scrollUp:RegisterForClicks("LeftButtonUp", "LeftButtonDown", "RightButtonUp");
-    scrollFrame.scrollUp:HookScript("OnClick", function(_, button, isDown)
-        if button == "RightButton" and not isDown then
-            scrollFrame.scrollBar:SetValue(0)
-        end
     end)
 end, "hotkeys")

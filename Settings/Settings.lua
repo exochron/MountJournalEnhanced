@@ -73,6 +73,7 @@ local function PrepareDefaults()
                 ground = true,
                 flying = true,
                 underwater = true,
+                dragonriding = true,
                 transform = true,
                 repair = true,
                 passenger = true,

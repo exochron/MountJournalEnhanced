@@ -55,11 +55,15 @@ local function OwnIndexToMountId(index)
 end
 
 function ADDON.Api:GetNumDisplayedMounts()
+    return #self:DisplayedMounts()
+end
+
+function ADDON.Api:DisplayedMounts()
     if nil == orderedMountIds then
         ADDON.Api:UpdateIndex()
     end
 
-    return #orderedMountIds
+    return orderedMountIds
 end
 
 function ADDON.Api:GetMountInfoByID(mountId)
@@ -110,10 +114,11 @@ function ADDON.Api:SetSelected(selectedMountID, selectedVariation)
     if selectedMount ~= selectedMountID then
         selectedMount = selectedMountID
         selectedCreature = selectedVariation or nil
+        MountJournal_SelectByMountID(selectedMountID)
         --MountJournal_HideMountDropdown();
-        ADDON.UI:UpdateMountList()
+        --ADDON.UI:UpdateMountList()
         ADDON.UI:UpdateMountDisplay()
-        ADDON.UI:ScrollToSelected()
+        -- ADDON.UI:ScrollToSelected()
     elseif selectedCreature ~= selectedVariation then
         selectedCreature = selectedVariation or nil
         ADDON.UI:UpdateMountDisplay(true)

@@ -93,7 +93,7 @@ local function checkTaintedTable(tbl, parentPath, currentList)
                 currentList[key] = nil
             end
 
-            if currentList[key] ~= true and type(val) == "table" and key ~= "parent" and key ~= "ModelScene" and key ~= "tooltipFrame" then
+            if currentList[key] ~= true and type(val) == "table" and key ~= "parent" and key ~= "ModelScene" and key ~= "tooltipFrame" and key ~= "tooltipFrame" and key ~= "ScrollBox"  and key ~= "ScrollBar" then
                 if currentList[key] == nil then
                     currentList[key] = {}
                 end

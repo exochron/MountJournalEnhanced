@@ -15,7 +15,7 @@ local function BuildResizeButton()
     button:SetNormalTexture('Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Up')
     button:SetHighlightTexture('Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Highlight')
     button:SetPushedTexture('Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Down')
-    button:SetDontSavePosition()
+    button:SetDontSavePosition(true)
 
     local ticker
     button:SetScript("OnMouseDown", function()
@@ -24,7 +24,7 @@ local function BuildResizeButton()
         ticker = C_Timer.NewTicker(0.05, function()
             local currentX, currentY = GetCursorPosition()
             local w, h = CollectionsJournal:GetSize()
-            local minW, minH = CollectionsJournal:GetMinResize()
+            local minW, minH = CollectionsJournal:GetResizeBounds()
             CollectionsJournal:SetSize(max(w - lastX + currentX, minW), max(h + lastY - currentY, minH))
             lastX = currentX
             lastY = currentY
@@ -46,7 +46,7 @@ ADDON.Events:RegisterCallback("loadUI", function()
 
     ADDON.UI:SaveSize(CJ)
     ADDON.UI:SavePoint(CJ)
-    CJ:SetMinResize(CJ:GetWidth(), CJ:GetHeight())
+    CJ:SetResizeBounds(CJ:GetWidth(), CJ:GetHeight())
     CJ:SetClampedToScreen(true)
 
     local handler = function(_, activate)

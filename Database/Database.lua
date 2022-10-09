@@ -1538,10 +1538,13 @@ ADDON.DB.Type = {
         typeIDs = { 230, 231, 241, 269, 284, 408 },
     },
     flying = {
-        typeIDs = { 247, 248, 398, 407 },
+        typeIDs = { 247, 248, 398, 402, 407 },
     },
     underwater = {
         typeIDs = { 231, 232, 254, 407 },
+    },
+    dragonriding = {
+        typeIDs = { 402 },
     },
     repair = {
         [280] = true, -- Traveler's Tundra Mammoth (Alliance)
