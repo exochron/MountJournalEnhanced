@@ -1,4 +1,10 @@
 
+### 2.20 pretty fly for a dragon guy
+- database / generator
+- api cleanup
+- sort dataprovider
+- sort/filter by rarity
+
 ### Next
 - personal favorites rework
 - special summon animation

@@ -1515,7 +1515,7 @@ ADDON.DB.Expansion = {
 
     [8] = { -- Shadowlands
         ["minID"] = 1330,
-        ["maxID"] = 999999,
+        ["maxID"] = 1576,
         [803] = true, -- Mastercraft Gravewing
         [1289] = true, -- Ensorcelled Everwyrm
         [1298] = true, -- Hopecrusher Gargon
@@ -1528,7 +1528,28 @@ ADDON.DB.Expansion = {
         [1307] = true, -- Sundancer
         [1309] = true, -- Chittering Animite
         [1310] = true, -- Horrid Dredwing
-    }
+        [1580] = true, -- Heartbond Lupine
+        [1581] = true, -- Nether-Gorged Greatwyrm
+        [1585] = true, -- Colossal Wraithbound Mawrat
+        [1587] = true, -- Zereth Overseer
+        [1597] = true, -- Grimhowl
+        [1599] = true, -- Eternal Gladiator's Soul Eater
+        [1600] = true, -- Elusive Emerald Hawkstrider
+        [1602] = true, -- Tuskarr Shoreglider
+        [1679] = true, -- Frostbrood Proto-Wyrm
+    },
+
+    [9] = { -- Dragonfly
+        ["minID"] = 1577,
+        ["maxID"] = 9999999999,
+        [1467] = true, -- Noble Elderhorn
+        [1469] = true, -- Magmashell
+        [1545] = true, -- Divine Kiss of Ohn'ahra
+        [1546] = true, -- Iskaara Trader's Ottuk
+        [1553] = true, -- Liberated Slyvern
+        [1556] = true, -- Tangled Dreamweaver
+        [1563] = true, -- Highland Drake
+    },
 }
 
 ADDON.DB.Type = {

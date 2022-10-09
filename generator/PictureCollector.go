@@ -52,7 +52,7 @@ func CollectTextures(mounts map[int]*mount, casc CascGateway, mountXDisplayDB DB
 		mountID := int(mountXDisplayDB.ReadInt(xDisplayID, 2))
 		creatureDisplayID := mountXDisplayDB.ReadInt(xDisplayID, 0)
 		if mount, ok := mounts[mountID]; ok {
-			for i := 0; i < 3; i++ {
+			for i := 0; i < 4; i++ {
 				textureFileID := CreatureDisplayInfoDB.ReadInt(creatureDisplayID, 24, i)
 				if textureFileID > 0 {
 					go collect_colors(mount, int(textureFileID), casc, t)
