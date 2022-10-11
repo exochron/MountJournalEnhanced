@@ -252,6 +252,7 @@ ADDON.Events:RegisterCallback("preloadUI", function()
         end
 
         local mountProvider = CreateDataProvider(data)
+        ADDON:UpdateProviderSort(mountProvider)
         orgSetDataProvider(self, mountProvider)
     end
     MountJournal.ScrollBox:SetDataProvider(CreateDataProvider(), ScrollBoxConstants.RetainScrollPosition);

@@ -40,9 +40,9 @@ local function MountIdToOriginalIndex(mountId, recursionCounter)
 end
 --endregion
 
-local orderedMountIds -- initialize with nil, so we know if it's not ready yet and not just empty
+local filteredMountIds -- initialize with nil, so we know if it's not ready yet and not just empty
 local function OwnIndexToMountId(index)
-    if nil == orderedMountIds then
+    if nil == filteredMountIds then
         ADDON.Api:UpdateIndex()
     end
 
@@ -51,7 +51,7 @@ local function OwnIndexToMountId(index)
         return 0
     end
 
-    return orderedMountIds[index] or nil
+    return filteredMountIds[index] or nil
 end
 
 function ADDON.Api:GetNumDisplayedMounts()
@@ -59,11 +59,11 @@ function ADDON.Api:GetNumDisplayedMounts()
 end
 
 function ADDON.Api:DisplayedMounts()
-    if nil == orderedMountIds then
+    if nil == filteredMountIds then
         ADDON.Api:UpdateIndex()
     end
 
-    return orderedMountIds
+    return filteredMountIds
 end
 
 function ADDON.Api:GetMountInfoByID(mountId)
@@ -102,10 +102,9 @@ function ADDON.Api:UpdateIndex(calledFromEvent)
     local list = ADDON:FilterMounts()
     --ADDON.Debug:ProfileFunction("filter", ADDON.FilterMounts, true)
 
-    if true ~= calledFromEvent or nil == orderedMountIds or #list ~= #orderedMountIds then
-        orderedMountIds = ADDON:SortMounts(list)
+    if true ~= calledFromEvent or nil == filteredMountIds or #list ~= #filteredMountIds then
+        filteredMountIds = list
         ADDON.Events:TriggerEvent("OnFilterUpdate")
-        --ADDON.Debug:ProfileFunction("sort", ADDON.SortMounts, true)
     end
 end
 

@@ -101,15 +101,12 @@ local function CompareNames(nameA, idA, nameB, idB)
     return TransliterateName(nameA, idA) < TransliterateName(nameB, idB)
 end
 
-local function mapMountType(mountId)
-    local _, _, _, _, mountType = C_MountJournal.GetMountInfoExtraByID(mountId)
-    for category, values in pairs(ADDON.DB.Type) do
-        if values.typeIDs and tContains(values.typeIDs, mountType) then
-            return category
-        end
+local RemappedTypes = {}
+for category, values in pairs(ADDON.DB.Type) do
+    for _, typeId in pairs(values.typeIDs or {}) do
+        RemappedTypes[typeId] = category
     end
 end
-
 local TrackingIndex = {
     usage_count = 1,
     last_usage = 2,
@@ -118,105 +115,154 @@ local TrackingIndex = {
     learned_date = 5,
 }
 
-function ADDON:SortMounts(ids)
-    local sortBy = ADDON.settings.sort.by or 'name'
-
-    local fanfareCount = C_MountJournal.GetNumMountsNeedingFanfare()
-    local collectedData = {}
-    for _, mountId in ipairs(ids) do
-        local name, _, _, _, isUsable, _, isFavorite, _, _, _, isCollected = ADDON.Api:GetMountInfoByID(mountId)
-
-        local needsFanfare = false
-        if isCollected and fanfareCount > 0 then
-            needsFanfare = C_MountJournal.NeedsFanfare(mountId)
-            if needsFanfare then
-                fanfareCount = fanfareCount - 1
-            end
-        end
-
-        local sortValue
-        if sortBy == 'type' then
-            sortValue = mapMountType(mountId)
-        elseif TrackingIndex[sortBy] then
-            sortValue = select(TrackingIndex[sortBy], ADDON:GetMountStatistics(mountId)) or 0
-        end
-
-        collectedData[mountId] = { name, isUsable, isFavorite, isCollected, needsFanfare, sortValue }
+local cache = {}
+local setTimer = false
+local function CacheMount(mountId)
+    if cache[mountId] then
+        return cache[mountId][1], cache[mountId][2], cache[mountId][3], cache[mountId][4], cache[mountId][5]
     end
 
-    table.sort(ids, function(mountIdA, mountIdB)
-        if mountIdA == mountIdB then
-            return false
-        end
+    if not setTimer then
+        C_Timer.After(0.1, function()
+            cache = {}
+            setTimer = false
+        end)
+        setTimer = true
+    end
 
-        local doNotDescend = false
-        local result = false
+    local name, _, _, _, isUsable, _, isFavorite, _, _, _, isCollected = ADDON.Api:GetMountInfoByID(mountId)
+    local needsFanfare = isCollected and C_MountJournal.NeedsFanfare(mountId)
 
-        local nameA = collectedData[mountIdA][1]
-        local isUsableA = collectedData[mountIdA][2]
-        local isFavoriteA = collectedData[mountIdA][3]
-        local isCollectedA = collectedData[mountIdA][4]
-        local needsFanfareA = collectedData[mountIdA][5]
+    cache[mountId] = { name, isUsable, isFavorite, isCollected, needsFanfare }
 
-        local nameB = collectedData[mountIdB][1]
-        local isUsableB = collectedData[mountIdB][2]
-        local isFavoriteB = collectedData[mountIdB][3]
-        local isCollectedB = collectedData[mountIdB][4]
-        local needsFanfareB = collectedData[mountIdB][5]
+    return name, isUsable, isFavorite, isCollected, needsFanfare
+end
+local function CacheType(mountId)
+    if not cache[mountId][6] then
+        cache[mountId][6] = select(5, C_MountJournal.GetMountInfoExtraByID(mountId))
+    end
 
-        if needsFanfareA ~= needsFanfareB then
-            return needsFanfareA and not needsFanfareB
-        end
+    return cache[mountId][6]
+end
 
-        if ADDON.settings.sort.favoritesOnTop and isFavoriteA ~= isFavoriteB then
-            return isFavoriteA and not isFavoriteB
-        end
-        if ADDON.settings.sort.unusableToBottom and isUsableA ~= isUsableB then
-            return isUsableA and not isUsableB
-        end
-        if ADDON.settings.sort.unownedOnBottom and isCollectedA ~= isCollectedB then
-            return isCollectedA and not isCollectedB
-        end
+local function CheckGeneral(mountIdA, mountIdB)
+    if mountIdA == mountIdB then
+        return false
+    end
 
-        if sortBy == 'name' then
-            result = CompareNames(nameA, mountIdA, nameB, mountIdB)
-        elseif sortBy == 'type' then
-            local mountTypeA = collectedData[mountIdA][6]
-            local mountTypeB = collectedData[mountIdB][6]
+    local _, isUsableA, isFavoriteA, isCollectedA, needsFanfareA = CacheMount(mountIdA)
+    local _, isUsableB, isFavoriteB, isCollectedB, needsFanfareB = CacheMount(mountIdB)
 
-            if mountTypeA == mountTypeB then
-                result = CompareNames(nameA, mountIdA, nameB, mountIdB)
-                doNotDescend = true
-            elseif mountTypeA == "flying" then
-                result = true
-            elseif mountTypeA == "ground" then
-                result = (mountTypeB == "underwater")
-            elseif mountTypeA == "underwater" then
-                result = false
-            end
+    if needsFanfareA ~= needsFanfareB then
+        return needsFanfareA and not needsFanfareB
+    end
 
-        elseif sortBy == 'expansion' then
-            result = mountIdA < mountIdB
+    if ADDON.settings.sort.favoritesOnTop and isFavoriteA ~= isFavoriteB then
+        return isFavoriteA and not isFavoriteB
+    end
+    if ADDON.settings.sort.unusableToBottom and isUsableA ~= isUsableB then
+        return isUsableA and not isUsableB
+    end
+    if ADDON.settings.sort.unownedOnBottom and isCollectedA ~= isCollectedB then
+        return isCollectedA and not isCollectedB
+    end
+end
 
-        elseif TrackingIndex[sortBy] then
-            local valueA = collectedData[mountIdA][6]
-            local valueB = collectedData[mountIdB][6]
-            if valueA == valueB then
-                result = CompareNames(nameA, mountIdA, nameB, mountIdB)
-                doNotDescend = true
-            elseif sortBy == 'learned_date' or sortBy == 'last_usage' then
-                result = valueA > valueB
-            else
-                result = valueA < valueB
-            end
-        end
+local function CheckDescending(result, doNotDescend)
+    if ADDON.settings.sort.descending and not doNotDescend then
+        result = not result
+    end
 
-        if ADDON.settings.sort.descending and not doNotDescend then
-            result = not result
-        end
+    return result
+end
 
-        return result
-    end)
+local function FallbackByName(mountIdA, mountIdB)
+    local nameA = CacheMount(mountIdA)
+    local nameB = CacheMount(mountIdB)
+    return CompareNames(nameA, mountIdA, nameB, mountIdB)
+end
 
-    return ids
+local function SortByName(mountA, mountB)
+    local mountIdA, mountIdB = mountA.mountID, mountB.mountID
+    local general = CheckGeneral(mountIdA, mountIdB)
+    if general ~= nil then
+        return general
+    end
+
+    return CheckDescending(FallbackByName(mountIdA, mountIdB))
+end
+
+local function SortByExpansion(mountA, mountB)
+    local mountIdA, mountIdB = mountA.mountID, mountB.mountID
+    local general = CheckGeneral(mountIdA, mountIdB)
+    if general ~= nil then
+        return general
+    end
+
+    return CheckDescending(mountIdA < mountIdB)
+end
+
+local function SortByType(mountA, mountB)
+    local mountIdA, mountIdB = mountA.mountID, mountB.mountID
+    local general = CheckGeneral(mountIdA, mountIdB)
+    if general ~= nil then
+        return general
+    end
+
+    local mountTypeA = RemappedTypes[CacheType(mountIdA)] or nil
+    local mountTypeB = RemappedTypes[CacheType(mountIdB)] or nil
+
+    local result = false
+    if mountTypeA == mountTypeB then
+        return CheckDescending(FallbackByName(mountIdA, mountIdB), true)
+    elseif mountTypeA == "dragonriding" then
+        result = (mountTypeB ~= "flying")
+    elseif mountTypeA == "flying" then
+        result = (mountTypeB ~= "dragonriding")
+    elseif mountTypeA == "ground" then
+        result = (mountTypeB == "underwater")
+    elseif mountTypeA == "underwater" then
+        result = false
+    end
+
+    return CheckDescending(result)
+end
+
+local function SortByTracking(mountA, mountB)
+    local mountIdA, mountIdB = mountA.mountID, mountB.mountID
+    local general = CheckGeneral(mountIdA, mountIdB)
+    if general ~= nil then
+        return general
+    end
+
+    local sortBy = ADDON.settings.sort.by
+    local result = false
+    local valueA = select(TrackingIndex[sortBy], ADDON:GetMountStatistics(mountIdA)) or 0
+    local valueB = select(TrackingIndex[sortBy], ADDON:GetMountStatistics(mountIdB)) or 0
+    if valueA == valueB then
+        return CheckDescending(FallbackByName(mountIdA, mountIdB), true)
+    elseif sortBy == 'learned_date' or sortBy == 'last_usage' then
+        result = valueA > valueB
+    else
+        result = valueA < valueB
+    end
+
+    return CheckDescending(result)
+end
+
+function ADDON:UpdateProviderSort(dataProvider)
+    dataProvider = dataProvider or MountJournal.ScrollBox:GetView():GetDataProvider()
+    local sortBy = ADDON.settings.sort.by
+    local func
+    if sortBy == 'type' then
+        func = SortByType
+    elseif sortBy == 'expansion' then
+        func = SortByExpansion
+    elseif TrackingIndex[sortBy] then
+        func = SortByTracking
+    else
+        func = SortByName
+    end
+
+    dataProvider:SetSortComparator(func)
 end
