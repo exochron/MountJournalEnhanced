@@ -13,9 +13,11 @@ ADDON.Events:RegisterCallback("preloadUI", function()
             local mountID, mountVariation = ADDON.Api:GetSelected()
             if mountVariation then
                 local creatureData = C_MountJournal.GetMountAllCreatureDisplayInfoByID(mountID)
-                local variationDisplayID = creatureData[mountVariation].creatureDisplayID or nil
-                if variationDisplayID then
-                    self:SetModelByCreatureDisplayID(variationDisplayID, flag, nil, nil, nil, true)
+                if creatureData[mountVariation] then
+                    local variationDisplayID = creatureData[mountVariation].creatureDisplayID or nil
+                    if variationDisplayID then
+                        self:SetModelByCreatureDisplayID(variationDisplayID, flag, nil, nil, nil, true)
+                    end
                 end
             end
         end

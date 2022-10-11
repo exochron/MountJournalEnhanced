@@ -28,9 +28,7 @@ local function Select(step, totalDisplayed)
     end
 
     MountJournal.ScrollBox:ScrollToElementDataIndex(index)
-    local frame = MountJournal.ScrollBox:FindFrameByPredicate(function(frame)
-        return frame.index == index
-    end)
+    local frame = MountJournal.ScrollBox:FindFrame(MountJournal.ScrollBox:Find(index))
     if frame then
         frame:Click()
     end
@@ -47,7 +45,7 @@ ADDON.Events:RegisterCallback("loadUI", function()
     scrollFrame:HookScript("OnKeyDown", function(self, key)
         local totalDisplayed
         if (key == "DOWN" or key == "UP") and ADDON.settings.ui.enableCursorKeys and not IsModifierKeyDown() then
-            totalDisplayed = ADDON.Api:GetNumDisplayedMounts()
+            totalDisplayed = MountJournal.ScrollBox:GetDataProvider():GetSize()
             if totalDisplayed > 0 then
                 local step = 1
                 if key == "UP" then
