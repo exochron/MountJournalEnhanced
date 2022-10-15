@@ -78,6 +78,13 @@ local function PrepareDefaults()
                 repair = true,
                 passenger = true,
             },
+            rarity = {
+                [Enum.ItemQuality.Common] = true,
+                [Enum.ItemQuality.Uncommon] = true,
+                [Enum.ItemQuality.Rare] = true,
+                [Enum.ItemQuality.Epic] = true,
+                [Enum.ItemQuality.Legendary] = true,
+            },
             family = {},
             expansion = {},
             hidden = false,

@@ -17,6 +17,7 @@ local SETTING_HIDDEN = "hidden"
 local SETTING_HIDDEN_INGAME = "hiddenIngame"
 local SETTING_SORT = "sort"
 local SETTING_COLOR = "color"
+local SETTING_RARITY = "rarity"
 
 function ADDON.UI.FDD:UpdateResetVisibility()
     if MountJournalFilterButton.ResetButton then
@@ -160,6 +161,7 @@ local function InitializeFilterDropDown(_, level)
         UIDropDownMenu_AddButton(CreateFilterCategory(L["Family"], SETTING_FAMILY), level)
         UIDropDownMenu_AddButton(CreateFilterCategory(EXPANSION_FILTER_TEXT, SETTING_EXPANSION), level)
         UIDropDownMenu_AddButton(CreateFilterCategory(COLOR, SETTING_COLOR), level)
+        UIDropDownMenu_AddButton(CreateFilterCategory(RARITY, SETTING_RARITY), level)
 
         UIDropDownMenu_AddSpace(level)
 
@@ -217,6 +219,18 @@ local function InitializeFilterDropDown(_, level)
         end
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_COLOR then
         ADDON.UI.FDD:AddColorMenu(level)
+    elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_RARITY then
+        local settings = ADDON.settings.filter[SETTING_RARITY]
+        AddCheckAllAndNoneInfo(settings, level)
+        local addButton = function(quality, suffix)
+            local text = "|c"..select(4, GetItemQualityColor(quality)).._G["ITEM_QUALITY"..quality.."_DESC"].."|r".." ("..suffix..")"
+            UIDropDownMenu_AddButton(CreateFilterInfo(text, quality, settings), level)
+        end
+        addButton(Enum.ItemQuality.Legendary, "<1%")
+        addButton(Enum.ItemQuality.Epic, "<10%")
+        addButton(Enum.ItemQuality.Rare, "<20%")
+        addButton(Enum.ItemQuality.Uncommon, "<50%")
+        addButton(Enum.ItemQuality.Common, ">=50%")
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_SORT then
         ADDON.UI.FDD:AddSortMenu(level)
     end

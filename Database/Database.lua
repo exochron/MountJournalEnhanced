@@ -1530,6 +1530,7 @@ ADDON.DB.Expansion = {
         [1310] = true, -- Horrid Dredwing
         [1580] = true, -- Heartbond Lupine
         [1581] = true, -- Nether-Gorged Greatwyrm
+        [1584] = true, -- Colossal Plaguespew Mawrat
         [1585] = true, -- Colossal Wraithbound Mawrat
         [1587] = true, -- Zereth Overseer
         [1597] = true, -- Grimhowl

@@ -32,7 +32,7 @@ function ADDON.UI.FDD:AddSortMenu(level)
     UIDropDownMenu_AddButton(CreateFilterRadio(NAME, 'name'), level)
     UIDropDownMenu_AddButton(CreateFilterRadio(TYPE, 'type'), level)
     UIDropDownMenu_AddButton(CreateFilterRadio(EXPANSION_FILTER_TEXT, 'expansion'), level)
-    UIDropDownMenu_AddButton(CreateFilterRadio(L.SORT_BY_RARITY, 'rarity'), level)
+    UIDropDownMenu_AddButton(CreateFilterRadio(RARITY, 'rarity'), level)
 
     local trackingEnabled = ADDON.settings.trackUsageStats
     local info = CreateFilterRadio(L.SORT_BY_USAGE_COUNT, 'usage_count')

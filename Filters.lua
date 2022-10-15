@@ -268,6 +268,20 @@ local function FilterByType(mountID, preparedSettings)
     return result
 end
 
+local function FilterByRarity(mountID, allSettings)
+    local rarity = ADDON.DB.Rarities[mountID]
+
+    if rarity == nil then
+        return allSettings == false
+    end
+
+    return (rarity < 1.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Legendary])
+        or (rarity >= 1.0 and rarity < 10.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Epic])
+        or (rarity >= 10.0 and rarity < 20.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Rare])
+        or (rarity >= 20.0 and rarity < 50.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Uncommon])
+        or (rarity >= 50.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Common])
+end
+
 function ADDON:FilterMounts()
     local result = {}
     local ids = C_MountJournal.GetMountIDs()
@@ -308,6 +322,8 @@ function ADDON:FilterMounts()
             preparedExpansion = prepareSettings(ADDON.settings.filter.expansion, ExpansionDB)
         end
 
+        local allSettingsRarity = CheckAllSettings(ADDON.settings.filter.rarity)
+
         for _, mountId in ipairs(ids) do
             local _, spellId, _, _, isUsable, sourceType, isFavorite, isFaction, faction, shouldHideOnChar, isCollected = ADDON.Api:GetMountInfoByID(mountId)
             if FilterUserHiddenMounts(spellId)
@@ -322,6 +338,7 @@ function ADDON:FilterMounts()
                     and (allSettingsType or FilterByType(mountId, preparedTypes))
                     and (allSettingsFamily or FilterByFamily(mountId, preparedFamily))
                     and (allSettingsExpansion or FilterByExpansion(mountId, preparedExpansion))
+                    and (allSettingsRarity or FilterByRarity(mountId, allSettingsRarity))
                     and FilterByColor(mountId)
             then
                 result[#result + 1] = mountId

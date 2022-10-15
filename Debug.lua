@@ -117,8 +117,9 @@ ADDON.Events:RegisterCallback("postloadUI", function()
     if ADDON.settings.ui.debugMode then
         testDatabase()
 
-        checkForTaint()
-        C_Timer.NewTicker(1, checkForTaint)
+        -- disable taint checks for now
+        --checkForTaint()
+        --C_Timer.NewTicker(1, checkForTaint)
     end
 end, "debug")
 
