@@ -86,9 +86,10 @@ local function PrepareDefaults()
         },
 
         sort = {
-            by = 'name', -- name|type|expansion
+            by = 'name', -- name|type|expansion|rarity|tracking
             descending = false,
             favoritesOnTop = true,
+            dragonridingOnTop = true,
             unusableToBottom = false,
             unownedOnBottom = true,
         },

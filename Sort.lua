@@ -119,7 +119,7 @@ local cache = {}
 local setTimer = false
 local function CacheMount(mountId)
     if cache[mountId] then
-        return cache[mountId][1], cache[mountId][2], cache[mountId][3], cache[mountId][4], cache[mountId][5]
+        return cache[mountId][1], cache[mountId][2], cache[mountId][3], cache[mountId][4], cache[mountId][5], cache[mountId][6]
     end
 
     if not setTimer then
@@ -130,12 +130,12 @@ local function CacheMount(mountId)
         setTimer = true
     end
 
-    local name, _, _, _, isUsable, _, isFavorite, _, _, _, isCollected = ADDON.Api:GetMountInfoByID(mountId)
+    local name, _, _, _, isUsable, _, isFavorite, _, _, _, isCollected, _, isForDragonriding = ADDON.Api:GetMountInfoByID(mountId)
     local needsFanfare = isCollected and C_MountJournal.NeedsFanfare(mountId)
 
-    cache[mountId] = { name, isUsable, isFavorite, isCollected, needsFanfare }
+    cache[mountId] = { name, isUsable, isFavorite, isCollected, needsFanfare, isForDragonriding }
 
-    return name, isUsable, isFavorite, isCollected, needsFanfare
+    return name, isUsable, isFavorite, isCollected, needsFanfare, isForDragonriding
 end
 local function CacheType(mountId)
     if not cache[mountId][6] then
@@ -195,14 +195,28 @@ local function SortByTracking(mountIdA, mountIdB)
     return CheckDescending(result)
 end
 
+local function SortByRarity(mountIdA, mountIdB)
+    local rarityA = ADDON.DB.Rarities[mountIdA] or nil
+    local rarityB = ADDON.DB.Rarities[mountIdB] or nil
+    if nil ~= rarityA and nil ~= rarityB then
+        return CheckDescending(rarityA > rarityB)
+    elseif nil ~= rarityA then
+        return CheckDescending(true, true)
+    elseif nil ~= rarityB then
+        return CheckDescending(false, true)
+    end
+
+    return CheckDescending(FallbackByName(mountIdA, mountIdB), true)
+end
+
 function ADDON:SortHandler(mountA, mountB)
     local mountIdA, mountIdB = mountA.mountID, mountB.mountID
     if mountIdA == mountIdB then
         return false
     end
 
-    local _, isUsableA, isFavoriteA, isCollectedA, needsFanfareA = CacheMount(mountIdA)
-    local _, isUsableB, isFavoriteB, isCollectedB, needsFanfareB = CacheMount(mountIdB)
+    local _, isUsableA, isFavoriteA, isCollectedA, needsFanfareA, isForDragonridingA = CacheMount(mountIdA)
+    local _, isUsableB, isFavoriteB, isCollectedB, needsFanfareB, isForDragonridingB = CacheMount(mountIdB)
 
     if needsFanfareA ~= needsFanfareB then
         return needsFanfareA and not needsFanfareB
@@ -217,12 +231,19 @@ function ADDON:SortHandler(mountA, mountB)
     if ADDON.settings.sort.unownedOnBottom and isCollectedA ~= isCollectedB then
         return isCollectedA and not isCollectedB
     end
+    if ADDON.settings.sort.dragonridingOnTop and isForDragonridingA ~= isForDragonridingB then
+        return isForDragonridingA and not isForDragonridingB
+    end
 
     local sortBy = ADDON.settings.sort.by
     if sortBy == 'type' then
         return SortByType(mountIdA, mountIdB)
     elseif sortBy == 'expansion' then
         return CheckDescending(mountIdA < mountIdB)
+    elseif sortBy == 'expansion' then
+        return CheckDescending(mountIdA < mountIdB)
+    elseif sortBy == 'rarity' then
+        return SortByRarity(mountIdA, mountIdB)
     elseif TrackingIndex[sortBy] then
         return SortByTracking(mountIdA, mountIdB)
     else
