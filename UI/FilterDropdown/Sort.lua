@@ -10,7 +10,7 @@ local function CreateFilterRadio(text, filterValue)
     end
     info.func = function(_, arg1, arg2)
         arg1["by"] = arg2
-        ADDON:UpdateProviderSort()
+        MountJournal.ScrollBox:GetDataProvider():Sort()
         UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
     end
 
@@ -62,7 +62,7 @@ function ADDON.UI.FDD:AddSortMenu(level)
     info.keepShownOnClick = false
     info.func = function()
         ADDON:ResetSortSettings()
-        ADDON:UpdateProviderSort()
+        MountJournal.ScrollBox:GetDataProvider():Sort()
     end
     UIDropDownMenu_AddButton(info, level)
 end

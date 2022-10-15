@@ -43,8 +43,7 @@ function ADDON.UI.FDD:CreateFilterInfo(text, filterKey, filterSettings, toggleBu
         end
         info.func = function(self, arg1, arg2, value)
             arg1[filterKey] = arg2 or value
-            ADDON.Api:UpdateIndex()
-            ADDON.UI:UpdateMountList()
+            ADDON:FilterMounts()
             UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
             ADDON.UI.FDD:UpdateResetVisibility()
 
@@ -91,8 +90,7 @@ function ADDON.UI.FDD:SetAllSubFilters(settings, switch)
     end
 
     UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
-    ADDON.Api:UpdateIndex()
-    ADDON.UI:UpdateMountList()
+    ADDON:FilterMounts()
     ADDON.UI.FDD:UpdateResetVisibility()
 end
 
@@ -240,8 +238,7 @@ ADDON.Events:RegisterCallback("loadUI", function()
     end)
     MountJournalFilterButton.resetFunction = function()
         ADDON:ResetFilterSettings()
-        ADDON.Api:UpdateIndex()
-        ADDON.UI:UpdateMountList()
+        ADDON:FilterMounts()
     end
     ADDON.UI.FDD:UpdateResetVisibility()
 end, "filter dropdown")

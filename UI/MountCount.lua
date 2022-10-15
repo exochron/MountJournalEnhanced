@@ -64,7 +64,8 @@ local function CreateCharacterMountCount()
         end
 
         if ADDON.settings.ui.showPersonalCount then
-            local displayCount = ADDON.Api:GetNumDisplayedMounts()
+            local dataProvider = MountJournal.ScrollBox:GetDataProvider()
+            local displayCount = dataProvider:GetSize()
 
             local personal, personalTotal, owned, totalCount = count()
             frame.uniqueCount:SetText(generateText(personal, personalTotal))
@@ -74,12 +75,11 @@ local function CreateCharacterMountCount()
                 MountJournal.MountCount.Count.SetText(MountJournal.MountCount.Count, generateText(owned, totalCount), nil, nil, nil, true)
             else
                 local collectedFilter = 0
-                for index = 1, displayCount do
-                    local _, _, _, _, _, _, _, _, _, _, isCollected = ADDON.Api:GetDisplayedMountInfo(index)
-                    if isCollected then
+                dataProvider:ForEach(function(data)
+                    if select(11, C_MountJournal.GetMountInfoByID(data.mountID)) then -- isCollected
                         collectedFilter = collectedFilter + 1
                     end
-                end
+                end)
                 MountJournal.MountCount.Label:SetText(FILTER)
                 MountJournal.MountCount.Count.SetText(MountJournal.MountCount.Count, generateText(collectedFilter, displayCount), nil, nil, nil, true)
             end

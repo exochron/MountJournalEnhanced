@@ -220,10 +220,6 @@ function ADDON.UI:UpdateMountList()
     MountJournal_UpdateMountList()
 end
 
-function ADDON.UI:ScrollToSelected()
-    --TODO
-end
-
 ADDON.Events:RegisterCallback("preloadUI", function()
     MountJournal.ScrollBox:ForEachFrame(SetupExtras)
     ScrollUtil.AddAcquiredFrameCallback(MountJournal.ScrollBox, function(button, _, new)
@@ -237,25 +233,15 @@ ADDON.Events:RegisterCallback("preloadUI", function()
         UpdateExtras(button, elementData)
     end
 
-    local view = MountJournal.ScrollBox:GetView()
-    local orgSetDataProvider = view.SetDataProvider
-    view.SetDataProvider = function(self, orgProvider)
-        local dragonridingMounts = MountJournal.needsDragonridingHelpTip and C_MountJournal.GetCollectedDragonridingMounts() or nil
-
-        local data = {}
-        for index, mountID in ipairs(ADDON.Api:DisplayedMounts()) do
-            table.insert(data, { index = index, mountID = mountID })
-            if dragonridingMounts and tContains(dragonridingMounts, mountID) then
-                MountJournal.dragonridingHelpTipMountIndex = index;
-                dragonridingMounts = nil
-            end
-        end
-
-        local mountProvider = CreateDataProvider(data)
-        ADDON:UpdateProviderSort(mountProvider)
-        orgSetDataProvider(self, mountProvider)
-    end
-    MountJournal.ScrollBox:SetDataProvider(CreateDataProvider(), ScrollBoxConstants.RetainScrollPosition);
+    -- inject fixed data provider
+    local dataProvider = CreateDataProvider()
+    dataProvider:SetSortComparator(function(a,b) return ADDON:SortHandler(a,b) end)
+    dataProvider:RegisterCallback("OnSizeChanged", function()
+        ADDON.Events:TriggerEvent("OnFilterUpdate")
+    end, ADDON_NAME)
+    MountJournal.ScrollBox:SetDataProvider(dataProvider, ScrollBoxConstants.RetainScrollPosition)
+    MountJournal.ScrollBox.SetDataProvider = function() end
+    ADDON:FilterMounts()
 
     -- TODO: ElvUI okay?
 end, "enhanced list")

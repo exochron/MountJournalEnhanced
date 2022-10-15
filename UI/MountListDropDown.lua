@@ -40,15 +40,13 @@ local function InitializeMountOptionsMenu(sender, level)
             info.text = BATTLE_PET_UNFAVORITE
             info.func = function()
                 ADDON.Api:SetIsFavoriteByID(menuMountId, false)
-                ADDON.Api:UpdateIndex()
-                ADDON.UI:UpdateMountList()
+                ADDON:FilterMounts()
             end
         else
             info.text = BATTLE_PET_FAVORITE
             info.func = function()
                 ADDON.Api:SetIsFavoriteByID(menuMountId, true)
-                ADDON.Api:UpdateIndex()
-                ADDON.UI:UpdateMountList()
+                ADDON:FilterMounts()
             end
         end
 
@@ -62,8 +60,7 @@ local function InitializeMountOptionsMenu(sender, level)
                 text = SHOW,
                 func = function()
                     ADDON.settings.hiddenMounts[spellId] = nil
-                    ADDON.Api:UpdateIndex()
-                    ADDON.UI:UpdateMountList()
+                    ADDON:FilterMounts()
                 end
             }
         else
@@ -72,8 +69,7 @@ local function InitializeMountOptionsMenu(sender, level)
                 text = HIDE,
                 func = function()
                     ADDON.settings.hiddenMounts[spellId] = true
-                    ADDON.Api:UpdateIndex()
-                    ADDON.UI:UpdateMountList()
+                    ADDON:FilterMounts()
                 end,
             }
         end

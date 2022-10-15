@@ -1622,7 +1622,7 @@ ADDON.DB.Ignored = {
     [484] = true, -- Black Riding Yak
     [485] = true, -- Brown Riding Yak
 
-    -- ghost
+    -- ghost (mountType=242)
     [238] = true, -- Swift Spectral Gryphon
     [776] = true, -- Swift Spectral Rylak
     [934] = true, -- Swift Spectral Hippogryph
@@ -1630,6 +1630,7 @@ ADDON.DB.Ignored = {
     [1270] = true, -- Swift Spectral Magnetocraft
     [1271] = true, -- Swift Spectral Armored Gryphon
     [1272] = true, -- Swift Spectral Pterrordax
+    [1607] = true, -- Swift Spectral Drake
 
     [1578] = true, -- DNT Test Mount JZB
 }

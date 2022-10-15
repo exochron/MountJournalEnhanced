@@ -25,6 +25,7 @@ ignored: [
 	1270, # Swift Spectral Magnetocraft (inv_mount_hippogryph_arcane)
 	1271, # Swift Spectral Armored Gryphon (inv_mount_hippogryph_arcane)
 	1272, # Swift Spectral Pterrordax (inv_mount_hippogryph_arcane)
+	1607, # Swift Spectral Drake
 ]
 
 # family based on http://www.warcraftmounts.com/gallery.php + https://wow.gamepedia.com/Beast

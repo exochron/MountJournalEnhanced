@@ -40,43 +40,11 @@ local function MountIdToOriginalIndex(mountId, recursionCounter)
 end
 --endregion
 
-local filteredMountIds -- initialize with nil, so we know if it's not ready yet and not just empty
-local function OwnIndexToMountId(index)
-    if nil == filteredMountIds then
-        ADDON.Api:UpdateIndex()
-    end
-
-    -- index=0 => SummonRandomButton
-    if index == 0 then
-        return 0
-    end
-
-    return filteredMountIds[index] or nil
-end
-
-function ADDON.Api:GetNumDisplayedMounts()
-    return #self:DisplayedMounts()
-end
-
-function ADDON.Api:DisplayedMounts()
-    if nil == filteredMountIds then
-        ADDON.Api:UpdateIndex()
-    end
-
-    return filteredMountIds
-end
-
 function ADDON.Api:GetMountInfoByID(mountId)
     local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h = C_MountJournal.GetMountInfoByID(mountId)
     isUsable = isUsable and IsUsableSpell(spellId)
 
     return creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, a, b, c, d, e, f, g, h
-end
-function ADDON.Api:GetDisplayedMountInfo(index)
-    local mappedMountId = OwnIndexToMountId(index)
-    if mappedMountId then
-        return ADDON.Api:GetMountInfoByID(mappedMountId)
-    end
 end
 function ADDON.Api:PickupByID(mountId, ...)
     local index = MountIdToOriginalIndex(mountId)
@@ -98,16 +66,6 @@ function ADDON.Api:SetIsFavoriteByID(mountId, ...)
     end
 end
 
-function ADDON.Api:UpdateIndex(calledFromEvent)
-    local list = ADDON:FilterMounts()
-    --ADDON.Debug:ProfileFunction("filter", ADDON.FilterMounts, true)
-
-    if true ~= calledFromEvent or nil == filteredMountIds or #list ~= #filteredMountIds then
-        filteredMountIds = list
-        ADDON.Events:TriggerEvent("OnFilterUpdate")
-    end
-end
-
 local selectedMount, selectedCreature
 function ADDON.Api:SetSelected(selectedMountID, selectedVariation)
     if selectedMount ~= selectedMountID then
@@ -117,7 +75,6 @@ function ADDON.Api:SetSelected(selectedMountID, selectedVariation)
         --MountJournal_HideMountDropdown();
         --ADDON.UI:UpdateMountList()
         ADDON.UI:UpdateMountDisplay()
-        -- ADDON.UI:ScrollToSelected()
     elseif selectedCreature ~= selectedVariation then
         selectedCreature = selectedVariation or nil
         ADDON.UI:UpdateMountDisplay(true)
