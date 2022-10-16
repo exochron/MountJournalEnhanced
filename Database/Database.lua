@@ -1540,11 +1540,12 @@ ADDON.DB.Expansion = {
         [1679] = true, -- Frostbrood Proto-Wyrm
     },
 
-    [9] = { -- Dragonfly
+    [9] = { -- Dragonflight
         ["minID"] = 1577,
         ["maxID"] = 9999999999,
         [1467] = true, -- Noble Elderhorn
         [1469] = true, -- Magmashell
+        [1478] = true, -- Skyskin Hornstrider
         [1545] = true, -- Divine Kiss of Ohn'ahra
         [1546] = true, -- Iskaara Trader's Ottuk
         [1553] = true, -- Liberated Slyvern

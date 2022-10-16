@@ -78,6 +78,10 @@ ADDON.DB.Family = {
 [600] = true, -- Dread Raven
 [753] = true, -- Corrupted Dreadwing
 },
+["Eagle"] = {
+[1672] = true, -- Zenet Hatchling
+[1545] = true, -- Divine Kiss of Ohn'ahra
+},
 ["Hawkstriders"] = {
 [146] = true, -- Swift Pink Hawkstrider
 [152] = true, -- Red Hawkstrider
@@ -139,6 +143,8 @@ ADDON.DB.Family = {
 [429] = true, -- Swift Forest Strider
 [430] = true, -- Swift Springstrider
 [431] = true, -- Swift Lovebird
+[1478] = true, -- Skyskin Hornstrider
+[1643] = true, -- Restless Hornstrider
 },
 ["Talonbirds"] = {
 [185] = true, -- Raven Lord
@@ -295,6 +301,12 @@ ADDON.DB.Family = {
 [1222] = true, -- Vulpine Familiar
 [1393] = true, -- Wild Glimmerfur Prowler
 },
+["Ottuk"] = {
+[1546] = true, -- Iskaara Trader's Ottuk
+[1656] = true, -- Splish-Splash
+[1657] = true, -- Brown Scouting Ottuk
+[1658] = true, -- Ivory Trader's Ottuk
+},
 },
 ["Cats"] = {
 ["Lions"] = {
@@ -347,6 +359,8 @@ ADDON.DB.Family = {
 [1205] = true, -- Kaldorei Nightsaber
 [1204] = true, -- Sandy Nightsaber
 [1216] = true, -- Priestess' Moonsaber
+[1688] = true, -- Vicious Sabertooth
+[1689] = true, -- Vicious Sabertooth
 },
 ["Stone Cats"] = {
 [421] = true, -- Winged Guardian
@@ -536,6 +550,7 @@ ADDON.DB.Family = {
 [1240] = true, -- Obsidian Worldbreaker
 [1265] = true, -- Uncorrupted Voidwing
 [1556] = true, -- Tangled Dreamweaver
+[1660] = true, -- Crimson Gladiator's Drake
 },
 ["Grand Drakes"] = {
 [442] = true, -- Blazing Drake
@@ -723,6 +738,7 @@ ADDON.DB.Family = {
 [527] = true, -- Grand Armored Wyvern
 [529] = true, -- Grand Wyvern
 [1267] = true, -- Alabaster Thunderwing
+[1553] = true, -- Liberated Slyvern
 },
 },
 ["Fish"] = {
@@ -785,7 +801,6 @@ ADDON.DB.Family = {
 [363] = true, -- Invincible
 [376] = true, -- Celestial Steed
 [439] = true, -- Tyrael's Charger
-[523] = true, -- Swift Windsteed
 [532] = true, -- Ghastly Charger
 [547] = true, -- Hearthsteed
 [454] = true, -- Cindermane Charger
@@ -811,6 +826,13 @@ ADDON.DB.Family = {
 [1413] = true, -- Dauntless Duskrunner
 [1426] = true, -- Ascended Skymane
 [1511] = true, -- Maelie, the Wanderer
+[1668] = true, -- Majestic Armored Vorquin
+[1667] = true, -- Armored Vorquin Leystrider
+[1665] = true, -- Swift Armored Vorquin
+[1683] = true, -- Crimson Vorquin
+[1684] = true, -- Sapphire Vorquin
+[1685] = true, -- Bronze Vorquin
+[1686] = true, -- Obsidian Vorquin
 },
 ["Mechanical Steeds"] = {
 [552] = true, -- Ironbound Wraithcharger
@@ -917,6 +939,9 @@ ADDON.DB.Family = {
 [1495] = true, -- Maldraxxian Corpsefly
 [1496] = true, -- Regal Corpsefly
 [1497] = true, -- Battlefield Swarmer
+[1615] = true, -- Tamed Skitterfly
+[1616] = true, -- Azure Skitterfly
+[1617] = true, -- Verdant Skitterfly
 },
 ["Krolusks"] = {
 [933] = true, -- Obsidian Krolusk
@@ -966,6 +991,18 @@ ADDON.DB.Family = {
 [1434] = true, -- Deepstar Aurelid
 [1549] = true, -- Shimmering Aurelid
 [1551] = true, -- Cryptic Aurelid
+},
+["Mollusc"] = {
+["Snail"] = {
+[1448] = true, -- Serenade
+[1469] = true, -- Magmashell
+[1538] = true, -- Bronze Helicid
+[1539] = true, -- Unsuccessful Prototype Fleetpod
+[1540] = true, -- Scarlet Helicid
+},
+["Slug"] = {
+[1623] = true, -- Scorchpath
+},
 },
 ["Rats"] = {
 [804] = true, -- Ratstallion
@@ -1090,6 +1127,7 @@ ADDON.DB.Family = {
 },
 ["Others"] = {
 [1444] = true, -- Viridian Phase-Hunter
+[1622] = true, -- Stormhide Salamanther
 },
 },
 ["Rylaks"] = {
@@ -1099,12 +1137,6 @@ ADDON.DB.Family = {
 [1406] = true, -- Marrowfang
 [1407] = true, -- Callow Flayedwing
 [1408] = true, -- Gruesome Flayedwing
-},
-["Snail"] = {
-[1448] = true, -- Serenade
-[1538] = true, -- Bronze Helicid
-[1539] = true, -- Unsuccessful Prototype Fleetpod
-[1540] = true, -- Scarlet Helicid
 },
 ["Ungulates"] = {
 ["Alpacas"] = {
@@ -1181,6 +1213,8 @@ ADDON.DB.Family = {
 [287] = true, -- Grand Black War Mammoth
 [288] = true, -- Grand Ice Mammoth
 [289] = true, -- Grand Ice Mammoth
+[1612] = true, -- Loyal Magmammoth
+[1635] = true, -- Plainswalker Bearer
 },
 ["Moose"] = {
 [764] = true, -- Grove Warden
@@ -1190,6 +1224,7 @@ ADDON.DB.Family = {
 [941] = true, -- Highmountain Elderhorn
 [1007] = true, -- Highmountain Thunderhoof
 [1209] = true, -- Stonehide Elderhorn
+[1467] = true, -- Noble Elderhorn
 },
 ["Ox"] = {
 [1291] = true, -- Lucky Yun

@@ -1,5 +1,8 @@
 
-### 2.20 pretty fly for a dragon guy
+### 2.20 pretty fly (for a dragon guy)
+- errors: 
+  - reverse sort by rarity -> reload
+  - no unlocked camera after reload
 - database / generator
 - elvui
 

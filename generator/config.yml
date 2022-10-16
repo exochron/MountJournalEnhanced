@@ -25,6 +25,7 @@ ignored: [
 	1270, # Swift Spectral Magnetocraft (inv_mount_hippogryph_arcane)
 	1271, # Swift Spectral Armored Gryphon (inv_mount_hippogryph_arcane)
 	1272, # Swift Spectral Pterrordax (inv_mount_hippogryph_arcane)
+	#1578, # [DND] Test Mount JZB (ability_mount_travellersyakmount)
 	1607, # Swift Spectral Drake
 ]
 
@@ -52,6 +53,7 @@ familymap: [
       {name: Cranes, wcm: [Cranes]},
       {name: Crows, wcm: [Birds], icons: [roguemount, arcaneraven, suncrown]},
       {name: Dread Ravens, wcm: [Birds], icons: [ravenlord, dreadraven]},
+			{name: Eagle, wcm: [Birds], icons: [eagle]},
       {name: Hawkstriders, wcm: [Hawkstriders]},
       {name: Mechanical Birds, wcm: [Mechanical Birds]},
       {name: Pandaren Phoenixes, wcm: [Birds], icons: [pandarenphoenix, ji-kun, thunderislebirdboss]},
@@ -84,6 +86,7 @@ familymap: [
       {name: Hyenas, wcm: [Hyenas]},
       {name: Quilen, wcm: [Quilen]},
       {name: Vulpin, wcm: [Vulpin]},
+      {name: Ottuk, wcm: [Ottuks]},
 		]
 	},
   { name: Cats,
@@ -92,7 +95,7 @@ familymap: [
     	{name: Manasabers, wcm: [Cats], icons: [suramarmount, nightborneracial], ids: [741]}, # Mystic Runesaber
     	{name: Mechanical Cats, wcm: [Mechanical Cats]},
     	{name: Others, wcm: [Flamesabers, Panthara, Felsabers, Undead Cats], ids: [1330, 1531, 1576]}, # Sunwarmed Furline, Wen Lo, Jigglesworth Sr.
-    	{name: Sabers, wcm: [Cats], icons: [blackpanther, whitetiger, pinktiger, nightsaber2, saber3mount]},
+    	{name: Sabers, wcm: [Cats], icons: [blackpanther, whitetiger, pinktiger, nightsaber2, saber3mount, sabertooth]},
     	{name: Stone Cats, wcm: [Flying Stone Cats], ids: [421]}, # Winged Guardian
     	{name: Tigers, wcm: [Cats, Undead Cats], icons: [monkmount, spectraltiger, siberiantiger, warnightsaber, jungletiger]},
 		]
@@ -183,7 +186,7 @@ familymap: [
 					931, # Netherlord's Accursed Wrathsteed
 				]
 			},
-			{name: Flying Steeds, wcm: [Flying Steeds, Windsteeds]},
+			{name: Flying Steeds, wcm: [Flying Steeds]},
 			{name: Horned Steeds, wcm: [Horned Steeds, Windsteeds]},
 			{name: Mechanical Steeds, wcm: [Mechanical Steeds]},
 			{name: Mountain Horses,
@@ -219,7 +222,7 @@ familymap: [
                       #       348769, # Vicious War
                       #       348770, # Vicious War Gorm
                       #       352441, # Wild Hunt Legsplitter
-      		{name: Flies, wcm: [Flies]},
+      		{name: Flies, wcm: [Flies, Skitterflies]},
 			{name: Krolusks, wcm: [Krolusks]},
 			{name: Moth, wcm: [Moths]},
 			{name: Ravagers, wcm: [Ravagers]},
@@ -233,6 +236,11 @@ familymap: [
 		]
 	},
 	{name: Jellyfish, wcm: [Fathom Dwellers, Hiveminds, Aurelids]},
+	{name: Mollusc,
+		subfamily: [
+			{name: Snail, wcm:  [Snails]},
+			{name: Slug, wcm:  [Slugs]},
+	]},
 	{name: Rats, wcm: [Rats, Mawrats]},
 	{name: Rays,
     subfamily: [
@@ -254,11 +262,10 @@ familymap: [
 			{name: Snapdragons, wcm: [Snapdragons]},
 			{name: Shardhides, wcm: [Shardhides]},
 			{name: Turtles, wcm: [Dragon Turtles, Sea Turtles, Turtles]},
-			{name: Others, wcm: [Warp Stalkers]},
+			{name: Others, wcm: [Warp Stalkers, Thunder Lizards, Newts]},
 		]
 	},
 	{name: Rylaks, wcm:  [Rylaks, Chimaeras]},
-	{name: Snail, wcm:  [Snails]},
 	{name: Ungulates,
     subfamily: [
 			{name: Alpacas, wcm: [Alpacas]},
@@ -267,7 +274,7 @@ familymap: [
 			{name: Cervid, wcm: [Cervids] },
 			{name: Elekks, wcm: [Elekks]},
 			{name: Mammoths, wcm: [Mammoths]},
-			{name: Moose, wcm: [Elderhorns]},
+			{name: Moose, wcm: [Elderhorns, Bruffalons]},
 			{name: Ox, wcm: [Oxen]},
 			{name: Rhinos, wcm: [Rhinos]},
 			{name: Riverbeasts, wcm: [Riverbeasts]},
