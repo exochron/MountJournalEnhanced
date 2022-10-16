@@ -23,3 +23,8 @@ ADDON.Events:RegisterCallback("preloadUI", function()
         ADDON.Events:TriggerEvent("OnUpdateMountDisplay")
     end)
 end, "enhanced display")
+
+ADDON.Events:RegisterCallback("postloadUI", function()
+    -- trigger initial update
+    ADDON.Events:TriggerEvent("OnUpdateMountDisplay")
+end , "enhanced display")

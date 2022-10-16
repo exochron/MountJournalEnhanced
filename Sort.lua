@@ -198,11 +198,11 @@ end
 local function SortByRarity(mountIdA, mountIdB)
     local rarityA = ADDON.DB.Rarities[mountIdA] or nil
     local rarityB = ADDON.DB.Rarities[mountIdB] or nil
-    if nil ~= rarityA and nil ~= rarityB then
+    if nil ~= rarityA and nil ~= rarityB and rarityA ~= rarityB then
         return CheckDescending(rarityA > rarityB)
-    elseif nil ~= rarityA then
+    elseif nil ~= rarityA and nil == rarityB then
         return CheckDescending(true, true)
-    elseif nil ~= rarityB then
+    elseif nil == rarityA and nil ~= rarityB then
         return CheckDescending(false, true)
     end
 

@@ -71,4 +71,4 @@ end)
 
 ADDON.Events:RegisterCallback("loadUI", function()
     ADDON:ApplySetting('colorizeNameByRarity', ADDON.settings.ui.colorizeNameByRarity)
-end, "camera")
+end, "rarity_names")
