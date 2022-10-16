@@ -1,9 +1,5 @@
 local _, ADDON = ...
 
-function ADDON.UI:UpdateMountDisplay(forceSceneChange)
-    MountJournal_UpdateMountDisplay(forceSceneChange)
-end
-
 ADDON.Events:RegisterCallback("preloadUI", function()
 
     -- view variant mount color

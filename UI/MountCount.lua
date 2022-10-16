@@ -122,7 +122,7 @@ ADDON:RegisterUISetting('showPersonalCount', true, ADDON.L.SETTING_MOUNT_COUNT, 
             end
 
             --to trigger update function
-            ADDON.UI:UpdateMountList()
+            MountJournal.MountCount.Count:SetText(MountJournal.numOwned or 0)
         end
     end
 end)

@@ -41,7 +41,6 @@ UI\Functions.lua
 
 UI\EnhancedList.lua
 UI\EnhancedDisplay.lua
-# UI\EnhancedMountButton.lua # remove?
 UI\CompactMountList.lua
 UI\AchievementPoints.lua
 UI\MountCount.lua

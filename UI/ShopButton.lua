@@ -2,7 +2,7 @@ local ADDON_NAME, ADDON = ...
 
 ADDON:RegisterUISetting('showShopButton', true, ADDON.L.SETTING_SHOP_BUTTON, function()
     if ADDON.initialized then
-        ADDON.UI:UpdateMountDisplay()
+        MountJournal_UpdateMountDisplay()
     end
 end)
 

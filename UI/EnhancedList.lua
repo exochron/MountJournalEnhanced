@@ -144,7 +144,7 @@ local function SetupExtras(button)
         end)
         button:HookScript("OnDoubleClick", function(sender, clickButton)
             if clickButton == "LeftButton" then
-                ADDON.Api:UseMount(sender.mountID)
+                MountJournalMountButton_UseMount(sender.mountID)
             end
         end)
 
@@ -214,12 +214,6 @@ local function UpdateExtras(button, elementData)
     end
 end
 
--- from https://www.townlong-yak.com/framexml/live/Blizzard_Collections/Blizzard_MountCollection.lua#386
--- deprecated: TODO remove after patch 10.0
-function ADDON.UI:UpdateMountList()
-    MountJournal_UpdateMountList()
-end
-
 ADDON.Events:RegisterCallback("preloadUI", function()
     MountJournal.ScrollBox:ForEachFrame(SetupExtras)
     ScrollUtil.AddAcquiredFrameCallback(MountJournal.ScrollBox, function(button, _, new)
@@ -240,7 +234,10 @@ ADDON.Events:RegisterCallback("preloadUI", function()
         ADDON.Events:TriggerEvent("OnFilterUpdate")
     end, ADDON_NAME)
     MountJournal.ScrollBox:SetDataProvider(dataProvider, ScrollBoxConstants.RetainScrollPosition)
-    MountJournal.ScrollBox.SetDataProvider = function() end
+    MountJournal.ScrollBox.SetDataProvider = function(self)
+        -- called from MountJournal_UpdateMountList. we just repaint the list instead
+        self:ForEachFrame(MountJournal_InitMountButton)
+    end
     ADDON:FilterMounts()
 
     -- TODO: ElvUI okay?

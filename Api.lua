@@ -66,42 +66,18 @@ function ADDON.Api:SetIsFavoriteByID(mountId, ...)
     end
 end
 
-local selectedMount, selectedCreature
+local selectedCreature
 function ADDON.Api:SetSelected(selectedMountID, selectedVariation)
-    if selectedMount ~= selectedMountID then
-        selectedMount = selectedMountID
+    if MountJournal.selectedMountID ~= selectedMountID then
         selectedCreature = selectedVariation or nil
         MountJournal_SelectByMountID(selectedMountID)
-        --MountJournal_HideMountDropdown();
-        --ADDON.UI:UpdateMountList()
-        ADDON.UI:UpdateMountDisplay()
     elseif selectedCreature ~= selectedVariation then
         selectedCreature = selectedVariation or nil
-        ADDON.UI:UpdateMountDisplay(true)
+        MountJournal_UpdateMountDisplay(true)
     end
 end
 function ADDON.Api:GetSelected()
-    return selectedMount, selectedCreature
-end
-
--- from https://www.townlong-yak.com/framexml/live/Blizzard_Collections/Blizzard_MountCollection.lua#668
-function ADDON.Api:UseMount(mountID)
-    if mountID then
-        local creatureName, spellID, icon, active = C_MountJournal.GetMountInfoByID(mountID);
-        if (active) then
-            C_MountJournal.Dismiss();
-        elseif (C_MountJournal.NeedsFanfare(mountID)) then
-            local function OnFinishedCallback()
-                C_MountJournal.ClearFanfare(mountID);
-                --MountJournal_HideMountDropdown();
-                ADDON.UI:UpdateMountList()
-                ADDON.UI:UpdateMountDisplay()
-            end
-            MountJournal.MountDisplay.ModelScene:StartUnwrapAnimation(OnFinishedCallback);
-        else
-            C_MountJournal.SummonByID(mountID);
-        end
-    end
+    return MountJournal.selectedMountID, selectedCreature
 end
 
 ADDON.Events:RegisterCallback("OnJournalLoaded", function()
