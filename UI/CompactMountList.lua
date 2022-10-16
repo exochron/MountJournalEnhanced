@@ -112,6 +112,6 @@ ADDON.Events:RegisterCallback("loadUI", function()
     ADDON:ApplySetting('compactMountList', ADDON.settings.ui.compactMountList)
 
     -- MountJournal_InitMountButton() is also called directly within MountJournal_SetSelected().
-    -- So we can't just use scrollbox event instead.
+    -- So we can't just use a scrollbox event.
     hooksecurefunc("MountJournal_InitMountButton", UpdateButton)
 end, "compact")

@@ -1,9 +1,7 @@
 
 ### 2.20 pretty fly for a dragon guy
-- api: get/setselected
-- mountbutton
 - database / generator
-- api cleanup
+- elvui
 
 ### Next
 - personal favorites rework

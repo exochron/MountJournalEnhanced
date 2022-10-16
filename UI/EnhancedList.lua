@@ -229,14 +229,18 @@ ADDON.Events:RegisterCallback("preloadUI", function()
 
     -- inject fixed data provider
     local dataProvider = CreateDataProvider()
-    dataProvider:SetSortComparator(function(a,b) return ADDON:SortHandler(a,b) end)
+    dataProvider:SetSortComparator(function(a, b)
+        return ADDON:SortHandler(a, b)
+    end)
     dataProvider:RegisterCallback("OnSizeChanged", function()
         ADDON.Events:TriggerEvent("OnFilterUpdate")
     end, ADDON_NAME)
     MountJournal.ScrollBox:SetDataProvider(dataProvider, ScrollBoxConstants.RetainScrollPosition)
     MountJournal.ScrollBox.SetDataProvider = function(self)
         -- called from MountJournal_UpdateMountList. we just repaint the list instead
-        self:ForEachFrame(MountJournal_InitMountButton)
+        self:ForEachFrame(function(button, elementData)
+            MountJournal_InitMountButton(button, elementData)
+        end)
     end
     ADDON:FilterMounts()
 

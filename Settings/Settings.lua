@@ -45,6 +45,7 @@ local function PrepareDefaults()
             previewButton = true,
             showPersonalCount = true,
             windowSize = { 0, 0 },
+            colorizeNameByRarity = true,
         },
 
         favoritePerChar = false,

@@ -84,5 +84,5 @@ EventRegistry:RegisterCallback("MountJournal.OnShow", function()
     end
 end, ADDON_NAME)
 
--- skip dragonriding helptip for now
+-- skip dragonriding order helptip
 C_CVar.SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_MOUNT_COLLECTION_DRAGONRIDING, true)
