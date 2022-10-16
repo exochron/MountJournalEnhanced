@@ -1,5 +1,7 @@
 
 ### 2.20 pretty fly for a dragon guy
+- api: get/setselected
+- mountbutton
 - database / generator
 - api cleanup
 
@@ -23,7 +25,7 @@
 (maybe for april fool's)
 - googly eyes (like in overwatch)
 - who's that mount:
-  - Only Display, but the mount is completly black
+  - Only Display, but the mount is completely black
   - multiple choice (4?); never use an alternative option of the same family
   - 10? rounds
 - Pimp my Mount: more effects in display, like:

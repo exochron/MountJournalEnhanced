@@ -36,7 +36,6 @@ Tracking.lua
 SlashCommand.lua
 Debug.lua
 
-# UI\Templates.xml #remove
 UI\Functions.lua
 # UI\ElvUIList.lua
 

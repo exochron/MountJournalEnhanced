@@ -42,8 +42,8 @@ local function ModifyButton(button)
     end
 
     button.name:ClearAllPoints()
-    button.name:SetPoint("LEFT", button, "LEFT", 10, 0)
-    button.name:SetPoint("RIGHT", button, "RIGHT", -10, 0)
+    button.name:SetPoint("LEFT", button, "LEFT", 10, 1)
+    button.name:SetPoint("RIGHT", button, "RIGHT", -10, 1)
 
     button.new:ClearAllPoints()
     button.new:SetPoint("CENTER", button.DragButton)
@@ -52,6 +52,22 @@ local function ModifyButton(button)
     button.factionIcon:SetPoint('TOPRIGHT', -2, -2)
     button.factionIcon:SetPoint('TOPLEFT', button, "TOPRIGHT", 2 - MOUNT_BUTTON_HEIGHT, -2)
     button.factionIcon:SetPoint('BOTTOMRIGHT', -2, 2)
+end
+
+local function UpdateButton(_, button, elementData)
+    local mountID = elementData.mountID
+    local isForDragonriding = select(13, C_MountJournal.GetMountInfoByID(mountID))
+
+    local yOffset = 1;
+    if isForDragonriding then
+        if button.name:GetNumLines() == 1 then
+            yOffset = 6;
+        else
+            yOffset = 5;
+        end
+    end
+    button.name:SetPoint("LEFT", button, "LEFT", 10, yOffset)
+    button.name:SetPoint("RIGHT", button, "RIGHT", -10, yOffset)
 end
 
 ADDON:RegisterUISetting('compactMountList', true, ADDON.L.SETTING_COMPACT_LIST, function(flag)
@@ -74,11 +90,13 @@ ADDON:RegisterUISetting('compactMountList', true, ADDON.L.SETTING_COMPACT_LIST, 
                 end
             end, ADDON_NAME .. 'compact')
             ScrollUtil.AddReleasedFrameCallback(box, RestoreButtonLayout, ADDON_NAME .. 'compact')
+            box:RegisterCallback(ScrollBoxListViewMixin.Event.OnInitializedFrame, UpdateButton, ADDON_NAME .. 'compact')
             view:SetPadding(0, 0, MOUNT_BUTTON_HEIGHT + 2, 0, 0)
             view:SetElementExtent(MOUNT_BUTTON_HEIGHT)
         else
             box:UnregisterCallback(ScrollBoxListMixin.Event.OnAcquiredFrame, ADDON_NAME .. 'compact')
             box:UnregisterCallback(ScrollBoxListMixin.Event.OnReleasedFrame, ADDON_NAME .. 'compact')
+            box:UnregisterCallback(ScrollBoxListViewMixin.Event.OnInitializedFrame, ADDON_NAME .. 'compact')
             box:ForEachFrame(function(button)
                 RestoreButtonLayout(button)
             end)
