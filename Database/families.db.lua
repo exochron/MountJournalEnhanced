@@ -306,6 +306,7 @@ ADDON.DB.Family = {
 [1656] = true, -- Splish-Splash
 [1657] = true, -- Brown Scouting Ottuk
 [1658] = true, -- Ivory Trader's Ottuk
+[1654] = true, -- Otterworldly Ottuk Carrier
 },
 },
 ["Cats"] = {
@@ -576,6 +577,7 @@ ADDON.DB.Family = {
 [1289] = true, -- Ensorcelled Everwyrm
 [1346] = true, -- Steamscale Incinerator
 [1581] = true, -- Nether-Gorged Greatwyrm
+[1591] = true, -- Cliffside Wylderdrake
 },
 ["Proto-Drakes"] = {
 [262] = true, -- Red Proto-Drake
@@ -593,6 +595,7 @@ ADDON.DB.Family = {
 [1031] = true, -- Sinister Gladiator's Proto-Drake
 [1032] = true, -- Notorious Gladiator's Proto-Drake
 [1035] = true, -- Corrupted Gladiator's Proto-Drake
+[1589] = true, -- Renewed Proto-Drake
 [1679] = true, -- Frostbrood Proto-Wyrm
 },
 ["Stone Drakes"] = {
@@ -1128,6 +1131,8 @@ ADDON.DB.Family = {
 ["Others"] = {
 [1444] = true, -- Viridian Phase-Hunter
 [1622] = true, -- Stormhide Salamanther
+[1639] = true, -- Lizi, Thunderspine Tramper
+[1681] = true, -- Hailstorm Armoredon
 },
 },
 ["Rylaks"] = {

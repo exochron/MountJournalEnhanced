@@ -25,8 +25,10 @@ ignored: [
 	1270, # Swift Spectral Magnetocraft (inv_mount_hippogryph_arcane)
 	1271, # Swift Spectral Armored Gryphon (inv_mount_hippogryph_arcane)
 	1272, # Swift Spectral Pterrordax (inv_mount_hippogryph_arcane)
-	#1578, # [DND] Test Mount JZB (ability_mount_travellersyakmount)
+	1578, # [DND] Test Mount JZB (ability_mount_travellersyakmount)
+	1605, # Dragon Isles Drake Model Test
 	1607, # Swift Spectral Drake
+	1608, # Soar, Dracthyr racial
 ]
 
 # family based on http://www.warcraftmounts.com/gallery.php + https://wow.gamepedia.com/Beast
@@ -86,8 +88,8 @@ familymap: [
       {name: Hyenas, wcm: [Hyenas]},
       {name: Quilen, wcm: [Quilen]},
       {name: Vulpin, wcm: [Vulpin]},
-      {name: Ottuk, wcm: [Ottuks]},
-		]
+      {name: Ottuk, wcm: [Ottuks], ids: [1654]}, # Otterworldly Ottuk Carrier
+	]
 	},
   { name: Cats,
     subfamily: [
@@ -133,8 +135,8 @@ familymap: [
       {name: Drakes, wcm: [Drakes, Onyxian Drakes, Void Dragons]},
       {name: Grand Drakes, wcm: [Grand Drakes]},
       {name: Nether Drakes, wcm: [Nether Drakes]},
-      {name: Others, wcm: [Sinuous Drakes, Fey Drakes, Everwyrms, Mechanical Dragons, Greatwyrms]},
-      {name: Proto-Drakes, wcm: [Proto-Drakes]},
+      {name: Others, wcm: [Sinuous Drakes, Fey Drakes, Everwyrms, Mechanical Dragons, Greatwyrms], ids: [1591]}, # Cliffside Wylderdrake
+      {name: Proto-Drakes, wcm: [Proto-Drakes], ids: [1589]}, # Renewed Proto Drake
       {name: Stone Drakes, wcm: [Stone Drakes]},
       {name: Undead Drakes, wcm: [Undead Drakes, Soul Eaters]},
       {name: Wind Drakes, wcm: [Wind Drakes]},
@@ -262,7 +264,7 @@ familymap: [
 			{name: Snapdragons, wcm: [Snapdragons]},
 			{name: Shardhides, wcm: [Shardhides]},
 			{name: Turtles, wcm: [Dragon Turtles, Sea Turtles, Turtles]},
-			{name: Others, wcm: [Warp Stalkers, Thunder Lizards, Newts]},
+			{name: Others, wcm: [Warp Stalkers, Armoredons, Newts], ids: [1639]}, # Lizi
 		]
 	},
 	{name: Rylaks, wcm:  [Rylaks, Chimaeras]},
