@@ -5,26 +5,10 @@ local AceGUI = LibStub("AceGUI-3.0")
 local mainCategory, aboutCategory
 
 function ADDON:OpenOptions()
-    if Settings then
-        Settings.OpenToCategory(mainCategory.ID)
-        SettingsPanel.tabsGroup:SelectAtIndex(2) -- switch to addons tab
-        SettingsPanel:SelectCategory(aboutCategory) -- select around to expand the list
-        SettingsPanel:SelectCategory(mainCategory)
-    else
-        -- TODO: remove after patch 10.0
-        local title = GetAddOnMetadata(ADDON_NAME, "Title")
-
-        InterfaceOptionsFrame_OpenToCategory(title)
-        InterfaceOptionsFrame_OpenToCategory(title)
-
-        for _, button in ipairs(InterfaceOptionsFrameAddOns.buttons) do
-            local element = button.element
-            if element and element.collapsed and element.hasChildren and element.name == title then
-                InterfaceOptionsListButton_ToggleSubCategories(button)
-                break
-            end
-        end
-    end
+    Settings.OpenToCategory(mainCategory.ID)
+    SettingsPanel.tabsGroup:SelectAtIndex(2) -- switch to addons tab
+    SettingsPanel:SelectCategory(aboutCategory) -- select around to expand the list
+    SettingsPanel:SelectCategory(mainCategory)
 end
 
 local function BuildCheckBox(parent, text)
@@ -183,20 +167,13 @@ ADDON.Events:RegisterCallback("OnLogin", function()
     end)
     group:SetCallback("default", ADDON.ResetSettings)
 
-    if Settings then
-        group.frame.OnCommit = group.frame.okay
-        group.frame.OnDefault = group.frame.default
-        group.frame.OnRefresh = group.frame.refresh
+    group.frame.OnCommit = group.frame.okay
+    group.frame.OnDefault = group.frame.default
+    group.frame.OnRefresh = group.frame.refresh
 
-        mainCategory = Settings.RegisterCanvasLayoutCategory(group.frame, GetAddOnMetadata(ADDON_NAME, "Title"));
+    mainCategory = Settings.RegisterCanvasLayoutCategory(group.frame, GetAddOnMetadata(ADDON_NAME, "Title"));
 
-        Settings.RegisterAddOnCategory(mainCategory)
-        aboutCategory = Settings.RegisterCanvasLayoutSubcategory(mainCategory, BildAbout().frame, ADDON.L["SETTING_HEAD_ABOUT"])
-    else
-        -- TODO: remove after patch 10.0
-        InterfaceOptions_AddCategory(group.frame)
-
-        InterfaceOptions_AddCategory(BildAbout().frame)
-    end
+    Settings.RegisterAddOnCategory(mainCategory)
+    aboutCategory = Settings.RegisterCanvasLayoutSubcategory(mainCategory, BildAbout().frame, ADDON.L["SETTING_HEAD_ABOUT"])
 
 end, "settings panel")
