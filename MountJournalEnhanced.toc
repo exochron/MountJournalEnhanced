@@ -37,8 +37,6 @@ SlashCommand.lua
 Debug.lua
 
 UI\Functions.lua
-# UI\ElvUIList.lua
-
 UI\EnhancedList.lua
 UI\EnhancedDisplay.lua
 UI\CompactMountList.lua

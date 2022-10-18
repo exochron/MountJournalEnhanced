@@ -21,11 +21,6 @@ local function RestoreButtonLayout(button)
     ADDON.UI:RestorePoint(button.name)
     ADDON.UI:RestorePoint(button.new)
     ADDON.UI:RestorePoint(button.factionIcon)
-
-    if button.backdrop then
-        -- ElvUI customization
-        button.backdrop:SetInside(button, 3, 3)
-    end
 end
 
 local function ModifyButton(button)
@@ -35,9 +30,8 @@ local function ModifyButton(button)
     button.icon:ClearAllPoints()
     button.icon:SetPoint("RIGHT", button, "LEFT", -2, 0)
 
-    if button.backdrop then
+    if button.IsSkinned then
         -- ElvUI customization
-        button.backdrop:SetInside(button, 0, 0)
         button.icon:SetSize(MOUNT_BUTTON_HEIGHT - 2, MOUNT_BUTTON_HEIGHT - 2)
     end
 

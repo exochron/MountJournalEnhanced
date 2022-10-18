@@ -1,7 +1,6 @@
 
 ### 2.20 pretty fly (for a dragon guy)
 - database / generator
-- elvui
 
 ### Next
 - personal favorites rework

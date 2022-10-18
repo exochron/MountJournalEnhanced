@@ -243,6 +243,4 @@ ADDON.Events:RegisterCallback("preloadUI", function()
         end)
     end
     ADDON:FilterMounts()
-
-    -- TODO: ElvUI okay?
 end, "enhanced list")
