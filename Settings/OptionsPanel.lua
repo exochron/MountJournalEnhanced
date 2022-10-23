@@ -2,13 +2,11 @@ local ADDON_NAME, ADDON = ...
 
 local AceGUI = LibStub("AceGUI-3.0")
 
-local mainCategory, aboutCategory
+local mainCategory
 
 function ADDON:OpenOptions()
+    mainCategory.expanded = true
     Settings.OpenToCategory(mainCategory.ID)
-    SettingsPanel.tabsGroup:SelectAtIndex(2) -- switch to addons tab
-    SettingsPanel:SelectCategory(aboutCategory) -- select around to expand the list
-    SettingsPanel:SelectCategory(mainCategory)
 end
 
 local function BuildCheckBox(parent, text)
@@ -167,13 +165,9 @@ ADDON.Events:RegisterCallback("OnLogin", function()
     end)
     group:SetCallback("default", ADDON.ResetSettings)
 
-    group.frame.OnCommit = group.frame.okay
-    group.frame.OnDefault = group.frame.default
-    group.frame.OnRefresh = group.frame.refresh
-
     mainCategory = Settings.RegisterCanvasLayoutCategory(group.frame, GetAddOnMetadata(ADDON_NAME, "Title"));
 
     Settings.RegisterAddOnCategory(mainCategory)
-    aboutCategory = Settings.RegisterCanvasLayoutSubcategory(mainCategory, BildAbout().frame, ADDON.L["SETTING_HEAD_ABOUT"])
+    Settings.RegisterCanvasLayoutSubcategory(mainCategory, BildAbout().frame, ADDON.L.SETTING_HEAD_ABOUT)
 
 end, "settings panel")

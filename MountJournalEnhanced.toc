@@ -1,4 +1,4 @@
-## Interface: 100002
+## Interface: 100000
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron

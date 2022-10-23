@@ -1,8 +1,16 @@
 local _, ADDON = ...
 
 local hooked
-local orgCollectedR, orgCollectedG, orgCollectedB, orgCollectedA
-local orgGreyR, orgGreyG, orgGreyB, orgGreyA
+
+local function RestoreOriginalColor(collected, button)
+    if collected then
+        button.name:SetTextColor(1.0, 0.82, 0) -- reset original colors
+        button.name:SetFontObject("GameFontNormal") -- reset for hooked elvui
+    else
+        button.name:SetTextColor(0.5, 0.5, 0.5)
+        button.name:SetFontObject("GameFontDisable")
+    end
+end
 
 local function DetermineQuality(rarity)
     if rarity < 1.0 then
@@ -26,22 +34,14 @@ local function ColorNames(button, elementData)
         local mountID = elementData.mountID
         local collected = select(11, C_MountJournal.GetMountInfoByID(mountID))
 
-        if orgCollectedR == nil and collected then
-            orgCollectedR, orgCollectedG, orgCollectedB, orgCollectedA = button.name:GetTextColor()
-        elseif orgGreyR == nil and not collected then
-            orgGreyR, orgGreyG, orgGreyB, orgGreyA = button.name:GetTextColor()
-        end
-
         local rarity = ADDON.DB.Rarities[mountID] or nil
         if rarity ~= nil then
             local quality = DetermineQuality(rarity)
             local r, g, b = GetItemQualityColor(quality)
             local a = collected and 1.0 or 0.75
             button.name:SetTextColor(r, g, b, a)
-        elseif collected then
-            button.name:SetTextColor(orgCollectedR, orgCollectedG, orgCollectedB, orgCollectedA)
         else
-            button.name:SetTextColor(orgGreyR, orgGreyG, orgGreyB, orgGreyA)
+            RestoreOriginalColor(collected, button)
         end
     end
 end
@@ -56,14 +56,10 @@ ADDON:RegisterUISetting('colorizeNameByRarity', true, ADDON.L.SETTING_COLOR_NAME
                 hooksecurefunc("MountJournal_InitMountButton", ColorNames)
                 hooked = true
             end
-        elseif orgCollectedR ~= nil or orgGreyA ~= nil then
+        else
             MountJournal.ScrollBox:ForEachFrame(function(button, elementData)
                 local collected = select(11, C_MountJournal.GetMountInfoByID(elementData.mountID))
-                if collected and orgCollectedR ~= nil then
-                    button.name:SetTextColor(orgCollectedR, orgCollectedG, orgCollectedB, orgCollectedA)
-                elseif not collected and orgGreyA ~= nil then
-                    button.name:SetTextColor(orgGreyR, orgGreyG, orgGreyB, orgGreyA)
-                end
+                RestoreOriginalColor(collected, button)
             end)
         end
     end

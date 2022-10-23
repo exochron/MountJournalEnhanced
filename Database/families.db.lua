@@ -79,8 +79,8 @@ ADDON.DB.Family = {
 [753] = true, -- Corrupted Dreadwing
 },
 ["Eagle"] = {
-[1672] = true, -- Zenet Hatchling
 [1545] = true, -- Divine Kiss of Ohn'ahra
+[1672] = true, -- Zenet Hatchling
 },
 ["Hawkstriders"] = {
 [146] = true, -- Swift Pink Hawkstrider

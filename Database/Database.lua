@@ -144,6 +144,10 @@ ADDON.DB.Source = {
         [342680] = true, -- Deepstar Aurelid - Hirukon - Zereth Mortis
         [368105] = true, -- Colossal Plaguespew Mawrat - Rhuv, Gorger of Ruin - Zereth Mortis
         [368128] = true, -- Colossal Wraithbound Mawrat - Zereth Mortis - treasure
+
+        -- Dragonflight
+        [359622] = true, -- Liberated Slyvern - Breezebiter - Azure Span
+        [385266] = true, -- Zenet Hatchling - Ohn'ahran Plains - Zenet Egg
     },
 
     ["Quest"] = {
@@ -188,6 +192,7 @@ ADDON.DB.Source = {
         [354361] = true, -- Dusklight Razorwing - Korthia - random eggs
         [354362] = true, -- Maelie the Wanderer - Korthia - treasure quest chain
         [363701] = true, -- Patient Bufonid - Zereth Mortis - treasure quest chain
+        [374247] = true, -- Lizi, Thunderspine Tramper
 
         ------------------------------
         -- Alliance ------------------
@@ -254,6 +259,7 @@ ADDON.DB.Source = {
         [334409] = true, -- Eternal Phalynx of Humility - kyrian feature vendor
         [340503] = true, -- Umbral Scythehorn - night fae feature vendor
         [342667] = true, -- Vibrant Flutterwing - night fae feature vendor
+        [374098] = true, -- Stormhide Salamanther
         [385115] = true, -- Swift Armored Vorquin - dracthyr vendor
         [385131] = true, -- Armored Vorquin Leystrider - dracthyr vendor
         [385134] = true, -- Majestic Armored Vorquin - dracthyr vendor
@@ -261,6 +267,8 @@ ADDON.DB.Source = {
         [394218] = true, -- Sapphire Vorquin - dracthyr vendor
         [394219] = true, -- Bronze Vorquin - dracthyr vendor
         [394220] = true, -- Obsidian Vorquin - dracthyr vendor
+        [359409] = true, -- Iskaara Trader's Ottuk - Tattukiaka
+        [376879] = true, -- Ivory Trader's Ottuk - Tattukiaka
 
         ------------------------------
         -- Alliance ------------------
@@ -1326,6 +1334,9 @@ ADDON.DB.Source = {
         -- Call of the Scarab (Micro)
         [239766] = true, -- Blue Qiraji War Tank
         [239767] = true, -- Red Qiraji War Tank
+
+        -- Centaur Hunts (Micro)
+        [374196] = true, -- Plainswalker Bearer
     },
 
     ["Black Market"] = {
