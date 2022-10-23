@@ -40,6 +40,9 @@ func checkClass(mask int) []Condition {
 	if mask&0x800 > 0 {
 		result = append(result, Condition{"class", "\"DEMONHUNTER\""})
 	}
+	if mask&0x1000 > 0 {
+		result = append(result, Condition{"class", "\"EVOKER\""})
+	}
 
 	return result
 }

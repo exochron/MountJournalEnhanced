@@ -1,10 +1,6 @@
-local _, ADDON = ...
+local ADDON_NAME, ADDON = ...
 
 local RestrictionsDB = ADDON.DB.Restrictions
-
-local function getMountButtonHeight()
-    return MountJournal.MJE_ListScrollFrame.buttonHeight
-end
 
 local MOUNT_FACTION_TEXTURES = {
     [0] = "MountJournalIcons-Horde",
@@ -29,192 +25,116 @@ local CLASS_TEXTURES = {
     ["SHAMAN"] = "Artifacts-Shaman-BG-rune",
     ["WARLOCK"] = "Artifacts-Warlock-BG-rune",
     ["WARRIOR"] = "Artifacts-Warrior-BG-rune",
+    -- TODO: Evoker ?
 }
 
--- from https://www.townlong-yak.com/framexml/live/Blizzard_Collections/Blizzard_MountCollection.lua#386
-function ADDON.UI:UpdateMountList()
-    local deltaY = 0
-    local showMounts = C_MountJournal.GetNumMounts() > 0
+-- originally from MountJournal_InitMountButton()
+local function InitMountButton(button, elementData)
+    local creatureName, spellID, icon, active, isUsable, sourceType, isFavorite, isFactionSpecific, faction, isFiltered, isCollected, mountID, isForDragonriding = ADDON.Api:GetMountInfoByID(elementData.mountID)
+    -- everything below this line is from the original function
+    local needsFanfare = C_MountJournal.NeedsFanfare(mountID);
 
-    local scrollFrame = MountJournal.MJE_ListScrollFrame
-    if not scrollFrame then
-        return
-    end
-    local offset = HybridScrollFrame_GetOffset(scrollFrame);
-    local buttons = scrollFrame.buttons;
+    button.name:SetText(creatureName);
+    button.icon:SetTexture(needsFanfare and COLLECTIONS_FANFARE_ICON or icon);
+    button.new:SetShown(needsFanfare);
+    button.newGlow:SetShown(needsFanfare);
 
-    local numDisplayedMounts = ADDON.Api:GetNumDisplayedMounts()
-    for i = 1, #buttons do
-        local button = buttons[i];
-        local displayIndex = i + offset;
-        if (displayIndex <= numDisplayedMounts and showMounts) then
-            local index = displayIndex;
-            local creatureName, spellID, icon, active, isUsable, _, isFavorite, isFactionSpecific, faction, _, isCollected, mountID = ADDON.Api:GetDisplayedMountInfo(index)
-            local needsFanfare = C_MountJournal.NeedsFanfare(mountID);
-            button.name:SetText(creatureName);
-            button.icon:SetTexture(needsFanfare and COLLECTIONS_FANFARE_ICON or icon);
-            button.new:SetShown(needsFanfare);
-            button.newGlow:SetShown(needsFanfare);
-            button.index = index
-            button.spellID = spellID
-            button.mountID = mountID
-            button.active = active
-            if (active) then
-                button.DragButton.ActiveTexture:Show();
-            else
-                button.DragButton.ActiveTexture:Hide();
-            end
-            button:Show();
-            if (ADDON.Api:GetSelected() == mountID) then
-                button.selected = true;
-                button.selectedTexture:Show();
-            else
-                button.selected = false;
-                button.selectedTexture:Hide();
-            end
-            button:SetEnabled(true);
-            CollectionItemListButton_SetRedOverlayShown(button, false);
-            button.iconBorder:Hide();
-            button.background:SetVertexColor(1, 1, 1, 1);
-            if (isUsable or needsFanfare) then
-                button.DragButton:SetEnabled(true);
-                button.additionalText = nil;
-                button.icon:SetDesaturated(false);
-                button.icon:SetAlpha(1.0);
-                button.name:SetFontObject("GameFontNormal");
-            else
-                if (isCollected) then
-                    CollectionItemListButton_SetRedOverlayShown(button, true);
-                    button.DragButton:SetEnabled(true);
-                    button.name:SetFontObject("GameFontNormal");
-                    button.icon:SetAlpha(0.75);
-                    button.additionalText = nil;
-                    button.background:SetVertexColor(1, 0, 0, 1);
-                else
-                    button.icon:SetDesaturated(true);
-                    button.DragButton:SetEnabled(false);
-                    button.icon:SetAlpha(0.25);
-                    button.additionalText = nil;
-                    button.name:SetFontObject("GameFontDisable");
-                end
-            end
-            if (isFavorite) then
-                button.favorite:Show();
-            else
-                button.favorite:Hide();
-            end
-            if (isFactionSpecific) then
-                button.factionIcon:SetAtlas(MOUNT_FACTION_TEXTURES[faction], true);
-                button.factionIcon:Show();
-                button.factionIcon:SetAlpha(1.0)
-            elseif RestrictionsDB[mountID] and RestrictionsDB[mountID].covenant then
-                local h = button:GetHeight()-2
-                button.factionIcon:SetAtlas(COVENANT_TEXTURES[RestrictionsDB[mountID].covenant[1]], false)
-                button.factionIcon:SetAlpha(0.6)
-                button.factionIcon:SetSize(h * 0.8, h)
-                button.factionIcon:Show()
-            else
-                button.factionIcon:Hide();
-            end
-            if RestrictionsDB[mountID] and RestrictionsDB[mountID].class then
-                button.ClassIcon:SetAtlas(CLASS_TEXTURES[RestrictionsDB[mountID].class[1]], false)
-                if button.factionIcon:IsShown() then
-                    button.factionIcon:Hide()
-                    button.HalfFactionIcon:SetAtlas(button.factionIcon:GetAtlas(), false);
-                    button.HalfFactionIcon:Show()
-
-                    button.ClassIcon:SetPoint("BOTTOMRIGHT", button.factionIcon, "BOTTOM")
-                    button.ClassIcon:SetTexCoord(0, 0.5, 0, 1)
-                else
-                    button.HalfFactionIcon:Hide()
-                    button.ClassIcon:SetTexCoord(0, 1, 0, 1)
-                    button.ClassIcon:SetPoint("BOTTOMRIGHT", button.factionIcon, "BOTTOMRIGHT")
-                end
-
-                button.ClassIcon:Show()
-            else
-                button.ClassIcon:Hide()
-                button.HalfFactionIcon:Hide()
-            end
-
-            if (button.showingTooltip) then
-                MountJournalMountButton_UpdateTooltip(button);
-            end
-
-            if button.DragButton.IsHidden then
-                if ADDON.settings.hiddenMounts[spellID] then
-                    button.DragButton.IsHidden:SetShown(true)
-                else
-                    button.DragButton.IsHidden:SetShown(false)
-                end
-            end
+    local yOffset = 1;
+    if isForDragonriding then
+        if button.name:GetNumLines() == 1 then
+            yOffset = 6;
         else
-            button.name:SetText("");
-            button.icon:SetTexture("Interface\\PetBattles\\MountJournalEmptyIcon");
-            button.index = nil;
-            button.spellID = 0;
-            button.selected = false;
-            CollectionItemListButton_SetRedOverlayShown(button, false);
-            button.DragButton.ActiveTexture:Hide();
-            button.selectedTexture:Hide();
-            button:SetEnabled(false);
-            button.DragButton:SetEnabled(false);
-            button.icon:SetDesaturated(true);
-            button.icon:SetAlpha(0.5);
-            button.favorite:Hide();
-            button.factionIcon:Hide();
-            button.background:SetVertexColor(1, 1, 1, 1);
-            button.iconBorder:Hide();
-
-            button.ClassIcon:Hide()
-            button.HalfFactionIcon:Hide()
-            if button.DragButton.IsHidden then
-                button.DragButton.IsHidden:SetShown(false)
-            end
+            yOffset = 5;
         end
+    end
+    button.name:SetPoint("LEFT", button.icon, "RIGHT", 10, yOffset);
 
-        _, _, _, _, deltaY = button:GetPoint(1)
+    button.DragonRidingLabel:SetShown(isForDragonriding);
+
+    button.index = elementData.index;
+    button.spellID = spellID;
+    button.mountID = mountID;
+
+    button.active = active;
+    if (active) then
+        button.DragButton.ActiveTexture:Show();
+    else
+        button.DragButton.ActiveTexture:Hide();
+    end
+    button:Show();
+
+    if (MountJournal.selectedSpellID == spellID) then
+        button.selected = true;
+        button.selectedTexture:Show();
+    else
+        button.selected = false;
+        button.selectedTexture:Hide();
+    end
+    button:SetEnabled(true);
+    CollectionItemListButton_SetRedOverlayShown(button, false);
+    button.iconBorder:Hide();
+    button.background:SetVertexColor(1, 1, 1, 1);
+    if (isUsable or needsFanfare) then
+        button.DragButton:SetEnabled(true);
+        button.additionalText = nil;
+        button.icon:SetDesaturated(false);
+        button.icon:SetAlpha(1.0);
+        button.name:SetFontObject("GameFontNormal");
+    else
+        if (isCollected) then
+            CollectionItemListButton_SetRedOverlayShown(button, true);
+            button.DragButton:SetEnabled(true);
+            button.name:SetFontObject("GameFontNormal");
+            button.icon:SetAlpha(0.75);
+            button.additionalText = nil;
+            button.background:SetVertexColor(1, 0, 0, 1);
+        else
+            button.icon:SetDesaturated(true);
+            button.DragButton:SetEnabled(false);
+            button.icon:SetAlpha(0.25);
+            button.additionalText = nil;
+            button.name:SetFontObject("GameFontDisable");
+        end
     end
 
-    local totalHeight = numDisplayedMounts * getMountButtonHeight()
-    if deltaY ~= 0 then
-        totalHeight = totalHeight - ((scrollFrame:GetHeight() / getMountButtonHeight()) * deltaY)
+    if (isFavorite) then
+        button.favorite:Show();
+    else
+        button.favorite:Hide();
     end
-    HybridScrollFrame_Update(scrollFrame, totalHeight, scrollFrame:GetHeight());
+
+    if (isFactionSpecific) then
+        button.factionIcon:SetAtlas(MOUNT_FACTION_TEXTURES[faction], true);
+        button.factionIcon:Show();
+    else
+        button.factionIcon:Hide();
+    end
+
+    if (button.showingTooltip) then
+        MountJournalMountButton_UpdateTooltip(button);
+    end
 end
 
-local function SetupButtons(scrollFrame)
+local function SetupExtras(button)
+    if not button.DragButton.IsHidden then
 
-    -- generate buttons with original size
-    HybridScrollFrame_CreateButtons(scrollFrame, "MountListButtonTemplate", 44, 0)
-
-    local buttons = scrollFrame.buttons
-    -- generate more buttons with smaller height
-    local height = buttons[1]:GetHeight()
-    buttons[1]:SetHeight(height / 7)
-    HybridScrollFrame_CreateButtons(scrollFrame, "MountListButtonTemplate")
-    -- switch back to original height
-    buttons[1]:SetHeight(height)
-    HybridScrollFrame_CreateButtons(scrollFrame, "MountListButtonTemplate")
-
-    for _, button in ipairs(buttons) do
         button:SetScript("OnClick", function(self, clickButton)
             if clickButton ~= "LeftButton" then
                 -- right click is handled in MountListDropDown.lua
             elseif IsModifiedClick("CHATLINK") then
                 -- No MacroFrame exception :>
-                local spellLink = GetSpellLink(self.spellID)
-                ChatEdit_InsertLink(spellLink)
-            elseif (self.mountID ~= ADDON.Api:GetSelected()) then
-                ADDON.Api:SetSelected(self.mountID);
+                local mountLink = C_MountJournal.GetMountLink(self.spellID);
+                ChatEdit_InsertLink(mountLink);
+            elseif self.mountID ~= MountJournal.selectedMountID then
+                MountJournal_SelectByMountID(self.mountID)
             end
         end)
         button.DragButton:SetScript("OnClick", function(self, clickButton)
             local parent = self:GetParent();
             if clickButton ~= "LeftButton" then
             elseif IsModifiedClick("CHATLINK") then
-                local spellLink = GetSpellLink(parent.spellID)
-                ChatEdit_InsertLink(spellLink)
+                local mountLink = C_MountJournal.GetMountLink(parent.spellID);
+                ChatEdit_InsertLink(mountLink);
             else
                 ADDON.Api:PickupByID(parent.mountID)
             end
@@ -222,10 +142,9 @@ local function SetupButtons(scrollFrame)
         button.DragButton:SetScript("OnDragStart", function(self)
             ADDON.Api:PickupByID(self:GetParent().mountID)
         end)
-
         button:HookScript("OnDoubleClick", function(sender, clickButton)
             if clickButton == "LeftButton" then
-                ADDON.Api:UseMount(sender.mountID)
+                MountJournalMountButton_UseMount(sender.mountID)
             end
         end)
 
@@ -250,67 +169,78 @@ local function SetupButtons(scrollFrame)
     end
 end
 
-local function GetMountButtonByMountID(mountID)
-    local scrollFrame = MountJournal.MJE_ListScrollFrame
-    local buttons = scrollFrame.buttons;
-    for i = 1, #buttons do
-        local button = buttons[i];
-        if button.mountID == mountID then
-            return button;
-        end
+local function UpdateExtras(button, elementData)
+    local _, spellID, _, _, _, _, _, isFactionSpecific, faction, _, _, mountID, _ = ADDON.Api:GetMountInfoByID(elementData.mountID)
+    if (isFactionSpecific) then
+        button.factionIcon:SetAtlas(MOUNT_FACTION_TEXTURES[faction], true)
+        button.factionIcon:Show()
+        button.factionIcon:SetAlpha(1.0)
+    elseif RestrictionsDB[mountID] and RestrictionsDB[mountID].covenant then
+        local h = button:GetHeight() - 2
+        button.factionIcon:SetAtlas(COVENANT_TEXTURES[RestrictionsDB[mountID].covenant[1]], false)
+        button.factionIcon:SetAlpha(0.6)
+        button.factionIcon:SetSize(h * 0.8, h)
+        button.factionIcon:Show()
+    else
+        button.factionIcon:Hide()
     end
-end
-function GetMountIDByMountButton(sourceButton)
-    local scrollFrame = MountJournal.MJE_ListScrollFrame
-    local buttons = scrollFrame.buttons;
-    for i = 1, #buttons do
-        local button = buttons[i];
-        if button == sourceButton then
-            return button.mountID;
-        end
-    end
-end
-local function GetMountDisplayIndexByMountID(mountID)
-    for i = 1, ADDON.Api:GetNumDisplayedMounts() do
-        local currentMountID = select(12, ADDON.Api:GetDisplayedMountInfo(i))
-        if currentMountID == mountID then
-            return i;
-        end
-    end
-    return nil;
-end
-function ADDON.UI:ScrollToSelected()
-    local selectedMountID = ADDON.Api:GetSelected()
+    if RestrictionsDB[mountID] and RestrictionsDB[mountID].class then
+        button.ClassIcon:SetAtlas(CLASS_TEXTURES[RestrictionsDB[mountID].class[1]], false)
+        if button.factionIcon:IsShown() then
+            button.factionIcon:Hide()
+            button.HalfFactionIcon:SetAtlas(button.factionIcon:GetAtlas(), false)
+            button.HalfFactionIcon:Show()
 
-    local scrollFrame = MountJournal.MJE_ListScrollFrame
-    if scrollFrame and selectedMountID then
-
-        local inView
-        local button = GetMountButtonByMountID(selectedMountID)
-        if button then
-            local delta = getMountButtonHeight() * 0.666 -- next button should be at least visible for 2/3
-            inView = button:GetTop() > (scrollFrame:GetBottom() + delta) and button:GetBottom() < (scrollFrame:GetTop() - delta)
+            button.ClassIcon:SetPoint("BOTTOMRIGHT", button.factionIcon, "BOTTOM")
+            button.ClassIcon:SetTexCoord(0, 0.5, 0, 1)
         else
-            inView = false
+            button.HalfFactionIcon:Hide()
+            button.ClassIcon:SetTexCoord(0, 1, 0, 1)
+            button.ClassIcon:SetPoint("BOTTOMRIGHT", button.factionIcon, "BOTTOMRIGHT")
         end
-        if not inView then
-            local mountIndex = GetMountDisplayIndexByMountID(selectedMountID)
-            if mountIndex then
-                HybridScrollFrame_ScrollToIndex(scrollFrame, mountIndex, getMountButtonHeight);
-            end
+
+        button.ClassIcon:Show()
+    else
+        button.ClassIcon:Hide()
+        button.HalfFactionIcon:Hide()
+    end
+
+    if button.DragButton.IsHidden then
+        if ADDON.settings.hiddenMounts[spellID] then
+            button.DragButton.IsHidden:SetShown(true)
+        else
+            button.DragButton.IsHidden:SetShown(false)
         end
     end
 end
 
 ADDON.Events:RegisterCallback("preloadUI", function()
-    MountJournal.ListScrollFrame:Hide()
-    MountJournal.MJE_ListScrollFrame = CreateFrame("ScrollFrame", "MountJournalEnhancedListScrollFrame", MountJournal, "MJE_ListScrollFrameTemplate")
-    MountJournal.MJE_ListScrollFrame.scrollBar.doNotHide = true
+    MountJournal.ScrollBox:ForEachFrame(SetupExtras)
+    ScrollUtil.AddAcquiredFrameCallback(MountJournal.ScrollBox, function(button, _, new)
+        if new then
+            SetupExtras(button)
+        end
+    end, ADDON_NAME .. 'enhanced')
 
-    SetupButtons(MountJournal.MJE_ListScrollFrame)
+    MountJournal_InitMountButton = function(button, elementData)
+        InitMountButton(button, elementData)
+        UpdateExtras(button, elementData)
+    end
 
-    MountJournal.MJE_ListScrollFrame.update = ADDON.UI.UpdateMountList
-    hooksecurefunc("MountJournal_UpdateMountList", ADDON.UI.UpdateMountList)
-
-    ADDON.UI:StyleListWithElvUI(MountJournal.MJE_ListScrollFrame)
+    -- inject fixed data provider
+    local dataProvider = CreateDataProvider()
+    dataProvider:SetSortComparator(function(a, b)
+        return ADDON:SortHandler(a, b)
+    end)
+    dataProvider:RegisterCallback("OnSizeChanged", function()
+        ADDON.Events:TriggerEvent("OnFilterUpdate")
+    end, ADDON_NAME)
+    MountJournal.ScrollBox:SetDataProvider(dataProvider, ScrollBoxConstants.RetainScrollPosition)
+    MountJournal.ScrollBox.SetDataProvider = function(self)
+        -- called from MountJournal_UpdateMountList. we just repaint the list instead
+        self:ForEachFrame(function(button, elementData)
+            MountJournal_InitMountButton(button, elementData)
+        end)
+    end
+    ADDON:FilterMounts()
 end, "enhanced list")

@@ -1,4 +1,4 @@
-## Interface: 90207
+## Interface: 100000
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron
@@ -36,13 +36,9 @@ Tracking.lua
 SlashCommand.lua
 Debug.lua
 
-UI\Templates.xml
 UI\Functions.lua
-UI\ElvUIList.lua
-
 UI\EnhancedList.lua
 UI\EnhancedDisplay.lua
-UI\EnhancedMountButton.lua
 UI\CompactMountList.lua
 UI\AchievementPoints.lua
 UI\MountCount.lua
@@ -58,6 +54,7 @@ UI\Hotkeys.lua
 UI\MountListDropDown.lua
 UI\SettingsDropDown.lua
 UI\DressUpButton.lua
+UI\RarityNames.lua
 UI\Resize.lua
 UI\ShopButton.lua
 UI\BlizzFixes.lua

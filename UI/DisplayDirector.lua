@@ -179,7 +179,7 @@ local function BuildCameraPanel()
         else
             SetCVar("mountJournalShowPlayer", 0)
         end
-        ADDON.UI:UpdateMountDisplay(true)
+        MountJournal_UpdateMountDisplay(true)
     end)
 
     local color = BuildButton(L.TOGGLE_COLOR)

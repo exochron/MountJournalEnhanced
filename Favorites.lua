@@ -62,8 +62,7 @@ local function FavorMounts(mountIds, finishedCallback)
             starButton:SetDisabled(false)
         end
         if ADDON.initialized then
-            ADDON.Api:UpdateIndex()
-            ADDON.UI:UpdateMountList()
+            ADDON.Api:FilterMounts()
         end
         finishedCallback()
     end
@@ -80,12 +79,12 @@ end
 
 local function FetchDisplayedMountIds()
     local mountIds = {}
-    for index = 1, ADDON.Api:GetNumDisplayedMounts() do
-        local _, _, _, _, _, _, _, _, _, _, isCollected, mountId = ADDON.Api:GetDisplayedMountInfo(index)
-        if isCollected then
-            mountIds[#mountIds + 1] = mountId
+    MountJournal.ScrollBox:GetDataProvider():ForEach(function(data)
+        if select(11, C_MountJournal.GetMountInfoByID(data.mountID)) then
+            mountIds[#mountIds + 1] = data.mountID
         end
-    end
+    end)
+
     return mountIds
 end
 

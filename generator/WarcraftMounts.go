@@ -23,6 +23,8 @@ func LoadMountFamilies() map[string]string {
 			mountName = strings.ToLower(mountName)
 			mountName = strings.Replace(mountName, " [horde]", "", -1)
 			mountName = strings.Replace(mountName, " [alliance]", "", -1)
+			mountName = strings.Replace(mountName, " [Horde]", "", -1)
+			mountName = strings.Replace(mountName, " [Alliance]", "", -1)
 			families[mountName] = familyName
 		}
 	}

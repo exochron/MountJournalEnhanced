@@ -45,6 +45,7 @@ local function PrepareDefaults()
             previewButton = true,
             showPersonalCount = true,
             windowSize = { 0, 0 },
+            colorizeNameByRarity = true,
         },
 
         favoritePerChar = false,
@@ -73,9 +74,17 @@ local function PrepareDefaults()
                 ground = true,
                 flying = true,
                 underwater = true,
+                dragonriding = true,
                 transform = true,
                 repair = true,
                 passenger = true,
+            },
+            rarity = {
+                [Enum.ItemQuality.Common] = true,
+                [Enum.ItemQuality.Uncommon] = true,
+                [Enum.ItemQuality.Rare] = true,
+                [Enum.ItemQuality.Epic] = true,
+                [Enum.ItemQuality.Legendary] = true,
             },
             family = {},
             expansion = {},
@@ -85,9 +94,10 @@ local function PrepareDefaults()
         },
 
         sort = {
-            by = 'name', -- name|type|expansion
+            by = 'name', -- name|type|expansion|rarity|tracking
             descending = false,
             favoritesOnTop = true,
+            dragonridingOnTop = true,
             unusableToBottom = false,
             unownedOnBottom = true,
         },

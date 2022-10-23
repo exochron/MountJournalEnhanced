@@ -34,21 +34,19 @@ local function InitializeMountOptionsMenu(sender, level)
 
     if not needsFanfare and isCollected then
         local isFavorite, canFavorite = ADDON.Api:GetIsFavoriteByID(menuMountId)
-        info = {notCheckable = true, disabled = not canFavorite }
+        info = { notCheckable = true, disabled = not canFavorite }
 
         if isFavorite then
             info.text = BATTLE_PET_UNFAVORITE
             info.func = function()
                 ADDON.Api:SetIsFavoriteByID(menuMountId, false)
-                ADDON.Api:UpdateIndex()
-                ADDON.UI:UpdateMountList()
+                ADDON:FilterMounts()
             end
         else
             info.text = BATTLE_PET_FAVORITE
             info.func = function()
                 ADDON.Api:SetIsFavoriteByID(menuMountId, true)
-                ADDON.Api:UpdateIndex()
-                ADDON.UI:UpdateMountList()
+                ADDON:FilterMounts()
             end
         end
 
@@ -62,8 +60,7 @@ local function InitializeMountOptionsMenu(sender, level)
                 text = SHOW,
                 func = function()
                     ADDON.settings.hiddenMounts[spellId] = nil
-                    ADDON.Api:UpdateIndex()
-                    ADDON.UI:UpdateMountList()
+                    ADDON:FilterMounts()
                 end
             }
         else
@@ -72,8 +69,7 @@ local function InitializeMountOptionsMenu(sender, level)
                 text = HIDE,
                 func = function()
                     ADDON.settings.hiddenMounts[spellId] = true
-                    ADDON.Api:UpdateIndex()
-                    ADDON.UI:UpdateMountList()
+                    ADDON:FilterMounts()
                 end,
             }
         end
@@ -87,10 +83,10 @@ local function InitializeMountOptionsMenu(sender, level)
             ADDON.UI:CreateNotesFrame(mountId)
         end,
     }
-    
+
     UIDropDownMenu_AddButton(info, level)
 
-    UIDropDownMenu_AddButton({text = CANCEL, notCheckable = true,}, level)
+    UIDropDownMenu_AddButton({ text = CANCEL, notCheckable = true, }, level)
 end
 
 ADDON.Events:RegisterCallback("loadUI", function()
@@ -107,8 +103,7 @@ ADDON.Events:RegisterCallback("loadUI", function()
             ToggleDropDownMenu(1, nil, menu, anchor, 0, 0)
         end
     end
-
-    for _, button in pairs(MountJournal.MJE_ListScrollFrame.buttons) do
+    local Setup = function(button)
         button:HookScript("OnClick", function(sender, mouseButton)
             OnClick(sender, sender, mouseButton)
         end)
@@ -116,4 +111,10 @@ ADDON.Events:RegisterCallback("loadUI", function()
             OnClick(sender:GetParent(), sender, mouseButton)
         end)
     end
+    MountJournal.ScrollBox:ForEachFrame(Setup)
+    ScrollUtil.AddAcquiredFrameCallback(MountJournal.ScrollBox, function(button, _, new)
+        if new then
+            Setup(button)
+        end
+    end, ADDON_NAME .. 'dropdown')
 end, "mount dropdown")

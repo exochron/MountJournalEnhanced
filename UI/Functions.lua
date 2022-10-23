@@ -55,6 +55,7 @@ end
 function ADDON.UI:RestoreSize(frame)
     if savedSize[frame] then
         frame:SetSize(savedSize[frame][1], savedSize[frame][2])
+        return savedSize[frame][1], savedSize[frame][2]
     end
 end
 

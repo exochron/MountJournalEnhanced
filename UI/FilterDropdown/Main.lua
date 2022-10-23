@@ -17,6 +17,7 @@ local SETTING_HIDDEN = "hidden"
 local SETTING_HIDDEN_INGAME = "hiddenIngame"
 local SETTING_SORT = "sort"
 local SETTING_COLOR = "color"
+local SETTING_RARITY = "rarity"
 
 function ADDON.UI.FDD:UpdateResetVisibility()
     if MountJournalFilterButton.ResetButton then
@@ -43,8 +44,7 @@ function ADDON.UI.FDD:CreateFilterInfo(text, filterKey, filterSettings, toggleBu
         end
         info.func = function(self, arg1, arg2, value)
             arg1[filterKey] = arg2 or value
-            ADDON.Api:UpdateIndex()
-            ADDON.UI:UpdateMountList()
+            ADDON:FilterMounts()
             UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
             ADDON.UI.FDD:UpdateResetVisibility()
 
@@ -91,8 +91,7 @@ function ADDON.UI.FDD:SetAllSubFilters(settings, switch)
     end
 
     UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
-    ADDON.Api:UpdateIndex()
-    ADDON.UI:UpdateMountList()
+    ADDON:FilterMounts()
     ADDON.UI.FDD:UpdateResetVisibility()
 end
 
@@ -162,6 +161,7 @@ local function InitializeFilterDropDown(_, level)
         UIDropDownMenu_AddButton(CreateFilterCategory(L["Family"], SETTING_FAMILY), level)
         UIDropDownMenu_AddButton(CreateFilterCategory(EXPANSION_FILTER_TEXT, SETTING_EXPANSION), level)
         UIDropDownMenu_AddButton(CreateFilterCategory(COLOR, SETTING_COLOR), level)
+        UIDropDownMenu_AddButton(CreateFilterCategory(RARITY, SETTING_RARITY), level)
 
         UIDropDownMenu_AddSpace(level)
 
@@ -197,6 +197,7 @@ local function InitializeFilterDropDown(_, level)
         UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_FLYING, "flying", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_GROUND, "ground", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_AQUATIC, "underwater", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_DRAGONRIDING, "dragonriding", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L["Transform"], "transform", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(MINIMAP_TRACKING_REPAIR, "repair", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L["Passenger"], "passenger", settings), level)
@@ -213,11 +214,23 @@ local function InitializeFilterDropDown(_, level)
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_EXPANSION then
         local settings = ADDON.settings.filter[SETTING_EXPANSION]
         AddCheckAllAndNoneInfo(settings, level)
-        for i = 0, #ADDON.DB.Expansion do
+        for i = #ADDON.DB.Expansion, 0,-1 do
             UIDropDownMenu_AddButton(CreateFilterInfo(_G["EXPANSION_NAME" .. i], i, settings), level)
         end
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_COLOR then
         ADDON.UI.FDD:AddColorMenu(level)
+    elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_RARITY then
+        local settings = ADDON.settings.filter[SETTING_RARITY]
+        AddCheckAllAndNoneInfo(settings, level)
+        local addButton = function(quality, suffix)
+            local text = "|c"..select(4, GetItemQualityColor(quality)).._G["ITEM_QUALITY"..quality.."_DESC"].."|r".." ("..suffix..")"
+            UIDropDownMenu_AddButton(CreateFilterInfo(text, quality, settings), level)
+        end
+        addButton(Enum.ItemQuality.Legendary, "<1%")
+        addButton(Enum.ItemQuality.Epic, "<10%")
+        addButton(Enum.ItemQuality.Rare, "<20%")
+        addButton(Enum.ItemQuality.Uncommon, "<50%")
+        addButton(Enum.ItemQuality.Common, ">=50%")
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_SORT then
         ADDON.UI.FDD:AddSortMenu(level)
     end
@@ -239,8 +252,7 @@ ADDON.Events:RegisterCallback("loadUI", function()
     end)
     MountJournalFilterButton.resetFunction = function()
         ADDON:ResetFilterSettings()
-        ADDON.Api:UpdateIndex()
-        ADDON.UI:UpdateMountList()
+        ADDON:FilterMounts()
     end
     ADDON.UI.FDD:UpdateResetVisibility()
 end, "filter dropdown")

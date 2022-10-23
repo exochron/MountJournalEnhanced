@@ -51,7 +51,7 @@ func collectMounts(
 				playerConditionDB.ReadInt64(playerConditionId, 0),
 				playerConditionDB.ReadString(playerConditionId, 1),
 				playerConditionDB.ReadInt(playerConditionId, 2),
-				playerConditionDB.ReadInt(playerConditionId, 56),
+				playerConditionDB.ReadInt(playerConditionId, 57),
 			)
 		}
 
@@ -76,7 +76,7 @@ func collectMounts(
 		spellID := int(itemEffectDB.ReadInt(effectID, 6))
 		// is mount spell && is TriggerType = OnUse(6) && is Bonding = 0
 		if mountID, ok := spellToMount[spellID]; ok && itemEffectDB.ReadInt(effectID, 1) == 6 {
-			if _, ok := itemSparseIDs[itemID]; ok && itemSparseDB.ReadInt(itemID, 54) == 0 {
+			if _, ok := itemSparseIDs[itemID]; ok && itemSparseDB.ReadInt(itemID, 55) == 0 {
 				mounts[mountID].ItemIsTradeable = true
 			}
 		}

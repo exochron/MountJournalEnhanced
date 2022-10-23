@@ -3,9 +3,9 @@ local _, ADDON = ...
 ADDON.DB = {}
 
 ADDON.DB.Recent = {
-    ["minID"] = 1597,
-    ["blacklist"] = { },
-    ["whitelist"] = { 1405, 1576 },
+    ["minID"] = 1577,
+    ["blacklist"] = { 1580, 1581, 1584, 1585, 1587, 1597, 1599, 1600, 1602, 1679 },
+    ["whitelist"] = { 1467, 1469, 1478, 1545, 1546, 1553, 1556, 1563 },
 }
 
 ADDON.DB.Source = {
@@ -144,6 +144,10 @@ ADDON.DB.Source = {
         [342680] = true, -- Deepstar Aurelid - Hirukon - Zereth Mortis
         [368105] = true, -- Colossal Plaguespew Mawrat - Rhuv, Gorger of Ruin - Zereth Mortis
         [368128] = true, -- Colossal Wraithbound Mawrat - Zereth Mortis - treasure
+
+        -- Dragonflight
+        [359622] = true, -- Liberated Slyvern - Breezebiter - Azure Span
+        [385266] = true, -- Zenet Hatchling - Ohn'ahran Plains - Zenet Egg
     },
 
     ["Quest"] = {
@@ -188,6 +192,7 @@ ADDON.DB.Source = {
         [354361] = true, -- Dusklight Razorwing - Korthia - random eggs
         [354362] = true, -- Maelie the Wanderer - Korthia - treasure quest chain
         [363701] = true, -- Patient Bufonid - Zereth Mortis - treasure quest chain
+        [374247] = true, -- Lizi, Thunderspine Tramper
 
         ------------------------------
         -- Alliance ------------------
@@ -254,6 +259,16 @@ ADDON.DB.Source = {
         [334409] = true, -- Eternal Phalynx of Humility - kyrian feature vendor
         [340503] = true, -- Umbral Scythehorn - night fae feature vendor
         [342667] = true, -- Vibrant Flutterwing - night fae feature vendor
+        [374098] = true, -- Stormhide Salamanther
+        [385115] = true, -- Swift Armored Vorquin - dracthyr vendor
+        [385131] = true, -- Armored Vorquin Leystrider - dracthyr vendor
+        [385134] = true, -- Majestic Armored Vorquin - dracthyr vendor
+        [394216] = true, -- Crimson Vorquin - dracthyr vendor
+        [394218] = true, -- Sapphire Vorquin - dracthyr vendor
+        [394219] = true, -- Bronze Vorquin - dracthyr vendor
+        [394220] = true, -- Obsidian Vorquin - dracthyr vendor
+        [359409] = true, -- Iskaara Trader's Ottuk - Tattukiaka
+        [376879] = true, -- Ivory Trader's Ottuk - Tattukiaka
 
         ------------------------------
         -- Alliance ------------------
@@ -538,6 +553,11 @@ ADDON.DB.Source = {
         [354359] = true, -- Fierce Razorwing - Korthia - Death's Advance Supplies
         [359229] = true, -- Heartlight Vombata - Zereth Mortis - The Enlightened
         [359276] = true, -- Anointed Protostag - Zereth Mortis - The Enlightened
+
+        [374034] = true, -- Azure Skitterfly - Dragonscale Expedition
+        [374048] = true, -- Verdant Skitterfly - Dragonscale Expedition
+        [374032] = true, -- Tamed Skitterfly - Dragonscale Expedition
+        [376875] = true, -- Brown Scouting Ottuk - Iskaara Tuskar
 
         ------------------------------
         -- Alliance ------------------
@@ -861,7 +881,6 @@ ADDON.DB.Source = {
         [340068] = 14532, -- Sintouched Deathwalker - Shadowlands Keystone Master: Season One
         [344578] = 14570, -- Corridor Creeper - Twisting Corridors: Layer 8
         [344659] = 14322, -- Voracious Gorger - Glory of the Shadowlands Hero
-
         [339956] = 15089, -- Mawsworn Charger - Flawless Master
         [339957] = 15130, -- Hand of Hrestimorak - Glory of the Dominant Raider
         [346554] = 15178, -- Tazavesh Gearglider - Fake It 'Til You Make It
@@ -875,6 +894,15 @@ ADDON.DB.Source = {
         [363297] = 15322, -- Colossal Soulshredder Mawrat - Flawless Master (Layer 16)
         [334482] = 15690, -- Restoration Deathwalker - Shadowlands Keystone Master: Season Four
         [366791] = 15684, -- Jigglesworth, Sr. - Fates of the Shadowlands Raids
+
+        -- Dragonflight
+        [360954] = 15797, -- Highland Drake - An Azure Ally
+        [368896] = 15794, -- Renewed Proto-Drake - A New Friend
+        [368899] = 15795, -- Windborne Velocidrake - Together in the Skies
+        [368901] = 15796, -- Cliffside Wylderdrake - Cliffside Companion
+        [376912] = { 15833, 15834 }, -- Otterworldly Ottuk Carrier - Thanks for the Carry!
+        [387231] = 16649, -- Hailstorm Armoredon - Dragonflight Keystone Master: Season One
+
 
         ------------------------------
         -- Alliance ------------------
@@ -1082,6 +1110,7 @@ ADDON.DB.Source = {
         [353036] = true, -- Unchained Gladiator's Soul Eater - Sinful Gladiator: Shadowlands Season 2
         [365559] = true, -- Cosmic Gladiator's Soul Eater - Gladiator: Shadowlands Season 3
         [370346] = true, -- Eternal Gladiator's Soul Eater - Gladiator: Shadowlands Season 4
+        [377071] = true, -- Crimson Gladiator's Drake - Gladiator: Dragonflight Season 1
 
         -- Prestige Reward
         [222202] = true, -- Prestigious Bronze Courser
@@ -1117,6 +1146,7 @@ ADDON.DB.Source = {
         [348770] = true, -- Vicious War Gorm
         [347256] = true, -- Vicious War Croaker
         [349824] = true, -- Vicious War Warstalker
+        [394737] = true, -- Vicious Sabertooth
 
         -- Achievement
         [60118] = true, -- Black War Bear - For The Alliance!
@@ -1162,6 +1192,7 @@ ADDON.DB.Source = {
         [348769] = true, -- Vicious War Gorm
         [347255] = true, -- Vicious War Croaker
         [349823] = true, -- Vicious War Warstalker
+        [394738] = true, -- Vicious Sabertooth
 
         -- Achievement
         [60119] = true, -- Black War Bear - For The Horde!
@@ -1303,6 +1334,9 @@ ADDON.DB.Source = {
         -- Call of the Scarab (Micro)
         [239766] = true, -- Blue Qiraji War Tank
         [239767] = true, -- Red Qiraji War Tank
+
+        -- Centaur Hunts (Micro)
+        [374196] = true, -- Plainswalker Bearer
     },
 
     ["Black Market"] = {
@@ -1381,7 +1415,7 @@ ADDON.DB.Source = {
 }
 
 ADDON.DB.FeatsOfStrength = {
-    -- from https://wowhead.com/mount-feats-of-strength (62)
+    -- from https://wowhead.com/mount-feats-of-strength (63)
     -- mountId => AchievementId
     [55] = 3356, -- Winterspring Frostsaber
     [69] = 729, -- Deathcharger's Reins
@@ -1441,6 +1475,7 @@ ADDON.DB.FeatsOfStrength = {
     [1480] = 14999, -- Unchained Gladiator's Soul Eater
     [1572] = 15384, -- Cosmic Gladiator's Soul Eater
     [1599] = 15612, -- Eternal Gladiator's Soul Eater
+    [1660] = 16730, -- Crimson Gladiator's Drake
 }
 
 ADDON.DB.Expansion = {
@@ -1515,7 +1550,7 @@ ADDON.DB.Expansion = {
 
     [8] = { -- Shadowlands
         ["minID"] = 1330,
-        ["maxID"] = 999999,
+        ["maxID"] = 1576,
         [803] = true, -- Mastercraft Gravewing
         [1289] = true, -- Ensorcelled Everwyrm
         [1298] = true, -- Hopecrusher Gargon
@@ -1528,7 +1563,30 @@ ADDON.DB.Expansion = {
         [1307] = true, -- Sundancer
         [1309] = true, -- Chittering Animite
         [1310] = true, -- Horrid Dredwing
-    }
+        [1580] = true, -- Heartbond Lupine
+        [1581] = true, -- Nether-Gorged Greatwyrm
+        [1584] = true, -- Colossal Plaguespew Mawrat
+        [1585] = true, -- Colossal Wraithbound Mawrat
+        [1587] = true, -- Zereth Overseer
+        [1597] = true, -- Grimhowl
+        [1599] = true, -- Eternal Gladiator's Soul Eater
+        [1600] = true, -- Elusive Emerald Hawkstrider
+        [1602] = true, -- Tuskarr Shoreglider
+        [1679] = true, -- Frostbrood Proto-Wyrm
+    },
+
+    [9] = { -- Dragonflight
+        ["minID"] = 1577,
+        ["maxID"] = 9999999999,
+        [1467] = true, -- Noble Elderhorn
+        [1469] = true, -- Magmashell
+        [1478] = true, -- Skyskin Hornstrider
+        [1545] = true, -- Divine Kiss of Ohn'ahra
+        [1546] = true, -- Iskaara Trader's Ottuk
+        [1553] = true, -- Liberated Slyvern
+        [1556] = true, -- Tangled Dreamweaver
+        [1563] = true, -- Highland Drake
+    },
 }
 
 ADDON.DB.Type = {
@@ -1538,10 +1596,13 @@ ADDON.DB.Type = {
         typeIDs = { 230, 231, 241, 269, 284, 408 },
     },
     flying = {
-        typeIDs = { 247, 248, 398, 407 },
+        typeIDs = { 247, 248, 398, 402, 407 },
     },
     underwater = {
         typeIDs = { 231, 232, 254, 407 },
+    },
+    dragonriding = {
+        typeIDs = { 402 },
     },
     repair = {
         [280] = true, -- Traveler's Tundra Mammoth (Alliance)
@@ -1598,7 +1659,7 @@ ADDON.DB.Ignored = {
     [484] = true, -- Black Riding Yak
     [485] = true, -- Brown Riding Yak
 
-    -- ghost
+    -- ghost (mountType=242)
     [238] = true, -- Swift Spectral Gryphon
     [776] = true, -- Swift Spectral Rylak
     [934] = true, -- Swift Spectral Hippogryph
@@ -1606,6 +1667,7 @@ ADDON.DB.Ignored = {
     [1270] = true, -- Swift Spectral Magnetocraft
     [1271] = true, -- Swift Spectral Armored Gryphon
     [1272] = true, -- Swift Spectral Pterrordax
+    [1607] = true, -- Swift Spectral Drake
 
     [1578] = true, -- DNT Test Mount JZB
 }

@@ -46,26 +46,8 @@ local function CreateAchievementPoints()
     frame.staticText:SetText(GetCategoryAchievementPoints(MOUNT_ACHIEVEMENT_CATEGORY, true))
 
     frame:SetScript("OnClick", function()
-        if ACHIEVEMENT_FUNCTIONS then
-            ACHIEVEMENT_FUNCTIONS.selectedCategory = MOUNT_ACHIEVEMENT_CATEGORY
-        else
-            local onLoadAddon = CreateFrame("FRAME")
-            onLoadAddon:RegisterEvent("ADDON_LOADED")
-            onLoadAddon:SetScript("OnEvent", function(_, _, arg1)
-                if arg1 == "Blizzard_AchievementUI" then
-                    local doSwitch = true
-                    AchievementFrame:HookScript("OnShow", function ()
-                        if doSwitch then
-                            ACHIEVEMENT_FUNCTIONS.selectedCategory = MOUNT_ACHIEVEMENT_CATEGORY
-                            AchievementFrame_ForceUpdate()
-                            doSwitch = false
-                        end
-                    end)
-                end
-            end)
-        end
         ToggleAchievementFrame()
-
+        AchievementFrame_UpdateAndSelectCategory(MOUNT_ACHIEVEMENT_CATEGORY)
     end)
     frame:SetScript("OnEnter", function()
         frame.highlight:SetShown(true)

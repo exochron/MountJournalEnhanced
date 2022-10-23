@@ -2,7 +2,7 @@ local ADDON_NAME, ADDON = ...
 
 ADDON:RegisterUISetting('showShopButton', true, ADDON.L.SETTING_SHOP_BUTTON, function()
     if ADDON.initialized then
-        ADDON.UI:UpdateMountDisplay()
+        MountJournal_UpdateMountDisplay()
     end
 end)
 
@@ -33,7 +33,7 @@ local function CreateShopButton()
     frame:SetNormalAtlas('hud-microbutton-BStore-Up', true)
     frame:SetPushedAtlas('hud-microbutton-BStore-Down', true)
     frame:SetDisabledAtlas('hud-microbutton-BStore-Disabled', true)
-    frame:SetHighlightAtlas('hud-microbutton-highlight', true)
+    frame:SetHighlightAtlas('hud-microbutton-highlight')
 
     frame:HookScript("OnClick", function()
         SetStoreUIShown(true)

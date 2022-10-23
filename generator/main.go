@@ -32,12 +32,12 @@ func main() {
 		mounts[mountId].Rarity = rarity
 	}
 
-	CollectTextures(
-		mounts,
-		casc,
-		db2reader.ParseDB2(casc.LoadDB2("mountxdisplay")),
-		db2reader.ParseDB2(casc.LoadDB2("creaturedisplayinfo")),
-	)
+ 	CollectTextures(
+ 		mounts,
+ 		casc,
+ 		db2reader.ParseDB2(casc.LoadDB2("mountxdisplay")),
+ 		db2reader.ParseDB2(casc.LoadDB2("creaturedisplayinfo")),
+ 	)
 
 	wcmMap := LoadMountFamilies()
 	conf.FamilyMap = GroupByFamily(conf.FamilyMap, mounts, wcmMap)

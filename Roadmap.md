@@ -12,7 +12,6 @@
 - favorite groups / custom filter groups
 - favorite menu at SummonRandomFavoriteButton?
 - link to wowhead (?)
-- display Rarity / x Percentage of all worldwide players have that (Retail) - if I can find a nice source for that (https://www.dataforazeroth.com/collections/mounts ?)
 - Mount Score Rating (based on rarity?)
 - disable ingame sound effects of mounts (currently no api for that)
 
@@ -20,7 +19,7 @@
 (maybe for april fool's)
 - googly eyes (like in overwatch)
 - who's that mount:
-  - Only Display, but the mount is completly black
+  - Only Display, but the mount is completely black
   - multiple choice (4?); never use an alternative option of the same family
   - 10? rounds
 - Pimp my Mount: more effects in display, like:

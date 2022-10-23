@@ -6,8 +6,6 @@ ADDON.Events:OnLoad()
 ADDON.Events:SetUndefinedEventsAllowed(true)
 
 local function InitUI()
-    ADDON.Api:UpdateIndex()
-
     local frame = CreateFrame("frame")
     frame:RegisterEvent("ZONE_CHANGED")
     frame:RegisterEvent("ZONE_CHANGED_INDOORS")
@@ -15,15 +13,13 @@ local function InitUI()
     frame:RegisterEvent("MOUNT_JOURNAL_SEARCH_UPDATED")
     frame:SetScript("OnEvent", function()
         if CollectionsJournal:IsShown() then
-            ADDON.Api:UpdateIndex(true)
-            ADDON.UI:UpdateMountList()
+            ADDON:FilterMounts()
         end
     end);
 
     MountJournal.searchBox:SetScript("OnTextChanged", function()
         SearchBoxTemplate_OnTextChanged(MountJournal.searchBox)
-        ADDON.Api:UpdateIndex(true)
-        ADDON.UI:UpdateMountList()
+        ADDON:FilterMounts()
     end)
 end
 
@@ -61,8 +57,8 @@ frame:SetScript("OnEvent", function(_, event, ...)
     if event == "NEW_MOUNT_ADDED" then
         local param1, param2, param3 = ...
         C_Timer.After(1, function() -- mount infos are not properly updated in current frame
+            ADDON:FilterMounts()
             ADDON.Events:TriggerEvent("OnNewMount", param1, param2, param3)
-            ADDON.Api:UpdateIndex()
         end)
     end
 end)
@@ -79,8 +75,15 @@ EventRegistry:RegisterCallback("MountJournal.OnShow", function()
         ADDON.Events:TriggerEvent("postloadUI")
         ADDON.Events:UnregisterEvents({"preloadUI", "loadUI", "postloadUI"})
 
-        if ADDON.Api:GetSelected() == nil then
-            ADDON.Api:SetSelected(select(12, ADDON.Api:GetDisplayedMountInfo(1)))
+        local selected = ADDON.Api:GetSelected()
+        if selected == nil or selected == select(12, C_MountJournal.GetDisplayedMountInfo(1)) then
+            local dataprovider = MountJournal.ScrollBox:GetDataProvider()
+            if dataprovider:GetSize() > 0 then
+                ADDON.Api:SetSelected(dataprovider:Find(1).mountID)
+            end
         end
     end
 end, ADDON_NAME)
+
+-- skip dragonriding order helptip
+C_CVar.SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_MOUNT_COLLECTION_DRAGONRIDING, true)

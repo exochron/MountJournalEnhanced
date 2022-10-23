@@ -33,8 +33,7 @@ local function CreateSwatch()
 
         swatchFrame:HookScript("OnColorSelect", function(_, r, g, b)
             ADDON.settings.filter.color = { r * 255, g * 255, b * 255 }
-            ADDON.Api:UpdateIndex()
-            ADDON.UI:UpdateMountList()
+            ADDON:FilterMounts()
             ADDON.UI.FDD:UpdateResetVisibility()
         end)
 
@@ -66,8 +65,7 @@ function ADDON.UI.FDD:AddColorMenu(level)
         justifyH = "CENTER",
         func = function()
             ADDON.settings.filter.color = { }
-            ADDON.Api:UpdateIndex()
-            ADDON.UI:UpdateMountList()
+            ADDON:FilterMounts()
             ADDON.UI.FDD:UpdateResetVisibility()
         end,
     }

@@ -4,7 +4,7 @@ local tooltip
 
 ADDON:RegisterUISetting('showStatistics', true, ADDON.L.SETTING_SHOW_STATISTICS, function()
     if ADDON.initialized then
-        ADDON.UI:UpdateMountDisplay()
+        MountJournal_UpdateMountDisplay()
     end
 end)
 

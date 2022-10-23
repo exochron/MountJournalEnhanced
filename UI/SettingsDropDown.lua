@@ -64,6 +64,7 @@ local function BuildWheelButton()
     button:SetWidth(24)
     button:SetHeight(24)
     button:SetPoint("RIGHT", CollectionsJournal.CloseButton, "LEFT", 0, 0)
+    button:SetFrameLevel(510)
 
     local tex = button:CreateTexture(nil, "ARTWORK")
     tex:SetPoint("TOPLEFT", button, "TOPLEFT", 3, -3)

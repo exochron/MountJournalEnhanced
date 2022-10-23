@@ -2,18 +2,11 @@ local ADDON_NAME, ADDON = ...
 
 local AceGUI = LibStub("AceGUI-3.0")
 
-function ADDON:OpenOptions()
-    local title = GetAddOnMetadata(ADDON_NAME, "Title")
-    InterfaceOptionsFrame_OpenToCategory(title)
-    InterfaceOptionsFrame_OpenToCategory(title)
+local mainCategory
 
-    for _, button in ipairs(InterfaceOptionsFrameAddOns.buttons) do
-        local element = button.element
-        if element and element.collapsed and element.hasChildren and element.name == title then
-            InterfaceOptionsListButton_ToggleSubCategories(button)
-            break
-        end
-    end
+function ADDON:OpenOptions()
+    mainCategory.expanded = true
+    Settings.OpenToCategory(mainCategory.ID)
 end
 
 local function BuildCheckBox(parent, text)
@@ -171,7 +164,10 @@ ADDON.Events:RegisterCallback("OnLogin", function()
         end
     end)
     group:SetCallback("default", ADDON.ResetSettings)
-    InterfaceOptions_AddCategory(group.frame)
 
-    InterfaceOptions_AddCategory(BildAbout().frame)
+    mainCategory = Settings.RegisterCanvasLayoutCategory(group.frame, GetAddOnMetadata(ADDON_NAME, "Title"));
+
+    Settings.RegisterAddOnCategory(mainCategory)
+    Settings.RegisterCanvasLayoutSubcategory(mainCategory, BildAbout().frame, ADDON.L.SETTING_HEAD_ABOUT)
+
 end, "settings panel")

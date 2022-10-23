@@ -44,7 +44,7 @@ local function getLabelText(mountId)
     local text = ''
     local note = ADDON.settings.notes[mountId]
     if note then
-        text = NORMAL_FONT_COLOR:WrapTextInColorCode(NOTE_COLON) .. HIGHLIGHT_FONT_COLOR:WrapTextInColorCode(note)
+        text = NORMAL_FONT_COLOR:WrapTextInColorCode(NOTE_COLON) .. " " .. HIGHLIGHT_FONT_COLOR:WrapTextInColorCode(note)
     end
 
     return text
