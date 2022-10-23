@@ -1,7 +1,4 @@
 
-### 2.20 pretty fly (for a dragon guy)
-- database / generator
-
 ### Next
 - personal favorites rework
 - special summon animation
