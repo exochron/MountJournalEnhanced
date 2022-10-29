@@ -348,7 +348,7 @@ function ADDON:FilterMounts()
 
     -- update data provider
     if MountJournal then
-        local dataProvider = MountJournal.ScrollBox:GetDataProvider()
+        local dataProvider = ADDON.Api:GetDataProvider()
         if #result == 0 then
             dataProvider:Flush()
         else

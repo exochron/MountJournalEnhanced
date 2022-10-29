@@ -64,7 +64,7 @@ local function CreateCharacterMountCount()
         end
 
         if ADDON.settings.ui.showPersonalCount then
-            local dataProvider = MountJournal.ScrollBox:GetDataProvider()
+            local dataProvider = ADDON.Api:GetDataProvider()
             local displayCount = dataProvider:GetSize()
 
             local personal, personalTotal, owned, totalCount = count()

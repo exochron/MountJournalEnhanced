@@ -79,7 +79,7 @@ end
 
 local function FetchDisplayedMountIds()
     local mountIds = {}
-    MountJournal.ScrollBox:GetDataProvider():ForEach(function(data)
+    ADDON.Api:GetDataProvider():ForEach(function(data)
         if select(11, C_MountJournal.GetMountInfoByID(data.mountID)) then
             mountIds[#mountIds + 1] = data.mountID
         end

@@ -77,7 +77,7 @@ EventRegistry:RegisterCallback("MountJournal.OnShow", function()
 
         local selected = ADDON.Api:GetSelected()
         if selected == nil or selected == select(12, C_MountJournal.GetDisplayedMountInfo(1)) then
-            local dataprovider = MountJournal.ScrollBox:GetDataProvider()
+            local dataprovider = ADDON.Api:GetDataProvider()
             if dataprovider:GetSize() > 0 then
                 ADDON.Api:SetSelected(dataprovider:Find(1).mountID)
             end
