@@ -88,9 +88,6 @@ function ADDON.Api:GetDataProvider()
         dataProvider:SetSortComparator(function(a, b)
             return ADDON:SortHandler(a, b)
         end)
-        dataProvider:RegisterCallback("OnSizeChanged", function()
-            ADDON.Events:TriggerEvent("OnFilterUpdate")
-        end, ADDON_NAME)
     end
 
     return dataProvider

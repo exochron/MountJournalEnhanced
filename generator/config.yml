@@ -1,4 +1,4 @@
-product: wowt
+product: wow
 
 ignored: [
 	7,    # Gray Wolf
@@ -135,7 +135,7 @@ familymap: [
       {name: Drakes, wcm: [Drakes, Onyxian Drakes, Void Dragons]},
       {name: Grand Drakes, wcm: [Grand Drakes]},
       {name: Nether Drakes, wcm: [Nether Drakes]},
-      {name: Others, wcm: [Sinuous Drakes, Fey Drakes, Everwyrms, Mechanical Dragons, Greatwyrms], ids: [1591]}, # Cliffside Wylderdrake
+      {name: Others, wcm: [Sinuous Drakes, Fey Drakes, Everwyrms, Mechanical Dragons, Greatwyrms], ids: [1563, 1590, 1591]}, # Highland Drake, Velocidrake, Cliffside Wylderdrake
       {name: Proto-Drakes, wcm: [Proto-Drakes], ids: [1589]}, # Renewed Proto Drake
       {name: Stone Drakes, wcm: [Stone Drakes]},
       {name: Undead Drakes, wcm: [Undead Drakes, Soul Eaters]},
