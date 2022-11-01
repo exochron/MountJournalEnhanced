@@ -35,7 +35,6 @@ local function ModifyButton(button)
         button.icon:SetSize(MOUNT_BUTTON_HEIGHT - 2, MOUNT_BUTTON_HEIGHT - 2)
     end
 
-    button.name:ClearAllPoints()
     button.name:SetPoint("LEFT", button, "LEFT", 10, 1)
     button.name:SetPoint("RIGHT", button, "RIGHT", -10, 1)
 
@@ -52,6 +51,14 @@ local function UpdateButton(button, elementData)
     if ADDON.settings.ui.compactMountList then
         local mountID = elementData.mountID
         local isForDragonriding = select(13, C_MountJournal.GetMountInfoByID(mountID))
+
+        if button.name:GetNumLines() > 1 then
+            -- name region might have been stretched in height before. so we reset it's size here.
+            local text = button.name:GetText()
+            button.name:SetText("")
+            button.name:SetSize(button:GetWidth()-20, 0)
+            button.name:SetText(text)
+        end
 
         local yOffset = 1;
         if isForDragonriding then
@@ -71,9 +78,10 @@ ADDON:RegisterUISetting('compactMountList', true, ADDON.L.SETTING_COMPACT_LIST, 
         local box = MountJournal.ScrollBox
         local view = box:GetView()
         if flag then
-            box:ForEachFrame(function(button)
+            box:ForEachFrame(function(button, elementData)
                 SaveButtonLayout(button)
                 ModifyButton(button)
+                UpdateButton(button, elementData)
             end)
             ScrollUtil.AddAcquiredFrameCallback(box, function(button, _, new)
                 if new then
