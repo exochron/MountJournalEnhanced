@@ -208,13 +208,13 @@ familymap: [
 			{name: Gronnlings, wcm: [Gronnlings]},
 			{name: Gorger, wcm: [Anima Gorgers]},
 			{name: Yetis, wcm: [Yeti]},
+			{name: Others, ids: [1312]},
 		]
 	},
 	{name: Insects,
     subfamily: [
 			{name: Animite, wcm: [Animites]},
 			{name: Aqir Flyers, wcm: [Aqir Flyers]},
-			{name: Bees, wcm: [Bees]},
 			{name: Gorm, wcm: [Gorms]},
                       #   ids: [# somehow WCM has currently wrong mount ids for gorm
                       #       334364, # Spinemaw Gladechewer
@@ -227,7 +227,7 @@ familymap: [
       		{name: Flies, wcm: [Flies, Skitterflies]},
 			{name: Krolusks, wcm: [Krolusks]},
 			{name: Moth, wcm: [Moths]},
-			{name: Ravagers, wcm: [Ravagers]},
+			{name: Others, wcm: [ Bees, Ravagers ], ids: [1662] }, # Telix
 			{name: Silithids, wcm: [Silithids],
         ids: [
 					936, # Red Qiraji War Tank

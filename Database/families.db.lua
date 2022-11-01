@@ -911,6 +911,9 @@ ADDON.DB.Family = {
 [769] = true, -- Minion of Grumpus
 [1176] = true, -- Craghorn Chasm-Leaper
 },
+["Others"] = {
+[1312] = true, -- Gargantuan Grrloc
+},
 },
 ["Insects"] = {
 ["Animite"] = {
@@ -921,9 +924,6 @@ ADDON.DB.Family = {
 [1319] = true, -- Malevolent Drone
 [1320] = true, -- Shadowbarb Drone
 [1321] = true, -- Wicked Swarmer
-},
-["Bees"] = {
-[1013] = true, -- Honeyback Harvester
 },
 ["Gorm"] = {
 [1305] = true, -- Darkwarren Hardshell
@@ -955,8 +955,10 @@ ADDON.DB.Family = {
 [1428] = true, -- Amber Ardenmoth
 [1429] = true, -- Vibrant Flutterwing
 },
-["Ravagers"] = {
+["Others"] = {
 [594] = true, -- Grinning Reaver
+[1013] = true, -- Honeyback Harvester
+[1662] = true, -- Telix the Stormhorn
 },
 ["Silithids"] = {
 [116] = true, -- Black Qiraji Battle Tank
