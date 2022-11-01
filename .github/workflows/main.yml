@@ -33,7 +33,7 @@ jobs:
       - name: Clone project
         uses: actions/checkout@v3
         with:
-          fetch-depth: 50 # controls the length of the automated changelog
+          fetch-depth: 0 # controls the length of the automated changelog
 
       # once cloned, we just run the GitHub Action for the packager project
       - name: Package and release

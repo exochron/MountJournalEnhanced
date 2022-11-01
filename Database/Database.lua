@@ -1475,7 +1475,7 @@ ADDON.DB.FeatsOfStrength = {
     [1480] = 14999, -- Unchained Gladiator's Soul Eater
     [1572] = 15384, -- Cosmic Gladiator's Soul Eater
     [1599] = 15612, -- Eternal Gladiator's Soul Eater
-    [1660] = 16730, -- Crimson Gladiator's Drake
+    --[1660] = 16730, -- Crimson Gladiator's Drake
 }
 
 ADDON.DB.Expansion = {
@@ -1578,12 +1578,12 @@ ADDON.DB.Expansion = {
     [9] = { -- Dragonflight
         ["minID"] = 1577,
         ["maxID"] = 9999999999,
-        [1467] = true, -- Noble Elderhorn
-        [1469] = true, -- Magmashell
-        [1478] = true, -- Skyskin Hornstrider
-        [1545] = true, -- Divine Kiss of Ohn'ahra
-        [1546] = true, -- Iskaara Trader's Ottuk
-        [1553] = true, -- Liberated Slyvern
+        --[1467] = true, -- Noble Elderhorn
+        --[1469] = true, -- Magmashell
+        --[1478] = true, -- Skyskin Hornstrider
+        --[1545] = true, -- Divine Kiss of Ohn'ahra
+        --[1546] = true, -- Iskaara Trader's Ottuk
+        --[1553] = true, -- Liberated Slyvern
         [1556] = true, -- Tangled Dreamweaver
         [1563] = true, -- Highland Drake
     },

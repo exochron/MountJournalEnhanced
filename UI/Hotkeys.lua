@@ -45,7 +45,7 @@ ADDON.Events:RegisterCallback("loadUI", function()
     scrollFrame:HookScript("OnKeyDown", function(self, key)
         local totalDisplayed
         if (key == "DOWN" or key == "UP") and ADDON.settings.ui.enableCursorKeys and not IsModifierKeyDown() then
-            totalDisplayed = MountJournal.ScrollBox:GetDataProvider():GetSize()
+            totalDisplayed = ADDON.Api:GetDataProvider():GetSize()
             if totalDisplayed > 0 then
                 local step = 1
                 if key == "UP" then

@@ -1,5 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
+local menu
 local menuMountId
 
 local function InitializeMountOptionsMenu(sender, level)
@@ -89,32 +90,12 @@ local function InitializeMountOptionsMenu(sender, level)
     UIDropDownMenu_AddButton({ text = CANCEL, notCheckable = true, }, level)
 end
 
-ADDON.Events:RegisterCallback("loadUI", function()
-    local menu
-
-    local OnClick = function(sender, anchor, button)
-        if button ~= "LeftButton" then
-            if menu == nil then
-                menu = CreateFrame("Frame", ADDON_NAME .. "MountOptionsMenu", MountJournal, "UIDropDownMenuTemplate")
-                UIDropDownMenu_Initialize(menu, InitializeMountOptionsMenu, "MENU")
-            end
-
-            menuMountId = sender.mountID;
-            ToggleDropDownMenu(1, nil, menu, anchor, 0, 0)
-        end
+function ADDON.UI:HandleListDropDown(sender, anchor)
+    if menu == nil then
+        menu = CreateFrame("Frame", ADDON_NAME .. "MountOptionsMenu", MountJournal, "UIDropDownMenuTemplate")
+        UIDropDownMenu_Initialize(menu, InitializeMountOptionsMenu, "MENU")
     end
-    local Setup = function(button)
-        button:HookScript("OnClick", function(sender, mouseButton)
-            OnClick(sender, sender, mouseButton)
-        end)
-        button.DragButton:HookScript("OnClick", function(sender, mouseButton)
-            OnClick(sender:GetParent(), sender, mouseButton)
-        end)
-    end
-    MountJournal.ScrollBox:ForEachFrame(Setup)
-    ScrollUtil.AddAcquiredFrameCallback(MountJournal.ScrollBox, function(button, _, new)
-        if new then
-            Setup(button)
-        end
-    end, ADDON_NAME .. 'dropdown')
-end, "mount dropdown")
+
+    menuMountId = sender.mountID
+    ToggleDropDownMenu(1, nil, menu, anchor, 0, 0)
+end

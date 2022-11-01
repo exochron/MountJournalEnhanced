@@ -347,35 +347,33 @@ function ADDON:FilterMounts()
     end
 
     -- update data provider
-    if MountJournal then
-        local dataProvider = MountJournal.ScrollBox:GetDataProvider()
-        if #result == 0 then
-            dataProvider:Flush()
-        else
-            local flippedResult = CopyValuesAsKeys(result)
-            local skipAdd = {}
-            local toRemove = {}
-            dataProvider:ForEach(function(data)
-                local resultPosition = flippedResult[data.mountID]
-                if resultPosition then
-                    -- already in provider
-                    skipAdd[data.mountID] = true
-                else
-                    toRemove[#toRemove + 1] = data
-                end
-            end)
-            if #toRemove > 0 then
-                dataProvider:Remove(unpack(toRemove))
+    local dataProvider = ADDON.Api:GetDataProvider()
+    if #result == 0 then
+        dataProvider:Flush()
+    else
+        local flippedResult = CopyValuesAsKeys(result)
+        local skipAdd = {}
+        local toRemove = {}
+        dataProvider:ForEach(function(data)
+            local resultPosition = flippedResult[data.mountID]
+            if resultPosition then
+                -- already in provider
+                skipAdd[data.mountID] = true
+            else
+                toRemove[#toRemove + 1] = data
             end
-            local toAdd = tFilter(result, function(mountId)
-                return not skipAdd[mountId]
-            end, true)
-            if #toAdd > 0 then
-                for i, mountId in ipairs(toAdd) do
-                    toAdd[i] = { index = mountId, mountID = mountId }
-                end
-                dataProvider:InsertTable(toAdd)
+        end)
+        if #toRemove > 0 then
+            dataProvider:Remove(unpack(toRemove))
+        end
+        local toAdd = tFilter(result, function(mountId)
+            return not skipAdd[mountId]
+        end, true)
+        if #toAdd > 0 then
+            for i, mountId in ipairs(toAdd) do
+                toAdd[i] = { index = mountId, mountID = mountId }
             end
+            dataProvider:InsertTable(toAdd)
         end
     end
 

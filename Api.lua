@@ -1,4 +1,4 @@
-local _, ADDON = ...
+local ADDON_NAME, ADDON = ...
 
 ADDON.Api = {}
 
@@ -78,6 +78,19 @@ function ADDON.Api:SetSelected(selectedMountID, selectedVariation)
 end
 function ADDON.Api:GetSelected()
     return MountJournal.selectedMountID, selectedCreature
+end
+
+
+local dataProvider
+function ADDON.Api:GetDataProvider()
+    if not dataProvider then
+        dataProvider = CreateDataProvider()
+        dataProvider:SetSortComparator(function(a, b)
+            return ADDON:SortHandler(a, b)
+        end)
+    end
+
+    return dataProvider
 end
 
 ADDON.Events:RegisterCallback("OnJournalLoaded", function()
