@@ -121,6 +121,7 @@ local function SetupExtras(button)
         button:SetScript("OnClick", function(self, clickButton)
             if clickButton ~= "LeftButton" then
                 -- right click is handled in MountListDropDown.lua
+                ADDON.UI:HandleListDropDown(self, self)
             elseif IsModifiedClick("CHATLINK") then
                 -- No MacroFrame exception :>
                 local mountLink = C_MountJournal.GetMountLink(self.spellID);
@@ -132,6 +133,7 @@ local function SetupExtras(button)
         button.DragButton:SetScript("OnClick", function(self, clickButton)
             local parent = self:GetParent();
             if clickButton ~= "LeftButton" then
+                ADDON.UI:HandleListDropDown(self:GetParent(), self)
             elseif IsModifiedClick("CHATLINK") then
                 local mountLink = C_MountJournal.GetMountLink(parent.spellID);
                 ChatEdit_InsertLink(mountLink);
