@@ -193,6 +193,8 @@ ADDON.DB.Source = {
         [354362] = true, -- Maelie the Wanderer - Korthia - treasure quest chain
         [363701] = true, -- Patient Bufonid - Zereth Mortis - treasure quest chain
         [374247] = true, -- Lizi, Thunderspine Tramper
+        [376873] = true, -- Otto
+        [395644] = true, -- Divine Kiss of Ohn'ahra
 
         ------------------------------
         -- Alliance ------------------
@@ -268,6 +270,7 @@ ADDON.DB.Source = {
         [394219] = true, -- Bronze Vorquin - dracthyr vendor
         [394220] = true, -- Obsidian Vorquin - dracthyr vendor
         [359409] = true, -- Iskaara Trader's Ottuk - Tattukiaka
+        [373859] = true, -- Loyal Magmammoth - Yries Lightfingers
         [376879] = true, -- Ivory Trader's Ottuk - Tattukiaka
 
         ------------------------------
@@ -1593,13 +1596,13 @@ ADDON.DB.Type = {
     -- https://wow.gamepedia.com/API_C_MountJournal.GetMountInfoExtraByID
     -- https://wow.tools/dbc/?dbc=mounttype
     ground = {
-        typeIDs = { 230, 231, 241, 269, 284, 408 },
+        typeIDs = { 230, 231, 241, 269, 284, 408, 412 },
     },
     flying = {
         typeIDs = { 247, 248, 398, 402, 407 },
     },
     underwater = {
-        typeIDs = { 231, 232, 254, 407 },
+        typeIDs = { 231, 232, 254, 407, 412},
     },
     dragonriding = {
         typeIDs = { 402 },

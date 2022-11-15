@@ -56,7 +56,7 @@ local function UpdateButton(button, elementData)
             -- name region might have been stretched in height before. so we reset it's size here.
             local text = button.name:GetText()
             button.name:SetText("")
-            button.name:SetSize(button:GetWidth()-20, 0)
+            button.name:SetSize(button:GetWidth() - 20, 0)
             button.name:SetText(text)
         end
 
@@ -83,7 +83,14 @@ ADDON:RegisterUISetting('compactMountList', true, ADDON.L.SETTING_COMPACT_LIST, 
                 ModifyButton(button)
                 UpdateButton(button, elementData)
             end)
-            ScrollUtil.AddAcquiredFrameCallback(box, function(button, _, new)
+            local owner = ADDON_NAME .. 'compact'
+            ScrollUtil.AddAcquiredFrameCallback(box, function(a, b, c, d)
+                local button, new = b, d
+                if a ~= owner then
+                    -- TODO: remove after 10.0 launch
+                    button = a
+                    new = c
+                end
                 if new then
                     SaveButtonLayout(button)
                 end
@@ -92,8 +99,15 @@ ADDON:RegisterUISetting('compactMountList', true, ADDON.L.SETTING_COMPACT_LIST, 
                 else
                     RestoreButtonLayout(button)
                 end
-            end, ADDON_NAME .. 'compact')
-            ScrollUtil.AddReleasedFrameCallback(box, RestoreButtonLayout, ADDON_NAME .. 'compact')
+            end, owner)
+            ScrollUtil.AddReleasedFrameCallback(box, function(a, b)
+                local button = b
+                if a ~= owner then
+                    -- TODO: remove after 10.0 launch
+                    button = a
+                end
+                RestoreButtonLayout(button)
+            end, owner)
             view:SetPadding(0, 0, MOUNT_BUTTON_HEIGHT + 2, 0, 0)
             view:SetElementExtent(MOUNT_BUTTON_HEIGHT)
         else

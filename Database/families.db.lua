@@ -79,8 +79,8 @@ ADDON.DB.Family = {
 [753] = true, -- Corrupted Dreadwing
 },
 ["Eagle"] = {
-[1545] = true, -- Divine Kiss of Ohn'ahra
 [1672] = true, -- Zenet Hatchling
+[1545] = true, -- Divine Kiss of Ohn'ahra
 },
 ["Hawkstriders"] = {
 [146] = true, -- Swift Pink Hawkstrider
@@ -301,7 +301,7 @@ ADDON.DB.Family = {
 },
 ["Ottuk"] = {
 [1546] = true, -- Iskaara Trader's Ottuk
-[1656] = true, -- Splish-Splash
+[1656] = true, -- Otto
 [1657] = true, -- Brown Scouting Ottuk
 [1658] = true, -- Ivory Trader's Ottuk
 [1654] = true, -- Otterworldly Ottuk Carrier
@@ -358,6 +358,8 @@ ADDON.DB.Family = {
 [1205] = true, -- Kaldorei Nightsaber
 [1204] = true, -- Sandy Nightsaber
 [1216] = true, -- Priestess' Moonsaber
+[1688] = true, -- Vicious Sabertooth
+[1689] = true, -- Vicious Sabertooth
 },
 ["Stone Cats"] = {
 [421] = true, -- Winged Guardian
@@ -547,6 +549,7 @@ ADDON.DB.Family = {
 [1240] = true, -- Obsidian Worldbreaker
 [1265] = true, -- Uncorrupted Voidwing
 [1556] = true, -- Tangled Dreamweaver
+[1660] = true, -- Crimson Gladiator's Drake
 },
 ["Grand Drakes"] = {
 [442] = true, -- Blazing Drake
@@ -1130,6 +1133,7 @@ ADDON.DB.Family = {
 [1444] = true, -- Viridian Phase-Hunter
 [1622] = true, -- Stormhide Salamanther
 [1639] = true, -- Lizi, Thunderspine Tramper
+[1681] = true, -- Hailstorm Armoredon
 },
 },
 ["Rylaks"] = {
