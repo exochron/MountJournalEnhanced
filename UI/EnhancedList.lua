@@ -218,11 +218,17 @@ end
 
 ADDON.Events:RegisterCallback("preloadUI", function()
     MountJournal.ScrollBox:ForEachFrame(SetupExtras)
-    ScrollUtil.AddAcquiredFrameCallback(MountJournal.ScrollBox, function(button, _, new)
+    local owner = ADDON_NAME .. 'enhanced'
+    ScrollUtil.AddAcquiredFrameCallback(MountJournal.ScrollBox, function(a, b, c, d)
+        local button, new = b,d
+        if a ~= owner then -- TODO: remove after 10.0 launch
+            button = a
+            new = c
+        end
         if new then
             SetupExtras(button)
         end
-    end, ADDON_NAME .. 'enhanced')
+    end, owner)
 
     MountJournal_InitMountButton = function(button, elementData)
         InitMountButton(button, elementData)
