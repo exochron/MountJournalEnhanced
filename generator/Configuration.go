@@ -18,6 +18,7 @@ type familyConfig struct {
 
 type config struct {
 	Product   string
+	CacheDir  string
 	Ignored   []int
 	FamilyMap []familyConfig
 }

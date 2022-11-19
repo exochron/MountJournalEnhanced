@@ -829,6 +829,7 @@ ADDON.DB.Family = {
 [1413] = true, -- Dauntless Duskrunner
 [1426] = true, -- Ascended Skymane
 [1511] = true, -- Maelie, the Wanderer
+[1664] = true, -- Guardian Vorquin
 [1668] = true, -- Majestic Armored Vorquin
 [1667] = true, -- Armored Vorquin Leystrider
 [1665] = true, -- Swift Armored Vorquin

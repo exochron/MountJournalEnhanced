@@ -1,4 +1,5 @@
 product: wow
+cachedir: D:\Games\wow_cache\casc_cache\
 
 ignored: [
 	7,    # Gray Wolf
@@ -88,7 +89,7 @@ familymap: [
       {name: Hyenas, wcm: [Hyenas]},
       {name: Quilen, wcm: [Quilen]},
       {name: Vulpin, wcm: [Vulpin]},
-      {name: Ottuk, wcm: [Ottuks], ids: [1654]}, # Otterworldly Ottuk Carrier
+      {name: Ottuk, wcm: [Ottuks], ids: [1654, 1656]}, # Otterworldly Ottuk Carrier, Otto
 	]
 	},
   { name: Cats,
