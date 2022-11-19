@@ -262,6 +262,7 @@ ADDON.DB.Source = {
         [340503] = true, -- Umbral Scythehorn - night fae feature vendor
         [342667] = true, -- Vibrant Flutterwing - night fae feature vendor
         [374098] = true, -- Stormhide Salamanther
+        [384963] = true, -- Guardian Vorquin - dracthyr vendor
         [385115] = true, -- Swift Armored Vorquin - dracthyr vendor
         [385131] = true, -- Armored Vorquin Leystrider - dracthyr vendor
         [385134] = true, -- Majestic Armored Vorquin - dracthyr vendor
@@ -1478,7 +1479,7 @@ ADDON.DB.FeatsOfStrength = {
     [1480] = 14999, -- Unchained Gladiator's Soul Eater
     [1572] = 15384, -- Cosmic Gladiator's Soul Eater
     [1599] = 15612, -- Eternal Gladiator's Soul Eater
-    --[1660] = 16730, -- Crimson Gladiator's Drake
+    [1660] = 16730, -- Crimson Gladiator's Drake
 }
 
 ADDON.DB.Expansion = {
@@ -1582,11 +1583,11 @@ ADDON.DB.Expansion = {
         ["minID"] = 1577,
         ["maxID"] = 9999999999,
         --[1467] = true, -- Noble Elderhorn
-        --[1469] = true, -- Magmashell
+        [1469] = true, -- Magmashell
         --[1478] = true, -- Skyskin Hornstrider
-        --[1545] = true, -- Divine Kiss of Ohn'ahra
-        --[1546] = true, -- Iskaara Trader's Ottuk
-        --[1553] = true, -- Liberated Slyvern
+        [1545] = true, -- Divine Kiss of Ohn'ahra
+        [1546] = true, -- Iskaara Trader's Ottuk
+        [1553] = true, -- Liberated Slyvern
         [1556] = true, -- Tangled Dreamweaver
         [1563] = true, -- Highland Drake
     },

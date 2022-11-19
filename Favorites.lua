@@ -62,7 +62,7 @@ local function FavorMounts(mountIds, finishedCallback)
             starButton:SetDisabled(false)
         end
         if ADDON.initialized then
-            ADDON.Api:FilterMounts()
+            ADDON:FilterMounts()
         end
         finishedCallback()
     end

@@ -84,13 +84,7 @@ ADDON:RegisterUISetting('compactMountList', true, ADDON.L.SETTING_COMPACT_LIST, 
                 UpdateButton(button, elementData)
             end)
             local owner = ADDON_NAME .. 'compact'
-            ScrollUtil.AddAcquiredFrameCallback(box, function(a, b, c, d)
-                local button, new = b, d
-                if a ~= owner then
-                    -- TODO: remove after 10.0 launch
-                    button = a
-                    new = c
-                end
+            ScrollUtil.AddAcquiredFrameCallback(box, function(_, button, _, new)
                 if new then
                     SaveButtonLayout(button)
                 end
@@ -100,12 +94,7 @@ ADDON:RegisterUISetting('compactMountList', true, ADDON.L.SETTING_COMPACT_LIST, 
                     RestoreButtonLayout(button)
                 end
             end, owner)
-            ScrollUtil.AddReleasedFrameCallback(box, function(a, b)
-                local button = b
-                if a ~= owner then
-                    -- TODO: remove after 10.0 launch
-                    button = a
-                end
+            ScrollUtil.AddReleasedFrameCallback(box, function(_, button)
                 RestoreButtonLayout(button)
             end, owner)
             view:SetPadding(0, 0, MOUNT_BUTTON_HEIGHT + 2, 0, 0)
