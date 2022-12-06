@@ -194,6 +194,7 @@ ADDON.DB.Source = {
         [363701] = true, -- Patient Bufonid - Zereth Mortis - treasure quest chain
         [374247] = true, -- Lizi, Thunderspine Tramper
         [376873] = true, -- Otto
+        [385738] = true, -- Temperamental Skyclaw
         [395644] = true, -- Divine Kiss of Ohn'ahra
 
         ------------------------------
@@ -272,7 +273,12 @@ ADDON.DB.Source = {
         [394220] = true, -- Obsidian Vorquin - dracthyr vendor
         [359409] = true, -- Iskaara Trader's Ottuk - Tattukiaka
         [373859] = true, -- Loyal Magmammoth - Yries Lightfingers
+        [374162] = true, -- Scrappy Worldsnail - Dealer Vexil
+        [376875] = true, -- Brown Scouting Ottuk - Tatto
         [376879] = true, -- Ivory Trader's Ottuk - Tattukiaka
+        [376880] = true, -- Yellow Scouting Ottuk - Tatto
+        [376910] = true, -- Brown War Ottuk - Tatto
+        [376913] = true, -- Yellow War Ottuk - Tatto
 
         ------------------------------
         -- Alliance ------------------
@@ -561,7 +567,10 @@ ADDON.DB.Source = {
         [374034] = true, -- Azure Skitterfly - Dragonscale Expedition
         [374048] = true, -- Verdant Skitterfly - Dragonscale Expedition
         [374032] = true, -- Tamed Skitterfly - Dragonscale Expedition
-        [376875] = true, -- Brown Scouting Ottuk - Iskaara Tuskar
+        [376875] = true, -- Brown Scouting Ottuk - Iskaara Tuskar - Renown 34
+        [376880] = true, -- Yellow Scouting Ottuk - Iskaara Tuskar - Renown 34
+        [376910] = true, -- Brown War Ottuk - Iskaara Tuskarr - Renown 30
+        [376913] = true, -- Yellow War Ottuk - Iskaara Tuskarr - Renown 30
 
         ------------------------------
         -- Alliance ------------------
@@ -904,6 +913,8 @@ ADDON.DB.Source = {
         [368896] = 15794, -- Renewed Proto-Drake - A New Friend
         [368899] = 15795, -- Windborne Velocidrake - Together in the Skies
         [368901] = 15796, -- Cliffside Wylderdrake - Cliffside Companion
+        [374155] = 16295, -- Shellack - Glory of the Dragonflight Hero
+        [374275] = 16355, -- Raging Magmammoth - Glory of the Vault Raider
         [376912] = { 15833, 15834 }, -- Otterworldly Ottuk Carrier - Thanks for the Carry!
         [387231] = 16649, -- Hailstorm Armoredon - Dragonflight Keystone Master: Season One
 
