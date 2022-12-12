@@ -7,11 +7,6 @@ MJETrackingData = MJETrackingData or {}
 local HBD = LibStub("HereBeDragons-2.0")
 local currentMount, startZone, startPositionX, startPositionY, travelTicker
 
-function ADDON:GetMountStatistics(mountId)
-    local blob = MJETrackingData[mountId] or {}
-    return (blob[INDEX_USE_COUNT] or 0), (blob[INDEX_LAST_USE_TIME] or nil), (blob[INDEX_TRAVEL_TIME] or 0), (blob[INDEX_TRAVEL_DISTANCE] or 0), (blob[INDEX_LEARNED_TIME] or nil)
-end
-
 local function initData(mountId)
     if not MJETrackingData[mountId] then
         MJETrackingData[mountId] = {
@@ -24,6 +19,21 @@ local function initData(mountId)
     end
 
     return MJETrackingData[mountId]
+end
+
+function ADDON:GetMountStatistics(mountId)
+    local blob = MJETrackingData[mountId] or {}
+    return (blob[INDEX_USE_COUNT] or 0), (blob[INDEX_LAST_USE_TIME] or nil), (blob[INDEX_TRAVEL_TIME] or 0), (blob[INDEX_TRAVEL_DISTANCE] or 0), (blob[INDEX_LEARNED_TIME] or nil)
+end
+
+function ADDON:SetLearnedDate(mountId, year, month, day)
+    if mountId and ADDON.settings.trackUsageStats then
+        local blob = initData(mountId)
+        if blob[INDEX_LEARNED_TIME] == nil and year >= 2000 and year < 2050 and month >= 1 and month <= 12 and day >= 1 and day <= 31 then
+            blob[INDEX_LEARNED_TIME] = time({ year = year, month = month, day = day, hour = 12, min = 0, sec = 0 })
+            return true
+        end
+    end
 end
 
 local function updateDistance()

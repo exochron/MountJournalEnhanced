@@ -399,6 +399,7 @@ ADDON.DB.Family = {
 [981] = true, -- Biletooth Gnasher
 [979] = true, -- Crimson Slavermaw
 [980] = true, -- Acid Belcher
+[1596] = true, -- Amalgam of Rage
 },
 ["Demonic Steeds"] = {
 [17] = true, -- Felsteed

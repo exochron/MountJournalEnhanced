@@ -106,7 +106,7 @@ familymap: [
 	{name: Crabs, wcm:  [Crabs]},
 	{ name: Demons,
     subfamily: [
-		  {name: Demonic Hounds, wcm: [Felstalkers, Vile Fiends, Antoran Hounds, Flying Felstalkers]},
+		  {name: Demonic Hounds, wcm: [Felstalkers, Vile Fiends, Antoran Hounds, Flying Felstalkers, Amalgams of Rage]},
 		  {name: Demonic Steeds, wcm: [Demonic Steeds]},
 		  {name: Felsabers, wcm: [Felsabers]},
 		  {name: Infernals, wcm: [Infernals]},
