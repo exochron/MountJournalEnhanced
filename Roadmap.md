@@ -1,7 +1,5 @@
 
 ### Next
-- open dragonflight talents
-- df customization counter/editor ?
 - personal favorites rework
 - special summon animation
 

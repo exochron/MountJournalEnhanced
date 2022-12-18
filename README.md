@@ -1,5 +1,5 @@
 # Mount Journal Enhanced
-This addon extends the ingame mount journal with some cool stuff.
+This addon extends the ingame mount journal with extra features.
 
 ## Features
 + Filter mounts by an extended source, colors, faction, type, family or expansion
