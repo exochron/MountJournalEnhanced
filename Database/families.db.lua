@@ -304,7 +304,10 @@ ADDON.DB.Family = {
 [1656] = true, -- Otto
 [1657] = true, -- Brown Scouting Ottuk
 [1658] = true, -- Ivory Trader's Ottuk
+[1659] = true, -- Yellow Scouting Ottuk
+[1653] = true, -- Brown War Ottuk
 [1654] = true, -- Otterworldly Ottuk Carrier
+[1655] = true, -- Yellow War Ottuk
 },
 },
 ["Cats"] = {
@@ -396,6 +399,7 @@ ADDON.DB.Family = {
 [981] = true, -- Biletooth Gnasher
 [979] = true, -- Crimson Slavermaw
 [980] = true, -- Acid Belcher
+[1596] = true, -- Amalgam of Rage
 },
 ["Demonic Steeds"] = {
 [17] = true, -- Felsteed
@@ -549,6 +553,7 @@ ADDON.DB.Family = {
 [1240] = true, -- Obsidian Worldbreaker
 [1265] = true, -- Uncorrupted Voidwing
 [1556] = true, -- Tangled Dreamweaver
+[1563] = true, -- Highland Drake
 [1660] = true, -- Crimson Gladiator's Drake
 },
 ["Grand Drakes"] = {
@@ -574,7 +579,6 @@ ADDON.DB.Family = {
 [551] = true, -- Enchanted Fey Dragon
 [1289] = true, -- Ensorcelled Everwyrm
 [1346] = true, -- Steamscale Incinerator
-[1563] = true, -- Highland Drake
 [1581] = true, -- Nether-Gorged Greatwyrm
 [1590] = true, -- Windborne Velocidrake
 [1591] = true, -- Cliffside Wylderdrake
@@ -742,6 +746,7 @@ ADDON.DB.Family = {
 [529] = true, -- Grand Wyvern
 [1267] = true, -- Alabaster Thunderwing
 [1553] = true, -- Liberated Slyvern
+[1674] = true, -- Temperamental Skyclaw
 },
 },
 ["Fish"] = {
@@ -1005,6 +1010,8 @@ ADDON.DB.Family = {
 [1538] = true, -- Bronze Helicid
 [1539] = true, -- Unsuccessful Prototype Fleetpod
 [1540] = true, -- Scarlet Helicid
+[1626] = true, -- Shellack
+[1629] = true, -- Scrappy Worldsnail
 },
 ["Slug"] = {
 },
@@ -1222,6 +1229,7 @@ ADDON.DB.Family = {
 [289] = true, -- Grand Ice Mammoth
 [1612] = true, -- Loyal Magmammoth
 [1635] = true, -- Plainswalker Bearer
+[1644] = true, -- Raging Magmammoth
 },
 ["Moose"] = {
 [764] = true, -- Grove Warden

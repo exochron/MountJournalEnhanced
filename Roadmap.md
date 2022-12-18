@@ -5,7 +5,7 @@
 
 ### More Ideas:
 - activate sound effects in display (with global setting)
-- more animation control in display (start/pause, movements, with sound effects)
+- more animation control in display (start/pause, movements)
 - gamepad support (?)
 - variation filter (undead, mech, elemental, magic...)
 - proper favorite profiles with one global profile
