@@ -148,6 +148,7 @@ ADDON.DB.Source = {
         -- Dragonflight
         [359622] = true, -- Liberated Slyvern - Breezebiter - Azure Span
         [385266] = true, -- Zenet Hatchling - Ohn'ahran Plains - Zenet Egg
+        [350219] = true, -- Magmashell
     },
 
     ["Quest"] = {
@@ -191,7 +192,11 @@ ADDON.DB.Source = {
         [354358] = true, -- Darkmaul - Korthia - Darkmaul treasure quest
         [354361] = true, -- Dusklight Razorwing - Korthia - random eggs
         [354362] = true, -- Maelie the Wanderer - Korthia - treasure quest chain
+        [360954] = true, -- Highland Drake
         [363701] = true, -- Patient Bufonid - Zereth Mortis - treasure quest chain
+        [368896] = true, -- Renewed Proto-Drake
+        [368899] = true, -- Windborne Velocidrake
+        [368901] = true, -- Cliffside Wylderdrake
         [374247] = true, -- Lizi, Thunderspine Tramper
         [376873] = true, -- Otto
         [385738] = true, -- Temperamental Skyclaw

@@ -18,6 +18,7 @@ Libs\UIFixes.lua
 Locals.lua
 Database\Database.lua
 Database\colors.db.lua
+Database\customization.db.lua
 Database\families.db.lua
 Database\tradable.db.lua
 Database\rarities.db.lua

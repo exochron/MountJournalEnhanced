@@ -61,6 +61,10 @@ local function setupContainer()
         ADDON.UI:RestorePoint(infoButton.Source)
     end)
 
+    container.CustomizationCount = buildStat(container,
+            "colorblind-colorwheel",
+            L["STATS_TIP_CUSTOMIZATION_COUNT_HEAD"]
+    )
     container.UsedCount = buildStat(container,
             413588, -- interface/icons/achievement_guildperk_mountup
             L["STATS_TIP_USAGE_COUNT_HEAD"]
@@ -104,8 +108,39 @@ local function formatDistance(length)
     end
 end
 
+local function parseCustomization(mountData)
+    local count = 0
+    local total = 0
+
+    if mountData["quest"] then
+        total = total + #mountData["quest"]
+        for _, questId in ipairs(mountData["quest"]) do
+            if C_QuestLog.IsQuestFlaggedCompleted(questId) then
+                count = count + 1
+            end
+        end
+    end
+    if mountData["achievement"] then
+        total = total + #mountData["achievement"]
+        for _, achievementId in ipairs(mountData["achievement"]) do
+            if select(4, GetAchievementInfo(achievementId)) then
+                count = count + 1
+            end
+        end
+    end
+
+    return count .. "/" .. total
+end
+
 local function updateContainer(mountId, container)
     local displayed = {}
+
+    container.CustomizationCount:SetShown(ADDON.DB.Customization[mountId] ~= nil)
+    if ADDON.DB.Customization[mountId] ~= nil then
+        container.CustomizationCount.Text:SetText(parseCustomization(ADDON.DB.Customization[mountId]))
+        displayed[#displayed + 1] = container.CustomizationCount
+    end
+
     local useCount, lastUseTime, travelTime, travelDistance, learnedTime = ADDON:GetMountStatistics(mountId)
     if useCount ~= nil then
         container.UsedCount:SetShown(useCount > 0)
@@ -147,10 +182,10 @@ local function updateContainer(mountId, container)
             totalWidth = totalWidth + stat:GetWidth()
         end
         totalWidth = totalWidth + ((#displayed - 1) * 7)
-        local prevWidth = 0
+        local leftOffset = -(totalWidth / 2)
         for _, stat in ipairs(displayed) do
-            stat:SetPoint("LEFT", container, "CENTER", -(totalWidth / 2) + prevWidth, 0)
-            prevWidth = prevWidth + 7 + stat:GetWidth()
+            stat:SetPoint("LEFT", container, "CENTER", leftOffset, 0)
+            leftOffset = leftOffset + 7 + stat:GetWidth()
         end
     end
 
