@@ -189,6 +189,7 @@ local function InitializeFilterDropDown(_, level)
         UIDropDownMenu_AddButton(CreateFilterInfo(CLASS, "Class", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_7, "World Event", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L["Black Market"], "Black Market", settings), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(select(2, C_Garrison.GetBuildingInfo(111)), "Trading Post", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_10, "Shop", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_8, "Promotion", settings), level)
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_MOUNT_TYPE then

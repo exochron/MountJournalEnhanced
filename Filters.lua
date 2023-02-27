@@ -199,19 +199,27 @@ local function FilterByFaction(isFaction, faction)
             or (ADDON.settings.filter.faction.horde and faction == 0)
 end
 
-local function FilterBySource(spellId, sourceType, preparedSettings)
+local function FilterBySource(mountId, spellId, sourceType, preparedSettings)
     if preparedSettings[spellId] ~= nil then
         return preparedSettings[spellId]
     end
 
+    local fallback = true
     for source, value in pairs(ADDON.settings.filter.source) do
-        if SourceDB[source] and SourceDB[source]["sourceType"]
-                and tContains(SourceDB[source]["sourceType"], sourceType) then
-            return value
+        if SourceDB[source] and ((
+                SourceDB[source]["sourceType"] and tContains(SourceDB[source]["sourceType"], sourceType)
+        ) or (
+                SourceDB[source]["sourceDescription"] and SourceDB[source]["sourceDescription"] == select(3, C_MountJournal.GetMountInfoExtraByID(mountId))
+        )) then
+            if value then
+                return true
+            else
+                fallback = false
+            end
         end
     end
 
-    return true
+    return fallback
 end
 
 local function FilterByFamily(mountId, preparedSettings)
@@ -276,10 +284,10 @@ local function FilterByRarity(mountID, allSettings)
     end
 
     return (rarity < 1.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Legendary])
-        or (rarity >= 1.0 and rarity < 10.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Epic])
-        or (rarity >= 10.0 and rarity < 20.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Rare])
-        or (rarity >= 20.0 and rarity < 50.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Uncommon])
-        or (rarity >= 50.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Common])
+            or (rarity >= 1.0 and rarity < 10.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Epic])
+            or (rarity >= 10.0 and rarity < 20.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Rare])
+            or (rarity >= 20.0 and rarity < 50.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Uncommon])
+            or (rarity >= 50.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Common])
 end
 
 function ADDON:FilterMounts()
@@ -334,7 +342,7 @@ function ADDON:FilterMounts()
                     and FilterRecentMounts(mountId)
                     and FilterCollectedMounts(isCollected)
                     and FilterByFaction(isFaction, faction)
-                    and (allSettingsSource or FilterBySource(spellId, sourceType, preparedSource))
+                    and (allSettingsSource or FilterBySource(mountId, spellId, sourceType, preparedSource))
                     and (allSettingsType or FilterByType(mountId, preparedTypes))
                     and (allSettingsFamily or FilterByFamily(mountId, preparedFamily))
                     and (allSettingsExpansion or FilterByExpansion(mountId, preparedExpansion))

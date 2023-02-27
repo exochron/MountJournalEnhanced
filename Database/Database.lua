@@ -1420,6 +1420,10 @@ ADDON.DB.Source = {
         [264058] = true, -- Mighty Caravan Brutosaur
     },
 
+    ["Trading Post"] = {
+        sourceDescription = "\124cFFFFD200" .. select(2, C_Garrison.GetBuildingInfo(111)) .. "\124r", -- "Trading Post"
+    },
+
     ["Shop"] = {
         sourceType = { 10 },
     },
