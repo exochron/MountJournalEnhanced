@@ -3,9 +3,9 @@ local _, ADDON = ...
 ADDON.DB = {}
 
 ADDON.DB.Recent = {
-    ["minID"] = 1577,
-    ["blacklist"] = { 1580, 1581, 1584, 1585, 1587, 1597, 1599, 1600, 1602, 1679 },
-    ["whitelist"] = { 1467, 1469, 1478, 1545, 1546, 1553, 1556, 1563 },
+    ["minID"] = 1690,
+    ["blacklist"] = { },
+    ["whitelist"] = { 1478, 1573, 1574, 1575, 1577, 1579, 1582, 1583, 1586, 1595 },
 }
 
 ADDON.DB.Source = {
@@ -267,6 +267,7 @@ ADDON.DB.Source = {
         [334409] = true, -- Eternal Phalynx of Humility - kyrian feature vendor
         [340503] = true, -- Umbral Scythehorn - night fae feature vendor
         [342667] = true, -- Vibrant Flutterwing - night fae feature vendor
+        [352926] = true, -- Skyskin Hornstrider - Brendormi
         [374098] = true, -- Stormhide Salamanther
         [384963] = true, -- Guardian Vorquin - dracthyr vendor
         [385115] = true, -- Swift Armored Vorquin - dracthyr vendor
@@ -291,8 +292,9 @@ ADDON.DB.Source = {
 
         [171846] = true, -- Champion's Treadblade
 
-        -- pre 1.4, no longer available
+        -- pre 1.4
         [15779] = true, -- White Mechanostrider Mod B
+        [15780] = true, -- Green Mechanostrider
         [16055] = true, -- Black Nightsaber
         [16056] = true, -- Ancient Frostsaber
         [16082] = true, -- Palomino
@@ -300,6 +302,7 @@ ADDON.DB.Source = {
         [17459] = true, -- Icy Blue Mechanostrider Mod A
         [17460] = true, -- Frost Ram
         [17461] = true, -- Black Ram
+        [33630] = true, -- Green Mechanostrider
 
         -- Stormwind
         [32235] = true, -- Golden Gryphon
@@ -324,7 +327,8 @@ ADDON.DB.Source = {
         -- Horde ---------------------
         ------------------------------
 
-        -- pre 1.4, no longer available
+        -- pre 1.4
+        [578] = true, -- Black Wolf
         [16080] = true, -- Red Wolf
         [16081] = true, -- Arctic Wolf
         [16084] = true, -- Mottled Red Raptor
@@ -1661,19 +1665,16 @@ ADDON.DB.Type = {
 ADDON.DB.Ignored = {
     [7] = true, -- Gray Wolf
     [8] = true, -- White Stallion
-    [12] = true, -- Black Wolf
     [13] = true, -- Red Wolf
     [15] = true, -- Winter Wolf
     [22] = true, -- Black Ram
     [28] = true, -- Skeletal Horse
     [32] = true, -- Tiger
     [35] = true, -- Ivory Raptor
-    [43] = true, -- Green Mechanostrider
     [70] = true, -- Riding Kodo
     [116] = true, -- Black Qiraji Battle Tank
     [121] = true, -- Black Qiraji Battle Tank
     [123] = true, -- Nether Drake
-    [145] = true, -- Blue Mechanostrider
     [206] = true, -- Merciless Nether Drake
     [251] = true, -- Black Polar Bear
     [273] = true, -- Grand Caravan Mammoth
@@ -1694,4 +1695,5 @@ ADDON.DB.Ignored = {
     [1607] = true, -- Swift Spectral Drake
 
     [1578] = true, -- DNT Test Mount JZB
+    [1690] = true, -- Whelpling
 }
