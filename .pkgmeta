@@ -1,5 +1,4 @@
 ignore:
-    - generator
     - LICENSE
     - README.md
     - Roadmap.md
