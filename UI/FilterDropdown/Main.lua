@@ -170,6 +170,7 @@ local function InitializeFilterDropDown(_, level)
         info.keepShownOnClick = false
         info.func = function()
             MountJournalFilterButton.resetFunction()
+            ADDON.UI.FDD:UpdateResetVisibility()
         end
         UIDropDownMenu_AddButton(info, level)
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_SOURCE then
