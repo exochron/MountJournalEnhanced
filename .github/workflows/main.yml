@@ -33,7 +33,7 @@ jobs:
       - name: Clone project
         uses: actions/checkout@v3
         with:
-          fetch-depth: 100
+          fetch-depth: 0 # <= 0 adds fetches tags as well
 
       # once cloned, we just run the GitHub Action for the packager project
       - name: Package and release
