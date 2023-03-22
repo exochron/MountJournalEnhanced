@@ -3,9 +3,9 @@ local _, ADDON = ...
 ADDON.DB = {}
 
 ADDON.DB.Recent = {
-    ["minID"] = 1690,
+    ["minID"] = 1698,
     ["blacklist"] = { },
-    ["whitelist"] = { 1478, 1573, 1574, 1575, 1577, 1579, 1582, 1583, 1586, 1595 },
+    ["whitelist"] = { 1467, 1619, 1627, 1634, 1698 },
 }
 
 ADDON.DB.Source = {
@@ -149,6 +149,9 @@ ADDON.DB.Source = {
         [359622] = true, -- Liberated Slyvern - Breezebiter - Azure Span
         [385266] = true, -- Zenet Hatchling - Ohn'ahran Plains - Zenet Egg
         [350219] = true, -- Magmashell
+        [374090] = true, -- Ancient Salamanther
+        [374157] = true, -- Gooey Snailemental
+        [374194] = true, -- Mossy Mammoth
     },
 
     ["Quest"] = {
@@ -267,8 +270,17 @@ ADDON.DB.Source = {
         [334409] = true, -- Eternal Phalynx of Humility - kyrian feature vendor
         [340503] = true, -- Umbral Scythehorn - night fae feature vendor
         [342667] = true, -- Vibrant Flutterwing - night fae feature vendor
+        [349935] = true, -- Noble Bruffalon
         [352926] = true, -- Skyskin Hornstrider - Brendormi
+        [359409] = true, -- Iskaara Trader's Ottuk - Tattukiaka
+        [373859] = true, -- Loyal Magmammoth - Yries Lightfingers
         [374098] = true, -- Stormhide Salamanther
+        [374162] = true, -- Scrappy Worldsnail - Dealer Vexil
+        [376875] = true, -- Brown Scouting Ottuk - Tatto
+        [376879] = true, -- Ivory Trader's Ottuk - Tattukiaka
+        [376880] = true, -- Yellow Scouting Ottuk - Tatto
+        [376910] = true, -- Brown War Ottuk - Tatto
+        [376913] = true, -- Yellow War Ottuk - Tatto
         [384963] = true, -- Guardian Vorquin - dracthyr vendor
         [385115] = true, -- Swift Armored Vorquin - dracthyr vendor
         [385131] = true, -- Armored Vorquin Leystrider - dracthyr vendor
@@ -277,14 +289,6 @@ ADDON.DB.Source = {
         [394218] = true, -- Sapphire Vorquin - dracthyr vendor
         [394219] = true, -- Bronze Vorquin - dracthyr vendor
         [394220] = true, -- Obsidian Vorquin - dracthyr vendor
-        [359409] = true, -- Iskaara Trader's Ottuk - Tattukiaka
-        [373859] = true, -- Loyal Magmammoth - Yries Lightfingers
-        [374162] = true, -- Scrappy Worldsnail - Dealer Vexil
-        [376875] = true, -- Brown Scouting Ottuk - Tatto
-        [376879] = true, -- Ivory Trader's Ottuk - Tattukiaka
-        [376880] = true, -- Yellow Scouting Ottuk - Tatto
-        [376910] = true, -- Brown War Ottuk - Tatto
-        [376913] = true, -- Yellow War Ottuk - Tatto
 
         ------------------------------
         -- Alliance ------------------

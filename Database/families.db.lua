@@ -17,7 +17,7 @@ ADDON.DB.Family = {
 [1569] = true, -- Patient Bufonid
 [1570] = true, -- Prototype Leaper
 [1571] = true, -- Russet Bufonid
-[1595] = true, -- Himmelblauer Sumpfhüpfer
+[1595] = true, -- Cerulean Marsh Hopper
 },
 },
 ["Arachnids"] = {
@@ -470,7 +470,7 @@ ADDON.DB.Family = {
 [1059] = true, -- Captured Swampstalker
 [1060] = true, -- Voldunai Dunescraper
 [1218] = true, -- Dazar'alor Windreaver
-[1586] = true, -- Gepanzerter goldener Pterrordax
+[1586] = true, -- Armored Golden Pterrordax
 },
 ["Raptors"] = {
 [27] = true, -- Emerald Raptor
@@ -814,7 +814,7 @@ ADDON.DB.Family = {
 ["Flying Steeds"] = {
 [219] = true, -- Headless Horseman's Mount
 [363] = true, -- Invincible
-[376] = true, -- Himmelsross
+[376] = true, -- Celestial Steed
 [439] = true, -- Tyrael's Charger
 [454] = true, -- Cindermane Charger
 [532] = true, -- Ghastly Charger
@@ -1018,6 +1018,7 @@ ADDON.DB.Family = {
 [1539] = true, -- Unsuccessful Prototype Fleetpod
 [1540] = true, -- Scarlet Helicid
 [1626] = true, -- Shellack
+[1627] = true, -- Schleimiger Schneckelementar
 [1629] = true, -- Scrappy Worldsnail
 },
 },
@@ -1101,6 +1102,7 @@ ADDON.DB.Family = {
 },
 ["Others"] = {
 [1444] = true, -- Viridian Phase-Hunter
+[1619] = true, -- Uralter Salamanther
 [1622] = true, -- Stormhide Salamanther
 [1639] = true, -- Lizi, Thunderspine Tramper
 [1681] = true, -- Hailstorm Armoredon
@@ -1139,7 +1141,6 @@ ADDON.DB.Family = {
 [847] = true, -- Arcadian War Turtle
 [900] = true, -- Vicious War Turtle
 [901] = true, -- Vicious War Turtle
-[1582] = true, -- Savage Green Battle Turtle
 },
 },
 ["Rodent"] = {
@@ -1241,6 +1242,7 @@ ADDON.DB.Family = {
 [288] = true, -- Grand Ice Mammoth
 [289] = true, -- Grand Ice Mammoth
 [1612] = true, -- Loyal Magmammoth
+[1634] = true, -- Moosmammut
 [1635] = true, -- Plainswalker Bearer
 [1644] = true, -- Raging Magmammoth
 },
@@ -1252,6 +1254,7 @@ ADDON.DB.Family = {
 [941] = true, -- Highmountain Elderhorn
 [1007] = true, -- Highmountain Thunderhoof
 [1209] = true, -- Stonehide Elderhorn
+[1467] = true, -- Noble Bruffalon
 },
 ["Ox"] = {
 [1291] = true, -- Lucky Yun
@@ -1337,6 +1340,7 @@ ADDON.DB.Family = {
 [845] = true, -- Mechanized Lumber Extractor
 [932] = true, -- Lightforged Warframe
 [1217] = true, -- G.M.O.D.
+[1698] = true, -- Rocket Shredder 9001
 },
 ["Mechanical Animals"] = {
 [552] = true, -- Ironbound Wraithcharger
