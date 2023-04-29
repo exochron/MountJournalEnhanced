@@ -61,3 +61,4 @@ UI\Resize.lua
 UI\ShopButton.lua
 UI\BlizzFixes.lua
 UI\Notes.lua
+UI\Fun.lua
