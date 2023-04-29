@@ -3,9 +3,9 @@ local _, ADDON = ...
 ADDON.DB = {}
 
 ADDON.DB.Recent = {
-    ["minID"] = 1698,
+    ["minID"] = 1725,
     ["blacklist"] = { },
-    ["whitelist"] = { 1467, 1619, 1627, 1634, 1698 },
+    ["whitelist"] = { 1588, 1603, 1623 },
 }
 
 ADDON.DB.Source = {
@@ -150,8 +150,11 @@ ADDON.DB.Source = {
         [385266] = true, -- Zenet Hatchling - Ohn'ahran Plains - Zenet Egg
         [350219] = true, -- Magmashell
         [374090] = true, -- Ancient Salamanther
+        [374138] = true, -- Seething Slug
         [374157] = true, -- Gooey Snailemental
         [374194] = true, -- Mossy Mammoth
+        [408647] = true, -- Cobalt Shalewing
+        [408651] = true, -- Cataloged Shalewing
     },
 
     ["Quest"] = {
@@ -197,6 +200,7 @@ ADDON.DB.Source = {
         [354362] = true, -- Maelie the Wanderer - Korthia - treasure quest chain
         [360954] = true, -- Highland Drake
         [363701] = true, -- Patient Bufonid - Zereth Mortis - treasure quest chain
+        [368893] = true, -- Winding Slitherdrake
         [368896] = true, -- Renewed Proto-Drake
         [368899] = true, -- Windborne Velocidrake
         [368901] = true, -- Cliffside Wylderdrake
@@ -204,6 +208,7 @@ ADDON.DB.Source = {
         [376873] = true, -- Otto
         [385738] = true, -- Temperamental Skyclaw
         [395644] = true, -- Divine Kiss of Ohn'ahra
+        [408313] = true, -- Big Slick in the City
 
         ------------------------------
         -- Alliance ------------------
@@ -289,6 +294,9 @@ ADDON.DB.Source = {
         [394218] = true, -- Sapphire Vorquin - dracthyr vendor
         [394219] = true, -- Bronze Vorquin - dracthyr vendor
         [394220] = true, -- Obsidian Vorquin - dracthyr vendor
+        [408627] = true, -- Igneous Shalewing
+        [408653] = true, -- Boulder Hauler
+        [408655] = true, -- Morsel Sniffer
 
         ------------------------------
         -- Alliance ------------------
@@ -584,6 +592,7 @@ ADDON.DB.Source = {
         [376880] = true, -- Yellow Scouting Ottuk - Iskaara Tuskar - Renown 34
         [376910] = true, -- Brown War Ottuk - Iskaara Tuskarr - Renown 30
         [376913] = true, -- Yellow War Ottuk - Iskaara Tuskarr - Renown 30
+        [408655] = true, -- Morsel Sniffer - Niffel Renown 18
 
         ------------------------------
         -- Alliance ------------------
@@ -923,6 +932,7 @@ ADDON.DB.Source = {
 
         -- Dragonflight
         [360954] = 15797, -- Highland Drake - An Azure Ally
+        [368893] = 17779, -- Winding Slitherdrake - A Serpentine Discovery
         [368896] = 15794, -- Renewed Proto-Drake - A New Friend
         [368899] = 15795, -- Windborne Velocidrake - Together in the Skies
         [368901] = 15796, -- Cliffside Wylderdrake - Cliffside Companion
@@ -930,6 +940,8 @@ ADDON.DB.Source = {
         [374275] = 16355, -- Raging Magmammoth - Glory of the Vault Raider
         [376912] = { 15833, 15834 }, -- Otterworldly Ottuk Carrier - Thanks for the Carry!
         [387231] = 16649, -- Hailstorm Armoredon - Dragonflight Keystone Master: Season One
+        [406637] = 17844, -- Inferno Armoredon - Dragonflight Keystone Master: Season Two
+        [408649] = 18251, -- Shadowflame Shalewing - Glory of the Aberrus Raider
 
 
         ------------------------------
@@ -1139,6 +1151,7 @@ ADDON.DB.Source = {
         [365559] = true, -- Cosmic Gladiator's Soul Eater - Gladiator: Shadowlands Season 3
         [370346] = true, -- Eternal Gladiator's Soul Eater - Gladiator: Shadowlands Season 4
         [377071] = true, -- Crimson Gladiator's Drake - Gladiator: Dragonflight Season 1
+        [408977] = true, -- Obsidian Gladiator's Slitherdrake - Gladiator: Dragonflight Season 2
 
         -- Prestige Reward
         [222202] = true, -- Prestigious Bronze Courser
@@ -1175,6 +1188,7 @@ ADDON.DB.Source = {
         [347256] = true, -- Vicious War Croaker
         [349824] = true, -- Vicious War Warstalker
         [394737] = true, -- Vicious Sabertooth
+        [409034] = true, -- Vicious War Snail
 
         -- Achievement
         [60118] = true, -- Black War Bear - For The Alliance!
@@ -1221,6 +1235,7 @@ ADDON.DB.Source = {
         [347255] = true, -- Vicious War Croaker
         [349823] = true, -- Vicious War Warstalker
         [394738] = true, -- Vicious Sabertooth
+        [409032] = true, -- Vicious War Snail
 
         -- Achievement
         [60119] = true, -- Black War Bear - For The Horde!
@@ -1508,6 +1523,7 @@ ADDON.DB.FeatsOfStrength = {
     [1572] = 15384, -- Cosmic Gladiator's Soul Eater
     [1599] = 15612, -- Eternal Gladiator's Soul Eater
     [1660] = 16730, -- Crimson Gladiator's Drake
+    [1739] = 17764, -- Obsidian Gladiator's Slitherdrake - Gladiator: Dragonflight Season 2
 }
 
 ADDON.DB.Expansion = {
