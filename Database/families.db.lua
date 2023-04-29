@@ -30,6 +30,7 @@ ADDON.DB.Family = {
 [463] = true, -- Amber Scorpion
 [559] = true, -- Kor'kron Juggernaut
 [882] = true, -- Vicious War Scorpion
+[1742] = true, -- Felcrystal Scorpion
 },
 ["Spiders"] = {
 [663] = true, -- Bloodfang Widow
@@ -587,8 +588,10 @@ ADDON.DB.Family = {
 [1289] = true, -- Ensorcelled Everwyrm
 [1346] = true, -- Steamscale Incinerator
 [1581] = true, -- Nether-Gorged Greatwyrm
+[1588] = true, -- Winding Slitherdrake
 [1590] = true, -- Windborne Velocidrake
 [1591] = true, -- Cliffside Wylderdrake
+[1739] = true, -- Obsidian Gladiator's Slitherdrake
 },
 ["Proto-Drakes"] = {
 [262] = true, -- Red Proto-Drake
@@ -671,6 +674,14 @@ ADDON.DB.Family = {
 },
 ["Sabers"] = {
 [896] = true, -- Primal Flamesaber
+},
+["Sporebat"] = {
+[1730] = true, -- Igneous Shalewing
+[1732] = true, -- Cobalt Shalewing
+[1734] = true, -- Shadowflame Shalewing
+[1735] = true, -- Cataloged Shalewing
+[1736] = true, -- Boulder Hauler
+[1738] = true, -- Morsel Sniffer
 },
 ["Stone Drakes"] = {
 [391] = true, -- Volcanic Stone Drake
@@ -1011,6 +1022,9 @@ ADDON.DB.Family = {
 [1551] = true, -- Cryptic Aurelid
 },
 ["Mollusc"] = {
+["Slug"] = {
+[1623] = true, -- Seething Slug
+},
 ["Snail"] = {
 [1448] = true, -- Serenade
 [1469] = true, -- Magmashell
@@ -1018,8 +1032,11 @@ ADDON.DB.Family = {
 [1539] = true, -- Unsuccessful Prototype Fleetpod
 [1540] = true, -- Scarlet Helicid
 [1626] = true, -- Shellack
-[1627] = true, -- Schleimiger Schneckelementar
+[1627] = true, -- Gooey Snailemental
 [1629] = true, -- Scrappy Worldsnail
+[1729] = true, -- Big Slick in the City
+[1740] = true, -- Vicious War Snail
+[1741] = true, -- Vicious War Snail
 },
 },
 ["Rays"] = {
@@ -1102,10 +1119,11 @@ ADDON.DB.Family = {
 },
 ["Others"] = {
 [1444] = true, -- Viridian Phase-Hunter
-[1619] = true, -- Uralter Salamanther
+[1619] = true, -- Ancient Salamanther
 [1622] = true, -- Stormhide Salamanther
 [1639] = true, -- Lizi, Thunderspine Tramper
 [1681] = true, -- Hailstorm Armoredon
+[1725] = true, -- Inferno Armoredon
 },
 ["Sea Serpents"] = {
 [899] = true, -- Abyss Worm
@@ -1241,8 +1259,9 @@ ADDON.DB.Family = {
 [287] = true, -- Grand Black War Mammoth
 [288] = true, -- Grand Ice Mammoth
 [289] = true, -- Grand Ice Mammoth
+[1603] = true, -- Subterranean Magmammoth
 [1612] = true, -- Loyal Magmammoth
-[1634] = true, -- Moosmammut
+[1634] = true, -- Mossy Mammoth
 [1635] = true, -- Plainswalker Bearer
 [1644] = true, -- Raging Magmammoth
 },
