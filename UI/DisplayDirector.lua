@@ -54,6 +54,7 @@ local function SetupModelActor()
 end
 
 local function BuildControlContainer()
+    -- from ModelWithControlsTemplate.controlFrame
     local frame = CreateFrame("Frame", nil, MountJournal.MountDisplay)
     frame:SetAlpha(0.5)
     frame:Hide()
@@ -122,19 +123,20 @@ local function BuildCheckButton(tooltip, tooltipText, OnInitShow)
     return button
 end
 
-local function BuildCameraButton(tooltip, tooltipText, cameraMode, amountPerSceond)
-    local button = CreateFrame("Button", nil, container, "ModelControlButtonTemplate,ModifyOrbitCameraBaseButtonTemplate")
+local function BuildCameraButton(tooltip, tooltipText, cameraMode, amountPerSecond)
+    local button = CreateFrame("Button", nil, container, "ModelControlButtonTemplate")
+    Mixin(button, ModifyOrbitCameraButtonMixin)
     button:SetSize(18, 18)
     InitButton(button, tooltip, tooltipText)
 
     button.cameraMode = cameraMode
-    button.amountPerSecond = amountPerSceond
+    button.amountPerSecond = amountPerSecond
     button.GetActiveOrbitCamera = function()
         return MountJournal.MountDisplay.ModelScene:GetActiveCamera()
     end
 
-    button:HookScript("OnMouseDown", ModelControlButtonMixin.OnMouseDown)
-    button:HookScript("OnMouseUp", ModelControlButtonMixin.OnMouseUp)
+    button:HookScript("OnMouseDown", ModifyOrbitCameraButtonMixin.OnMouseDown)
+    button:HookScript("OnMouseUp", ModifyOrbitCameraButtonMixin.OnMouseUp)
 
     return button
 end
@@ -154,7 +156,9 @@ local function BuildCameraPanel()
         end
     end)
     scene:HookScript("OnLeave", function()
-        container:Hide()
+        if not container:IsMouseOver()then
+            container:Hide()
+        end
     end)
 
     local special = BuildButton("/mountspecial")
