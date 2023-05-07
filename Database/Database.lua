@@ -278,6 +278,7 @@ ADDON.DB.Source = {
         [349935] = true, -- Noble Bruffalon
         [352926] = true, -- Skyskin Hornstrider - Brendormi
         [359409] = true, -- Iskaara Trader's Ottuk - Tattukiaka
+        [371176] = true, -- Subterranean Magmammoth
         [373859] = true, -- Loyal Magmammoth - Yries Lightfingers
         [374098] = true, -- Stormhide Salamanther
         [374162] = true, -- Scrappy Worldsnail - Dealer Vexil
