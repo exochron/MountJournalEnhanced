@@ -59,9 +59,6 @@ ADDON.DB.Family = {
 },
 ["Chickens"] = {
 [328] = true, -- Magic Rooster
-[333] = true, -- Magic Rooster
-[334] = true, -- Magic Rooster
-[335] = true, -- Magic Rooster
 },
 ["Cranes"] = {
 [479] = true, -- Azure Riding Crane
@@ -562,6 +559,7 @@ ADDON.DB.Family = {
 [1265] = true, -- Uncorrupted Voidwing
 [1556] = true, -- Tangled Dreamweaver
 [1563] = true, -- Highland Drake
+[1588] = true, -- Winding Slitherdrake
 [1660] = true, -- Crimson Gladiator's Drake
 },
 ["Grand Drakes"] = {
@@ -588,7 +586,6 @@ ADDON.DB.Family = {
 [1289] = true, -- Ensorcelled Everwyrm
 [1346] = true, -- Steamscale Incinerator
 [1581] = true, -- Nether-Gorged Greatwyrm
-[1588] = true, -- Winding Slitherdrake
 [1590] = true, -- Windborne Velocidrake
 [1591] = true, -- Cliffside Wylderdrake
 [1739] = true, -- Obsidian Gladiator's Slitherdrake
@@ -1159,6 +1156,7 @@ ADDON.DB.Family = {
 [847] = true, -- Arcadian War Turtle
 [900] = true, -- Vicious War Turtle
 [901] = true, -- Vicious War Turtle
+[1582] = true, -- Savage Green Battle Turtle
 },
 },
 ["Rodent"] = {
