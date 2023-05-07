@@ -1,7 +1,10 @@
-# Mount Journal Enhanced
+# ![Logo](/UI/icons/mje.png) Mount Journal Enhanced
 This addon extends the ingame mount journal with extra features.
 
-## Features
+## 🎬 In Action
+- https://www.tiktok.com/t/ZTRwwh9LH/ (by [Touchpadwarrior](https://www.twitch.tv/touchpadwarrior))
+
+## ⭐ Features
 + Filter mounts by an extended source, colors, faction, type, family or expansion
 + Filter unusable or unwanted mounts
 + Display mounts which are actually hidden by the game (TCG, PvP, secrets etc.)
@@ -25,10 +28,10 @@ This addon extends the ingame mount journal with extra features.
 + Works with ElvUI
 + Set own notes for each mount. They're displayed within mount tooltips and the journal display.
 
-## Fixes also
+## 🩹 Fixes also
 + the ridiculous fly in animation of the rider
 
-## Help wanted
+## 🙋 Help wanted
 - Have you found any bug or do you have some suggestions? Please let me know in the issue tracker on [GitHub](https://github.com/exochron/MountJournalEnhanced/issues) or [Curseforge](https://www.curseforge.com/wow/addons/mount-journal-enhanced/issues).
 - Is your language still missing some texts? You can help to localize the addon into your language on [Curseforge](https://www.curseforge.com/wow/addons/mount-journal-enhanced/localization).
 - Are you interested in developing addons as well? Then come join me at [GitHub](https://github.com/exochron/MountJournalEnhanced). Don't worry about not knowing LUA. It's easy to learn. ;-)
