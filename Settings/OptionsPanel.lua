@@ -17,6 +17,26 @@ local function BuildCheckBox(parent, text)
 
     return button
 end
+local function BuildDropDown(parent, text, options)
+    local group = AceGUI:Create("SimpleGroup")
+    group:SetLayout("Flow")
+    group:SetFullWidth(true)
+
+    local label = AceGUI:Create("Label")
+    label:SetFontObject(GameFontHighlight)
+    label:SetText(text)
+    label:SetWidth(400)
+    group:AddChild(label)
+
+    local dropdown = AceGUI:Create("Dropdown")
+    for option, optionLabel in pairs(options) do
+        dropdown:AddItem(option, optionLabel)
+    end
+    group:AddChild(dropdown)
+    parent:AddChild(group)
+
+    return dropdown
+end
 local function BuildHeading(parent, text)
     local head = AceGUI:Create("Heading")
     head:SetText(text)
@@ -41,9 +61,13 @@ local function BuildMainFrame(uiLabels, behaviourLabels)
     BuildHeading(frame, UIOPTIONS_MENU)
 
     for _, labelData in ipairs(uiLabels) do
-        local setting, label = labelData[1], labelData[2]
+        local setting, label, options = labelData[1], labelData[2], labelData[3]
         if (ADDON.settings.ui[setting] ~= nil) then
-            frame.checks[setting] = BuildCheckBox(frame, label)
+            if options then
+                frame.checks[setting] = BuildDropDown(frame, label, options)
+            else
+                frame.checks[setting] = BuildCheckBox(frame, label)
+            end
         end
     end
 

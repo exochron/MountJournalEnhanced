@@ -1,57 +1,97 @@
 local ADDON_NAME, ADDON = ...
 
-local function InitializeDropDown(_, level)
-    local button = {
-        isTitle = 1,
-        text = GetAddOnMetadata(ADDON_NAME, "Title"),
-        notCheckable = 1,
-    }
-    UIDropDownMenu_AddButton(button, level)
+local function InitializeDropDown(self, level)
 
-    local uiLabels, _ = ADDON:GetSettingLabels()
-    for _, labelData in ipairs(uiLabels) do
-        local setting, label = labelData[1], labelData[2]
-        if ADDON.settings.ui[setting] ~= nil then
-            button = {
-                keepShownOnClick = true,
-                isNotRadio = true,
-                hasArrow = false,
-                text = label,
-                notCheckable = false,
-                checked = ADDON.settings.ui[setting],
-                func = function(_, _, _, value)
-                    ADDON:ApplySetting(setting, value)
-                end,
-            }
-            UIDropDownMenu_AddButton(button, level)
+    if level == 1 then
+        local button = {
+            isTitle = 1,
+            text = GetAddOnMetadata(ADDON_NAME, "Title"),
+            notCheckable = 1,
+        }
+        UIDropDownMenu_AddButton(button, level)
+
+        local uiLabels, _ = ADDON:GetSettingLabels()
+        for _, labelData in ipairs(uiLabels) do
+            local setting, label, options = labelData[1], labelData[2], labelData[3]
+            if ADDON.settings.ui[setting] ~= nil then
+                if options then
+                    button = {
+                        keepShownOnClick = true,
+                        isNotRadio = true,
+                        hasArrow = true,
+                        text = label,
+                        notCheckable = true,
+                        value = setting,
+                    }
+                else
+                    button = {
+                        keepShownOnClick = true,
+                        isNotRadio = true,
+                        hasArrow = false,
+                        text = label,
+                        notCheckable = false,
+                        checked = ADDON.settings.ui[setting],
+                        func = function(_, _, _, value)
+                            ADDON:ApplySetting(setting, value)
+                        end,
+                    }
+                end
+                UIDropDownMenu_AddButton(button, level)
+            end
+        end
+
+        UIDropDownMenu_AddSpace(level)
+
+        button = {
+            isNotRadio = true,
+            notCheckable = true,
+            hasArrow = false,
+            text = ADDON.L.DISPLAY_ALL_SETTINGS,
+            justifyH = "CENTER",
+            func = ADDON.OpenOptions,
+        }
+        UIDropDownMenu_AddButton(button, level)
+        button = {
+            isNotRadio = true,
+            notCheckable = true,
+            hasArrow = false,
+            text = ADDON.L.RESET_WINDOW_SIZE,
+            justifyH = "CENTER",
+            func = function()
+                ADDON.UI:RestoreWindowSize()
+            end,
+        }
+        UIDropDownMenu_AddButton(button, level)
+    elseif level == 2 then
+        local uiLabels, _ = ADDON:GetSettingLabels()
+        for _, labelData in ipairs(uiLabels) do
+            local setting, _, options = labelData[1], labelData[2], labelData[3]
+            if ADDON.settings.ui[setting] ~= nil and options and UIDROPDOWNMENU_MENU_VALUE == setting then
+                for option, label in pairs(options) do
+                    local button = {
+                        keepShownOnClick = true,
+                        isNotRadio = false,
+                        hasArrow = false,
+                        text = label,
+                        notCheckable = false,
+                        checked = function()
+                            return ADDON.settings.ui[setting] == option
+                        end,
+                        value = option,
+                        func = function()
+                            ADDON:ApplySetting(setting, option)
+                            UIDropDownMenu_Refresh(self, nil, level)
+                        end,
+                    }
+                    UIDropDownMenu_AddButton(button, level)
+                end
+                break
+            end
         end
     end
-
-    UIDropDownMenu_AddSpace(level)
-
-    button = {
-        isNotRadio = true,
-        notCheckable = true,
-        hasArrow = false,
-        text = ADDON.L.DISPLAY_ALL_SETTINGS,
-        justifyH = "CENTER",
-        func = ADDON.OpenOptions,
-    }
-    UIDropDownMenu_AddButton(button, level)
-    button = {
-        isNotRadio = true,
-        notCheckable = true,
-        hasArrow = false,
-        text = ADDON.L.RESET_WINDOW_SIZE,
-        justifyH = "CENTER",
-        func = function()
-            ADDON.UI:RestoreWindowSize()
-        end,
-    }
-    UIDropDownMenu_AddButton(button, level)
 end
 
-local withoutStyle=false
+local withoutStyle = false
 local function BuildWheelButton()
 
     local template
@@ -99,6 +139,6 @@ end, "settings wheel")
 
 ADDON.UI:RegisterUIOverhaulCallback(function(frame)
     if frame == CollectionsJournal then
-        withoutStyle=true
+        withoutStyle = true
     end
 end)
