@@ -1,8 +1,7 @@
 
 ### Next
-- addon flyout
+- zoom in/out more
 - autorotate model in display
-- zoom out more
 - personal favorites rework
 - special summon animation
 
