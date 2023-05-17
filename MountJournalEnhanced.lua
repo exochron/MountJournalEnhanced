@@ -87,3 +87,8 @@ end, ADDON_NAME)
 
 -- skip dragonriding order helptip
 C_CVar.SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_MOUNT_COLLECTION_DRAGONRIDING, true)
+
+-- for addon compartment
+function MountJournalEnhanced_Open()
+    ToggleCollectionsJournal(COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS)
+end
