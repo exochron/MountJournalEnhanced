@@ -3,7 +3,7 @@ local L = ADDON.L
 
 --region setting handler
 local callbacks, defaults, uiLabels, behaviourLabels = {}, {}, {}, {}
-function ADDON:RegisterUISetting(key, default, label, func)
+function ADDON:RegisterUISetting(key, default, label, func, options)
     callbacks[key] = function(flag)
         ADDON.settings.ui[key] = flag
         if func then
@@ -11,7 +11,7 @@ function ADDON:RegisterUISetting(key, default, label, func)
         end
     end
     defaults[key] = default
-    table.insert(uiLabels, { key, label })
+    table.insert(uiLabels, { key, label, options })
 end
 function ADDON:RegisterBehaviourSetting(key, default, label, func)
     callbacks[key] = function(flag)

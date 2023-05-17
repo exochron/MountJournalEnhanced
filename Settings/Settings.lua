@@ -46,6 +46,7 @@ local function PrepareDefaults()
             showPersonalCount = true,
             windowSize = { 0, 0 },
             colorizeNameByRarity = true,
+            displayBackground = "original",
         },
 
         favoritePerChar = false,

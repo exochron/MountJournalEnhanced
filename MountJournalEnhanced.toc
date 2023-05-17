@@ -50,6 +50,7 @@ UI\FilterDropdown\Main.lua
 UI\FilterDropdown\Color.lua
 UI\FilterDropdown\Family.lua
 UI\FilterDropdown\Sort.lua
+UI\DisplayBackground.lua
 UI\DisplayCamera.lua
 UI\DisplayStatistics.lua
 UI\Hotkeys.lua
