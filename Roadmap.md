@@ -1,6 +1,7 @@
 
 ### Next
-- zoom in/out more
+- mountspecial button next to mount button
+- black filter inaccurate
 - autorotate model in display
 - personal favorites rework
 - special summon animation
