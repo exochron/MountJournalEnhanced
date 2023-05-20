@@ -1,6 +1,5 @@
 
 ### Next
-- mountspecial button next to mount button
 - black filter inaccurate
 - autorotate model in display
 - personal favorites rework

@@ -47,6 +47,7 @@ local function PrepareDefaults()
             windowSize = { 0, 0 },
             colorizeNameByRarity = true,
             displayBackground = "original",
+            showMountspecialButton = true,
         },
 
         favoritePerChar = false,
