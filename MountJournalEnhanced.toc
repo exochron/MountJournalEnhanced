@@ -56,6 +56,7 @@ UI\DisplayCamera.lua
 UI\DisplayStatistics.lua
 UI\Hotkeys.lua
 UI\MountListDropDown.lua
+UI\MountSpecialButton.lua
 UI\SettingsDropDown.lua
 UI\DressUpButton.lua
 UI\RarityNames.lua
