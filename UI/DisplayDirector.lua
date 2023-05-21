@@ -217,6 +217,16 @@ local function BuildCameraPanel()
     local zoomOut = BuildCameraButton(ZOOM_OUT, KEY_MOUSEWHEELDOWN, ORBIT_CAMERA_MOUSE_MODE_ZOOM, -0.9)
     zoomOut.icon:SetTexCoord(0.29687500, 0.54687500, 0.00781250, 0.13281250)
 
+    local autorotate = BuildCheckButton(ADDON.L.AUTO_ROTATE, nil, function(self)
+        self:SetChecked(ADDON.settings.ui.autoRotateModel)
+    end)
+    autorotate.icon:SetTexture("Interface/Animations/PowerSwirlAnimation")
+    autorotate.icon:SetTexCoord(0.810547, 0.947266, 0.00195312, 0.138672)
+    autorotate.icon:SetSize(11, 11)
+    autorotate:HookScript("OnClick", function(self)
+        ADDON.settings.ui.autoRotateModel = self:GetChecked()
+    end)
+
     local rotateLeft = BuildCameraButton(ROTATE_LEFT, ROTATE_TOOLTIP, ORBIT_CAMERA_MOUSE_MODE_YAW_ROTATION, -3)
     rotateLeft.icon:SetTexCoord(0.01562500, 0.26562500, 0.28906250, 0.41406250)
 
@@ -249,6 +259,12 @@ ADDON.Events:RegisterCallback("loadUI", function()
     HideOriginalElements()
     SetupModelActor()
     BuildCameraPanel()
+
+    MountJournal.MountDisplay.ModelScene:HookScript("OnUpdate", function(self, elapsed)
+        if ADDON.settings.ui.autoRotateModel then
+            self:GetActiveCamera():HandleMouseMovement(ORBIT_CAMERA_MOUSE_MODE_YAW_ROTATION, elapsed * -0.8, false)
+        end
+    end);
 end, "display director")
 
 ADDON.Events:RegisterCallback("OnUpdateMountDisplay", function()
