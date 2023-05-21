@@ -6,6 +6,7 @@ ADDON.isMetric = false -- is the metric or imperial/us unit system used?
 ADDON.L = {}
 local L = ADDON.L
 
+L["AUTO_ROTATE"] = "Rotate automatically"
 L["Black Market"] = "Black Market"
 L["DRESSUP_LABEL"] = "Journal"
 L["FAVOR_AUTO"] = "Auto-favor new mounts"
