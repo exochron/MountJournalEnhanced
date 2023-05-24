@@ -16,7 +16,7 @@ This addon extends the ingame mount journal with extra features.
 + Display count of character specific mounts
 + Display mount related achievement points
 + Freely rotate display camera around mount
-+ Trigger /mountspecial within the display
++ Trigger /mountspecial of your mount or within the display
 + Browse through mounts with Up/Down arrow keys
 + Right Click on scroll buttons to quickly go to the top or bottom
 + Track, display and sort by your usage statistics
@@ -27,6 +27,8 @@ This addon extends the ingame mount journal with extra features.
 + Resize the journal window
 + Works with ElvUI
 + Set own notes for each mount. They're displayed within mount tooltips and the journal display.
++ Change the display background to a static color
++ Toggle the mount journal via the addon compartment
 
 ## 🩹 Fixes also
 + the ridiculous fly in animation of the rider

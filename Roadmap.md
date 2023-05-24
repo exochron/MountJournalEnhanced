@@ -1,11 +1,12 @@
 
 ### Next
 - black filter inaccurate
-- autorotate model in display
 - personal favorites rework
 - special summon animation
 
 ### More Ideas:
+- preview manuscripts
+- use rarity of dataforazeroth.com?
 - activate sound effects in display (with global setting)
 - more animation control in display (start/pause, movements)
 - gallery mode (like wardrobe)
