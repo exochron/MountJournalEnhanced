@@ -208,6 +208,7 @@ ADDON.DB.Source = {
         [376873] = true, -- Otto
         [385738] = true, -- Temperamental Skyclaw
         [395644] = true, -- Divine Kiss of Ohn'ahra
+        [407555] = true, -- Tarecgosa's Visage
         [408313] = true, -- Big Slick in the City
 
         ------------------------------
