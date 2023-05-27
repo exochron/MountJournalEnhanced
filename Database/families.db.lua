@@ -566,6 +566,7 @@ ADDON.DB.Family = {
 [442] = true, -- Blazing Drake
 [443] = true, -- Twilight Harbinger
 [444] = true, -- Life-Binder's Handmaiden
+[1727] = true, -- Tarecgosa's Visage
 },
 ["Nether Drakes"] = {
 [169] = true, -- Swift Nether Drake
