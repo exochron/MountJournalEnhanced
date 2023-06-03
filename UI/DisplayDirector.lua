@@ -269,7 +269,7 @@ end, "display director")
 
 ADDON.Events:RegisterCallback("OnUpdateMountDisplay", function()
     local mountID = ADDON.Api:GetSelected()
-    if mountID then
+    if mountID and buttons then
         local creatureData = C_MountJournal.GetMountAllCreatureDisplayInfoByID(mountID)
         local _, _, _, isSelfMount = C_MountJournal.GetMountInfoExtraByID(mountID)
         buttons[2]:SetShown(not isSelfMount) -- char toggle
