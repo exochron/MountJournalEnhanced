@@ -48,7 +48,7 @@ local function PrepareDefaults()
             colorizeNameByRarity = true,
             displayBackground = "original",
             showMountspecialButton = true,
-            autoRotateModel = true,
+            autoRotateModel = false,
         },
 
         favoritePerChar = false,
