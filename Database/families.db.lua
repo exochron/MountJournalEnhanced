@@ -949,6 +949,7 @@ ADDON.DB.Family = {
 [1319] = true, -- Malevolent Drone
 [1320] = true, -- Shadowbarb Drone
 [1321] = true, -- Wicked Swarmer
+[1784] = true, -- Königlicher Schwärmer
 },
 ["Flies"] = {
 [1449] = true, -- Lord of the Corpseflies
