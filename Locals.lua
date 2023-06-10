@@ -32,6 +32,7 @@ L["SORT_DRAGONRIDING_TOP"] = "Dragonriding mounts at the top"
 L["SORT_REVERSE"] = "Reverse Sort"
 L["SORT_UNOWNED_BOTTOM"] = "Unowned at Bottom"
 L["SORT_UNUSABLE_BOTTOM"] = "Unusable after Usable"
+L["SPECIAL_TIP"] = "Starts the special animation of your mount in game."
 L["STATS_TIP_CUSTOMIZATION_COUNT_HEAD"] = "Count of collected customization options"
 L["STATS_TIP_LEARNED_DATE_HEAD"] = "Possession date"
 L["STATS_TIP_RARITY_HEAD"] = RARITY
