@@ -1,21 +1,20 @@
 local ADDON_NAME, ADDON = ...
 
 -- see: https://www.townlong-yak.com/framexml/ptr/CallbackRegistry.lua
-ADDON.Events = CreateFromMixins(CallbackRegistryMixin)
+ADDON.Events = CreateFromMixins(EventRegistry)
 ADDON.Events:OnLoad()
 ADDON.Events:SetUndefinedEventsAllowed(true)
 
 local function InitUI()
-    local frame = CreateFrame("frame")
-    frame:RegisterEvent("ZONE_CHANGED")
-    frame:RegisterEvent("ZONE_CHANGED_INDOORS")
-    frame:RegisterEvent("MOUNT_JOURNAL_USABILITY_CHANGED")
-    frame:RegisterEvent("MOUNT_JOURNAL_SEARCH_UPDATED")
-    frame:SetScript("OnEvent", function()
+    local updateUI = function ()
         if CollectionsJournal:IsShown() then
             ADDON:FilterMounts()
         end
-    end);
+    end
+    ADDON.Events:RegisterFrameEventAndCallback("ZONE_CHANGED", updateUI, 'init')
+    ADDON.Events:RegisterFrameEventAndCallback("ZONE_CHANGED_INDOORS", updateUI, 'init')
+    ADDON.Events:RegisterFrameEventAndCallback("MOUNT_JOURNAL_USABILITY_CHANGED", updateUI, 'init')
+    ADDON.Events:RegisterFrameEventAndCallback("MOUNT_JOURNAL_SEARCH_UPDATED", updateUI, 'init')
 
     MountJournal.searchBox:SetScript("OnTextChanged", function()
         SearchBoxTemplate_OnTextChanged(MountJournal.searchBox)
@@ -35,13 +34,9 @@ end
 ADDON:ResetIngameFilter()
 
 local loggedIn = false
-local frame = CreateFrame("Frame")
-frame:RegisterEvent("PLAYER_LOGIN")
-frame:RegisterEvent("NEW_MOUNT_ADDED")
-frame:RegisterEvent("ADDON_LOADED")
-frame:SetScript("OnEvent", function(_, event, ...)
+local function initialize()
     if MountJournal then
-        frame:UnregisterEvent("ADDON_LOADED")
+        ADDON.Events:UnregisterFrameEvent("ADDON_LOADED")
         ADDON.Events:TriggerEvent("OnJournalLoaded")
         ADDON.Events:UnregisterEvents({"OnJournalLoaded"})
     end
@@ -53,15 +48,9 @@ frame:SetScript("OnEvent", function(_, event, ...)
         ADDON.Events:TriggerEvent("OnLogin")
         ADDON.Events:UnregisterEvents({"OnInit", "OnLogin"})
     end
-
-    if event == "NEW_MOUNT_ADDED" then
-        local param1, param2, param3 = ...
-        C_Timer.After(1, function() -- mount infos are not properly updated in current frame
-            ADDON:FilterMounts()
-            ADDON.Events:TriggerEvent("OnNewMount", param1, param2, param3)
-        end)
-    end
-end)
+end
+ADDON.Events:RegisterFrameEventAndCallback("PLAYER_LOGIN", initialize, 'init')
+ADDON.Events:RegisterFrameEventAndCallback("ADDON_LOADED", initialize, 'init')
 
 EventRegistry:RegisterCallback("MountJournal.OnShow", function()
     -- MountJournal gets always initially shown before switching to the actual tab.

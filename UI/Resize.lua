@@ -83,16 +83,13 @@ EventRegistry:RegisterCallback("MountJournal.OnHide", function()
     CollectionsJournal:SetResizable(false)
 end, ADDON_NAME .. '_Resize')
 
-local f = CreateFrame("Frame")
-f:RegisterEvent("PLAYER_REGEN_DISABLED")
-f:RegisterEvent("PLAYER_REGEN_ENABLED")
-f:SetScript("OnEvent", function(_, event)
-    local CJ = CollectionsJournal
-    if CJ then
-        if event == "PLAYER_REGEN_DISABLED" then
-            CJ:SetResizable(false)
-        elseif event == "PLAYER_REGEN_ENABLED" and CJ.selectedTab == COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS then
-            CJ:SetResizable(true)
-        end
+ADDON.Events:RegisterFrameEventAndCallback("PLAYER_REGEN_DISABLED", function()
+    if CollectionsJournal then
+        CollectionsJournal:SetResizable(false)
     end
-end)
+end, ADDON_NAME .. '_Resize')
+ADDON.Events:RegisterFrameEventAndCallback("PLAYER_REGEN_ENABLED", function()
+    if CollectionsJournal and CollectionsJournal.selectedTab == COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS then
+        CollectionsJournal:SetResizable(true)
+    end
+end, ADDON_NAME .. '_Resize')
