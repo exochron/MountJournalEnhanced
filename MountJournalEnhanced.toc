@@ -31,6 +31,7 @@ Filters.lua
 Sort.lua
 MountJournalEnhanced.lua
 Api.lua
+Events.lua
 Settings\Handling.lua
 Settings\Settings.lua
 Settings\OptionsPanel.lua

@@ -1,8 +1,8 @@
-# ![Logo](/UI/icons/mje.png) Mount Journal Enhanced
+# ![Logo](https://raw.githubusercontent.com/exochron/MountJournalEnhanced/master/UI/icons/mje.png) Mount Journal Enhanced
 This addon extends the ingame mount journal with extra features.
 
 ## 🎬 In Action
-- https://www.tiktok.com/t/ZTRwwh9LH/ (by [Touchpadwarrior](https://www.twitch.tv/touchpadwarrior))
+- https://www.tiktok.com/t/ZTRwwh9LH/ (03/2023 by [Touchpadwarrior](https://www.twitch.tv/touchpadwarrior))
 
 ## ⭐ Features
 + Filter mounts by an extended source, colors, faction, type, family or expansion
