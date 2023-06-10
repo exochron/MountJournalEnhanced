@@ -40,9 +40,7 @@ end
 
 ADDON.Events:RegisterCallback("OnLogin", scanAuras, 'external events')
 
-local frame = CreateFrame("Frame")
-frame:RegisterEvent("UNIT_AURA")
-frame:SetScript("OnEvent", function(_, _, target, updateInfo)
+ADDON.Events:RegisterFrameEventAndCallback("UNIT_AURA", function(_, target, updateInfo)
     if target == "player" then
         if updateInfo.isFullUpdate then
             scanAuras()
@@ -61,4 +59,12 @@ frame:SetScript("OnEvent", function(_, _, target, updateInfo)
             ADDON.Events:TriggerEvent("OnMountDown", mountId)
         end
     end
-end)
+end, 'external events')
+
+ADDON.Events:RegisterFrameEventAndCallback("NEW_MOUNT_ADDED", function(_, ...)
+    local param1, param2, param3 = ...
+    C_Timer.After(1, function() -- mount infos are not properly updated in current frame
+        ADDON:FilterMounts()
+        ADDON.Events:TriggerEvent("OnNewMount", param1, param2, param3)
+    end)
+end, 'external events')

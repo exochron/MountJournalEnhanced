@@ -5,7 +5,7 @@ local INDEX_USE_COUNT, INDEX_LAST_USE_TIME, INDEX_TRAVEL_TIME, INDEX_TRAVEL_DIST
 MJETrackingData = MJETrackingData or {}
 
 local HBD = LibStub("HereBeDragons-2.0")
-local currentMount, startZone, startPositionX, startPositionY, travelTicker
+local startZone, startPositionX, startPositionY, travelTicker
 
 local function initData(mountId)
     if not MJETrackingData[mountId] then
@@ -36,9 +36,9 @@ function ADDON:SetLearnedDate(mountId, year, month, day)
     end
 end
 
-local function updateDistance()
-    if MJETrackingData[currentMount] then
-        local blob = MJETrackingData[currentMount]
+local function updateDistance(mountId)
+    if MJETrackingData[mountId] then
+        local blob = MJETrackingData[mountId]
         local currentPosX, currentPosY, currentZone = HBD:GetPlayerZonePosition()
         local distance = HBD:GetZoneDistance(startZone, startPositionX, startPositionY, currentZone, currentPosX, currentPosY)
         if distance then
@@ -48,45 +48,28 @@ local function updateDistance()
     end
 end
 
-local function startTracking(mount)
-    currentMount = mount
-    local blob = initData(mount)
-    blob[INDEX_LAST_USE_TIME] = GetServerTime()
-    blob[INDEX_USE_COUNT] = blob[INDEX_USE_COUNT] + 1
-    startPositionX, startPositionY, startZone = HBD:GetPlayerZonePosition()
-    travelTicker = C_Timer.NewTicker(5, updateDistance)
-end
-local function stopTracking(mount)
-    local blob = initData(mount)
-    blob[INDEX_TRAVEL_TIME] = blob[INDEX_TRAVEL_TIME] + (GetServerTime() - blob[INDEX_LAST_USE_TIME])
-
-    travelTicker:Cancel()
-    updateDistance()
-    currentMount, startZone, startPositionX, startPositionY = nil, nil, nil, nil
-end
-
-local function checkMountEvent()
-    if currentMount then
-        stopTracking(currentMount)
-    elseif ADDON.settings.trackUsageStats then
-        for i = 1, 40 do
-            local spellId = select(10, UnitBuff("player", i, "HELPFUL|PLAYER|CANCELABLE"))
-            if spellId then
-                local mountId = C_MountJournal.GetMountFromSpell(spellId)
-                if mountId then
-                    startTracking(mountId)
-                    break
-                end
-            end
-        end
+ADDON.Events:RegisterCallback("OnMountUp", function(_, mount)
+    if ADDON.settings.trackUsageStats then
+        local blob = initData(mount)
+        blob[INDEX_LAST_USE_TIME] = GetServerTime()
+        blob[INDEX_USE_COUNT] = blob[INDEX_USE_COUNT] + 1
+        startPositionX, startPositionY, startZone = HBD:GetPlayerZonePosition()
+        travelTicker = C_Timer.NewTicker(5, function()
+            updateDistance(mount)
+        end)
     end
-end
+end, "tracking")
+ADDON.Events:RegisterCallback("OnMountDown", function(_, mount)
+    if ADDON.settings.trackUsageStats then
+        local blob = initData(mount)
+        blob[INDEX_TRAVEL_TIME] = blob[INDEX_TRAVEL_TIME] + (GetServerTime() - blob[INDEX_LAST_USE_TIME])
 
-local frame = CreateFrame("Frame")
-frame:RegisterEvent("PLAYER_MOUNT_DISPLAY_CHANGED") -- player mounts or dismounts
-frame:SetScript("OnEvent", checkMountEvent)
+        travelTicker:Cancel()
+        updateDistance(mount)
+        startZone, startPositionX, startPositionY = nil, nil, nil
+    end
+end, "tracking")
 
-ADDON.Events:RegisterCallback("OnLogin", checkMountEvent, "tracking")
 ADDON.Events:RegisterCallback("OnNewMount", function(_, mountId)
     if mountId and ADDON.settings.trackUsageStats then
         local blob = initData(mountId)
