@@ -3,9 +3,9 @@ local _, ADDON = ...
 ADDON.DB = {}
 
 ADDON.DB.Recent = {
-    ["minID"] = 1725,
-    ["blacklist"] = { },
-    ["whitelist"] = { 1588, 1603, 1623 },
+    ["minID"] = 1771,
+    ["blacklist"] = { 1784 }, -- Royal Swarmer
+    ["whitelist"] = { },
 }
 
 ADDON.DB.Source = {
@@ -210,6 +210,13 @@ ADDON.DB.Source = {
         [395644] = true, -- Divine Kiss of Ohn'ahra
         [407555] = true, -- Tarecgosa's Visage
         [408313] = true, -- Big Slick in the City
+        [413409] = true, -- Highland Drake
+        [413825] = true, -- Scarlet Pterrordax
+        [413827] = true, -- Harbor Gryphon
+        [417548] = true, -- Renewed Proto-Drake
+        [417552] = true, -- Windborne Velocidrake
+        [417554] = true, -- Cliffside Wylderdrake
+        [417556] = true, -- Winding Slitherdrake
 
         ------------------------------
         -- Alliance ------------------
@@ -299,6 +306,13 @@ ADDON.DB.Source = {
         [408627] = true, -- Igneous Shalewing
         [408653] = true, -- Boulder Hauler
         [408655] = true, -- Morsel Sniffer
+        [414316] = true, -- White War Wolf - Time Rift vendor
+        [414323] = true, -- Ravenous Black Gryphon - Time Rift vendor
+        [414324] = true, -- Gold-Toed Albatross - Time Rift vendor
+        [414326] = true, -- Felstorm Dragon - Time Rift vendor
+        [414327] = true, -- Sulfur Hound - Time Rift vendor
+        [414328] = true, -- Perfected Juggernaut - Time Rift vendor
+        [414334] = true, -- Scourgebound Vanquisher - Time Rift vendor
 
         ------------------------------
         -- Alliance ------------------
@@ -441,6 +455,7 @@ ADDON.DB.Source = {
         [351195] = true, -- Vengeance - Sylvanas Mythic
         [354351] = true, -- Sanctum Gloomcharger - The Nine, Sanctum of Domination
         [368158] = true, -- Zereth Overseer - The Jailer, Sepulcher of the First Ones
+        [413922] = true, -- Valiance -- Naxxramas - Discovery
     },
 
     ["Reputation"] = {
@@ -944,6 +959,12 @@ ADDON.DB.Source = {
         [387231] = 16649, -- Hailstorm Armoredon - Dragonflight Keystone Master: Season One
         [406637] = 17844, -- Inferno Armoredon - Dragonflight Keystone Master: Season Two
         [408649] = 18251, -- Shadowflame Shalewing - Glory of the Aberrus Raider
+        [413409] = 15797, -- Highland Drake - An Azure Ally
+        [417548] = 15794, -- Renewed Proto-Drake - A New Friend
+        [417552] = 15795, -- Windborne Velocidrake - Together in the Skies
+        [417554] = 15796, -- Cliffside Wylderdrake - Cliffside Companion
+        [417556] = 17779, -- Winding Slitherdrake - A Serpentine Discovery
+        [418078] = 18646, -- Pattie - Whodunnit?
 
 
         ------------------------------
@@ -1646,7 +1667,7 @@ ADDON.DB.Type = {
         typeIDs = { 230, 231, 241, 269, 284, 408, 412 },
     },
     flying = {
-        typeIDs = { 247, 248, 398, 402, 407 },
+        typeIDs = { 247, 248, 398, 402, 407, 424, 426, 428, 429 },
     },
     underwater = {
         typeIDs = { 231, 232, 254, 407, 412},
@@ -1721,4 +1742,5 @@ ADDON.DB.Ignored = {
 
     [1578] = true, -- DNT Test Mount JZB
     [1690] = true, -- Whelpling
+    [1796] = true, -- Temp
 }

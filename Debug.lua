@@ -39,7 +39,8 @@ local function runFilterTest(testName)
     ADDON.settings.filter.hiddenIngame = true
     for _, mountId in ipairs(ADDON:FilterMounts()) do
         local name, spellID, _, _, _, sourceType = C_MountJournal.GetMountInfoByID(mountId)
-        print("No " .. testName .. " info for mount: " .. name .. " (" .. spellID .. ", " .. mountId .. ", " .. sourceType .. ") ")
+        local _, _, _, _, mountType = C_MountJournal.GetMountInfoExtraByID(mountId)
+        print("No " .. testName .. " info for mount: " .. name .. " (" .. spellID .. ", " .. mountId .. ", " .. sourceType .. ", " .. mountType .. ") ")
     end
 end
 

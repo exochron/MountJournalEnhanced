@@ -31,6 +31,7 @@ ADDON.DB.Family = {
 [559] = true, -- Kor'kron Juggernaut
 [882] = true, -- Vicious War Scorpion
 [1742] = true, -- Felcrystal Scorpion
+[1782] = true, -- Perfected Juggernaut
 },
 ["Spiders"] = {
 [663] = true, -- Bloodfang Widow
@@ -56,6 +57,7 @@ ADDON.DB.Family = {
 ["Birds"] = {
 ["Albatross"] = {
 [1042] = true, -- Siltwing Albatross
+[1778] = true, -- Gold-Toed Albatross
 },
 ["Chickens"] = {
 [328] = true, -- Magic Rooster
@@ -155,6 +157,7 @@ ADDON.DB.Family = {
 [1042] = true, -- Siltwing Albatross
 [1317] = true, -- Waste Marauder
 [1318] = true, -- Wastewander Skyterror
+[1778] = true, -- Gold-Toed Albatross
 },
 },
 ["Bovids"] = {
@@ -284,6 +287,7 @@ ADDON.DB.Family = {
 [1442] = true, -- Corridor Creeper
 [1477] = true, -- Undying Darkhound
 [1597] = true, -- Grimhowl
+[1781] = true, -- Sulfur Hound
 },
 ["Hyenas"] = {
 [926] = true, -- Alabaster Hyena
@@ -469,6 +473,7 @@ ADDON.DB.Family = {
 [1060] = true, -- Voldunai Dunescraper
 [1218] = true, -- Dazar'alor Windreaver
 [1586] = true, -- Armored Golden Pterrordax
+[1772] = true, -- Scarlet Pterrordax
 },
 ["Raptors"] = {
 [27] = true, -- Emerald Raptor
@@ -561,6 +566,8 @@ ADDON.DB.Family = {
 [1563] = true, -- Highland Drake
 [1588] = true, -- Winding Slitherdrake
 [1660] = true, -- Crimson Gladiator's Drake
+[1771] = true, -- Highland Drake
+[1789] = true, -- Winding Slitherdrake
 },
 ["Grand Drakes"] = {
 [442] = true, -- Blazing Drake
@@ -590,6 +597,8 @@ ADDON.DB.Family = {
 [1590] = true, -- Windborne Velocidrake
 [1591] = true, -- Cliffside Wylderdrake
 [1739] = true, -- Obsidian Gladiator's Slitherdrake
+[1787] = true, -- Windborne Velocidrake
+[1788] = true, -- Cliffside Wylderdrake
 },
 ["Proto-Drakes"] = {
 [262] = true, -- Red Proto-Drake
@@ -609,6 +618,7 @@ ADDON.DB.Family = {
 [1035] = true, -- Corrupted Gladiator's Proto-Drake
 [1589] = true, -- Renewed Proto-Drake
 [1679] = true, -- Frostbrood Proto-Wyrm
+[1786] = true, -- Renewed Proto-Drake
 },
 ["Stone Drakes"] = {
 [391] = true, -- Volcanic Stone Drake
@@ -629,6 +639,7 @@ ADDON.DB.Family = {
 [1480] = true, -- Unchained Gladiator's Soul Eater
 [1572] = true, -- Cosmic Gladiator's Soul Eater
 [1599] = true, -- Eternal Gladiator's Soul Eater
+[1783] = true, -- Scourgebound Vanquisher
 },
 ["Wind Drakes"] = {
 [392] = true, -- Drake of the East Wind
@@ -645,6 +656,7 @@ ADDON.DB.Family = {
 [948] = true, -- Demonic Gladiator's Storm Dragon
 [1212] = true, -- Island Thunderscale
 [1314] = true, -- Drake of the Four Winds
+[1779] = true, -- Felstorm Dragon
 },
 },
 ["Elementals"] = {
@@ -652,6 +664,7 @@ ADDON.DB.Family = {
 [606] = true, -- Core Hound
 [797] = true, -- Steelbound Devourer
 [1048] = true, -- Dark Iron Core Hound
+[1781] = true, -- Sulfur Hound
 },
 ["Others"] = {
 [888] = true, -- Farseer's Raging Tempest
@@ -702,6 +715,7 @@ ADDON.DB.Family = {
 [948] = true, -- Demonic Gladiator's Storm Dragon
 [1212] = true, -- Island Thunderscale
 [1314] = true, -- Drake of the Four Winds
+[1779] = true, -- Felstorm Dragon
 },
 },
 ["Feathermanes"] = {
@@ -723,6 +737,8 @@ ADDON.DB.Family = {
 [1063] = true, -- Stormsong Coastwatcher
 [1064] = true, -- Proudmoore Sea Scout
 [1266] = true, -- Alabaster Stormtalon
+[1773] = true, -- Harbor Gryphon
+[1777] = true, -- Ravenous Black Gryphon
 },
 ["Hippogryphs"] = {
 [203] = true, -- Cenarion War Hippogryph
@@ -916,6 +932,7 @@ ADDON.DB.Family = {
 [1500] = true, -- Sanctum Gloomcharger
 [1501] = true, -- Soulbound Gloomcharger
 [1502] = true, -- Fallen Charger
+[1774] = true, -- Valiance
 },
 },
 ["Humanoids"] = {
@@ -949,7 +966,7 @@ ADDON.DB.Family = {
 [1319] = true, -- Malevolent Drone
 [1320] = true, -- Shadowbarb Drone
 [1321] = true, -- Wicked Swarmer
-[1784] = true, -- Königlicher Schwärmer
+[1784] = true, -- Royal Swarmer
 },
 ["Flies"] = {
 [1449] = true, -- Lord of the Corpseflies
@@ -1189,6 +1206,7 @@ ADDON.DB.Family = {
 [1250] = true, -- Mollie
 [1324] = true, -- Elusive Quickhoof
 [1329] = true, -- Springfur Alpaca
+[1794] = true, -- Pattie
 },
 ["Boars"] = {
 [619] = true, -- Blacksteel Battleboar
@@ -1380,6 +1398,7 @@ ADDON.DB.Family = {
 [1492] = true, -- Elysian Aquilon
 [1493] = true, -- Forsworn Aquilon
 [1494] = true, -- Ascendant's Aquilon
+[1782] = true, -- Perfected Juggernaut
 },
 ["Mechanostriders"] = {
 [39] = true, -- Red Mechanostrider
@@ -1490,6 +1509,7 @@ ADDON.DB.Family = {
 [310] = true, -- Black Wolf
 [327] = true, -- Swift Burgundy Wolf
 [342] = true, -- Swift Horde Wolf
+[1776] = true, -- White War Wolf
 },
 },
 }
