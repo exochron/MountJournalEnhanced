@@ -31,6 +31,7 @@ local function BuildButton()
     frame:SetAttribute("type", "macro")
     frame:SetAttribute("typerelease", "macro")
     frame:SetAttribute("macrotext", "/mountspecial");
+    frame:SetAttribute("pressAndHoldAction", "1");
 
     frame:RegisterEvent("PLAYER_REGEN_DISABLED")
     frame:RegisterEvent("PLAYER_REGEN_ENABLED")
