@@ -96,4 +96,5 @@ ADDON.DB.Restrictions = {
 [1497] = { ["covenant"]={4,}, }, -- Battlefield Swarmer
 [1568] = { ["class"]={"PALADIN",}, ["race"]={"LightforgedDraenei",}, }, -- Lightforged Ruinstrider
 [1597] = { ["race"]={"DarkIronDwarf",}, }, -- Grimhowl
+[1727] = { ["quest"]={73199,}, }, -- Tarecgosa's Visage
 }

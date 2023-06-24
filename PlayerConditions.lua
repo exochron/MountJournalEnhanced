@@ -94,6 +94,7 @@ local Mapping = {
     race = playerIsRace,
     skill = playerHasProfession,
     covenant = playerIsCovenant,
+    quest = C_QuestLog.IsQuestFlaggedCompleted,
 }
 
 function ADDON.IsPersonalMount(mountId, faction)
