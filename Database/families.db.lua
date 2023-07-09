@@ -587,6 +587,7 @@ ADDON.DB.Family = {
 [207] = true, -- Merciless Nether Drake
 [223] = true, -- Vengeful Nether Drake
 [241] = true, -- Brutal Nether Drake
+[1744] = true, -- Grotto Netherwing Drake
 },
 ["Others"] = {
 [446] = true, -- Heart of the Aspects
