@@ -2,14 +2,15 @@
 ### Next
 - black filter inaccurate
 - personal favorites rework
-- special summon animation
 
 ### More Ideas:
+- special summon animation
 - preview manuscripts
 - use rarity of dataforazeroth.com?
 - activate sound effects in display (with global setting)
 - more animation control in display (start/pause, movements)
 - gallery mode (like wardrobe)
+- cover flow mode
 - gamepad support (?)
 - variation filter (undead, mech, elemental, magic...)
 - proper favorite profiles with one global profile
