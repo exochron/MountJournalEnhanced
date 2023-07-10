@@ -5,7 +5,7 @@ ADDON.DB = {}
 ADDON.DB.Recent = {
     ["minID"] = 1771,
     ["blacklist"] = { 1784 }, -- Royal Swarmer
-    ["whitelist"] = { },
+    ["whitelist"] = { 1692 }, -- Wondrous Wavewhisker
 }
 
 ADDON.DB.Source = {
