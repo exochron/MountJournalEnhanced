@@ -785,6 +785,7 @@ ADDON.DB.Family = {
 ["Fish"] = {
 ["Fish"] = {
 [800] = true, -- Brinedeep Bottom-Feeder
+[1692] = true, -- Wondrous Wavewhisker
 },
 ["Seahorses"] = {
 [373] = true, -- Vashj'ir Seahorse
