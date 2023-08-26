@@ -168,6 +168,7 @@ ADDON.DB.Family = {
 [612] = true, -- Bloodhoof Bull
 [613] = true, -- Ironhoof Destroyer
 [1045] = true, -- Vicious War Clefthoof
+[1785] = true, -- Ancestral Clefthoof
 },
 ["Goats"] = {
 [508] = true, -- Brown Riding Goat
@@ -420,7 +421,9 @@ ADDON.DB.Family = {
 },
 ["Infernals"] = {
 [633] = true, -- Hellfire Infernal
+[646] = true, -- Coldflame Infernal
 [791] = true, -- Felblaze Infernal
+[799] = true, -- Flarecore Infernal
 [1167] = true, -- Frostshard Infernal
 },
 ["Ur'zul"] = {
@@ -568,6 +571,7 @@ ADDON.DB.Family = {
 [1660] = true, -- Crimson Gladiator's Drake
 [1771] = true, -- Highland Drake
 [1789] = true, -- Winding Slitherdrake
+[1798] = true, -- Azure Worldchiller
 },
 ["Grand Drakes"] = {
 [442] = true, -- Blazing Drake
@@ -693,6 +697,7 @@ ADDON.DB.Family = {
 [1734] = true, -- Shadowflame Shalewing
 [1735] = true, -- Cataloged Shalewing
 [1736] = true, -- Boulder Hauler
+[1737] = true, -- Sandy Shalewing
 [1738] = true, -- Morsel Sniffer
 },
 ["Stone Drakes"] = {
@@ -785,7 +790,7 @@ ADDON.DB.Family = {
 ["Fish"] = {
 ["Fish"] = {
 [800] = true, -- Brinedeep Bottom-Feeder
-[1692] = true, -- Wondrous Wavewhisker
+[1692] = true, -- Wonderous Wavewhisker
 },
 ["Seahorses"] = {
 [373] = true, -- Vashj'ir Seahorse
@@ -949,6 +954,9 @@ ADDON.DB.Family = {
 [760] = true, -- Wild Gladiator's Felblood Gronnling
 [761] = true, -- Warmongering Gladiator's Felblood Gronnling
 [762] = true, -- Coalfist Gronnling
+},
+["Murloc"] = {
+[1797] = true, -- Ginormous Grrloc
 },
 ["Others"] = {
 [1312] = true, -- Gargantuan Grrloc
@@ -1333,6 +1341,9 @@ ADDON.DB.Family = {
 },
 ["Book"] = {
 [1532] = true, -- Soaring Spelltome
+},
+["Broom"] = {
+[1799] = true, -- Eve's Ghastly Rider
 },
 ["Carpets"] = {
 [279] = true, -- Magnificent Flying Carpet
