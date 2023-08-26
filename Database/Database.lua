@@ -3,9 +3,9 @@ local _, ADDON = ...
 ADDON.DB = {}
 
 ADDON.DB.Recent = {
-    ["minID"] = 1771,
-    ["blacklist"] = { 1784 }, -- Royal Swarmer
-    ["whitelist"] = { 1692 }, -- Wondrous Wavewhisker
+    ["minID"] = 1797,
+    ["blacklist"] = {  },
+    ["whitelist"] = { 646, 799, 1737 }, -- Coldflame Infernal, Flarecore Infernal, Sandy Shalewing
 }
 
 ADDON.DB.Source = {
@@ -155,6 +155,7 @@ ADDON.DB.Source = {
         [374194] = true, -- Mossy Mammoth
         [408647] = true, -- Cobalt Shalewing
         [408651] = true, -- Cataloged Shalewing
+        [420097] = true, -- Azure Worldchiller
     },
 
     ["Quest"] = {
@@ -965,6 +966,7 @@ ADDON.DB.Source = {
         [417554] = 15796, -- Cliffside Wylderdrake - Cliffside Companion
         [417556] = 17779, -- Winding Slitherdrake - A Serpentine Discovery
         [418078] = 18646, -- Pattie - Whodunnit?
+        [408654] = 19079, -- Sandy Shalewing - Master of Troubled Timeways
 
 
         ------------------------------

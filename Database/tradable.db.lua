@@ -50,4 +50,5 @@ ADDON.DB.Tradable = {
 [1166] = true, -- Great Sea Ray
 [1287] = true, -- Explorer's Jungle Hopper
 [1288] = true, -- Explorer's Dunetrekker
+[1799] = true, -- Eve's Ghastly Rider
 }
