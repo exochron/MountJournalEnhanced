@@ -54,7 +54,7 @@ local function BuildButton()
 end
 
 ADDON:RegisterUISetting('showMountspecialButton', true, ADDON.L.SETTING_MOUNTSPECIAL_BUTTON, function(flag)
-    if flag and not button then
+    if flag and not button and ADDON.initialized then
         button = BuildButton()
     end
     if button then
