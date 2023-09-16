@@ -5,7 +5,7 @@ ADDON.DB = {}
 ADDON.DB.Recent = {
     ["minID"] = 1797,
     ["blacklist"] = {  },
-    ["whitelist"] = { 646, 799, 1737 }, -- Coldflame Infernal, Flarecore Infernal, Sandy Shalewing
+    ["whitelist"] = { 1645, 1671 }, --Renewed Magmammoth; Duskwing Ohuna
 }
 
 ADDON.DB.Source = {
@@ -153,6 +153,8 @@ ADDON.DB.Source = {
         [374138] = true, -- Seething Slug
         [374157] = true, -- Gooey Snailemental
         [374194] = true, -- Mossy Mammoth
+        [374196] = true, -- Plainswalker Bearer
+        [374278] = true, -- Renewed Magmammoth
         [408647] = true, -- Cobalt Shalewing
         [408651] = true, -- Cataloged Shalewing
         [420097] = true, -- Azure Worldchiller
@@ -300,6 +302,7 @@ ADDON.DB.Source = {
         [385115] = true, -- Swift Armored Vorquin - dracthyr vendor
         [385131] = true, -- Armored Vorquin Leystrider - dracthyr vendor
         [385134] = true, -- Majestic Armored Vorquin - dracthyr vendor
+        [385262] = true, -- Duskwing Ohuna
         [394216] = true, -- Crimson Vorquin - dracthyr vendor
         [394218] = true, -- Sapphire Vorquin - dracthyr vendor
         [394219] = true, -- Bronze Vorquin - dracthyr vendor
@@ -1403,8 +1406,8 @@ ADDON.DB.Source = {
         [239766] = true, -- Blue Qiraji War Tank
         [239767] = true, -- Red Qiraji War Tank
 
-        -- Centaur Hunts (Micro)
-        [374196] = true, -- Plainswalker Bearer
+        -- Secrets of Azeroth
+        [424082] = true, -- Mimiron's Jumpjets
     },
 
     ["Black Market"] = {

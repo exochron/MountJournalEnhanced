@@ -81,6 +81,7 @@ ADDON.DB.Family = {
 },
 ["Eagle"] = {
 [1545] = true, -- Divine Kiss of Ohn'ahra
+[1671] = true, -- Dämmerschwingenohuna
 [1672] = true, -- Zenet Hatchling
 },
 ["Hawkstriders"] = {
@@ -1292,6 +1293,7 @@ ADDON.DB.Family = {
 [1634] = true, -- Mossy Mammoth
 [1635] = true, -- Plainswalker Bearer
 [1644] = true, -- Raging Magmammoth
+[1645] = true, -- Erneuertes Magmammut
 },
 ["Moose"] = {
 [764] = true, -- Grove Warden
@@ -1377,6 +1379,7 @@ ADDON.DB.Family = {
 [1227] = true, -- Aerial Unit R-21/X
 [1254] = true, -- Rustbolt Resistor
 [1587] = true, -- Zereth Overseer
+[1813] = true, -- Mimiron's Jumpjets
 },
 ["Kites"] = {
 [450] = true, -- Pandaren Kite
