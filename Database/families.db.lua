@@ -678,6 +678,7 @@ ADDON.DB.Family = {
 [1405] = true, -- Restoration Deathwalker
 [1419] = true, -- Sintouched Deathwalker
 [1458] = true, -- Wandering Ancient
+[1517] = true, -- Bested Blizzard
 [1520] = true, -- Soultwisted Deathwalker
 [1544] = true, -- Wastewarped Deathwalker
 },
