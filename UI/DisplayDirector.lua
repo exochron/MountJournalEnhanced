@@ -267,14 +267,23 @@ ADDON.Events:RegisterCallback("loadUI", function()
     end);
 end, "display director")
 
-ADDON.Events:RegisterCallback("OnUpdateMountDisplay", function()
+local function updateVisibility()
     local mountID = ADDON.Api:GetSelected()
-    if mountID and buttons then
+    if mountID and #buttons > 2 then
         local creatureData = C_MountJournal.GetMountAllCreatureDisplayInfoByID(mountID)
         local _, _, _, isSelfMount = C_MountJournal.GetMountInfoExtraByID(mountID)
         buttons[2]:SetShown(not isSelfMount) -- char toggle
         buttons[3]:SetShown(#creatureData > 1) -- color toggle
 
         UpdateContainer()
+    end
+end
+
+ADDON.Events:RegisterCallback("OnUpdateMountDisplay", function()
+    if #buttons < 3 then
+        -- might be just bad timing, so lets delay by a frame to be sure
+        C_Timer.After(0, updateVisibility)
+    else
+        updateVisibility()
     end
 end, "display director")
