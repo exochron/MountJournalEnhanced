@@ -40,7 +40,7 @@ local function BuildResizeButton()
     return button
 end
 
-ADDON.Events:RegisterCallback("loadUI", function()
+local function init()
     local CJ = CollectionsJournal
     local button = BuildResizeButton()
 
@@ -72,6 +72,12 @@ ADDON.Events:RegisterCallback("loadUI", function()
             ADDON.settings.ui.windowSize = { width, height }
         end
     end)
+end
+
+ADDON.Events:RegisterCallback("loadUI", function()
+    -- Positions might not be properly up to date yet, so we just wait a frame.
+    -- see: https://github.com/exochron/MountJournalEnhanced/issues/86
+    C_Timer.After(0, init)
 end, "Resize")
 
 EventRegistry:RegisterCallback("MountJournal.OnShow", function()
