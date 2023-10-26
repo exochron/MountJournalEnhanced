@@ -40,6 +40,7 @@ Tracking.lua
 SlashCommand.lua
 Debug.lua
 
+UI\Templates.xml
 UI\Functions.lua
 UI\EnhancedList.lua
 UI\EnhancedDisplay.lua
