@@ -75,10 +75,12 @@ local function testDatabase()
         MJEGlobalSettings.filter = ADDON.settings.filter
     end
 
-    checkDBForOldMountIds(ADDON.DB.FeatsOfStrength, "FeatsOfStrength")
-    checkDBForOldMountIds(ADDON.DB.Expansion, "Expansion")
-    checkDBForOldMountIds(ADDON.DB.Type, "Type")
-    checkDBForOldMountIds(ADDON.DB.Ignored, "Ignored")
+    if GetExpansionLevel() >= 10 then
+        checkDBForOldMountIds(ADDON.DB.FeatsOfStrength, "FeatsOfStrength")
+        checkDBForOldMountIds(ADDON.DB.Expansion, "Expansion")
+        checkDBForOldMountIds(ADDON.DB.Type, "Type")
+        checkDBForOldMountIds(ADDON.DB.Ignored, "Ignored")
+    end
 end
 
 local taintedList = {}

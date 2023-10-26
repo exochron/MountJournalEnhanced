@@ -138,7 +138,9 @@ local function BildAbout()
     buildLabel("Furthermore I'd like to thank all contributors, translators, feedback and idea givers. Your help is really very much appreciated." .. "\n\n")
 
     buildLabel("Besides, it is important to give a special thank you to some community projects and websites. Without whose preliminary work it would be much harder to develop this addon.\n\n")
-    buildLabel("- " .. link("https://rarityraider.com/", "RarityRaider", "rarityraider") .. " for kindly providing their mount rarity percentages.")
+    if ADDON.DB.Rarities then
+        buildLabel("- " .. link("https://rarityraider.com/", "RarityRaider", "rarityraider") .. " for kindly providing their mount rarity percentages.")
+    end
     buildLabel("- " .. link("https://www.warcraftmounts.com/", "Warcraft Mounts", "warcraftmounts") .. " for their comprehensive family gallery.")
     buildLabel("- " .. link("https://www.townlong-yak.com/framexml/live", "Townlong Yak", "townlong_yak") .. ", "
             .. link("https://wow.tools/", "WoW.tools", "wow_tools")

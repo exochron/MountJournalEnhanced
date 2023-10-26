@@ -75,7 +75,9 @@ EventRegistry:RegisterCallback("MountJournal.OnShow", function()
 end, ADDON_NAME)
 
 -- skip dragonriding order helptip
-C_CVar.SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_MOUNT_COLLECTION_DRAGONRIDING, true)
+if LE_FRAME_TUTORIAL_MOUNT_COLLECTION_DRAGONRIDING then
+    C_CVar.SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_MOUNT_COLLECTION_DRAGONRIDING, true)
+end
 
 -- for addon compartment
 function MountJournalEnhanced_Open()

@@ -6,17 +6,20 @@ local function playerHasProfession(skillId)
 
     if nil == playerProfessions then
         playerProfessions = {}
-        local prof1, prof2 = GetProfessions()
-        if prof1 then
-            local prof1SkillID = select(7, GetProfessionInfo(prof1))
-            if prof1SkillID then
-                playerProfessions[prof1SkillID] = true
+        if GetProfessions then
+            -- TODO Wotlk parse professions
+            local prof1, prof2 = GetProfessions()
+            if prof1 then
+                local prof1SkillID = select(7, GetProfessionInfo(prof1))
+                if prof1SkillID then
+                    playerProfessions[prof1SkillID] = true
+                end
             end
-        end
-        if prof2 then
-            local prof2SkillID = select(7, GetProfessionInfo(prof2))
-            if prof2SkillID then
-                playerProfessions[prof2SkillID] = true
+            if prof2 then
+                local prof2SkillID = select(7, GetProfessionInfo(prof2))
+                if prof2SkillID then
+                    playerProfessions[prof2SkillID] = true
+                end
             end
         end
     end
@@ -45,7 +48,7 @@ end
 
 local playerCovenant
 local function playerIsCovenant(covenantId)
-    if playerCovenant == nil then
+    if playerCovenant == nil and C_Covenants then
         playerCovenant = C_Covenants.GetActiveCovenantID()
     end
 

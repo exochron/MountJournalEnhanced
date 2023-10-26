@@ -1,12 +1,22 @@
 local _, ADDON = ...
 
+local isWrath = GetExpansionLevel() == 2
+
 ADDON.DB = {}
 
-ADDON.DB.Recent = {
-    ["minID"] = 1801,
-    ["blacklist"] = { 1813 }, -- Mimiron's Jumpjets
-    ["whitelist"] = { 1744 }, -- Grotto Netherwing Drake
-}
+if isWrath then
+    ADDON.DB.Recent = {
+        ["minID"] = 1,
+        ["blacklist"] = { },
+        ["whitelist"] = { },
+    }
+else
+    ADDON.DB.Recent = {
+        ["minID"] = 1801,
+        ["blacklist"] = { 1813 }, -- Mimiron's Jumpjets
+        ["whitelist"] = { 1744 }, -- Grotto Netherwing Drake
+    }
+end
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -1499,7 +1509,7 @@ ADDON.DB.Source = {
     },
 
     ["Trading Post"] = {
-        sourceDescription = "\124cFFFFD200" .. select(2, C_Garrison.GetBuildingInfo(111)) .. "\124r", -- "Trading Post"
+        sourceDescription = C_Garrison and "\124cFFFFD200" .. select(2, C_Garrison.GetBuildingInfo(111)) .. "\124r" or nil, -- "Trading Post"
     },
 
     ["Shop"] = {
@@ -1773,6 +1783,7 @@ ADDON.DB.Ignored = {
     [1271] = true, -- Swift Spectral Armored Gryphon
     [1272] = true, -- Swift Spectral Pterrordax
     [1607] = true, -- Swift Spectral Drake
+    [1823] = true, -- Swift Spectral Gryphon
 
     -- racing dragonriding duplicates (mountType=426)
     [1771] = true, -- Highland Drake

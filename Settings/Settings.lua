@@ -83,8 +83,8 @@ local function PrepareDefaults()
                 passenger = true,
             },
             rarity = {
-                [Enum.ItemQuality.Common] = true,
-                [Enum.ItemQuality.Uncommon] = true,
+                [Enum.ItemQuality.Common or Enum.ItemQuality.Standard] = true,
+                [Enum.ItemQuality.Uncommon or Enum.ItemQuality.Good] = true,
                 [Enum.ItemQuality.Rare] = true,
                 [Enum.ItemQuality.Epic] = true,
                 [Enum.ItemQuality.Legendary] = true,
