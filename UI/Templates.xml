@@ -1,0 +1,33 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI_shared.xsd">
+
+    <!-- Polyfill of original ModelSceneControlButtonTemplate -->
+    <Button name="MJE_ModelSceneControlButtonTemplate" virtual="true">
+        <Size x="32" y="32"/>
+        <HitRectInsets left="4" right="4" top="4" bottom="4"/>
+        <Layers>
+            <Layer level="OVERLAY">
+                <Texture parentKey="Icon" >
+                    <Size x="16" y="16"/>
+                    <Anchors>
+                        <Anchor point="CENTER"/>
+                    </Anchors>
+                </Texture>
+                <!--<Texture parentKey="Icon" setAllPoints="true" />-->
+            </Layer>
+        </Layers>
+        <NormalTexture parentKey="NormalTexture" atlas="common-button-square-gray-up"/>
+        <HighlightTexture parentKey="HighlightTexture" alphaMode="ADD" alpha="0.4">
+            <Anchors>
+                <Anchor point="TOPLEFT" relativeKey="$parent.Icon" relativePoint="TOPLEFT"/>
+                <Anchor point="BOTTOMRIGHT" relativeKey="$parent.Icon" relativePoint="BOTTOMRIGHT"/>
+            </Anchors>
+        </HighlightTexture>
+        <PushedTexture parentKey="PushedTexture" atlas="common-button-square-gray-down">
+            <Anchors>
+                <Anchor point="TOPLEFT" x="1" y="-1"/>
+                <Anchor point="BOTTOMRIGHT" x="1" y="-1"/>
+            </Anchors>
+        </PushedTexture>
+    </Button>
+</Ui>

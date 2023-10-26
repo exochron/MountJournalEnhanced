@@ -20,25 +20,36 @@ local _, ADDON = ...
 
 local helpTooltip
 local buttons = {}
-local container
 
 local function UpdateContainer()
     local activeButtons = 0
+    local controlFrame = MountJournal.MountDisplay.ModelScene.ControlFrame
+    local hPadding = controlFrame.buttonHorizontalPadding or 0
+    local buttonWidth = 0
 
     for _, button in ipairs(buttons) do
         if button:IsShown() then
-            button:SetPoint("LEFT", 2 + (activeButtons * 18), 0)
+            buttonWidth = button:GetWidth()
+            if activeButtons == 0 then
+                button:SetPoint("LEFT", 0, 0)
+            else
+                button:SetPoint("LEFT", activeButtons * (buttonWidth + hPadding), 0)
+            end
             activeButtons = activeButtons + 1
         end
     end
 
-    container:SetSize((activeButtons * 18) + 4, 23)
+    controlFrame:SetWidth((activeButtons * (buttonWidth + hPadding)) - hPadding)
 end
 
 local function HideOriginalElements()
     local scene = MountJournal.MountDisplay.ModelScene
-    scene.RotateLeftButton:Hide()
-    scene.RotateRightButton:Hide()
+    if scene.RotateLeftButton then
+        scene.RotateLeftButton:Hide()
+    end
+    if scene.RotateRightButton then
+        scene.RotateRightButton:Hide()
+    end
     scene.TogglePlayer:Hide()
 end
 
@@ -54,26 +65,37 @@ local function SetupModelActor()
 end
 
 local function BuildControlContainer()
-    -- from ModelWithControlsTemplate.controlFrame
-    local frame = CreateFrame("Frame", nil, MountJournal.MountDisplay)
+    local frame = CreateFrame("Frame", nil, MountJournal.MountDisplay.ModelScene)
+    frame:SetSize(32,32)
+    frame:SetPoint("BOTTOM", 0, 10)
+    frame:SetFrameLevel(500)
     frame:SetAlpha(0.5)
     frame:Hide()
-    local rightTexture = frame:CreateTexture(nil, "BACKGROUND")
-    rightTexture:SetPoint("RIGHT", 0, 0)
-    rightTexture:SetTexture("Interface/Common/UI-ModelControlPanel")
-    rightTexture:SetTexCoord(0.01562500, 0.37500000, 0.42968750, 0.60937500)
-    rightTexture:SetSize(23, 23)
-    local leftTexture = frame:CreateTexture(nil, "BACKGROUND")
-    leftTexture:SetPoint("LEFT", 0, 0)
-    leftTexture:SetTexture("Interface/Common/UI-ModelControlPanel")
-    leftTexture:SetTexCoord(0.40625000, 0.76562500, 0.42968750, 0.60937500)
-    leftTexture:SetSize(23, 23)
-    local middleTexture = frame:CreateTexture(nil, "BACKGROUND")
-    middleTexture:SetPoint("LEFT", leftTexture, "RIGHT", 0, 0)
-    middleTexture:SetPoint("RIGHT", rightTexture, "LEFT", 0, 0)
-    middleTexture:SetTexture("Interface/Common/UI-ModelControlPanel")
-    middleTexture:SetTexCoord(0, 01, 0.62500000, 0.80468750)
-    middleTexture:SetSize(23, 23)
+    frame.buttonHorizontalPadding = -6
+    frame.UpdateLayout = function()
+    end
+    frame.GetRotateIncrement = function()
+        return 0.05
+    end
+    frame:SetScript("OnShow", function()
+        frame:UpdateLayout()
+    end)
+    frame:SetScript("OnEnter", function()
+        frame:SetAlpha(1)
+    end)
+    frame:SetScript("OnLeave", function()
+        frame:SetAlpha(0.5)
+    end)
+
+    MountJournal.MountDisplay.ModelScene.ControlFrame = frame
+    MountJournal.MountDisplay.ModelScene:HookScript("OnEnter", function()
+        frame:Show()
+    end)
+    MountJournal.MountDisplay.ModelScene:HookScript("OnLeave", function()
+        if not frame:IsMouseOver() then
+            frame:Hide()
+        end
+    end)
 
     return frame
 end
@@ -81,17 +103,16 @@ end
 local function InitButton(button, tooltip, tooltipText)
     -- overwrite default tooltip handling (which might cause taint)
     button:SetScript("OnEnter", function()
-        container:SetAlpha(1)
-        container:Show()
+        button:GetParent():SetAlpha(1);
         helpTooltip:SetOwner(button, "ANCHOR_BOTTOM")
-        helpTooltip:SetText(tooltip, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
-        if tooltipText then
-            helpTooltip:AddLine(tooltipText, _, _, _, 1, 1)
+        helpTooltip:SetText(tooltip or button.tooltip, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
+        if tooltipText or button.tooltipText then
+            helpTooltip:AddLine(tooltipText or button.tooltipText, _, _, _, 1, 1)
         end
         helpTooltip:Show()
     end)
     button:SetScript("OnLeave", function()
-        container:SetAlpha(0.5)
+        button:GetParent():SetAlpha(0.5);
         helpTooltip:Hide()
     end)
 
@@ -99,44 +120,65 @@ local function InitButton(button, tooltip, tooltipText)
 end
 
 local function BuildButton(tooltip, tooltipText)
-    local button = CreateFrame("Button", nil, container, "ModelControlButtonTemplate")
+    local _, button = xpcall(
+            function()
+                return CreateFrame("Button", nil, MountJournal.MountDisplay.ModelScene.ControlFrame, "ModelSceneControlButtonTemplate")
+            end,
+            function()
+                local frame =  CreateFrame("Button", nil, MountJournal.MountDisplay.ModelScene.ControlFrame, "MJE_ModelSceneControlButtonTemplate")
+                frame:HookScript("OnMouseDown", function() frame.Icon:AdjustPointsOffset(1, -1) end)
+                frame:HookScript("OnMouseUp", function() frame.Icon:AdjustPointsOffset(-1, 1) end)
+                return frame
+            end
+    )
     InitButton(button, tooltip, tooltipText)
+    button:HookScript("OnMouseDown", function()
+        PlaySound(SOUNDKIT.IG_INVENTORY_ROTATE_CHARACTER)
+    end)
 
     return button
 end
 
 local function CheckButtonStatus(self)
+    self.Icon:SetPoint("CENTER")
     if self:GetChecked() then
-        self:OnMouseDown()
-    else
-        self:OnMouseUp()
+        self.Icon:AdjustPointsOffset(1, -1);
     end
 end
 
 local function BuildCheckButton(tooltip, tooltipText, OnInitShow)
-    local button = CreateFrame("CheckButton", nil, container, "ModelControlButtonTemplate")
+    local _, button = xpcall(
+            function()
+                return CreateFrame("CheckButton", nil, MountJournal.MountDisplay.ModelScene.ControlFrame, "ModelSceneControlButtonTemplate")
+            end,
+            function()
+                local frame =  CreateFrame("CheckButton", nil, MountJournal.MountDisplay.ModelScene.ControlFrame, "MJE_ModelSceneControlButtonTemplate")
+                frame:HookScript("OnMouseDown", function() frame.Icon:AdjustPointsOffset(1, -1) end)
+                frame:HookScript("OnMouseUp", function() frame.Icon:AdjustPointsOffset(-1, 1) end)
+                return frame
+            end
+    )
+    button:RegisterForClicks("AnyUp")
     InitButton(button, tooltip, tooltipText)
     button:HookScript("OnShow", OnInitShow)
     button:HookScript("OnShow", CheckButtonStatus)
     button:HookScript("OnClick", CheckButtonStatus)
+    button:HookScript("OnMouseDown", function()
+        PlaySound(SOUNDKIT.IG_INVENTORY_ROTATE_CHARACTER)
+    end)
 
     return button
 end
 
-local function BuildCameraButton(tooltip, tooltipText, cameraMode, amountPerSecond)
-    local button = CreateFrame("Button", nil, container, "ModelControlButtonTemplate")
-    Mixin(button, ModifyOrbitCameraButtonMixin)
-    button:SetSize(18, 18)
-    InitButton(button, tooltip, tooltipText)
-
-    button.cameraMode = cameraMode
-    button.amountPerSecond = amountPerSecond
-    button.GetActiveOrbitCamera = function()
-        return MountJournal.MountDisplay.ModelScene:GetActiveCamera()
-    end
-
-    button:HookScript("OnMouseDown", ModifyOrbitCameraButtonMixin.OnMouseDown)
-    button:HookScript("OnMouseUp", ModifyOrbitCameraButtonMixin.OnMouseUp)
+local function BuildRotateButton(tooltip, icon, direction)
+    local button = BuildButton(tooltip, ROTATE_TOOLTIP)
+    button.Icon:SetAtlas("common-icon-" .. icon)
+    button:HookScript("OnMouseDown", function()
+        MountJournal.MountDisplay.ModelScene:AdjustCameraYaw(direction, button:GetParent():GetRotateIncrement())
+    end)
+    button:HookScript("OnMouseUp", function()
+        MountJournal.MountDisplay.ModelScene:StopCameraYaw()
+    end)
 
     return button
 end
@@ -144,27 +186,14 @@ end
 local function BuildCameraPanel()
     local L = ADDON.L
 
-    container = BuildControlContainer()
-    container:SetPoint("BOTTOM", 0, 15)
+    local container = MountJournal.MountDisplay.ModelScene.ControlFrame or BuildControlContainer()
 
     helpTooltip = CreateFrame("GameTooltip", "MJEDisplayHelpToolTip", container, "SharedNoHeaderTooltipTemplate")
 
-    local scene = MountJournal.MountDisplay.ModelScene
-    scene:HookScript("OnEnter", function()
-        if ADDON.Api:GetSelected() then
-            container:Show()
-        end
-    end)
-    scene:HookScript("OnLeave", function()
-        if not container:IsMouseOver()then
-            container:Hide()
-        end
-    end)
-
-    local special = BuildButton("/mountspecial")
-    special.icon:SetTexture("Interface/GossipFrame/CampaignGossipIcons") -- from atlas: campaignavailablequesticon
-    special.icon:SetTexCoord(0.1875, 0.421875, 0.37, 0.85)
-    special:HookScript("OnClick", function()
+    container.specialButton = BuildButton("/mountspecial")
+    container.specialButton.Icon:SetTexture("Interface/GossipFrame/CampaignGossipIcons") -- from atlas: campaignavailablequesticon
+    container.specialButton.Icon:SetTexCoord(0.1875, 0.421875, 0.37, 0.85)
+    container.specialButton:HookScript("OnClick", function()
         local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
         if actor then
             actor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_ANIM)
@@ -173,11 +202,13 @@ local function BuildCameraPanel()
         end
     end)
 
-    local char = BuildCheckButton(MOUNT_JOURNAL_PLAYER, nil, PlayerPreviewToggle.OnShow)
-    char.icon:SetTexture(386865) -- interface/friendsframe/ui-toast-toasticons.blp
-    char.icon:SetTexCoord(0.04, 0.58, 0.04, 0.92, 0.21, 0.58, 0.21, 0.92)
-    char.icon:SetVertexColor(1, 0.7, 0.1)
-    char:HookScript("OnClick", function(self)
+    container.togglePlayerButton = BuildCheckButton(MOUNT_JOURNAL_PLAYER, nil, function(self)
+        PlayerPreviewToggle.OnShow(self)
+    end)
+    container.togglePlayerButton.Icon:SetTexture(386865) -- interface/friendsframe/ui-toast-toasticons.blp
+    container.togglePlayerButton.Icon:SetTexCoord(0.05, 0.2, 0.6, 0.9)
+    container.togglePlayerButton.Icon:SetVertexColor(1, 0.7, 0.1)
+    container.togglePlayerButton:HookScript("OnClick", function(self)
         if self:GetChecked() then
             SetCVar("mountJournalShowPlayer", 1)
         else
@@ -186,11 +217,9 @@ local function BuildCameraPanel()
         MountJournal_UpdateMountDisplay(true)
     end)
 
-    local color = BuildButton(L.TOGGLE_COLOR)
-    color.icon:SetTexture("Interface/OptionsFrame/ColorblindSettings") -- from atlas: colorblind-colorwheel
-    color.icon:SetTexCoord(0.00390625, 0.582031, 0.00390625, 0.582031)
-    color.icon:SetSize(10, 10)
-    color:HookScript("OnClick", function()
+    container.cycleColorButton = BuildButton(L.TOGGLE_COLOR)
+    container.cycleColorButton.Icon:SetAtlas("colorblind-colorwheel")
+    container.cycleColorButton:HookScript("OnClick", function()
         local mountID, mountVariation = ADDON.Api:GetSelected()
         local creatureData = C_MountJournal.GetMountAllCreatureDisplayInfoByID(mountID)
         if nil == mountVariation then
@@ -211,47 +240,69 @@ local function BuildCameraPanel()
         end
     end)
 
-    local zoomIn = BuildCameraButton(ZOOM_IN, KEY_MOUSEWHEELUP, ORBIT_CAMERA_MOUSE_MODE_ZOOM, 0.9)
-    zoomIn.icon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
+    if container.zoomInButton then
+        InitButton(container.zoomInButton)
+    else
+        container.zoomInButton = BuildButton(ZOOM_IN, KEY_MOUSEWHEELUP)
+        container.zoomInButton.Icon:SetAtlas("common-icon-zoomin")
+        container.zoomInButton:HookScript("OnClick", function()
+            MountJournal.MountDisplay.ModelScene:OnMouseWheel(1)
+        end)
+    end
 
-    local zoomOut = BuildCameraButton(ZOOM_OUT, KEY_MOUSEWHEELDOWN, ORBIT_CAMERA_MOUSE_MODE_ZOOM, -0.9)
-    zoomOut.icon:SetTexCoord(0.29687500, 0.54687500, 0.00781250, 0.13281250)
+    if container.zoomOutButton then
+        InitButton(container.zoomOutButton)
+    else
+        container.zoomOutButton = BuildButton(ZOOM_OUT, KEY_MOUSEWHEELDOWN)
+        container.zoomOutButton.Icon:SetAtlas("common-icon-zoomout")
+        container.zoomOutButton:HookScript("OnClick", function()
+            MountJournal.MountDisplay.ModelScene:OnMouseWheel(-1)
+        end)
+    end
 
-    local autorotate = BuildCheckButton(ADDON.L.AUTO_ROTATE, nil, function(self)
+    container.toggleAutoRotateButton = BuildCheckButton(ADDON.L.AUTO_ROTATE, nil, function(self)
         self:SetChecked(ADDON.settings.ui.autoRotateModel)
     end)
-    autorotate.icon:SetTexture("Interface/Animations/PowerSwirlAnimation")
-    autorotate.icon:SetTexCoord(0.810547, 0.947266, 0.00195312, 0.138672)
-    autorotate.icon:SetSize(11, 11)
-    autorotate:HookScript("OnClick", function(self)
+    container.toggleAutoRotateButton.Icon:SetTexture("Interface/Animations/PowerSwirlAnimation")
+    container.toggleAutoRotateButton.Icon:SetTexCoord(0.810547, 0.947266, 0.00195312, 0.138672)
+    container.toggleAutoRotateButton:HookScript("OnClick", function(self)
         ADDON.settings.ui.autoRotateModel = self:GetChecked()
     end)
 
-    local rotateLeft = BuildCameraButton(ROTATE_LEFT, ROTATE_TOOLTIP, ORBIT_CAMERA_MOUSE_MODE_YAW_ROTATION, -3)
-    rotateLeft.icon:SetTexCoord(0.01562500, 0.26562500, 0.28906250, 0.41406250)
+    if container.rotateLeftButton then
+        InitButton(container.rotateLeftButton)
+    else
+        container.rotateLeftButton = BuildRotateButton(ROTATE_LEFT, "rotateleft", "left")
+    end
+    if container.rotateRightButton then
+        InitButton(container.rotateRightButton)
+    else
+        container.rotateRightButton = BuildRotateButton(ROTATE_RIGHT, "rotateright", "right")
+    end
 
-    local rotateRight = BuildCameraButton(ROTATE_RIGHT, ROTATE_TOOLTIP, ORBIT_CAMERA_MOUSE_MODE_YAW_ROTATION, 3)
-    rotateRight.icon:SetTexCoord(0.57812500, 0.82812500, 0.28906250, 0.41406250)
+    container.rotateUpButton = BuildRotateButton(L.ROTATE_UP, "rotateleft", "up")
+    container.rotateUpButton.Icon:SetRotation(-math.pi / 2)
 
-    local rotateUp = BuildCameraButton(L.ROTATE_UP, ROTATE_TOOLTIP, ORBIT_CAMERA_MOUSE_MODE_PITCH_ROTATION, -3)
-    rotateUp.icon:SetTexCoord(0.01562500, 0.26562500, 0.28906250, 0.41406250)
-    rotateUp.icon:SetRotation(-90)
+    container.rotateDownButton = BuildRotateButton(L.ROTATE_DOWN, "rotateright", "down")
+    container.rotateDownButton.Icon:SetRotation(-math.pi / 2)
 
-    local rotateDown = BuildCameraButton(L.ROTATE_DOWN, ROTATE_TOOLTIP, ORBIT_CAMERA_MOUSE_MODE_PITCH_ROTATION, 3)
-    rotateDown.icon:SetTexCoord(0.57812500, 0.82812500, 0.28906250, 0.41406250)
-    rotateDown.icon:SetRotation(-90)
+    if container.resetButton then
+        InitButton(container.resetButton)
+    else
+        container.resetButton = BuildButton(RESET_POSITION)
+        container.resetButton.Icon:SetAtlas("common-icon-undo")
+        container.resetButton:HookScript("OnClick", function()
+            local cam = MountJournal.MountDisplay.ModelScene:GetActiveCamera()
+            if cam then
+                local info = cam.modelSceneCameraInfo
+                cam:SetPitch(info.pitch)
+                cam:SetYaw(info.yaw)
+                cam:SetZoomDistance(info.zoomDistance)
+            end
+        end)
+    end
 
-    local reset = BuildButton(RESET_POSITION)
-    reset:HookScript("OnClick", function()
-        local cam = MountJournal.MountDisplay.ModelScene:GetActiveCamera()
-        if cam then
-            local info = cam.modelSceneCameraInfo
-            cam:SetPitch(info.pitch)
-            cam:SetYaw(info.yaw)
-            cam:SetZoomDistance(info.zoomDistance);
-        end
-    end)
-
+    hooksecurefunc(container, "UpdateLayout", UpdateContainer)
     UpdateContainer()
 end
 
@@ -259,6 +310,25 @@ ADDON.Events:RegisterCallback("loadUI", function()
     HideOriginalElements()
     SetupModelActor()
     BuildCameraPanel()
+
+    -- fix display rotation and adds up and down as possibilities
+    MountJournal.MountDisplay.ModelScene:SetScript("OnUpdate", function(self, elapsed)
+        if self.activeCamera then
+            local yawDirection = self.yawDirection;
+            local increment = self.increment;
+            if yawDirection == "left" then
+                self.activeCamera:AdjustYaw(-1, 0, increment);
+            elseif yawDirection == "right" then
+                self.activeCamera:AdjustYaw(1, 0, increment);
+            elseif yawDirection == "up" then
+                self.activeCamera:AdjustYaw(0, -1, increment);
+            elseif yawDirection == "down" then
+                self.activeCamera:AdjustYaw(0, 1, increment);
+            end
+
+            self.activeCamera:OnUpdate(elapsed);
+        end
+    end);
 
     MountJournal.MountDisplay.ModelScene:HookScript("OnUpdate", function(self, elapsed)
         if ADDON.settings.ui.autoRotateModel then
@@ -269,11 +339,16 @@ end, "display director")
 
 local function updateVisibility()
     local mountID = ADDON.Api:GetSelected()
-    if mountID and #buttons > 2 then
-        local creatureData = C_MountJournal.GetMountAllCreatureDisplayInfoByID(mountID)
-        local _, _, _, isSelfMount = C_MountJournal.GetMountInfoExtraByID(mountID)
-        buttons[2]:SetShown(not isSelfMount) -- char toggle
-        buttons[3]:SetShown(#creatureData > 1) -- color toggle
+    if mountID then
+        local controlFrame = MountJournal.MountDisplay.ModelScene.ControlFrame
+        if controlFrame.togglePlayerButton then
+            local _, _, _, isSelfMount = C_MountJournal.GetMountInfoExtraByID(mountID)
+            controlFrame.togglePlayerButton:SetShown(not isSelfMount)
+        end
+        if controlFrame.cycleColorButton then
+            local creatureData = C_MountJournal.GetMountAllCreatureDisplayInfoByID(mountID)
+            controlFrame.cycleColorButton:SetShown(#creatureData > 1)
+        end
 
         UpdateContainer()
     end
