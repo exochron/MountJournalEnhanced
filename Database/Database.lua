@@ -3,9 +3,9 @@ local _, ADDON = ...
 ADDON.DB = {}
 
 ADDON.DB.Recent = {
-    ["minID"] = 1797,
-    ["blacklist"] = {  },
-    ["whitelist"] = { 1645, 1671 }, --Renewed Magmammoth; Duskwing Ohuna
+    ["minID"] = 1801,
+    ["blacklist"] = { 1813 }, -- Mimiron's Jumpjets
+    ["whitelist"] = { 1744 }, -- Grotto Netherwing Drake
 }
 
 ADDON.DB.Source = {
@@ -158,6 +158,7 @@ ADDON.DB.Source = {
         [408647] = true, -- Cobalt Shalewing
         [408651] = true, -- Cataloged Shalewing
         [420097] = true, -- Azure Worldchiller
+        [424476] = true, -- Winter Night Dreamsaber
     },
 
     ["Quest"] = {
@@ -220,6 +221,10 @@ ADDON.DB.Source = {
         [417552] = true, -- Windborne Velocidrake
         [417554] = true, -- Cliffside Wylderdrake
         [417556] = true, -- Winding Slitherdrake
+        [412088] = true, -- Grotto Netherwing Drake
+        [425338] = true, -- Flourishing Whimsydrake
+        [427041] = true, -- Ochre Dreamtalon
+        [428060] = true, -- Golden Regal Scarab
 
         ------------------------------
         -- Alliance ------------------
@@ -317,6 +322,20 @@ ADDON.DB.Source = {
         [414327] = true, -- Sulfur Hound - Time Rift vendor
         [414328] = true, -- Perfected Juggernaut - Time Rift vendor
         [414334] = true, -- Scourgebound Vanquisher - Time Rift vendor
+        [423871] = true, -- Blossoming Dreamstag - Emerald Dream vendor
+        [423873] = true, -- Suntouched Dreamstag - Emerald Dream Renown vendor
+        [423877] = true, -- Rekindled Dreamstag - Emerald Dream vendor
+        [423891] = true, -- Lunar Dreamstag - Emerald Dream Renown vendor
+        [424479] = true, -- Evening Sun Dreamsaber - Emerald Dream vendor
+        [424482] = true, -- Mourning Flourish Dreamsaber - Emerald Dream vendor
+        [426955] = true, -- Springtide Dreamtalon - Emerald Dream vendor
+        [427043] = true, -- Snowfluff Dreamtalon - Emerald Dream vendor
+        [427222] = true, -- Delugen - Emerald Dream vendor
+        [427224] = true, -- Talont - Emerald Dream vendor
+        [427226] = true, -- Stargrazer - Emerald Dream vendor
+        [427546] = true, -- Mammyth - Emerald Dream vendor
+        [427549] = true, -- Imagiwing - Emerald Dream vendor
+        [427724] = true, -- Salatrancer - Emerald Dream vendor
 
         ------------------------------
         -- Alliance ------------------
@@ -460,6 +479,7 @@ ADDON.DB.Source = {
         [354351] = true, -- Sanctum Gloomcharger - The Nine, Sanctum of Domination
         [368158] = true, -- Zereth Overseer - The Jailer, Sepulcher of the First Ones
         [413922] = true, -- Valiance -- Naxxramas - Discovery
+        [424484] = true, -- Anu'relos -- Amirdrassil - Fyrak Mythic
     },
 
     ["Reputation"] = {
@@ -614,6 +634,8 @@ ADDON.DB.Source = {
         [376910] = true, -- Brown War Ottuk - Iskaara Tuskarr - Renown 30
         [376913] = true, -- Yellow War Ottuk - Iskaara Tuskarr - Renown 30
         [408655] = true, -- Morsel Sniffer - Niffel Renown 18
+        [423873] = true, -- Suntouched Dreamstag - Emerald Dream Renown vendor
+        [423891] = true, -- Lunar Dreamstag - Emerald Dream Renown vendor
 
         ------------------------------
         -- Alliance ------------------
@@ -970,6 +992,8 @@ ADDON.DB.Source = {
         [417556] = 17779, -- Winding Slitherdrake - A Serpentine Discovery
         [418078] = 18646, -- Pattie - Whodunnit?
         [408654] = 19079, -- Sandy Shalewing - Master of Troubled Timeways
+        [422486] = 19011, -- Verdant Armoredon - Dragonflight Keystone Master: Season Three
+        [424474] = 19349, -- Shadow Dusk Dreamsaber - Glory of the Dream Raider
 
 
         ------------------------------
@@ -1180,6 +1204,7 @@ ADDON.DB.Source = {
         [370346] = true, -- Eternal Gladiator's Soul Eater - Gladiator: Shadowlands Season 4
         [377071] = true, -- Crimson Gladiator's Drake - Gladiator: Dragonflight Season 1
         [408977] = true, -- Obsidian Gladiator's Slitherdrake - Gladiator: Dragonflight Season 2
+        [425416] = true, -- Verdant Gladiator's Slitherdrake - Gladiator: Dragonflight Season 3
 
         -- Prestige Reward
         [222202] = true, -- Prestigious Bronze Courser
@@ -1217,6 +1242,7 @@ ADDON.DB.Source = {
         [349824] = true, -- Vicious War Warstalker
         [394737] = true, -- Vicious Sabertooth
         [409034] = true, -- Vicious War Snail
+        [424534] = true, -- Vicious Moon Beast
 
         -- Achievement
         [60118] = true, -- Black War Bear - For The Alliance!
@@ -1264,6 +1290,7 @@ ADDON.DB.Source = {
         [349823] = true, -- Vicious War Warstalker
         [394738] = true, -- Vicious Sabertooth
         [409032] = true, -- Vicious War Snail
+        [424535] = true, -- Vicious Moon Beast
 
         -- Achievement
         [60119] = true, -- Black War Bear - For The Horde!

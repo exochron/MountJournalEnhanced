@@ -81,7 +81,7 @@ ADDON.DB.Family = {
 },
 ["Eagle"] = {
 [1545] = true, -- Divine Kiss of Ohn'ahra
-[1671] = true, -- Dämmerschwingenohuna
+[1671] = true, -- Duskwing Ohuna
 [1672] = true, -- Zenet Hatchling
 },
 ["Hawkstriders"] = {
@@ -108,6 +108,13 @@ ADDON.DB.Family = {
 [1492] = true, -- Elysian Aquilon
 [1493] = true, -- Forsworn Aquilon
 [1494] = true, -- Ascendant's Aquilon
+},
+["Owl"] = {
+[1818] = true, -- Anu'relos, Flame's Guidance
+},
+["Owlbear"] = {
+[1819] = true, -- Vicious Moonbeast
+[1820] = true, -- Vicious Moonbeast
 },
 ["Pandaren Phoenixes"] = {
 [503] = true, -- Crimson Pandaren Phoenix
@@ -305,6 +312,7 @@ ADDON.DB.Family = {
 [1657] = true, -- Brown Scouting Ottuk
 [1658] = true, -- Ivory Trader's Ottuk
 [1659] = true, -- Yellow Scouting Ottuk
+[1837] = true, -- Delugen
 },
 ["Quilen"] = {
 [468] = true, -- Imperial Quilen
@@ -315,9 +323,22 @@ ADDON.DB.Family = {
 ["Vulpin"] = {
 [1222] = true, -- Vulpine Familiar
 [1393] = true, -- Wild Glimmerfur Prowler
+[1841] = true, -- Crimson Glimmerfur
 },
 },
 ["Cats"] = {
+["Bipedal Cat"] = {
+[1833] = true, -- Springtide Dreamtalon
+[1834] = true, -- Ochre Dreamtalon
+[1835] = true, -- Snowfluff Dreamtalon
+[1838] = true, -- Talont
+},
+["Dreamsaber"] = {
+[1814] = true, -- Shadow Dusk Dreamsaber
+[1815] = true, -- Winter Night Dreamsaber
+[1816] = true, -- Evening Sun Dreamsaber
+[1817] = true, -- Morning Flourish Dreamsaber
+},
 ["Lions"] = {
 [403] = true, -- Golden King
 [421] = true, -- Winged Guardian
@@ -573,6 +594,7 @@ ADDON.DB.Family = {
 [1771] = true, -- Highland Drake
 [1789] = true, -- Winding Slitherdrake
 [1798] = true, -- Azure Worldchiller
+[1831] = true, -- Verdant Gladiator's Slitherdrake
 },
 ["Grand Drakes"] = {
 [442] = true, -- Blazing Drake
@@ -605,6 +627,7 @@ ADDON.DB.Family = {
 [1739] = true, -- Obsidian Gladiator's Slitherdrake
 [1787] = true, -- Windborne Velocidrake
 [1788] = true, -- Cliffside Wylderdrake
+[1830] = true, -- Flourishing Whimsydrake
 },
 ["Proto-Drakes"] = {
 [262] = true, -- Red Proto-Drake
@@ -678,7 +701,6 @@ ADDON.DB.Family = {
 [1405] = true, -- Restoration Deathwalker
 [1419] = true, -- Sintouched Deathwalker
 [1458] = true, -- Wandering Ancient
-[1517] = true, -- Bested Blizzard
 [1520] = true, -- Soultwisted Deathwalker
 [1544] = true, -- Wastewarped Deathwalker
 },
@@ -701,6 +723,7 @@ ADDON.DB.Family = {
 [1736] = true, -- Boulder Hauler
 [1737] = true, -- Sandy Shalewing
 [1738] = true, -- Morsel Sniffer
+[1939] = true, -- Imagiwing
 },
 ["Stone Drakes"] = {
 [391] = true, -- Volcanic Stone Drake
@@ -792,7 +815,7 @@ ADDON.DB.Family = {
 ["Fish"] = {
 ["Fish"] = {
 [800] = true, -- Brinedeep Bottom-Feeder
-[1692] = true, -- Wonderous Wavewhisker
+[1692] = true, -- Wondrous Wavewhisker
 },
 ["Seahorses"] = {
 [373] = true, -- Vashj'ir Seahorse
@@ -980,6 +1003,11 @@ ADDON.DB.Family = {
 [1321] = true, -- Wicked Swarmer
 [1784] = true, -- Royal Swarmer
 },
+["Beetle"] = {
+[1662] = true, -- Telix the Stormhorn
+[1942] = true, -- Jeweled Copper Scarab
+[1944] = true, -- Golden Regal Scarab
+},
 ["Flies"] = {
 [1449] = true, -- Lord of the Corpseflies
 [1495] = true, -- Maldraxxian Corpsefly
@@ -1013,7 +1041,6 @@ ADDON.DB.Family = {
 ["Others"] = {
 [594] = true, -- Grinning Reaver
 [1013] = true, -- Honeyback Harvester
-[1662] = true, -- Telix the Stormhorn
 },
 ["Silithids"] = {
 [116] = true, -- Black Qiraji Battle Tank
@@ -1152,6 +1179,8 @@ ADDON.DB.Family = {
 [1639] = true, -- Lizi, Thunderspine Tramper
 [1681] = true, -- Hailstorm Armoredon
 [1725] = true, -- Inferno Armoredon
+[1801] = true, -- Verdant Armoredon
+[1940] = true, -- Salatrancer
 },
 ["Sea Serpents"] = {
 [899] = true, -- Abyss Worm
@@ -1294,7 +1323,8 @@ ADDON.DB.Family = {
 [1634] = true, -- Mossy Mammoth
 [1635] = true, -- Plainswalker Bearer
 [1644] = true, -- Raging Magmammoth
-[1645] = true, -- Erneuertes Magmammut
+[1645] = true, -- Renewed Magmammoth
+[1938] = true, -- Mammyth
 },
 ["Moose"] = {
 [764] = true, -- Grove Warden
@@ -1319,7 +1349,7 @@ ADDON.DB.Family = {
 [632] = true, -- Mosshide Riverwallow
 [1050] = true, -- Vicious War Riverbeast
 },
-["Runestag"] = {
+["Stag"] = {
 [1302] = true, -- Dreamlight Runestag
 [1303] = true, -- Enchanted Dreamlight Runestag
 [1354] = true, -- Shadeleaf Runestag
@@ -1328,6 +1358,11 @@ ADDON.DB.Family = {
 [1357] = true, -- Enchanted Shadeleaf Runestag
 [1358] = true, -- Enchanted Wakener's Runestag
 [1359] = true, -- Enchanted Winterborn Runestag
+[1808] = true, -- Blossoming Dreamstag
+[1809] = true, -- Suntouched Dreamstag
+[1810] = true, -- Rekindled Dreamstag
+[1811] = true, -- Lunar Dreamstag
+[1839] = true, -- Stargrazer
 },
 },
 ["Vehicles"] = {
