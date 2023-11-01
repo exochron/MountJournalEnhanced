@@ -113,6 +113,7 @@ ADDON.DB.Family = {
 [1818] = true, -- Anu'relos, Flame's Guidance
 },
 ["Owlbear"] = {
+[1699] = true, -- Gleaming Moonbeast
 [1819] = true, -- Vicious Moonbeast
 [1820] = true, -- Vicious Moonbeast
 },
@@ -701,6 +702,7 @@ ADDON.DB.Family = {
 [1405] = true, -- Restoration Deathwalker
 [1419] = true, -- Sintouched Deathwalker
 [1458] = true, -- Wandering Ancient
+[1517] = true, -- Bound Blizzard
 [1520] = true, -- Soultwisted Deathwalker
 [1544] = true, -- Wastewarped Deathwalker
 },
