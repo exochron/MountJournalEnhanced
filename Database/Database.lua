@@ -1504,6 +1504,8 @@ ADDON.DB.Source = {
 
     ["Shop"] = {
         sourceType = { 10 },
+
+        [400976] = true, -- Gleaming Moonbeast
     },
 
     ["Promotion"] = {
