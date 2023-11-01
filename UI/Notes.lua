@@ -2,6 +2,25 @@ local _, ADDON = ...
 
 local AceGUI = LibStub("AceGUI-3.0")
 
+local notesText
+
+local function getLabelText(mountId)
+    local text = ''
+    local note = ADDON.settings.notes[mountId]
+    if note then
+        text = NORMAL_FONT_COLOR:WrapTextInColorCode(NOTE_COLON) .. " " .. HIGHLIGHT_FONT_COLOR:WrapTextInColorCode(note)
+    end
+
+    return text
+end
+
+local function updateText()
+    local mountId = ADDON.Api:GetSelected()
+    if mountId and notesText then
+        notesText:SetText(getLabelText(mountId))
+    end
+end
+
 function ADDON.UI:CreateNotesFrame(mountId)
 
     local note = AceGUI:Create("Window")
@@ -29,7 +48,16 @@ function ADDON.UI:CreateNotesFrame(mountId)
     button:SetText(SAVE)
     button:SetWidth(375)
     button:SetCallback("OnClick", function()
-        ADDON.settings.notes[mountId] = editbox:GetText()
+        local text = strtrim(editbox:GetText(), " \n")
+        if strlen(text) > 0 then
+            ADDON.settings.notes[mountId] = text
+        elseif ADDON.settings.notes[mountId] then
+            ADDON.settings.notes[mountId] = nil
+            ADDON.settings.notes = tFilter(ADDON.settings.notes, function(v)
+                return v ~= nil
+            end)
+        end
+        updateText()
         note:Hide()
     end)
     note:AddChild(button)
@@ -40,15 +68,22 @@ function ADDON.UI:CreateNotesFrame(mountId)
     editbox:SetFocus()
 end
 
-local function getLabelText(mountId)
-    local text = ''
-    local note = ADDON.settings.notes[mountId]
-    if note then
-        text = NORMAL_FONT_COLOR:WrapTextInColorCode(NOTE_COLON) .. " " .. HIGHLIGHT_FONT_COLOR:WrapTextInColorCode(note)
-    end
+-- show notes in display
+local function setupFontString()
+    local frame = MountJournal.MountDisplay.InfoButton
+
+    local text = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+    text:SetPoint("TOPLEFT", frame.Lore, "BOTTOMLEFT", 0, -6)
+    text:SetSize(345, 0)
+    text:SetJustifyH("LEFT")
 
     return text
 end
+
+ADDON.Events:RegisterCallback("loadUI", function()
+    notesText = setupFontString()
+    ADDON.Events:RegisterCallback("OnUpdateMountDisplay", updateText, 'DisplayNotes')
+end, "display notes")
 
 -- show notes in mount tooltips
 ADDON.Events:RegisterCallback("OnLogin", function()
@@ -63,26 +98,3 @@ ADDON.Events:RegisterCallback("OnLogin", function()
         end
     end)
 end, "notes")
-
--- show notes also in display
-local function setupFontString()
-    local frame = MountJournal.MountDisplay.InfoButton
-
-    local text = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
-    text:SetPoint("TOPLEFT", frame.Lore, "BOTTOMLEFT", 0, -6)
-    text:SetSize(345, 0)
-    text:SetJustifyH("LEFT")
-
-    return text
-end
-ADDON.Events:RegisterCallback("loadUI", function()
-    local notesText = setupFontString()
-
-    local callback = function()
-        local mountId = ADDON.Api:GetSelected()
-        if mountId and notesText then
-            notesText:SetText(getLabelText(mountId))
-        end
-    end
-    ADDON.Events:RegisterCallback("OnUpdateMountDisplay", callback, 'DisplayNotes')
-end, "display notes")
