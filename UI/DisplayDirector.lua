@@ -349,6 +349,10 @@ local function updateVisibility()
             local creatureData = C_MountJournal.GetMountAllCreatureDisplayInfoByID(mountID)
             controlFrame.cycleColorButton:SetShown(#creatureData > 1)
         end
+        if controlFrame.rotateUpButton and controlFrame.rotateDownButton then
+            controlFrame.rotateUpButton:SetShown(ADDON.settings.ui.unlockDisplayCamera)
+            controlFrame.rotateDownButton:SetShown(ADDON.settings.ui.unlockDisplayCamera)
+        end
 
         UpdateContainer()
     end
