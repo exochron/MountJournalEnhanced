@@ -239,4 +239,15 @@ ADDON.Events:RegisterCallback("preloadUI", function()
         end)
     end
     ADDON:FilterMounts()
+
+    MountJournal.ScrollBar.Back:HookScript("OnMouseDown", function(self, button)
+        if button == "RightButton" then
+            self:GetParent():ScrollToBegin()
+        end
+    end)
+    MountJournal.ScrollBar.Forward:HookScript("OnMouseDown", function(self, button)
+        if button == "RightButton" then
+            self:GetParent():ScrollToEnd()
+        end
+    end)
 end, "enhanced list")
