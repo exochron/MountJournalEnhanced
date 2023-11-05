@@ -772,6 +772,7 @@ ADDON.DB.Family = {
 [1266] = true, -- Alabaster Stormtalon
 [1773] = true, -- Harbor Gryphon
 [1777] = true, -- Ravenous Black Gryphon
+[1792] = true, -- Algarian Stormrider
 },
 ["Hippogryphs"] = {
 [203] = true, -- Cenarion War Hippogryph
