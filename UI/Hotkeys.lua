@@ -3,6 +3,8 @@ local _, ADDON = ...
 -- Keyboard Shortcuts:
 -- UP: Select Previous Mount
 -- DOWN: Select Next Mount
+-- HOME: Select first Mount
+-- END: Select last Mount
 
 local function FetchCurrentSelectedIndex()
     local target = MountJournal.selectedMountID
@@ -13,24 +15,27 @@ local function FetchCurrentSelectedIndex()
     end
 end
 
-local function Select(step, totalDisplayed)
-    local currentIndex = FetchCurrentSelectedIndex()
-    local index
-    if currentIndex == nil then
-        index = 1
-    else
-        index = currentIndex + step
-        if index < 1 then
-            index = 1
-        elseif index > totalDisplayed then
-            index = totalDisplayed
-        end
-    end
-
+local function JumpTo(index)
     MountJournal.ScrollBox:ScrollToElementDataIndex(index)
     local frame = MountJournal.ScrollBox:FindFrame(MountJournal.ScrollBox:Find(index))
     if frame then
         frame:Click()
+    end
+end
+
+local function Select(step, totalDisplayed)
+    local currentIndex = FetchCurrentSelectedIndex()
+    if currentIndex == nil then
+        return JumpTo(1)
+    end
+
+    local index = currentIndex + step
+    if index < 1 then
+        JumpTo(1)
+    elseif index > totalDisplayed then
+        JumpTo(totalDisplayed)
+    else
+        JumpTo(index)
     end
 end
 
@@ -44,14 +49,18 @@ ADDON.Events:RegisterCallback("loadUI", function()
     scrollFrame:EnableKeyboard(true)
     scrollFrame:HookScript("OnKeyDown", function(self, key)
         local totalDisplayed
-        if (key == "DOWN" or key == "UP") and ADDON.settings.ui.enableCursorKeys and not IsModifierKeyDown() then
+        if (key == "DOWN" or key == "UP" or key == "HOME" or key == "END") and ADDON.settings.ui.enableCursorKeys and not IsModifierKeyDown() then
             totalDisplayed = ADDON.Api:GetDataProvider():GetSize()
             if totalDisplayed > 0 then
-                local step = 1
-                if key == "UP" then
-                    step = -1
+                if key == "END" then
+                    JumpTo(totalDisplayed)
+                elseif key == "HOME" then
+                    JumpTo(1)
+                elseif key == "UP" then
+                    Select(-1, totalDisplayed)
+                elseif key == "DOWN" then
+                    Select(1, totalDisplayed)
                 end
-                Select(step, totalDisplayed)
 
                 self:SetPropagateKeyboardInput(false)
                 return
