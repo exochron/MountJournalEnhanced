@@ -109,7 +109,7 @@ local function BuildWheelButton()
     local tex = button:CreateTexture(nil, "ARTWORK")
     tex:SetPoint("TOPLEFT", button, "TOPLEFT", 3, -3)
     tex:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -3, 3)
-    tex:SetAtlas("mechagon-projects")
+    tex:SetAtlas("mechagon-projects") -- TODO need new icon for classic
     tex:SetDesaturated(true)
 
     button:SetHighlightAtlas("mechagon-projects", "ADD")

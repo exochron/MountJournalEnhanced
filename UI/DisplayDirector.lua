@@ -285,7 +285,7 @@ local function BuildCameraPanel()
     container.toggleAutoRotateButton = BuildCheckButton(ADDON.L.AUTO_ROTATE, nil, function(self)
         self:SetChecked(ADDON.settings.ui.autoRotateModel)
     end)
-    container.toggleAutoRotateButton.Icon:SetAtlas("PowerSwirlAnimation-SpinningGlowys")
+    container.toggleAutoRotateButton.Icon:SetAtlas("PowerSwirlAnimation-SpinningGlowys") --TODO need icon for classic
     container.toggleAutoRotateButton:HookScript("OnClick", function(self)
         ADDON.settings.ui.autoRotateModel = self:GetChecked()
     end)
