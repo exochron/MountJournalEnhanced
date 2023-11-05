@@ -19,6 +19,7 @@
 - link to wowhead (?)
 - Mount Score Rating (based on rarity?)
 - disable ingame sound effects of mounts (currently no api for that)
+- customize mount from everywhere (barbershop api works only after clicking certain objects)
 
 ### Stupid Ideas :D
 (maybe for april fool's)
