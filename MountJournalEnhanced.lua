@@ -33,6 +33,32 @@ function ADDON:ResetIngameFilter()
 end
 ADDON:ResetIngameFilter()
 
+local function intersectTableKeys(tbl, keysToKeep)
+    local result = {}
+
+    for key, val in pairs(tbl) do
+        if type(key) == "string" and type(val) == "table" then
+            local subResult = intersectTableKeys(val, keysToKeep)
+            if not TableIsEmpty(subResult) then
+                result[key] = subResult
+            end
+        elseif nil ~= keysToKeep[key] then
+            result[key] = val
+        end
+    end
+
+    return result
+end
+local function CleanupDatabase()
+    local mountIds = C_MountJournal.GetMountIDs()
+    mountIds = CopyValuesAsKeys(mountIds)
+    ADDON.DB.Colors = intersectTableKeys(ADDON.DB.Colors, mountIds)
+    ADDON.DB.Customization = intersectTableKeys(ADDON.DB.Customization, mountIds)
+    ADDON.DB.Family = intersectTableKeys(ADDON.DB.Family, mountIds)
+    ADDON.DB.Restrictions = intersectTableKeys(ADDON.DB.Restrictions, mountIds)
+    ADDON.DB.Tradable = intersectTableKeys(ADDON.DB.Tradable, mountIds)
+end
+
 local loggedIn = false
 local function initialize()
     if MountJournal then
@@ -43,6 +69,7 @@ local function initialize()
 
     if not loggedIn and IsLoggedIn() then
         loggedIn = true
+        CleanupDatabase()
         ADDON:ResetIngameFilter()
         ADDON.Events:TriggerEvent("OnInit")
         ADDON.Events:TriggerEvent("OnLogin")

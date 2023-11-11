@@ -75,7 +75,7 @@ local function testDatabase()
         MJEGlobalSettings.filter = ADDON.settings.filter
     end
 
-    if GetServerExpansionLevel() >= 10 then
+    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
         checkDBForOldMountIds(ADDON.DB.FeatsOfStrength, "FeatsOfStrength")
         checkDBForOldMountIds(ADDON.DB.Expansion, "Expansion")
         checkDBForOldMountIds(ADDON.DB.Type, "Type")

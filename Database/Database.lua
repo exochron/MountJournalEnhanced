@@ -1,22 +1,12 @@
 local _, ADDON = ...
 
-local isWrath = GetServerExpansionLevel() == 2
-
 ADDON.DB = {}
 
-if isWrath then
-    ADDON.DB.Recent = {
-        ["minID"] = 1,
-        ["blacklist"] = { },
-        ["whitelist"] = { },
-    }
-else
-    ADDON.DB.Recent = {
-        ["minID"] = 1801,
-        ["blacklist"] = { 1813 }, -- Mimiron's Jumpjets
-        ["whitelist"] = { 1744 }, -- Grotto Netherwing Drake
-    }
-end
+ADDON.DB.Recent = {
+    ["minID"] = 1801,
+    ["blacklist"] = { 1813 }, -- Mimiron's Jumpjets
+    ["whitelist"] = { 1744 }, -- Grotto Netherwing Drake
+}
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -1605,6 +1595,7 @@ ADDON.DB.Expansion = {
         ["maxID"] = 226,
         [241] = true, -- Brutal Nether Drake
         [243] = true, -- Big Blizzard Bear
+        [1761] = true; -- Reawakened Phase-Hunter (TBC Classic)
     },
 
     [2] = { -- Wrath of the Lich King
@@ -1613,6 +1604,7 @@ ADDON.DB.Expansion = {
         [211] = true, -- X-51 Nether-Rocket
         [212] = true, -- X-51 Nether-Rocket X-TREME
         [221] = true, -- Acherus Deathcharger
+        [1762] = true, -- Kalu'ak Whalebone Glider (WotLK Classic)
     },
 
     [3] = { -- Cataclysm
@@ -1620,6 +1612,7 @@ ADDON.DB.Expansion = {
         ["maxID"] = 447,
         [358] = true, -- Wrathful Gladiator's Frost Wyrm
         [373] = true, -- Abyssal Seahorse
+        [1807] = true, -- Avatar of Flame (Cataclysm Classic)
     },
 
     [4] = { -- Mists of Pandaria
@@ -1773,6 +1766,13 @@ ADDON.DB.Ignored = {
     [462] = true, -- White Riding Yak
     [484] = true, -- Black Riding Yak
     [485] = true, -- Brown Riding Yak
+
+    [1763] = true, -- Magic Rooster
+    [1764] = true, -- X-51 Nether-Rocket X-TREME
+    [1765] = true, -- Big Battle Bear
+    [1766] = true, -- Blazing Hippogryph
+    [1767] = true, -- Wooly White Rhino
+    [1768] = true, -- X-51 Nether-Rocket
 
     -- ghost (mountType=242)
     [238] = true, -- Swift Spectral Gryphon

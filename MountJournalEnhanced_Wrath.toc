@@ -23,6 +23,7 @@ Database\families.db.lua
 Database\tradable.db.lua
 # Database\rarities.db.lua # these are numbers from retail. the don't fit into classic.
 Database\restrictions.db.lua
+Database\wrath.db.lua
 
 PlayerConditions.lua
 Filters.lua
@@ -33,7 +34,7 @@ Events_Wrath.lua
 Settings\Handling.lua
 Settings\Settings.lua
 Settings\OptionsPanel.lua
-Favorites.lua
+# Favorites.lua # There is no Summon Random Mount Button yet
 Tracking.lua
 SlashCommand.lua
 Debug.lua

@@ -176,6 +176,9 @@ local function InitializeFilterDropDown(_, level)
         end
         UIDropDownMenu_AddButton(info, level)
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_SOURCE then
+
+        local serverExpansion = GetServerExpansionLevel()
+
         local settings = ADDON.settings.filter[SETTING_SOURCE]
         AddCheckAllAndNoneInfo(settings, level)
         UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_1, "Drop", settings), level)
@@ -185,15 +188,25 @@ local function InitializeFilterDropDown(_, level)
         UIDropDownMenu_AddButton(CreateFilterInfo(INSTANCE, "Instance", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(REPUTATION, "Reputation", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_6, "Achievement", settings), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(GetCategoryInfo(15441), "Covenants", settings), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(ISLANDS_HEADER, "Island Expedition", settings), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(GARRISON_LOCATION_TOOLTIP, "Garrison", settings), level)
+        if serverExpansion >= LE_EXPANSION_SHADOWLANDS then
+            UIDropDownMenu_AddButton(CreateFilterInfo(GetCategoryInfo(15441), "Covenants", settings), level)
+        end
+        if serverExpansion >= LE_EXPANSION_BATTLE_FOR_AZEROTH then
+            UIDropDownMenu_AddButton(CreateFilterInfo(ISLANDS_HEADER, "Island Expedition", settings), level)
+        end
+        if serverExpansion >= LE_EXPANSION_WARLORDS_OF_DRAENOR then
+            UIDropDownMenu_AddButton(CreateFilterInfo(GARRISON_LOCATION_TOOLTIP, "Garrison", settings), level)
+        end
         UIDropDownMenu_AddButton(CreateFilterInfo(PVP, "PVP", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(CLASS, "Class", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_7, "World Event", settings), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(L["Black Market"], "Black Market", settings), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_12, "Trading Post", settings), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_10, "Shop", settings), level)
+        if serverExpansion >= LE_EXPANSION_MISTS_OF_PANDARIA then
+            UIDropDownMenu_AddButton(CreateFilterInfo(L["Black Market"], "Black Market", settings), level)
+        end
+        if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE  then
+            UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_12, "Trading Post", settings), level)
+            UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_10, "Shop", settings), level)
+        end
         UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_8, "Promotion", settings), level)
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_MOUNT_TYPE then
         local settings = ADDON.settings.filter[SETTING_MOUNT_TYPE]
@@ -204,7 +217,9 @@ local function InitializeFilterDropDown(_, level)
         if MOUNT_JOURNAL_FILTER_DRAGONRIDING then
             UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_DRAGONRIDING, "dragonriding", settings), level)
         end
-        UIDropDownMenu_AddButton(CreateFilterInfo(L["Transform"], "transform", settings), level)
+        if GetServerExpansionLevel() >= LE_EXPANSION_CATACLYSM then
+            UIDropDownMenu_AddButton(CreateFilterInfo(L["Transform"], "transform", settings), level)
+        end
         UIDropDownMenu_AddButton(CreateFilterInfo(MINIMAP_TRACKING_REPAIR, "repair", settings), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(L["Passenger"], "passenger", settings), level)
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_FACTION then
@@ -220,7 +235,7 @@ local function InitializeFilterDropDown(_, level)
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_EXPANSION then
         local settings = ADDON.settings.filter[SETTING_EXPANSION]
         AddCheckAllAndNoneInfo(settings, level)
-        for i = #ADDON.DB.Expansion, 0,-1 do
+        for i = GetServerExpansionLevel(), 0,-1 do
             UIDropDownMenu_AddButton(CreateFilterInfo(_G["EXPANSION_NAME" .. i], i, settings), level)
         end
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_COLOR then

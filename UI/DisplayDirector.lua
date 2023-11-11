@@ -208,7 +208,7 @@ local function BuildCameraPanel()
 
     helpTooltip = CreateFrame("GameTooltip", "MJEDisplayHelpToolTip", container, "SharedNoHeaderTooltipTemplate")
 
-    if GetServerExpansionLevel() >= 10 then -- TODO later for wrath
+    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then -- TODO later for wrath
         container.specialButton = BuildButton("/mountspecial")
         container.specialButton.Icon:SetTexture("Interface/GossipFrame/CampaignGossipIcons") -- from atlas: campaignavailablequesticon
         container.specialButton.Icon:SetTexCoord(0.1875, 0.421875, 0.37, 0.85)

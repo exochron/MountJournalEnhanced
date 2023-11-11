@@ -121,8 +121,8 @@ local function PrepareDefaults()
             end
         end
     end
-    for expansionName, _ in pairs(ADDON.DB.Expansion) do
-        defaultSettings.filter.expansion[expansionName] = true
+    for i = 0, GetServerExpansionLevel() do
+        defaultSettings.filter.expansion[i] = true
     end
 
     return defaultSettings
