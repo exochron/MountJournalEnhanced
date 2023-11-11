@@ -48,7 +48,7 @@ local function BuildHeading(parent, text)
 end
 
 local function BuildMainFrame(uiLabels, behaviourLabels)
-    local title = GetAddOnMetadata(ADDON_NAME, "Title")
+    local title = C_AddOns.GetAddOnMetadata(ADDON_NAME, "Title")
     local frame = AceGUI:Create("BlizOptionsGroup")
     frame:SetName(title)
     frame:SetTitle(title)
@@ -87,7 +87,7 @@ local function BildAbout()
 
     local copybox
     local frame = AceGUI:Create("BlizOptionsGroup")
-    frame:SetName(ADDON.L["SETTING_HEAD_ABOUT"], GetAddOnMetadata(ADDON_NAME, "Title"))
+    frame:SetName(ADDON.L["SETTING_HEAD_ABOUT"], C_AddOns.GetAddOnMetadata(ADDON_NAME, "Title"))
     frame:SetTitle(ADDON.L["SETTING_HEAD_ABOUT"])
     frame:SetLayout("List")
     frame.content:SetPoint("TOPLEFT", 20, -50)
@@ -125,8 +125,8 @@ local function BildAbout()
         frame:AddChild(label)
     end
 
-    buildLabel("|cffffd100" .. GAME_VERSION_LABEL .. ":|r " .. GetAddOnMetadata(ADDON_NAME, "Version") .. "\n\n")
-    buildLabel("|cffffd100" .. ADDON.L["SETTING_ABOUT_AUTHOR"] .. ":|r " .. GetAddOnMetadata(ADDON_NAME, "Author") .. "\n\n")
+    buildLabel("|cffffd100" .. GAME_VERSION_LABEL .. ":|r " .. C_AddOns.GetAddOnMetadata(ADDON_NAME, "Version") .. "\n\n")
+    buildLabel("|cffffd100" .. ADDON.L["SETTING_ABOUT_AUTHOR"] .. ":|r " .. C_AddOns.GetAddOnMetadata(ADDON_NAME, "Author") .. "\n\n")
     buildLabel("Have you found any bug or do you have some suggestions? Please let me know in the issue tracker on "
             .. link("https://www.curseforge.com/wow/addons/mount-journal-enhanced/issues", "Curseforge") .. " or "
             .. link("https://github.com/exochron/MountJournalEnhanced/issues", "GitHub") .. ".")
@@ -191,7 +191,7 @@ ADDON.Events:RegisterCallback("OnLogin", function()
     end)
     group:SetCallback("default", ADDON.ResetSettings)
 
-    mainCategory = Settings.RegisterCanvasLayoutCategory(group.frame, GetAddOnMetadata(ADDON_NAME, "Title"));
+    mainCategory = Settings.RegisterCanvasLayoutCategory(group.frame, C_AddOns.GetAddOnMetadata(ADDON_NAME, "Title"));
 
     Settings.RegisterAddOnCategory(mainCategory)
     Settings.RegisterCanvasLayoutSubcategory(mainCategory, BildAbout().frame, ADDON.L.SETTING_HEAD_ABOUT)

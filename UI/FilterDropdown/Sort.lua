@@ -56,7 +56,7 @@ function ADDON.UI.FDD:AddSortMenu(level)
     UIDropDownMenu_AddSpace(level)
     UIDropDownMenu_AddButton(CreateSortCheckbox(L.SORT_REVERSE, 'descending'), level)
     UIDropDownMenu_AddButton(CreateSortCheckbox(L.SORT_FAVORITES_FIRST, 'favoritesOnTop'), level)
-    if GetExpansionLevel() >= 10 then
+    if GetServerExpansionLevel() >= 10 then
         UIDropDownMenu_AddButton(CreateSortCheckbox(L.SORT_DRAGONRIDING_TOP, 'dragonridingOnTop'), level)
     end
     UIDropDownMenu_AddButton(CreateSortCheckbox(L.SORT_UNUSABLE_BOTTOM, 'unusableToBottom'), level)

@@ -1,6 +1,6 @@
 local _, ADDON = ...
 
-local isWrath = GetExpansionLevel() == 2
+local isWrath = GetServerExpansionLevel() == 2
 
 ADDON.DB = {}
 

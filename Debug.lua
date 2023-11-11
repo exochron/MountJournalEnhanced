@@ -75,7 +75,7 @@ local function testDatabase()
         MJEGlobalSettings.filter = ADDON.settings.filter
     end
 
-    if GetExpansionLevel() >= 10 then
+    if GetServerExpansionLevel() >= 10 then
         checkDBForOldMountIds(ADDON.DB.FeatsOfStrength, "FeatsOfStrength")
         checkDBForOldMountIds(ADDON.DB.Expansion, "Expansion")
         checkDBForOldMountIds(ADDON.DB.Type, "Type")

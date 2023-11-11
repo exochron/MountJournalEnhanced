@@ -5,7 +5,7 @@ local function InitializeDropDown(self, level)
     if level == 1 then
         local button = {
             isTitle = 1,
-            text = GetAddOnMetadata(ADDON_NAME, "Title"),
+            text = C_AddOns.GetAddOnMetadata(ADDON_NAME, "Title"),
             notCheckable = 1,
         }
         UIDropDownMenu_AddButton(button, level)
