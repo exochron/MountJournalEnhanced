@@ -27,8 +27,24 @@ local function UpdateContainer()
     local hPadding = controlFrame.buttonHorizontalPadding or 0
     local buttonWidth = 0
 
+    local ElvSkin
+    if ElvUI then
+        local E = unpack(ElvUI)
+        ElvSkin = E:GetModule('Skins')
+    end
+    if controlFrame.isSkinned then
+        hPadding = 1
+    end
+
     for _, button in ipairs(buttons) do
         if button:IsShown() then
+            -- ElvUI Mod
+            if controlFrame.isSkinned and not button.isSkinned and ElvSkin then
+                ElvSkin:HandleButton(button)
+                button:Size(22)
+                button.Icon:SetInside(nil, 2, 2)
+            end
+
             buttonWidth = button:GetWidth()
             if activeButtons == 0 then
                 button:SetPoint("LEFT", 0, 0)
@@ -302,7 +318,7 @@ local function BuildCameraPanel()
         end)
     end
 
-    hooksecurefunc(container, "UpdateLayout", UpdateContainer)
+    container:HookScript("OnShow", UpdateContainer) -- hook at OnShow instead at UpdateLayout so we are running after ElvUI
     UpdateContainer()
 end
 
