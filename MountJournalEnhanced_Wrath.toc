@@ -21,7 +21,7 @@ Database\colors.db.lua
 Database\customization.db.lua
 Database\families.db.lua
 Database\tradable.db.lua
-# Database\rarities.db.lua # these are numbers from retail. the don't fit into classic.
+# Database\rarities.db.lua # these numbers are from retail. the don't fit into classic.
 Database\restrictions.db.lua
 Database\wrath.db.lua
 
@@ -53,7 +53,7 @@ UI\FilterDropdown\Family.lua
 UI\FilterDropdown\Sort.lua
 UI\DisplayBackground.lua
 UI\DisplayCamera.lua
-# UI\DisplayStatistics.lua
+UI\DisplayStatistics.lua
 UI\Hotkeys.lua
 UI\MountListDropDown.lua
 UI\MountSpecialButton.lua
@@ -61,7 +61,7 @@ UI\SettingsDropDown.lua
 # UI\DressUpButton.lua
 # UI\RarityNames.lua
 UI\Resize.lua
-# UI\ShopButton.lua
+# UI\ShopButton.lua # no shop in classic \o/
 UI\BlizzFixes.lua
 UI\Notes.lua
 # UI\Fun.lua # maybe later

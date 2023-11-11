@@ -13,7 +13,9 @@ local function buildStat(container, iconTexture, tooltipHead, tooltipText)
 
     local icon = item:CreateTexture(nil, "OVERLAY")
     icon:SetTexture(iconTexture)
-    icon:SetAtlas(iconTexture)
+    if type(iconTexture) == "string" then
+        icon:SetAtlas(iconTexture)
+    end
     icon:SetSize(12, 12)
     icon:SetPoint("TOPLEFT", item, "TOPLEFT", 0, 0)
     item.Icon = icon
@@ -66,20 +68,21 @@ local function setupContainer()
             L["STATS_TIP_CUSTOMIZATION_COUNT_HEAD"]
     )
     container.UsedCount = buildStat(container,
-            413588, -- interface/icons/achievement_guildperk_mountup
+            397908, -- interface/levelup/leveluptex
             L["STATS_TIP_USAGE_COUNT_HEAD"]
     )
+    container.UsedCount.Icon:SetTexCoord(0.720703125, 0.78125, 0.03515625, 0.1015625)
     container.TravelTime = buildStat(container,
-            136106, -- interface/icons/spell_nature_timestop
+            136106, -- spell_nature_timestop
             L["STATS_TIP_TRAVEL_TIME_HEAD"],
             L["STATS_TIP_TRAVEL_TIME_TEXT"]
     )
     container.TravelDistance = buildStat(container,
-            1817485, -- interface/icons/ability_druid_dash_orange
+            132120, -- ability_druid_dash
             L["STATS_TIP_TRAVEL_DISTANCE_HEAD"]
     )
     container.LearnedDate = buildStat(container,
-            "auctionhouse-icon-checkmark", -- interface/icons/ability_druid_dash_orange
+            "auctionhouse-icon-checkmark",
             L["STATS_TIP_LEARNED_DATE_HEAD"]
     )
     container.Rarity = buildStat(container,
@@ -169,8 +172,8 @@ local function updateContainer(mountId, container)
         end
     end
 
-    container.Rarity:SetShown(ADDON.DB.Rarities[mountId] ~= nil)
-    if ADDON.DB.Rarities[mountId] ~= nil then
+    container.Rarity:SetShown(ADDON.DB.Rarities and ADDON.DB.Rarities[mountId] ~= nil)
+    if ADDON.DB.Rarities and ADDON.DB.Rarities[mountId] ~= nil then
         container.Rarity.Text:SetText(ADDON.DB.Rarities[mountId] .. " %")
         displayed[#displayed + 1] = container.Rarity
     end
