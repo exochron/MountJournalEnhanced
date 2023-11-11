@@ -2,7 +2,7 @@
 
 local locale = GetLocale()
 
-ADDON.isMetric = false -- is the metric or imperial/us unit system used?
+ADDON.isMetric = (locale ~= "enUS") -- is the metric or imperial unit system used?
 ADDON.L = {}
 local L = ADDON.L
 
@@ -247,44 +247,52 @@ L["SETTING_TRACK_USAGE"] = "Track mount usage behavior on all characters"
 L["SETTING_YCAMERA"] = "Unlock Y rotation with mouse in display"
 
 if locale == "deDE" then
-    ADDON.isMetric = true
     --@localization(locale="deDE", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="deDE", namespace="Settings", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="deDE", namespace="Families", format="lua_additive_table", handle-unlocalized=comment)@
 
 elseif locale == "esES" then
-    ADDON.isMetric = true
     --@localization(locale="esES", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="esES", namespace="Settings", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="esES", namespace="Families", format="lua_additive_table", handle-unlocalized=comment)@
 
+elseif locale == "esMX" then
+    --@localization(locale="esMX", format="lua_additive_table", handle-unlocalized=comment)@
+    --@localization(locale="esMX", namespace="Settings", format="lua_additive_table", handle-unlocalized=comment)@
+    --@localization(locale="esMX", namespace="Families", format="lua_additive_table", handle-unlocalized=comment)@
+
 elseif locale == "frFR" then
-    ADDON.isMetric = true
     --@localization(locale="frFR", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="frFR", namespace="Settings", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="frFR", namespace="Families", format="lua_additive_table", handle-unlocalized=comment)@
 
+elseif locale == "itIT" then
+    --@localization(locale="itIT", format="lua_additive_table", handle-unlocalized=comment)@
+    --@localization(locale="itIT", namespace="Settings", format="lua_additive_table", handle-unlocalized=comment)@
+    --@localization(locale="itIT", namespace="Families", format="lua_additive_table", handle-unlocalized=comment)@
+
 elseif locale == "koKR" then
-    ADDON.isMetric = true
     --@localization(locale="koKR", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="koKR", namespace="Settings", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="koKR", namespace="Families", format="lua_additive_table", handle-unlocalized=comment)@
 
 elseif locale == "ptBR" then
-    ADDON.isMetric = true
     --@localization(locale="ptBR", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="ptBR", namespace="Settings", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="ptBR", namespace="Families", format="lua_additive_table", handle-unlocalized=comment)@
 
 elseif locale == "ruRU" then
-    ADDON.isMetric = true
     --@localization(locale="ruRU", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="ruRU", namespace="Settings", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="ruRU", namespace="Families", format="lua_additive_table", handle-unlocalized=comment)@
 
 elseif locale == "zhCN" then
-    ADDON.isMetric = true
     --@localization(locale="zhCN", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="zhCN", namespace="Settings", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="zhCN", namespace="Families", format="lua_additive_table", handle-unlocalized=comment)@
+
+elseif locale == "zhTW" then
+    --@localization(locale="zhTW", format="lua_additive_table", handle-unlocalized=comment)@
+    --@localization(locale="zhTW", namespace="Settings", format="lua_additive_table", handle-unlocalized=comment)@
+    --@localization(locale="zhTW", namespace="Families", format="lua_additive_table", handle-unlocalized=comment)@
 end
