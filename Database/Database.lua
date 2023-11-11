@@ -1695,7 +1695,7 @@ ADDON.DB.Expansion = {
 }
 
 ADDON.DB.Type = {
-    -- https://wow.gamepedia.com/API_C_MountJournal.GetMountInfoExtraByID
+    -- https://warcraft.wiki.gg/wiki/API_C_MountJournal.GetMountInfoExtraByID
     -- https://wow.tools/dbc/?dbc=mounttype
     ground = {
         typeIDs = { 230, 231, 241, 269, 284, 408, 412 },
@@ -1707,7 +1707,7 @@ ADDON.DB.Type = {
         typeIDs = { 231, 232, 254, 407, 412},
     },
     dragonriding = {
-        typeIDs = { 402 },
+        typeIDs = { 402, 426 },
     },
     repair = {
         [280] = true, -- Traveler's Tundra Mammoth (Alliance)
@@ -1773,6 +1773,13 @@ ADDON.DB.Ignored = {
     [1271] = true, -- Swift Spectral Armored Gryphon
     [1272] = true, -- Swift Spectral Pterrordax
     [1607] = true, -- Swift Spectral Drake
+
+    -- racing dragonriding duplicates (mountType=426)
+    [1771] = true, -- Highland Drake
+    [1786] = true, -- Renewed Proto-Drake
+    [1787] = true, -- Windborne Velocidrake
+    [1788] = true, -- Cliffside Wylderdrake
+    [1789] = true, -- Winding Slitherdrake
 
     [1578] = true, -- DNT Test Mount JZB
     [1690] = true, -- Whelpling

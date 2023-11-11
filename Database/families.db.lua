@@ -592,8 +592,6 @@ ADDON.DB.Family = {
 [1563] = true, -- Highland Drake
 [1588] = true, -- Winding Slitherdrake
 [1660] = true, -- Crimson Gladiator's Drake
-[1771] = true, -- Highland Drake
-[1789] = true, -- Winding Slitherdrake
 [1798] = true, -- Azure Worldchiller
 [1831] = true, -- Verdant Gladiator's Slitherdrake
 },
@@ -626,8 +624,6 @@ ADDON.DB.Family = {
 [1590] = true, -- Windborne Velocidrake
 [1591] = true, -- Cliffside Wylderdrake
 [1739] = true, -- Obsidian Gladiator's Slitherdrake
-[1787] = true, -- Windborne Velocidrake
-[1788] = true, -- Cliffside Wylderdrake
 [1830] = true, -- Flourishing Whimsydrake
 },
 ["Proto-Drakes"] = {
@@ -648,7 +644,6 @@ ADDON.DB.Family = {
 [1035] = true, -- Corrupted Gladiator's Proto-Drake
 [1589] = true, -- Renewed Proto-Drake
 [1679] = true, -- Frostbrood Proto-Wyrm
-[1786] = true, -- Renewed Proto-Drake
 },
 ["Stone Drakes"] = {
 [391] = true, -- Volcanic Stone Drake

@@ -1,13 +1,12 @@
 local _, ADDON = ...
 
 local playerProfessions
---see https://wow.gamepedia.com/TradeSkillLineID for all skillIds
+--see https://warcraft.wiki.gg/wiki/TradeSkillLineID for all skillIds
 local function playerHasProfession(skillId)
 
     if nil == playerProfessions then
         playerProfessions = {}
         local prof1, prof2 = GetProfessions()
-        -- https://wow.gamepedia.com/TradeSkillLineID
         if prof1 then
             local prof1SkillID = select(7, GetProfessionInfo(prof1))
             if prof1SkillID then
@@ -35,7 +34,7 @@ local function playerIsClass(class)
 end
 
 local playerRace
--- see https://wow.gamepedia.com/API_UnitRace for all race names
+-- see https://warcraft.wiki.gg/wiki/API_UnitRace for all race names
 local function playerIsRace(race)
     if playerRace == nil then
         playerRace = select(2, UnitRace("player"))
