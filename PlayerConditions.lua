@@ -7,7 +7,6 @@ local function playerHasProfession(skillId)
     if nil == playerProfessions then
         playerProfessions = {}
         if GetProfessions then
-            -- TODO Wotlk parse professions
             local prof1, prof2 = GetProfessions()
             if prof1 then
                 local prof1SkillID = select(7, GetProfessionInfo(prof1))
@@ -20,6 +19,16 @@ local function playerHasProfession(skillId)
                 if prof2SkillID then
                     playerProfessions[prof2SkillID] = true
                 end
+            end
+        else
+            if IsSpellKnown(2108) or IsSpellKnown(3104) or IsSpellKnown(3811) or IsSpellKnown(10662) or IsSpellKnown(32549) or IsSpellKnown(51302) then
+                playerProfessions[165] = true -- Leatherworking
+            end
+            if IsSpellKnown(3908) or IsSpellKnown(3909) or IsSpellKnown(3910) or IsSpellKnown(12180) or IsSpellKnown(26790) or IsSpellKnown(51309) then
+                playerProfessions[197] = true -- Tailoring
+            end
+            if IsSpellKnown(4036) or IsSpellKnown(4037) or IsSpellKnown(4038) or IsSpellKnown(12656) or IsSpellKnown(30350) or IsSpellKnown(51306) then
+                playerProfessions[202] = true -- Engineering
             end
         end
     end
