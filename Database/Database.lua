@@ -1595,7 +1595,6 @@ ADDON.DB.Expansion = {
         ["maxID"] = 226,
         [241] = true, -- Brutal Nether Drake
         [243] = true, -- Big Blizzard Bear
-        [1761] = true; -- Reawakened Phase-Hunter (TBC Classic)
     },
 
     [2] = { -- Wrath of the Lich King
@@ -1604,7 +1603,7 @@ ADDON.DB.Expansion = {
         [211] = true, -- X-51 Nether-Rocket
         [212] = true, -- X-51 Nether-Rocket X-TREME
         [221] = true, -- Acherus Deathcharger
-        [1762] = true, -- Kalu'ak Whalebone Glider (WotLK Classic)
+        [1679] = true, -- Frostbrood Proto-Wyrm (WotLK Classic)
     },
 
     [3] = { -- Cataclysm
@@ -1612,7 +1611,7 @@ ADDON.DB.Expansion = {
         ["maxID"] = 447,
         [358] = true, -- Wrathful Gladiator's Frost Wyrm
         [373] = true, -- Abyssal Seahorse
-        [1807] = true, -- Avatar of Flame (Cataclysm Classic)
+        [1812] = true, -- Runebound Firelord (Cataclysm Classic)
     },
 
     [4] = { -- Mists of Pandaria
@@ -1743,56 +1742,38 @@ ADDON.DB.Type = {
 -- used as filter
 -- mountId as Index
 ADDON.DB.Ignored = {
-    [7] = true, -- Gray Wolf
-    [8] = true, -- White Stallion
-    [13] = true, -- Red Wolf
-    [15] = true, -- Winter Wolf
-    [22] = true, -- Black Ram
-    [28] = true, -- Skeletal Horse
-    [32] = true, -- Tiger
-    [35] = true, -- Ivory Raptor
-    [70] = true, -- Riding Kodo
-    [116] = true, -- Black Qiraji Battle Tank
-    [121] = true, -- Black Qiraji Battle Tank
-    [123] = true, -- Nether Drake
-    [206] = true, -- Merciless Nether Drake
-    [251] = true, -- Black Polar Bear
-    [273] = true, -- Grand Caravan Mammoth
-    [274] = true, -- Grand Caravan Mammoth
-    [308] = true, -- Blue Skeletal Warhorse
-    [333] = true, -- Magic Rooster
-    [334] = true, -- Magic Rooster
-    [335] = true, -- Magic Rooster
-    [462] = true, -- White Riding Yak
-    [484] = true, -- Black Riding Yak
-    [485] = true, -- Brown Riding Yak
+    ["types"] = {
+        [242] = true, -- ghosts
+        [426] = true, -- dragonriding racing duplicates
+    },
 
-    [1763] = true, -- Magic Rooster
-    [1764] = true, -- X-51 Nether-Rocket X-TREME
-    [1765] = true, -- Big Battle Bear
-    [1766] = true, -- Blazing Hippogryph
-    [1767] = true, -- Wooly White Rhino
-    [1768] = true, -- X-51 Nether-Rocket
+    ["ids"] = {
+        [7] = true, -- Gray Wolf
+        [8] = true, -- White Stallion
+        [13] = true, -- Red Wolf
+        [15] = true, -- Winter Wolf
+        [22] = true, -- Black Ram
+        [28] = true, -- Skeletal Horse
+        [32] = true, -- Tiger
+        [35] = true, -- Ivory Raptor
+        [70] = true, -- Riding Kodo
+        [116] = true, -- Black Qiraji Battle Tank
+        [121] = true, -- Black Qiraji Battle Tank
+        [123] = true, -- Nether Drake
+        [206] = true, -- Merciless Nether Drake
+        [251] = true, -- Black Polar Bear
+        [273] = true, -- Grand Caravan Mammoth
+        [274] = true, -- Grand Caravan Mammoth
+        [308] = true, -- Blue Skeletal Warhorse
+        [333] = true, -- Magic Rooster
+        [334] = true, -- Magic Rooster
+        [335] = true, -- Magic Rooster
+        [462] = true, -- White Riding Yak
+        [484] = true, -- Black Riding Yak
+        [485] = true, -- Brown Riding Yak
 
-    -- ghost (mountType=242)
-    [238] = true, -- Swift Spectral Gryphon
-    [776] = true, -- Swift Spectral Rylak
-    [934] = true, -- Swift Spectral Hippogryph
-    [1269] = true, -- Swift Spectral Fathom Ray
-    [1270] = true, -- Swift Spectral Magnetocraft
-    [1271] = true, -- Swift Spectral Armored Gryphon
-    [1272] = true, -- Swift Spectral Pterrordax
-    [1607] = true, -- Swift Spectral Drake
-    [1823] = true, -- Swift Spectral Gryphon
-
-    -- racing dragonriding duplicates (mountType=426)
-    [1771] = true, -- Highland Drake
-    [1786] = true, -- Renewed Proto-Drake
-    [1787] = true, -- Windborne Velocidrake
-    [1788] = true, -- Cliffside Wylderdrake
-    [1789] = true, -- Winding Slitherdrake
-
-    [1578] = true, -- DNT Test Mount JZB
-    [1690] = true, -- Whelpling
-    [1796] = true, -- Temp
+        [1578] = true, -- DNT Test Mount JZB
+        [1690] = true, -- Whelpling
+        [1796] = true, -- Whelpling
+    },
 }

@@ -79,7 +79,7 @@ local function testDatabase()
         checkDBForOldMountIds(ADDON.DB.FeatsOfStrength, "FeatsOfStrength")
         checkDBForOldMountIds(ADDON.DB.Expansion, "Expansion")
         checkDBForOldMountIds(ADDON.DB.Type, "Type")
-        checkDBForOldMountIds(ADDON.DB.Ignored, "Ignored")
+        checkDBForOldMountIds(ADDON.DB.Ignored.ids, "Ignored")
     end
 end
 

@@ -38,4 +38,15 @@ ADDON.DB.Family["Vehicles"]["Kites"][1762] = true; -- Kalu'ak Whalebone Glider
 ADDON.DB.Family["Drakes"]["Drakes"][1770] = true; -- Festering Emerald Drake
 ADDON.DB.Family["Drakes"]["Drakes"][1832] = true; -- Nightmarish Emerald Drake
 
+ADDON.DB.Expansion[1][1761] = true; -- Reawakened Phase-Hunter (TBC Classic)
+ADDON.DB.Expansion[2][1762] = true; -- Kalu'ak Whalebone Glider (WotLK Classic)
+ADDON.DB.Expansion[3][1807] = true; -- Avatar of Flame (Cataclysm Classic)
 ADDON.DB.Expansion[GetServerExpansionLevel()].maxID = 999999999
+
+-- These are duplicate TCG mounts only existing in classic
+ADDON.DB.Ignored[1763] = true; -- Magic Rooster
+ADDON.DB.Ignored[1764] = true; -- X-51 Nether-Rocket X-TREME
+ADDON.DB.Ignored[1765] = true; -- Big Battle Bear
+ADDON.DB.Ignored[1766] = true; -- Blazing Hippogryph
+ADDON.DB.Ignored[1767] = true; -- Wooly White Rhino
+ADDON.DB.Ignored[1768] = true; -- X-51 Nether-Rocket
