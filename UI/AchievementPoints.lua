@@ -1,8 +1,26 @@
 local _, ADDON = ...
 
-local function CreateAchievementPoints()
-    local MOUNT_ACHIEVEMENT_CATEGORY = 15248
+local MOUNT_ACHIEVEMENT_CATEGORY = WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC and 92 or 15248
 
+local function CountPoints()
+    if WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC then
+        local achievementsIds = { 2076, 2077, 2078, 2097, 2141, 2142, 2143, 2536, 2537 }
+
+        local sum = 0
+        for _, id in ipairs(achievementsIds) do
+            local _, _, points, completed = GetAchievementInfo(id)
+            if completed then
+                sum = sum + points
+            end
+        end
+
+        return sum
+    end
+
+    return GetCategoryAchievementPoints(MOUNT_ACHIEVEMENT_CATEGORY, true)
+end
+
+local function CreateAchievementPoints()
     local frame = CreateFrame("Button", nil, MountJournal)
 
     frame:ClearAllPoints()
@@ -37,17 +55,25 @@ local function CreateAchievementPoints()
     frame.icon:ClearAllPoints()
     frame.icon:SetSize(30, 30)
     frame.icon:SetPoint("RIGHT", 0, -5)
-    frame.icon:SetTexCoord(0, 0.5, 0, 0.5)
+    if WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC then
+        frame.icon:SetTexCoord(0, 0.5, 0, 1)
+    else
+        frame.icon:SetTexCoord(0, 0.5, 0, 0.5)
+    end
 
     frame.staticText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
     frame.staticText:ClearAllPoints()
     frame.staticText:SetPoint("RIGHT", frame.icon, "LEFT", -4, 4)
     frame.staticText:SetSize(0, 0)
-    frame.staticText:SetText(GetCategoryAchievementPoints(MOUNT_ACHIEVEMENT_CATEGORY, true))
+    frame.staticText:SetText(CountPoints())
 
     frame:SetScript("OnClick", function()
         ToggleAchievementFrame()
-        AchievementFrame_UpdateAndSelectCategory(MOUNT_ACHIEVEMENT_CATEGORY)
+        if WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC then
+            AchievementCategoryButton_OnClick(AchievementFrameCategoriesContainerButton2)
+        else
+            AchievementFrame_UpdateAndSelectCategory(MOUNT_ACHIEVEMENT_CATEGORY)
+        end
     end)
     frame:SetScript("OnEnter", function()
         frame.highlight:SetShown(true)
@@ -58,7 +84,7 @@ local function CreateAchievementPoints()
 
     frame:RegisterEvent("ACHIEVEMENT_EARNED")
     frame:SetScript("OnEvent", function()
-        frame.staticText:SetText(GetCategoryAchievementPoints(MOUNT_ACHIEVEMENT_CATEGORY, true))
+        frame.staticText:SetText(CountPoints())
     end)
 
     return frame

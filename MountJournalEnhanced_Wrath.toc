@@ -44,7 +44,7 @@ UI\Functions.lua
 UI\EnhancedList.lua
 UI\EnhancedDisplay.lua
 UI\CompactMountList.lua
-# UI\AchievementPoints.lua
+UI\AchievementPoints.lua
 UI\MountCount.lua
 UI\DisplayDirector.lua
 UI\FilterDropdown\Main.lua
