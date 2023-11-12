@@ -74,6 +74,8 @@ ADDON:RegisterBehaviourSetting('personalFilter', false, L.SETTING_PERSONAL_FILTE
     end
 end)
 
-ADDON:RegisterBehaviourSetting('searchInDescription', true, L.SETTING_SEARCH_MORE)
+if WOW_PROJECT_ID ~= WOW_PROJECT_WRATH_CLASSIC then
+    ADDON:RegisterBehaviourSetting('searchInDescription', true, L.SETTING_SEARCH_MORE)
+end
 ADDON:RegisterBehaviourSetting('searchInNotes', true, L.SETTING_SEARCH_NOTES)
 --endregion
