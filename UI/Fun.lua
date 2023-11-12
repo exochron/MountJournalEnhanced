@@ -1,27 +1,46 @@
 local ADDON_NAME, ADDON = ...
 
 local function togglePortrait(cool)
-    if cool then
-        CollectionsJournal:GetPortrait():SetTexture("Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\mje.png")
+    if WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC then
+        if cool then
+            CollectionsJournal.portrait:SetTexture("Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\mje.png")
+            CollectionsJournal.portrait:SetTexCoord(0, 1, 0, 1)
+        else
+            SetPortraitToTexture(CollectionsJournal.portrait, "Interface\\ICONS\\Ability_Mount_RidingHorse")
+            CollectionsJournal.portrait:SetTexCoord(1, 0, 0, 1)
+        end
     else
-        CollectionsJournal:SetPortraitToAsset("Interface\\Icons\\MountJournalPortrait")
+        if cool then
+            CollectionsJournal:GetPortrait():SetTexture("Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\mje.png")
+        else
+            CollectionsJournal:SetPortraitToAsset("Interface\\Icons\\MountJournalPortrait")
+        end
     end
 end
 
 ADDON.Events:RegisterCallback("loadUI", function()
-    local portrait = CollectionsJournal:GetPortrait()
+    local portrait = WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC and CollectionsJournal.portrait or CollectionsJournal:GetPortrait()
+
+    if WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC then
+        -- SetPortraitToTexture() doesn't work for own textures/pngs :(
+        -- so we need to add a mask as well.
+        local mask = CollectionsJournal:CreateMaskTexture()
+        mask:SetAllPoints(portrait)
+        mask:SetTexture("Interface/CHARACTERFRAME/TempPortraitAlphaMask", "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE")
+        portrait:AddMaskTexture(mask)
+    end
 
     portrait:EnableMouse(true)
     portrait:HookScript("OnMouseDown", function()
         if CollectionsJournal.selectedTab == 1 then
-            togglePortrait(strsub(portrait:GetTexture(),1,8) == "Portrait")
+            togglePortrait(strsub(portrait:GetTexture(), 1, 8) == "Portrait")
         end
     end)
 end, "fun stuff")
 
 local today = C_DateAndTime.GetCurrentCalendarTime()
 if today.month == 4 and today.monthDay == 1 then
-    EventRegistry:RegisterCallback("MountJournal.OnShow",function()
+    EventRegistry:RegisterCallback("MountJournal.OnShow", function()
         togglePortrait(true)
     end, ADDON_NAME .. 'fun stuff')
 end

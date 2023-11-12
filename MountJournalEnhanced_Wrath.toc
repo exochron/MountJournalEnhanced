@@ -58,10 +58,10 @@ UI\Hotkeys.lua
 UI\MountListDropDown.lua
 UI\MountSpecialButton.lua
 UI\SettingsDropDown.lua
-# UI\DressUpButton.lua
+# UI\DressUpButton.lua # no mount preview possible yet
 # UI\RarityNames.lua
 UI\Resize.lua
 # UI\ShopButton.lua # no shop in classic \o/
 UI\BlizzFixes.lua
 UI\Notes.lua
-# UI\Fun.lua # maybe later
+UI\Fun.lua
