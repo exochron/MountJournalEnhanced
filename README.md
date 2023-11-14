@@ -5,6 +5,8 @@ This addon extends the ingame mount journal with extra features.
 - https://www.tiktok.com/t/ZTRwwh9LH/ (03/2023 by [Touchpadwarrior](https://www.twitch.tv/touchpadwarrior))
 
 ## ⭐ Features
++ __New:__ now 10% cooler with support for WotLK classic
+    + also adds again Summon Random Mount Button
 + Filter mounts by an extended source, colors, faction, type, family or expansion
 + Filter unusable or unwanted mounts
 + Display mounts which are actually hidden by the game (TCG, PvP, secrets etc.)
@@ -12,15 +14,15 @@ This addon extends the ingame mount journal with extra features.
 + Saves filter options
 + Double click list entry to summon mount
 + Compact mount list
-+ Move equipment slot into display to save space
++ Move equipment slot into display to save space (Retail only)
 + Display count of character specific mounts
 + Display mount related achievement points
 + Freely rotate display camera around mount
-+ Trigger /mountspecial of your mount or within the display
++ Trigger /mountspecial of your mount or within the display (Retail only)
 + Browse through mounts with Up/Down arrow keys
 + Right Click on scroll buttons to quickly go to the top or bottom
 + Track, display and sort by your usage statistics
-+ Shows mount rarity.
++ Shows mount rarity. (Retail only)
 + Favor all filtered mounts at once or unset them all
 + Save favorites per character
 + Auto-favor new learned mounts
@@ -28,7 +30,7 @@ This addon extends the ingame mount journal with extra features.
 + Works with ElvUI
 + Set own notes for each mount. They're displayed within mount tooltips and the journal display.
 + Change the display background to a static color
-+ Toggle the mount journal via the addon compartment
++ Toggle the mount journal via the addon compartment (Retail only)
 
 ## 🩹 Fixes also
 + the ridiculous fly in animation of the rider
