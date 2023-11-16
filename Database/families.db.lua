@@ -61,6 +61,7 @@ ADDON.DB.Family = {
 },
 ["Chickens"] = {
 [328] = true, -- Magic Rooster
+[1763] = true, -- Magic Rooster
 },
 ["Cranes"] = {
 [479] = true, -- Azure Riding Crane
@@ -268,6 +269,7 @@ ADDON.DB.Family = {
 [874] = true, -- Vicious War Bear
 [1199] = true, -- Blackpaw
 [1424] = true, -- Snowstorm
+[1765] = true, -- Big Battle Bear
 },
 ["Foxes"] = {
 [656] = true, -- Llothien Prowler
@@ -592,8 +594,10 @@ ADDON.DB.Family = {
 [1563] = true, -- Highland Drake
 [1588] = true, -- Winding Slitherdrake
 [1660] = true, -- Crimson Gladiator's Drake
+[1770] = true, -- Festering Emerald Drake
 [1798] = true, -- Azure Worldchiller
 [1831] = true, -- Verdant Gladiator's Slitherdrake
+[1832] = true, -- Nightmarish Emerald Drake
 },
 ["Grand Drakes"] = {
 [442] = true, -- Blazing Drake
@@ -700,6 +704,8 @@ ADDON.DB.Family = {
 [1517] = true, -- Bound Blizzard
 [1520] = true, -- Soultwisted Deathwalker
 [1544] = true, -- Wastewarped Deathwalker
+[1807] = true, -- Avatar of Flame
+[1812] = true, -- Runebound Firelord
 },
 ["Phoenixes"] = {
 [183] = true, -- Ashes of Al'ar
@@ -768,6 +774,7 @@ ADDON.DB.Family = {
 [1773] = true, -- Harbor Gryphon
 [1777] = true, -- Ravenous Black Gryphon
 [1792] = true, -- Algarian Stormrider
+[1823] = true, -- Swift Spectral Gryphon
 },
 ["Hippogryphs"] = {
 [203] = true, -- Cenarion War Hippogryph
@@ -782,6 +789,7 @@ ADDON.DB.Family = {
 [943] = true, -- Cloudwing Hippogryph
 [1054] = true, -- Teldrassil Hippogryph
 [1521] = true, -- Val'sharah Hippogryph
+[1766] = true, -- Blazing Hippogryph
 },
 ["Larion"] = {
 [1404] = true, -- Silverwind Larion
@@ -1177,6 +1185,7 @@ ADDON.DB.Family = {
 [1639] = true, -- Lizi, Thunderspine Tramper
 [1681] = true, -- Hailstorm Armoredon
 [1725] = true, -- Inferno Armoredon
+[1761] = true, -- Reawakened Phase-Hunter
 [1801] = true, -- Verdant Armoredon
 [1940] = true, -- Salatrancer
 },
@@ -1220,6 +1229,7 @@ ADDON.DB.Family = {
 ["Rodent"] = {
 ["Rabbit"] = {
 [1594] = true, -- Jade, Bright Foreseer
+[1769] = true, -- Hao-Yue, River Foreseer
 },
 ["Rats"] = {
 [804] = true, -- Ratstallion
@@ -1339,6 +1349,7 @@ ADDON.DB.Family = {
 },
 ["Rhinos"] = {
 [372] = true, -- Wooly White Rhino
+[1767] = true, -- Wooly White Rhino
 },
 ["Riverbeasts"] = {
 [629] = true, -- Trained Riverwallow
@@ -1420,6 +1431,7 @@ ADDON.DB.Family = {
 [516] = true, -- Pandaren Kite
 [521] = true, -- Jade Pandaren Kite
 [1602] = true, -- Tuskarr Shoreglider
+[1762] = true, -- Kalu'ak Whalebone Glider
 },
 ["Mecha-suits"] = {
 [522] = true, -- Sky Golem
@@ -1489,6 +1501,8 @@ ADDON.DB.Family = {
 [469] = true, -- Depleted-Kyparium Rocket
 [470] = true, -- Geosynchronous World Spinner
 [962] = true, -- Darkmoon Dirigible
+[1764] = true, -- X-51 Nether-Rocket X-TREME
+[1768] = true, -- X-51 Nether-Rocket
 },
 ["Seat"] = {
 [1397] = true, -- Wildseed Cradle

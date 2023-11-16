@@ -33,11 +33,6 @@ ADDON.DB.Source.Promotion[394209] = true; -- Festering Emerald Drake
 ADDON.DB.Source.Promotion[416158] = true; -- Nightmarish Emerald Drake
 ADDON.DB.Source.Promotion[423869] = true; -- Avatar of Flame
 
-ADDON.DB.Family["Reptiles"]["Others"][1761] = true; -- Reawakened Phase-Hunter
-ADDON.DB.Family["Vehicles"]["Kites"][1762] = true; -- Kalu'ak Whalebone Glider
-ADDON.DB.Family["Drakes"]["Drakes"][1770] = true; -- Festering Emerald Drake
-ADDON.DB.Family["Drakes"]["Drakes"][1832] = true; -- Nightmarish Emerald Drake
-
 ADDON.DB.Expansion[1][1761] = true; -- Reawakened Phase-Hunter (TBC Classic)
 ADDON.DB.Expansion[2][1762] = true; -- Kalu'ak Whalebone Glider (WotLK Classic)
 ADDON.DB.Expansion[3][1807] = true; -- Avatar of Flame (Cataclysm Classic)
