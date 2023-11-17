@@ -2,7 +2,7 @@
 This addon extends the ingame mount journal with extra features.
 
 ## 🎬 In Action
-- https://www.tiktok.com/t/ZTRwwh9LH/ (03/2023 by [Touchpadwarrior](https://www.twitch.tv/touchpadwarrior))
+- [TikTok: Great Addon for Mount collectors](https://www.tiktok.com/@touchpadwarrior/video/7216081879886269739) (03/2023 by [Touchpadwarrior](https://www.twitch.tv/touchpadwarrior))
 
 ## ⭐ Features
 + __New:__ now 10% cooler with support for WotLK classic
