@@ -2,6 +2,7 @@
 This addon extends the ingame mount journal with extra features.
 
 ## 🎬 In Action
+- [YouTube: 9 Must Have Addons for Mount Collectors and Farmers](https://www.youtube.com/watch?v=O4Sb1CtPado&t=530s) (08/2023 by [Syiler](https://www.twitch.tv/syiler))
 - [TikTok: Great Addon for Mount collectors](https://www.tiktok.com/@touchpadwarrior/video/7216081879886269739) (03/2023 by [Touchpadwarrior](https://www.twitch.tv/touchpadwarrior))
 
 ## ⭐ Features
