@@ -16,7 +16,7 @@ local _, ADDON = ...
 --94=mountspecial
 --118=eat
 --618=MountSelfIdle -- for isSelfMount
---636=mountspecial
+--636=MountSelfSpecial
 
 local helpTooltip
 local buttons = {}
@@ -66,7 +66,9 @@ local function HideOriginalElements()
     if scene.RotateRightButton then
         scene.RotateRightButton:Hide()
     end
-    scene.TogglePlayer:Hide()
+    if scene.TogglePlayer then
+        scene.TogglePlayer:Hide()
+    end
 end
 
 -- Switching mounts still starts the Animationkit. So we have to stop it.
@@ -206,32 +208,36 @@ local function BuildCameraPanel()
 
     helpTooltip = CreateFrame("GameTooltip", "MJEDisplayHelpToolTip", container, "SharedNoHeaderTooltipTemplate")
 
-    container.specialButton = BuildButton("/mountspecial")
-    container.specialButton.Icon:SetTexture("Interface/GossipFrame/CampaignGossipIcons") -- from atlas: campaignavailablequesticon
-    container.specialButton.Icon:SetTexCoord(0.1875, 0.421875, 0.37, 0.85)
-    container.specialButton:HookScript("OnClick", function()
-        local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
-        if actor then
-            actor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_ANIM)
-            actor:PlayAnimationKit(1371)
-            actor:PlayAnimationKit(1371) -- animation gets sometimes canceled. second call is to enforce it.
-        end
-    end)
+    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then -- TODO later for wrath
+        container.specialButton = BuildButton("/mountspecial")
+        container.specialButton.Icon:SetTexture("Interface/GossipFrame/CampaignGossipIcons") -- from atlas: campaignavailablequesticon
+        container.specialButton.Icon:SetTexCoord(0.1875, 0.421875, 0.37, 0.85)
+        container.specialButton:HookScript("OnClick", function()
+            local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
+            if actor then
+                actor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_ANIM)
+                actor:PlayAnimationKit(1371)
+                actor:PlayAnimationKit(1371) -- animation gets sometimes canceled. second call is to enforce it.
+            end
+        end)
+    end
 
-    container.togglePlayerButton = BuildCheckButton(MOUNT_JOURNAL_PLAYER, nil, function(self)
-        PlayerPreviewToggle.OnShow(self)
-    end)
-    container.togglePlayerButton.Icon:SetTexture(386865) -- interface/friendsframe/ui-toast-toasticons.blp
-    container.togglePlayerButton.Icon:SetTexCoord(0.05, 0.2, 0.6, 0.9)
-    container.togglePlayerButton.Icon:SetVertexColor(1, 0.7, 0.1)
-    container.togglePlayerButton:HookScript("OnClick", function(self)
-        if self:GetChecked() then
-            SetCVar("mountJournalShowPlayer", 1)
-        else
-            SetCVar("mountJournalShowPlayer", 0)
-        end
-        MountJournal_UpdateMountDisplay(true)
-    end)
+    if MOUNT_JOURNAL_PLAYER then
+        container.togglePlayerButton = BuildCheckButton(MOUNT_JOURNAL_PLAYER, nil, function(self)
+            PlayerPreviewToggle.OnShow(self)
+        end)
+        container.togglePlayerButton.Icon:SetTexture(386865) -- interface/friendsframe/ui-toast-toasticons.blp
+        container.togglePlayerButton.Icon:SetTexCoord(0.05, 0.2, 0.6, 0.9)
+        container.togglePlayerButton.Icon:SetVertexColor(1, 0.7, 0.1)
+        container.togglePlayerButton:HookScript("OnClick", function(self)
+            if self:GetChecked() then
+                SetCVar("mountJournalShowPlayer", 1)
+            else
+                SetCVar("mountJournalShowPlayer", 0)
+            end
+            MountJournal_UpdateMountDisplay(true)
+        end)
+    end
 
     container.cycleColorButton = BuildButton(L.TOGGLE_COLOR)
     container.cycleColorButton.Icon:SetAtlas("colorblind-colorwheel")
@@ -279,8 +285,7 @@ local function BuildCameraPanel()
     container.toggleAutoRotateButton = BuildCheckButton(ADDON.L.AUTO_ROTATE, nil, function(self)
         self:SetChecked(ADDON.settings.ui.autoRotateModel)
     end)
-    container.toggleAutoRotateButton.Icon:SetTexture("Interface/Animations/PowerSwirlAnimation")
-    container.toggleAutoRotateButton.Icon:SetTexCoord(0.810547, 0.947266, 0.00195312, 0.138672)
+    container.toggleAutoRotateButton.Icon:SetTexture("Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\rotate.png") -- icon could need some work :-/
     container.toggleAutoRotateButton:HookScript("OnClick", function(self)
         ADDON.settings.ui.autoRotateModel = self:GetChecked()
     end)

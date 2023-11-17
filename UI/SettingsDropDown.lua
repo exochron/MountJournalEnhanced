@@ -5,7 +5,7 @@ local function InitializeDropDown(self, level)
     if level == 1 then
         local button = {
             isTitle = 1,
-            text = GetAddOnMetadata(ADDON_NAME, "Title"),
+            text = C_AddOns.GetAddOnMetadata(ADDON_NAME, "Title"),
             notCheckable = 1,
         }
         UIDropDownMenu_AddButton(button, level)
@@ -107,9 +107,13 @@ local function BuildWheelButton()
     button:SetFrameLevel(510)
 
     local tex = button:CreateTexture(nil, "ARTWORK")
-    tex:SetPoint("TOPLEFT", button, "TOPLEFT", 3, -3)
-    tex:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -3, 3)
-    tex:SetAtlas("mechagon-projects")
+    tex:SetPoint("TOPLEFT", 4, -4)
+    tex:SetPoint("BOTTOMRIGHT", -4, 4)
+    if GetFileIDFromPath("interface/cursor/crosshair/engineerskin") then
+        tex:SetTexture(4675627) -- wrench cursor
+    else
+        tex:SetTexture(235498) -- wrench cursor
+    end
     tex:SetDesaturated(true)
 
     button:SetHighlightAtlas("mechagon-projects", "ADD")

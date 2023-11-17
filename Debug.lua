@@ -75,10 +75,12 @@ local function testDatabase()
         MJEGlobalSettings.filter = ADDON.settings.filter
     end
 
-    checkDBForOldMountIds(ADDON.DB.FeatsOfStrength, "FeatsOfStrength")
-    checkDBForOldMountIds(ADDON.DB.Expansion, "Expansion")
-    checkDBForOldMountIds(ADDON.DB.Type, "Type")
-    checkDBForOldMountIds(ADDON.DB.Ignored, "Ignored")
+    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+        checkDBForOldMountIds(ADDON.DB.FeatsOfStrength, "FeatsOfStrength")
+        checkDBForOldMountIds(ADDON.DB.Expansion, "Expansion")
+        checkDBForOldMountIds(ADDON.DB.Type, "Type")
+        checkDBForOldMountIds(ADDON.DB.Ignored.ids, "Ignored")
+    end
 end
 
 local taintedList = {}

@@ -49,7 +49,9 @@ local function InitMountButton(button, elementData)
     end
     button.name:SetPoint("LEFT", button.icon, "RIGHT", 10, yOffset);
 
-    button.DragonRidingLabel:SetShown(isForDragonriding);
+    if button.DragonRidingLabel then
+        button.DragonRidingLabel:SetShown(isForDragonriding);
+    end
 
     button.index = elementData.index;
     button.spellID = spellID;

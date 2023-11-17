@@ -1,5 +1,6 @@
 
 ### Next
+- screenshot generator
 - black filter inaccurate
 - personal favorites rework
 
@@ -31,4 +32,4 @@
 - Pimp my Mount: more effects in display, like:
     - underbody lightning
     - sunglasses for mount
-- retro UI: like in WotLK
+- retro UI: like in original WotLK

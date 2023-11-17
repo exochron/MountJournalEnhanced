@@ -48,7 +48,18 @@ local function FilterUserHiddenMounts(spellId)
     return ADDON.settings.filter.hidden or not ADDON.settings.hiddenMounts[spellId]
 end
 local function FilterIngameHiddenMounts(shouldHideOnChar, mountId)
-    return not shouldHideOnChar or (ADDON.settings.filter.hiddenIngame and not IgnoredDB[mountId])
+    if not shouldHideOnChar then
+        return true
+    end
+
+    if ADDON.settings.filter.hiddenIngame and not IgnoredDB.ids[mountId] then
+        local _, _, _, _, mountType = C_MountJournal.GetMountInfoExtraByID(mountId)
+        if not IgnoredDB.types[mountType] then
+            return true
+        end
+    end
+
+    return false
 end
 
 local function FilterFavoriteMounts(isFavorite)
