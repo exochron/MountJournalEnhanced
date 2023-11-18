@@ -1,9 +1,6 @@
 local _, ADDON = ...
 
 -- TODO:
--- - take shots
--- - move latest X files into /Images/
--- - crop images
 -- - ci: upload to cf
 -- - ci: upload to wago
 
@@ -95,12 +92,12 @@ local function TakeScreenshots(shotHandlers, doneHandler)
 
     if not cursor then
         cursor = CreateFrame("Frame")
-        cursor:SetSize(20, 20)
+        cursor:SetSize(19, 19)
         cursor:SetFrameStrata("TOOLTIP")
 
         cursor.tex = cursor:CreateTexture()
         cursor.tex:SetAllPoints()
-        cursor.tex:SetTexture(131028) --interface/cursor/point.blp
+        cursor.tex:SetAtlas("Cursor_Point_48")
         cursor:Hide()
     end
 
