@@ -37,7 +37,9 @@ Settings\OptionsPanel.lua
 Favorites.lua
 Tracking.lua
 SlashCommand.lua
-Debug.lua
+#@do-not-package@
+DevZone\Debug.lua
+#@end-do-not-package@
 
 UI\Templates.xml
 UI\Functions.lua

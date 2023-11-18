@@ -2,5 +2,6 @@ ignore:
     - LICENSE
     - README.md
     - Roadmap.md
+    - DevZone
 
 license-output: LICENSE
