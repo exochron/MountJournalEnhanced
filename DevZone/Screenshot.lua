@@ -1,9 +1,5 @@
 local _, ADDON = ...
 
--- TODO:
--- - ci: upload to cf
--- - ci: upload to wago
-
 local cursor
 local backScreen
 

@@ -3,6 +3,7 @@ ignore:
     - README.md
     - Roadmap.md
     - DevZone
+    - Images
     - MoveScreenshots.ps1
 
 license-output: LICENSE
