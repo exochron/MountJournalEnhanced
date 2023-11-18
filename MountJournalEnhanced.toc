@@ -40,6 +40,7 @@ Tracking.lua
 SlashCommand.lua
 #@do-not-package@
 DevZone\Debug.lua
+DevZone\Screenshot.lua
 #@end-do-not-package@
 
 UI\Functions.lua
