@@ -208,6 +208,13 @@ function ADDON:TakeScreenshots()
                 ADDON.Api:SetSelected(1057) -- Nazjatar Blood Serpent
                 local noteFrame = ADDON.UI:CreateNotesFrame(1057)
                 C_Timer.After(1.1, function() noteFrame:Hide()  end)
+
+                local button = MountJournal.ScrollBox:FindFrameByPredicate(function(frame)
+                    return frame:GetElementData().mountID == 1057
+                end)
+                api.Point(button)
+                api.Click(button, "RightButton")
+                api.Point(DropDownList1Button4, 10)
             end,
             function(api)
                 api.BackScreen()
