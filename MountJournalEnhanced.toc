@@ -38,7 +38,10 @@ Settings\OptionsPanel.lua
 Favorites.lua
 Tracking.lua
 SlashCommand.lua
-Debug.lua
+#@do-not-package@
+DevZone\Debug.lua
+DevZone\Screenshot.lua
+#@end-do-not-package@
 
 UI\Functions.lua
 UI\EnhancedList.lua

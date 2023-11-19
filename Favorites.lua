@@ -163,6 +163,7 @@ local function BuildStarButton()
     end)
 
     starButton.frame:Show()
+    ADDON.UI.FavoriteButton = starButton.frame
 
     local searchBox = MountJournal.searchBox
     searchBox:ClearAllPoints()

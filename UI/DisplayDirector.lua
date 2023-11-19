@@ -231,9 +231,9 @@ local function BuildCameraPanel()
         container.togglePlayerButton.Icon:SetVertexColor(1, 0.7, 0.1)
         container.togglePlayerButton:HookScript("OnClick", function(self)
             if self:GetChecked() then
-                SetCVar("mountJournalShowPlayer", 1)
+                C_CVar.SetCVar("mountJournalShowPlayer", 1)
             else
-                SetCVar("mountJournalShowPlayer", 0)
+                C_CVar.SetCVar("mountJournalShowPlayer", 0)
             end
             MountJournal_UpdateMountDisplay(true)
         end)

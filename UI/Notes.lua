@@ -63,9 +63,12 @@ function ADDON.UI:CreateNotesFrame(mountId)
     note:AddChild(button)
 
     -- Display
-    note:SetPoint("CENTER", 0, 0)
+    note:ClearAllPoints()
+    note:SetPoint("BOTTOM", MountJournal.MountDisplay, "BOTTOM", 0, 0)
     note:Show()
     editbox:SetFocus()
+
+    return note
 end
 
 -- show notes in display
