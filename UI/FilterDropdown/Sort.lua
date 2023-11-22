@@ -32,7 +32,7 @@ function ADDON.UI.FDD:AddSortMenu(level)
     UIDropDownMenu_AddButton(CreateFilterRadio(NAME, 'name'), level)
     UIDropDownMenu_AddButton(CreateFilterRadio(TYPE, 'type'), level)
     UIDropDownMenu_AddButton(CreateFilterRadio(EXPANSION_FILTER_TEXT, 'expansion'), level)
-    if ADDON.DB.Rarities then
+    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
         UIDropDownMenu_AddButton(CreateFilterRadio(RARITY, 'rarity'), level)
     end
 

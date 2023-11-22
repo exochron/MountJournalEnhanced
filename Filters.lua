@@ -8,6 +8,7 @@ local TradableDB = ADDON.DB.Tradable
 local IgnoredDB = ADDON.DB.Ignored
 local RecentDB = ADDON.DB.Recent
 local ColorsDB = ADDON.DB.Colors
+local LibMountsRarity
 
 local cachedColor, cachedColorResults = {}, {}
 
@@ -293,7 +294,8 @@ local function FilterByType(mountID, preparedSettings)
 end
 
 local function FilterByRarity(mountID, allSettings)
-    local rarity = ADDON.DB.Rarities[mountID]
+    LibMountsRarity = LibMountsRarity or LibStub("MountsRarity-2.0")
+    local rarity = LibMountsRarity:GetRarityByID(mountID)
 
     if rarity == nil then
         return allSettings == false

@@ -1,6 +1,7 @@
 local ADDON_NAME, ADDON = ...
 
 local tooltip
+local LibMountsRarity
 
 ADDON:RegisterUISetting('showStatistics', true, ADDON.L.SETTING_SHOW_STATISTICS, function()
     if ADDON.initialized then
@@ -22,10 +23,9 @@ local function buildStat(container, iconTexture, tooltipHead, tooltipText)
 
     local text = item:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     text:SetPoint("TOPLEFT", icon, "TOPRIGHT", 2, 0)
-    text:SetPoint("BOTTOMRIGHT", item, "BOTTOMRIGHT", 0, 0)
     item.Text = text
 
-    item:SetPoint("TOP", container, "TOP", 0, 0)
+    item:SetHeight(12)
 
     item:HookScript("OnEnter", function(self)
         tooltip:SetOwner(self, "ANCHOR_TOP")
@@ -47,7 +47,7 @@ local function setupContainer()
     local L = ADDON.L
     local infoButton = MountJournal.MountDisplay.InfoButton
 
-    local container = CreateFrame("frame", nil, infoButton)
+    local container = CreateFrame("Frame", nil, infoButton)
     container:SetPoint("TOPLEFT", infoButton.Icon, "BOTTOMLEFT", 0, -6)
     container:SetPoint("RIGHT", MountJournal.MountDisplay, "RIGHT", -26, 0)
     container:SetHeight(12)
@@ -86,9 +86,9 @@ local function setupContainer()
             L["STATS_TIP_LEARNED_DATE_HEAD"]
     )
     container.Rarity = buildStat(container,
-            "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\rarityraider",
+            134071, -- interface/icons/inv_misc_gem_01
             L["STATS_TIP_RARITY_HEAD"],
-            string.gsub(L["STATS_TIP_RARITY_TEXT"], "{RR}", "|TInterface\\Addons\\MountJournalEnhanced\\UI\\icons\\rarityraider:0|t Rarity Raider")
+            L["STATS_TIP_RARITY_DESCRIPTION"]
     )
 
     container:Hide()
@@ -172,23 +172,42 @@ local function updateContainer(mountId, container)
         end
     end
 
-    container.Rarity:SetShown(ADDON.DB.Rarities and ADDON.DB.Rarities[mountId] ~= nil)
-    if ADDON.DB.Rarities and ADDON.DB.Rarities[mountId] ~= nil then
-        container.Rarity.Text:SetText(ADDON.DB.Rarities[mountId] .. " %")
-        displayed[#displayed + 1] = container.Rarity
+    container.Rarity:SetShown(false)
+    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+        LibMountsRarity = LibMountsRarity or LibStub("MountsRarity-2.0")
+        local rarity = LibMountsRarity:GetRarityByID(mountId)
+        if rarity ~= nil then
+            container.Rarity:SetShown(true)
+            container.Rarity.Text:SetText(string.format("%.2f %%", rarity))
+            displayed[#displayed + 1] = container.Rarity
+        end
     end
 
     if #displayed > 0 then
-        local totalWidth = 0
-        for _, stat in ipairs(displayed) do
+        local firstHalfWidth = 0
+        local secondHalfWidth = 0
+        for i, stat in ipairs(displayed) do
             stat:SetWidth(stat.Text:GetUnboundedStringWidth() + 14)
-            totalWidth = totalWidth + stat:GetWidth()
+            if i < 4 then
+                firstHalfWidth = firstHalfWidth + stat:GetWidth()
+            else
+                secondHalfWidth = secondHalfWidth + stat:GetWidth()
+            end
         end
-        totalWidth = totalWidth + ((#displayed - 1) * 7)
-        local leftOffset = -(totalWidth / 2)
-        for _, stat in ipairs(displayed) do
-            stat:SetPoint("LEFT", container, "CENTER", leftOffset, 0)
-            leftOffset = leftOffset + 7 + stat:GetWidth()
+        local totalWidth = (firstHalfWidth + secondHalfWidth) + ((#displayed - 1) * 7)
+        for i, stat in ipairs(displayed) do
+            stat:ClearAllPoints()
+            if i > 1 then
+                stat:SetPoint("LEFT", displayed[i - 1], "RIGHT", 7, 0)
+            end
+        end
+        if (MountJournal.MountDisplay:GetWidth() - 40) < totalWidth then
+            displayed[1]:SetPoint("TOPLEFT", container, "TOP", -7 - (firstHalfWidth / 2), 1)
+            displayed[4]:SetPoint("TOPLEFT", container, "TOP", -((secondHalfWidth + ((#displayed - 4) * 7)) / 2), -11)
+            container:SetHeight(24)
+        else
+            displayed[1]:SetPoint("TOPLEFT", container, "TOP", -(totalWidth / 2), 1)
+            container:SetHeight(12)
         end
     end
 

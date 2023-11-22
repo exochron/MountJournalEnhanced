@@ -1,7 +1,43 @@
+externals:
+    Libs/LibStub:
+        url: https://repos.wowace.com/wow/libstub/trunk
+        curse-slug: libstub
+
+    Libs/CallbackHandler-1.0:
+        url: https://repos.wowace.com/wow/callbackhandler/trunk/CallbackHandler-1.0
+        tag: latest
+        curse-slug: callbackhandler
+    Libs/HereBeDragons:
+        url: https://repos.curseforge.com/wow/herebedragons
+        curse-slug: herebedragons
+
+    Libs/AceGUI-3.0:
+        url: https://repos.wowace.com/wow/ace3/trunk/AceGUI-3.0/
+        tag: latest
+        curse-slug: ace3
+
+    Libs/MountsRarity-2.0:
+        url: https://github.com/sgade/MountsRarity
+        curse-slug: mountsrarity
+
+    Libs/TaintLess:
+        url: https://www.townlong-yak.com/addons.git/taintless
+        commit: default
+
 ignore:
     - LICENSE
     - README.md
     - DevZone
     - Images
+    - Libs/*/LICENSE
+    - Libs/*.toc
+    - Libs/CallbackHandler-1.0/CallbackHandler-1.0.xml
+    - Libs/LibStub/tests
+    - Libs/HereBeDragons/HereBeDragons-Migrate.lua
+    - Libs/HereBeDragons/HereBeDragons-Pins-2.0.lua
+    - Libs/MountsRarity-2.0/Libs
+    - Libs/MountsRarity-2.0/embeds.xml
 
 license-output: LICENSE
+
+enable-nolib-creation: no
