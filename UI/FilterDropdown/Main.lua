@@ -161,7 +161,7 @@ local function InitializeFilterDropDown(_, level)
         UIDropDownMenu_AddButton(CreateFilterCategory(L["Family"], SETTING_FAMILY), level)
         UIDropDownMenu_AddButton(CreateFilterCategory(EXPANSION_FILTER_TEXT, SETTING_EXPANSION), level)
         UIDropDownMenu_AddButton(CreateFilterCategory(COLOR, SETTING_COLOR), level)
-        if ADDON.DB.Rarities then
+        if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
             UIDropDownMenu_AddButton(CreateFilterCategory(RARITY, SETTING_RARITY), level)
         end
 

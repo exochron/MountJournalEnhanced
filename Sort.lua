@@ -195,9 +195,11 @@ local function SortByTracking(mountIdA, mountIdB)
     return CheckDescending(result)
 end
 
+local LibMountsRarity
 local function SortByRarity(mountIdA, mountIdB)
-    local rarityA = ADDON.DB.Rarities[mountIdA] or nil
-    local rarityB = ADDON.DB.Rarities[mountIdB] or nil
+    LibMountsRarity = LibMountsRarity or LibStub("MountsRarity-2.0")
+    local rarityA = LibMountsRarity:GetRarityByID(mountIdA)
+    local rarityB = LibMountsRarity:GetRarityByID(mountIdB)
     if nil ~= rarityA and nil ~= rarityB and rarityA ~= rarityB then
         return CheckDescending(rarityA > rarityB)
     elseif nil ~= rarityA and nil == rarityB then

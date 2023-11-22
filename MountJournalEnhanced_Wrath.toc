@@ -12,7 +12,7 @@ Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
 Libs\AceGUI-3.0\AceGUI-3.0.xml
 Libs\HereBeDragons\HereBeDragons-2.0.lua
-Libs\TaintLess.xml
+Libs\TaintLess\TaintLess.xml
 Libs\UIFixes.lua
 
 Locals.lua
@@ -21,7 +21,6 @@ Database\colors.db.lua
 Database\customization.db.lua
 Database\families.db.lua
 Database\tradable.db.lua
-# Database\rarities.db.lua # these numbers are from retail. the don't fit into classic.
 Database\restrictions.db.lua
 Database\wrath.db.lua
 

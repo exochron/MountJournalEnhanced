@@ -1,6 +1,7 @@
 local _, ADDON = ...
 
 local hooked
+local LibMountsRarity
 
 local function RestoreOriginalColor(collected, button)
     if collected then
@@ -34,7 +35,8 @@ local function ColorNames(button, elementData)
         local mountID = elementData.mountID
         local collected = select(11, C_MountJournal.GetMountInfoByID(mountID))
 
-        local rarity = ADDON.DB.Rarities[mountID] or nil
+        LibMountsRarity = LibMountsRarity or LibStub("MountsRarity-2.0")
+        local rarity = LibMountsRarity:GetRarityByID(mountID)
         if rarity ~= nil then
             local quality = DetermineQuality(rarity)
             local r, g, b = GetItemQualityColor(quality)
