@@ -139,17 +139,17 @@ local function BildAbout()
 
     buildLabel("Besides, it is important to give a special thank you to some community projects and websites. Without whose preliminary work it would be much harder to develop this addon.\n\n")
     if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-        buildLabel("- " .. link("https://www.dataforazeroth.com", "Data for Azeroth") .. " and " .. link("https://www.curseforge.com/wow/addons/mountsrarity", "MountsRarity") .." for providing mount rarity percentages.")
+        buildLabel("- " .. link("https://www.dataforazeroth.com", "Data for Azeroth", "dfa.png") .. " and " .. link("https://www.curseforge.com/wow/addons/mountsrarity", "MountsRarity") .." for providing mount rarity percentages.")
     end
-    buildLabel("- " .. link("https://www.warcraftmounts.com/", "Warcraft Mounts", "warcraftmounts") .. " for their comprehensive family gallery.")
-    buildLabel("- " .. link("https://www.townlong-yak.com/framexml/live", "Townlong Yak", "townlong_yak") .. ", "
-            .. link("https://wow.tools/", "WoW.tools", "wow_tools")
-            .. " and the " .. link("https://wowdev.wiki/", "WoWDev wiki", "wowdev")
+    buildLabel("- " .. link("https://www.warcraftmounts.com", "Warcraft Mounts", "warcraftmounts.png") .. " for their comprehensive family gallery.")
+    buildLabel("- " .. link("https://www.townlong-yak.com/framexml/live", "Townlong Yak", "townlong_yak.png") .. ", "
+            .. link("https://wago.tools", "Wago Tools")
+            .. " and the " .. link("https://wowdev.wiki", "WoWDev wiki", "wowdev.png")
             .. " for their awesome developer resources.")
     buildLabel("- foxlit for " .. link("https://www.townlong-yak.com/addons/taintless", "TaintLess") .. ". This great little library is (sadly) essential for any bugless addon or client.")
     buildLabel("- The Team of " .. link("https://www.wowace.com/projects/ace3", "Ace3") .. " for their developer friendly framework.")
     buildLabel("- " .. link("https://www.wowace.com/projects/herebedragons", "HereBeDragons") .. " for providing a nice api to keep track of the player position.")
-    buildLabel("- The " .. link("https://github.com/BigWigsMods/packager/", "packager by BigWigsMods") .. " which makes releasing new versions as simple as possible.")
+    buildLabel("- The " .. link("https://github.com/BigWigsMods/packager", "packager by BigWigsMods") .. " which makes releasing new versions as simple as possible.")
 
     buildLabel("\n" .. "Last but not least I'd like to thank YOU for using Mount Journal Enhanced. If you like it, you should show it to your friends and guild mates. So they can enjoy it as well. :-)")
     buildLabel("\n\n\n") -- add some space for copybox
