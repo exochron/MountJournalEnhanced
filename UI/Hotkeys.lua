@@ -42,12 +42,12 @@ end
 ADDON:RegisterUISetting('enableCursorKeys', true, ADDON.L.SETTING_CURSOR_KEYS)
 
 ADDON.Events:RegisterCallback("loadUI", function()
-    local scrollFrame = MountJournal.ScrollBox
-
     -- I had issues handling the input directly at the MountJournal frame. So I'm using the ScrollFrame instead.
-    scrollFrame:SetPropagateKeyboardInput(true)
-    scrollFrame:EnableKeyboard(true)
-    scrollFrame:HookScript("OnKeyDown", function(self, key)
+    MountJournal.ScrollBox:HookScript("OnKeyDown", function(self, key)
+        if InCombatLockdown() then
+            return
+        end
+
         local totalDisplayed
         if (key == "DOWN" or key == "UP" or key == "HOME" or key == "END") and ADDON.settings.ui.enableCursorKeys and not IsModifierKeyDown() then
             totalDisplayed = ADDON.Api:GetDataProvider():GetSize()
