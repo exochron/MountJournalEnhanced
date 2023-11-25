@@ -1,3 +1,6 @@
+tools-used:
+    - gallery-generator
+
 externals:
     Libs/LibStub:
         url: https://repos.wowace.com/wow/libstub/trunk
@@ -9,6 +12,7 @@ externals:
         curse-slug: callbackhandler
     Libs/HereBeDragons:
         url: https://repos.curseforge.com/wow/herebedragons
+        tag: latest
         curse-slug: herebedragons
 
     Libs/AceGUI-3.0:
