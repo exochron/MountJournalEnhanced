@@ -48,7 +48,7 @@ local function setupContainer()
     local infoButton = MountJournal.MountDisplay.InfoButton
 
     local container = CreateFrame("Frame", nil, infoButton)
-    container:SetPoint("TOPLEFT", infoButton.Icon, "BOTTOMLEFT", 0, -6)
+    container:SetPoint("TOPLEFT", infoButton.Icon, "BOTTOMLEFT", 0, -5)
     container:SetPoint("RIGHT", MountJournal.MountDisplay, "RIGHT", -26, 0)
     container:SetHeight(12)
 
@@ -89,6 +89,14 @@ local function setupContainer()
             134071, -- interface/icons/inv_misc_gem_01
             L["STATS_TIP_RARITY_HEAD"],
             L["STATS_TIP_RARITY_DESCRIPTION"]
+    )
+    container.Family1 = buildStat(container,
+            132834, -- interface/icons/inv_egg_03
+            L["Family"]
+    )
+    container.Family2 = buildStat(container,
+            132834, -- interface/icons/inv_egg_03
+            L["Family"]
     )
 
     container:Hide()
@@ -133,6 +141,29 @@ local function parseCustomization(mountData)
     end
 
     return count .. "/" .. total
+end
+
+local function buildFamilyStrings(mountId)
+    local result = {}
+
+    for mainFamily, values in pairs(ADDON.DB.Family) do
+        if values[mountId] then
+            result[#result + 1] = ADDON.L[mainFamily] or mainFamily
+        end
+        local firstKey = next(values)
+        if type(firstKey) == "string" then
+            for subFamily, subValues in pairs(values) do
+                if subValues[mountId] then
+                    result[#result + 1] = (ADDON.L[mainFamily] or mainFamily) .. " / " .. (ADDON.L[subFamily] or subFamily)
+                end
+            end
+        end
+        if #result == 2 then
+            break
+        end
+    end
+
+    return result[1] or nil, result[2] or nil
 end
 
 local function updateContainer(mountId, container)
@@ -183,32 +214,37 @@ local function updateContainer(mountId, container)
         end
     end
 
+    local mountFamily1, mountFamily2 = buildFamilyStrings(mountId)
+    container.Family1:SetShown(mountFamily1 ~= nil)
+    if mountFamily1 then
+        container.Family1.Text:SetText(mountFamily1)
+        displayed[#displayed + 1] = container.Family1
+    end
+    container.Family2:SetShown(mountFamily2 ~= nil)
+    if mountFamily2 then
+        container.Family2.Text:SetText(mountFamily2)
+        displayed[#displayed + 1] = container.Family2
+    end
+
     if #displayed > 0 then
-        local firstHalfWidth = 0
-        local secondHalfWidth = 0
+        local maxWidth = MountJournal.MountDisplay:GetWidth() - 52
+        local rowWidth = 0
+        local rowLead
+        local rowCount = 0
         for i, stat in ipairs(displayed) do
             stat:SetWidth(stat.Text:GetUnboundedStringWidth() + 14)
-            if i < 4 then
-                firstHalfWidth = firstHalfWidth + stat:GetWidth()
-            else
-                secondHalfWidth = secondHalfWidth + stat:GetWidth()
-            end
-        end
-        local totalWidth = (firstHalfWidth + secondHalfWidth) + ((#displayed - 1) * 7)
-        for i, stat in ipairs(displayed) do
             stat:ClearAllPoints()
-            if i > 1 then
+            rowWidth = rowWidth + 7 + stat:GetWidth()
+            if maxWidth < rowWidth or rowLead == nil then
+                rowWidth = stat:GetWidth()
+                rowCount = rowCount + 1
+                rowLead = stat
+            else
                 stat:SetPoint("LEFT", displayed[i - 1], "RIGHT", 7, 0)
             end
+            rowLead:SetPoint("TOPLEFT", container, "TOP", -(rowWidth / 2), (rowCount - 1) * -12)
         end
-        if (MountJournal.MountDisplay:GetWidth() - 40) < totalWidth then
-            displayed[1]:SetPoint("TOPLEFT", container, "TOP", -7 - (firstHalfWidth / 2), 1)
-            displayed[4]:SetPoint("TOPLEFT", container, "TOP", -((secondHalfWidth + ((#displayed - 4) * 7)) / 2), -11)
-            container:SetHeight(24)
-        else
-            displayed[1]:SetPoint("TOPLEFT", container, "TOP", -(totalWidth / 2), 1)
-            container:SetHeight(12)
-        end
+        container:SetHeight(12 * rowCount)
     end
 
     container:SetShown(#displayed > 0)
