@@ -17,7 +17,7 @@ local function BuildCheckBox(parent, text)
 
     return button
 end
-local function BuildDropDown(parent, text, options)
+local function BuildDropDown(parent, text, options, isMultiOptions)
     local group = AceGUI:Create("SimpleGroup")
     group:SetLayout("Flow")
     group:SetFullWidth(true)
@@ -29,6 +29,7 @@ local function BuildDropDown(parent, text, options)
     group:AddChild(label)
 
     local dropdown = AceGUI:Create("Dropdown")
+    dropdown:SetMultiselect(isMultiOptions)
     for option, optionLabel in pairs(options) do
         dropdown:AddItem(option, optionLabel)
     end
@@ -61,10 +62,10 @@ local function BuildMainFrame(uiLabels, behaviourLabels)
     BuildHeading(frame, UIOPTIONS_MENU)
 
     for _, labelData in ipairs(uiLabels) do
-        local setting, label, options = labelData[1], labelData[2], labelData[3]
-        if (ADDON.settings.ui[setting] ~= nil) then
+        local setting, label, options, isMultiOptions = labelData[1], labelData[2], labelData[3], labelData[4]
+        if ADDON.settings.ui[setting] ~= nil then
             if options then
-                frame.checks[setting] = BuildDropDown(frame, label, options)
+                frame.checks[setting] = BuildDropDown(frame, label, options, isMultiOptions)
             else
                 frame.checks[setting] = BuildCheckBox(frame, label)
             end
@@ -163,28 +164,45 @@ ADDON.Events:RegisterCallback("OnLogin", function()
     local group = BuildMainFrame(uiLabels, behaviourLabels)
     group:SetCallback("refresh", function(frame)
         for _, labelData in ipairs(uiLabels) do
-            local setting = labelData[1]
-            if (frame.checks[setting]) then
-                frame.checks[setting]:SetValue(ADDON.settings.ui[setting])
+            local setting, isMultiOptions = labelData[1], labelData[4]
+            local check = frame.checks[setting]
+            if check then
+                if isMultiOptions then
+                    for subSetting, value in pairs(ADDON.settings.ui[setting]) do
+                        check:SetItemValue(subSetting, value)
+                    end
+                else
+                    check:SetValue(ADDON.settings.ui[setting])
+                end
             end
         end
         for _, labelData in ipairs(behaviourLabels) do
             local setting = labelData[1]
-            if (frame.checks[setting]) then
+            if frame.checks[setting] then
                 frame.checks[setting]:SetValue(ADDON.settings[setting])
             end
         end
     end)
     group:SetCallback("okay", function(frame)
         for _, labelData in ipairs(uiLabels) do
-            local setting = labelData[1]
-            if (frame.checks[setting]) then
-                ADDON:ApplySetting(setting, frame.checks[setting]:GetValue())
+            local setting, isMultiOptions = labelData[1], labelData[4]
+            if frame.checks[setting] then
+                if isMultiOptions then
+                    local values = {}
+                    for _, widget in pairs(frame.checks[setting].pullout.items) do
+                        if widget.userdata and widget.userdata.value then
+                            values[widget.userdata.value] = widget:GetValue()
+                        end
+                    end
+                    ADDON:ApplySetting(setting, values)
+                else
+                    ADDON:ApplySetting(setting, frame.checks[setting]:GetValue())
+                end
             end
         end
         for _, labelData in ipairs(behaviourLabels) do
             local setting = labelData[1]
-            if (frame.checks[setting]) then
+            if frame.checks[setting] then
                 ADDON:ApplySetting(setting, frame.checks[setting]:GetValue())
             end
         end

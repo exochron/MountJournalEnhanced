@@ -3,11 +3,35 @@ local ADDON_NAME, ADDON = ...
 local tooltip
 local LibMountsRarity
 
-ADDON:RegisterUISetting('showStatistics', true, ADDON.L.SETTING_SHOW_STATISTICS, function()
-    if ADDON.initialized then
-        MountJournal_UpdateMountDisplay()
+do
+    local options = {
+        CustomizationCount = ADDON.L["STATS_TIP_CUSTOMIZATION_COUNT_HEAD"],
+        UsedCount = ADDON.L["STATS_TIP_USAGE_COUNT_HEAD"],
+        TravelTime = ADDON.L["STATS_TIP_TRAVEL_TIME_HEAD"],
+        TravelDistance = ADDON.L["STATS_TIP_TRAVEL_DISTANCE_HEAD"],
+        LearnedDate = ADDON.L["STATS_TIP_LEARNED_DATE_HEAD"],
+        Rarity = ADDON.L["STATS_TIP_RARITY_HEAD"],
+        Family = ADDON.L["Family"],
+    }
+    if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+        options.Rarity = nil
     end
-end)
+    local defaults = CopyTable(options)
+    for key in pairs(defaults) do
+        defaults[key] = true
+    end
+    ADDON:RegisterUISetting('displayStatistics',
+            defaults,
+            ADDON.L.SETTING_SHOW_STATISTICS,
+            function()
+                if ADDON.initialized then
+                    MountJournal_UpdateMountDisplay()
+                end
+            end,
+            options
+    )
+end
+
 
 local function buildStat(container, iconTexture, tooltipHead, tooltipText)
     local item = CreateFrame("frame", nil, container)
@@ -99,6 +123,17 @@ local function setupContainer()
             L["Family"]
     )
 
+    container.Items = {
+        container.CustomizationCount,
+        container.UsedCount,
+        container.TravelTime,
+        container.TravelDistance,
+        container.LearnedDate,
+        container.Rarity,
+        container.Family1,
+        container.Family2,
+    }
+
     container:Hide()
 
     return container
@@ -167,71 +202,67 @@ local function buildFamilyStrings(mountId)
 end
 
 local function updateContainer(mountId, container)
-    local displayed = {}
+    local settings = ADDON.settings.ui.displayStatistics
 
-    container.CustomizationCount:SetShown(ADDON.DB.Customization[mountId] ~= nil)
-    if ADDON.DB.Customization[mountId] ~= nil then
+    container.CustomizationCount:SetShown(settings.CustomizationCount and ADDON.DB.Customization[mountId] ~= nil)
+    if container.CustomizationCount:IsShown() then
         container.CustomizationCount.Text:SetText(parseCustomization(ADDON.DB.Customization[mountId]))
-        displayed[#displayed + 1] = container.CustomizationCount
     end
 
     local useCount, lastUseTime, travelTime, travelDistance, learnedTime = ADDON:GetMountStatistics(mountId)
-    if useCount ~= nil then
-        container.UsedCount:SetShown(useCount > 0)
-        if useCount > 0 then
-            container.UsedCount.Text:SetText(useCount .. ' x')
-            displayed[#displayed + 1] = container.UsedCount
-        end
 
-        container.TravelTime:SetShown(travelTime > 0)
-        if travelTime > 0 then
-            container.TravelTime.Text:SetText(SecondsToClock(travelTime, true))
-            displayed[#displayed + 1] = container.TravelTime
-        end
-
-        container.TravelDistance:SetShown(travelDistance > 0)
-        if travelDistance > 0 then
-            container.TravelDistance.Text:SetText(formatDistance(travelDistance))
-            displayed[#displayed + 1] = container.TravelDistance
-        end
-
-        container.LearnedDate:SetShown(learnedTime)
-        if learnedTime then
-            local data = date('*t', learnedTime)
-            container.LearnedDate.Text:SetText(FormatShortDate(data.day, data.month, data.year))
-            displayed[#displayed + 1] = container.LearnedDate
-        end
+    container.UsedCount:SetShown(settings.UsedCount and useCount > 0)
+    if container.UsedCount:IsShown() then
+        container.UsedCount.Text:SetText(useCount .. ' x')
     end
 
-    container.Rarity:SetShown(false)
-    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+    container.TravelTime:SetShown(settings.TravelTime and travelTime > 0)
+    if container.TravelTime:IsShown() then
+        container.TravelTime.Text:SetText(SecondsToClock(travelTime, true))
+    end
+
+    container.TravelDistance:SetShown(settings.TravelDistance and travelDistance > 0)
+    if container.TravelDistance:IsShown() then
+        container.TravelDistance.Text:SetText(formatDistance(travelDistance))
+    end
+
+    container.LearnedDate:SetShown(settings.LearnedDate and learnedTime ~= nil)
+    if container.LearnedDate:IsShown() then
+        local data = date('*t', learnedTime)
+        container.LearnedDate.Text:SetText(FormatShortDate(data.day, data.month, data.year))
+    end
+
+    container.Rarity:Hide()
+    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE and settings.Rarity then
         LibMountsRarity = LibMountsRarity or LibStub("MountsRarity-2.0")
         local rarity = LibMountsRarity:GetRarityByID(mountId)
         if rarity ~= nil then
-            container.Rarity:SetShown(true)
+            container.Rarity:Show()
             container.Rarity.Text:SetText(string.format("%.2f %%", rarity))
-            displayed[#displayed + 1] = container.Rarity
         end
     end
 
-    local mountFamily1, mountFamily2 = buildFamilyStrings(mountId)
-    container.Family1:SetShown(mountFamily1 ~= nil)
-    if mountFamily1 then
-        container.Family1.Text:SetText(mountFamily1)
-        displayed[#displayed + 1] = container.Family1
-    end
-    container.Family2:SetShown(mountFamily2 ~= nil)
-    if mountFamily2 then
-        container.Family2.Text:SetText(mountFamily2)
-        displayed[#displayed + 1] = container.Family2
+    container.Family1:Hide()
+    container.Family2:Hide()
+    if settings.Family then
+        local mountFamily1, mountFamily2 = buildFamilyStrings(mountId)
+        container.Family1:SetShown(mountFamily1 ~= nil)
+        if mountFamily1 then
+            container.Family1.Text:SetText(mountFamily1)
+        end
+        container.Family2:SetShown(mountFamily2 ~= nil)
+        if mountFamily2 then
+            container.Family2.Text:SetText(mountFamily2)
+        end
     end
 
-    if #displayed > 0 then
-        local maxWidth = MountJournal.MountDisplay:GetWidth() - 52
-        local rowWidth = 0
-        local rowLead
-        local rowCount = 0
-        for i, stat in ipairs(displayed) do
+    local maxWidth = MountJournal.MountDisplay:GetWidth() - 52
+    local rowWidth = 0
+    local rowLead
+    local rowPrevious
+    local rowCount = 0
+    for _, stat in ipairs(container.Items) do
+        if stat:IsShown() then
             stat:SetWidth(stat.Text:GetUnboundedStringWidth() + 14)
             stat:ClearAllPoints()
             rowWidth = rowWidth + 7 + stat:GetWidth()
@@ -240,34 +271,29 @@ local function updateContainer(mountId, container)
                 rowCount = rowCount + 1
                 rowLead = stat
             else
-                stat:SetPoint("LEFT", displayed[i - 1], "RIGHT", 7, 0)
+                stat:SetPoint("LEFT", rowPrevious, "RIGHT", 7, 0)
             end
             rowLead:SetPoint("TOPLEFT", container, "TOP", -(rowWidth / 2), (rowCount - 1) * -12)
+            rowPrevious = stat
         end
-        container:SetHeight(12 * rowCount)
     end
-
-    container:SetShown(#displayed > 0)
+    container:SetHeight(12 * rowCount)
+    container:SetShown(rowCount > 0)
 end
 
 ADDON.Events:RegisterCallback("loadUI", function()
     local container
 
     local callback = function()
-        if ADDON.settings.ui.showStatistics then
-            if not container then
-                container = setupContainer()
-            end
+        if not container then
+            container = setupContainer()
+        end
 
-            local selectedMount = ADDON.Api:GetSelected()
-            if selectedMount then
-                updateContainer(selectedMount, container)
-            else
-                container:Hide();
-            end
-
-        elseif container then
-            container:Hide()
+        local selectedMount = ADDON.Api:GetSelected()
+        if selectedMount then
+            updateContainer(selectedMount, container)
+        else
+            container:Hide();
         end
     end
     ADDON.Events:RegisterCallback("OnUpdateMountDisplay", callback, ADDON_NAME .. 'DisplayStatistics')
