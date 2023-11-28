@@ -65,21 +65,28 @@ local function InitializeDropDown(self, level)
     elseif level == 2 then
         local uiLabels, _ = ADDON:GetSettingLabels()
         for _, labelData in ipairs(uiLabels) do
-            local setting, _, options = labelData[1], labelData[2], labelData[3]
+            local setting, options, isMultiSelect = labelData[1], labelData[3], labelData[4]
             if ADDON.settings.ui[setting] ~= nil and options and UIDROPDOWNMENU_MENU_VALUE == setting then
                 for option, label in pairs(options) do
                     local button = {
                         keepShownOnClick = true,
-                        isNotRadio = false,
+                        isNotRadio = isMultiSelect,
                         hasArrow = false,
                         text = label,
                         notCheckable = false,
                         checked = function()
+                            if isMultiSelect then
+                                return ADDON.settings.ui[setting][option]
+                            end
                             return ADDON.settings.ui[setting] == option
                         end,
                         value = option,
-                        func = function()
-                            ADDON:ApplySetting(setting, option)
+                        func = function(_, _, _, checked)
+                            if isMultiSelect then
+                                ADDON:ApplySetting(setting, checked, option)
+                            else
+                                ADDON:ApplySetting(setting, option)
+                            end
                             UIDropDownMenu_Refresh(self, nil, level)
                         end,
                     }

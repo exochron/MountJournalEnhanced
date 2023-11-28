@@ -1,6 +1,6 @@
 
 ### Next
-- screenshot generator
+- quick filters in display
 - black filter inaccurate
 - personal favorites rework
 

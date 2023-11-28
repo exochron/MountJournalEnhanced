@@ -4,14 +4,19 @@ local L = ADDON.L
 --region setting handler
 local callbacks, defaults, uiLabels, behaviourLabels = {}, {}, {}, {}
 function ADDON:RegisterUISetting(key, default, label, func, options)
-    callbacks[key] = function(flag)
-        ADDON.settings.ui[key] = flag
+    local isMultiOptions = type(options) == "table" and type(default) == "table"
+    callbacks[key] = function(flag, subKey, ...)
+        if isMultiOptions and subKey then
+            ADDON.settings.ui[key][subKey] = flag
+        else
+            ADDON.settings.ui[key] = flag
+        end
         if func then
-            func(flag)
+            func(flag, subKey, ...)
         end
     end
     defaults[key] = default
-    table.insert(uiLabels, { key, label, options })
+    table.insert(uiLabels, { key, label, options, isMultiOptions })
 end
 function ADDON:RegisterBehaviourSetting(key, default, label, func)
     callbacks[key] = function(flag)
@@ -24,9 +29,9 @@ function ADDON:RegisterBehaviourSetting(key, default, label, func)
     defaults[key] = default
     table.insert(behaviourLabels, { key, label })
 end
-function ADDON:ApplySetting(key, value)
+function ADDON:ApplySetting(key, ...)
     if callbacks[key] then
-        callbacks[key](value)
+        callbacks[key](...)
     end
 end
 function ADDON:ResetSettings()
