@@ -297,4 +297,9 @@ ADDON.Events:RegisterCallback("loadUI", function()
         end
     end
     ADDON.Events:RegisterCallback("OnUpdateMountDisplay", callback, ADDON_NAME .. 'DisplayStatistics')
+    CollectionsJournal:HookScript("OnSizeChanged", function()
+        if CollectionsJournal:IsResizable() and CollectionsJournal.selectedTab == COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS then
+            callback()
+        end
+    end)
 end, "display statistics")

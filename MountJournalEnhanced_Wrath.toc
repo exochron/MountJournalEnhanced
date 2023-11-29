@@ -54,6 +54,7 @@ UI\FilterDropdown\Family.lua
 UI\FilterDropdown\Sort.lua
 UI\DisplayBackground.lua
 UI\DisplayCamera.lua
+UI\Resize.lua
 UI\DisplayStatistics.lua
 UI\Hotkeys.lua
 UI\MountListDropDown.lua
@@ -61,7 +62,6 @@ UI\MountSpecialButton.lua
 UI\SettingsDropDown.lua
 # UI\DressUpButton.lua # no mount preview possible yet
 # UI\RarityNames.lua
-UI\Resize.lua
 # UI\ShopButton.lua # no shop in classic \o/
 UI\SummonRandomButton.lua
 UI\BlizzFixes.lua
