@@ -57,6 +57,7 @@ UI\FilterDropdown\Family.lua
 UI\FilterDropdown\Sort.lua
 UI\DisplayBackground.lua
 UI\DisplayCamera.lua
+UI\Resize.lua
 UI\DisplayStatistics.lua
 UI\Hotkeys.lua
 UI\MountListDropDown.lua
@@ -64,7 +65,6 @@ UI\MountSpecialButton.lua
 UI\SettingsDropDown.lua
 UI\DressUpButton.lua
 UI\RarityNames.lua
-UI\Resize.lua
 UI\ShopButton.lua
 UI\BlizzFixes.lua
 UI\Notes.lua

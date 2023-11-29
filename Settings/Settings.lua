@@ -57,6 +57,7 @@ local function PrepareDefaults()
             displayBackground = "original",
             showMountspecialButton = true,
             autoRotateModel = false,
+            showResizeEdge = true,
         },
 
         favoritePerChar = false,

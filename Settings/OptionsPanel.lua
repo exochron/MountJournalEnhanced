@@ -54,8 +54,8 @@ local function BuildMainFrame(uiLabels, behaviourLabels)
     frame:SetName(title)
     frame:SetTitle(title)
     frame:SetLayout("List")
-    frame.content:SetPoint("TOPLEFT", 20, -50)
-    frame.content:SetPoint("BOTTOMRIGHT", -20, 10)
+    --frame.content:SetPoint("TOPLEFT", 20, -50)
+    --frame.content:SetPoint("BOTTOMRIGHT", -20, 10)
 
     frame.checks = {}
 
