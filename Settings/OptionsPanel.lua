@@ -53,31 +53,32 @@ local function BuildMainFrame(uiLabels, behaviourLabels)
     local frame = AceGUI:Create("BlizOptionsGroup")
     frame:SetName(title)
     frame:SetTitle(title)
-    frame:SetLayout("List")
-    --frame.content:SetPoint("TOPLEFT", 20, -50)
-    --frame.content:SetPoint("BOTTOMRIGHT", -20, 10)
+
+    local scroll = AceGUI:Create("ScrollFrame")
+    frame:SetLayout("fill")
+    frame:AddChild(scroll)
 
     frame.checks = {}
 
-    BuildHeading(frame, UIOPTIONS_MENU)
+    BuildHeading(scroll, UIOPTIONS_MENU)
 
     for _, labelData in ipairs(uiLabels) do
         local setting, label, options, isMultiOptions = labelData[1], labelData[2], labelData[3], labelData[4]
         if ADDON.settings.ui[setting] ~= nil then
             if options then
-                frame.checks[setting] = BuildDropDown(frame, label, options, isMultiOptions)
+                frame.checks[setting] = BuildDropDown(scroll, label, options, isMultiOptions)
             else
-                frame.checks[setting] = BuildCheckBox(frame, label)
+                frame.checks[setting] = BuildCheckBox(scroll, label)
             end
         end
     end
 
-    BuildHeading(frame, ADDON.L.SETTING_HEAD_BEHAVIOUR)
+    BuildHeading(scroll, ADDON.L.SETTING_HEAD_BEHAVIOUR)
 
     for _, labelData in ipairs(behaviourLabels) do
         local setting, label = labelData[1], labelData[2]
         if (ADDON.settings[setting] ~= nil) then
-            frame.checks[setting] = BuildCheckBox(frame, label)
+            frame.checks[setting] = BuildCheckBox(scroll, label)
         end
     end
 
