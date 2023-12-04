@@ -158,6 +158,7 @@ local function BuildButton(tooltip, tooltipText)
 end
 
 local function CheckButtonStatus(self)
+    self.Icon:ClearAllPoints()
     self.Icon:SetPoint("CENTER")
     if self:GetChecked() then
         self.Icon:AdjustPointsOffset(1, -1);
