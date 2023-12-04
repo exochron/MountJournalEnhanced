@@ -68,13 +68,15 @@ end
 
 local button
 ADDON:RegisterUISetting("showResizeEdge", true, ADDON.L["SETTING_SHOW_RESIZE_EDGE"], function(value)
-    if value and not button then
-        button = BuildResizeButton()
-        hooksecurefunc(CollectionsJournal, "SetResizable", function(_, activate)
-            button:SetShown(activate)
-        end)
+    if ADDON.initialized then
+        if value and not button then
+            button = BuildResizeButton()
+            hooksecurefunc(CollectionsJournal, "SetResizable", function(_, activate)
+                button:SetShown(activate)
+            end)
+        end
+        CollectionsJournal:SetResizable(value)
     end
-    CollectionsJournal:SetResizable(value)
 end)
 
 local loaded = false
