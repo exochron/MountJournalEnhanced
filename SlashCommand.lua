@@ -18,7 +18,7 @@ function SlashCmdList.MOUNTJOURNALENHANCED(input)
     elseif loweredInput == "debug off" then
         ADDON.settings.ui.debugMode = false
         print("MountJournalEnhanced: debug mode deactivated.")
-    elseif ADDON.TakeScreenshots and (loweredInput == "sreenshots" or loweredInput == "ss") then
+    elseif ADDON.TakeScreenshots and loweredInput == "sreenshots" then
         ADDON:TakeScreenshots()
     elseif loweredInput == "reset size" then
         ADDON.UI:RestoreWindowSize()
