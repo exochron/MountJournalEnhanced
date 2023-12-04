@@ -3,7 +3,7 @@
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron
 ## Version: @project-version@
-## SavedVariablesPerCharacter: MountJournalEnhancedSettings, MJEPersonalSettings
+## SavedVariablesPerCharacter: MJEPersonalSettings
 ## SavedVariables: MJEGlobalSettings, MJETrackingData
 ## X-Curse-Project-ID: 86372
 ## X-Wago-ID: nQN5m7NB
@@ -61,7 +61,6 @@ UI\MountListDropDown.lua
 UI\MountSpecialButton.lua
 UI\SettingsDropDown.lua
 # UI\DressUpButton.lua # no mount preview possible yet
-# UI\RarityNames.lua
 # UI\ShopButton.lua # no shop in classic \o/
 UI\SummonRandomButton.lua
 UI\BlizzFixes.lua

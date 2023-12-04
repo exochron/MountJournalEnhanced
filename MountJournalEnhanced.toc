@@ -4,7 +4,7 @@
 ## IconTexture: Interface\Addons\MountJournalEnhanced\UI\icons\mje.png
 ## Author: eXochron
 ## Version: @project-version@
-## SavedVariablesPerCharacter: MountJournalEnhancedSettings, MJEPersonalSettings
+## SavedVariablesPerCharacter: MJEPersonalSettings
 ## SavedVariables: MJEGlobalSettings, MJETrackingData
 ## AddonCompartmentFunc: MountJournalEnhanced_Open
 ## X-Curse-Project-ID: 86372

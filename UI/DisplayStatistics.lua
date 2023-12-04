@@ -14,6 +14,7 @@ do
         Family = ADDON.L["Family"],
     }
     if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+        options.CustomizationCount = nil
         options.Rarity = nil
     end
     local defaults = CopyTable(options)
