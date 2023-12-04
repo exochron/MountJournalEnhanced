@@ -3,7 +3,7 @@ local _, ADDON = ...
 local button, doStrip
 
 ADDON.UI:RegisterUIOverhaulCallback(function(frame)
-    if frame ==  MountJournalMountButton then
+    if frame ==  MountJournal then
         doStrip = true
     end
 end)
@@ -46,8 +46,10 @@ local function BuildButton()
         frame:Disable()
     end
 
-    if doStrip then
-        frame:StripTextures()
+    if doStrip and ElvUI then
+        local E = unpack(ElvUI)
+        local S = E:GetModule('Skins')
+        S:HandleButton(frame)
     end
 
     return frame
