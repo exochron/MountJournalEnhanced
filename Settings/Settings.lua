@@ -49,7 +49,7 @@ local function PrepareDefaults()
                 Family = true,
             },
             enableCursorKeys = true,
-            moveEquipmentSlot = true,
+            slotPosition = "top",
             previewButton = true,
             showPersonalCount = true,
             windowSize = { 0, 0 },
