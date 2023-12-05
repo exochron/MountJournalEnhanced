@@ -19,8 +19,15 @@ ADDON.Events:RegisterCallback("preloadUI", function()
         end
     end)
 
+    local gotUpdated = false
+    hooksecurefunc(MountJournal.MountDisplay.ModelScene, "TransitionToModelSceneID", function()
+        gotUpdated = true
+    end)
     hooksecurefunc("MountJournal_UpdateMountDisplay", function()
-        ADDON.Events:TriggerEvent("OnUpdateMountDisplay")
+        if gotUpdated then
+            ADDON.Events:TriggerEvent("OnUpdateMountDisplay")
+        end
+        gotUpdated = false
     end)
 end, "enhanced display")
 
