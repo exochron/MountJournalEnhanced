@@ -36,8 +36,12 @@ local function BuildResizeButton()
         ticker = C_Timer.NewTicker(0.05, function()
             local currentX, currentY = GetCursorPosition()
             local w, h = CollectionsJournal:GetSize()
+            local scale = CollectionsJournal:GetEffectiveScale()
             local minW, minH = CollectionsJournal:GetResizeBounds()
-            CollectionsJournal:SetSize(max(w - lastX + currentX, minW), max(h + lastY - currentY, minH))
+            CollectionsJournal:SetSize(
+                    max(w - ((lastX - currentX) / scale), minW),
+                    max(h + ((lastY - currentY) / scale), minH)
+            )
             lastX = currentX
             lastY = currentY
         end)
