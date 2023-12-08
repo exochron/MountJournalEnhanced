@@ -8,6 +8,7 @@ local L = ADDON.L
 
 L["AUTO_ROTATE"] = "Rotate automatically"
 L["Black Market"] = "Black Market"
+L["COMPARTMENT_TOOLTIP"] = "|cffeda55fLeft-Click|r to toggle showing the mount collection.\n|cffeda55fRight-Click|r to open addon options."
 L["DRESSUP_LABEL"] = "Journal"
 L["FAVOR_AUTO"] = "Auto-favor new mounts"
 L["FAVOR_DISPLAYED"] = "All Displayed"

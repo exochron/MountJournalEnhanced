@@ -105,8 +105,3 @@ end, ADDON_NAME)
 if LE_FRAME_TUTORIAL_MOUNT_COLLECTION_DRAGONRIDING then
     C_CVar.SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_MOUNT_COLLECTION_DRAGONRIDING, true)
 end
-
--- for addon compartment
-function MountJournalEnhanced_Open()
-    ToggleCollectionsJournal(COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS)
-end
