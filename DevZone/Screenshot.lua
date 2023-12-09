@@ -13,10 +13,12 @@ function ADDON:TakeScreenshots()
         frame:Hide()
     end
 
+    C_CVar.SetCVar("mountJournalShowPlayer", 0) -- hide player
+
     if WeakAuras then
         WeakAuras:Toggle() -- turn off WA
     end
-    MountJournalEnhanced_Open()
+    ToggleCollectionsJournal(COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS)
 
     -- give time to load properly
     C_Timer.After(0.5, function()
@@ -121,6 +123,8 @@ function ADDON:TakeScreenshots()
                 if WeakAuras then
                     WeakAuras:Toggle() -- turn on WA
                 end
+
+                C_CVar.SetCVar("mountJournalShowPlayer", 1) -- show player
             end
         )
     end)
