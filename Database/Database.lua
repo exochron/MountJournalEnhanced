@@ -3,9 +3,9 @@ local _, ADDON = ...
 ADDON.DB = {}
 
 ADDON.DB.Recent = {
-    ["minID"] = 1801,
-    ["blacklist"] = { 1813 }, -- Mimiron's Jumpjets
-    ["whitelist"] = { 1744 }, -- Grotto Netherwing Drake
+    ["minID"] = 1956,
+    ["blacklist"] = { },
+    ["whitelist"] = { 1168, 1638, 1941 }, -- Fiery Hearthsteed, Explorer's Stonehide Packbeast, Heartseeker Mana Ray
 }
 
 ADDON.DB.Source = {
@@ -159,6 +159,8 @@ ADDON.DB.Source = {
         [408651] = true, -- Cataloged Shalewing
         [420097] = true, -- Azure Worldchiller
         [424476] = true, -- Winter Night Dreamsaber
+        [432455] = true, -- Noble Flying Carpet
+        [432610] = true, -- Clayscale Hornstrider
     },
 
     ["Quest"] = {
@@ -224,7 +226,6 @@ ADDON.DB.Source = {
         [412088] = true, -- Grotto Netherwing Drake
         [425338] = true, -- Flourishing Whimsydrake
         [427041] = true, -- Ochre Dreamtalon
-        [428060] = true, -- Golden Regal Scarab
 
         ------------------------------
         -- Alliance ------------------
@@ -298,6 +299,7 @@ ADDON.DB.Source = {
         [373859] = true, -- Loyal Magmammoth - Yries Lightfingers
         [374098] = true, -- Stormhide Salamanther
         [374162] = true, -- Scrappy Worldsnail - Dealer Vexil
+        [374204] = true, -- Explorer's Stonehide Packbeast - Azerothian Archivists
         [376875] = true, -- Brown Scouting Ottuk - Tatto
         [376879] = true, -- Ivory Trader's Ottuk - Tattukiaka
         [376880] = true, -- Yellow Scouting Ottuk - Tatto
@@ -336,6 +338,7 @@ ADDON.DB.Source = {
         [427546] = true, -- Mammyth - Emerald Dream vendor
         [427549] = true, -- Imagiwing - Emerald Dream vendor
         [427724] = true, -- Salatrancer - Emerald Dream vendor
+        [428060] = true, -- Golden Regal Scarab
 
         ------------------------------
         -- Alliance ------------------
@@ -626,6 +629,7 @@ ADDON.DB.Source = {
         [359229] = true, -- Heartlight Vombata - Zereth Mortis - The Enlightened
         [359276] = true, -- Anointed Protostag - Zereth Mortis - The Enlightened
 
+        [374204] = true, -- Explorer's Stonehide Packbeast - Azerothian Archivists
         [374034] = true, -- Azure Skitterfly - Dragonscale Expedition
         [374048] = true, -- Verdant Skitterfly - Dragonscale Expedition
         [374032] = true, -- Tamed Skitterfly - Dragonscale Expedition
@@ -1397,6 +1401,7 @@ ADDON.DB.Source = {
         -- Love is in the Air
         [71342] = true, -- Big Love Rocket
         [102350] = true, -- Swift Lovebird
+        [427777] = true, -- Heartseeker Mana Ray
 
         -- Noblegarden
         [102349] = true, -- Swift Springstrider
@@ -1435,6 +1440,9 @@ ADDON.DB.Source = {
 
         -- Secrets of Azeroth
         [424082] = true, -- Mimiron's Jumpjets
+
+        -- Hearthstone Anniversary
+        [431992] = true, -- Compass Rose
     },
 
     ["Black Market"] = {
@@ -1514,6 +1522,7 @@ ADDON.DB.Source = {
         --  9 = TCG
 
         [62048] = true, -- Illidari Doomhawk - 17th Anniversary
+        [278966] = true, -- Fiery Hearthsteed - Hearthstone Anniversary
         [294197] = true, -- Obsidian Worldbreaker - 15th Anniversary
     },
 }

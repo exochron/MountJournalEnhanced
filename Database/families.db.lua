@@ -131,6 +131,9 @@ ADDON.DB.Family = {
 [995] = true, -- Sharkbait
 [1575] = true, -- Quawks
 },
+["Peafowl"] = {
+[2035] = true, -- Majestic Azure Peafowl
+},
 ["Phoenixes"] = {
 [183] = true, -- Ashes of Al'ar
 [401] = true, -- Dark Phoenix
@@ -156,6 +159,7 @@ ADDON.DB.Family = {
 [430] = true, -- Swift Springstrider
 [431] = true, -- Swift Lovebird
 [1478] = true, -- Skyskin Hornstrider
+[2038] = true, -- Tonschuppenhornschreiter
 },
 ["Talonbirds"] = {
 [185] = true, -- Raven Lord
@@ -275,6 +279,8 @@ ADDON.DB.Family = {
 [656] = true, -- Llothien Prowler
 [945] = true, -- Vicious War Fox
 [946] = true, -- Vicious War Fox
+[1956] = true, -- Fur-endship Fox
+[1958] = true, -- Twilight Sky Prowler
 },
 ["Gargon"] = {
 [1298] = true, -- Hopecrusher Gargon
@@ -618,6 +624,7 @@ ADDON.DB.Family = {
 [223] = true, -- Vengeful Nether Drake
 [241] = true, -- Brutal Nether Drake
 [1744] = true, -- Grotto Netherwing Drake
+[1953] = true, -- Grotto Netherwing Drake
 },
 ["Others"] = {
 [446] = true, -- Heart of the Aspects
@@ -629,6 +636,7 @@ ADDON.DB.Family = {
 [1591] = true, -- Cliffside Wylderdrake
 [1739] = true, -- Obsidian Gladiator's Slitherdrake
 [1830] = true, -- Flourishing Whimsydrake
+[1954] = true, -- Flourishing Whimsydrake
 },
 ["Proto-Drakes"] = {
 [262] = true, -- Red Proto-Drake
@@ -882,6 +890,7 @@ ADDON.DB.Family = {
 [454] = true, -- Cindermane Charger
 [532] = true, -- Ghastly Charger
 [547] = true, -- Hearthsteed
+[1168] = true, -- Fiery Hearthsteed
 },
 ["Horned Steeds"] = {
 [222] = true, -- Swift Zhevra
@@ -1117,6 +1126,7 @@ ADDON.DB.Family = {
 [1438] = true, -- Bulbous Necroray
 [1439] = true, -- Infested Necroray
 [1440] = true, -- Pestilent Necroray
+[1941] = true, -- Heartseeker Mana Ray
 },
 ["Nether Rays"] = {
 [176] = true, -- Green Riding Nether Ray
@@ -1182,6 +1192,7 @@ ADDON.DB.Family = {
 [1444] = true, -- Viridian Phase-Hunter
 [1619] = true, -- Ancient Salamanther
 [1622] = true, -- Stormhide Salamanther
+[1638] = true, -- Steinbalgpacktier des Forschers
 [1639] = true, -- Lizi, Thunderspine Tramper
 [1681] = true, -- Hailstorm Armoredon
 [1725] = true, -- Inferno Armoredon
@@ -1224,6 +1235,7 @@ ADDON.DB.Family = {
 [900] = true, -- Vicious War Turtle
 [901] = true, -- Vicious War Turtle
 [1582] = true, -- Savage Green Battle Turtle
+[2039] = true, -- Savage Blue Battle Turtle
 },
 },
 ["Rodent"] = {
@@ -1398,12 +1410,14 @@ ADDON.DB.Family = {
 [375] = true, -- Frosty Flying Carpet
 [603] = true, -- Creeping Carpet
 [905] = true, -- Leywoven Flying Carpet
+[2023] = true, -- Noble Flying Carpet
 },
 ["Discs"] = {
 [509] = true, -- Red Flying Cloud
 [860] = true, -- Archmage's Prismatic Disc
 [1446] = true, -- Tazavesh Gearglider
 [1481] = true, -- Cartel Master's Gearglider
+[1959] = true, -- Compass Rose
 },
 ["Gyrocopters"] = {
 [204] = true, -- Turbo-Charged Flying Machine
