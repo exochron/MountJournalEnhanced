@@ -7,8 +7,7 @@
 ### More Ideas:
 - special summon animation
 - preview manuscripts
-- use rarity of dataforazeroth.com?
-- activate sound effects in display (with global setting)
+9- activate sound effects in display (with global setting)
 - more animation control in display (start/pause, movements)
 - gallery mode (like wardrobe)
 - cover flow mode
