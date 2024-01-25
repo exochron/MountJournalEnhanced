@@ -8,7 +8,7 @@ local _, ADDON = ...
 local function fixInitialRiderBlend()
     local playerActor = MountJournal.MountDisplay.ModelScene:GetPlayerActor("player-rider")
     if playerActor then
-        playerActor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_NONE)
+        playerActor:SetAnimationBlendOperation(Enum.ModelBlendOperation.None)
     end
 end
 

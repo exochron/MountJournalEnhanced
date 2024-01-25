@@ -46,6 +46,12 @@ L["TASK_END"] = "[MJE] Phew! I'm done."
 L["TASK_FAVOR_START"] = "[MJE] Reapplying stars all over your mounts. Please wait a few seconds until I'm finished."
 L["TOGGLE_COLOR"] = "Show next color variation"
 L["Transform"] = "Transform"
+L["ANIMATION_STAND"] = "Stand"
+L["ANIMATION_WALK"] = "Walk"
+L["ANIMATION_WALK_BACK"] = "Walk Backwards"
+L["ANIMATION_RUN"] = "Run"
+L["ANIMATION_FLY"] = "Fly"
+L["ANIMATION_FLY_IDLE"] = "Fly Idle"
 
 -- Families
 L["Airplanes"] = "Airplanes"
