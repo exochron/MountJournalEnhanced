@@ -19,7 +19,7 @@ end
 local function scanAuras()
     local continuationToken, aura1, aura2, aura3, aura4, aura5
     repeat
-        continuationToken, aura1, aura2, aura3, aura4, aura5 = UnitAuraSlots("player", "HELPFUL|CANCELABLE", 5, continuationToken)
+        continuationToken, aura1, aura2, aura3, aura4, aura5 = C_UnitAuras.GetAuraSlots("player", "HELPFUL|CANCELABLE", 5, continuationToken)
         if aura1 and checkAuraData(C_UnitAuras.GetAuraDataBySlot("player", aura1)) then
             break
         end

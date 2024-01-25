@@ -19,6 +19,7 @@ local _, ADDON = ...
 --636=MountSelfSpecial
 
 local helpTooltip
+local animationMenu
 local buttons = {}
 
 local function UpdateContainer()
@@ -71,13 +72,44 @@ local function HideOriginalElements()
     end
 end
 
--- Switching mounts still starts the Animationkit. So we have to stop it.
+local function GetAnimationsOfCurrentMount()
+    local animations = {
+        ["stand"] = 0,
+        ["walk"] = 4,
+        ["walk_back"] = 13,
+        ["run"] = 5,
+        ["fly_idle"] = 548,
+        ["fly"] = 135,
+    }
+
+    local mountId = ADDON.Api:GetSelected()
+    local _, _, _, _, _, _, _, _, _, _, _, _, isForDragonriding = C_MountJournal.GetMountInfoByID(mountId)
+    local _, _, _, _, mountType = C_MountJournal.GetMountInfoExtraByID(mountId)
+
+    if isForDragonriding then
+        animations["fly"] = 1532
+    end
+
+    if not tContains(ADDON.DB.Type.flying.typeIDs, mountType) then
+        animations["fly_idle"] = nil
+        animations["fly"] = nil
+    end
+
+    return animations
+end
+
+local function PlayAnimationByType(type)
+    local animations = GetAnimationsOfCurrentMount()
+    local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
+    if actor then
+        actor:StopAnimationKit() -- changing animation while an Animationkit runs, cancels new animation afterwards.
+        actor:SetAnimation(animations[type] or 0)
+    end
+end
+
 local function SetupModelActor()
     local callback = function()
-        local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
-        if actor then
-            actor:StopAnimationKit()
-        end
+        PlayAnimationByType(ADDON.settings.ui.displayAnimation)
     end
     ADDON.Events:RegisterCallback("OnUpdateMountDisplay", callback, 'DisplayDirector')
 end
@@ -202,6 +234,40 @@ local function BuildRotateButton(tooltip, icon, direction)
     return button
 end
 
+local function InitializeAnimationDropDown(self, level)
+    local animations = GetAnimationsOfCurrentMount()
+
+    local order = {"stand", "walk", "walk_back", "run", "fly_idle", "fly"}
+    local labels = {
+        ["stand"] = ADDON.L.ANIMATION_STAND,
+        ["walk"] = ADDON.L.ANIMATION_WALK,
+        ["walk_back"] = ADDON.L.ANIMATION_WALK_BACK,
+        ["run"] = ADDON.L.ANIMATION_RUN,
+        ["fly_idle"] = ADDON.L.ANIMATION_FLY_IDLE,
+        ["fly"] = ADDON.L.ANIMATION_FLY,
+    }
+
+    for _, type in ipairs(order) do
+        if animations[type] then
+            local info = {
+                keepShownOnClick = true,
+                isNotRadio = false,
+                hasArrow = false,
+                text = labels[type],
+                checked = function()
+                    return ADDON.settings.ui.displayAnimation == type
+                end,
+                func = function()
+                    ADDON.settings.ui.displayAnimation = type
+                    UIDropDownMenu_Refresh(self, nil, level)
+                    PlayAnimationByType(type)
+                end,
+            }
+            UIDropDownMenu_AddButton(info, level)
+        end
+    end
+end
+
 local function BuildCameraPanel()
     local L = ADDON.L
 
@@ -216,12 +282,28 @@ local function BuildCameraPanel()
         container.specialButton:HookScript("OnClick", function()
             local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
             if actor then
-                actor:SetAnimationBlendOperation(LE_MODEL_BLEND_OPERATION_ANIM)
                 actor:PlayAnimationKit(1371)
                 actor:PlayAnimationKit(1371) -- animation gets sometimes canceled. second call is to enforce it.
+                ADDON.settings.ui.displayAnimation = "stand" -- back to normal stand
             end
         end)
     end
+
+    container.animationButton = BuildButton(ANIMATION)
+    container.animationButton.Icon:SetTexture(516779) -- Interface/HELPFRAME/ReportLagIcon-Movement.blp
+    container.animationButton.Icon:SetDesaturated(true)
+    container.animationButton.Icon:SetVertexColor(1, 0.8, 0)
+    container.animationButton.Icon:SetSize(25,25)
+    container.animationButton:HookScript("OnClick", function(sender)
+        if animationMenu == nil then
+            animationMenu = CreateFrame("Frame", nil, container.animationButton, "UIDropDownMenuTemplate")
+            UIDropDownMenu_Initialize(animationMenu, InitializeAnimationDropDown, "MENU")
+            animationMenu.point = "BOTTOMLEFT"
+            animationMenu.relativePoint = "TOPLEFT"
+        end
+
+        ToggleDropDownMenu(1, nil, animationMenu, sender, 0, -7)
+    end)
 
     if MOUNT_JOURNAL_PLAYER then
         container.togglePlayerButton = BuildCheckButton(MOUNT_JOURNAL_PLAYER, nil, function(self)
@@ -229,7 +311,7 @@ local function BuildCameraPanel()
         end)
         container.togglePlayerButton.Icon:SetTexture(386865) -- interface/friendsframe/ui-toast-toasticons.blp
         container.togglePlayerButton.Icon:SetTexCoord(0.05, 0.2, 0.6, 0.9)
-        container.togglePlayerButton.Icon:SetVertexColor(1, 0.7, 0.1)
+        container.togglePlayerButton.Icon:SetVertexColor(1, 0.7, 0)
         container.togglePlayerButton:HookScript("OnClick", function(self)
             if self:GetChecked() then
                 C_CVar.SetCVar("mountJournalShowPlayer", 1)

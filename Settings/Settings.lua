@@ -58,6 +58,7 @@ local function PrepareDefaults()
             showMountspecialButton = true,
             autoRotateModel = false,
             showResizeEdge = true,
+            displayAnimation = "stand",
         },
 
         favoritePerChar = false,
