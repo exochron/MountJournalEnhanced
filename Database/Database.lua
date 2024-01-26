@@ -226,6 +226,7 @@ ADDON.DB.Source = {
         [412088] = true, -- Grotto Netherwing Drake
         [425338] = true, -- Flourishing Whimsydrake
         [427041] = true, -- Ochre Dreamtalon
+        [430225] = true, -- Gilnean Prowler
 
         ------------------------------
         -- Alliance ------------------

@@ -279,6 +279,7 @@ ADDON.DB.Family = {
 [656] = true, -- Llothien Prowler
 [945] = true, -- Vicious War Fox
 [946] = true, -- Vicious War Fox
+[1949] = true, -- Gilnean Prowler
 [1956] = true, -- Fur-endship Fox
 [1958] = true, -- Twilight Sky Prowler
 },
@@ -603,6 +604,7 @@ ADDON.DB.Family = {
 [1770] = true, -- Festering Emerald Drake
 [1795] = true, -- Auspicious Arborwyrm
 [1798] = true, -- Azure Worldchiller
+[1806] = true, -- Auspicious Arborwyrm
 [1831] = true, -- Verdant Gladiator's Slitherdrake
 [1832] = true, -- Nightmarish Emerald Drake
 },
