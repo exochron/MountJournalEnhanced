@@ -61,14 +61,18 @@ function ADDON:TakeScreenshots()
                 end,
                 function(api)
                     api:BackScreen()
+                    api:Click(MountJournalFilterButton)
                     api:Point(DropDownList1Button11) -- Sources
                 end,
                 function(api)
                     api:BackScreen()
+                    api:Click(MountJournalFilterButton)
                     api:Point(DropDownList1Button12) -- Type
                 end,
                 function(api)
                     api:BackScreen()
+
+                    api:Click(MountJournalFilterButton)
 
                     api:Point(DropDownList1Button14)
                     api:Click(DropDownList2Button2) -- deselect all
@@ -80,10 +84,12 @@ function ADDON:TakeScreenshots()
                 function(api)
                     api:BackScreen()
                     api:Click(MountJournalFilterButton.ResetButton)
+                    api:Click(MountJournalFilterButton)
                     api:Point(DropDownList1Button16) --Color
                 end,
                 function(api)
                     api:BackScreen()
+                    api:Click(MountJournalFilterButton)
                     api:Point(DropDownList1Button17) --Rarity
                 end,
                 function(api)
