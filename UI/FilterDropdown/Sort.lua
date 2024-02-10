@@ -1,15 +1,15 @@
 local ADDON_NAME, ADDON = ...
 local L = ADDON.L
 
-local function CreateFilterRadio(text, filterValue)
-    local info = ADDON.UI.FDD:CreateFilterInfo(text, "by", ADDON.settings.sort)
+local function CreateSortRadio(text, sortValue)
+    local sortSettings = ADDON.settings.sort
+    local info = ADDON.UI.FDD:CreateFilterInfo(text, "by", sortSettings)
     info.isNotRadio = false
-    info.arg2 = filterValue
-    info.checked = function(self)
-        return self.arg1["by"] == filterValue
+    info.checked = function()
+        return sortSettings["by"] == sortValue
     end
-    info.func = function(_, arg1, arg2)
-        arg1["by"] = arg2
+    info.func = function()
+        sortSettings["by"] = sortValue
         ADDON.Api:GetDataProvider():Sort()
         UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
     end
@@ -18,9 +18,10 @@ local function CreateFilterRadio(text, filterValue)
 end
 
 local function CreateSortCheckbox(text, sortKey)
-    local info = ADDON.UI.FDD:CreateFilterInfo(text, sortKey, ADDON.settings.sort)
-    info.func = function(_, arg1, _, value)
-        arg1[sortKey] = value
+    local sortSettings = ADDON.settings.sort
+    local info = ADDON.UI.FDD:CreateFilterInfo(text, sortKey, sortSettings)
+    info.func = function(_, _, _, value)
+        sortSettings[sortKey] = value
         ADDON.Api:GetDataProvider():Sort()
         UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
     end
@@ -29,27 +30,27 @@ local function CreateSortCheckbox(text, sortKey)
 end
 
 function ADDON.UI.FDD:AddSortMenu(level)
-    UIDropDownMenu_AddButton(CreateFilterRadio(NAME, 'name'), level)
-    UIDropDownMenu_AddButton(CreateFilterRadio(TYPE, 'type'), level)
-    UIDropDownMenu_AddButton(CreateFilterRadio(EXPANSION_FILTER_TEXT, 'expansion'), level)
+    UIDropDownMenu_AddButton(CreateSortRadio(NAME, 'name'), level)
+    UIDropDownMenu_AddButton(CreateSortRadio(TYPE, 'type'), level)
+    UIDropDownMenu_AddButton(CreateSortRadio(EXPANSION_FILTER_TEXT, 'expansion'), level)
     if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-        UIDropDownMenu_AddButton(CreateFilterRadio(RARITY, 'rarity'), level)
+        UIDropDownMenu_AddButton(CreateSortRadio(RARITY, 'rarity'), level)
     end
 
     local trackingEnabled = ADDON.settings.trackUsageStats
-    local info = CreateFilterRadio(L.SORT_BY_USAGE_COUNT, 'usage_count')
+    local info = CreateSortRadio(L.SORT_BY_USAGE_COUNT, 'usage_count')
     info.disabled = not trackingEnabled
     UIDropDownMenu_AddButton(info, level)
-    info = CreateFilterRadio(L.SORT_BY_LAST_USAGE, 'last_usage')
+    info = CreateSortRadio(L.SORT_BY_LAST_USAGE, 'last_usage')
     info.disabled = not trackingEnabled
     UIDropDownMenu_AddButton(info, level)
-    info = CreateFilterRadio(L.SORT_BY_LEARNED_DATE, 'learned_date')
+    info = CreateSortRadio(L.SORT_BY_LEARNED_DATE, 'learned_date')
     info.disabled = not trackingEnabled
     UIDropDownMenu_AddButton(info, level)
-    info = CreateFilterRadio(L.SORT_BY_TRAVEL_DURATION, 'travel_duration')
+    info = CreateSortRadio(L.SORT_BY_TRAVEL_DURATION, 'travel_duration')
     info.disabled = not trackingEnabled
     UIDropDownMenu_AddButton(info, level)
-    info = CreateFilterRadio(L.SORT_BY_TRAVEL_DISTANCE, 'travel_distance')
+    info = CreateSortRadio(L.SORT_BY_TRAVEL_DISTANCE, 'travel_distance')
     info.disabled = not trackingEnabled
     UIDropDownMenu_AddButton(info, level)
 
