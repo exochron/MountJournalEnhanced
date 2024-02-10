@@ -37,13 +37,12 @@ function ADDON.UI.FDD:CreateFilterInfo(text, filterKey, filterSettings, toggleBu
         if not filterSettings then
             filterSettings = ADDON.settings.filter
         end
-        info.arg1 = filterSettings
         info.notCheckable = false
-        info.checked = function(self)
-            return self.arg1[filterKey]
+        info.checked = function()
+            return filterSettings[filterKey]
         end
-        info.func = function(self, arg1, arg2, value)
-            arg1[filterKey] = arg2 or value
+        info.func = function(self, _, _, value)
+            filterSettings[filterKey] = value
             ADDON:FilterMounts()
             UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
             ADDON.UI.FDD:UpdateResetVisibility()
@@ -95,18 +94,35 @@ function ADDON.UI.FDD:SetAllSubFilters(settings, switch)
     ADDON.UI.FDD:UpdateResetVisibility()
 end
 
+local function HookResizeButtonWidth(button, calcWidth)
+    button.arg2 = "MJE_RESIZE"
+    if not button.MJE_HookedWidth then
+        button.MJE_HookedWidth = true
+        hooksecurefunc(button, "SetWidth", function(self, width)
+            if self.arg2 == "MJE_RESIZE" then
+                self:SetSize(calcWidth(width), self:GetHeight())
+            end
+        end)
+    end
+end
+
 local function AddCheckAllAndNoneInfo(settings, level)
-    local info = CreateFilterInfo(CHECK_ALL)
+    local info = CreateFilterInfo(ALL)
+    info.justifyH = "CENTER"
     info.func = function()
         ADDON.UI.FDD:SetAllSubFilters(settings, true)
     end
-    UIDropDownMenu_AddButton(info, level)
+    local AllButton = UIDropDownMenu_AddButton(info, level)
+    HookResizeButtonWidth(AllButton, function(w) return w/2 end)
 
-    info = CreateFilterInfo(UNCHECK_ALL)
+    info = CreateFilterInfo(NONE)
+    info.justifyH = "CENTER"
     info.func = function()
         ADDON.UI.FDD:SetAllSubFilters(settings, false)
     end
-    UIDropDownMenu_AddButton(info, level)
+    local NoneButton = UIDropDownMenu_AddButton(info, level)
+    NoneButton:SetPoint("TOPLEFT", AllButton, "TOPRIGHT", 0, 0)
+    HookResizeButtonWidth(NoneButton, function(w) return w/2 end)
 end
 
 local function HasUserHiddenMounts()
