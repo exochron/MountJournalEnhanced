@@ -32,10 +32,13 @@ ADDON.DB.Source.Promotion[372677] = true; -- Kalu'ak Whalebone Glider
 ADDON.DB.Source.Promotion[394209] = true; -- Festering Emerald Drake
 ADDON.DB.Source.Promotion[416158] = true; -- Nightmarish Emerald Drake
 ADDON.DB.Source.Promotion[423869] = true; -- Avatar of Flame
+ADDON.DB.Source.Promotion[440915] = true; -- Auspicious Arborwyrm
 
 ADDON.DB.Expansion[1][1761] = true; -- Reawakened Phase-Hunter (TBC Classic)
 ADDON.DB.Expansion[2][1762] = true; -- Kalu'ak Whalebone Glider (WotLK Classic)
-ADDON.DB.Expansion[3][1807] = true; -- Avatar of Flame (Cataclysm Classic)
+if GetServerExpansionLevel() >=3 then
+    ADDON.DB.Expansion[3][1807] = true; -- Avatar of Flame (Cataclysm Classic)
+end
 ADDON.DB.Expansion[GetServerExpansionLevel()].maxID = 999999999
 
 -- These are duplicate TCG mounts only existing in classic
