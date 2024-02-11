@@ -126,7 +126,7 @@ local function SetupExtras(button)
                 ADDON.UI:HandleListDropDown(self, self)
             elseif IsModifiedClick("CHATLINK") then
                 -- No MacroFrame exception :>
-                local mountLink = C_MountJournal.GetMountLink(self.spellID);
+                local mountLink = ADDON.Api:GetMountLink(self.spellID);
                 ChatEdit_InsertLink(mountLink);
             elseif self.mountID ~= MountJournal.selectedMountID then
                 MountJournal_SelectByMountID(self.mountID)
@@ -137,7 +137,7 @@ local function SetupExtras(button)
             if clickButton ~= "LeftButton" then
                 ADDON.UI:HandleListDropDown(self:GetParent(), self)
             elseif IsModifiedClick("CHATLINK") then
-                local mountLink = C_MountJournal.GetMountLink(parent.spellID);
+                local mountLink = ADDON.Api:GetMountLink(parent.spellID);
                 ChatEdit_InsertLink(mountLink);
             else
                 ADDON.Api:PickupByID(parent.mountID)
