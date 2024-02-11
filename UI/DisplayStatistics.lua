@@ -292,7 +292,13 @@ ADDON.Events:RegisterCallback("loadUI", function()
 
         local selectedMount = ADDON.Api:GetSelected()
         if selectedMount then
-            updateContainer(selectedMount, container)
+            if 0 == MountJournal.MountDisplay:GetWidth() then
+                C_Timer.After(0, function()
+                    updateContainer(selectedMount, container)
+                end)
+            else
+                updateContainer(selectedMount, container)
+            end
         else
             container:Hide();
         end
