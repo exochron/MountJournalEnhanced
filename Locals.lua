@@ -52,6 +52,7 @@ L["ANIMATION_WALK_BACK"] = "Walk Backwards"
 L["ANIMATION_RUN"] = "Run"
 L["ANIMATION_FLY"] = "Fly"
 L["ANIMATION_FLY_IDLE"] = "Fly Idle"
+L["FILTER_ONLY"] = "only"
 
 -- Families
 L["Airplanes"] = "Airplanes"

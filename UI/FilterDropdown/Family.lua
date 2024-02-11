@@ -81,7 +81,7 @@ function ADDON.UI.FDD:AddFamilyMenu(level)
         if hasSubFamilies[family] then
             UIDropDownMenu_AddButton(CreateInfoWithMenu(L[family] or family, family, settings[family]), level)
         else
-            UIDropDownMenu_AddButton(ADDON.UI.FDD:CreateFilterInfo(L[family] or family, family, settings), level)
+            UIDropDownMenu_AddButton(ADDON.UI.FDD:CreateFilterInfo(L[family] or family, family, settings, true), level)
         end
     end
 end
@@ -113,6 +113,6 @@ function ADDON.UI.FDD:AddFamilySubMenu(level, filterValue)
         return (L[a] or a) < (L[b] or b)
     end)
     for _, family in pairs(sortedFamilies) do
-        UIDropDownMenu_AddButton(ADDON.UI.FDD:CreateFilterInfo(L[family] or family, family, settings), level)
+        UIDropDownMenu_AddButton(ADDON.UI.FDD:CreateFilterInfo(L[family] or family, family, settings, ADDON.settings.filter.family), level)
     end
 end
