@@ -77,9 +77,9 @@ function ADDON:TakeScreenshots()
                     api:Point(DropDownList1Button14)
                     api:Click(DropDownList2Button2) -- deselect all
                     api:Click(DropDownList2Button15) -- Drakes
-                    api:Point(DropDownList2Button6) -- Birds
-                    api:Click(DropDownList3Button3) -- Crows
-                    api:PointAndClick(DropDownList3Button8, 20) -- Owl
+                    api:Point(DropDownList2Button7) -- Bovids
+                    api:Click(DropDownList3Button3) -- Rams
+                    api:PointAndClick(DropDownList3Button7, 20) -- Yaks
                 end,
                 function(api)
                     api:BackScreen()
