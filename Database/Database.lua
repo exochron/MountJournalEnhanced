@@ -1515,6 +1515,7 @@ ADDON.DB.Source = {
         sourceType = { 10 },
 
         [400976] = true, -- Gleaming Moonbeast
+        [431360] = true, -- Twilight Sky Prowler
     },
 
     ["Promotion"] = {
