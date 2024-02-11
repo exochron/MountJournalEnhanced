@@ -57,8 +57,10 @@ local function AddOnlyButton(info, settings)
         end)
         onlyButton:HookScript("OnLeave", function(self)
             if not self:GetParent():IsMouseOver() then
-                self:Hide()
                 self:GetParent().Highlight:Hide()
+                if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE  then
+                    self:Hide()
+                end
             end
         end)
 
@@ -72,12 +74,15 @@ local function AddOnlyButton(info, settings)
         info.func(button,button.arg1,button.arg2, true)
     end)
 
-    info.funcOnEnter = function()
-        onlyButton:Show()
-    end
-    info.funcOnLeave = function()
-        if not onlyButton:IsMouseOver() then
-            onlyButton:Hide()
+    -- classic doesn't has funcOnEnter and funcOnLeave yet. so we simply always show
+    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE  then
+        info.funcOnEnter = function()
+            onlyButton:Show()
+        end
+        info.funcOnLeave = function()
+            if not onlyButton:IsMouseOver() then
+                onlyButton:Hide()
+            end
         end
     end
     info.customFrame = {
@@ -85,6 +90,9 @@ local function AddOnlyButton(info, settings)
         button = nil,
         Show = function(self)
             self.button:Show()
+            if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE  then
+                self.only:Show()
+            end
         end,
         Hide = function(self)
             self.button:Hide()
