@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 ADDON.Api = {}
 
@@ -45,6 +45,19 @@ function ADDON.Api:GetMountInfoByID(mountId)
     isUsable = isUsable and IsUsableSpell(spellId)
 
     return creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, isForDragonriding, a, b, c, d, e, f, g, h
+end
+
+function ADDON.Api:GetMountLink(spellId)
+    local link = C_MountJournal.GetMountLink(spellId)
+    if strlen(link) > 1000 then
+        -- broken link
+        local mountId = C_MountJournal.GetMountFromSpell(spellId)
+        local name = C_MountJournal.GetMountInfoByID(mountId)
+        local prefix = link:match("(|cff71d5ff|Hmount:%d+:%d+:)")
+        return prefix..'0|h['..name..']|h|r'
+    end
+
+    return link
 end
 function ADDON.Api:PickupByID(mountId, ...)
     local index = MountIdToOriginalIndex(mountId)
