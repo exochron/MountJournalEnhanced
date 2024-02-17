@@ -48,13 +48,14 @@ function ADDON.Api:GetMountInfoByID(mountId)
 end
 
 function ADDON.Api:GetMountLink(spellId)
+    if WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC then
+        -- wotlk doesn't supports mount links yet. so use spell link instead. (preview might not work though)
+        return GetSpellLink(spellId)
+    end
     local link = C_MountJournal.GetMountLink(spellId)
-    if strlen(link) > 1000 then
+    if strlen(link) > 400 then
         -- broken link
-        local mountId = C_MountJournal.GetMountFromSpell(spellId)
-        local name = C_MountJournal.GetMountInfoByID(mountId)
-        local prefix = link:match("(|cff71d5ff|Hmount:%d+:%d+:)")
-        return prefix..'0|h['..name..']|h|r'
+        return GetSpellLink(spellId)
     end
 
     return link
