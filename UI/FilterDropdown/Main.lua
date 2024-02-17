@@ -199,10 +199,12 @@ function ADDON.UI.FDD:SetAllSubFilters(settings, switch)
     ADDON.UI.FDD:UpdateResetVisibility()
 end
 
+local hookedWidthButtons = {}
 local function HookResizeButtonWidth(button, calcWidth)
+    local name = button:GetName()
     button.arg2 = {"MJE_RESIZE", calcWidth}
-    if not button.MJE_HookedWidth then
-        button.MJE_HookedWidth = true
+    if not hookedWidthButtons[name] then
+        hookedWidthButtons[name] = true
         hooksecurefunc(button, "SetWidth", function(self, width)
             if "table" == type(self.arg2) and self.arg2[1] == "MJE_RESIZE" then
                 self:SetSize(self.arg2[2](width), self:GetHeight())
