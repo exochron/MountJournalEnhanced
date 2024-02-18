@@ -51,13 +51,18 @@ local function AddOnlyButton(info, settings)
 
         onlyButton:SetSize(onlyButton:GetTextWidth(), UIDROPDOWNMENU_BUTTON_HEIGHT)
 
+        onlyButton.CallParent = function(self, script, ...)
+            local parent = self:GetParent()
+            parent:GetScript(script)(parent, ...)
+        end
+
         onlyButton:HookScript("OnEnter", function(self)
             self:Show()
-            self:GetParent().Highlight:Show()
+            self:CallParent("OnEnter")
         end)
         onlyButton:HookScript("OnLeave", function(self)
             if not self:GetParent():IsMouseOver() then
-                self:GetParent().Highlight:Hide()
+                self:CallParent("OnLeave")
                 if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE  then
                     self:Hide()
                 end
@@ -68,10 +73,9 @@ local function AddOnlyButton(info, settings)
     end
 
     -- overwrite every time
-    onlyButton:SetScript("OnClick", function(self)
+    onlyButton:SetScript("OnClick", function(self, ...)
         setAllSettings(settings, false)
-        local button = self:GetParent()
-        info.func(button,button.arg1,button.arg2, true)
+        self:CallParent("OnClick", ...)
     end)
 
     -- classic doesn't has funcOnEnter and funcOnLeave yet. so we simply always show
