@@ -3,9 +3,9 @@ local _, ADDON = ...
 ADDON.DB = {}
 
 ADDON.DB.Recent = {
-    ["minID"] = 1956,
+    ["minID"] = 2055,
     ["blacklist"] = { },
-    ["whitelist"] = { 1168, 1638, 1941 }, -- Fiery Hearthsteed, Explorer's Stonehide Packbeast, Heartseeker Mana Ray
+    ["whitelist"] = { 1733, 1822, 994, 1259, 1825 },
 }
 
 ADDON.DB.Source = {
@@ -641,6 +641,10 @@ ADDON.DB.Source = {
         [408655] = true, -- Morsel Sniffer - Niffel Renown 18
         [423873] = true, -- Suntouched Dreamstag - Emerald Dream Renown vendor
         [423891] = true, -- Lunar Dreamstag - Emerald Dream Renown vendor
+        [437162] = true, -- Polly Roger - Keg Leg's Crew
+        [446902] = true, -- Polly Roger (classic) - Keg Leg's Crew
+        [254812] = true, -- Royal Seafeather - Keg Leg's Crew
+        [300154] = true, -- Silver Tidestallion - Keg Leg's Crew
 
         ------------------------------
         -- Alliance ------------------
@@ -989,16 +993,21 @@ ADDON.DB.Source = {
         [376912] = { 15833, 15834 }, -- Otterworldly Ottuk Carrier - Thanks for the Carry!
         [387231] = 16649, -- Hailstorm Armoredon - Dragonflight Keystone Master: Season One
         [406637] = 17844, -- Inferno Armoredon - Dragonflight Keystone Master: Season Two
+        [408648] = 17785, -- Calescent Shalewing - Que Zara(lek), Zara(lek)
         [408649] = 18251, -- Shadowflame Shalewing - Glory of the Aberrus Raider
+        [408654] = 19079, -- Sandy Shalewing - Master of Troubled Timeways
         [413409] = 15797, -- Highland Drake - An Azure Ally
         [417548] = 15794, -- Renewed Proto-Drake - A New Friend
         [417552] = 15795, -- Windborne Velocidrake - Together in the Skies
         [417554] = 15796, -- Cliffside Wylderdrake - Cliffside Companion
         [417556] = 17779, -- Winding Slitherdrake - A Serpentine Discovery
         [418078] = 18646, -- Pattie - Whodunnit?
-        [408654] = 19079, -- Sandy Shalewing - Master of Troubled Timeways
         [422486] = 19011, -- Verdant Armoredon - Dragonflight Keystone Master: Season Three
         [424474] = 19349, -- Shadow Dusk Dreamsaber - Glory of the Dream Raider
+        [424607] = 19458, -- Taivan - A World Awoken
+        [439138] = 19574, -- Voyaging Wilderling - Awakening the Dragonflight Raids
+        [434462] = 19782, -- Infinite Armoredon - Dragonflight Keystone Master: Season Four
+        [440444] = 20501, -- Zovaal's Soul Eater - Back from the Beyond
 
 
         ------------------------------
@@ -1209,7 +1218,10 @@ ADDON.DB.Source = {
         [370346] = true, -- Eternal Gladiator's Soul Eater - Gladiator: Shadowlands Season 4
         [377071] = true, -- Crimson Gladiator's Drake - Gladiator: Dragonflight Season 1
         [408977] = true, -- Obsidian Gladiator's Slitherdrake - Gladiator: Dragonflight Season 2
+        [424539] = true, -- Draconic Gladiator's Drake - Gladiator: Dragonflight Season 4
         [425416] = true, -- Verdant Gladiator's Slitherdrake - Gladiator: Dragonflight Season 3
+        [434470] = true, -- Vicious Dreamtalon - Dragonflight: Season 4
+        [434477] = true, -- Vicious Dreamtalon - Dragonflight: Season 4
 
         -- Prestige Reward
         [222202] = true, -- Prestigious Bronze Courser
@@ -1509,11 +1521,14 @@ ADDON.DB.Source = {
 
     ["Trading Post"] = {
         sourceDescription = C_Garrison and "\124cFFFFD200" .. select(2, C_Garrison.GetBuildingInfo(111)) .. "\124r" or nil, -- "Trading Post"
+
+        [366962] = true, -- Ash'adar
     },
 
     ["Shop"] = {
         sourceType = { 10 },
 
+        [366962] = true, -- Ash'adar
         [400976] = true, -- Gleaming Moonbeast
         [431360] = true, -- Twilight Sky Prowler
     },
@@ -1592,6 +1607,8 @@ ADDON.DB.FeatsOfStrength = {
     [1599] = 15612, -- Eternal Gladiator's Soul Eater
     [1660] = 16730, -- Crimson Gladiator's Drake
     [1739] = 17764, -- Obsidian Gladiator's Slitherdrake - Gladiator: Dragonflight Season 2
+    [1822] = 19490, -- Draconic Gladiator's Drake - Gladiator: Dragonflight Season 4
+    [1831] = 19091, -- Verdant Gladiator's Slitherdrake - Gladiator: Dragonflight Season 3
 }
 
 ADDON.DB.Expansion = {
