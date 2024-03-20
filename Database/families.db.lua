@@ -128,8 +128,11 @@ ADDON.DB.Family = {
 },
 ["Parrots"] = {
 [993] = true, -- Squawks
+[994] = true, -- Royal Seafeather
 [995] = true, -- Sharkbait
 [1575] = true, -- Quawks
+[2090] = true, -- Polly Roger
+[2147] = true, -- Polly Roger
 },
 ["Peafowl"] = {
 [2035] = true, -- Majestic Azure Peafowl
@@ -307,6 +310,7 @@ ADDON.DB.Family = {
 [1477] = true, -- Undying Darkhound
 [1597] = true, -- Grimhowl
 [1781] = true, -- Sulfur Hound
+[1825] = true, -- Taivan
 },
 ["Hyenas"] = {
 [926] = true, -- Alabaster Hyena
@@ -342,6 +346,8 @@ ADDON.DB.Family = {
 [1834] = true, -- Ochre Dreamtalon
 [1835] = true, -- Snowfluff Dreamtalon
 [1838] = true, -- Talont
+[2056] = true, -- Vicious Dreamtalon
+[2057] = true, -- Vicious Dreamtalon
 },
 ["Dreamsaber"] = {
 [1814] = true, -- Shadow Dusk Dreamsaber
@@ -605,6 +611,7 @@ ADDON.DB.Family = {
 [1795] = true, -- Auspicious Arborwyrm
 [1798] = true, -- Azure Worldchiller
 [1806] = true, -- Auspicious Arborwyrm
+[1822] = true, -- Draconic Gladiator's Drake
 [1831] = true, -- Verdant Gladiator's Slitherdrake
 [1832] = true, -- Nightmarish Emerald Drake
 },
@@ -680,6 +687,7 @@ ADDON.DB.Family = {
 [1572] = true, -- Cosmic Gladiator's Soul Eater
 [1599] = true, -- Eternal Gladiator's Soul Eater
 [1783] = true, -- Scourgebound Vanquisher
+[2114] = true, -- Zovaal's Soul Eater
 },
 ["Wind Drakes"] = {
 [392] = true, -- Drake of the East Wind
@@ -732,6 +740,7 @@ ADDON.DB.Family = {
 ["Sporebat"] = {
 [1730] = true, -- Igneous Shalewing
 [1732] = true, -- Cobalt Shalewing
+[1733] = true, -- Calescent Shalewing
 [1734] = true, -- Shadowflame Shalewing
 [1735] = true, -- Cataloged Shalewing
 [1736] = true, -- Boulder Hauler
@@ -839,6 +848,7 @@ ADDON.DB.Family = {
 [420] = true, -- Subdued Seahorse
 [1208] = true, -- Saltwater Seahorse
 [1258] = true, -- Fabious
+[1259] = true, -- Silver Tidestallion
 [1260] = true, -- Crimson Tidestallion
 [1262] = true, -- Inkscale Deepseeker
 },
@@ -1150,6 +1160,12 @@ ADDON.DB.Family = {
 [1510] = true, -- Dusklight Razorwing
 },
 ["Reptiles"] = {
+["Armoredon"] = {
+[1681] = true, -- Hailstorm Armoredon
+[1725] = true, -- Inferno Armoredon
+[1801] = true, -- Verdant Armoredon
+[2055] = true, -- Infinite Armoredon
+},
 ["Basilisks"] = {
 [878] = true, -- Brawler's Burly Basilisk
 [1026] = true, -- Vicious War Basilisk
@@ -1197,10 +1213,7 @@ ADDON.DB.Family = {
 [1622] = true, -- Stormhide Salamanther
 [1638] = true, -- Explorer's Stonehide Packbeast
 [1639] = true, -- Lizi, Thunderspine Tramper
-[1681] = true, -- Hailstorm Armoredon
-[1725] = true, -- Inferno Armoredon
 [1761] = true, -- Reawakened Phase-Hunter
-[1801] = true, -- Verdant Armoredon
 [1940] = true, -- Salatrancer
 },
 ["Sea Serpents"] = {
@@ -1572,6 +1585,7 @@ ADDON.DB.Family = {
 [1485] = true, -- Autumnal Wilderling
 [1486] = true, -- Winter Wilderling
 [1487] = true, -- Summer Wilderling
+[2091] = true, -- Voyaging Wilderling
 },
 ["Wolves"] = {
 [12] = true, -- Black Wolf
