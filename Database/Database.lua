@@ -5,7 +5,7 @@ ADDON.DB = {}
 ADDON.DB.Recent = {
     ["minID"] = 2055,
     ["blacklist"] = { },
-    ["whitelist"] = { 1733, 1822, 994, 1259, 1825 },
+    ["whitelist"] = { 1474, 1614, 1618, 1621, 1633, 1651, 1669, 1733, 1822, 994, 1259, 1825 },
 }
 
 ADDON.DB.Source = {
@@ -983,14 +983,21 @@ ADDON.DB.Source = {
         [366791] = 15684, -- Jigglesworth, Sr. - Fates of the Shadowlands Raids
 
         -- Dragonflight
+        [351408] = 19481, -- Bestowed Thunderspine Packleader - Centaur of Attention
         [360954] = 15797, -- Highland Drake - An Azure Ally
         [368893] = 17779, -- Winding Slitherdrake - A Serpentine Discovery
         [368896] = 15794, -- Renewed Proto-Drake - A New Friend
         [368899] = 15795, -- Windborne Velocidrake - Together in the Skies
         [368901] = 15796, -- Cliffside Wylderdrake - Cliffside Companion
+        [373967] = 19486, -- Stormtouched Bruffalon - Across the Isles
+        [374071] = 19485, -- Bestowed Sandskimmer - Closing Time
+        [374097] = 16492, -- Coralscale Salamanther - Into the Storm
         [374155] = 16295, -- Shellack - Glory of the Dragonflight Hero
+        [374172] = 19482, -- Bestowed Trawling Mammoth - Army of the Fed
         [374275] = 16355, -- Raging Magmammoth - Glory of the Vault Raider
+        [376898] = 19483, -- Bestowed Ottuk Vanguard - Fight Club
         [376912] = { 15833, 15834 }, -- Otterworldly Ottuk Carrier - Thanks for the Carry!
+        [385260] = 19479, -- Bestowed Ohuna Spotter - Wake Me Up
         [387231] = 16649, -- Hailstorm Armoredon - Dragonflight Keystone Master: Season One
         [406637] = 17844, -- Inferno Armoredon - Dragonflight Keystone Master: Season Two
         [408648] = 17785, -- Calescent Shalewing - Que Zara(lek), Zara(lek)
@@ -1005,8 +1012,8 @@ ADDON.DB.Source = {
         [422486] = 19011, -- Verdant Armoredon - Dragonflight Keystone Master: Season Three
         [424474] = 19349, -- Shadow Dusk Dreamsaber - Glory of the Dream Raider
         [424607] = 19458, -- Taivan - A World Awoken
-        [439138] = 19574, -- Voyaging Wilderling - Awakening the Dragonflight Raids
         [434462] = 19782, -- Infinite Armoredon - Dragonflight Keystone Master: Season Four
+        [439138] = 19574, -- Voyaging Wilderling - Awakening the Dragonflight Raids
         [440444] = 20501, -- Zovaal's Soul Eater - Back from the Beyond
 
 
@@ -1521,8 +1528,6 @@ ADDON.DB.Source = {
 
     ["Trading Post"] = {
         sourceDescription = C_Garrison and "\124cFFFFD200" .. select(2, C_Garrison.GetBuildingInfo(111)) .. "\124r" or nil, -- "Trading Post"
-
-        [366962] = true, -- Ash'adar
     },
 
     ["Shop"] = {
