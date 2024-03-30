@@ -82,6 +82,7 @@ ADDON.DB.Family = {
 },
 ["Eagle"] = {
 [1545] = true, -- Divine Kiss of Ohn'ahra
+[1669] = true, -- Überlassener Ohunaaufklärer
 [1671] = true, -- Duskwing Ohuna
 [1672] = true, -- Zenet Hatchling
 },
@@ -319,6 +320,7 @@ ADDON.DB.Family = {
 },
 ["Ottuk"] = {
 [1546] = true, -- Iskaara Trader's Ottuk
+[1651] = true, -- Überlassene Ottukvorhut
 [1653] = true, -- Brown War Ottuk
 [1654] = true, -- Otterworldly Ottuk Carrier
 [1655] = true, -- Yellow War Ottuk
@@ -1044,6 +1046,7 @@ ADDON.DB.Family = {
 [1615] = true, -- Tamed Skitterfly
 [1616] = true, -- Azure Skitterfly
 [1617] = true, -- Verdant Skitterfly
+[1618] = true, -- Überlassener Sandhuscher
 },
 ["Gorm"] = {
 [1305] = true, -- Darkwarren Hardshell
@@ -1210,9 +1213,8 @@ ADDON.DB.Family = {
 ["Others"] = {
 [1444] = true, -- Viridian Phase-Hunter
 [1619] = true, -- Ancient Salamanther
+[1621] = true, -- Korallenschuppensalamanther
 [1622] = true, -- Stormhide Salamanther
-[1638] = true, -- Explorer's Stonehide Packbeast
-[1639] = true, -- Lizi, Thunderspine Tramper
 [1761] = true, -- Reawakened Phase-Hunter
 [1940] = true, -- Salatrancer
 },
@@ -1231,6 +1233,11 @@ ADDON.DB.Family = {
 [1237] = true, -- Royal Snapdragon
 [1255] = true, -- Deepcoral Snapdragon
 [1256] = true, -- Snapdragon Kelpstalker
+},
+["Thunder Lizard"] = {
+[1474] = true, -- Überlassenes Leittier der Donnerrückgrate
+[1638] = true, -- Explorer's Stonehide Packbeast
+[1639] = true, -- Lizi, Thunderspine Tramper
 },
 ["Turtles"] = {
 [125] = true, -- Riding Turtle
@@ -1356,6 +1363,7 @@ ADDON.DB.Family = {
 [289] = true, -- Grand Ice Mammoth
 [1603] = true, -- Subterranean Magmammoth
 [1612] = true, -- Loyal Magmammoth
+[1633] = true, -- Überlassenes Fischermammut
 [1634] = true, -- Mossy Mammoth
 [1635] = true, -- Plainswalker Bearer
 [1644] = true, -- Raging Magmammoth
@@ -1371,6 +1379,7 @@ ADDON.DB.Family = {
 [1007] = true, -- Highmountain Thunderhoof
 [1209] = true, -- Stonehide Elderhorn
 [1467] = true, -- Noble Bruffalon
+[1614] = true, -- Sturmberührter Brüffelch
 },
 ["Ox"] = {
 [1291] = true, -- Lucky Yun
