@@ -74,12 +74,12 @@ end
 
 local function GetAnimationsOfCurrentMount()
     local animations = {
-        ["stand"] = 0,
-        ["walk"] = 4,
-        ["walk_back"] = 13,
-        ["run"] = 5,
-        ["fly_idle"] = 548,
-        ["fly"] = 135,
+        ["stand"] = 1,
+        ["walk"] = 868,
+        ["walk_back"] = 15155,
+        ["run"] = 603,
+        ["fly_idle"] = 	2015,
+        ["fly"] = 3146,
     }
 
     local mountId = ADDON.Api:GetSelected()
@@ -87,7 +87,7 @@ local function GetAnimationsOfCurrentMount()
     local _, _, _, _, mountType = C_MountJournal.GetMountInfoExtraByID(mountId)
 
     if isForDragonriding then
-        animations["fly"] = 1532
+        animations["fly"] = 25260
     end
 
     if not tContains(ADDON.DB.Type.flying.typeIDs, mountType) then
@@ -103,7 +103,7 @@ local function PlayAnimationByType(type)
     local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
     if actor then
         actor:StopAnimationKit() -- changing animation while an Animationkit runs, cancels new animation afterwards.
-        actor:SetAnimation(animations[type] or 0)
+        actor:PlayAnimationKit(animations[type], true)
     end
 end
 
