@@ -6,7 +6,7 @@ This addon extends the ingame mount journal with extra features.
 - [TikTok: Great Addon for Mount collectors](https://www.tiktok.com/@touchpadwarrior/video/7216081879886269739) (03/2023 by [Touchpadwarrior](https://www.twitch.tv/touchpadwarrior))
 
 ## ⭐ Features
-+ Support for WotLK Classic
++ Support for Cataclysm Classic
     + also adds again Summon Random Mount Button
 + Filter mounts by an extended source, colors, faction, type, family or expansion
 + Filter unusable or unwanted mounts
@@ -19,7 +19,7 @@ This addon extends the ingame mount journal with extra features.
 + Display count of character specific mounts
 + Display mount related achievement points
 + Freely rotate display camera around mount
-+ Trigger /mountspecial of your mount or within the display (Retail only)
++ Trigger /mountspecial of your mount or within the display
 + Browse through mounts with Up/Down arrow keys
 + Right Click on scroll buttons to quickly go to the top or bottom
 + Track, display and sort by your usage statistics

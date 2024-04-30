@@ -103,7 +103,7 @@ local function PlayAnimationByType(type)
     local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
     if actor then
         actor:StopAnimationKit() -- changing animation while an Animationkit runs, cancels new animation afterwards.
-        actor:PlayAnimationKit(animations[type], true)
+        actor:PlayAnimationKit(animations[type] or 1, true)
     end
 end
 
@@ -174,6 +174,7 @@ local function BuildButton(tooltip, tooltipText)
             function()
                 return CreateFrame("Button", nil, MountJournal.MountDisplay.ModelScene.ControlFrame, "ModelSceneControlButtonTemplate")
             end,
+            -- TODO: remove later after Cata launch
             function()
                 local frame =  CreateFrame("Button", nil, MountJournal.MountDisplay.ModelScene.ControlFrame, "MJE_ModelSceneControlButtonTemplate")
                 frame:HookScript("OnMouseDown", function() frame.Icon:AdjustPointsOffset(1, -1) end)
@@ -275,10 +276,16 @@ local function BuildCameraPanel()
 
     helpTooltip = CreateFrame("GameTooltip", "MJEDisplayHelpToolTip", container, "SharedNoHeaderTooltipTemplate")
 
-    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then -- TODO later for wrath
+    if WOW_PROJECT_ID ~= WOW_PROJECT_WRATH_CLASSIC then
         container.specialButton = BuildButton("/mountspecial")
         container.specialButton.Icon:SetTexture("Interface/GossipFrame/CampaignGossipIcons") -- from atlas: campaignavailablequesticon
-        container.specialButton.Icon:SetTexCoord(0.1875, 0.421875, 0.37, 0.85)
+        if nil == container.specialButton.Icon:GetTexture() then
+            -- fallback for classic client
+            container.specialButton.Icon:SetTexture("Interface/QuestTypeIcons")
+            container.specialButton.Icon:SetTexCoord(0, 0.14285714285714285714285714285714, 0.275, 0.575)
+        else
+            container.specialButton.Icon:SetTexCoord(0.1875, 0.421875, 0.37, 0.85)
+        end
         container.specialButton:HookScript("OnClick", function()
             local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
             if actor then
@@ -289,23 +296,26 @@ local function BuildCameraPanel()
         end)
     end
 
-    container.animationButton = BuildButton(ANIMATION)
-    container.animationButton.Icon:SetTexture(516779) -- Interface/HELPFRAME/ReportLagIcon-Movement.blp
-    container.animationButton.Icon:SetDesaturated(true)
-    container.animationButton.Icon:SetVertexColor(1, 0.8, 0)
-    container.animationButton.Icon:SetSize(25,25)
-    container.animationButton:HookScript("OnClick", function(sender)
-        if animationMenu == nil then
-            animationMenu = CreateFrame("Frame", nil, container.animationButton, "UIDropDownMenuTemplate")
-            UIDropDownMenu_Initialize(animationMenu, InitializeAnimationDropDown, "MENU")
-            animationMenu.point = "BOTTOMLEFT"
-            animationMenu.relativePoint = "TOPLEFT"
-        end
+    -- TODO animation ids don't fit in 4.4
+    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+        container.animationButton = BuildButton(ANIMATION)
+        container.animationButton.Icon:SetTexture(516779) -- Interface/HELPFRAME/ReportLagIcon-Movement.blp
+        container.animationButton.Icon:SetDesaturated(true)
+        container.animationButton.Icon:SetVertexColor(1, 0.8, 0)
+        container.animationButton.Icon:SetSize(25,25)
+        container.animationButton:HookScript("OnClick", function(sender)
+            if animationMenu == nil then
+                animationMenu = CreateFrame("Frame", nil, container.animationButton, "UIDropDownMenuTemplate")
+                UIDropDownMenu_Initialize(animationMenu, InitializeAnimationDropDown, "MENU")
+                animationMenu.point = "BOTTOMLEFT"
+                animationMenu.relativePoint = "TOPLEFT"
+            end
 
-        ToggleDropDownMenu(1, nil, animationMenu, sender, 0, -7)
-    end)
+            ToggleDropDownMenu(1, nil, animationMenu, sender, 0, -7)
+        end)
+    end
 
-    if MOUNT_JOURNAL_PLAYER then
+    if MOUNT_JOURNAL_PLAYER and nil ~= C_CVar.GetCVar("mountJournalShowPlayer") then
         container.togglePlayerButton = BuildCheckButton(MOUNT_JOURNAL_PLAYER, nil, function(self)
             PlayerPreviewToggle.OnShow(self)
         end)
