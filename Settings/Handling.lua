@@ -79,7 +79,7 @@ ADDON:RegisterBehaviourSetting('personalFilter', false, L.SETTING_PERSONAL_FILTE
     end
 end)
 
-if WOW_PROJECT_ID ~= WOW_PROJECT_WRATH_CLASSIC then
+if "" ~= select(3, C_MountJournal.GetMountInfoExtraByID(9)) then
     ADDON:RegisterBehaviourSetting('searchInDescription', true, L.SETTING_SEARCH_MORE)
 end
 ADDON:RegisterBehaviourSetting('searchInNotes', true, L.SETTING_SEARCH_NOTES)

@@ -32,6 +32,7 @@ ADDON.DB.Family = {
 [882] = true, -- Vicious War Scorpion
 [1742] = true, -- Felcrystal Scorpion
 [1782] = true, -- Perfected Juggernaut
+[1898] = true, -- Kor'kron Annihilator
 },
 ["Spiders"] = {
 [663] = true, -- Bloodfang Widow
@@ -145,6 +146,10 @@ ADDON.DB.Family = {
 [416] = true, -- Felfire Hawk
 [417] = true, -- Corrupted Fire Hawk
 [1456] = true, -- Sapphire Skyblazer
+[1890] = true, -- Dark Phoenix
+[1904] = true, -- Pureblood Fire Hawk
+[1905] = true, -- Green Fire Hawk
+[1906] = true, -- Corrupted Fire Hawk
 },
 ["Raptora"] = {
 [1430] = true, -- Desertwing Hunter
@@ -163,6 +168,10 @@ ADDON.DB.Family = {
 [430] = true, -- Swift Springstrider
 [431] = true, -- Swift Lovebird
 [1478] = true, -- Skyskin Hornstrider
+[1915] = true, -- Swift Shorestrider
+[1918] = true, -- Swift Forest Strider
+[1919] = true, -- Swift Springstrider
+[1920] = true, -- Swift Lovebird
 [2038] = true, -- Clayscale Hornstrider
 },
 ["Talonbirds"] = {
@@ -170,6 +179,7 @@ ADDON.DB.Family = {
 [425] = true, -- Flametalon of Alysrazor
 [682] = true, -- Voidtalon of the Dark Star
 [1191] = true, -- Frenzied Feltalon
+[1914] = true, -- Flametalon of Alysrazor
 },
 ["Vultures"] = {
 [1042] = true, -- Siltwing Albatross
@@ -278,6 +288,8 @@ ADDON.DB.Family = {
 [1199] = true, -- Blackpaw
 [1424] = true, -- Snowstorm
 [1765] = true, -- Big Battle Bear
+[1908] = true, -- Amani Battle Bear
+[1923] = true, -- Darkmoon Dancing Bear
 },
 ["Foxes"] = {
 [656] = true, -- Llothien Prowler
@@ -361,6 +373,7 @@ ADDON.DB.Family = {
 [403] = true, -- Golden King
 [421] = true, -- Winged Guardian
 [876] = true, -- Vicious War Lion
+[1892] = true, -- Golden King
 },
 ["Manasabers"] = {
 [741] = true, -- Mystic Runesaber
@@ -410,6 +423,7 @@ ADDON.DB.Family = {
 [1216] = true, -- Priestess' Moonsaber
 [1688] = true, -- Vicious Sabertooth
 [1689] = true, -- Vicious Sabertooth
+[1900] = true, -- Swift Zulian Panther
 },
 ["Stone Cats"] = {
 [421] = true, -- Winged Guardian
@@ -419,6 +433,8 @@ ADDON.DB.Family = {
 [457] = true, -- Jade Panther
 [458] = true, -- Ruby Panther
 [459] = true, -- Sunstone Panther
+[1910] = true, -- Winged Guardian
+[1937] = true, -- Obsidian Nightwing
 },
 ["Tigers"] = {
 [32] = true, -- Tiger
@@ -432,6 +448,7 @@ ADDON.DB.Family = {
 [864] = true, -- Ban-Lu, Grandmaster's Companion
 [1194] = true, -- Vicious White Warsaber
 [1195] = true, -- Vicious Black Warsaber
+[1843] = true, -- Tiger
 },
 },
 ["Crabs"] = {
@@ -545,6 +562,9 @@ ADDON.DB.Family = {
 [1040] = true, -- Tomb Stalker
 [1180] = true, -- Swift Albino Raptor
 [1183] = true, -- Skullripper
+[1875] = true, -- Fossilized Raptor
+[1899] = true, -- Armored Razzashi Raptor
+[1907] = true, -- Savage Raptor
 },
 },
 ["Dragonhawks"] = {
@@ -557,6 +577,7 @@ ADDON.DB.Family = {
 [549] = true, -- Armored Blue Dragonhawk
 [778] = true, -- Eclipse Dragonhawk
 [1471] = true, -- Vengeance
+[1901] = true, -- Amani Dragonhawk
 },
 ["Drakes"] = {
 ["Cloud Serpents"] = {
@@ -616,12 +637,20 @@ ADDON.DB.Family = {
 [1822] = true, -- Draconic Gladiator's Drake
 [1831] = true, -- Verdant Gladiator's Slitherdrake
 [1832] = true, -- Nightmarish Emerald Drake
+[1897] = true, -- Mottled Drake
+[1913] = true, -- Vicious Gladiator's Twilight Drake
+[1917] = true, -- Ruthless Gladiator's Twilight Drake
+[1934] = true, -- Experiment 12-B
+[1936] = true, -- Feldrake
 },
 ["Grand Drakes"] = {
 [442] = true, -- Blazing Drake
 [443] = true, -- Twilight Harbinger
 [444] = true, -- Life-Binder's Handmaiden
 [1727] = true, -- Tarecgosa's Visage
+[1931] = true, -- Blazing Drake
+[1932] = true, -- Twilight Harbinger
+[1933] = true, -- Life-Binder's Handmaiden
 },
 ["Nether Drakes"] = {
 [169] = true, -- Swift Nether Drake
@@ -648,6 +677,7 @@ ADDON.DB.Family = {
 [1591] = true, -- Cliffside Wylderdrake
 [1739] = true, -- Obsidian Gladiator's Slitherdrake
 [1830] = true, -- Flourishing Whimsydrake
+[1935] = true, -- Heart of the Aspects
 [1954] = true, -- Flourishing Whimsydrake
 },
 ["Proto-Drakes"] = {
@@ -674,6 +704,10 @@ ADDON.DB.Family = {
 [393] = true, -- Phosphorescent Stone Drake
 [397] = true, -- Vitreous Stone Drake
 [407] = true, -- Sandstone Drake
+[1880] = true, -- Volcanic Stone Drake
+[1882] = true, -- Phosphorescent Stone Drake
+[1886] = true, -- Vitreous Stone Drake
+[1896] = true, -- Sandstone Drake
 },
 ["Undead Drakes"] = {
 [313] = true, -- Deadly Gladiator's Frost Wyrm
@@ -707,6 +741,10 @@ ADDON.DB.Family = {
 [1212] = true, -- Island Thunderscale
 [1314] = true, -- Drake of the Four Winds
 [1779] = true, -- Felstorm Dragon
+[1881] = true, -- Drake of the East Wind
+[1883] = true, -- Drake of the West Wind
+[1884] = true, -- Drake of the North Wind
+[1885] = true, -- Drake of the South Wind
 },
 },
 ["Elementals"] = {
@@ -735,6 +773,9 @@ ADDON.DB.Family = {
 [416] = true, -- Felfire Hawk
 [417] = true, -- Corrupted Fire Hawk
 [1456] = true, -- Sapphire Skyblazer
+[1890] = true, -- Dark Phoenix
+[1904] = true, -- Pureblood Fire Hawk
+[1906] = true, -- Corrupted Fire Hawk
 },
 ["Sabers"] = {
 [896] = true, -- Primal Flamesaber
@@ -755,6 +796,10 @@ ADDON.DB.Family = {
 [393] = true, -- Phosphorescent Stone Drake
 [397] = true, -- Vitreous Stone Drake
 [407] = true, -- Sandstone Drake
+[1880] = true, -- Volcanic Stone Drake
+[1882] = true, -- Phosphorescent Stone Drake
+[1886] = true, -- Vitreous Stone Drake
+[1896] = true, -- Sandstone Drake
 },
 ["Wind Drakes"] = {
 [392] = true, -- Drake of the East Wind
@@ -772,6 +817,10 @@ ADDON.DB.Family = {
 [1212] = true, -- Island Thunderscale
 [1314] = true, -- Drake of the Four Winds
 [1779] = true, -- Felstorm Dragon
+[1881] = true, -- Drake of the East Wind
+[1883] = true, -- Drake of the West Wind
+[1884] = true, -- Drake of the North Wind
+[1885] = true, -- Drake of the South Wind
 },
 },
 ["Feathermanes"] = {
@@ -797,6 +846,7 @@ ADDON.DB.Family = {
 [1777] = true, -- Ravenous Black Gryphon
 [1792] = true, -- Algarian Stormrider
 [1823] = true, -- Swift Spectral Gryphon
+[1929] = true, -- Spectral Gryphon
 },
 ["Hippogryphs"] = {
 [203] = true, -- Cenarion War Hippogryph
@@ -812,6 +862,8 @@ ADDON.DB.Family = {
 [1054] = true, -- Teldrassil Hippogryph
 [1521] = true, -- Val'sharah Hippogryph
 [1766] = true, -- Blazing Hippogryph
+[1902] = true, -- Flameward Hippogryph
+[1922] = true, -- Corrupted Hippogryph
 },
 ["Larion"] = {
 [1404] = true, -- Silverwind Larion
@@ -838,6 +890,7 @@ ADDON.DB.Family = {
 [1267] = true, -- Alabaster Thunderwing
 [1553] = true, -- Liberated Slyvern
 [1674] = true, -- Temperamental Skyclaw
+[1930] = true, -- Spectral Wind Rider
 },
 },
 ["Fish"] = {
@@ -853,6 +906,8 @@ ADDON.DB.Family = {
 [1259] = true, -- Silver Tidestallion
 [1260] = true, -- Crimson Tidestallion
 [1262] = true, -- Inkscale Deepseeker
+[1873] = true, -- Abyssal Seahorse
+[1909] = true, -- Subdued Seahorse
 },
 ["Stingrays"] = {
 [855] = true, -- Darkwater Skate
@@ -886,6 +941,7 @@ ADDON.DB.Family = {
 [894] = true, -- Highlord's Valorous Charger
 [1198] = true, -- Kul Tiran Charger
 [1245] = true, -- Bloodflank Charger
+[1911] = true, -- Vicious War Steed
 },
 ["Demonic Steeds"] = {
 [17] = true, -- Felsteed
@@ -906,6 +962,7 @@ ADDON.DB.Family = {
 [532] = true, -- Ghastly Charger
 [547] = true, -- Hearthsteed
 [1168] = true, -- Fiery Hearthsteed
+[1928] = true, -- Tyrael's Charger
 },
 ["Horned Steeds"] = {
 [222] = true, -- Swift Zhevra
@@ -970,6 +1027,8 @@ ADDON.DB.Family = {
 [294] = true, -- Stormwind Steed
 [321] = true, -- Swift Gray Steed
 [343] = true, -- Swift Alliance Steed
+[1924] = true, -- Mountain Horse
+[1925] = true, -- Swift Mountain Horse
 },
 ["Undead Steeds"] = {
 [65] = true, -- Red Skeletal Horse
@@ -995,6 +1054,7 @@ ADDON.DB.Family = {
 [1501] = true, -- Soulbound Gloomcharger
 [1502] = true, -- Fallen Charger
 [1774] = true, -- Valiance
+[1894] = true, -- Spectral Steed
 },
 },
 ["Humanoids"] = {
@@ -1085,6 +1145,7 @@ ADDON.DB.Family = {
 [935] = true, -- Blue Qiraji War Tank
 [936] = true, -- Red Qiraji War Tank
 [937] = true, -- Black Qiraji War Tank
+[1893] = true, -- Ultramarine Qiraji Battle Tank
 },
 ["Wasp"] = {
 [1433] = true, -- Vespoid Flutterer
@@ -1197,6 +1258,8 @@ ADDON.DB.Family = {
 [823] = true, -- Great Sunwalker Kodo
 [1201] = true, -- Frightened Kodo
 [1583] = true, -- Armored Siege Kodo
+[1869] = true, -- Summon Sunwalker Kodo
+[1870] = true, -- Summon Great Sunwalker Kodo
 },
 ["Mushan"] = {
 [515] = true, -- Son of Galleon
@@ -1316,6 +1379,10 @@ ADDON.DB.Family = {
 [400] = true, -- Grey Riding Camel
 [432] = true, -- White Riding Camel
 [1288] = true, -- Explorer's Dunetrekker
+[1887] = true, -- Brown Riding Camel
+[1888] = true, -- Tan Riding Camel
+[1889] = true, -- Grey Riding Camel
+[1921] = true, -- White Riding Camel
 },
 ["Cervid"] = {
 [1431] = true, -- Pale Regal Cervid
@@ -1347,6 +1414,8 @@ ADDON.DB.Family = {
 [985] = true, -- Avenging Felcrusher
 [1006] = true, -- Lightforged Felcrusher
 [1242] = true, -- Beastlord's Irontusk
+[1871] = true, -- Summon Exarch's Elekk
+[1872] = true, -- Summon Great Exarch's Elekk
 },
 ["Mammoths"] = {
 [254] = true, -- Black War Mammoth
@@ -1531,6 +1600,8 @@ ADDON.DB.Family = {
 [842] = true, -- Vicious War Trike
 [1247] = true, -- Mechacycle Model W
 [1248] = true, -- Junkheap Drifter
+[1877] = true, -- Goblin Trike
+[1878] = true, -- Goblin Turbo-Trike
 },
 ["Rockets"] = {
 [211] = true, -- X-51 Nether-Rocket
@@ -1580,6 +1651,7 @@ ADDON.DB.Family = {
 },
 ["Undead Wolves"] = {
 [406] = true, -- Spectral Wolf
+[1895] = true, -- Spectral Wolf
 },
 ["War Wolves"] = {
 [423] = true, -- Vicious War Wolf
@@ -1588,6 +1660,7 @@ ADDON.DB.Family = {
 [1243] = true, -- Beastlord's Warwolf
 [1246] = true, -- Ironclad Frostclaw
 [1285] = true, -- Frostwolf Snarler
+[1912] = true, -- Vicious War Wolf
 },
 ["Wilderlings"] = {
 [1484] = true, -- Ardenweald Wilderling

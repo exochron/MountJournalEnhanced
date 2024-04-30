@@ -1733,10 +1733,10 @@ ADDON.DB.Type = {
     -- https://warcraft.wiki.gg/wiki/API_C_MountJournal.GetMountInfoExtraByID
     -- https://wow.tools/dbc/?dbc=mounttype
     ground = {
-        typeIDs = { 230, 231, 241, 269, 284, 408, 412 },
+        typeIDs = { 225, 230, 231, 241, 269, 284, 408, 412 },
     },
     flying = {
-        typeIDs = { 247, 248, 398, 402, 407, 424, 426, 428, 429 },
+        typeIDs = { 229, 238, 247, 248, 398, 402, 407, 424, 426, 428, 429 },
     },
     underwater = {
         typeIDs = { 231, 232, 254, 407, 412},
