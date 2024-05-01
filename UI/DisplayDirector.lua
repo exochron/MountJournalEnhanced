@@ -73,21 +73,27 @@ local function HideOriginalElements()
 end
 
 local function GetAnimationsOfCurrentMount()
+    -- Look into AnimKitSegment for suiting AnimIDs. The ParentAnimKitID should only has 1 segment.
     local animations = {
         ["stand"] = 1,
-        ["walk"] = 868,
-        ["walk_back"] = 15155,
-        ["run"] = 603,
-        ["fly_idle"] = 	2015,
-        ["fly"] = 3146,
+        ["walk"] = 1132, -- AnimID=4
+        ["walk_back"] = 4749, -- AnimID=13
+        ["run"] = 603, -- AnimID=5
+        ["fly_idle"] = 2015, -- AnimID=548
+        ["fly"] = 3146, --AnimID=557
     }
+    if WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC then
+        animations["walk_back"] = nil
+        animations["fly_idle"] = nil
+        animations["fly"] = 1273 -- 556
+    end
 
     local mountId = ADDON.Api:GetSelected()
     local _, _, _, _, _, _, _, _, _, _, _, _, isForDragonriding = C_MountJournal.GetMountInfoByID(mountId)
     local _, _, _, _, mountType = C_MountJournal.GetMountInfoExtraByID(mountId)
 
     if isForDragonriding then
-        animations["fly"] = 25260
+        animations["fly"] = 25218 --AnimID=1524
     end
 
     if not tContains(ADDON.DB.Type.flying.typeIDs, mountType) then
@@ -275,7 +281,7 @@ local function BuildCameraPanel()
     end)
 
     -- TODO animation ids don't fit in 4.4
-    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+    --if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
         container.animationButton = BuildButton(ANIMATION)
         container.animationButton.Icon:SetTexture(516779) -- Interface/HELPFRAME/ReportLagIcon-Movement.blp
         container.animationButton.Icon:SetDesaturated(true)
@@ -291,7 +297,7 @@ local function BuildCameraPanel()
 
             ToggleDropDownMenu(1, nil, animationMenu, sender, 0, -7)
         end)
-    end
+    --end
 
     if MOUNT_JOURNAL_PLAYER and nil ~= C_CVar.GetCVar("mountJournalShowPlayer") then
         container.togglePlayerButton = BuildCheckButton(MOUNT_JOURNAL_PLAYER, nil, function(self)
