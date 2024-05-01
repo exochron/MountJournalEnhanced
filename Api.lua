@@ -48,8 +48,8 @@ function ADDON.Api:GetMountInfoByID(mountId)
 end
 
 function ADDON.Api:GetMountLink(spellId)
-    if WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC or WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC then
-        -- wotlk doesn't supports mount links yet. so use spell link instead. (preview might not work though)
+    if  WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC then
+        -- classic doesn't supports mount links yet. so use spell link instead. (preview might not work though)
         return GetSpellLink(spellId)
     end
     local link = C_MountJournal.GetMountLink(spellId)

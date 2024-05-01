@@ -3,7 +3,7 @@ local _, ADDON = ...
 local RETAIL_MOUNT_ACHIEVEMENT_CATEGORY = 15248
 
 local function CountPoints()
-    if WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC or WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC then
+    if WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC then
         local achievementsIds = { 2076, 2077, 2078, 2097, 2141, 2142, 2143, 2536, 2537, 4888, 5749 }
 
         local sum = 0
@@ -55,11 +55,7 @@ local function CreateAchievementPoints()
     frame.icon:ClearAllPoints()
     frame.icon:SetSize(30, 30)
     frame.icon:SetPoint("RIGHT", 0, -5)
-    if WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC then
-        frame.icon:SetTexCoord(0, 0.5, 0, 1)
-    else
-        frame.icon:SetTexCoord(0, 0.5, 0, 0.5)
-    end
+    frame.icon:SetTexCoord(0, 0.5, 0, 0.5)
 
     frame.staticText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
     frame.staticText:ClearAllPoints()
@@ -69,7 +65,7 @@ local function CreateAchievementPoints()
 
     frame:SetScript("OnClick", function()
         ToggleAchievementFrame()
-        if WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC or WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC  then
+        if WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC  then
             AchievementCategoryButton_OnClick(AchievementFrameCategoriesContainerButton2)
         else
             AchievementFrame_UpdateAndSelectCategory(RETAIL_MOUNT_ACHIEVEMENT_CATEGORY)
