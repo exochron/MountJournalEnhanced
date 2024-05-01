@@ -170,18 +170,7 @@ local function InitButton(button, tooltip, tooltipText)
 end
 
 local function BuildButton(tooltip, tooltipText)
-    local _, button = xpcall(
-            function()
-                return CreateFrame("Button", nil, MountJournal.MountDisplay.ModelScene.ControlFrame, "ModelSceneControlButtonTemplate")
-            end,
-            -- TODO: remove later after Cata launch
-            function()
-                local frame =  CreateFrame("Button", nil, MountJournal.MountDisplay.ModelScene.ControlFrame, "MJE_ModelSceneControlButtonTemplate")
-                frame:HookScript("OnMouseDown", function() frame.Icon:AdjustPointsOffset(1, -1) end)
-                frame:HookScript("OnMouseUp", function() frame.Icon:AdjustPointsOffset(-1, 1) end)
-                return frame
-            end
-    )
+    local button = CreateFrame("Button", nil, MountJournal.MountDisplay.ModelScene.ControlFrame, "ModelSceneControlButtonTemplate")
     InitButton(button, tooltip, tooltipText)
     button:HookScript("OnMouseDown", function()
         PlaySound(SOUNDKIT.IG_INVENTORY_ROTATE_CHARACTER)
@@ -199,17 +188,8 @@ local function CheckButtonStatus(self)
 end
 
 local function BuildCheckButton(tooltip, tooltipText, OnInitShow)
-    local _, button = xpcall(
-            function()
-                return CreateFrame("CheckButton", nil, MountJournal.MountDisplay.ModelScene.ControlFrame, "ModelSceneControlButtonTemplate")
-            end,
-            function()
-                local frame =  CreateFrame("CheckButton", nil, MountJournal.MountDisplay.ModelScene.ControlFrame, "MJE_ModelSceneControlButtonTemplate")
-                frame:HookScript("OnMouseDown", function() frame.Icon:AdjustPointsOffset(1, -1) end)
-                frame:HookScript("OnMouseUp", function() frame.Icon:AdjustPointsOffset(-1, 1) end)
-                return frame
-            end
-    )
+    local button = CreateFrame("CheckButton", nil, MountJournal.MountDisplay.ModelScene.ControlFrame, "ModelSceneControlButtonTemplate")
+
     button:RegisterForClicks("AnyUp")
     InitButton(button, tooltip, tooltipText)
     button:HookScript("OnShow", OnInitShow)
@@ -276,25 +256,23 @@ local function BuildCameraPanel()
 
     helpTooltip = CreateFrame("GameTooltip", "MJEDisplayHelpToolTip", container, "SharedNoHeaderTooltipTemplate")
 
-    if WOW_PROJECT_ID ~= WOW_PROJECT_WRATH_CLASSIC then
-        container.specialButton = BuildButton("/mountspecial")
-        container.specialButton.Icon:SetTexture("Interface/GossipFrame/CampaignGossipIcons") -- from atlas: campaignavailablequesticon
-        if nil == container.specialButton.Icon:GetTexture() then
-            -- fallback for classic client
-            container.specialButton.Icon:SetTexture("Interface/QuestTypeIcons")
-            container.specialButton.Icon:SetTexCoord(0, 0.14285714285714285714285714285714, 0.275, 0.575)
-        else
-            container.specialButton.Icon:SetTexCoord(0.1875, 0.421875, 0.37, 0.85)
-        end
-        container.specialButton:HookScript("OnClick", function()
-            local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
-            if actor then
-                actor:PlayAnimationKit(1371)
-                actor:PlayAnimationKit(1371) -- animation gets sometimes canceled. second call is to enforce it.
-                ADDON.settings.ui.displayAnimation = "stand" -- back to normal stand
-            end
-        end)
+    container.specialButton = BuildButton("/mountspecial")
+    container.specialButton.Icon:SetTexture("Interface/GossipFrame/CampaignGossipIcons") -- from atlas: campaignavailablequesticon
+    if nil == container.specialButton.Icon:GetTexture() then
+        -- fallback for classic client
+        container.specialButton.Icon:SetTexture("Interface/QuestTypeIcons")
+        container.specialButton.Icon:SetTexCoord(0, 0.14285714285714285714285714285714, 0.275, 0.575)
+    else
+        container.specialButton.Icon:SetTexCoord(0.1875, 0.421875, 0.37, 0.85)
     end
+    container.specialButton:HookScript("OnClick", function()
+        local actor = MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped")
+        if actor then
+            actor:PlayAnimationKit(1371)
+            actor:PlayAnimationKit(1371) -- animation gets sometimes canceled. second call is to enforce it.
+            ADDON.settings.ui.displayAnimation = "stand" -- back to normal stand
+        end
+    end)
 
     -- TODO animation ids don't fit in 4.4
     if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
