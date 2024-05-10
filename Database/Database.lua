@@ -1618,22 +1618,14 @@ ADDON.DB.Source = {
     },
 
     ["Trading Post"] = {
-        sourceDescription = C_Garrison and "\124cFFFFD200" .. select(2, C_Garrison.GetBuildingInfo(111)) .. "\124r" or nil, -- "Trading Post"
-
-        [74856] = true, -- Blazing Hippogryph
-        [302361] = true, -- Alabaster Stormtalon
-        [302362] = true, -- Alabaster Thunderwing
-        [367875] = true, -- Armored Siege Kodo
+        filterFunc = function(mountId)
+            return nil ~= (BATTLE_PET_SOURCE_12 and string.find(select(3, C_MountJournal.GetMountInfoExtraByID(mountId)), BATTLE_PET_SOURCE_12))
+        end,
     },
 
     ["Shop"] = {
         sourceType = { 10 },
 
-        [302361] = true, -- Alabaster Stormtalon
-        [302362] = true, -- Alabaster Thunderwing
-        [367875] = true, -- Armored Siege Kodo
-        [366962] = true, -- Ash'adar
-        [400976] = true, -- Gleaming Moonbeast
         [431360] = true, -- Twilight Sky Prowler
     },
 
