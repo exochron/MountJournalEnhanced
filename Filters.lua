@@ -216,16 +216,15 @@ local function FilterBySource(mountId, spellId, sourceType, preparedSettings)
         return preparedSettings[spellId]
     end
 
-    local mountSourceDescription = select(3, C_MountJournal.GetMountInfoExtraByID(mountId))
-    mountSourceDescription = mountSourceDescription:gsub("[|n ]+$", "")
     local fallback = true
     for source, value in pairs(ADDON.settings.filter.source) do
         if SourceDB[source] and ((
                 SourceDB[source]["sourceType"] and tContains(SourceDB[source]["sourceType"], sourceType)
         ) or (
-                SourceDB[source]["sourceDescription"] and SourceDB[source]["sourceDescription"] == mountSourceDescription
+                SourceDB[source]["filterFunc"] and SourceDB[source]["filterFunc"](mountId)
         )) then
             if value then
+                SourceDB[source][spellId] = true
                 return true
             else
                 fallback = false
