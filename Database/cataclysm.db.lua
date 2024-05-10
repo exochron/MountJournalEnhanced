@@ -22,7 +22,7 @@ ADDON.DB.Source.Profession[92155] = true; -- Ultramarine Qiraji Battle Tank
 ADDON.DB.Source.Profession[93326] = true; -- Sandstone Drake
 ADDON.DB.Source.Profession[121820] = true; -- Obsidian Nightwing
 
-ADDON.DB.Source.Promotion[42776] = true; -- Spectral Tigher
+ADDON.DB.Source.Promotion[42776] = true; -- Spectral Tiger
 ADDON.DB.Source.Promotion[42777] = true; -- Swift Spectral Tigher
 ADDON.DB.Source.Promotion[46197] = true; -- X-51 Nether-Rocket
 ADDON.DB.Source.Promotion[46199] = true; -- X-51 Nether-Rocket X-TREME
@@ -37,7 +37,6 @@ ADDON.DB.Source.Promotion[388516] = true; -- Hao-Yue
 ADDON.DB.Source.Promotion[394209] = true; -- Festering Emerald Drake
 ADDON.DB.Source.Promotion[416158] = true; -- Nightmarish Emerald Drake
 ADDON.DB.Source.Promotion[423869] = true; -- Avatar of Flame
-ADDON.DB.Source.Promotion[440915] = true; -- Auspicious Arborwyrm
 ADDON.DB.Source.Promotion[93623] = true; -- Mottled Drake
 ADDON.DB.Source.Promotion[96503] = true; -- Amani Dragonhawk
 ADDON.DB.Source.Promotion[97581] = true; -- Savage Raptor
@@ -50,6 +49,9 @@ ADDON.DB.Source.Promotion[107516] = true; -- Spectral Gryphon
 ADDON.DB.Source.Promotion[107517] = true; -- Spectral Wind Rider
 ADDON.DB.Source.Promotion[110051] = true; -- Heart of the Aspects
 ADDON.DB.Source.Promotion[113120] = true; -- Feldrake
+ADDON.DB.Source.Shop[348459] = true; -- Reawakened Phase-Hunter (TBC Classic)
+ADDON.DB.Source.Shop[372677] = true; -- Kalu'ak Whalebone Glider (WotLK Classic)
+ADDON.DB.Source.Shop[440915] = true; -- Auspicious Arborwyrm
 
 --ADDON.DB.Expansion[0][1843] = true; -- Tiger
 ADDON.DB.Expansion[1][1761] = true; -- Reawakened Phase-Hunter (TBC Classic)
