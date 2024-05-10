@@ -332,8 +332,8 @@ local function InitializeFilterDropDown(frame, level)
         end
         if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE  then
             UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_12, "Trading Post", settings, true), level)
-            UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_10, "Shop", settings, true), level)
         end
+        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_10, "Shop", settings, true), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_8, "Promotion", settings, true), level)
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_MOUNT_TYPE then
         local settings = ADDON.settings.filter[SETTING_MOUNT_TYPE]
