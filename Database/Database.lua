@@ -3,9 +3,9 @@ local _, ADDON = ...
 ADDON.DB = {}
 
 ADDON.DB.Recent = {
-    ["minID"] = 2055,
-    ["blacklist"] = { },
-    ["whitelist"] = { 1474, 1614, 1618, 1621, 1633, 1651, 1669, 1733, 1822, 994, 1259, 1825 },
+    ["minID"] = 2060,
+    ["blacklist"] = { 2090, 2091, 2114 },
+    ["whitelist"] = { 462,482,484,485 },
 }
 
 ADDON.DB.Source = {
@@ -19,11 +19,11 @@ ADDON.DB.Source = {
         [88718] = true, -- Phosphorescent Stone Drake- Deepholm, Aeonaxx
         [88750] = true, -- Grey Riding Camel- Uldum, Mysterious Camel Figurine
         [98718] = true, -- Subdued Seahorse- Shimmering Expanse, Poseidus
-        [127158] = true, -- Heavenly Onyx Cloud Serpent- Kun-Lai Summit, Sha of Anger
+        [127158] = true, -- Heavenly Onyx Cloud Serpent - Kun-Lai Summit, Sha of Anger
         [130965] = true, -- Son of Galleon- Valley of the Four Winds, Galleon
-        [132036] = true, -- Thundering Ruby Cloud Serpent- 10x Skyshard
+        [132036] = true, -- Thundering Ruby Cloud Serpent - 10x Skyshard
         [138423] = true, -- Cobalt Primordial Direhorn- Isle of Giants, Oondasta
-        [139442] = true, -- Thundering Cobalt Cloud Serpent- Isle of Thunder, Nalak
+        [139442] = true, -- Thundering Cobalt Cloud Serpent - Isle of Thunder, Nalak
         [148476] = true, -- Thundering Onyx Cloud Serpent- Timeless Isle, Huolon
         [179478] = true, -- Voidtalon of the Dark Star- Edge of Reality
 
@@ -340,6 +340,49 @@ ADDON.DB.Source = {
         [427549] = true, -- Imagiwing - Emerald Dream vendor
         [427724] = true, -- Salatrancer - Emerald Dream vendor
         [428060] = true, -- Golden Regal Scarab
+
+        -- Remix: MoP
+        [138425] = true, -- Slate Primordial Direhorn
+        [127170] = true, -- Astral Cloud Serpent
+        [136471] = true, -- Spawn of Horridon
+        [130965] = true, -- Son of Galleon
+        [138423] = true, -- Cobalt Primordial Direhorn
+        [139448] = true, -- Clutch of Ji-Kun
+        [148476] = true, -- Thundering Onyx Cloud Serpent
+        [127158] = true, -- Heavenly Onyx Cloud Serpent
+        [139442] = true, -- Thundering Cobalt Cloud Serpent
+        [148417] = true, -- Kor'kron Juggernaut
+        [132036] = true, -- Thundering Ruby Cloud Serpent
+        [123182] = true, -- Kafa Yak
+        [127178] = true, -- Jungle Riding Crane
+        [127209] = true, -- Black Riding Yak
+        [127213] = true, -- Modest Expedition Yak
+        [435044] = true, -- Golden Discus
+        [435082] = true, -- Mogu Hazeblazer
+        [435084] = true, -- Sky Surfer
+        [435108] = true, -- Daystorm Windsteed
+        [435107] = true, -- Forest Windsteed
+        [435103] = true, -- Dashing Windsteed
+        [435109] = true, -- Feathered Windsurfer
+        [435115] = true, -- Guardian Quilen
+        [435118] = true, -- Marble Quilen
+        [435123] = true, -- Gilded Riding Crane
+        [435128] = true, -- Pale Riding Crane
+        [435127] = true, -- Rose Riding Crane
+        [435126] = true, -- Silver Riding Crane
+        [435124] = true, -- Luxurious Riding Crane
+        [435125] = true, -- Tropical Riding Crane
+        [435131] = true, -- Snowy Riding Goat
+        [435133] = true, -- Little Red Riding Goat
+        [435145] = true, -- Bloody Skyscreamer
+        [435146] = true, -- Night Pterrorwing
+        [435147] = true, -- Jade Pterrordax
+        [435149] = true, -- Cobalt Juggernaut
+        [435150] = true, -- Fel Iron Juggernaut
+        [435153] = true, -- Purple Shado-Pan Riding Tiger
+        [435160] = true, -- Riverwalker Mushan
+        [435161] = true, -- Palehide Mushan Beast
+        [441794] = true, -- Amber Pterrordax
 
         ------------------------------
         -- Alliance ------------------
@@ -1016,6 +1059,9 @@ ADDON.DB.Source = {
         [439138] = 19574, -- Voyaging Wilderling - Awakening the Dragonflight Raids
         [440444] = 20501, -- Zovaal's Soul Eater - Back from the Beyond
 
+        -- Remix: MoP
+        [446017] = 20593, -- August Phoenix
+        [446022] = 19876, -- Astral Emperor's Serpent
 
         ------------------------------
         -- Alliance ------------------
@@ -1463,6 +1509,51 @@ ADDON.DB.Source = {
 
         -- Hearthstone Anniversary
         [431992] = true, -- Compass Rose
+
+        -- Remix: MoP
+        [138425] = true, -- Slate Primordial Direhorn
+        [127170] = true, -- Astral Cloud Serpent
+        [136471] = true, -- Spawn of Horridon
+        [130965] = true, -- Son of Galleon
+        [138423] = true, -- Cobalt Primordial Direhorn
+        [139448] = true, -- Clutch of Ji-Kun
+        [148476] = true, -- Thundering Onyx Cloud Serpent
+        [127158] = true, -- Heavenly Onyx Cloud Serpent
+        [139442] = true, -- Thundering Cobalt Cloud Serpent
+        [148417] = true, -- Kor'kron Juggernaut
+        [132036] = true, -- Thundering Ruby Cloud Serpent
+        [123182] = true, -- Kafa Yak
+        [127178] = true, -- Jungle Riding Crane
+        [127209] = true, -- Black Riding Yak
+        [127213] = true, -- Modest Expedition Yak
+        [435044] = true, -- Golden Discus
+        [435082] = true, -- Mogu Hazeblazer
+        [435084] = true, -- Sky Surfer
+        [435108] = true, -- Daystorm Windsteed
+        [435107] = true, -- Forest Windsteed
+        [435103] = true, -- Dashing Windsteed
+        [435109] = true, -- Feathered Windsurfer
+        [435115] = true, -- Guardian Quilen
+        [435118] = true, -- Marble Quilen
+        [435123] = true, -- Gilded Riding Crane
+        [435128] = true, -- Pale Riding Crane
+        [435127] = true, -- Rose Riding Crane
+        [435126] = true, -- Silver Riding Crane
+        [435124] = true, -- Luxurious Riding Crane
+        [435125] = true, -- Tropical Riding Crane
+        [435131] = true, -- Snowy Riding Goat
+        [435133] = true, -- Little Red Riding Goat
+        [435145] = true, -- Bloody Skyscreamer
+        [435146] = true, -- Night Pterrorwing
+        [435147] = true, -- Jade Pterrordax
+        [435149] = true, -- Cobalt Juggernaut
+        [435150] = true, -- Fel Iron Juggernaut
+        [435153] = true, -- Purple Shado-Pan Riding Tiger
+        [435160] = true, -- Riverwalker Mushan
+        [435161] = true, -- Palehide Mushan Beast
+        [441794] = true, -- Amber Pterrordax
+        [446017] = true, -- August Phoenix
+        [446022] = true, -- Astral Emperor's Serpent
     },
 
     ["Black Market"] = {
@@ -1503,7 +1594,7 @@ ADDON.DB.Source = {
         [130965] = true, -- Son of Galleon
         [132036] = true, -- Thundering Ruby Cloud Serpent
         [136471] = true, -- Spawn of Horridon - Throne of Thunder, Horridon
-        [138423] = true, -- Cobalt Primordial Direhorn- Isle of Giants, Oondasta
+        [138423] = true, -- Cobalt Primordial Direhorn - Isle of Giants, Oondasta
         [138424] = true, -- Amber Primordial Direhorn
         [138425] = true, -- Slate Primordial Direhorn
         [138426] = true, -- Jade Primordial Direhorn
@@ -1528,11 +1619,19 @@ ADDON.DB.Source = {
 
     ["Trading Post"] = {
         sourceDescription = C_Garrison and "\124cFFFFD200" .. select(2, C_Garrison.GetBuildingInfo(111)) .. "\124r" or nil, -- "Trading Post"
+
+        [74856] = true, -- Blazing Hippogryph
+        [302361] = true, -- Alabaster Stormtalon
+        [302362] = true, -- Alabaster Thunderwing
+        [367875] = true, -- Armored Siege Kodo
     },
 
     ["Shop"] = {
         sourceType = { 10 },
 
+        [302361] = true, -- Alabaster Stormtalon
+        [302362] = true, -- Alabaster Thunderwing
+        [367875] = true, -- Armored Siege Kodo
         [366962] = true, -- Ash'adar
         [400976] = true, -- Gleaming Moonbeast
         [431360] = true, -- Twilight Sky Prowler

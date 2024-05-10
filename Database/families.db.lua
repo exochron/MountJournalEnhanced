@@ -33,6 +33,8 @@ ADDON.DB.Family = {
 [1742] = true, -- Felcrystal Scorpion
 [1782] = true, -- Perfected Juggernaut
 [1898] = true, -- Kor'kron Annihilator
+[2085] = true, -- Cobalt Juggernaut
+[2086] = true, -- Fel Iron Juggernaut
 },
 ["Spiders"] = {
 [663] = true, -- Bloodfang Widow
@@ -68,6 +70,13 @@ ADDON.DB.Family = {
 [479] = true, -- Azure Riding Crane
 [480] = true, -- Golden Riding Crane
 [481] = true, -- Regal Riding Crane
+[482] = true, -- Jungle Riding Crane
+[2072] = true, -- Gilded Riding Crane
+[2073] = true, -- Pale Riding Crane
+[2074] = true, -- Rose Riding Crane
+[2075] = true, -- Silver Riding Crane
+[2076] = true, -- Luxurious Riding Crane
+[2077] = true, -- Tropical Riding Crane
 },
 ["Crows"] = {
 [634] = true, -- Solar Spirehawk
@@ -83,7 +92,7 @@ ADDON.DB.Family = {
 },
 ["Eagle"] = {
 [1545] = true, -- Divine Kiss of Ohn'ahra
-[1669] = true, -- Überlassener Ohunaaufklärer
+[1669] = true, -- Bestowed Ohuna Spotter
 [1671] = true, -- Duskwing Ohuna
 [1672] = true, -- Zenet Hatchling
 },
@@ -127,6 +136,7 @@ ADDON.DB.Family = {
 [520] = true, -- Violet Pandaren Phoenix
 [543] = true, -- Clutch of Ji-Kun
 [1297] = true, -- Clutch of Ha-Li
+[2142] = true, -- August Phoenix
 },
 ["Parrots"] = {
 [993] = true, -- Squawks
@@ -202,6 +212,8 @@ ADDON.DB.Family = {
 [508] = true, -- Brown Riding Goat
 [510] = true, -- White Riding Goat
 [511] = true, -- Black Riding Goat
+[2078] = true, -- Snowy Riding Goat
+[2080] = true, -- Little Red Riding Goat
 },
 ["Rams"] = {
 [21] = true, -- Gray Ram
@@ -267,6 +279,9 @@ ADDON.DB.Family = {
 },
 ["Yaks"] = {
 [460] = true, -- Grand Expedition Yak
+[462] = true, -- Kafa Yak
+[484] = true, -- Black Riding Yak
+[485] = true, -- Modest Expedition Yak
 [486] = true, -- Grey Riding Yak
 [487] = true, -- Blonde Riding Yak
 },
@@ -332,7 +347,7 @@ ADDON.DB.Family = {
 },
 ["Ottuk"] = {
 [1546] = true, -- Iskaara Trader's Ottuk
-[1651] = true, -- Überlassene Ottukvorhut
+[1651] = true, -- Bestowed Ottuk Vanguard
 [1653] = true, -- Brown War Ottuk
 [1654] = true, -- Otterworldly Ottuk Carrier
 [1655] = true, -- Yellow War Ottuk
@@ -347,6 +362,8 @@ ADDON.DB.Family = {
 [1178] = true, -- Qinsho's Eternal Hound
 [1327] = true, -- Ren's Stalwart Hound
 [1328] = true, -- Xinlao
+[2070] = true, -- Guardian Quilen
+[2071] = true, -- Marble Quilen
 },
 ["Vulpin"] = {
 [1222] = true, -- Vulpine Familiar
@@ -424,6 +441,9 @@ ADDON.DB.Family = {
 [1688] = true, -- Vicious Sabertooth
 [1689] = true, -- Vicious Sabertooth
 [1900] = true, -- Swift Zulian Panther
+[2198] = true, -- Kor'kron Warsaber
+[2199] = true, -- [PH] Nightsaber Horde Mount Black
+[2200] = true, -- [PH] Nightsaber Horde Mount White
 },
 ["Stone Cats"] = {
 [421] = true, -- Winged Guardian
@@ -449,6 +469,7 @@ ADDON.DB.Family = {
 [1194] = true, -- Vicious White Warsaber
 [1195] = true, -- Vicious Black Warsaber
 [1843] = true, -- Tiger
+[2087] = true, -- Purple Shado-Pan Riding Tiger
 },
 },
 ["Crabs"] = {
@@ -534,6 +555,10 @@ ADDON.DB.Family = {
 [1218] = true, -- Dazar'alor Windreaver
 [1586] = true, -- Armored Golden Pterrordax
 [1772] = true, -- Scarlet Pterrordax
+[2081] = true, -- Bloody Skyscreamer
+[2083] = true, -- Night Pterrorwing
+[2084] = true, -- Jade Pterrordax
+[2118] = true, -- Amber Pterrordax
 },
 ["Raptors"] = {
 [27] = true, -- Emerald Raptor
@@ -604,6 +629,7 @@ ADDON.DB.Family = {
 [1311] = true, -- Ivory Cloud Serpent
 [1313] = true, -- Rajani Warserpent
 [1573] = true, -- Magenta Cloud Serpent
+[2143] = true, -- Astral Emperor's Serpent
 },
 ["Drakes"] = {
 [246] = true, -- Azure Drake
@@ -897,6 +923,10 @@ ADDON.DB.Family = {
 ["Fish"] = {
 [800] = true, -- Brinedeep Bottom-Feeder
 [1692] = true, -- Wondrous Wavewhisker
+[2186] = true, -- [PH] Blue Old God Fish Mount
+[2187] = true, -- Underlight Shorestalker
+[2188] = true, -- [PH] Red Old God Fish Mount
+[2189] = true, -- Underlight Corrupted Behemoth
 },
 ["Seahorses"] = {
 [373] = true, -- Vashj'ir Seahorse
@@ -993,6 +1023,9 @@ ADDON.DB.Family = {
 [1684] = true, -- Sapphire Vorquin
 [1685] = true, -- Bronze Vorquin
 [1686] = true, -- Obsidian Vorquin
+[2065] = true, -- Daystorm Windsteed
+[2067] = true, -- Forest Windsteed
+[2068] = true, -- Dashing Windsteed
 },
 ["Mechanical Steeds"] = {
 [552] = true, -- Ironbound Wraithcharger
@@ -1100,13 +1133,14 @@ ADDON.DB.Family = {
 },
 ["Flies"] = {
 [1449] = true, -- Lord of the Corpseflies
+[1468] = true, -- Amber Skitterfly
 [1495] = true, -- Maldraxxian Corpsefly
 [1496] = true, -- Regal Corpsefly
 [1497] = true, -- Battlefield Swarmer
 [1615] = true, -- Tamed Skitterfly
 [1616] = true, -- Azure Skitterfly
 [1617] = true, -- Verdant Skitterfly
-[1618] = true, -- Überlassener Sandhuscher
+[1618] = true, -- Bestowed Sandskimmer
 },
 ["Gorm"] = {
 [1305] = true, -- Darkwarren Hardshell
@@ -1265,6 +1299,8 @@ ADDON.DB.Family = {
 [515] = true, -- Son of Galleon
 [550] = true, -- Brawler's Burly Mushan Beast
 [560] = true, -- Ashhide Mushan Beast
+[2088] = true, -- Riverwalker Mushan
+[2089] = true, -- Palehide Mushan Beast
 },
 ["N'Zoth Serpents"] = {
 [1282] = true, -- Black Serpent of N'Zoth
@@ -1276,7 +1312,7 @@ ADDON.DB.Family = {
 ["Others"] = {
 [1444] = true, -- Viridian Phase-Hunter
 [1619] = true, -- Ancient Salamanther
-[1621] = true, -- Korallenschuppensalamanther
+[1621] = true, -- Coralscale Salamanther
 [1622] = true, -- Stormhide Salamanther
 [1761] = true, -- Reawakened Phase-Hunter
 [1940] = true, -- Salatrancer
@@ -1298,7 +1334,7 @@ ADDON.DB.Family = {
 [1256] = true, -- Snapdragon Kelpstalker
 },
 ["Thunder Lizard"] = {
-[1474] = true, -- Überlassenes Leittier der Donnerrückgrate
+[1474] = true, -- Bestowed Thunderspine Packleader
 [1638] = true, -- Explorer's Stonehide Packbeast
 [1639] = true, -- Lizi, Thunderspine Tramper
 },
@@ -1322,6 +1358,7 @@ ADDON.DB.Family = {
 [901] = true, -- Vicious War Turtle
 [1582] = true, -- Savage Green Battle Turtle
 [2039] = true, -- Savage Blue Battle Turtle
+[2232] = true, -- Savage Ebony Battle Turtle
 },
 },
 ["Rodent"] = {
@@ -1432,7 +1469,7 @@ ADDON.DB.Family = {
 [289] = true, -- Grand Ice Mammoth
 [1603] = true, -- Subterranean Magmammoth
 [1612] = true, -- Loyal Magmammoth
-[1633] = true, -- Überlassenes Fischermammut
+[1633] = true, -- Bestowed Trawling Mammoth
 [1634] = true, -- Mossy Mammoth
 [1635] = true, -- Plainswalker Bearer
 [1644] = true, -- Raging Magmammoth
@@ -1448,7 +1485,7 @@ ADDON.DB.Family = {
 [1007] = true, -- Highmountain Thunderhoof
 [1209] = true, -- Stonehide Elderhorn
 [1467] = true, -- Noble Bruffalon
-[1614] = true, -- Sturmberührter Brüffelch
+[1614] = true, -- Stormtouched Bruffalon
 },
 ["Ox"] = {
 [1291] = true, -- Lucky Yun
@@ -1512,6 +1549,9 @@ ADDON.DB.Family = {
 [1446] = true, -- Tazavesh Gearglider
 [1481] = true, -- Cartel Master's Gearglider
 [1959] = true, -- Compass Rose
+[2060] = true, -- Golden Discus
+[2063] = true, -- Mogu Hazeblazer
+[2064] = true, -- Sky Surfer
 },
 ["Gyrocopters"] = {
 [204] = true, -- Turbo-Charged Flying Machine
@@ -1524,6 +1564,10 @@ ADDON.DB.Family = {
 [1475] = true, -- Hand of Bahmethra
 [1503] = true, -- Hand of Nilganihmaht
 [1504] = true, -- Hand of Salaranga
+},
+["Hover Board"] = {
+[2145] = true, -- [PH] Goblin Surfboard - Blue
+[2152] = true, -- Pearlescent Goblin Wave Shredder
 },
 ["Hovercraft"] = {
 [999] = true, -- Xiwyllag ATV
@@ -1540,6 +1584,7 @@ ADDON.DB.Family = {
 [521] = true, -- Jade Pandaren Kite
 [1602] = true, -- Tuskarr Shoreglider
 [1762] = true, -- Kalu'ak Whalebone Glider
+[2069] = true, -- Feathered Windsurfer
 },
 ["Mecha-suits"] = {
 [522] = true, -- Sky Golem
@@ -1569,6 +1614,8 @@ ADDON.DB.Family = {
 [1493] = true, -- Forsworn Aquilon
 [1494] = true, -- Ascendant's Aquilon
 [1782] = true, -- Perfected Juggernaut
+[2085] = true, -- Cobalt Juggernaut
+[2086] = true, -- Fel Iron Juggernaut
 },
 ["Mechanostriders"] = {
 [39] = true, -- Red Mechanostrider
@@ -1661,6 +1708,9 @@ ADDON.DB.Family = {
 [1246] = true, -- Ironclad Frostclaw
 [1285] = true, -- Frostwolf Snarler
 [1912] = true, -- Vicious War Wolf
+[2201] = true, -- Sentinel War Wolf
+[2202] = true, -- [PH] Alliance Wolf Mount
+[2203] = true, -- [PH] Alliance Wolf Mount
 },
 ["Wilderlings"] = {
 [1484] = true, -- Ardenweald Wilderling
