@@ -82,6 +82,13 @@ local function BuildMainFrame(uiLabels, behaviourLabels)
         end
     end
 
+    frame.checks.trackUsageStats:SetCallback("OnValueChanged", function(_, _, value)
+        frame.checks.displayStatistics:SetItemDisabled("UsedCount", not value)
+        frame.checks.displayStatistics:SetItemDisabled("TravelTime", not value)
+        frame.checks.displayStatistics:SetItemDisabled("TravelDistance", not value)
+        frame.checks.displayStatistics:SetItemDisabled("LearnedDate", not value)
+    end)
+
     return frame
 end
 
@@ -183,6 +190,11 @@ ADDON.Events:RegisterCallback("OnLogin", function()
                 frame.checks[setting]:SetValue(ADDON.settings[setting])
             end
         end
+
+        frame.checks.displayStatistics:SetItemDisabled("UsedCount", not ADDON.settings.trackUsageStats)
+        frame.checks.displayStatistics:SetItemDisabled("TravelTime", not ADDON.settings.trackUsageStats)
+        frame.checks.displayStatistics:SetItemDisabled("TravelDistance", not ADDON.settings.trackUsageStats)
+        frame.checks.displayStatistics:SetItemDisabled("LearnedDate", not ADDON.settings.trackUsageStats)
     end)
     group:SetCallback("okay", function(frame)
         for _, labelData in ipairs(uiLabels) do
