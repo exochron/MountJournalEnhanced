@@ -204,30 +204,34 @@ end
 
 local function updateContainer(mountId, container)
     local settings = ADDON.settings.ui.displayStatistics
+    local trackingEnabled = ADDON.settings.trackUsageStats
 
     container.CustomizationCount:SetShown(settings.CustomizationCount and ADDON.DB.Customization[mountId] ~= nil)
     if container.CustomizationCount:IsShown() then
         container.CustomizationCount.Text:SetText(parseCustomization(ADDON.DB.Customization[mountId]))
     end
 
-    local useCount, lastUseTime, travelTime, travelDistance, learnedTime = ADDON:GetMountStatistics(mountId)
+    local useCount, travelTime, travelDistance, learnedTime
+    if trackingEnabled then
+        useCount, _, travelTime, travelDistance, learnedTime = ADDON:GetMountStatistics(mountId)
+    end
 
-    container.UsedCount:SetShown(settings.UsedCount and useCount > 0)
+    container.UsedCount:SetShown(trackingEnabled and settings.UsedCount and useCount > 0)
     if container.UsedCount:IsShown() then
         container.UsedCount.Text:SetText(useCount .. ' x')
     end
 
-    container.TravelTime:SetShown(settings.TravelTime and travelTime > 0)
+    container.TravelTime:SetShown(trackingEnabled and settings.TravelTime and travelTime > 0)
     if container.TravelTime:IsShown() then
         container.TravelTime.Text:SetText(SecondsToClock(travelTime, true))
     end
 
-    container.TravelDistance:SetShown(settings.TravelDistance and travelDistance > 0)
+    container.TravelDistance:SetShown(trackingEnabled and settings.TravelDistance and travelDistance > 0)
     if container.TravelDistance:IsShown() then
         container.TravelDistance.Text:SetText(formatDistance(travelDistance))
     end
 
-    container.LearnedDate:SetShown(settings.LearnedDate and learnedTime ~= nil)
+    container.LearnedDate:SetShown(trackingEnabled and settings.LearnedDate and learnedTime ~= nil)
     if container.LearnedDate:IsShown() then
         local data = date('*t', learnedTime)
         container.LearnedDate.Text:SetText(FormatShortDate(data.day, data.month, data.year))
