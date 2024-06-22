@@ -40,6 +40,12 @@ local function MountIdToOriginalIndex(mountId, recursionCounter)
 end
 --endregion
 
+local IsUsableSpell = IsUsableSpell
+if not IsUsableSpell and C_Spell and C_Spell.IsSpellUsable then
+    -- moved api function in 11.0
+    IsUsableSpell = C_Spell.IsSpellUsable
+end
+
 function ADDON.Api:GetMountInfoByID(mountId)
     local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, isForDragonriding, a, b, c, d, e, f, g, h = C_MountJournal.GetMountInfoByID(mountId)
     isUsable = isUsable and IsUsableSpell(spellId)
@@ -55,7 +61,7 @@ function ADDON.Api:GetMountLink(spellId)
     local link = C_MountJournal.GetMountLink(spellId)
     if strlen(link) > 400 then
         -- broken link
-        return GetSpellLink(spellId)
+        return C_Spell.GetSpellLink(spellId)
     end
 
     return link
