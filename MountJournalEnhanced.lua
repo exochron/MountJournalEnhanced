@@ -84,7 +84,7 @@ ADDON.Events:RegisterFrameEventAndCallback("PLAYER_LOGIN", function()
             ADDON.Events:RegisterFrameEventAndCallback("ADDON_LOADED", initialize, 'init')
         end
     end)
-end , 'init')
+end, 'init')
 
 EventRegistry:RegisterCallback("MountJournal.OnShow", function()
     -- MountJournal gets always initially shown before switching to the actual tab.
