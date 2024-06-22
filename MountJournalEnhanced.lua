@@ -76,8 +76,15 @@ local function initialize()
         ADDON.Events:UnregisterEvents({"OnInit", "OnLogin"})
     end
 end
-ADDON.Events:RegisterFrameEventAndCallback("PLAYER_LOGIN", initialize, 'init')
-ADDON.Events:RegisterFrameEventAndCallback("ADDON_LOADED", initialize, 'init')
+ADDON.Events:RegisterFrameEventAndCallback("PLAYER_LOGIN", function()
+    -- delay by a frame, because GetServerExpansionLevel() can return 0 on first login
+    C_Timer.After(0, function()
+        initialize()
+        if not MountJournal then
+            ADDON.Events:RegisterFrameEventAndCallback("ADDON_LOADED", initialize, 'init')
+        end
+    end)
+end , 'init')
 
 EventRegistry:RegisterCallback("MountJournal.OnShow", function()
     -- MountJournal gets always initially shown before switching to the actual tab.
