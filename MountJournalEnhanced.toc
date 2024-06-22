@@ -55,6 +55,10 @@ UI\FilterDropdown\Main.lua
 UI\FilterDropdown\Color.lua
 UI\FilterDropdown\Family.lua
 UI\FilterDropdown\Sort.lua
+UI\FilterDropdown\Legacy\Main.lua
+UI\FilterDropdown\Legacy\Color.lua
+UI\FilterDropdown\Legacy\Family.lua
+UI\FilterDropdown\Legacy\Sort.lua
 UI\DisplayBackground.lua
 UI\DisplayCamera.lua
 UI\Resize.lua

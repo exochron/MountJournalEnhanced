@@ -1,10 +1,13 @@
 local _, ADDON = ...
-local L = ADDON.L
+
+if not MenuUtil then -- modern style filter menu does not exist. use legacy UIDropdownMenu instead
+    return
+end
 
 local function CheckSetting(settings)
     local hasTrue, hasFalse = false, false
     for _, v in pairs(settings) do
-        if (v == true) then
+        if v == true then
             hasTrue = true
         elseif v == false then
             hasFalse = true
@@ -17,48 +20,9 @@ local function CheckSetting(settings)
     return hasTrue, hasFalse
 end
 
-local function RefreshCategoryButton(button, isNotRadio)
-    local buttonName = button:GetName()
-    local buttonCheck = _G[buttonName .. "Check"]
+function ADDON.UI.FDD:AddFamilyMenu(root)
+    local L = ADDON.L
 
-    if isNotRadio then
-        buttonCheck:SetTexCoord(0.0, 0.5, 0.0, 0.5);
-    else
-        buttonCheck:SetTexCoord(0.0, 0.5, 0.5, 1.0);
-    end
-
-    button.isNotRadio = isNotRadio
-end
-
-local function CreateInfoWithMenu(text, filterKey, settings)
-    local info = {
-        text = text,
-        value = filterKey,
-        keepShownOnClick = true,
-        notCheckable = false,
-        hasArrow = true,
-    }
-
-    local hasTrue, hasFalse = CheckSetting(settings)
-    info.isNotRadio = not hasTrue or not hasFalse
-
-    info.checked = function(button)
-        local settingHasTrue, settingHasFalse = CheckSetting(settings)
-        RefreshCategoryButton(button, not settingHasTrue or not settingHasFalse)
-        return settingHasTrue
-    end
-    info.func = function(button, _, _, value)
-        if button.isNotRadio == value then
-            ADDON.UI.FDD:SetAllSubFilters(settings, true)
-        elseif true == button.isNotRadio and false == value then
-            ADDON.UI.FDD:SetAllSubFilters(settings, false)
-        end
-    end
-
-    return info
-end
-
-function ADDON.UI.FDD:AddFamilyMenu(level)
     local settings = ADDON.settings.filter.family
     local sortedFamilies, hasSubFamilies = {}, {}
 
@@ -79,40 +43,42 @@ function ADDON.UI.FDD:AddFamilyMenu(level)
 
     for _, family in pairs(sortedFamilies) do
         if hasSubFamilies[family] then
-            UIDropDownMenu_AddButton(CreateInfoWithMenu(L[family] or family, family, settings[family]), level)
+            local subMenu = root:CreateCheckbox(L[family] or family, function()
+                local settingHasTrue, settingHasFalse = CheckSetting(settings[family])
+
+                return settingHasTrue
+            end, function(...)
+                local _, settingHasFalse = CheckSetting(settings[family])
+                ADDON.UI.FDD:SetAllSubFilters(settings[family], settingHasFalse)
+
+                return MenuResponse.Refresh
+            end)
+            subMenu:AddInitializer(function(button)
+                if button.leftTexture2 then
+                    local settingHasTrue, settingHasFalse = CheckSetting(settings[family])
+                    if settingHasTrue and settingHasFalse then
+                        -- TODO: proper indeterminate icon. like: https://css-tricks.com/indeterminate-checkboxes/
+                        button.leftTexture2:SetAtlas("common-dropdown-icon-radialtick-yellow-classic", TextureKitConstants.UseAtlasSize)
+                        button.leftTexture2:SetAtlas("common-dropdown-icon-radialtick-yellow", TextureKitConstants.UseAtlasSize)
+                    else
+                        button.leftTexture2:SetAtlas("common-dropdown-icon-checkmark-yellow-classic", TextureKitConstants.UseAtlasSize)
+                        button.leftTexture2:SetAtlas("common-dropdown-icon-checkmark-yellow", TextureKitConstants.UseAtlasSize)
+                    end
+                end
+            end)
+            local sortedSubFamilies = {}
+            for subfamily, familyIds in pairs(ADDON.DB.Family[family]) do
+                table.insert(sortedSubFamilies, subfamily)
+            end
+            table.sort(sortedSubFamilies, function(a, b)
+                return (L[a] or a) < (L[b] or b)
+            end)
+            for _, subfamily in pairs(sortedSubFamilies) do
+                ADDON.UI.FDD:CreateFilter(subMenu, L[subfamily] or subfamily, subfamily, settings[family], settings)
+            end
+
         else
-            UIDropDownMenu_AddButton(ADDON.UI.FDD:CreateFilterInfo(L[family] or family, family, settings, true), level)
+            ADDON.UI.FDD:CreateFilter(root, L[family] or family, family, settings, true)
         end
-    end
-end
-
-local function ShouldDisplayFamily(mountIds)
-    if ADDON.settings.filter.hiddenIngame then
-        return true
-    end
-
-    for mountId, _ in pairs(mountIds) do
-        local _, _, _, _, _, _, _, _, _, shouldHideOnChar = C_MountJournal.GetMountInfoByID(mountId)
-        if shouldHideOnChar == false then
-            return true
-        end
-    end
-
-    return false
-end
-
-function ADDON.UI.FDD:AddFamilySubMenu(level, filterValue)
-    local settings = ADDON.settings.filter.family[filterValue]
-    local sortedFamilies = {}
-    for family, familyIds in pairs(ADDON.DB.Family[filterValue]) do
-        if ShouldDisplayFamily(familyIds) then
-            table.insert(sortedFamilies, family)
-        end
-    end
-    table.sort(sortedFamilies, function(a, b)
-        return (L[a] or a) < (L[b] or b)
-    end)
-    for _, family in pairs(sortedFamilies) do
-        UIDropDownMenu_AddButton(ADDON.UI.FDD:CreateFilterInfo(L[family] or family, family, settings, ADDON.settings.filter.family), level)
     end
 end

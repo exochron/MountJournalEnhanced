@@ -1,4 +1,8 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
+
+if not MenuUtil then -- modern style filter menu does not exist. use legacy UIDropdownMenu instead
+    return
+end
 
 ADDON.UI.FDD = {}
 
@@ -15,15 +19,7 @@ local SETTING_FAMILY = "family"
 local SETTING_EXPANSION = "expansion"
 local SETTING_HIDDEN = "hidden"
 local SETTING_HIDDEN_INGAME = "hiddenIngame"
-local SETTING_SORT = "sort"
-local SETTING_COLOR = "color"
 local SETTING_RARITY = "rarity"
-
-function ADDON.UI.FDD:UpdateResetVisibility()
-    if MountJournalFilterButton.ResetButton then
-        MountJournalFilterButton.ResetButton:SetShown(not ADDON.IsUsingDefaultFilters())
-    end
-end;
 
 local function setAllSettings(settings, switch)
     for key, value in pairs(settings) do
@@ -36,373 +32,281 @@ local function setAllSettings(settings, switch)
         end
     end
 end
-
-local onlyPool
-local function AddOnlyButton(info, settings)
-    if not onlyPool then
-        onlyPool = CreateFramePool("Button")
-    end
-
-    local onlyButton = onlyPool:Acquire()
-    if not onlyButton.initialized then
-        onlyButton:SetNormalFontObject(GameFontHighlightSmallLeft)
-        onlyButton:SetHighlightFontObject(GameFontHighlightSmallLeft)
-        onlyButton:SetText(ADDON.L.FILTER_ONLY)
-
-        onlyButton:SetSize(onlyButton:GetTextWidth(), UIDROPDOWNMENU_BUTTON_HEIGHT)
-
-        onlyButton.CallParent = function(self, script, ...)
-            local parent = self:GetParent()
-            parent:GetScript(script)(parent, ...)
-        end
-
-        onlyButton:HookScript("OnEnter", function(self)
-            self:Show()
-            self:CallParent("OnEnter")
-        end)
-        onlyButton:HookScript("OnLeave", function(self)
-            if not self:GetParent():IsMouseOver() then
-                self:CallParent("OnLeave")
-                if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE  then
-                    self:Hide()
-                end
-            end
-        end)
-
-        onlyButton.initialized = true
-    end
-
-    -- overwrite every time
-    onlyButton:SetScript("OnClick", function(self, ...)
-        setAllSettings(settings, false)
-        self:CallParent("OnClick", ...)
-    end)
-
-    -- classic doesn't has funcOnEnter and funcOnLeave yet. so we simply always show
-    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE  then
-        info.funcOnEnter = function()
-            onlyButton:Show()
-        end
-        info.funcOnLeave = function()
-            if not onlyButton:IsMouseOver() then
-                onlyButton:Hide()
-            end
-        end
-    end
-    info.customFrame = {
-        only = onlyButton,
-        button = nil,
-        Show = function(self)
-            self.button:Show()
-            if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE  then
-                self.only:Show()
-            end
-        end,
-        Hide = function(self)
-            self.button:Hide()
-            self.only:SetParent()
-            onlyPool:Release(self.only)
-        end,
-        IsShown = function(self)
-            return self.button:IsShown()
-        end,
-        SetOwningButton = function(self, button)
-            self.button = button
-            self.only:SetParent(button)
-            self.only:SetPoint("RIGHT", button, "RIGHT")
-            self.only:SetFrameLevel(button:GetFrameLevel()+2)
-        end,
-        ClearAllPoints = function() end,
-        SetPoint = function() end,
-        GetPreferredEntryWidth = function(self)
-            local button = self.button
-            local width = button:GetTextWidth() + 40
-            -- Add padding if has and expand arrow or color swatch
-            if ( button.hasArrow or button.hasColorSwatch ) then
-                width = width + 10;
-            end
-            if ( button.padding ) then
-                width = width + button.padding;
-            end
-
-            width = width + self.only:GetTextWidth()
-
-            return width
-        end,
-        GetPreferredEntryHeight = function(self)
-            self.button:Show() -- show again after SetShown(false) in default logic
-            return self.button:GetHeight()
-        end
-    }
-
-    return info
-end
-
-function ADDON.UI.FDD:CreateFilterInfo(text, filterKey, filterSettings, withOnly, toggleButtons)
-    local info = {
-        keepShownOnClick = true,
-        isNotRadio = true,
-        hasArrow = false,
-        text = text,
-    }
-
-    if filterKey then
-        if not filterSettings then
-            filterSettings = ADDON.settings.filter
-        end
-        info.notCheckable = false
-        info.checked = function()
-            return filterSettings[filterKey]
-        end
-        info.func = function(self, _, _, value)
-            filterSettings[filterKey] = value
-            ADDON:FilterMounts()
-            UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
-            ADDON.UI.FDD:UpdateResetVisibility()
-
-            if toggleButtons then
-                local name = self:GetName()
-                local x = tonumber(string.match(name, "%d+"))
-                local y = tonumber(string.match(name, "%d+$"))
-                for _, toggleNext in ipairs(toggleButtons) do
-                    if value then
-                        UIDropDownMenu_EnableButton(x, y + toggleNext)
-                    else
-                        UIDropDownMenu_DisableButton(x, y + toggleNext)
-                    end
-                end
-            end
-        end
-        if withOnly then
-            -- accept other settings table as withOnly-Param
-            info = AddOnlyButton(info, true == withOnly and filterSettings or withOnly)
-        end
-    else
-        info.notCheckable = true
-    end
-
-    return info
-end
-local CreateFilterInfo = function(...)
-    return ADDON.UI.FDD.CreateFilterInfo(ADDON.UI.FDD, ...)
-end
-
-local function CreateFilterCategory(text, value)
-    local info = CreateFilterInfo(text)
-    info.hasArrow = true
-    info.value = value
-
-    return info
-end
-
 function ADDON.UI.FDD:SetAllSubFilters(settings, switch)
     setAllSettings(settings,switch)
-
-    UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
     ADDON:FilterMounts()
-    ADDON.UI.FDD:UpdateResetVisibility()
 end
 
-local hookedWidthButtons = {}
-local function HookResizeButtonWidth(button, calcWidth)
-    local name = button:GetName()
-    button.arg2 = {"MJE_RESIZE", calcWidth}
-    if not hookedWidthButtons[name] then
-        hookedWidthButtons[name] = true
-        hooksecurefunc(button, "SetWidth", function(self, width)
-            if "table" == type(self.arg2) and self.arg2[1] == "MJE_RESIZE" then
-                self:SetSize(self.arg2[2](width), self:GetHeight())
-            end
+function ADDON.UI.FDD:CreateFilter(root, text, filterKey, filterSettings, withOnly)
+    if not filterSettings then
+        filterSettings = ADDON.settings.filter
+    end
+
+    local button = root:CreateCheckbox(text, function()
+        return filterSettings[filterKey]
+    end, function(...)
+        filterSettings[filterKey] = not filterSettings[filterKey]
+        ADDON:FilterMounts()
+
+        return MenuResponse.Refresh
+    end)
+    if withOnly then
+        local onlySettings = true == withOnly and filterSettings or withOnly
+
+        button:AddInitializer(function(button, elementDescription, menu)
+            local onlyButton = MenuTemplates.AttachAutoHideButton(button, "")
+
+            onlyButton:SetNormalFontObject("GameFontHighlight")
+            onlyButton:SetHighlightFontObject("GameFontHighlight")
+            onlyButton:SetText(ADDON.L.FILTER_ONLY)
+            onlyButton:SetSize(onlyButton:GetTextWidth(), 20)
+            onlyButton:SetPoint("RIGHT")
+
+            onlyButton:SetScript("OnClick", function(self, ...)
+                setAllSettings(onlySettings, false)
+                filterSettings[filterKey] = true
+                ADDON:FilterMounts()
+                menu:SendResponse(elementDescription, MenuResponse.Refresh)
+            end)
+
+            -- after click menu gets rerendered. by default the auto button is hidden.
+            -- since the button itself isn't properly rendered yet, the mouse is also not yet over it.
+            -- and so we wait...
+            C_Timer.After(0, function()
+                if button:IsMouseOver() then
+                    onlyButton:Show()
+                end
+            end)
         end)
     end
+
+    return button
 end
 
-local function AddCheckAllAndNoneInfo(settings, level)
-    local info = CreateFilterInfo(ALL)
-    info.justifyH = "CENTER"
-    info.func = function()
-        ADDON.UI.FDD:SetAllSubFilters(settings, true)
-    end
-    local AllButton = UIDropDownMenu_AddButton(info, level)
-    HookResizeButtonWidth(AllButton, function(w) return w/2 end)
+--region ALL and None
+local hookedWidthButtons = {}
+local function layoutHalfButton(elementData)
+    elementData:AddInitializer(function(button)
+        button.fontString:ClearAllPoints()
+        button.fontString:SetPoint("CENTER")
 
-    info = CreateFilterInfo(NONE)
-    info.justifyH = "CENTER"
-    info.func = function()
-        ADDON.UI.FDD:SetAllSubFilters(settings, false)
-    end
-    local NoneButton = UIDropDownMenu_AddButton(info, level)
-    NoneButton:SetPoint("TOPLEFT", AllButton, "TOPRIGHT", 0, 0)
-    HookResizeButtonWidth(NoneButton, function(w) return w/2 end)
-end
-
-local function HasUserHiddenMounts()
-    for _, value in pairs(ADDON.settings.hiddenMounts) do
-        if value == true then
-            return true
+        local name = button:GetDebugName()
+        if not hookedWidthButtons[name] then
+            hooksecurefunc(button, "SetWidth", function(self, width)
+                local name = self:GetDebugName()
+                if hookedWidthButtons[name] then
+                    self:SetSize(width / hookedWidthButtons[name], self:GetHeight())
+                    hookedWidthButtons[name] = 1
+                end
+            end)
         end
-    end
+        hookedWidthButtons[name] = 2
+    end)
+end
+local function AddAllAndNone(root, settings)
+    local all = root:CreateButton(ALL, function()
+        ADDON.UI.FDD:SetAllSubFilters(settings, true)
+        return MenuResponse.Refresh
+    end)
+    layoutHalfButton(all)
+    local none = root:CreateButton(NONE, function()
+        ADDON.UI.FDD:SetAllSubFilters(settings, false)
+        return MenuResponse.Refresh
+    end)
+    layoutHalfButton(none)
 
-    return false
+    root:QueueSpacer()
+end
+local function registerVerticalLayoutHook()
+    hooksecurefunc(AnchorUtil, "VerticalLayout", function(frames, initialAnchor, padding)
+        if #frames > 3 then
+            local first = frames[1]
+            local second = frames[2]
+            if hookedWidthButtons[first:GetDebugName()] and hookedWidthButtons[second:GetDebugName()]
+                and first.fontString:GetText() == ALL
+                and second.fontString:GetText() == NONE
+            then
+                second:SetPoint("TOPLEFT", first, "TOPRIGHT", padding, 0)
+                frames[3]:SetPoint("TOPLEFT", first, "BOTTOMLEFT", 0, -padding)
+            end
+        end
+    end)
+end
+--endregion
+
+local function setLeftPadding(button)
+    button:AddInitializer(function(button)
+        local pad = button:AttachTexture();
+        pad:SetSize(18, 10);
+        pad:SetPoint("LEFT");
+
+        button.leftTexture1:SetPoint("LEFT", pad, "RIGHT");
+
+        local width = pad:GetWidth() + button.leftTexture1:GetWidth() + button.fontString:GetUnboundedStringWidth()
+        return width, button.fontString:GetHeight()
+    end)
 end
 
-local function InitializeFilterDropDown(frame, level)
+local function setupSourceMenu(root)
+    local serverExpansion = GetServerExpansionLevel()
+    local settings = ADDON.settings.filter[SETTING_SOURCE]
     local L = ADDON.L
 
-    if level == 1 then
-        local info
-        UIDropDownMenu_AddButton(CreateFilterCategory(RAID_FRAME_SORT_LABEL, SETTING_SORT), level)
-        UIDropDownMenu_AddSpace(level)
+    AddAllAndNone(root, settings)
 
-        info = CreateFilterInfo(COLLECTED, SETTING_COLLECTED, nil, nil, { 1, 2 })
-        UIDropDownMenu_AddButton(info, level)
+    ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_1, "Drop", settings, true)
+    ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_2, "Quest", settings, true)
+    ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_3, "Vendor", settings, true)
+    ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_4, "Profession", settings, true)
+    ADDON.UI.FDD:CreateFilter(root, INSTANCE, "Instance", settings, true)
+    ADDON.UI.FDD:CreateFilter(root, REPUTATION, "Reputation", settings, true)
+    ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_6, "Achievement", settings, true)
+    if serverExpansion >= LE_EXPANSION_SHADOWLANDS then
+        ADDON.UI.FDD:CreateFilter(root, GetCategoryInfo(15441), "Covenants", settings, true)
+    end
+    if serverExpansion >= LE_EXPANSION_BATTLE_FOR_AZEROTH then
+        ADDON.UI.FDD:CreateFilter(root, ISLANDS_HEADER, "Island Expedition", settings, true)
+    end
+    if serverExpansion >= LE_EXPANSION_WARLORDS_OF_DRAENOR then
+        ADDON.UI.FDD:CreateFilter(root, GARRISON_LOCATION_TOOLTIP, "Garrison", settings, true)
+    end
+    ADDON.UI.FDD:CreateFilter(root, PVP, "PVP", settings, true)
+    ADDON.UI.FDD:CreateFilter(root, CLASS, "Class", settings, true)
+    ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_7, "World Event", settings, true)
+    if serverExpansion >= LE_EXPANSION_MISTS_OF_PANDARIA then
+        ADDON.UI.FDD:CreateFilter(root, L["Black Market"], "Black Market", settings, true)
+    end
+    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE  then
+        ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_12, "Trading Post", settings, true)
+    end
+    ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_10, "Shop", settings, true)
+    ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_8, "Promotion", settings, true)
+end
 
-        info = CreateFilterInfo(FAVORITES_FILTER, SETTING_ONLY_FAVORITES)
-        info.leftPadding = 16
-        info.disabled = not ADDON.settings.filter.collected
-        UIDropDownMenu_AddButton(info, level)
-        info = CreateFilterInfo(PET_JOURNAL_FILTER_USABLE_ONLY, SETTING_ONLY_USEABLE)
-        info.leftPadding = 16
-        info.disabled = not ADDON.settings.filter.collected
-        UIDropDownMenu_AddButton(info, level)
+local function setupTypeMenu(root)
+    local settings = ADDON.settings.filter[SETTING_MOUNT_TYPE]
+    local L = ADDON.L
 
-        info = CreateFilterInfo(NOT_COLLECTED, SETTING_NOT_COLLECTED, nil, nil, { 1 })
-        UIDropDownMenu_AddButton(info, level)
-        info = CreateFilterInfo(L.FILTER_SECRET, SETTING_HIDDEN_INGAME)
-        info.leftPadding = 16
-        info.disabled = not ADDON.settings.filter.notCollected
-        UIDropDownMenu_AddButton(info, level)
+    AddAllAndNone(root, settings)
 
-        UIDropDownMenu_AddButton(CreateFilterInfo(L.FILTER_ONLY_LATEST, SETTING_ONLY_RECENT), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(L["Only tradable"], SETTING_ONLY_TRADABLE), level)
+    if MOUNT_JOURNAL_FILTER_DRAGONRIDING then
+        ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_DRAGONRIDING, "dragonriding", settings, true)
+    end
+    ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_FLYING, "flying", settings, true)
+    ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_GROUND, "ground", settings, true)
+    ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_AQUATIC, "underwater", settings, true)
+    if GetServerExpansionLevel() >= LE_EXPANSION_CATACLYSM then
+        ADDON.UI.FDD:CreateFilter(root, L["Transform"], "transform", settings, true)
+    end
+    ADDON.UI.FDD:CreateFilter(root, MINIMAP_TRACKING_REPAIR, "repair", settings, true)
+    ADDON.UI.FDD:CreateFilter(root, L["Passenger"], "passenger", settings, true)
+end
 
-        if ADDON.settings.filter[SETTING_HIDDEN] or HasUserHiddenMounts() then
-            UIDropDownMenu_AddButton(CreateFilterInfo(L["Hidden"], SETTING_HIDDEN), level)
-        end
+local function setupFactionMenu(root)
+    local settings = ADDON.settings.filter[SETTING_FACTION]
+    ADDON.UI.FDD:CreateFilter(root, FACTION_ALLIANCE, "alliance", settings)
+    ADDON.UI.FDD:CreateFilter(root, FACTION_HORDE, "horde", settings)
+    ADDON.UI.FDD:CreateFilter(root, NPC_NAMES_DROPDOWN_NONE, "noFaction", settings)
+end
 
-        UIDropDownMenu_AddSpace(level)
+local function setupExpansionMenu(root)
+    local settings = ADDON.settings.filter[SETTING_EXPANSION]
+    AddAllAndNone(root, settings)
 
-        UIDropDownMenu_AddButton(CreateFilterCategory(SOURCES, SETTING_SOURCE), level)
-        UIDropDownMenu_AddButton(CreateFilterCategory(MOUNT_JOURNAL_FILTER_TYPE or TYPE, SETTING_MOUNT_TYPE), level)
-        UIDropDownMenu_AddButton(CreateFilterCategory(FACTION, SETTING_FACTION), level)
-        UIDropDownMenu_AddButton(CreateFilterCategory(L["Family"], SETTING_FAMILY), level)
-        UIDropDownMenu_AddButton(CreateFilterCategory(EXPANSION_FILTER_TEXT, SETTING_EXPANSION), level)
-        UIDropDownMenu_AddButton(CreateFilterCategory(COLOR, SETTING_COLOR), level)
-        if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-            UIDropDownMenu_AddButton(CreateFilterCategory(RARITY, SETTING_RARITY), level)
-        end
+    --todo: use expansion icons/textures
+    for i = GetServerExpansionLevel(), 0,-1 do
+        ADDON.UI.FDD:CreateFilter(root, _G["EXPANSION_NAME" .. i], i, settings, true)
+    end
+end
 
-        UIDropDownMenu_AddSpace(level)
+local function setupRarityMenu(root)
+    local settings = ADDON.settings.filter[SETTING_RARITY]
+    AddAllAndNone(root, settings)
+    local addButton = function(quality, suffix)
+        local text = "|c"..select(4, GetItemQualityColor(quality)).._G["ITEM_QUALITY"..quality.."_DESC"].."|r".." ("..suffix..")"
+        ADDON.UI.FDD:CreateFilter(root, text, quality, settings, true)
+    end
+    addButton(Enum.ItemQuality.Legendary, "<1%")
+    addButton(Enum.ItemQuality.Epic, "<10%")
+    addButton(Enum.ItemQuality.Rare, "<20%")
+    addButton(Enum.ItemQuality.Uncommon, "<50%")
+    addButton(Enum.ItemQuality.Common, ">=50%")
+end
 
-        info = CreateFilterInfo(L["Reset filters"])
-        info.justifyH = "CENTER"
-        info.keepShownOnClick = false
-        info.func = function()
-            MountJournalFilterButton.resetFunction()
-            ADDON.UI.FDD:UpdateResetVisibility()
-        end
-        UIDropDownMenu_AddButton(info, level)
-    elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_SOURCE then
+local function setupFilterMenu(dropdown, root)
+    local L = ADDON.L
 
-        local serverExpansion = GetServerExpansionLevel()
+    root:SetTag("MENU_MOUNT_COLLECTION_FILTER")
 
-        local settings = ADDON.settings.filter[SETTING_SOURCE]
-        AddCheckAllAndNoneInfo(settings, level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_1, "Drop", settings, true), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_2, "Quest", settings, true), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_3, "Vendor", settings, true), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_4, "Profession", settings, true), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(INSTANCE, "Instance", settings, true), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(REPUTATION, "Reputation", settings, true), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_6, "Achievement", settings, true), level)
-        if serverExpansion >= LE_EXPANSION_SHADOWLANDS then
-            UIDropDownMenu_AddButton(CreateFilterInfo(GetCategoryInfo(15441), "Covenants", settings, true), level)
-        end
-        if serverExpansion >= LE_EXPANSION_BATTLE_FOR_AZEROTH then
-            UIDropDownMenu_AddButton(CreateFilterInfo(ISLANDS_HEADER, "Island Expedition", settings, true), level)
-        end
-        if serverExpansion >= LE_EXPANSION_WARLORDS_OF_DRAENOR then
-            UIDropDownMenu_AddButton(CreateFilterInfo(GARRISON_LOCATION_TOOLTIP, "Garrison", settings, true), level)
-        end
-        UIDropDownMenu_AddButton(CreateFilterInfo(PVP, "PVP", settings, true), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(CLASS, "Class", settings, true), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_7, "World Event", settings, true), level)
-        if serverExpansion >= LE_EXPANSION_MISTS_OF_PANDARIA then
-            UIDropDownMenu_AddButton(CreateFilterInfo(L["Black Market"], "Black Market", settings, true), level)
-        end
-        if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE  then
-            UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_12, "Trading Post", settings, true), level)
-        end
-        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_10, "Shop", settings, true), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_8, "Promotion", settings, true), level)
-    elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_MOUNT_TYPE then
-        local settings = ADDON.settings.filter[SETTING_MOUNT_TYPE]
-        AddCheckAllAndNoneInfo(settings, level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_FLYING, "flying", settings, true), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_GROUND, "ground", settings, true), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_AQUATIC, "underwater", settings, true), level)
-        if MOUNT_JOURNAL_FILTER_DRAGONRIDING then
-            UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_DRAGONRIDING, "dragonriding", settings, true), level)
-        end
-        if GetServerExpansionLevel() >= LE_EXPANSION_CATACLYSM then
-            UIDropDownMenu_AddButton(CreateFilterInfo(L["Transform"], "transform", settings, true), level)
-        end
-        UIDropDownMenu_AddButton(CreateFilterInfo(MINIMAP_TRACKING_REPAIR, "repair", settings, true), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(L["Passenger"], "passenger", settings, true), level)
-    elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_FACTION then
-        local settings = ADDON.settings.filter[SETTING_FACTION]
-        UIDropDownMenu_AddButton(CreateFilterInfo(FACTION_ALLIANCE, "alliance", settings), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(FACTION_HORDE, "horde", settings), level)
-        UIDropDownMenu_AddButton(CreateFilterInfo(NPC_NAMES_DROPDOWN_NONE, "noFaction", settings), level)
-    elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_FAMILY then
-        AddCheckAllAndNoneInfo(ADDON.settings.filter[SETTING_FAMILY], level)
-        ADDON.UI.FDD:AddFamilyMenu(level)
-    elseif level == 3 and ADDON.DB.Family[UIDROPDOWNMENU_MENU_VALUE] then
-        ADDON.UI.FDD:AddFamilySubMenu(level, UIDROPDOWNMENU_MENU_VALUE)
-    elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_EXPANSION then
-        local settings = ADDON.settings.filter[SETTING_EXPANSION]
-        AddCheckAllAndNoneInfo(settings, level)
-        for i = GetServerExpansionLevel(), 0,-1 do
-            UIDropDownMenu_AddButton(CreateFilterInfo(_G["EXPANSION_NAME" .. i], i, settings, true), level)
-        end
-    elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_COLOR then
-        ADDON.UI.FDD:AddColorMenu(level)
-    elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_RARITY then
-        local settings = ADDON.settings.filter[SETTING_RARITY]
-        AddCheckAllAndNoneInfo(settings, level)
-        local addButton = function(quality, suffix)
-            local text = "|c"..select(4, GetItemQualityColor(quality)).._G["ITEM_QUALITY"..quality.."_DESC"].."|r".." ("..suffix..")"
-            UIDropDownMenu_AddButton(CreateFilterInfo(text, quality, settings, true), level)
-        end
-        addButton(Enum.ItemQuality.Legendary, "<1%")
-        addButton(Enum.ItemQuality.Epic, "<10%")
-        addButton(Enum.ItemQuality.Rare, "<20%")
-        addButton(Enum.ItemQuality.Uncommon, "<50%")
-        addButton(Enum.ItemQuality.Common, ">=50%")
-    elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_SORT then
-        ADDON.UI.FDD:AddSortMenu(level)
+    ADDON.UI.FDD:AddSortMenu(root:CreateButton(RAID_FRAME_SORT_LABEL))
+
+    root:CreateSpacer()
+
+    ADDON.UI.FDD:CreateFilter(root, COLLECTED, SETTING_COLLECTED)
+    local favorites = ADDON.UI.FDD:CreateFilter(root, FAVORITES_FILTER, SETTING_ONLY_FAVORITES)
+    favorites:SetEnabled(function()
+        return ADDON.settings.filter.collected
+    end)
+    setLeftPadding(favorites)
+    local onlyUsable = ADDON.UI.FDD:CreateFilter(root, PET_JOURNAL_FILTER_USABLE_ONLY, SETTING_ONLY_USEABLE)
+    onlyUsable:SetEnabled(function()
+        return ADDON.settings.filter.collected
+    end)
+    setLeftPadding(onlyUsable)
+
+    ADDON.UI.FDD:CreateFilter(root, NOT_COLLECTED, SETTING_NOT_COLLECTED)
+    local hiddenIngame = ADDON.UI.FDD:CreateFilter(root, L.FILTER_SECRET, SETTING_HIDDEN_INGAME)
+    hiddenIngame:SetEnabled(function()
+        return ADDON.settings.filter.notCollected
+    end)
+    setLeftPadding(hiddenIngame)
+
+    ADDON.UI.FDD:CreateFilter(root, L.FILTER_ONLY_LATEST, SETTING_ONLY_RECENT)
+    ADDON.UI.FDD:CreateFilter(root, L["Only tradable"], SETTING_ONLY_TRADABLE)
+    if ADDON.settings.filter[SETTING_HIDDEN] or TableHasAnyEntries(ADDON.settings.hiddenMounts) then
+        ADDON.UI.FDD:CreateFilter(root, L["Hidden"], SETTING_HIDDEN)
     end
 
-    UIDropDownMenu_Refresh(frame, nil, level)
+    root:CreateSpacer()
+
+    setupSourceMenu(root:CreateButton(SOURCES))
+    setupTypeMenu(root:CreateButton(MOUNT_JOURNAL_FILTER_TYPE or TYPE))
+    setupFactionMenu(root:CreateButton(FACTION))
+
+    local familyRoot = root:CreateButton(L["Family"])
+    AddAllAndNone(familyRoot, ADDON.settings.filter[SETTING_FAMILY])
+    ADDON.UI.FDD:AddFamilyMenu(familyRoot)
+
+    setupExpansionMenu(root:CreateButton(EXPANSION_FILTER_TEXT))
+    ADDON.UI.FDD:AddColorMenu(root:CreateButton(COLOR))
+    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+        setupRarityMenu(root:CreateButton(RARITY))
+    end
+
+    root:CreateSpacer()
+
+    local reset = root:CreateButton(L["Reset filters"], function()
+        ADDON:ResetFilterSettings()
+        ADDON:FilterMounts()
+
+        return MenuResponse.CloseAll
+    end)
+    reset:AddInitializer(function(button)
+        button.fontString:ClearAllPoints()
+        button.fontString:SetPoint("CENTER")
+    end)
 end
 
 ADDON.Events:RegisterCallback("loadUI", function()
-    local menu
 
-    MountJournalFilterButton:SetScript("OnMouseDown", function(sender, button)
-        UIMenuButtonStretchMixin.OnMouseDown(sender, button);
-        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-
-        if menu == nil then
-            menu = CreateFrame("Frame", ADDON_NAME .. "FilterMenu", MountJournalFilterButton, "UIDropDownMenuTemplate")
-            UIDropDownMenu_Initialize(menu, InitializeFilterDropDown, "MENU")
-        end
-
-        ToggleDropDownMenu(1, nil, menu, sender, 74, 15)
+    MountJournal.FilterDropdown:SetIsDefaultCallback(function()
+        return ADDON.IsUsingDefaultFilters()
     end)
-    MountJournalFilterButton.resetFunction = function()
+    MountJournal.FilterDropdown:SetDefaultCallback(function()
         ADDON:ResetFilterSettings()
         ADDON:FilterMounts()
-    end
-    ADDON.UI.FDD:UpdateResetVisibility()
+    end)
+    MountJournal.FilterDropdown:SetupMenu(setupFilterMenu)
+
+    registerVerticalLayoutHook()
 end, "filter dropdown")

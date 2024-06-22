@@ -1,75 +1,69 @@
-local ADDON_NAME, ADDON = ...
-local L = ADDON.L
+local _, ADDON = ...
 
-local function CreateSortRadio(text, sortValue)
+if not MenuUtil then -- modern style filter menu does not exist. use legacy UIDropdownMenu instead
+    return
+end
+
+local function CreateSortRadio(root, text, sortValue)
     local sortSettings = ADDON.settings.sort
-    local info = ADDON.UI.FDD:CreateFilterInfo(text, "by", sortSettings)
-    info.isNotRadio = false
-    info.checked = function()
-        return sortSettings["by"] == sortValue
-    end
-    info.func = function()
+
+    return root:CreateRadio(text, function()
+        return sortSettings.by == sortValue
+    end, function()
         sortSettings["by"] = sortValue
         ADDON.Api:GetDataProvider():Sort()
-        UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
-    end
 
-    return info
+        return MenuResponse.Refresh
+    end)
 end
 
-local function CreateSortCheckbox(text, sortKey)
+local function CreateSortCheckbox(root, text, sortKey)
     local sortSettings = ADDON.settings.sort
-    local info = ADDON.UI.FDD:CreateFilterInfo(text, sortKey, sortSettings)
-    info.func = function(_, _, _, value)
-        sortSettings[sortKey] = value
-        ADDON.Api:GetDataProvider():Sort()
-        UIDropDownMenu_RefreshAll(_G[ADDON_NAME .. "FilterMenu"])
-    end
 
-    return info
+    return root:CreateCheckbox(text, function()
+        return sortSettings[sortKey]
+    end, function()
+        sortSettings[sortKey] = not sortSettings[sortKey]
+        ADDON.Api:GetDataProvider():Sort()
+
+        return MenuResponse.Refresh
+    end)
 end
 
-function ADDON.UI.FDD:AddSortMenu(level)
-    UIDropDownMenu_AddButton(CreateSortRadio(NAME, 'name'), level)
-    UIDropDownMenu_AddButton(CreateSortRadio(TYPE, 'type'), level)
-    UIDropDownMenu_AddButton(CreateSortRadio(EXPANSION_FILTER_TEXT, 'expansion'), level)
+function ADDON.UI.FDD:AddSortMenu(root)
+    local L = ADDON.L
+
+    CreateSortRadio(root, NAME, 'name')
+    CreateSortRadio(root, TYPE, 'type')
+    CreateSortRadio(root, EXPANSION_FILTER_TEXT, 'expansion')
     if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-        UIDropDownMenu_AddButton(CreateSortRadio(RARITY, 'rarity'), level)
+        CreateSortRadio(root, RARITY, 'rarity')
     end
 
-    local trackingEnabled = ADDON.settings.trackUsageStats
-    local info = CreateSortRadio(L.SORT_BY_USAGE_COUNT, 'usage_count')
-    info.disabled = not trackingEnabled
-    UIDropDownMenu_AddButton(info, level)
-    info = CreateSortRadio(L.SORT_BY_LAST_USAGE, 'last_usage')
-    info.disabled = not trackingEnabled
-    UIDropDownMenu_AddButton(info, level)
-    info = CreateSortRadio(L.SORT_BY_LEARNED_DATE, 'learned_date')
-    info.disabled = not trackingEnabled
-    UIDropDownMenu_AddButton(info, level)
-    info = CreateSortRadio(L.SORT_BY_TRAVEL_DURATION, 'travel_duration')
-    info.disabled = not trackingEnabled
-    UIDropDownMenu_AddButton(info, level)
-    info = CreateSortRadio(L.SORT_BY_TRAVEL_DISTANCE, 'travel_distance')
-    info.disabled = not trackingEnabled
-    UIDropDownMenu_AddButton(info, level)
+    CreateSortRadio(root, L.SORT_BY_USAGE_COUNT, 'usage_count'):SetEnabled(function() return ADDON.settings.trackUsageStats end)
+    CreateSortRadio(root, L.SORT_BY_LAST_USAGE, 'last_usage'):SetEnabled(function() return ADDON.settings.trackUsageStats end)
+    CreateSortRadio(root, L.SORT_BY_LEARNED_DATE, 'learned_date'):SetEnabled(function() return ADDON.settings.trackUsageStats end)
+    CreateSortRadio(root, L.SORT_BY_TRAVEL_DURATION, 'travel_duration'):SetEnabled(function() return ADDON.settings.trackUsageStats end)
+    CreateSortRadio(root, L.SORT_BY_TRAVEL_DISTANCE, 'travel_distance'):SetEnabled(function() return ADDON.settings.trackUsageStats end)
 
-    UIDropDownMenu_AddSpace(level)
-    UIDropDownMenu_AddButton(CreateSortCheckbox(L.SORT_REVERSE, 'descending'), level)
-    UIDropDownMenu_AddButton(CreateSortCheckbox(L.SORT_FAVORITES_FIRST, 'favoritesOnTop'), level)
+    root:CreateSpacer()
+    CreateSortCheckbox(root, L.SORT_REVERSE, 'descending')
+    CreateSortCheckbox(root, L.SORT_FAVORITES_FIRST, 'favoritesOnTop')
     if GetServerExpansionLevel() >= LE_EXPANSION_DRAGONFLIGHT then
-        UIDropDownMenu_AddButton(CreateSortCheckbox(L.SORT_DRAGONRIDING_TOP, 'dragonridingOnTop'), level)
+        CreateSortCheckbox(root, L.SORT_DRAGONRIDING_TOP, 'dragonridingOnTop')
     end
-    UIDropDownMenu_AddButton(CreateSortCheckbox(L.SORT_UNUSABLE_BOTTOM, 'unusableToBottom'), level)
-    UIDropDownMenu_AddButton(CreateSortCheckbox(L.SORT_UNOWNED_BOTTOM, 'unownedOnBottom'), level)
-    UIDropDownMenu_AddSpace(level)
+    CreateSortCheckbox(root, L.SORT_UNUSABLE_BOTTOM, 'unusableToBottom')
+    CreateSortCheckbox(root, L.SORT_UNOWNED_BOTTOM, 'unownedOnBottom')
+    root:CreateSpacer()
 
-    info = ADDON.UI.FDD:CreateFilterInfo(NEWBIE_TOOLTIP_STOPWATCH_RESETBUTTON)
-    info.justifyH = "CENTER"
-    info.keepShownOnClick = false
-    info.func = function()
+    local reset = root:CreateButton(NEWBIE_TOOLTIP_STOPWATCH_RESETBUTTON, function()
         ADDON:ResetSortSettings()
         ADDON.Api:GetDataProvider():Sort()
-    end
-    UIDropDownMenu_AddButton(info, level)
+
+        return MenuResponse.CloseAll
+    end)
+    reset:AddInitializer(function(button)
+        button.fontString:ClearAllPoints()
+        button.fontString:SetPoint("CENTER")
+    end)
 end
