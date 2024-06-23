@@ -26,7 +26,7 @@ do
             ADDON.L.SETTING_SHOW_STATISTICS,
             function()
                 if ADDON.initialized then
-                    MountJournal_UpdateMountDisplay()
+                    MountJournal_UpdateMountDisplay(true)
                 end
             end,
             options
