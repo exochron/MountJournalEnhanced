@@ -61,6 +61,13 @@ end
 
 --endregion
 
+function ADDON.UI:CenterDropdownButton(elementData)
+    elementData:AddInitializer(function(button)
+        button.fontString:ClearAllPoints()
+        button.fontString:SetPoint("CENTER")
+    end)
+end
+
 --region ElvUI hooks
 
 local callbacks = {}

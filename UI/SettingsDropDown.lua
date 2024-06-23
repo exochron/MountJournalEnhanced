@@ -1,6 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
-local function InitializeDropDown(self, level)
+local function InitializeUIDDM(self, level)
 
     if level == 1 then
         local button = {
@@ -98,6 +98,58 @@ local function InitializeDropDown(self, level)
     end
 end
 
+local function CreateSettingsMenu(owner, rootDescription)
+    rootDescription:CreateTitle(C_AddOns.GetAddOnMetadata(ADDON_NAME, "Title"))
+
+    local uiLabels, _ = ADDON:GetSettingLabels()
+    for _, labelData in ipairs(uiLabels) do
+        local setting, label, options, isMultiSelect = labelData[1], labelData[2], labelData[3], labelData[4]
+        if options then
+            local submenu = rootDescription:CreateButton(label)
+            for option, label in pairs(options) do
+                if isMultiSelect then
+                    submenu:CreateCheckbox(label, function()
+                        return ADDON.settings.ui[setting][option]
+                    end, function()
+                        ADDON:ApplySetting(setting, not ADDON.settings.ui[setting][option], option)
+                        return MenuResponse.Refresh
+                    end)
+                else
+                    submenu:CreateRadio(label, function()
+                        return ADDON.settings.ui[setting] == option
+                    end, function()
+                        ADDON:ApplySetting(setting, option)
+                        return MenuResponse.Refresh
+                    end)
+                end
+            end
+        else
+            rootDescription:CreateCheckbox(label, function()
+                return ADDON.settings.ui[setting]
+            end, function()
+                ADDON:ApplySetting(setting, not ADDON.settings.ui[setting])
+                return MenuResponse.Refresh
+            end)
+        end
+    end
+
+    rootDescription:CreateSpacer()
+    ADDON.UI:CenterDropdownButton(rootDescription:CreateButton(
+        ADDON.L.DISPLAY_ALL_SETTINGS,
+        function()
+            ADDON.OpenOptions()
+            return MenuResponse.CloseAll
+        end)
+    )
+    ADDON.UI:CenterDropdownButton(rootDescription:CreateButton(
+        ADDON.L.RESET_WINDOW_SIZE,
+        function()
+            ADDON.UI:RestoreWindowSize()
+            return MenuResponse.CloseAll
+        end)
+    )
+end
+
 local withoutStyle = false
 local function BuildWheelButton()
 
@@ -137,14 +189,18 @@ ADDON.Events:RegisterCallback("loadUI", function()
     ADDON.UI.SettingsButton = BuildWheelButton()
 
     local menu
-    ADDON.UI.SettingsButton:HookScript("OnClick", function()
-        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-        if menu == nil then
-            menu = CreateFrame("Frame", ADDON_NAME .. "SettingsMenu", MountJournal, "UIDropDownMenuTemplate")
-            UIDropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
-        end
+    ADDON.UI.SettingsButton:HookScript("OnClick", function(self)
+        if MenuUtil then
+            MenuUtil.CreateContextMenu(self, CreateSettingsMenu)
+        else
+            PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+            if menu == nil then
+                menu = CreateFrame("Frame", ADDON_NAME .. "SettingsMenu", MountJournal, "UIDropDownMenuTemplate")
+                UIDropDownMenu_Initialize(menu, InitializeUIDDM, "MENU")
+            end
 
-        ToggleDropDownMenu(1, nil, menu, ADDON.UI.SettingsButton, 0, 0)
+            ToggleDropDownMenu(1, nil, menu, self, 0, 0)
+        end
     end)
 end, "settings wheel")
 

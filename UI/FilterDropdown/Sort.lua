@@ -56,14 +56,10 @@ function ADDON.UI.FDD:AddSortMenu(root)
     CreateSortCheckbox(root, L.SORT_UNOWNED_BOTTOM, 'unownedOnBottom')
     root:CreateSpacer()
 
-    local reset = root:CreateButton(NEWBIE_TOOLTIP_STOPWATCH_RESETBUTTON, function()
+    ADDON.UI:CenterDropdownButton(root:CreateButton(NEWBIE_TOOLTIP_STOPWATCH_RESETBUTTON, function()
         ADDON:ResetSortSettings()
         ADDON.Api:GetDataProvider():Sort()
 
         return MenuResponse.CloseAll
-    end)
-    reset:AddInitializer(function(button)
-        button.fontString:ClearAllPoints()
-        button.fontString:SetPoint("CENTER")
-    end)
+    end))
 end

@@ -5,16 +5,12 @@ if not MenuUtil then -- modern style filter menu does not exist. use legacy UIDr
 end
 
 function ADDON.UI.FDD:AddColorMenu(root)
-    local reset = root:CreateButton(NEWBIE_TOOLTIP_STOPWATCH_RESETBUTTON, function()
+    ADDON.UI:CenterDropdownButton(root:CreateButton(NEWBIE_TOOLTIP_STOPWATCH_RESETBUTTON, function()
         ADDON.settings.filter.color = { }
         ADDON:FilterMounts()
 
         return MenuResponse.Close
-    end)
-    reset:AddInitializer(function(button)
-        button.fontString:ClearAllPoints()
-        button.fontString:SetPoint("CENTER")
-    end)
+    end))
 
     local swatch = root:CreateFrame()
     swatch:AddInitializer(function(frame, elementDescription, menu)

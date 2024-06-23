@@ -86,10 +86,8 @@ end
 --region ALL and None
 local hookedWidthButtons = {}
 local function layoutHalfButton(elementData)
+    ADDON.UI:CenterDropdownButton(elementData)
     elementData:AddInitializer(function(button)
-        button.fontString:ClearAllPoints()
-        button.fontString:SetPoint("CENTER")
-
         local name = button:GetDebugName()
         if not hookedWidthButtons[name] then
             hooksecurefunc(button, "SetWidth", function(self, width)
@@ -285,16 +283,12 @@ local function setupFilterMenu(dropdown, root)
 
     root:CreateSpacer()
 
-    local reset = root:CreateButton(L["Reset filters"], function()
+    ADDON.UI:CenterDropdownButton(root:CreateButton(L["Reset filters"], function()
         ADDON:ResetFilterSettings()
         ADDON:FilterMounts()
 
         return MenuResponse.CloseAll
-    end)
-    reset:AddInitializer(function(button)
-        button.fontString:ClearAllPoints()
-        button.fontString:SetPoint("CENTER")
-    end)
+    end))
 end
 
 ADDON.Events:RegisterCallback("loadUI", function()
