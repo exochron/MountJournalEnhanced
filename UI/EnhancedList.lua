@@ -76,8 +76,8 @@ local function InitMountButton(button, elementData)
     CollectionItemListButton_SetRedOverlayShown(button, false);
     button.iconBorder:Hide();
     button.background:SetVertexColor(1, 1, 1, 1);
+    button.DragButton:SetEnabled(true)
     if (isUsable or needsFanfare) then
-        button.DragButton:SetEnabled(true);
         button.additionalText = nil;
         button.icon:SetDesaturated(false);
         button.icon:SetAlpha(1.0);
@@ -85,14 +85,12 @@ local function InitMountButton(button, elementData)
     else
         if (isCollected) then
             CollectionItemListButton_SetRedOverlayShown(button, true);
-            button.DragButton:SetEnabled(true);
             button.name:SetFontObject("GameFontNormal");
             button.icon:SetAlpha(0.75);
             button.additionalText = nil;
             button.background:SetVertexColor(1, 0, 0, 1);
         else
             button.icon:SetDesaturated(true);
-            button.DragButton:SetEnabled(false);
             button.icon:SetAlpha(0.25);
             button.additionalText = nil;
             button.name:SetFontObject("GameFontDisable");
