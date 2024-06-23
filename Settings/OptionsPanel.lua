@@ -17,7 +17,7 @@ local function BuildCheckBox(parent, text)
 
     return button
 end
-local function BuildDropDown(parent, text, options, isMultiOptions)
+local function BuildDropDown(parent, text, options, isMultiOptions, parentSetting)
     local group = AceGUI:Create("SimpleGroup")
     group:SetLayout("Flow")
     group:SetFullWidth(true)
@@ -32,6 +32,7 @@ local function BuildDropDown(parent, text, options, isMultiOptions)
     dropdown:SetMultiselect(isMultiOptions)
     for option, optionLabel in pairs(options) do
         dropdown:AddItem(option, optionLabel)
+        dropdown:SetItemDisabled(option, ADDON:IsSettingDisabled(parentSetting, option))
     end
     group:AddChild(dropdown)
     parent:AddChild(group)
@@ -66,7 +67,7 @@ local function BuildMainFrame(uiLabels, behaviourLabels)
         local setting, label, options, isMultiOptions = labelData[1], labelData[2], labelData[3], labelData[4]
         if ADDON.settings.ui[setting] ~= nil then
             if options then
-                frame.checks[setting] = BuildDropDown(scroll, label, options, isMultiOptions)
+                frame.checks[setting] = BuildDropDown(scroll, label, options, isMultiOptions, setting)
             else
                 frame.checks[setting] = BuildCheckBox(scroll, label)
             end
@@ -81,13 +82,6 @@ local function BuildMainFrame(uiLabels, behaviourLabels)
             frame.checks[setting] = BuildCheckBox(scroll, label)
         end
     end
-
-    frame.checks.trackUsageStats:SetCallback("OnValueChanged", function(_, _, value)
-        frame.checks.displayStatistics:SetItemDisabled("UsedCount", not value)
-        frame.checks.displayStatistics:SetItemDisabled("TravelTime", not value)
-        frame.checks.displayStatistics:SetItemDisabled("TravelDistance", not value)
-        frame.checks.displayStatistics:SetItemDisabled("LearnedDate", not value)
-    end)
 
     return frame
 end
@@ -170,6 +164,12 @@ ADDON.Events:RegisterCallback("OnLogin", function()
     local uiLabels, behaviourLabels = ADDON:GetSettingLabels()
 
     local group = BuildMainFrame(uiLabels, behaviourLabels)
+    for _, check in pairs(group.checks) do
+        check:SetCallback("OnValueChanged", function()
+            group:Fire("okay")
+            group:Fire("refresh")
+        end)
+    end
     group:SetCallback("refresh", function(frame)
         for _, labelData in ipairs(uiLabels) do
             local setting, isMultiOptions = labelData[1], labelData[4]
@@ -178,9 +178,11 @@ ADDON.Events:RegisterCallback("OnLogin", function()
                 if isMultiOptions then
                     for subSetting, value in pairs(ADDON.settings.ui[setting]) do
                         check:SetItemValue(subSetting, value)
+                        check:SetItemDisabled(subSetting, ADDON:IsSettingDisabled(setting, subSetting))
                     end
                 else
                     check:SetValue(ADDON.settings.ui[setting])
+                    check:SetDisabled(ADDON:IsSettingDisabled(setting))
                 end
             end
         end
@@ -188,13 +190,9 @@ ADDON.Events:RegisterCallback("OnLogin", function()
             local setting = labelData[1]
             if frame.checks[setting] then
                 frame.checks[setting]:SetValue(ADDON.settings[setting])
+                frame.checks[setting]:SetDisabled(ADDON:IsSettingDisabled(setting))
             end
         end
-
-        frame.checks.displayStatistics:SetItemDisabled("UsedCount", not ADDON.settings.trackUsageStats)
-        frame.checks.displayStatistics:SetItemDisabled("TravelTime", not ADDON.settings.trackUsageStats)
-        frame.checks.displayStatistics:SetItemDisabled("TravelDistance", not ADDON.settings.trackUsageStats)
-        frame.checks.displayStatistics:SetItemDisabled("LearnedDate", not ADDON.settings.trackUsageStats)
     end)
     group:SetCallback("okay", function(frame)
         for _, labelData in ipairs(uiLabels) do

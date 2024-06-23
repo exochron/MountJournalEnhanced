@@ -71,6 +71,7 @@ local function InitializeUIDDM(self, level)
                     local button = {
                         keepShownOnClick = true,
                         isNotRadio = isMultiSelect,
+                        disabled = ADDON:IsSettingDisabled(setting, option),
                         hasArrow = false,
                         text = label,
                         notCheckable = false,
@@ -107,28 +108,35 @@ local function CreateSettingsMenu(owner, rootDescription)
         if options then
             local submenu = rootDescription:CreateButton(label)
             for option, label in pairs(options) do
+                local subItem
                 if isMultiSelect then
-                    submenu:CreateCheckbox(label, function()
+                    subItem = submenu:CreateCheckbox(label, function()
                         return ADDON.settings.ui[setting][option]
                     end, function()
                         ADDON:ApplySetting(setting, not ADDON.settings.ui[setting][option], option)
                         return MenuResponse.Refresh
                     end)
                 else
-                    submenu:CreateRadio(label, function()
+                    subItem = submenu:CreateRadio(label, function()
                         return ADDON.settings.ui[setting] == option
                     end, function()
                         ADDON:ApplySetting(setting, option)
                         return MenuResponse.Refresh
                     end)
                 end
+                subItem:SetEnabled(function()
+                    return not ADDON:IsSettingDisabled(setting, option)
+                end)
             end
         else
-            rootDescription:CreateCheckbox(label, function()
+            local item = rootDescription:CreateCheckbox(label, function()
                 return ADDON.settings.ui[setting]
             end, function()
                 ADDON:ApplySetting(setting, not ADDON.settings.ui[setting])
                 return MenuResponse.Refresh
+            end)
+            item:SetEnabled(function()
+                return not ADDON:IsSettingDisabled(setting)
             end)
         end
     end
