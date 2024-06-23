@@ -2,7 +2,7 @@ local _, ADDON = ...
 local L = ADDON.L
 
 --region setting handler
-local callbacks, defaults, uiLabels, behaviourLabels = {}, {}, {}, {}
+local callbacks, defaults, uiLabels, behaviourLabels, disabledHandler = {}, {}, {}, {}, {}
 function ADDON:RegisterUISetting(key, default, label, func, options)
     local isMultiOptions = type(options) == "table" and type(default) == "table"
     callbacks[key] = function(flag, subKey, ...)
@@ -41,6 +41,17 @@ function ADDON:ResetSettings()
 end
 function ADDON:GetSettingLabels()
     return uiLabels, behaviourLabels
+end
+function ADDON:RegisterSettingDisabledCheck(setting, handler)
+    disabledHandler[setting] = handler
+    return false
+end
+function ADDON:IsSettingDisabled(setting, option)
+    if disabledHandler[setting] then
+        return disabledHandler[setting](option)
+    end
+
+    return false
 end
 --endregion
 

@@ -31,6 +31,13 @@ do
             end,
             options
     )
+    ADDON:RegisterSettingDisabledCheck('displayStatistics', function(option)
+        if option == 'UsedCount' or option == 'TravelTime' or option == 'TravelDistance' or option == 'LearnedDate' then
+            return not ADDON.settings.trackUsageStats
+        end
+
+        return false
+    end)
 end
 
 
