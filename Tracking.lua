@@ -48,11 +48,13 @@ local function updateDistance(mountId)
     end
 end
 
-ADDON.Events:RegisterCallback("OnMountUp", function(_, mount)
+ADDON.Events:RegisterCallback("OnMountUp", function(_, mount, isOnLogin)
     if ADDON.settings.trackUsageStats then
         local blob = initData(mount)
         blob[INDEX_LAST_USE_TIME] = GetServerTime()
-        blob[INDEX_USE_COUNT] = blob[INDEX_USE_COUNT] + 1
+        if not isOnLogin then
+            blob[INDEX_USE_COUNT] = blob[INDEX_USE_COUNT] + 1
+        end
         startPositionX, startPositionY, startZone = HBD:GetPlayerZonePosition()
         travelTicker = C_Timer.NewTicker(5, function()
             updateDistance(mount)
