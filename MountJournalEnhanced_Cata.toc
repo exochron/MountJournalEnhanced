@@ -44,6 +44,7 @@ UI\Templates.xml
 UI\Functions.lua
 UI\EnhancedList.lua
 UI\EnhancedDisplay.lua
+UI\EnhancedToolbar.lua
 UI\CompactMountList.lua
 UI\AchievementPoints.lua
 UI\MountCount.lua

@@ -46,6 +46,7 @@ DevZone\Screenshot.lua
 UI\Functions.lua
 UI\EnhancedList.lua
 UI\EnhancedDisplay.lua
+UI\EnhancedToolbar.lua
 UI\CompactMountList.lua
 UI\AchievementPoints.lua
 UI\MountCount.lua
@@ -61,6 +62,7 @@ UI\FilterDropdown\Legacy\Family.lua
 UI\FilterDropdown\Legacy\Sort.lua
 UI\DisplayBackground.lua
 UI\DisplayCamera.lua
+UI\SkyridingButtons.lua
 UI\Resize.lua
 UI\DisplayStatistics.lua
 UI\Hotkeys.lua
