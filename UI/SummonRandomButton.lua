@@ -20,5 +20,6 @@ ADDON.Events:RegisterCallback("loadUI", function()
         local button = CreateFrame("Button", nil, MountJournal, "MJE_SummonRandomFavoriteButton")
         button.spellname:SetText(MOUNT_JOURNAL_SUMMON_RANDOM_FAVORITE_MOUNT)
         button:RegisterForDrag("LeftButton")
+        ADDON.UI:RegisterToolbarGroup("random-mount", button)
     end
 end, "summon random mount button")

@@ -1,6 +1,7 @@
 local _, ADDON = ...
 
 local originalParent
+local toolbarHandle
 
 ADDON:RegisterUISetting('slotPosition', "top", ADDON.L.SETTING_MOVE_EQUIPMENT_SLOT, function(flag)
     if ADDON.initialized then
@@ -10,6 +11,7 @@ ADDON:RegisterUISetting('slotPosition', "top", ADDON.L.SETTING_MOVE_EQUIPMENT_SL
             if originalParent then
                 button:SetParent(originalParent)
             end
+            toolbarHandle(false)
             button:SetScale(1.0)
             ADDON.UI:RestoreSize(button)
             ADDON.UI:RestorePoint(button)
@@ -19,10 +21,6 @@ ADDON:RegisterUISetting('slotPosition', "top", ADDON.L.SETTING_MOVE_EQUIPMENT_SL
         else
             -- backup frame settings
             if nil == originalParent then
-                ADDON.UI:SaveSize(button)
-                ADDON.UI:SavePoint(button)
-                ADDON.UI:SavePoint(MountJournal.LeftInset, "BOTTOMLEFT")
-                ADDON.UI:SavePoint(MountJournal.RightInset, "BOTTOMLEFT")
                 originalParent = button:GetParent()
             end
 
@@ -30,9 +28,10 @@ ADDON:RegisterUISetting('slotPosition', "top", ADDON.L.SETTING_MOVE_EQUIPMENT_SL
             button:SetParent(MountJournal.MountDisplay)
             button:ClearAllPoints()
             if flag == "top" then
+                toolbarHandle(true)
                 button:SetScale(0.75)
-                button:SetPoint("RIGHT", MountJournal.SummonRandomFavoriteButton.spellname, "LEFT")
             else
+                toolbarHandle(false)
                 button:SetScale(1.0)
                 button:SetPoint("BOTTOMLEFT", MountJournal.MountDisplay, 15, 15)
             end
@@ -52,5 +51,11 @@ end,
 )
 
 ADDON.Events:RegisterCallback("loadUI", function()
+    ADDON.UI:SaveSize(MountJournal.SlotButton)
+    ADDON.UI:SavePoint(MountJournal.SlotButton)
+    ADDON.UI:SavePoint(MountJournal.LeftInset, "BOTTOMLEFT")
+    ADDON.UI:SavePoint(MountJournal.RightInset, "BOTTOMLEFT")
+
+    toolbarHandle = ADDON.UI:RegisterToolbarGroup("equipment", MountJournal.SlotButton)
     ADDON:ApplySetting('slotPosition', ADDON.settings.ui.slotPosition)
 end, "equipment slot")
