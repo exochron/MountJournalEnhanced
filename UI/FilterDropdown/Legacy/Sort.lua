@@ -37,6 +37,7 @@ end
 function ADDON.UI.FDD:AddSortMenu(level)
     UIDropDownMenu_AddButton(CreateSortRadio(NAME, 'name'), level)
     UIDropDownMenu_AddButton(CreateSortRadio(TYPE, 'type'), level)
+    UIDropDownMenu_AddButton(CreateSortRadio(L.SORT_BY_FAMILY, 'family'), level)
     UIDropDownMenu_AddButton(CreateSortRadio(EXPANSION_FILTER_TEXT, 'expansion'), level)
     if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
         UIDropDownMenu_AddButton(CreateSortRadio(RARITY, 'rarity'), level)

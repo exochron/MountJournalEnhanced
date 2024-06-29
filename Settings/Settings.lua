@@ -107,7 +107,7 @@ local function PrepareDefaults()
         },
 
         sort = {
-            by = 'name', -- name|type|expansion|rarity|tracking
+            by = 'name', -- name|type|family|expansion|rarity|tracking
             descending = false,
             favoritesOnTop = true,
             dragonridingOnTop = true,
