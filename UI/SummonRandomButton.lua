@@ -2,7 +2,8 @@ local _, ADDON = ...
 
 ADDON.Events:RegisterCallback("OnLogin", function()
     local MACRO_NAME = "MJE: Random Mount"
-    local MACRO_BODY = "/cancelform\n".."/run C_MountJournal.SummonByID(0)"
+    local MACRO_BODY = "/cancelform [nocombat,noknown:15473]\n" -- don't cancel Shadowform
+                     .."/run C_MountJournal.SummonByID(0)"
     local MACRO_ICON = "achievement_guildperk_mountup"
 
     if not InCombatLockdown() then
