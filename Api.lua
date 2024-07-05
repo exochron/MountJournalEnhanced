@@ -40,20 +40,19 @@ local function MountIdToOriginalIndex(mountId, recursionCounter)
 end
 --endregion
 
-local IsUsableSpell = IsUsableSpell
-if not IsUsableSpell and C_Spell and C_Spell.IsSpellUsable then
-    -- moved api function in 11.0
-    IsUsableSpell = C_Spell.IsSpellUsable
-end
-
 function ADDON.Api:GetMountInfoByID(mountId)
     local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, isForDragonriding, a, b, c, d, e, f, g, h = C_MountJournal.GetMountInfoByID(mountId)
+    -- moved api functions in 11.0
+    local IsUsableSpell = C_Spell.IsSpellUsable or IsUsableSpell
     isUsable = isUsable and IsUsableSpell(spellId)
 
     return creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, isForDragonriding, a, b, c, d, e, f, g, h
 end
 
 function ADDON.Api:GetMountLink(spellId)
+    -- moved api functions in 11.0
+    local GetSpellLink = C_Spell.GetSpellLink or GetSpellLink
+
     if  WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC then
         -- classic doesn't supports mount links yet. so use spell link instead. (preview might not work though)
         return GetSpellLink(spellId)
@@ -61,7 +60,7 @@ function ADDON.Api:GetMountLink(spellId)
     local link = C_MountJournal.GetMountLink(spellId)
     if strlen(link) > 400 then
         -- broken link
-        return C_Spell.GetSpellLink(spellId)
+        return GetSpellLink(spellId)
     end
 
     return link
