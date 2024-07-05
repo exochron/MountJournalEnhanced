@@ -7,16 +7,17 @@ This addon extends the ingame mount journal with extra features.
 - [TikTok: Great Addon for Mount collectors](https://www.tiktok.com/@touchpadwarrior/video/7216081879886269739) (03/2023 by [Touchpadwarrior](https://www.twitch.tv/touchpadwarrior))
 
 ## ⭐ Features
++ **new:** Spend all your Skyriding Glyphs with one button click (Retail only)
 + Support for Cataclysm Classic
     + also adds again Summon Random Mount Button
 + Filter mounts by an extended source, colors, faction, type, family or expansion
 + Filter unusable or unwanted mounts
 + Display mounts which are actually hidden by the game (TCG, PvP, secrets etc.)
-+ Sort mounts by name, type or expansion (or in reverse)
++ Sort mounts by name, family, type or expansion (or in reverse)
 + Saves filter options
 + Double click list entry to summon mount
 + Compact mount list
-+ Move equipment slot into display to save space (Retail only)
++ Move equipment slot into display or top button bar to save some space (Retail only)
 + Display count of character specific mounts
 + Display mount related achievement points
 + Freely rotate display camera around mount
