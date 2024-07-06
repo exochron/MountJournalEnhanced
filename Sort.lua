@@ -1,104 +1,5 @@
 local _, ADDON = ...
 
---region transliterate string
-local translitCache = {}
-local translitTable = {
-    ["À"] = "A",
-    ["Á"] = "A",
-    ["Â"] = "A",
-    ["Ã"] = "A",
-    ["Ä"] = "A",
-    ["Å"] = "A",
-    ["Æ"] = "AE",
-    ["Ç"] = "C",
-    ["È"] = "E",
-    ["É"] = "E",
-    ["Ê"] = "E",
-    ["Ë"] = "E",
-    ["Ì"] = "I",
-    ["Í"] = "I",
-    ["Î"] = "I",
-    ["Ï"] = "I",
-    ["Ð"] = "D",
-    ["Ñ"] = "N",
-    ["Ò"] = "O",
-    ["Ó"] = "O",
-    ["Ô"] = "O",
-    ["Õ"] = "O",
-    ["Ö"] = "O",
-    ["Ø"] = "O",
-    ["Ù"] = "U",
-    ["Ú"] = "U",
-    ["Û"] = "U",
-    ["Ü"] = "U",
-    ["Ý"] = "Y",
-    ["ß"] = "ss",
-    ["à"] = "a",
-    ["á"] = "a",
-    ["â"] = "a",
-    ["ã"] = "a",
-    ["ä"] = "a",
-    ["å"] = "a",
-    ["æ"] = "ae",
-    ["ç"] = "c",
-    ["è"] = "e",
-    ["é"] = "e",
-    ["ê"] = "e",
-    ["ë"] = "e",
-    ["ì"] = "i",
-    ["í"] = "i",
-    ["î"] = "i",
-    ["ï"] = "i",
-    ["ñ"] = "n",
-    ["ò"] = "o",
-    ["ó"] = "o",
-    ["ô"] = "o",
-    ["õ"] = "o",
-    ["ö"] = "o",
-    ["ø"] = "o",
-    ["ù"] = "u",
-    ["ú"] = "u",
-    ["û"] = "u",
-    ["ü"] = "u",
-    ["ý"] = "y",
-    ["ÿ"] = "y",
-}
-
-local function TransliterateName(name, cacheKey)
-    if cacheKey and translitCache[cacheKey] then
-        if translitCache[cacheKey] == true then
-            return name
-        end
-
-        return translitCache[cacheKey]
-    end
-
-    -- has latin-1 supplement
-    if string.find(name, "\195", 1, true) then
-
-        for i = 1, string.len(name) do
-            local char = string.sub(name, i, i + 1)
-            if translitTable[char] then
-                local replaceChar = translitTable[char]
-                if i == 1 then
-                    name = replaceChar .. string.sub(name, i + 2)
-                else
-                    name = string.sub(name, 1, i - 1) .. replaceChar .. string.sub(name, i + 2)
-                end
-            end
-        end
-
-        if cacheKey then
-            translitCache[cacheKey] = name
-        end
-    elseif cacheKey then
-        translitCache[cacheKey] = true
-    end
-
-    return name
-end
---endregion
-
 local function CreateFleetingCache()
     local cache = {}
     local setTimer = false
@@ -111,7 +12,7 @@ local function CreateFleetingCache()
             if initializerFunc and not self:Has(cacheKey) then
                 self:Set(cacheKey, initializerFunc())
             end
-            
+
             if cache[cacheKey] then
                 return unpack(cache[cacheKey])
             end
@@ -127,6 +28,85 @@ local function CreateFleetingCache()
             end
         end,
     }
+end
+
+local function TransliterateName(name)
+
+    -- has latin-1 supplement
+    if string.find(name, "\195", 1, true) then
+        local replaceMap = {
+            ["À"] = "A",
+            ["Á"] = "A",
+            ["Â"] = "A",
+            ["Ã"] = "A",
+            ["Ä"] = "A",
+            ["Å"] = "A",
+            ["Æ"] = "AE",
+            ["Ç"] = "C",
+            ["È"] = "E",
+            ["É"] = "E",
+            ["Ê"] = "E",
+            ["Ë"] = "E",
+            ["Ì"] = "I",
+            ["Í"] = "I",
+            ["Î"] = "I",
+            ["Ï"] = "I",
+            ["Ð"] = "D",
+            ["Ñ"] = "N",
+            ["Ò"] = "O",
+            ["Ó"] = "O",
+            ["Ô"] = "O",
+            ["Õ"] = "O",
+            ["Ö"] = "O",
+            ["Ø"] = "O",
+            ["Ù"] = "U",
+            ["Ú"] = "U",
+            ["Û"] = "U",
+            ["Ü"] = "U",
+            ["Ý"] = "Y",
+            ["ß"] = "ss",
+            ["à"] = "a",
+            ["á"] = "a",
+            ["â"] = "a",
+            ["ã"] = "a",
+            ["ä"] = "a",
+            ["å"] = "a",
+            ["æ"] = "ae",
+            ["ç"] = "c",
+            ["è"] = "e",
+            ["é"] = "e",
+            ["ê"] = "e",
+            ["ë"] = "e",
+            ["ì"] = "i",
+            ["í"] = "i",
+            ["î"] = "i",
+            ["ï"] = "i",
+            ["ñ"] = "n",
+            ["ò"] = "o",
+            ["ó"] = "o",
+            ["ô"] = "o",
+            ["õ"] = "o",
+            ["ö"] = "o",
+            ["ø"] = "o",
+            ["ù"] = "u",
+            ["ú"] = "u",
+            ["û"] = "u",
+            ["ü"] = "u",
+            ["ý"] = "y",
+            ["ÿ"] = "y",
+        }
+        name = string.gsub(name, "\195.", replaceMap)
+    end
+
+    return name
+end
+
+local nameCache
+local function CacheAndTransliterateName(name, cacheKey)
+    nameCache = nameCache or CreateFleetingCache()
+    return nameCache:Get(cacheKey, function()
+        return TransliterateName(name)
+    end)
 end
 
 local TrackingIndex = {
@@ -150,7 +130,7 @@ end
 local function FallbackByName(mountIdA, mountIdB)
     local nameA = CacheMount(mountIdA)
     local nameB = CacheMount(mountIdB)
-    return TransliterateName(nameA, mountIdA) < TransliterateName(nameB, mountIdB)
+    return CacheAndTransliterateName(nameA, mountIdA) < CacheAndTransliterateName(nameB, mountIdB)
 end
 
 local function CheckDescending(result)
