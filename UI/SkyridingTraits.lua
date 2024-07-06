@@ -69,6 +69,7 @@ EventRegistry:RegisterCallback("GenericTraitFrame.OnShow", function(...)
     if IsSkyRidingTalentTreeOpen() then
         if not button then
             button = BuildButton()
+            ADDON.UI.SkyridingSpendAllGlyphsButton = button.frame
 
             local timer
             GenericTraitFrame:RegisterCallback(TalentFrameBaseMixin.Event.CommitStatusChanged, function()

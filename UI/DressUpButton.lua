@@ -36,6 +36,8 @@ local function createJournalButton()
                 button.frame:Show()
             end
         end)
+
+        ADDON.UI.DressUpJournalButton = button.frame
     end
 end
 

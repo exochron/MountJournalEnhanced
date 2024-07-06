@@ -38,7 +38,8 @@ function ADDON:TakeScreenshots()
                     MountJournal.MountDisplay.ModelScene:GetActiveCamera():SetPitch(0.6171)
 
                     -- fire /mountspecial
-                    MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped"):SetAnimation(94)
+                    MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped"):PlayAnimationKit(1371)
+                    MountJournal.MountDisplay.ModelScene:GetActorByTag("unwrapped"):PlayAnimationKit(1371)
 
                     api:Wait()
                     C_Timer.After(2, function()
@@ -57,7 +58,7 @@ function ADDON:TakeScreenshots()
 
                     api:Point(DropDownList1Button1)
 
-                    api:Point(DropDownList2Button5, 20)
+                    api:Point(DropDownList2Button6, 20) -- Count of usage
                 end,
                 function(api)
                     api:BackScreen()
@@ -118,6 +119,28 @@ function ADDON:TakeScreenshots()
                     api:PointAndClick(ADDON.UI.SettingsButton)
                 end,
                 function(api)
+                    api:BackScreen()
+
+                    -- show skyriding talent tree
+                    GenericTraitUI_LoadUI()
+                    GenericTraitFrame:SetSystemID(1)
+                    ToggleFrame(GenericTraitFrame)
+
+                    api:Point(ADDON.UI.SkyridingSpendAllGlyphsButton, 22)
+                end,
+                function(api)
+                    ToggleFrame(GenericTraitFrame)
+
+                    api:BackScreen()
+
+                    -- show mount preview
+                    DressUpMount(1357) -- Enchanted Shadeleaf Runestag
+
+                    api:Point(ADDON.UI.DressUpJournalButton, 17)
+                end,
+                function(api)
+                    HideUIPanel(DressUpFrame)
+
                     api:BackScreen()
                     ADDON:OpenOptions()
                 end,
