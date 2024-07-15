@@ -56,6 +56,6 @@ ADDON.Events:RegisterCallback("loadUI", function()
     ADDON.UI:SavePoint(MountJournal.LeftInset, "BOTTOMLEFT")
     ADDON.UI:SavePoint(MountJournal.RightInset, "BOTTOMLEFT")
 
-    toolbarHandle = ADDON.UI:RegisterToolbarGroup("equipment", MountJournal.SlotButton)
+    toolbarHandle = ADDON.UI:RegisterToolbarGroup("09-equipment", MountJournal.SlotButton)
     ADDON:ApplySetting('slotPosition', ADDON.settings.ui.slotPosition)
 end, "equipment slot")

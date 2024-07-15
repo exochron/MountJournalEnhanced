@@ -1,6 +1,6 @@
 local ADDON_NAME, ADDON = ...
 
--- see: https://www.townlong-yak.com/framexml/ptr/CallbackRegistry.lua
+-- see: https://www.townlong-yak.com/framexml/live/Blizzard_SharedXML/CallbackRegistry.lua
 ADDON.Events = CreateFromMixins(EventRegistry)
 ADDON.Events:OnLoad()
 ADDON.Events:SetUndefinedEventsAllowed(true)
