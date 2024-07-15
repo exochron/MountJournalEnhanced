@@ -36,18 +36,8 @@ local function renderToolbar()
     end
 end
 
-function ADDON.UI:RegisterToolbarGroup(name, button1, button2, button3)
-    local group = {}
-
-    if button1 then
-        table.insert(group, button1)
-    end
-    if button2 then
-        table.insert(group, button2)
-    end
-    if button3 then
-        table.insert(group, button3)
-    end
+function ADDON.UI:RegisterToolbarGroup(name, ...)
+    local group = { ... }
 
     if #group > 0 then
         buttonList[name] = group
