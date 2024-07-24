@@ -21,9 +21,15 @@ ADDON.DB.Family = {
 },
 },
 ["Arachnids"] = {
-["Blood Ticks"] = {
+["Mite"] = {
 [956] = true, -- Leaping Veinseeker
 [1061] = true, -- Expedition Bloodswarmer
+[1309] = true, -- Chittering Animite
+[1379] = true, -- Endmire Flyer
+[2150] = true, -- Vicious Skyflayer
+[2177] = true, -- Aquamarine Swarmite
+[2180] = true, -- Shadowed Swarmite
+[2211] = true, -- Vicious Skyflayer
 },
 ["Scorpions"] = {
 [409] = true, -- Kor'kron Annihilator
@@ -56,6 +62,7 @@ ADDON.DB.Family = {
 [1376] = true, -- Silvertip Dredwing
 [1377] = true, -- Rampart Screecher
 [1378] = true, -- Harvester's Dredwing
+[2218] = true, -- Forged Gladiator's Fel Bat
 },
 ["Birds"] = {
 ["Albatross"] = {
@@ -123,6 +130,7 @@ ADDON.DB.Family = {
 },
 ["Owl"] = {
 [1818] = true, -- Anu'relos, Flame's Guidance
+[2140] = true, -- Charming Courier
 },
 ["Owlbear"] = {
 [1699] = true, -- Gleaming Moonbeast
@@ -237,6 +245,9 @@ ADDON.DB.Family = {
 [1069] = true, -- Darkforge Ram
 [1071] = true, -- Dawnforge Ram
 [1292] = true, -- Stormpike Battle Ram
+[2213] = true, -- Shale Ramolith
+[2214] = true, -- Slatestone Ramolith
+[2233] = true, -- Earthen Ordinant's Ramolith
 },
 ["Ruinstriders"] = {
 [939] = true, -- Sable Ruinstrider
@@ -418,6 +429,7 @@ ADDON.DB.Family = {
 [1531] = true, -- Wen Lo, the River's Edge
 [1576] = true, -- Jigglesworth Sr.
 [1577] = true, -- Ash'adar, Harbinger of Dawn
+[2193] = true, -- Vermillion Imperial Lynx
 },
 ["Sabers"] = {
 [26] = true, -- Striped Frostsaber
@@ -791,6 +803,8 @@ ADDON.DB.Family = {
 [1544] = true, -- Wastewarped Deathwalker
 [1807] = true, -- Avatar of Flame
 [1812] = true, -- Runebound Firelord
+[2191] = true, -- Shackled Shadow
+[2192] = true, -- Beledar's Spawn
 },
 ["Phoenixes"] = {
 [183] = true, -- Ashes of Al'ar
@@ -873,6 +887,8 @@ ADDON.DB.Family = {
 [1792] = true, -- Algarian Stormrider
 [1823] = true, -- Swift Spectral Gryphon
 [1929] = true, -- Spectral Gryphon
+[2116] = true, -- Remembered Golden Gryphon
+[2176] = true, -- Alunira
 },
 ["Hippogryphs"] = {
 [203] = true, -- Cenarion War Hippogryph
@@ -917,6 +933,7 @@ ADDON.DB.Family = {
 [1553] = true, -- Liberated Slyvern
 [1674] = true, -- Temperamental Skyclaw
 [1930] = true, -- Spectral Wind Rider
+[2117] = true, -- Remembered Wind Rider
 },
 },
 ["Fish"] = {
@@ -1116,10 +1133,6 @@ ADDON.DB.Family = {
 },
 },
 ["Insects"] = {
-["Animite"] = {
-[1309] = true, -- Chittering Animite
-[1379] = true, -- Endmire Flyer
-},
 ["Aqir Flyers"] = {
 [1319] = true, -- Malevolent Drone
 [1320] = true, -- Shadowbarb Drone
@@ -1130,6 +1143,7 @@ ADDON.DB.Family = {
 [1662] = true, -- Telix the Stormhorn
 [1942] = true, -- Jeweled Copper Scarab
 [1944] = true, -- Golden Regal Scarab
+[2230] = true, -- Ivory Goliathus
 },
 ["Flies"] = {
 [1449] = true, -- Lord of the Corpseflies
@@ -1166,6 +1180,8 @@ ADDON.DB.Family = {
 ["Others"] = {
 [594] = true, -- Grinning Reaver
 [1013] = true, -- Honeyback Harvester
+[2148] = true, -- Smoldering Cinderbee
+[2162] = true, -- Cyan Glowmite
 },
 ["Silithids"] = {
 [116] = true, -- Black Qiraji Battle Tank
@@ -1180,6 +1196,11 @@ ADDON.DB.Family = {
 [936] = true, -- Red Qiraji War Tank
 [937] = true, -- Black Qiraji War Tank
 [1893] = true, -- Ultramarine Qiraji Battle Tank
+},
+["Skyrazor"] = {
+[2219] = true, -- Sureki Skyrazor
+[2222] = true, -- Siesbarg
+[2223] = true, -- Ascendant Skyrazor
 },
 ["Wasp"] = {
 [1433] = true, -- Vespoid Flutterer
@@ -1200,7 +1221,13 @@ ADDON.DB.Family = {
 [1293] = true, -- Ny'alotha Allseer
 [1434] = true, -- Deepstar Aurelid
 [1549] = true, -- Shimmering Aurelid
+[1550] = true, -- Depthstalker
 [1551] = true, -- Cryptic Aurelid
+},
+["Mole"] = {
+[2204] = true, -- Wick
+[2205] = true, -- Ol' Mole Rufus
+[2209] = true, -- Crimson Mudnose
 },
 ["Mollusc"] = {
 ["Slug"] = {
@@ -1271,6 +1298,10 @@ ADDON.DB.Family = {
 },
 ["Crocolisks"] = {
 [1220] = true, -- Bruce
+[2238] = true, -- Plunderlord's Golden Crocolisk
+[2239] = true, -- Keg Leg's Radiant Crocolisk
+[2240] = true, -- Plunderlord's Midnight Crocolisk
+[2241] = true, -- Plunderlord's Weathered Crocolisk
 },
 ["Kodos"] = {
 [71] = true, -- Gray Kodo
@@ -1525,6 +1556,7 @@ ADDON.DB.Family = {
 [959] = true, -- Stormwind Skychaser
 [960] = true, -- Orgrimmar Interceptor
 [1051] = true, -- The Dreadwake
+[2144] = true, -- Delver's Dirigible
 },
 ["Assault Wagons"] = {
 [1193] = true, -- Meat Wagon
@@ -1564,6 +1596,7 @@ ADDON.DB.Family = {
 [1475] = true, -- Hand of Bahmethra
 [1503] = true, -- Hand of Nilganihmaht
 [1504] = true, -- Hand of Salaranga
+[2249] = true, -- Hand of Reshkigaal
 },
 ["Hover Board"] = {
 [2145] = true, -- [PH] Goblin Surfboard - Blue
@@ -1593,6 +1626,10 @@ ADDON.DB.Family = {
 [932] = true, -- Lightforged Warframe
 [1217] = true, -- G.M.O.D.
 [1698] = true, -- Rocket Shredder 9001
+[2119] = true, -- Stonevault Mechsuit
+[2158] = true, -- Crowd Pummeler 2-30
+[2159] = true, -- Machine Defense Unit 1-11
+[2244] = true, -- Diamond Mechsuit
 },
 ["Mechanical Animals"] = {
 [552] = true, -- Ironbound Wraithcharger
@@ -1647,6 +1684,7 @@ ADDON.DB.Family = {
 [842] = true, -- Vicious War Trike
 [1247] = true, -- Mechacycle Model W
 [1248] = true, -- Junkheap Drifter
+[1715] = true, -- Armadillo Roller
 [1877] = true, -- Goblin Trike
 [1878] = true, -- Goblin Turbo-Trike
 },
@@ -1738,5 +1776,8 @@ ADDON.DB.Family = {
 [342] = true, -- Swift Horde Wolf
 [1776] = true, -- White War Wolf
 },
+},
+["Worm"] = {
+[2184] = true, -- Ferocious Jawcrawler
 },
 }
