@@ -50,7 +50,7 @@ end
 local function UpdateButton(button, elementData)
     if ADDON.settings.ui.compactMountList then
         local mountID = elementData.mountID
-        local isForDragonriding = select(13, C_MountJournal.GetMountInfoByID(mountID))
+        local isSteadyFlight = select(13, C_MountJournal.GetMountInfoByID(mountID))
 
         if button.name:GetNumLines() > 1 then
             -- name region might have been stretched in height before. so we reset it's size here.
@@ -61,7 +61,7 @@ local function UpdateButton(button, elementData)
         end
 
         local yOffset = 1;
-        if isForDragonriding then
+        if isSteadyFlight then
             if button.name:GetNumLines() == 1 then
                 yOffset = 6;
             else
