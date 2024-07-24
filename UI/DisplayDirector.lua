@@ -33,14 +33,14 @@ local function UpdateContainer()
         local E = unpack(ElvUI)
         ElvSkin = E:GetModule('Skins')
     end
-    if controlFrame.isSkinned then
+    if controlFrame.IsSkinned then
         hPadding = 1
     end
 
     for _, button in ipairs(buttons) do
         if button:IsShown() then
             -- ElvUI Mod
-            if controlFrame.isSkinned and not button.isSkinned and ElvSkin then
+            if controlFrame.IsSkinned and not button.IsSkinned and ElvSkin then
                 ElvSkin:HandleButton(button)
                 button:Size(22)
                 button.Icon:SetInside(nil, 2, 2)

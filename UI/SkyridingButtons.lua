@@ -33,6 +33,19 @@ local function BuildTraitToggle(nodeId)
     local button = CreateFrame("Button", nil, MountJournal, "DynamicFlightFlyoutButtonTemplate")
     button.texture = button:CreateTexture(nil, "ARTWORK")
     button.texture:SetAllPoints()
+
+    if ElvUI then
+        local E = unpack(ElvUI)
+        local ElvSkin = E:GetModule('Skins')
+
+        -- from Collectables.lua HandleDynamicFlightButton
+        button:SetPushedTexture(0)
+        button:GetHighlightTexture():SetColorTexture(1, 1, 1, .25)
+        button:SetNormalTexture(0)
+
+        ElvSkin:HandleIcon(button.texture)
+    end
+
     button.nodeId = nodeId
     button:HookScript("OnClick", function(self)
         local configId = C_Traits.GetConfigIDBySystemID(Constants.MountDynamicFlightConsts.TRAIT_SYSTEM_ID)
