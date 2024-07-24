@@ -89,12 +89,7 @@ local function GetAnimationsOfCurrentMount()
     end
 
     local mountId = ADDON.Api:GetSelected()
-    local _, _, _, _, _, _, _, _, _, _, _, _, isForDragonriding = C_MountJournal.GetMountInfoByID(mountId)
     local _, _, _, _, mountType = C_MountJournal.GetMountInfoExtraByID(mountId)
-
-    if isForDragonriding then
-        animations["fly"] = 25218 --AnimID=1524
-    end
 
     if not tContains(ADDON.DB.Type.flying.typeIDs, mountType) then
         animations["fly_idle"] = nil
