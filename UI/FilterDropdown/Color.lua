@@ -50,6 +50,7 @@ function ADDON.UI.FDD:AddColorMenu(root)
         swatchFrame:SetScript("OnMouseUp", function()
             menu:SendResponse(elementDescription, MenuResponse.Refresh)
         end)
+        swatchFrame:Show()
 
         frame.swatch = swatchFrame
     end)
