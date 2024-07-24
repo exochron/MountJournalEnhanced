@@ -89,9 +89,12 @@ end, 'init')
 EventRegistry:RegisterCallback("MountJournal.OnShow", function()
     -- MountJournal gets always initially shown before switching to the actual tab.
     if CollectionsJournal.selectedTab == COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS and not ADDON.initialized then
-        EventRegistry:UnregisterCallback("MountJournal.OnShow", ADDON_NAME)
         InitUI()
         ADDON.initialized = true
+        C_Timer.After(0, function()
+            -- EventRegistry might crash when removing an callback while looping through all callbacks
+            EventRegistry:UnregisterCallback("MountJournal.OnShow", ADDON_NAME)
+        end)
 
         ADDON.Events:TriggerEvent("preloadUI")
         ADDON.Events:TriggerEvent("loadUI")
