@@ -50,9 +50,6 @@ function ADDON.UI.FDD:AddSortMenu(root)
     root:CreateSpacer()
     CreateSortCheckbox(root, L.SORT_REVERSE, 'descending')
     CreateSortCheckbox(root, L.SORT_FAVORITES_FIRST, 'favoritesOnTop')
-    if GetServerExpansionLevel() >= LE_EXPANSION_DRAGONFLIGHT then
-        CreateSortCheckbox(root, L.SORT_DRAGONRIDING_TOP, 'dragonridingOnTop')
-    end
     CreateSortCheckbox(root, L.SORT_UNUSABLE_BOTTOM, 'unusableToBottom')
     CreateSortCheckbox(root, L.SORT_UNOWNED_BOTTOM, 'unownedOnBottom')
     root:CreateSpacer()

@@ -335,9 +335,6 @@ local function InitializeFilterDropDown(frame, level)
         UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_FLYING, "flying", settings, true), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_GROUND, "ground", settings, true), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_AQUATIC, "underwater", settings, true), level)
-        if MOUNT_JOURNAL_FILTER_DRAGONRIDING then
-            UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_DRAGONRIDING, "dragonriding", settings, true), level)
-        end
         if GetServerExpansionLevel() >= LE_EXPANSION_CATACLYSM then
             UIDropDownMenu_AddButton(CreateFilterInfo(L["Transform"], "transform", settings, true), level)
         end

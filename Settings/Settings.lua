@@ -87,7 +87,6 @@ local function PrepareDefaults()
                 ground = true,
                 flying = true,
                 underwater = true,
-                dragonriding = true,
                 transform = true,
                 repair = true,
                 passenger = true,
@@ -110,7 +109,6 @@ local function PrepareDefaults()
             by = 'name', -- name|type|family|expansion|rarity|tracking
             descending = false,
             favoritesOnTop = true,
-            dragonridingOnTop = true,
             unusableToBottom = false,
             unownedOnBottom = true,
         },
