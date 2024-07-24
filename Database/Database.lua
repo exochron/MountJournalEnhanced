@@ -3,9 +3,9 @@ local _, ADDON = ...
 ADDON.DB = {}
 
 ADDON.DB.Recent = {
-    ["minID"] = 2060,
-    ["blacklist"] = { 2090, 2091, 2114 },
-    ["whitelist"] = { 462,482,484,485 },
+    ["minID"] = 2116,
+    ["blacklist"] = { 2118, 2142, 2143, 2152, 2140, 2189 },
+    ["whitelist"] = { 1550, 1715 },
 }
 
 ADDON.DB.Source = {
@@ -161,6 +161,11 @@ ADDON.DB.Source = {
         [424476] = true, -- Winter Night Dreamsaber
         [432455] = true, -- Noble Flying Carpet
         [432610] = true, -- Clayscale Hornstrider
+
+        -- War Within
+        [447213] = true, -- Alunira
+        [448941] = true, -- Beledar's Spawn
+        [449258] = true, -- Ol' Mole Rufus
     },
 
     ["Quest"] = {
@@ -227,6 +232,9 @@ ADDON.DB.Source = {
         [425338] = true, -- Flourishing Whimsydrake
         [427041] = true, -- Ochre Dreamtalon
         [430225] = true, -- Gilnean Prowler
+        [442358] = true, -- Stonevault Mechasuit
+        [446052] = true, -- Delver's Dirigible
+        [451489] = true, -- Siesbarg
 
         ------------------------------
         -- Alliance ------------------
@@ -384,6 +392,16 @@ ADDON.DB.Source = {
         [435161] = true, -- Palehide Mushan Beast
         [441794] = true, -- Amber Pterrordax
 
+        -- War Within
+        [447057] = true, -- Smoldering Cinderbee
+        [447176] = true, -- Cyan Glowmite
+        [447185] = true, -- Aquamarine Swarmite
+        [447957] = true, -- Ferocious Jawcrawler
+        [448939] = true, -- Shackled Shadow
+        [448978] = true, -- Vermillion Imperial Lynx
+        [449269] = true, -- Crimson Mudnose
+        [449418] = true, -- Shale Ramolith
+
         ------------------------------
         -- Alliance ------------------
         ------------------------------
@@ -421,6 +439,9 @@ ADDON.DB.Source = {
         [288740] = true, -- Priestess' Moonsaber
         [288736] = true, -- Azureshell Krolusk
 
+        -- War Within PreEvent
+        [441324] = true, -- Remembered Golden Gryphon
+
         ------------------------------
         -- Horde ---------------------
         ------------------------------
@@ -452,6 +473,9 @@ ADDON.DB.Source = {
         -- Warfront Service Medal
         [288714] = true, -- Bloodthirsty Dreadwing
         [288735] = true, -- Rubyshell Krolusk
+
+        -- War Within PreEvent
+        [441325] = true, -- Remembered Wind Rider
     },
 
     ["Profession"] = {
@@ -482,6 +506,7 @@ ADDON.DB.Source = {
         [346141] = true, -- Slime Serpent - Plaguefall (secret)
         [353263] = true, -- Cartel Master's Gearglider - Tazavesh, the Veiled Market
         [363178] = true, -- Colossal Umbrahide Mawrat - Torghast 13+
+        [449264] = true, -- Wick - Darkflame Cleft
 
         -- Raid
         [25953] = true, -- Blue Qiraji Battle Tank - Temple of Ahn'Qiraj
@@ -527,6 +552,8 @@ ADDON.DB.Source = {
         [368158] = true, -- Zereth Overseer - The Jailer, Sepulcher of the First Ones
         [413922] = true, -- Valiance -- Naxxramas - Discovery
         [424484] = true, -- Anu'relos -- Amirdrassil - Fyrak Mythic
+        [451486] = true, -- Sureki Skyrazor -- Nerub-ar Palace
+        [451491] = true, -- Ascendant Skyrazor -- Nerub-ar Palace Mythic
     },
 
     ["Reputation"] = {
@@ -1002,6 +1029,7 @@ ADDON.DB.Source = {
         [306423] = 13161, -- Caravan Hyena - Allied Races: Vulpera
         [316343] = 14146, -- Wriggling Parasite - Glory of the Ny'alotha Raider
         [316637] = 14145, -- Awakened Mindborer - Battle for Azeroth Keystone Master: Season Four
+        [405623] = 13541, -- Armadillo Roller - Mecha-Done
 
         -- Shadowlands
         [318052] = 14520, -- Deathbringer's Flayedwing - Deathbringer
@@ -1062,6 +1090,13 @@ ADDON.DB.Source = {
         -- Remix: MoP
         [446017] = 20593, -- August Phoenix
         [446022] = 19876, -- Astral Emperor's Serpent
+
+        -- War Within
+        [447190] = 40232, -- Shadowed Swarmite - Glory of the Nerub-ar Raider
+        [448188] = 40662, -- Machine Defense Unit 1-11 - It's not much
+        [449415] = {40306, 40307}, -- Slatestone Ramolith - Allied Races: Earthen
+        [452779] = 40438, -- Ivory Goliathus - Glory of the Delver
+        [458335] = 20525, -- Diamond Mechsuit - WW Keystone Master S1
 
         ------------------------------
         -- Alliance ------------------
@@ -1275,6 +1310,9 @@ ADDON.DB.Source = {
         [425416] = true, -- Verdant Gladiator's Slitherdrake - Gladiator: Dragonflight Season 3
         [434470] = true, -- Vicious Dreamtalon - Dragonflight: Season 4
         [434477] = true, -- Vicious Dreamtalon - Dragonflight: Season 4
+        [449466] = true, -- Forged Gladiator's Fel Bat - Gladiator: War Within Season 1
+        [447405] = true, -- Vicious Skyflayer - War Within: Season 1
+        [449325] = true, -- Vicious Skyflayer - War Within: Season 1
 
         -- Prestige Reward
         [222202] = true, -- Prestigious Bronze Courser
@@ -1416,6 +1454,7 @@ ADDON.DB.Source = {
         [270562] = true, -- Darkforge Ram
         [290608] = true, -- Crusader's Direhorn
         [363613] = true, -- Lightforged Ruinstrider
+        [453785] = true, -- Earthen Ordinant's Ramolith
 
         -- Priest
         [229377] = true, -- High Priest's Lightsworn Seeker
@@ -1705,6 +1744,9 @@ ADDON.DB.FeatsOfStrength = {
     [1739] = 17764, -- Obsidian Gladiator's Slitherdrake - Gladiator: Dragonflight Season 2
     [1822] = 19490, -- Draconic Gladiator's Drake - Gladiator: Dragonflight Season 4
     [1831] = 19091, -- Verdant Gladiator's Slitherdrake - Gladiator: Dragonflight Season 3
+    [2218] = 40393, -- Forged Gladiator's Fel Bat - Gladiator: War Within Season 1
+    [2150] = 40397, -- Vicious Skyflayer - War Within: Season 1
+    [2211] = 40396, -- Vicious Skyflayer - War Within: Season 1
 }
 
 ADDON.DB.Expansion = {
@@ -1808,16 +1850,29 @@ ADDON.DB.Expansion = {
 
     [9] = { -- Dragonflight
         ["minID"] = 1577,
-        ["maxID"] = 9999999999,
-        --[1467] = true, -- Noble Elderhorn
+        ["maxID"] = 2115,
         [1469] = true, -- Magmashell
-        --[1478] = true, -- Skyskin Hornstrider
+        [1478] = true, -- Skyskin Hornstrider
         [1545] = true, -- Divine Kiss of Ohn'ahra
         [1546] = true, -- Iskaara Trader's Ottuk
         [1553] = true, -- Liberated Slyvern
         [1556] = true, -- Tangled Dreamweaver
         [1563] = true, -- Highland Drake
+        [2118] = true, -- Amber Pterrordax
+        [2142] = true, -- August Phoenix
+        [2143] = true, -- Astral Emperor's Serpent
+        [2152] = true, -- Pearlescent Goblin Wave Shredder
+        [2140] = true, -- Charming Courier
+        [2189] = true, -- Underlight Corrupted Behemoth
     },
+
+    [10] = { -- War Within
+        ["minID"] = 2116,
+        ["maxID"] = 9999999999,
+        [1550] = true, -- Depthstalker
+        [1715] = true, -- Armadillo Roller
+        [1792] = true, -- Algarian Stormrider
+    }
 }
 
 ADDON.DB.Type = {
@@ -1827,13 +1882,10 @@ ADDON.DB.Type = {
         typeIDs = { 225, 230, 231, 241, 269, 284, 408, 412 },
     },
     flying = {
-        typeIDs = { 229, 238, 247, 248, 398, 402, 407, 424, 426, 428, 429 },
+        typeIDs = { 229, 238, 247, 248, 398, 402, 407, 424, 426, 428, 429, 436, 437 },
     },
     underwater = {
-        typeIDs = { 231, 232, 254, 407, 412},
-    },
-    dragonriding = {
-        typeIDs = { 402, 426 },
+        typeIDs = { 231, 232, 254, 407, 412, 436},
     },
     repair = {
         [280] = true, -- Traveler's Tundra Mammoth (Alliance)
@@ -1895,9 +1947,11 @@ ADDON.DB.Ignored = {
         [462] = true, -- White Riding Yak
         [484] = true, -- Black Riding Yak
         [485] = true, -- Brown Riding Yak
-
+        [776] = true, -- Swift Spectral Rylak
+        [1269] = true, -- Swift Spectral Fathom Ray
         [1578] = true, -- DNT Test Mount JZB
         [1690] = true, -- Whelpling
         [1796] = true, -- Whelpling
+        [2115] = true, -- Soar
     },
 }

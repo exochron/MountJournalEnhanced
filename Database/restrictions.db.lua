@@ -97,4 +97,9 @@ ADDON.DB.Restrictions = {
 [1568] = { ["class"]={"PALADIN",}, ["race"]={"LightforgedDraenei",}, }, -- Lightforged Ruinstrider
 [1597] = { ["race"]={"DarkIronDwarf",}, }, -- Grimhowl
 [1727] = { ["quest"]={73199,}, }, -- Tarecgosa's Visage
+[1869] = { ["class"]={"PALADIN",}, ["race"]={"Tauren",}, }, -- Summon Sunwalker Kodo
+[1870] = { ["class"]={"PALADIN",}, ["race"]={"Tauren",}, }, -- Summon Great Sunwalker Kodo
+[1871] = { ["class"]={"PALADIN",}, ["race"]={"Draenei","LightforgedDraenei",}, }, -- Summon Exarch's Elekk
+[1872] = { ["class"]={"PALADIN",}, ["race"]={"Draenei","LightforgedDraenei",}, }, -- Summon Great Exarch's Elekk
+[2233] = { ["class"]={"PALADIN",}, }, -- Earthen Ordinant's Ramolith
 }
