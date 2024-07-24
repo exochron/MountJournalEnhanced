@@ -30,7 +30,7 @@ local CLASS_TEXTURES = {
 
 -- originally from MountJournal_InitMountButton()
 local function InitMountButton(button, elementData)
-    local creatureName, spellID, icon, active, isUsable, sourceType, isFavorite, isFactionSpecific, faction, isFiltered, isCollected, mountID, isForDragonriding = ADDON.Api:GetMountInfoByID(elementData.mountID)
+    local creatureName, spellID, icon, active, isUsable, sourceType, isFavorite, isFactionSpecific, faction, isFiltered, isCollected, mountID, isSteadyFlight = ADDON.Api:GetMountInfoByID(elementData.mountID)
     -- everything below this line is from the original function
     local needsFanfare = C_MountJournal.NeedsFanfare(mountID);
 
@@ -40,7 +40,7 @@ local function InitMountButton(button, elementData)
     button.newGlow:SetShown(needsFanfare);
 
     local yOffset = 1;
-    if isForDragonriding then
+    if isSteadyFlight then
         if button.name:GetNumLines() == 1 then
             yOffset = 6;
         else
@@ -49,8 +49,8 @@ local function InitMountButton(button, elementData)
     end
     button.name:SetPoint("LEFT", button.icon, "RIGHT", 10, yOffset);
 
-    if button.DragonRidingLabel then
-        button.DragonRidingLabel:SetShown(isForDragonriding);
+    if button.SteadyFlightLabel then
+        button.SteadyFlightLabel:SetShown(isSteadyFlight);
     end
 
     button.index = elementData.index;
@@ -76,7 +76,7 @@ local function InitMountButton(button, elementData)
     CollectionItemListButton_SetRedOverlayShown(button, false);
     button.iconBorder:Hide();
     button.background:SetVertexColor(1, 1, 1, 1);
-    button.DragButton:SetEnabled(true)
+    button.DragButton:SetEnabled(true);
     if (isUsable or needsFanfare) then
         button.additionalText = nil;
         button.icon:SetDesaturated(false);

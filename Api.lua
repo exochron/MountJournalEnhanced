@@ -41,12 +41,12 @@ end
 --endregion
 
 function ADDON.Api:GetMountInfoByID(mountId)
-    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, isForDragonriding, a, b, c, d, e, f, g, h = C_MountJournal.GetMountInfoByID(mountId)
+    local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, isSteadyFlight, a, b, c, d, e, f, g, h = C_MountJournal.GetMountInfoByID(mountId)
     -- moved api functions in 11.0
     local IsUsableSpell = C_Spell.IsSpellUsable or IsUsableSpell
     isUsable = isUsable and IsUsableSpell(spellId)
 
-    return creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, isForDragonriding, a, b, c, d, e, f, g, h
+    return creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, isSteadyFlight, a, b, c, d, e, f, g, h
 end
 
 function ADDON.Api:GetMountLink(spellId)
