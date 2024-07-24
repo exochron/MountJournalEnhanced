@@ -187,9 +187,6 @@ local function setupTypeMenu(root)
 
     AddAllAndNone(root, settings)
 
-    if MOUNT_JOURNAL_FILTER_DRAGONRIDING then
-        ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_DRAGONRIDING, "dragonriding", settings, true)
-    end
     ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_FLYING, "flying", settings, true)
     ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_GROUND, "ground", settings, true)
     ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_AQUATIC, "underwater", settings, true)

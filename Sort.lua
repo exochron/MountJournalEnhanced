@@ -121,10 +121,10 @@ local mountCache
 local function CacheMount(mountId)
     mountCache = mountCache or CreateFleetingCache()
     return mountCache:Get(mountId, function()
-        local name, _, _, _, isUsable, _, isFavorite, _, _, _, isCollected, _, isForDragonriding = ADDON.Api:GetMountInfoByID(mountId)
+        local name, _, _, _, isUsable, _, isFavorite, _, _, _, isCollected = ADDON.Api:GetMountInfoByID(mountId)
         local needsFanfare = isCollected and C_MountJournal.NeedsFanfare(mountId)
 
-        return name, isUsable, isFavorite, isCollected, needsFanfare, isForDragonriding
+        return name, isUsable, isFavorite, isCollected, needsFanfare
     end)
 end
 local function FallbackByName(mountIdA, mountIdB)
@@ -168,10 +168,8 @@ local function SortByType(mountIdA, mountIdB)
     local result = false
     if mountTypeA == mountTypeB then
         return FallbackByName(mountIdA, mountIdB)
-    elseif mountTypeA == "dragonriding" then
-        result = (mountTypeB ~= "flying")
     elseif mountTypeA == "flying" then
-        result = (mountTypeB ~= "dragonriding")
+        result = true
     elseif mountTypeA == "ground" then
         result = (mountTypeB == "underwater")
     elseif mountTypeA == "underwater" then
@@ -286,8 +284,8 @@ function ADDON:SortHandler(mountA, mountB)
         return false
     end
 
-    local _, isUsableA, isFavoriteA, isCollectedA, needsFanfareA, isForDragonridingA = CacheMount(mountIdA)
-    local _, isUsableB, isFavoriteB, isCollectedB, needsFanfareB, isForDragonridingB = CacheMount(mountIdB)
+    local _, isUsableA, isFavoriteA, isCollectedA, needsFanfareA = CacheMount(mountIdA)
+    local _, isUsableB, isFavoriteB, isCollectedB, needsFanfareB = CacheMount(mountIdB)
 
     if needsFanfareA ~= needsFanfareB then
         return needsFanfareA and not needsFanfareB
@@ -301,9 +299,6 @@ function ADDON:SortHandler(mountA, mountB)
     end
     if ADDON.settings.sort.unownedOnBottom and isCollectedA ~= isCollectedB then
         return isCollectedA and not isCollectedB
-    end
-    if ADDON.settings.sort.dragonridingOnTop and isForDragonridingA ~= isForDragonridingB then
-        return isForDragonridingA and not isForDragonridingB
     end
 
     local sortBy = ADDON.settings.sort.by
