@@ -63,7 +63,7 @@ ADDON.DB.Expansion[2][2147] = true; -- Polly Roger
 
 -- in cataclysm classic all mounts git new mountIds
 ADDON.DB.Expansion[3].minID = 1807; -- Avatar of Flame (Cataclysm Classic)
-ADDON.DB.Expansion[GetServerExpansionLevel()].maxID = 999999999
+ADDON.DB.Expansion[GetClientDisplayExpansionLevel()].maxID = 999999999
 
 -- These are duplicate TCG mounts only existing in classic
 ADDON.DB.Ignored.ids[1763] = true; -- Magic Rooster

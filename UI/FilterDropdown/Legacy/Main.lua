@@ -298,7 +298,7 @@ local function InitializeFilterDropDown(frame, level)
         UIDropDownMenu_AddButton(info, level)
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_SOURCE then
 
-        local serverExpansion = GetServerExpansionLevel()
+        local serverExpansion = GetClientDisplayExpansionLevel()
 
         local settings = ADDON.settings.filter[SETTING_SOURCE]
         AddCheckAllAndNoneInfo(settings, level)
@@ -335,7 +335,7 @@ local function InitializeFilterDropDown(frame, level)
         UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_FLYING, "flying", settings, true), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_GROUND, "ground", settings, true), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(MOUNT_JOURNAL_FILTER_AQUATIC, "underwater", settings, true), level)
-        if GetServerExpansionLevel() >= LE_EXPANSION_CATACLYSM then
+        if GetClientDisplayExpansionLevel() >= LE_EXPANSION_CATACLYSM then
             UIDropDownMenu_AddButton(CreateFilterInfo(L["Transform"], "transform", settings, true), level)
         end
         UIDropDownMenu_AddButton(CreateFilterInfo(MINIMAP_TRACKING_REPAIR, "repair", settings, true), level)
@@ -353,7 +353,7 @@ local function InitializeFilterDropDown(frame, level)
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_EXPANSION then
         local settings = ADDON.settings.filter[SETTING_EXPANSION]
         AddCheckAllAndNoneInfo(settings, level)
-        for i = GetServerExpansionLevel(), 0,-1 do
+        for i = GetClientDisplayExpansionLevel(), 0,-1 do
             UIDropDownMenu_AddButton(CreateFilterInfo(_G["EXPANSION_NAME" .. i], i, settings, true), level)
         end
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_COLOR then
