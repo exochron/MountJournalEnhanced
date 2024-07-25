@@ -146,7 +146,7 @@ local function setLeftPadding(button)
 end
 
 local function setupSourceMenu(root)
-    local serverExpansion = GetServerExpansionLevel()
+    local serverExpansion = GetClientDisplayExpansionLevel()
     local settings = ADDON.settings.filter[SETTING_SOURCE]
     local L = ADDON.L
 
@@ -190,7 +190,7 @@ local function setupTypeMenu(root)
     ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_FLYING, "flying", settings, true)
     ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_GROUND, "ground", settings, true)
     ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_AQUATIC, "underwater", settings, true)
-    if GetServerExpansionLevel() >= LE_EXPANSION_CATACLYSM then
+    if GetClientDisplayExpansionLevel() >= LE_EXPANSION_CATACLYSM then
         ADDON.UI.FDD:CreateFilter(root, L["Transform"], "transform", settings, true)
     end
     ADDON.UI.FDD:CreateFilter(root, MINIMAP_TRACKING_REPAIR, "repair", settings, true)
@@ -209,8 +209,10 @@ local function setupExpansionMenu(root)
     AddAllAndNone(root, settings)
 
     --todo: use expansion icons/textures
-    for i = GetServerExpansionLevel(), 0,-1 do
-        ADDON.UI.FDD:CreateFilter(root, _G["EXPANSION_NAME" .. i], i, settings, true)
+    for i = GetClientDisplayExpansionLevel(), 0,-1 do
+        if _G["EXPANSION_NAME" .. i] then
+            ADDON.UI.FDD:CreateFilter(root, _G["EXPANSION_NAME" .. i], i, settings, true)
+        end
     end
 end
 

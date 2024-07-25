@@ -129,7 +129,7 @@ local function PrepareDefaults()
             end
         end
     end
-    for i = 0, GetServerExpansionLevel() do
+    for i = 0, GetClientDisplayExpansionLevel() do
         defaultSettings.filter.expansion[i] = true
     end
 

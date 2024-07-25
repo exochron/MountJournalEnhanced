@@ -77,13 +77,10 @@ local function initialize()
     end
 end
 ADDON.Events:RegisterFrameEventAndCallback("PLAYER_LOGIN", function()
-    -- delay by a frame, because GetServerExpansionLevel() can return 0 on first login
-    C_Timer.After(0, function()
-        initialize()
-        if not MountJournal then
-            ADDON.Events:RegisterFrameEventAndCallback("ADDON_LOADED", initialize, 'init')
-        end
-    end)
+    initialize()
+    if not MountJournal then
+        ADDON.Events:RegisterFrameEventAndCallback("ADDON_LOADED", initialize, 'init')
+    end
 end, 'init')
 
 EventRegistry:RegisterCallback("MountJournal.OnShow", function()
