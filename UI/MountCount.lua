@@ -43,7 +43,7 @@ local function CreateCharacterMountCount()
 
     frame:ClearAllPoints()
     frame:SetPoint("BOTTOMLEFT", MountJournal.MountCount, "TOPLEFT", 0, 0)
-    frame:SetSize(130, 19)
+    frame:SetSize(140, 19)
     if doStrip then
         frame:StripTextures()
     end
@@ -111,7 +111,7 @@ ADDON:RegisterUISetting('showPersonalCount', true, ADDON.L.SETTING_MOUNT_COUNT, 
             frame:SetShown(flag)
 
             if flag then
-                MountJournal.MountCount:SetSize(130, 19)
+                MountJournal.MountCount:SetSize(140, 19)
                 MountJournal.MountCount:SetPoint("TOPLEFT", 70, -41)
                 MountJournal.MountCount.Label:ClearAllPoints()
                 MountJournal.MountCount.Label:SetPoint("LEFT", 5, 0)
