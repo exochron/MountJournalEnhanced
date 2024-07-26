@@ -84,46 +84,27 @@ function ADDON.UI.FDD:CreateFilter(root, text, filterKey, filterSettings, withOn
 end
 
 --region ALL and None
-local hookedWidthButtons = {}
-local function layoutHalfButton(elementData)
-    ADDON.UI:CenterDropdownButton(elementData)
-    elementData:AddInitializer(function(button)
-        local name = button:GetDebugName()
-        if not hookedWidthButtons[name] then
-            hooksecurefunc(button, "SetWidth", function(self, width)
-                local name = self:GetDebugName()
-                if hookedWidthButtons[name] then
-                    self:SetSize(width / hookedWidthButtons[name], self:GetHeight())
-                    hookedWidthButtons[name] = 1
-                end
-            end)
-        end
-        hookedWidthButtons[name] = 2
-    end)
-end
 local function AddAllAndNone(root, settings)
-    local all = root:CreateButton(ALL, function()
+    ADDON.UI:CenterDropdownButton(root:CreateButton(ALL, function()
         ADDON.UI.FDD:SetAllSubFilters(settings, true)
         return MenuResponse.Refresh
-    end)
-    layoutHalfButton(all)
-    local none = root:CreateButton(NONE, function()
+    end))
+    ADDON.UI:CenterDropdownButton(root:CreateButton(NONE, function()
         ADDON.UI.FDD:SetAllSubFilters(settings, false)
         return MenuResponse.Refresh
-    end)
-    layoutHalfButton(none)
+    end))
 
     root:QueueSpacer()
 end
 local function registerVerticalLayoutHook()
     hooksecurefunc(AnchorUtil, "VerticalLayout", function(frames, initialAnchor, padding)
-        if #frames > 3 then
+        if #frames > 3 and MountJournal and MountJournal:IsShown() then
             local first = frames[1]
             local second = frames[2]
-            if hookedWidthButtons[first:GetDebugName()] and hookedWidthButtons[second:GetDebugName()]
-                and first.fontString:GetText() == ALL
-                and second.fontString:GetText() == NONE
-            then
+            if first.fontString:GetText() == ALL and second.fontString:GetText() == NONE then
+                first:SetSize(first:GetWidth() / 2, first:GetHeight())
+                second:SetSize(second:GetWidth() / 2, second:GetHeight())
+
                 second:SetPoint("TOPLEFT", first, "TOPRIGHT", padding, 0)
                 frames[3]:SetPoint("TOPLEFT", first, "BOTTOMLEFT", 0, -padding)
             end

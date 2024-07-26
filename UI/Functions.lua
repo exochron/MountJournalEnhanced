@@ -93,3 +93,14 @@ end
 ADDON.Events:RegisterCallback("OnLogin", hookStripTextures, "ElvUI hooks")
 
 --endregion
+
+function ADDON.UI.OpenContextMenu(owner, anchor, generator, ...)
+    local elementDescription = MenuUtil.CreateRootMenuDescription(MenuVariants.GetDefaultContextMenuMixin());
+
+    Menu.PopulateDescription(generator, owner, elementDescription, ...);
+
+    local menu = Menu.GetManager():OpenMenu(owner, elementDescription, anchor);
+    if menu then
+        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
+    end
+end

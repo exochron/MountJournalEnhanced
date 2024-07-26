@@ -199,7 +199,8 @@ ADDON.Events:RegisterCallback("loadUI", function()
     local menu
     ADDON.UI.SettingsButton:HookScript("OnClick", function(self)
         if MenuUtil then
-            MenuUtil.CreateContextMenu(self, CreateSettingsMenu)
+            local anchor = CreateAnchor("TOPLEFT", self, "CENTER", -3, 5)
+            ADDON.UI.OpenContextMenu(self, anchor, CreateSettingsMenu)
         else
             PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
             if menu == nil then
