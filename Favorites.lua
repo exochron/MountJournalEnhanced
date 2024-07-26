@@ -74,6 +74,7 @@ local function RunSetFavorites(mountIds)
     print(L.TASK_FAVOR_START)
     FavorMounts(mountIds, function()
         print(L.TASK_END)
+        ADDON:FilterMounts()
     end)
 end
 
@@ -88,7 +89,7 @@ local function FetchDisplayedMountIds()
     return mountIds
 end
 
-local function InitializeDropDown(_, level)
+local function InitializeDDMenu(_, level)
 
     local button = { isTitle = 1, text = FAVORITES, notCheckable = 1, }
     UIDropDownMenu_AddButton(button, level)
@@ -138,32 +139,67 @@ local function InitializeDropDown(_, level)
     UIDropDownMenu_AddButton(button, level)
 end
 
+local function CreateFavoritesMenu(owner, root)
+    root:CreateTitle(FAVORITES)
+
+    root:CreateButton(L.FAVOR_DISPLAYED, function()
+        RunSetFavorites(FetchDisplayedMountIds())
+    end)
+    root:CreateButton(UNCHECK_ALL, function()
+        RunSetFavorites({})
+    end)
+    root:CreateCheckbox(L.FAVOR_PER_CHARACTER, function()
+        return ADDON.settings.favoritePerChar
+    end, function()
+        ADDON:ApplySetting('favoritePerChar', not ADDON.settings.favoritePerChar)
+        return MenuResponse.Refresh
+    end)
+    root:CreateCheckbox(L.FAVOR_AUTO, function()
+        return ADDON.settings.autoFavor
+    end, function()
+        ADDON:ApplySetting('autoFavor', not ADDON.settings.autoFavor)
+        return MenuResponse.Refresh
+    end)
+end
+
 local function BuildStarButton()
-    local AceGUI = LibStub("AceGUI-3.0")
+    starButton = CreateFrame(MenuUtil and "DropdownButton" or "Button", nil, MountJournal)
 
-    starButton = AceGUI:Create("Icon")
-    starButton:SetParent({ content = MountJournal })
     starButton:SetPoint("TOPLEFT", MountJournal.LeftInset, "TOPLEFT", 0, -7)
-    starButton:SetWidth(25)
-    starButton:SetHeight(25)
+    starButton:SetSize(25, 25)
 
-    starButton.image:SetAtlas("PetJournal-FavoritesIcon")
-    starButton.image:SetWidth(25)
-    starButton.image:SetHeight(25)
-    starButton.image:SetPoint("TOP", 0, 0)
+    local icon = starButton:CreateTexture(nil, "ARTWORK")
+    icon:SetAtlas("PetJournal-FavoritesIcon")
+    icon:SetAllPoints(starButton)
 
-    local menu
-    starButton:SetCallback("OnClick", function()
-        if menu == nil then
-            menu = CreateFrame("Frame", ADDON_NAME .. "FavorMenu", MountJournal, "UIDropDownMenuTemplate")
-            UIDropDownMenu_Initialize(menu, InitializeDropDown, "MENU")
-        end
+    starButton:SetHighlightAtlas("PetJournal-FavoritesIcon", "ADD")
+    local highlight = starButton:GetHighlightTexture()
+    highlight:SetAlpha(0.4)
+    highlight:SetAllPoints(icon)
 
-        ToggleDropDownMenu(1, nil, menu, starButton.frame, 0, 10)
+    starButton:HookScript("OnMouseDown", function()
+        icon:AdjustPointsOffset(1, -1)
+    end)
+    starButton:HookScript("OnMouseUp", function()
+        icon:AdjustPointsOffset(-1, 1)
     end)
 
-    starButton.frame:Show()
-    ADDON.UI.FavoriteButton = starButton.frame
+    if starButton.SetupMenu then
+        starButton:SetupMenu(CreateFavoritesMenu)
+    else
+        local menu
+        starButton:HookScript("OnClick", function()
+            if menu == nil then
+                menu = CreateFrame("Frame", ADDON_NAME .. "FavorMenu", MountJournal, "UIDropDownMenuTemplate")
+                UIDropDownMenu_Initialize(menu, InitializeDDMenu, "MENU")
+            end
+
+            ToggleDropDownMenu(1, nil, menu, starButton, 0, 10)
+        end)
+    end
+
+    starButton:Show()
+    ADDON.UI.FavoriteButton = starButton
 
     local searchBox = MountJournal.searchBox
     searchBox:ClearAllPoints()
