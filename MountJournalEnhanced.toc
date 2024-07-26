@@ -1,4 +1,4 @@
-## Interface: 100207, 110000
+## Interface: 110000
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## IconTexture: Interface\Addons\MountJournalEnhanced\UI\icons\mje.png
@@ -56,10 +56,6 @@ UI\FilterDropdown\Main.lua
 UI\FilterDropdown\Color.lua
 UI\FilterDropdown\Family.lua
 UI\FilterDropdown\Sort.lua
-UI\FilterDropdown\Legacy\Main.lua
-UI\FilterDropdown\Legacy\Color.lua
-UI\FilterDropdown\Legacy\Family.lua
-UI\FilterDropdown\Legacy\Sort.lua
 UI\DisplayBackground.lua
 UI\DisplayCamera.lua
 UI\SkyridingButtons.lua

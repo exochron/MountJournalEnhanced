@@ -154,9 +154,10 @@ local function CreateContextMenu(owner, rootDescription, mountId)
     end)
 end
 
-function ADDON.UI:HandleListDropDown(sender, anchor)
+function ADDON.UI:HandleListDropDown(sender, relativeTo)
     if MenuUtil then
-        MenuUtil.CreateContextMenu(anchor, CreateContextMenu, sender.mountID)
+        local anchor = CreateAnchor("TOPLEFT", relativeTo, "BOTTOMLEFT", 0, 5)
+        ADDON.UI.OpenContextMenu(sender, anchor, CreateContextMenu, sender.mountID)
     else
         if menu == nil then
             menu = CreateFrame("Frame", ADDON_NAME .. "MountOptionsMenu", MountJournal, "UIDropDownMenuTemplate")
@@ -164,6 +165,6 @@ function ADDON.UI:HandleListDropDown(sender, anchor)
         end
 
         currentMountId = sender.mountID
-        ToggleDropDownMenu(1, nil, menu, anchor, 0, 0)
+        ToggleDropDownMenu(1, nil, menu, relativeTo, 0, 0)
     end
 end
