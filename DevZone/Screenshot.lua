@@ -20,6 +20,12 @@ function ADDON:TakeScreenshots()
     end
     ToggleCollectionsJournal(COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS)
 
+    local function OpenFilterMenu()
+        MountJournal.FilterDropdown:SetMenuOpen(true)
+
+        return { Menu.GetManager():GetOpenMenu():GetChildren() }
+    end
+
     -- give time to load properly
     C_Timer.After(0.5, function()
         local gg = LibStub("GalleryGenerator")
@@ -28,7 +34,7 @@ function ADDON:TakeScreenshots()
             {
                 function(api)
                     api:BackScreen()
-                    api:Click(MountJournalFilterButton.ResetButton)
+                    api:Click(MountJournal.FilterDropdown.ResetButton)
 
                     C_CVar.SetCVar("mountJournalShowPlayer", 0) -- hide rider
 
@@ -54,48 +60,35 @@ function ADDON:TakeScreenshots()
                     ADDON.Api:SetSelected(764) --select Grove Warden
                     MountJournal.MountDisplay.ModelScene:Reset()
 
-                    api:Click(MountJournalFilterButton)
-
-                    api:Point(DropDownList1Button1)
-
-                    api:Point(DropDownList2Button6, 20) -- Count of usage
+                    api:Point(OpenFilterMenu()[3]) -- sort
                 end,
                 function(api)
                     api:BackScreen()
-                    api:Click(MountJournalFilterButton)
-                    api:Point(DropDownList1Button11) -- Sources
-                end,
-                function(api)
-                    api:BackScreen()
-                    api:Click(MountJournalFilterButton)
-                    api:Point(DropDownList1Button12) -- Type
+                    MountJournal.FilterDropdown:SetMenuOpen(true)
+
+                    api:Point(OpenFilterMenu()[13]) -- Sources
                 end,
                 function(api)
                     api:BackScreen()
 
-                    api:Click(MountJournalFilterButton)
+                    api:Point(OpenFilterMenu()[14]) -- Type
+                end,
+                function(api)
+                    api:BackScreen()
 
-                    api:Point(DropDownList1Button14)
-                    api:Click(DropDownList2Button2) -- deselect all
-                    api:Click(DropDownList2Button15) -- Drakes
-                    api:Point(DropDownList2Button7) -- Bovids
-                    api:Click(DropDownList3Button3) -- Rams
-                    api:PointAndClick(DropDownList3Button7, 20) -- Yaks
+                    api:Point(OpenFilterMenu()[16]) -- Family
                 end,
                 function(api)
                     api:BackScreen()
-                    api:Click(MountJournalFilterButton.ResetButton)
-                    api:Click(MountJournalFilterButton)
-                    api:Point(DropDownList1Button16) --Color
+                    api:Point(OpenFilterMenu()[18]) -- Color
                 end,
                 function(api)
                     api:BackScreen()
-                    api:Click(MountJournalFilterButton)
-                    api:Point(DropDownList1Button17) --Rarity
+                    api:Point(OpenFilterMenu()[19]) -- Rarity
                 end,
                 function(api)
                     api:BackScreen()
-                    api:Click(MountJournalFilterButton)
+                    MountJournal.FilterDropdown:SetMenuOpen(false)
 
                     ADDON.Api:SetSelected(1057) -- Nazjatar Blood Serpent
                     local noteFrame = ADDON.UI:CreateNotesFrame(1057)
@@ -108,28 +101,29 @@ function ADDON:TakeScreenshots()
                     end)
                     api:Point(button)
                     api:Click(button, "RightButton")
-                    api:Point(DropDownList1Button4, 10)
+
+                    local menuButtons = { Menu.GetManager():GetOpenMenu():GetChildren()}
+                    api:Point(menuButtons[6], 10) -- Set Note
                 end,
                 function(api)
                     api:BackScreen()
-                    api:PointAndClick(ADDON.UI.FavoriteButton)
+                    api:Point(ADDON.UI.FavoriteButton)
+                    ADDON.UI.FavoriteButton:SetMenuOpen(true)
                 end,
                 function(api)
                     api:BackScreen()
-                    api:PointAndClick(ADDON.UI.SettingsButton)
+                    api:Point(ADDON.UI.SettingsButton)
+                    ADDON.UI.SettingsButton:SetMenuOpen(true)
                 end,
                 function(api)
                     api:BackScreen()
 
-                    -- show skyriding talent tree
-                    GenericTraitUI_LoadUI()
-                    GenericTraitFrame:SetSystemID(1)
-                    ToggleFrame(GenericTraitFrame)
+                    api:Click(MountJournal.DynamicFlightFlyout.OpenDynamicFlightSkillTreeButton)
 
                     api:Point(ADDON.UI.SkyridingSpendAllGlyphsButton, 22)
                 end,
                 function(api)
-                    ToggleFrame(GenericTraitFrame)
+                    HideUIPanel(GenericTraitFrame)
 
                     api:BackScreen()
 
