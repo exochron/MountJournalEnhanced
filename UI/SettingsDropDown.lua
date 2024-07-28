@@ -166,29 +166,29 @@ local function BuildWheelButton()
         template = "UIMenuButtonStretchTemplate"
     end
 
-    local button = CreateFrame("Button", nil, MountJournal, template)
+    local button = CreateFrame(MenuUtil and "DropdownButton" or "Button", nil, MountJournal, template)
 
     button:SetWidth(24)
     button:SetHeight(24)
     button:SetPoint("RIGHT", CollectionsJournal.CloseButton, "LEFT", 0, 0)
     button:SetFrameLevel(555)
 
-    local tex = button:CreateTexture(nil, "ARTWORK")
-    tex:SetPoint("TOPLEFT", 4, -4)
-    tex:SetPoint("BOTTOMRIGHT", -4, 4)
-    if GetFileIDFromPath("interface/cursor/crosshair/engineerskin") then
-        tex:SetTexture(4675627) -- wrench cursor
+    local icon = button:CreateTexture(nil, "ARTWORK")
+    icon:SetPoint("TOPLEFT", 4, -4)
+    icon:SetPoint("BOTTOMRIGHT", -4, 4)
+    if GetFileIDFromPath("Interface/QuestFrame/QuestlogFrame") then
+        icon:SetAtlas("QuestLog-icon-setting")
     else
-        tex:SetTexture(235498) -- wrench cursor
+        icon:SetTexture(235498) -- wrench cursor
+        icon:SetDesaturated(true)
     end
-    tex:SetDesaturated(true)
+    button.Icon = icon
 
-    button:SetHighlightAtlas("mechagon-projects", "ADD")
-    tex = button:GetHighlightTexture()
-    tex:SetPoint("TOPLEFT", button, "TOPLEFT", 3, -3)
-    tex:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -3, 3)
-    tex:SetAlpha(0.35)
-    tex:SetBlendMode("ADD")
+    local highlight = button:GetHighlightTexture()
+    highlight:SetAtlas("QuestLog-icon-setting")
+    highlight:SetAlpha(0.4)
+    highlight:SetBlendMode("ADD")
+    highlight:SetAllPoints(icon)
 
     return button
 end
@@ -196,12 +196,11 @@ end
 ADDON.Events:RegisterCallback("loadUI", function()
     ADDON.UI.SettingsButton = BuildWheelButton()
 
-    local menu
-    ADDON.UI.SettingsButton:HookScript("OnClick", function(self)
-        if MenuUtil then
-            local anchor = CreateAnchor("TOPLEFT", self, "CENTER", -3, 5)
-            ADDON.UI.OpenContextMenu(self, anchor, CreateSettingsMenu)
-        else
+    if ADDON.UI.SettingsButton.SetupMenu then
+        ADDON.UI.SettingsButton:SetupMenu(CreateSettingsMenu)
+    else
+        local menu
+        ADDON.UI.SettingsButton:HookScript("OnClick", function(self)
             PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
             if menu == nil then
                 menu = CreateFrame("Frame", ADDON_NAME .. "SettingsMenu", MountJournal, "UIDropDownMenuTemplate")
@@ -209,8 +208,8 @@ ADDON.Events:RegisterCallback("loadUI", function()
             end
 
             ToggleDropDownMenu(1, nil, menu, self, 0, 0)
-        end
-    end)
+        end)
+    end
 end, "settings wheel")
 
 ADDON.UI:RegisterUIOverhaulCallback(function(frame)
