@@ -23,10 +23,10 @@ local function CollectFavoredMounts()
 end
 
 local function FavorMounts(mountIds, finishedCallback)
-    -- apparently Blizzard only allows ~5 requests per second
+    -- Apparently Blizzard only allows ~5 requests per second
 
     if starButton then
-        starButton:SetDisabled(true)
+        starButton:Disable()
     end
 
     local hasUpdate
@@ -59,7 +59,7 @@ local function FavorMounts(mountIds, finishedCallback)
         end)
     else
         if starButton then
-            starButton:SetDisabled(false)
+            starButton:Enable()
         end
         if ADDON.initialized then
             ADDON:FilterMounts()
