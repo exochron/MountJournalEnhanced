@@ -99,7 +99,7 @@ local function InitializeUIDDM(self, level)
     end
 end
 
-local function CreateSettingsMenu(owner, rootDescription)
+local function CreateSettingsMenu(_, rootDescription)
     rootDescription:CreateTitle(C_AddOns.GetAddOnMetadata(ADDON_NAME, "Title"))
 
     local uiLabels, _ = ADDON:GetSettingLabels()
@@ -158,15 +158,9 @@ local function CreateSettingsMenu(owner, rootDescription)
     )
 end
 
-local withoutStyle = false
 local function BuildWheelButton()
 
-    local template
-    if not withoutStyle then
-        template = "UIMenuButtonStretchTemplate"
-    end
-
-    local button = CreateFrame(MenuUtil and "DropdownButton" or "Button", nil, MountJournal, template)
+    local button = CreateFrame(MenuUtil and "DropdownButton" or "Button", nil, MountJournal, "UIMenuButtonStretchTemplate")
 
     button:SetWidth(24)
     button:SetHeight(24)
@@ -190,6 +184,11 @@ local function BuildWheelButton()
     highlight:SetBlendMode("ADD")
     highlight:SetAllPoints(icon)
 
+    if ElvUI and MountJournalSummonRandomFavoriteButton.IsSkinned then
+        local E = unpack(ElvUI)
+        E:GetModule('Skins'):HandleButton(button)
+    end
+
     return button
 end
 
@@ -211,9 +210,3 @@ ADDON.Events:RegisterCallback("loadUI", function()
         end)
     end
 end, "settings wheel")
-
-ADDON.UI:RegisterUIOverhaulCallback(function(frame)
-    if frame == CollectionsJournal then
-        withoutStyle = true
-    end
-end)
