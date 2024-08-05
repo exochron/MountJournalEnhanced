@@ -116,14 +116,7 @@ function ADDON:TakeScreenshots()
                     ADDON.UI.SettingsButton:SetMenuOpen(true)
                 end,
                 function(api)
-                    api:BackScreen()
-
-                    api:Click(MountJournal.DynamicFlightFlyout.OpenDynamicFlightSkillTreeButton)
-
-                    api:Point(ADDON.UI.SkyridingSpendAllGlyphsButton, 22)
-                end,
-                function(api)
-                    HideUIPanel(GenericTraitFrame)
+                    ToggleCollectionsJournal()
 
                     api:BackScreen()
 

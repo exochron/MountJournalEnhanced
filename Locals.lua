@@ -53,7 +53,6 @@ L["ANIMATION_RUN"] = "Run"
 L["ANIMATION_FLY"] = "Fly"
 L["ANIMATION_FLY_IDLE"] = "Fly Idle"
 L["FILTER_ONLY"] = "only"
-L["TRAITS_SPEND_ALL"] = "Spend all"
 
 -- Families
 L["Airplanes"] = "Airplanes"

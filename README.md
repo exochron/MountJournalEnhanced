@@ -7,7 +7,6 @@ This addon extends the ingame mount journal with extra features.
 - [TikTok: Great Addon for Mount collectors](https://www.tiktok.com/@touchpadwarrior/video/7216081879886269739) (03/2023 by [Touchpadwarrior](https://www.twitch.tv/touchpadwarrior))
 
 ## ⭐ Features
-+ **new:** Spend all your Skyriding Glyphs with one button click (Retail only)
 + Support for Cataclysm Classic
     + also adds again Summon Random Mount Button
 + Filter mounts by an extended source, colors, faction, type, family or expansion
