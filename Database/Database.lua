@@ -165,6 +165,7 @@ ADDON.DB.Source = {
         -- War Within
         [447213] = true, -- Alunira
         [448941] = true, -- Beledar's Spawn
+        [448979] = true, -- Dauntless Imperial Lynx
         [449258] = true, -- Ol' Mole Rufus
     },
 
@@ -394,9 +395,13 @@ ADDON.DB.Source = {
 
         -- War Within
         [447057] = true, -- Smoldering Cinderbee
+        [447151] = true, -- Soaring Meaderbee
         [447176] = true, -- Cyan Glowmite
         [447185] = true, -- Aquamarine Swarmite
         [447957] = true, -- Ferocious Jawcrawler
+        [448680] = true, -- Widow's Undercrawler
+        [448685] = true, -- Heritage Undercrawler
+        [448689] = true, -- Royal Court Undercrawler
         [448939] = true, -- Shackled Shadow
         [448978] = true, -- Vermillion Imperial Lynx
         [449269] = true, -- Crimson Mudnose
@@ -715,6 +720,18 @@ ADDON.DB.Source = {
         [446902] = true, -- Polly Roger (classic) - Keg Leg's Crew
         [254812] = true, -- Royal Seafeather - Keg Leg's Crew
         [300154] = true, -- Silver Tidestallion - Keg Leg's Crew
+
+        [447057] = true, -- Smoldering Cinderbee
+        [447176] = true, -- Cyan Glowmite
+        [447185] = true, -- Aquamarine Swarmite
+        [447957] = true, -- Ferocious Jawcrawler
+        [448680] = true, -- Widow's Undercrawler
+        [448685] = true, -- Heritage Undercrawler
+        [448689] = true, -- Royal Court Undercrawler
+        [448939] = true, -- Shackled Shadow
+        [448978] = true, -- Vermillion Imperial Lynx
+        [449269] = true, -- Crimson Mudnose
+        [449418] = true, -- Shale Ramolith
 
         ------------------------------
         -- Alliance ------------------
@@ -1092,8 +1109,11 @@ ADDON.DB.Source = {
         [446022] = 19876, -- Astral Emperor's Serpent
 
         -- War Within
+        [447160] = 40097, -- Raging Cinderbee
         [447190] = 40232, -- Shadowed Swarmite - Glory of the Nerub-ar Raider
+        [447195] = 40702, -- Swarmite Skyhunter - Swarmite Skyhunter
         [448188] = 40662, -- Machine Defense Unit 1-11 - It's not much
+        [448850] = 40539, -- Kah, Legend of the Deep - The Derby Dash
         [449415] = {40306, 40307}, -- Slatestone Ramolith - Allied Races: Earthen
         [452779] = 40438, -- Ivory Goliathus - Glory of the Delver
         [458335] = 20525, -- Diamond Mechsuit - WW Keystone Master S1
@@ -1882,7 +1902,7 @@ ADDON.DB.Type = {
         typeIDs = { 225, 230, 231, 241, 269, 284, 408, 412 },
     },
     flying = {
-        typeIDs = { 229, 238, 247, 248, 398, 402, 407, 424, 426, 428, 429, 436, 437 },
+        typeIDs = { 229, 238, 247, 248, 398, 402, 407, 424, 426, 428, 429, 436, 437, 444, 445 },
     },
     underwater = {
         typeIDs = { 231, 232, 254, 407, 412, 436},

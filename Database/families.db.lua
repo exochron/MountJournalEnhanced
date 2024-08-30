@@ -29,6 +29,7 @@ ADDON.DB.Family = {
 [2150] = true, -- Vicious Skyflayer
 [2177] = true, -- Aquamarine Swarmite
 [2180] = true, -- Shadowed Swarmite
+[2181] = true, -- Swarmite Skyhunter
 [2211] = true, -- Vicious Skyflayer
 },
 ["Scorpions"] = {
@@ -49,6 +50,9 @@ ADDON.DB.Family = {
 [1541] = true, -- Genesis Crawler
 [1542] = true, -- Tarachnid Creeper
 [1543] = true, -- Ineffable Skitterer
+[2171] = true, -- Widow's Undercrawler
+[2172] = true, -- Heritage Undercrawler
+[2174] = true, -- Royal Court Undercrawler
 },
 },
 ["Bats"] = {
@@ -316,6 +320,7 @@ ADDON.DB.Family = {
 [1765] = true, -- Big Battle Bear
 [1908] = true, -- Amani Battle Bear
 [1923] = true, -- Darkmoon Dancing Bear
+[2262] = true, -- Harmonious Salutations Bear
 },
 ["Foxes"] = {
 [656] = true, -- Llothien Prowler
@@ -430,6 +435,7 @@ ADDON.DB.Family = {
 [1576] = true, -- Jigglesworth Sr.
 [1577] = true, -- Ash'adar, Harbinger of Dawn
 [2193] = true, -- Vermillion Imperial Lynx
+[2194] = true, -- Dauntless Imperial Lynx
 },
 ["Sabers"] = {
 [26] = true, -- Striped Frostsaber
@@ -942,7 +948,7 @@ ADDON.DB.Family = {
 [1692] = true, -- Wondrous Wavewhisker
 [2186] = true, -- [PH] Blue Old God Fish Mount
 [2187] = true, -- Underlight Shorestalker
-[2188] = true, -- [PH] Red Old God Fish Mount
+[2188] = true, -- Kah, Legend of the Deep
 [2189] = true, -- Underlight Corrupted Behemoth
 },
 ["Seahorses"] = {
@@ -1122,6 +1128,7 @@ ADDON.DB.Family = {
 },
 ["Murloc"] = {
 [1797] = true, -- Ginormous Grrloc
+[2259] = true, -- Gigantic Grrloc
 },
 ["Others"] = {
 [1312] = true, -- Gargantuan Grrloc
@@ -1182,6 +1189,8 @@ ADDON.DB.Family = {
 [1013] = true, -- Honeyback Harvester
 [2148] = true, -- Smoldering Cinderbee
 [2162] = true, -- Cyan Glowmite
+[2165] = true, -- Soaring Meaderbee
+[2167] = true, -- Raging Cinderbee
 },
 ["Silithids"] = {
 [116] = true, -- Black Qiraji Battle Tank
