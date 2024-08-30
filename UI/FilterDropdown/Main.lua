@@ -176,6 +176,9 @@ local function setupTypeMenu(root)
     end
     ADDON.UI.FDD:CreateFilter(root, MINIMAP_TRACKING_REPAIR, "repair", settings, true)
     ADDON.UI.FDD:CreateFilter(root, L["Passenger"], "passenger", settings, true)
+    if GetClientDisplayExpansionLevel() >= LE_EXPANSION_WAR_WITHIN then
+        ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_RIDEALONG, "rideAlong", settings, true)
+    end
 end
 
 local function setupFactionMenu(root)

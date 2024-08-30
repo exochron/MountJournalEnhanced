@@ -90,6 +90,7 @@ local function PrepareDefaults()
                 transform = true,
                 repair = true,
                 passenger = true,
+                rideAlong = true,
             },
             rarity = {
                 [Enum.ItemQuality.Common or Enum.ItemQuality.Standard] = true,
