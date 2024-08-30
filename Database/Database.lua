@@ -1933,6 +1933,9 @@ ADDON.DB.Type = {
         [1287] = true, -- Explorer's Jungle Hopper
         [1288] = true, -- Explorer's Dunetrekker
     },
+    rideAlong = {
+        typeIDs = { 402, 445},
+    },
 }
 
 -- used as filter
