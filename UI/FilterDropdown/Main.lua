@@ -101,7 +101,7 @@ local function registerVerticalLayoutHook()
         if #frames > 3 and MountJournal and MountJournal:IsShown() then
             local first = frames[1]
             local second = frames[2]
-            if first.fontString:GetText() == ALL and second.fontString:GetText() == NONE then
+            if first.fontString and first.fontString:GetText() == ALL and second.fontString and second.fontString:GetText() == NONE then
                 first:SetSize(first:GetWidth() / 2, first:GetHeight())
                 second:SetSize(second:GetWidth() / 2, second:GetHeight())
 
