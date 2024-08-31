@@ -207,7 +207,7 @@ local function setupRarityMenu(root)
         local text = "|c"..select(4, GetItemQualityColor(quality)).._G["ITEM_QUALITY"..quality.."_DESC"].."|r".." ("..suffix..")"
         ADDON.UI.FDD:CreateFilter(root, text, quality, settings, true)
     end
-    addButton(Enum.ItemQuality.Legendary, "<1%")
+    addButton(Enum.ItemQuality.Legendary, "<2%")
     addButton(Enum.ItemQuality.Epic, "<10%")
     addButton(Enum.ItemQuality.Rare, "<20%")
     addButton(Enum.ItemQuality.Uncommon, "<50%")

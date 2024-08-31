@@ -14,10 +14,10 @@ local function RestoreOriginalColor(collected, button)
 end
 
 local function DetermineQuality(rarity)
-    if rarity < 1.0 then
+    if rarity < 2.0 then
         return Enum.ItemQuality.Legendary
     end
-    if rarity >= 1.0 and rarity < 10.0 then
+    if rarity >= 2.0 and rarity < 10.0 then
         return Enum.ItemQuality.Epic
     end
     if rarity >= 10.0 and rarity < 20.0 then

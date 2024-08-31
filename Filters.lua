@@ -324,8 +324,8 @@ local function FilterByRarity(mountID, allSettings)
         return allSettings == false
     end
 
-    return (rarity < 1.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Legendary])
-            or (rarity >= 1.0 and rarity < 10.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Epic])
+    return (rarity < 2.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Legendary])
+            or (rarity >= 2.0 and rarity < 10.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Epic])
             or (rarity >= 10.0 and rarity < 20.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Rare])
             or (rarity >= 20.0 and rarity < 50.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Uncommon])
             or (rarity >= 50.0 and ADDON.settings.filter.rarity[Enum.ItemQuality.Common])
