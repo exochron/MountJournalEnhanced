@@ -5,8 +5,8 @@ AddonCompartmentFrame:RegisterAddon({
     icon = C_AddOns.GetAddOnMetadata(ADDON_NAME, "IconTexture"),
     registerForAnyClick = true,
     notCheckable = true,
-    func = function(_, _, _, _, mouseButton)
-        if mouseButton == "RightButton" then
+    func = function(_, inputData)
+        if inputData.buttonName == "RightButton" then
             ADDON:OpenOptions()
         else
             ToggleCollectionsJournal(COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS)
