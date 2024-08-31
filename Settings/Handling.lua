@@ -94,4 +94,5 @@ if "" ~= select(3, C_MountJournal.GetMountInfoExtraByID(9)) then
     ADDON:RegisterBehaviourSetting('searchInDescription', true, L.SETTING_SEARCH_MORE)
 end
 ADDON:RegisterBehaviourSetting('searchInNotes', true, L.SETTING_SEARCH_NOTES)
+ADDON:RegisterBehaviourSetting('searchInFamilyName', true, L.SETTING_SEARCH_FAMILY_NAME)
 --endregion

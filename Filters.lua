@@ -12,25 +12,52 @@ local LibMountsRarity
 
 local cachedColor, cachedColorResults = {}, {}
 
-local function FilterByName(searchString, name, mountId)
+local function FilterByName(searchString, name)
     name = name:lower()
     local pos = strfind(name, searchString, 1, true)
-    local result = pos ~= nil
-
-    if result == false and ADDON.settings.searchInDescription then
+    return pos ~= nil
+end
+local function FilterByDescription(searchString, mountId)
+    if ADDON.settings.searchInDescription then
         local _, description, sourceText = C_MountJournal.GetMountInfoExtraByID(mountId)
         description = description:lower()
-        pos = strfind(description, searchString, 1, true)
-        result = pos ~= nil
+        local pos = strfind(description, searchString, 1, true)
+        local result = pos ~= nil
 
         if result == false then
             sourceText = sourceText:lower()
             pos = strfind(sourceText, searchString, 1, true)
             result = pos ~= nil
         end
+
+        return result
     end
 
-    return result
+    return false
+end
+local function FilterByFamilyName(searchString, mountId)
+    if ADDON.settings.searchInFamilyName then
+        local L = ADDON.L
+        for topFamily, topItems in pairs(FamilyDB) do
+            if topItems[mountId] and strfind((L[topFamily] or topFamily):lower(), searchString, 1, true) ~= nil then
+                return true
+            end
+
+            if type(select(2, next(topItems))) == "table" then
+                for subFamily, subValues in pairs(topItems) do
+                    if subValues[mountId] and
+                            (
+                                strfind((L[subFamily] or subFamily):lower(), searchString, 1, true) ~= nil
+                                or strfind((L[topFamily] or topFamily):lower(), searchString, 1, true) ~= nil
+                            ) then
+                        return true
+                    end
+                end
+            end
+        end
+    end
+
+    return false
 end
 local function FilterByNote(searchString, mountId)
     if ADDON.settings.searchInNotes then
@@ -316,8 +343,10 @@ function ADDON:FilterMounts()
             local creatureName, _, _, _, _, _, _, _, _, shouldHideOnChar = ADDON.Api:GetMountInfoByID(mountId)
             if FilterIngameHiddenMounts(shouldHideOnChar, mountId) and
                     (
-                            FilterByName(searchText, creatureName, mountId)
-                                    or FilterByNote(searchText, mountId)
+                            FilterByName(searchText, creatureName)
+                                or FilterByDescription(searchText, mountId)
+                                or FilterByFamilyName(searchText, mountId)
+                                or FilterByNote(searchText, mountId)
                     )
             then
                 result[#result + 1] = mountId

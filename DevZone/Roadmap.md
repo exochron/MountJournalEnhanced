@@ -1,8 +1,10 @@
 
 ### Next
+- sync dates of mount pairs, which are collected by the same trigger (alliance/horde versions)
 - quick filters in display
 - black filter inaccurate
 - personal favorites rework
+- Map Pins in description Text (Drop, Treasure, Vendor)
 
 ### More Ideas:
 - special summon animation

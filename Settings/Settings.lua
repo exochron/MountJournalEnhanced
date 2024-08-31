@@ -30,6 +30,7 @@ local function PrepareDefaults()
 
         trackUsageStats = true,
         searchInDescription = true,
+        searchInFamilyName = true,
         searchInNotes = true,
 
         personalUi = false,
@@ -171,6 +172,7 @@ ADDON.Events:RegisterCallback("OnInit", function()
     ADDON:ApplySetting('personalHiddenMounts', MJEPersonalSettings.personalHiddenMounts)
     ADDON:ApplySetting('personalFilter', MJEPersonalSettings.personalFilter)
     ADDON:ApplySetting('searchInDescription', MJEPersonalSettings.searchInDescription)
+    ADDON:ApplySetting('searchInFamilyName', MJEPersonalSettings.searchInFamilyName)
     ADDON:ApplySetting('searchInNotes', MJEPersonalSettings.searchInNotes)
 
     ADDON.settings.favoritePerChar = MJEPersonalSettings.favoritePerChar
