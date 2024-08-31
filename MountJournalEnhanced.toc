@@ -58,6 +58,7 @@ UI\FilterDropdown\Family.lua
 UI\FilterDropdown\Sort.lua
 UI\DisplayBackground.lua
 UI\DisplayCamera.lua
+UI\DisplayText.lua
 UI\SkyridingButtons.lua
 UI\Resize.lua
 UI\DisplayStatistics.lua
