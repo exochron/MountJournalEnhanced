@@ -257,6 +257,7 @@ L["SETTING_PERSONAL_HIDDEN_MOUNTS"] = "Apply hidden mounts only to this characte
 L["SETTING_PERSONAL_UI"] = "Apply Interface settings only to this character"
 L["SETTING_PREVIEW_LINK"] = "Show Collection button in mount preview"
 L["SETTING_SEARCH_MORE"] = "Search also in description text"
+L["SETTING_SEARCH_FAMILY_NAME"] = "Search also by family name"
 L["SETTING_SEARCH_NOTES"] = "Search also in own notes"
 L["SETTING_SHOP_BUTTON"] = "Show shop button at untrained shop mounts"
 L["SETTING_SHOW_RESIZE_EDGE"] = "Activate edge in bottom corner to resize window"
