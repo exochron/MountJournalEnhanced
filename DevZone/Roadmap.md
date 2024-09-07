@@ -19,7 +19,6 @@
 - proper favorite profiles with one global profile
 - favorite groups / custom filter groups
 - favorite menu at SummonRandomFavoriteButton?
-- link to wowhead (?)
 - Mount Score Rating (based on rarity?)
 - disable ingame sound effects of mounts (currently no api for that)
 - customize mount from everywhere (barbershop api works only after clicking certain objects)

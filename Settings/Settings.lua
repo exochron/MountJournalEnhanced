@@ -48,6 +48,7 @@ local function PrepareDefaults()
                 LearnedDate = true,
                 Rarity = true,
                 Family = true,
+                Wowhead = true,
             },
             enableCursorKeys = true,
             slotPosition = "top",
