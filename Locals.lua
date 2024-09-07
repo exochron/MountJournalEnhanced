@@ -53,6 +53,9 @@ L["ANIMATION_RUN"] = "Run"
 L["ANIMATION_FLY"] = "Fly"
 L["ANIMATION_FLY_IDLE"] = "Fly Idle"
 L["FILTER_ONLY"] = "only"
+L["COPY_POPUP"] = "press CTRL+C to copy"
+L["LINK_WOWHEAD"] = "Link to Wowhead"
+L["CLICK_TO_SHOW_LINK"] = "Click to Show Link"
 
 -- Families
 L["Airplanes"] = "Airplanes"
@@ -261,7 +264,7 @@ L["SETTING_SEARCH_FAMILY_NAME"] = "Search also by family name"
 L["SETTING_SEARCH_NOTES"] = "Search also in own notes"
 L["SETTING_SHOP_BUTTON"] = "Show shop button at untrained shop mounts"
 L["SETTING_SHOW_RESIZE_EDGE"] = "Activate edge in bottom corner to resize window"
-L["SETTING_SHOW_STATISTICS"] = "Show mount statistics in display"
+L["SETTING_SHOW_DATA"] = "Show mount data in display"
 L["SETTING_TRACK_USAGE"] = "Track mount usage behavior on all characters"
 L["SETTING_YCAMERA"] = "Unlock Y rotation with mouse in display"
 

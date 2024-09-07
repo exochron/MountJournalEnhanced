@@ -107,3 +107,25 @@ EventRegistry:RegisterCallback("MountJournal.OnShow", function()
         end
     end
 end, ADDON_NAME)
+
+StaticPopupDialogs["MJE_COPY"] = {
+    text = ADDON.L.COPY_POPUP,
+    button1 = CLOSE,
+    OnShow = function(self, data)
+        local function close(editBox) editBox:GetParent():Hide() end
+        self.editBox:SetScript("OnEscapePressed", close)
+        self.editBox:SetScript("OnEnterPressed", close)
+        self.editBox:SetScript("OnKeyUp", function(editBox, key)
+            if IsControlKeyDown() and key == "C" then
+                close(editBox)
+            end
+        end)
+        self.editBox:SetText(data)
+        self.editBox:HighlightText()
+    end,
+    hasEditBox = true,
+    editBoxWidth = 300,
+    timeout = 0,
+    whileDead = true,
+    hideOnEscape = true,
+}

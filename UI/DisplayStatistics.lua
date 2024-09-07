@@ -12,7 +12,9 @@ do
         LearnedDate = ADDON.L["STATS_TIP_LEARNED_DATE_HEAD"],
         Rarity = ADDON.L["STATS_TIP_RARITY_HEAD"],
         Family = ADDON.L["Family"],
+        Wowhead = ADDON.L["LINK_WOWHEAD"],
     }
+
     if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
         options.CustomizationCount = nil
         options.Rarity = nil
@@ -23,7 +25,7 @@ do
     end
     ADDON:RegisterUISetting('displayStatistics',
             defaults,
-            ADDON.L.SETTING_SHOW_STATISTICS,
+            ADDON.L.SETTING_SHOW_DATA,
             function()
                 if ADDON.initialized then
                     MountJournal_UpdateMountDisplay(true)
@@ -39,7 +41,6 @@ do
         return false
     end)
 end
-
 
 local function buildStat(container, iconTexture, tooltipHead, tooltipText)
     local item = CreateFrame("frame", nil, container)
@@ -96,9 +97,11 @@ local function setupContainer()
     end)
 
     container.CustomizationCount = buildStat(container,
-            "colorblind-colorwheel",
+            0,
             L["STATS_TIP_CUSTOMIZATION_COUNT_HEAD"]
     )
+    container.CustomizationCount.Icon:SetAtlas("colorblind-colorwheel")
+
     container.UsedCount = buildStat(container,
             397908, -- interface/levelup/leveluptex
             L["STATS_TIP_USAGE_COUNT_HEAD"]
@@ -114,9 +117,11 @@ local function setupContainer()
             L["STATS_TIP_TRAVEL_DISTANCE_HEAD"]
     )
     container.LearnedDate = buildStat(container,
-            "auctionhouse-icon-checkmark",
+            0,
             L["STATS_TIP_LEARNED_DATE_HEAD"]
     )
+    container.LearnedDate.Icon:SetAtlas("auctionhouse-icon-checkmark")
+
     container.Rarity = buildStat(container,
             134071, -- interface/icons/inv_misc_gem_01
             L["STATS_TIP_RARITY_HEAD"],
@@ -130,6 +135,27 @@ local function setupContainer()
             132834, -- interface/icons/inv_egg_03
             L["Family"]
     )
+    container.Wowhead = buildStat(container,
+            "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\wowhead.png",
+            L["LINK_WOWHEAD"],
+            L["CLICK_TO_SHOW_LINK"]
+    )
+    container.Wowhead:HookScript("OnMouseUp", function()
+        local mountId = ADDON.Api:GetSelected()
+        local _, spellId = C_MountJournal.GetMountInfoByID(mountId)
+        local lang
+        local locale = GetLocale()
+        if locale == "zhTW" or locale == "zhCN" then
+            lang = "cn"
+        else
+            lang = strsub(locale, 1, 2)
+        end
+        if  WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC then
+            lang = "cata/"..lang
+        end
+
+        StaticPopup_Show("MJE_COPY", nil, nil, "https://www.wowhead.com/"..lang.."/spell="..spellId)
+    end)
 
     container.Items = {
         container.CustomizationCount,
@@ -140,6 +166,7 @@ local function setupContainer()
         container.Rarity,
         container.Family1,
         container.Family2,
+        container.Wowhead,
     }
 
     container:Hide()
@@ -267,6 +294,8 @@ local function updateContainer(mountId, container)
             container.Family2.Text:SetText(mountFamily2)
         end
     end
+
+    container.Wowhead:SetShown(trackingEnabled and settings.Wowhead)
 
     local maxWidth = MountJournal.MountDisplay:GetWidth() - 52
     local rowWidth = 0
