@@ -30,7 +30,7 @@ externals:
 
 ignore:
     - LICENSE
-    - README.md
+    - **/*.md
     - DevZone
     - Images
     - Libs/*/LICENSE

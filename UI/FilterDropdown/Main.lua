@@ -160,6 +160,7 @@ local function setupSourceMenu(root)
     end
     ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_10, "Shop", settings, true)
     ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_8, "Promotion", settings, true)
+    ADDON.UI.FDD:CreateFilter(root, L.FILTER_RETIRED, "Unavailable", settings, true)
 end
 
 local function setupTypeMenu(root)
