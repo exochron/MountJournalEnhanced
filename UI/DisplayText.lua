@@ -1,4 +1,4 @@
-local _, ADDON = ...
+local ADDON_NAME, ADDON = ...
 
 local function updateSourceText(replace, sourceText)
     local text, count = sourceText:gsub(":%s?|r%s?.+|n", ":|r "..replace.."|n", 1)
@@ -43,7 +43,18 @@ local function replaceTextWithLinks()
         local name = EJ_GetEncounterInfo(encounterId)
         local link = C_EncounterJournal.GetEncounterJournalLink(1, encounterId, name, difficultyId)
         updateSourceText(link, sourceText)
+    elseif ADDON.DB.Source.Shop[spellId] or sourceType == 10 then
+        -- https://warcraft.wiki.gg/wiki/Hyperlinks#storecategory can only open to certain categories. mounts are not among them yet. (see: SetItemRef)
+        local text = "|cffffd000|Hitem:mje_openstore|h["..BATTLE_PET_SOURCE_10.."]|h|r"
+        MountJournal.MountDisplay.InfoButton.Source:SetText(text)
     end
 end
 
 ADDON.Events:RegisterCallback("OnUpdateMountDisplay", replaceTextWithLinks, 'ReplaceText')
+
+hooksecurefunc("SetItemRef", function(link)
+    local linkType, itemId = strsplit(":", link)
+    if linkType == "item" and itemId == "mje_openstore" then
+        SetStoreUIShown(true)
+    end
+end)
