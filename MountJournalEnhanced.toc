@@ -22,8 +22,9 @@ Database\Database.lua
 Database\colors.db.lua
 Database\customization.db.lua
 Database\families.db.lua
-Database\tradable.db.lua
 Database\restrictions.db.lua
+Database\sources.db.lua
+Database\tradable.db.lua
 
 PlayerConditions.lua
 Filters.lua
