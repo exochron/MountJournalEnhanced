@@ -175,7 +175,6 @@ ADDON.DB.Source = {
         -- Alliance & Horde ----------
         ------------------------------
 
-        [26656] = true, -- Black Qiraji Battle Tank - no longer available
         [54753] = true, -- White Polar Bear - Quest from Gretta the Arbiter, needs reputation to be able to accept the quest
         [73313] = true, -- Crimson Deathcharger - Mograine's Reunion
         [75207] = true, -- Abyssal Seahorse - The Abyssal Ride
@@ -188,7 +187,6 @@ ADDON.DB.Source = {
         [213165] = true, -- Viridian Sharptalon - Sharptalon Reunion
         [215159] = true, -- Long-Forgotten Hippogryph - Ephemeral Crystal x5
         [230987] = true, -- Arcanist's Manasaber - Fate of the Nightborne
-        [239770] = true, -- Black Qiraji War Tank - newer high res version of the Black Qiraji Battle Tank
         [289639] = true, -- Bruce - Complete the Brawler's Guild Questline
         [299159] = true, -- Scrapforged Mechaspider - Drive It Away Today
         [312754] = true, -- Battle Gargon Vrednic - venthyr campaign quest
@@ -243,7 +241,6 @@ ADDON.DB.Source = {
 
         [136163] = true, -- Grand Gryphon - Operation: Shieldwall; The Silence
         [259741] = true, -- Honeyback Harvester - Leaving the Hive: Harvester
-        [274610] = true, -- Teldrassil Hippogryph - From the Ashes... (BfA PreQuest)
         [300147] = true, -- Deepcoral Snapdragon - Wild Tame
         [369666] = true, -- Grimhowl - Good Fiery Boy
 
@@ -252,7 +249,6 @@ ADDON.DB.Source = {
         ------------------------------
 
         [136164] = true, -- Grand Wyvern - Dominance Offensive; Breath of Darkest Shadow
-        [272472] = true, -- Undercity Plaguebat - Killer Queen (BfA PreQuest)
         [267270] = true, -- Kua'fon - Down, But Not Out
         [297560] = true, -- Child of Torcali - Wander Not Alone
         [300146] = true, -- Snapdragon Kelpstalker - Good Girl
@@ -274,7 +270,6 @@ ADDON.DB.Source = {
         [213115] = true, -- Bloodfang Widow - The Mad Merchant
         [214791] = true, -- Brinedeep Bottom-Feeder - Conjurer Margoss
         [227956] = true, -- Arcadian War Turtle - Xur'ios
-        [230844] = true, -- Brawler's Burly Basilisk - brawler guild mount (season 2)
         [259740] = true, -- Green Marsh Hopper
         [266925] = true, -- Siltwing Albatross - Island expedition
         [279474] = true, -- Palehide Direhorn
@@ -414,15 +409,7 @@ ADDON.DB.Source = {
         [171846] = true, -- Champion's Treadblade
 
         -- pre 1.4
-        [15779] = true, -- White Mechanostrider Mod B
         [15780] = true, -- Green Mechanostrider
-        [16055] = true, -- Black Nightsaber
-        [16056] = true, -- Ancient Frostsaber
-        [16082] = true, -- Palomino
-        [16083] = true, -- White Stallion
-        [17459] = true, -- Icy Blue Mechanostrider Mod A
-        [17460] = true, -- Frost Ram
-        [17461] = true, -- Black Ram
         [33630] = true, -- Green Mechanostrider
 
         -- Stormwind
@@ -444,21 +431,12 @@ ADDON.DB.Source = {
         [288740] = true, -- Priestess' Moonsaber
         [288736] = true, -- Azureshell Krolusk
 
-        -- War Within PreEvent
-        [441324] = true, -- Remembered Golden Gryphon
-
         ------------------------------
         -- Horde ---------------------
         ------------------------------
 
         -- pre 1.4
         [578] = true, -- Black Wolf
-        [16080] = true, -- Red Wolf
-        [16081] = true, -- Arctic Wolf
-        [16084] = true, -- Mottled Red Raptor
-        [17450] = true, -- Ivory Raptor
-        [18991] = true, -- Green Kodo
-        [18992] = true, -- Teal Kodo
 
         -- Orgrimmar
         [32243] = true, -- Tawny Wind Rider
@@ -478,9 +456,6 @@ ADDON.DB.Source = {
         -- Warfront Service Medal
         [288714] = true, -- Bloodthirsty Dreadwing
         [288735] = true, -- Rubyshell Krolusk
-
-        -- War Within PreEvent
-        [441325] = true, -- Remembered Wind Rider
     },
 
     ["Profession"] = {
@@ -546,16 +521,13 @@ ADDON.DB.Source = {
         [148417] = { 869, 16 }, -- Kor'kron Juggernaut - Siege of Orgrimmar, Garrosh Hellscream Mythic
         [171621] = { 959, 16 }, -- Ironhoof Destroyer - Blackrock Foundry, Blackhand Mythic
         [182912] = { 1438, 16 }, -- Felsteel Annihilator - Hellfire Citadel, Archimonde
-        [189999] = true, -- Grove Warden - Hellfire Citadel, Archimonde
         [213134] = { 1737, 14 }, -- Felblaze Infernal - The Nighthold, Gul'dan
         [171827] = { 1737, 16 }, -- Hellfire Infernal - The Nighthold, Gul'dan (Mythic)
         [232519] = { 1861, 14 }, -- Abyss Worm - Tomb of Sargeras, Mistress Sassz'ine
         [253088] = { 1987, 14 }, -- Antoran Charhound - Antorus, Shatug
-        [253639] = true, -- Violet Spellwing - Antorus, Argus
         [243651] = { 2031, 16 }, -- Shackled Ur'zul - Antorus, Argus Mythic
         [289083] = { 2334, 14 }, -- G.M.O.D. - Battle of Dazar'alor
         [289555] = { 2343, 16 }, -- Glacial Tidestorm - Battle of Dazar'alor
-        [302143] = true, -- Uncorrupted Voidwing - Heroic? N'Zoth, Ny'alotha
         [308814] = { 2375, 16 }, -- Ny'alotha Allseer - Mythic N'Zoth, Ny'alotha
         [351195] = { 2441, 16 }, -- Vengeance - Sylvanas Mythic
         [354351] = { 2439, 14 }, -- Sanctum Gloomcharger - The Nine, Sanctum of Domination
@@ -971,13 +943,10 @@ ADDON.DB.Source = {
         [60025] = 2143, -- Albino Drake - Leading the Cavalry
         [98204] = 5858, -- Amani Battle Bear - Bear-ly Made It
         [133023] = { 7860, 7862 }, -- Jade Pandaren Kite - We're Going to Need More Saddles
-        [142641] = true, -- Brawler's Burly Mushan Beast - I've Got the Biggest Brawls of Them All (Season 1)
         [127169] = { 10355, 10356 }, -- Heavenly Azure Cloud Serpent - Lord of the Reins
 
         -- Wrath of the Lichking
-        [43688] = 430, -- Amani War Bear - no longer available
         [59961] = 2136, -- Red Proto-Drake - Glory of the Hero
-        [59976] = 2138, -- Black Proto-Drake - no longer available - Glory of the Raider (25 player)
         [63956] = { 2958, 12401 }, -- Ironbound Proto-Drake - Glory of the Ulduar Raider (25 player)
         [63963] = { 2957, 12401 }, -- Rusted Proto-Drake - Glory of the Ulduar Raider (10 player)
         [72807] = 4603, -- Icebound Frostbrood Vanquisher - Glory of the Icecrown Raider (25 player)
@@ -997,13 +966,6 @@ ADDON.DB.Source = {
         [127161] = 6932, -- Heavenly Crimson Cloud Serpent - Glory of the Pandaria Raider
         [136400] = 8124, -- Armored Skyscreamer - Glory of the Thundering Raider
         [148392] = 8454, -- Spawn of Galakras - Glory of the Orgrimmar Raider
-        [148396] = { 6398, 6399 }, -- Kor'kron War Wolf - Ahead of the Curve: Garrosh Hellscream (10/25 player)
-
-        -- Challenge Mode
-        [129552] = { 6375 }, -- Crimson Pandaren Phoenix - Challenge Conqueror: Silver
-        [132117] = { 6375 }, -- Ashen Pandaren Phoenix - Challenge Conqueror: Silver
-        [132118] = { 6375 }, -- Emerald Pandaren Phoenix - Challenge Conqueror: Silver
-        [132119] = { 6375 }, -- Violet Pandaren Phoenix - Challenge Conqueror: Silver
 
         -- Warlords of Draenor
         [97501] = { 9598, 9599 }, -- Felfire Hawk - Mountacular
@@ -1012,7 +974,6 @@ ADDON.DB.Source = {
         [171436] = 8985, -- Gorestrider Gronnling - Glory of the Draenor Raider
         [171627] = true, -- Blacksteel Battleboar - Guild Glory of the Draenor Raider
         [171632] = 9396, -- Frostplains Battleboar - Glory of the Draenor Hero
-        [171848] = 8898, -- Challenger's War Yeti - Challenge Warlord: Silver
         [186305] = 10149, -- Infernal Direwolf - Glory of the Hellfire Raider
         [191633] = 10018, -- Soaring Skyterror - Draenor Pathfinder
 
@@ -1050,7 +1011,6 @@ ADDON.DB.Source = {
         [305592] = 14013, -- Mechagon Mechanostrider - Allied Races: Mechagnome
         [306423] = 13161, -- Caravan Hyena - Allied Races: Vulpera
         [316343] = 14146, -- Wriggling Parasite - Glory of the Ny'alotha Raider
-        [316637] = 14145, -- Awakened Mindborer - Battle for Azeroth Keystone Master: Season Four
         [405623] = 13541, -- Armadillo Roller - Mecha-Done
 
         -- Shadowlands
@@ -1058,21 +1018,16 @@ ADDON.DB.Source = {
         [332460] = 14751, -- Chosen Tauralus - The Gang's All Here
         [332467] = 14752, -- Armored Chosen Tauralus - Things To Do When You're Dead
         [332903] = 14355, -- Rampart Screecher - Glory of the Nathria Raider
-        [340068] = 14532, -- Sintouched Deathwalker - Shadowlands Keystone Master: Season One
         [344578] = 14570, -- Corridor Creeper - Twisting Corridors: Layer 8
         [344659] = 14322, -- Voracious Gorger - Glory of the Shadowlands Hero
         [339956] = 15089, -- Mawsworn Charger - Flawless Master
         [339957] = 15130, -- Hand of Hrestimorak - Glory of the Dominant Raider
         [346554] = 15178, -- Tazavesh Gearglider - Fake It 'Til You Make It
         [354355] = 15064, -- Hand of Salaranga - Breaking the Chains
-        [358319] = 15078, -- Soultwisted Deathwalker - Shadowlands Keystone Master: Season Two
         [359379] = 15491, -- Shimmering Aurelid - Glory of the Sepulcher Raider
         [359381] = 15336, -- Cryptic Aurelid - From A to Zereth
-        [359407] = 15499, -- Wastewarped Deathwalker - Shadowlands Keystone Master: Season Three
-        [359545] = 15470, -- Carcinized Zerethsteed - Ahead of the Curve: The Jailer
         [363136] = 15254, -- Colossal Ebonclaw Mawrat - The Jailer's Gauntlet: Layer 4
         [363297] = 15322, -- Colossal Soulshredder Mawrat - Flawless Master (Layer 16)
-        [334482] = 15690, -- Restoration Deathwalker - Shadowlands Keystone Master: Season Four
         [366791] = 15684, -- Jigglesworth, Sr. - Fates of the Shadowlands Raids
 
         -- Dragonflight
@@ -1091,8 +1046,6 @@ ADDON.DB.Source = {
         [376898] = 19483, -- Bestowed Ottuk Vanguard - Fight Club
         [376912] = { 15833, 15834 }, -- Otterworldly Ottuk Carrier - Thanks for the Carry!
         [385260] = 19479, -- Bestowed Ohuna Spotter - Wake Me Up
-        [387231] = 16649, -- Hailstorm Armoredon - Dragonflight Keystone Master: Season One
-        [406637] = 17844, -- Inferno Armoredon - Dragonflight Keystone Master: Season Two
         [408648] = 17785, -- Calescent Shalewing - Que Zara(lek), Zara(lek)
         [408649] = 18251, -- Shadowflame Shalewing - Glory of the Aberrus Raider
         [408654] = 19079, -- Sandy Shalewing - Master of Troubled Timeways
@@ -1127,8 +1080,6 @@ ADDON.DB.Source = {
         -- Alliance ------------------
         ------------------------------
 
-        [68057] = true, -- Swift Alliance Steed - no longer available
-        [68187] = true, -- Crusader's White Warhorse - no longer available
         [90621] = true, -- Golden King - Guild Level 25
         [130985] = 6828, -- Pandaren Kite - Pandaren Ambassador, Alliance
         [295386] = 13517, -- Ironclad Frostclaw - Two Sides to Every Tale
@@ -1142,11 +1093,8 @@ ADDON.DB.Source = {
         -- Horde ---------------------
         ------------------------------
 
-        [68056] = true, -- Swift Horde Wolf - no longer available
-        [68188] = true, -- Crusader's Black Warhorse - no longer available
         [93644] = true, -- Kor'kron Annihilator - Guild Level 25
         [118737] = 6827, -- Pandaren Kite - Pandaren Ambassador, Horde
-        [171845] = 9496, -- Warlord's Deathwheel - Warlord's Deathwheel
         [295387] = 13517, -- Bloodflank Charger - Two Sides to Every Tale
 
         [61997] = 2537, -- Red Dragonhawk - Mountain o' Mounts, Horde
@@ -1295,44 +1243,7 @@ ADDON.DB.Source = {
         [148428] = true, -- Ashhide Mushan Beast
 
         -- Arena
-        [37015] = true, -- Swift Nether Drake - Season 1
-        [44744] = true, -- Merciless Nether Drake - Season 2
-        [49193] = true, -- Vengeful Nether Drake - Season 3
-        [58615] = true, -- Brutal Nether Drake - Season 4
-        [64927] = true, -- Deadly Gladiator's Frost Wyrm - Season 5
-        [65439] = true, -- Furious Gladiator's Frost Wyrm - Season 6
-        [67336] = true, -- Relentless Gladiator's Frost Wyrm - Season 7
-        [71810] = true, -- Wrathful Gladiator's Frost Wyrm - Season 8
-        [101282] = true, -- Vicious Gladiator's Twilight Drake - Season 9
-        [101821] = true, -- Ruthless Gladiator's Twilight Drake - Season 10
-        [124550] = true, -- Cataclysmic Gladiator's Twilight Drake - Season 11
-        [139407] = true, -- Malevolent Gladiator's Cloud Serpent - Season 12
-        [148618] = true, -- Tyrannical Gladiator's Cloud Serpent - Season 13
-        [148619] = true, -- Grievous Gladiator's Cloud Serpent - Season 14
-        [148620] = true, -- Prideful Gladiator's Cloud Serpent - Season 15
-        [186828] = true, -- Primal Gladiator's Felblood Gronnling - Season 16
-        [189043] = true, -- Wild Gladiator's Felblood Gronnling - Season 17
-        [189044] = true, -- Warmongering Gladiator's Felblood Gronnling - Season 18
-
-        [227986] = true, -- Vindictive Gladiator's Storm Dragon - Gladiator: Legion Season 1
-        [227988] = true, -- Fearless Gladiator's Storm Dragon - Gladiator: Legion Season 2
-        [227989] = true, -- Cruel Gladiator's Storm Dragon - Gladiator: Legion Season 3
-        [227991] = true, -- Ferocious Gladiator's Storm Dragon - Gladiator: Legion Season 4
-        [227994] = true, -- Fierce Gladiator's Storm Dragon - Legion Arena Season 5
-        [227995] = true, -- Dominating Gladiator's Storm Dragon - Legion Arena Season 6
-        [243201] = true, -- Demonic Gladiator's Storm Dragon - Legion Arena Season 7
-        [262022] = true, -- Dread Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 1
-        [262023] = true, -- Sinister Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 2
-        [262024] = true, -- Notorious Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 3
-        [262027] = true, -- Corrupted Gladiator's Proto-Drake - Gladiator: Battle for Azeroth Season 4
-        [332400] = true, -- Sinful Gladiator's Soul Eater - Sinful Gladiator: Shadowlands Season 1
-        [353036] = true, -- Unchained Gladiator's Soul Eater - Sinful Gladiator: Shadowlands Season 2
-        [365559] = true, -- Cosmic Gladiator's Soul Eater - Gladiator: Shadowlands Season 3
-        [370346] = true, -- Eternal Gladiator's Soul Eater - Gladiator: Shadowlands Season 4
-        [377071] = true, -- Crimson Gladiator's Drake - Gladiator: Dragonflight Season 1
-        [408977] = true, -- Obsidian Gladiator's Slitherdrake - Gladiator: Dragonflight Season 2
         [424539] = true, -- Draconic Gladiator's Drake - Gladiator: Dragonflight Season 4
-        [425416] = true, -- Verdant Gladiator's Slitherdrake - Gladiator: Dragonflight Season 3
         [434470] = true, -- Vicious Dreamtalon - Dragonflight: Season 4
         [434477] = true, -- Vicious Dreamtalon - Dragonflight: Season 4
         [449466] = true, -- Forged Gladiator's Fel Bat - Gladiator: War Within Season 1
@@ -1373,7 +1284,6 @@ ADDON.DB.Source = {
         [348770] = true, -- Vicious War Gorm
         [347256] = true, -- Vicious War Croaker
         [349824] = true, -- Vicious War Warstalker
-        [394737] = true, -- Vicious Sabertooth
         [409034] = true, -- Vicious War Snail
         [424534] = true, -- Vicious Moon Beast
 
@@ -1421,7 +1331,6 @@ ADDON.DB.Source = {
         [348769] = true, -- Vicious War Gorm
         [347255] = true, -- Vicious War Croaker
         [349823] = true, -- Vicious War Warstalker
-        [394738] = true, -- Vicious Sabertooth
         [409032] = true, -- Vicious War Snail
         [424535] = true, -- Vicious Moon Beast
 
@@ -1537,7 +1446,6 @@ ADDON.DB.Source = {
         [102349] = true, -- Swift Springstrider
 
         -- Brewfest
-        [43899] = true, -- Brewfest Ram
         [43900] = true, -- Swift Brewfest Ram
         [49378] = true, -- Brewfest Riding Kodo
         [49379] = true, -- Great Brewfest Kodo
@@ -1570,9 +1478,6 @@ ADDON.DB.Source = {
 
         -- Secrets of Azeroth
         [424082] = true, -- Mimiron's Jumpjets
-
-        -- Hearthstone Anniversary
-        [431992] = true, -- Compass Rose
 
         -- Remix: MoP
         [138425] = true, -- Slate Primordial Direhorn
@@ -1620,10 +1525,6 @@ ADDON.DB.Source = {
         [446022] = true, -- Astral Emperor's Serpent
     },
 
-    ["Black Market"] = {
-        -- filled by sources.d.b.lua
-    },
-
     ["Trading Post"] = {
         filterFunc = function(mountId)
             return nil ~= (BATTLE_PET_SOURCE_12 and string.find(select(3, C_MountJournal.GetMountInfoExtraByID(mountId)), BATTLE_PET_SOURCE_12))
@@ -1642,7 +1543,6 @@ ADDON.DB.Source = {
         --  9 = TCG
 
         [62048] = true, -- Illidari Doomhawk - 17th Anniversary
-        [278966] = true, -- Fiery Hearthsteed - Hearthstone Anniversary
         [294197] = true, -- Obsidian Worldbreaker - 15th Anniversary
     },
 }
@@ -1659,12 +1559,14 @@ ADDON.DB.FeatsOfStrength = {
     [169] = 886, -- Swift Nether Drake
     [183] = 885, -- Ashes of Al'ar
     [185] = 883, -- Reins of the Raven Lord
+    [199] = 430, -- Amani War Bear - no longer available
     [207] = 887, -- Merciless Nether Drake
     [213] = 884, -- Swift White Hawkstrider
     [219] = 980, -- The Horseman's Reins
     [223] = 888, -- Vengeful Nether Drake
     [224] = 1436, -- Friends In High Places
     [241] = 2316, -- Brutal Nether Drake
+    [263] = 2138, -- Black Proto-Drake - no longer available - Glory of the Raider (25 player)
     [286] = 2081, -- Grand Black War Mammoth
     [287] = 2081, -- Grand Black War Mammoth
     [304] = 4626, -- And I'll Form the Head!
@@ -1684,10 +1586,13 @@ ADDON.DB.FeatsOfStrength = {
     [467] = 6741, -- Cataclysmic Gladiator's Twilight Drake
     [537] = 8092, -- Bone-White Primal Raptor
     [541] = 8216, -- Malevolent Gladiator's Cloud Serpent
+    [558] = { 8398, 8399 }, -- Kor'kron War Wolf - Ahead of the Curve: Garrosh Hellscream (10/25 player)
     [562] = 8678, -- Tyrannical Gladiator's Cloud Serpent
     [563] = 8705, -- Grievous Gladiator's Cloud Serpent
     [564] = 8707, -- Prideful Gladiator's Cloud Serpent
     [568] = 8794, -- Friends In Places Even Higher Than That
+    [651] = 9496, -- Warlord's Deathwheel - Warlord's Deathwheel
+    [654] = 8898, -- Challenger's War Yeti - Challenge Warlord: Silver
     [759] = 9229, -- Primal Gladiator's Felblood Gronnling
     [760] = 10137, -- Wild Gladiator's Felblood Gronnling
     [761] = 10146, -- Warmongering Gladiator's Felblood Gronnling
@@ -1704,17 +1609,25 @@ ADDON.DB.FeatsOfStrength = {
     [1032] = 13632, -- Notorious Gladiator's Proto-Drake
     [1035] = 13958, -- Corrupted Gladiator's Proto-Drake
     [1039] = 14183, -- Mighty Caravan Brutosaur
+    [1326] = 14145, -- Awakened Mindborer - Battle for Azeroth Keystone Master: Season Four
     [1363] = 14816, -- Sinful Gladiator's Soul Eater
+    [1405] = 15690, -- Restoration Deathwalker - Shadowlands Keystone Master: Season Four
+    [1419] = 14532, -- Sintouched Deathwalker - Shadowlands Keystone Master: Season One
     [1480] = 14999, -- Unchained Gladiator's Soul Eater
+    [1520] = 15078, -- Soultwisted Deathwalker - Shadowlands Keystone Master: Season Two
+    [1544] = 15499, -- Wastewarped Deathwalker - Shadowlands Keystone Master: Season Three
+    [1552] = 15470, -- Carcinized Zerethsteed - Ahead of the Curve: The Jailer
     [1572] = 15384, -- Cosmic Gladiator's Soul Eater
     [1599] = 15612, -- Eternal Gladiator's Soul Eater
     [1660] = 16730, -- Crimson Gladiator's Drake
+    [1681] = 16649, -- Hailstorm Armoredon - Dragonflight Keystone Master: Season One
+    [1725] = 17844, -- Inferno Armoredon - Dragonflight Keystone Master: Season Two
     [1739] = 17764, -- Obsidian Gladiator's Slitherdrake - Gladiator: Dragonflight Season 2
     [1822] = 19490, -- Draconic Gladiator's Drake - Gladiator: Dragonflight Season 4
     [1831] = 19091, -- Verdant Gladiator's Slitherdrake - Gladiator: Dragonflight Season 3
-    [2218] = 40393, -- Forged Gladiator's Fel Bat - Gladiator: War Within Season 1
     [2150] = 40397, -- Vicious Skyflayer - War Within: Season 1
     [2211] = 40396, -- Vicious Skyflayer - War Within: Season 1
+    [2218] = 40393, -- Forged Gladiator's Fel Bat - Gladiator: War Within Season 1
 }
 
 ADDON.DB.Expansion = {

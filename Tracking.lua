@@ -115,7 +115,10 @@ local function parseLearnedDates()
         end
 
         for mountId, achievementId in pairs(ADDON.DB.FeatsOfStrength) do
-            parseLearnedDateForMount(mountId, { achievementId })
+            if type(achievementId) == "number" then
+                achievementId = { achievementId }
+            end
+            parseLearnedDateForMount(mountId, achievementId)
         end
     end
 end

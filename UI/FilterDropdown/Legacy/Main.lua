@@ -329,6 +329,7 @@ local function InitializeFilterDropDown(frame, level)
         end
         UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_10, "Shop", settings, true), level)
         UIDropDownMenu_AddButton(CreateFilterInfo(BATTLE_PET_SOURCE_8, "Promotion", settings, true), level)
+        UIDropDownMenu_AddButton(CreateFilterInfo(L.FILTER_RETIRED, "Unavailable", settings, true), level)
     elseif level == 2 and UIDROPDOWNMENU_MENU_VALUE == SETTING_MOUNT_TYPE then
         local settings = ADDON.settings.filter[SETTING_MOUNT_TYPE]
         AddCheckAllAndNoneInfo(settings, level)

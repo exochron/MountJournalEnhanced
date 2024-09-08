@@ -59,6 +59,16 @@ local function checkDBForOldMountIds(tbl, index)
     end
 end
 
+local function searchRetiredMountsInCurrentSources()
+    for spellId, _ in pairs(ADDON.DB.Source.Unavailable) do
+        for sourceKey, sourceList in pairs(ADDON.DB.Source) do
+            if sourceKey ~= "Unavailable" and sourceList[spellId] ~= nil then
+                print(sourceKey..": found retired mount: "..spellId)
+            end
+        end
+    end
+end
+
 local function testDatabase()
     local filterSettingsBackup = CopyTable(ADDON.settings.filter)
 
@@ -80,6 +90,8 @@ local function testDatabase()
         checkDBForOldMountIds(ADDON.DB.Expansion, "Expansion")
         checkDBForOldMountIds(ADDON.DB.Type, "Type")
         checkDBForOldMountIds(ADDON.DB.Ignored.ids, "Ignored")
+
+        searchRetiredMountsInCurrentSources()
     end
 end
 
