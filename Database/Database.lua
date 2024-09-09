@@ -11,162 +11,72 @@ ADDON.DB.Recent = {
 ADDON.DB.Source = {
     ["Drop"] = {
         -- sourceType = 1
-        ------------------------------
-        -- Alliance & Horde ----------
-        ------------------------------
+        -- generated drop chances and locations are within sources.db.lua
 
-        [60002] = true, -- Time-Lost Proto-Drake- The Storm Peaks, Time-Lost Proto-Drake
-        [88718] = true, -- Phosphorescent Stone Drake- Deepholm, Aeonaxx
-        [88750] = true, -- Grey Riding Camel- Uldum, Mysterious Camel Figurine
-        [98718] = true, -- Subdued Seahorse- Shimmering Expanse, Poseidus
-        [127158] = true, -- Heavenly Onyx Cloud Serpent - Kun-Lai Summit, Sha of Anger
-        [130965] = true, -- Son of Galleon- Valley of the Four Winds, Galleon
+        -- Wrath of the Lich King
+        [61294] = true, -- Green Proto-Drake - Mysterious Egg
+
+        -- Mists of Pandaria
         [132036] = true, -- Thundering Ruby Cloud Serpent - 10x Skyshard
-        [138423] = true, -- Cobalt Primordial Direhorn- Isle of Giants, Oondasta
-        [139442] = true, -- Thundering Cobalt Cloud Serpent - Isle of Thunder, Nalak
-        [148476] = true, -- Thundering Onyx Cloud Serpent- Timeless Isle, Huolon
-        [179478] = true, -- Voidtalon of the Dark Star- Edge of Reality
+        [138641] = true, -- Red Primal Raptor - Primal Egg
+        [138642] = true, -- Black Primal Raptor - Primal Egg
+        [138643] = true, -- Green Primal Raptor - Primal Egg
 
-        -- Zandalari Warbringer
-        [138424] = true, -- Amber Primordial Direhorn
-        [138425] = true, -- Slate Primordial Direhorn
-        [138426] = true, -- Jade Primordial Direhorn
-
-        -- Mysterious Egg
-        [61294] = true, -- Green Proto-Drake
-
-        -- Primal Egg
-        [138641] = true, -- Red Primal Raptor
-        [138642] = true, -- Black Primal Raptor
-        [138643] = true, -- Green Primal Raptor
-
-        -- Warlords of Draenor Rare
-        [171636] = true, -- Great Greytusk
-        [171620] = true, -- Bloodhoof Bull
-        [171622] = true, -- Mottled Meadowstomper
-        [171849] = true, -- Sunhide Gronnling
-        [171824] = true, -- Sapphire Riverbeast
-        [171830] = true, -- Swift Breezestrider
+        -- Warlords of Draenor
         [171619] = true, -- Tundra Icehoof - Vengeance, Deathtalon, Terrorfist, Doomroller
         [171630] = true, -- Armored Razorback - Vengeance, Deathtalon, Terrorfist, Doomroller
         [171837] = true, -- Warsong Direfang - Vengeance, Deathtalon, Terrorfist, Doomroller
-
-        -- Warlords of Draenor Elite
-        [171851] = true, -- Garn Nighthowl
-
-        -- Warlords of Draenor World Boss
-        [171828] = true, -- Solar Spirehawk - Rukhmar
+        [179478] = true, -- Voidtalon of the Dark Star- Edge of Reality
 
         -- Legion
         [223018] = true, -- Fathom Dweller - World Boss, Kosumoth the Hungering
+        [235764] = true, -- Darkspore Mana Ray
         [243025] = true, -- Riddler's Mind-Worm
-        [253058] = true, -- Maddened Chaosrunner
-        [243652] = true, -- Vile Fiend
-        [253661] = true, -- Crimson Slavermaw
-        [253662] = true, -- Acid Belcher
-        [253660] = true, -- Biletooth Gnasher
+        [247402] = true, -- Lucid Nightmare
         [253106] = true, -- Vibrant Mana Ray
-        [253107] = true, -- Lambent Mana Ray
         [253108] = true, -- Felglow Mana Ray
         [253109] = true, -- Scintillating Mana Ray
-        [235764] = true, -- Darkspore Mana Ray
-        [247402] = true, -- Lucid Nightmare
 
         -- Battle for Azeroth
-        [237286] = true, -- Dune Scavenger
-        [243795] = true, -- Leaping Veinseeker
-        [279868] = true, -- Witherbark Direwing - Nimar the Slayer Nimar the Slayer
-        [279569] = true, -- Swift Albino Raptor - Beastrider Kama
-        [279611] = true, -- Skullripper - Skullripper
-        [275623] = true, -- Nazjatar Blood Serpent - Adherent of the Abyss
-        [279608] = true, -- Lil' Donkey - Overseer Krix
-        [279457] = true, -- Broken Highland Mustang - Knight-Captain Aldrin
-        [260174] = true, -- Terrified Pack Mule
-        [279456] = true, -- Highland Mustang -Doomrider Helgrim
-        [260175] = true, -- Goldenmane
         [261395] = true, -- The Hivemind - hidden mount
-        [288438] = true, -- Blackpaw - Darkshore Warfront
-        [288495] = true, -- Ashenvale Chimaera - Darkshore Warfront
         [288499] = true, -- Frightened Kodo - Darkshore Warfront
-        [288503] = true, -- Umber Nightsaber - Darkshore Warfront
-        [288505] = true, -- Kaldorei Nightsaber - Darkshore Warfront
-        [291492] = true, -- Rusty Mechanocrawler - Mechagon
-        [297157] = true, -- Junkheap Drifter - Mechagon
-        [298367] = true, -- Mollie - Vol'dun
-        [300149] = true, -- Silent Glider - Nazjatar
         [300150] = true, -- Fabious - Nazjatar
-        [312751] = true, -- Clutch of Ha-Li - Vale of Eternal Blossoms
         [315014] = true, -- Ivory Cloud Serpent - Vale of Eternal Blossoms
-        [315847] = true, -- Drake of the Four Winds - Uldum
-        [315987] = true, -- Mail Muncher - Horrific Visions
-        [316275] = true, -- Waste Marauder - Uldum
-        [316337] = true, -- Malevolent Drone - Uldum
-        [316493] = true, -- Elusive Quickhoof - Vol'dun
         [315427] = true, -- Rajani Warserpent (actually just the scale drops from rare) - Vale of Eternal Blossoms
-        [316722] = true, -- Ren's Stalwart Hound - Vale of Eternal Blossoms
-        [316723] = true, -- Xinlao - Vale of Eternal Blossoms
+        [316493] = true, -- Elusive Quickhoof - Vol'dun
 
         -- Shadowlands
         [215545] = true, -- Mastercraft Gravewing - Korthia - venthyr drop: Gravewing Crystal
-        [312753] = true, -- Hopecrusher Gargon - Venthyr drop: Hopecrusher
-        [312762] = true, -- Mawsworn Soulhunter - The Maw - Gorged Shadehound
         [312765] = true, -- Sundancer - Bastion - Sundancer
-        [312767] = true, -- Swift Gloomhoof - Ardenweald - Night Mare
         [332252] = true, -- Shimmermist Runner - Ardenweald - Treasure
-        [332457] = true, -- Bonehoof Tauralus - necrolord drop: Tahonta
-        [332466] = true, -- Armored Bonehoof Tauralus - necrolord drop: Sabriel
-        [332478] = true, -- Blisterback Bloodtusk - Maldraxxus - Warbringer Mal'korak
-        [332480] = true, -- Gorespine - Maldraxxus - Nerissa Heartless
-        [332882] = true, -- Horrid Dredwing - Revendreth - venthyr drop: Harika the Horrid
-        [332905] = true, -- Endmire Flyer - Revendreth - Famu the Infinite
         [334352] = true, -- Wildseed Cradle - Ardenweald - Treasure
-        [334364] = true, -- Spinemaw Gladechewer - Ardenweald - Gormtamer Tizo
-        [334366] = true, -- Wild Glimmerfur Prowler - Ardenweald - Valfir the Unrelenting
         [334433] = true, -- Silverwind Larion - Bastion - Treasure
         [336038] = true, -- Callow Flayedwing - Random Egg drop in Maldraxxus
-        [336042] = true, -- Hulking Deathroc - Maldraxxus - Violet Mistake
-        [336045] = true, -- Predatory Plagueroc - Maldraxxus - Gieger for necrolord
-        [339632] = true, -- Arboreal Gulper - Ardenweald - Humon'gozz
         [342335] = true, -- Ascended Skymane - Bastion - Kyrian drop
-        [344228] = true, -- Battle-Bound Warhound - Theatre of Pain
         [344574] = true, -- Bulbous Necroray - Necroray Egg
         [344575] = true, -- Pestilent Necroray - Necroray Egg
         [344576] = true, -- Infested Necroray - Necroray Egg
         [347250] = true, -- Lord of the Corpseflies - Korthia - necrolord drop: Fleshwing
-        [352309] = true, -- Hand of Bahmethra - The Maw -Tormentors of Torghast
         [353859] = true, -- Summer Wilderling - Korthia - Escaped Wilderling
         [353877] = true, -- Foresworn Aquilon - Korthia - Wild Worldcracker
-        [354353] = true, -- Fallen Charger - The Maw - Fallen Charger
         [354354] = true, -- Hand of Nilganihmaht - The Maw - secret/treasure hunt
-        [354357] = true, -- Crimson Shardhide - Korthia - Malbog
-        [354360] = true, -- Garnet Razorwing - Korthia - Reliwik the Defiant
-        [356501] = true, -- Rampaging Mauler - Korthia - Konthrogz the Obliterator
-        [342680] = true, -- Deepstar Aurelid - Hirukon - Zereth Mortis
         [368105] = true, -- Colossal Plaguespew Mawrat - Rhuv, Gorger of Ruin - Zereth Mortis
         [368128] = true, -- Colossal Wraithbound Mawrat - Zereth Mortis - treasure
 
         -- Dragonflight
-        [359622] = true, -- Liberated Slyvern - Breezebiter - Azure Span
-        [385266] = true, -- Zenet Hatchling - Ohn'ahran Plains - Zenet Egg
         [350219] = true, -- Magmashell
-        [374090] = true, -- Ancient Salamanther
         [374138] = true, -- Seething Slug
         [374157] = true, -- Gooey Snailemental
         [374194] = true, -- Mossy Mammoth
         [374196] = true, -- Plainswalker Bearer
         [374278] = true, -- Renewed Magmammoth
-        [408647] = true, -- Cobalt Shalewing
+        [385266] = true, -- Zenet Hatchling - Ohn'ahran Plains - Zenet Egg
         [408651] = true, -- Cataloged Shalewing
         [420097] = true, -- Azure Worldchiller
         [424476] = true, -- Winter Night Dreamsaber
-        [432455] = true, -- Noble Flying Carpet
-        [432610] = true, -- Clayscale Hornstrider
 
         -- War Within
-        [447213] = true, -- Alunira
-        [448941] = true, -- Beledar's Spawn
         [448979] = true, -- Dauntless Imperial Lynx
-        [449258] = true, -- Ol' Mole Rufus
     },
 
     ["Quest"] = {
@@ -1401,6 +1311,7 @@ ADDON.DB.Source = {
 
         -- Noblegarden
         [102349] = true, -- Swift Springstrider
+        [432455] = true, -- Noble Flying Carpet
 
         -- Brewfest
         [43900] = true, -- Swift Brewfest Ram
@@ -1434,6 +1345,7 @@ ADDON.DB.Source = {
         [239767] = true, -- Red Qiraji War Tank
 
         -- Secrets of Azeroth
+        [418078] = true, -- Pattie - Whodunnit?
         [424082] = true, -- Mimiron's Jumpjets
 
         -- Remix: MoP
