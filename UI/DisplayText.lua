@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 local function updateSourceText(replace, sourceText)
     local text, count = sourceText:gsub(":%s?|r%s?.+|n", ":|r "..replace.."|n", 1)
@@ -29,13 +29,28 @@ local function replaceTextWithLinks()
                     local _, name = GetAchievementInfo(achievementId)
                     if name then
                         name = name:gsub("([()-])", "%%%1")
-                        sourceText = sourceText:gsub(name, link)
+                        sourceText = sourceText:gsub(name, link, 1)
                         MountJournal.MountDisplay.InfoButton.Source:SetText(sourceText)
                         break
                     end
                 end
             end
         end
+    elseif ADDON.DB.Source.Drop[spellId] and ADDON.DB.Source.Drop[spellId] ~= true then
+        local _, _, sourceText = C_MountJournal.GetMountInfoExtraByID(mountId)
+        local mapId = ADDON.DB.Source.Drop[spellId][1]
+        local x = ADDON.DB.Source.Drop[spellId][2]
+        local y = ADDON.DB.Source.Drop[spellId][3]
+        if mapId and x ~= nil and y ~= nil then
+            local link = " |cffffff00|Hworldmap:"..mapId..":"..x..":"..y.."|h[|A:Waypoint-MapPin-ChatIcon:13:13:0:0|a]|h|r"
+
+            local text, count = sourceText:gsub("|n", link.."|n", 1)
+            if count == 0 then
+                text = text..link
+            end
+            MountJournal.MountDisplay.InfoButton.Source:SetText(text)
+        end
+
     elseif ADDON.DB.Source.Instance[spellId] and ADDON.DB.Source.Instance[spellId] ~= true then
         local _, _, sourceText = C_MountJournal.GetMountInfoExtraByID(mountId)
         local encounterId = ADDON.DB.Source.Instance[spellId][1]
