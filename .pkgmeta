@@ -1,5 +1,6 @@
 tools-used:
     - gallery-generator
+    - libdatabroker-1-1
 
 externals:
     Libs/LibStub:

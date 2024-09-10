@@ -5,6 +5,7 @@
 - black filter inaccurate
 - personal favorites rework
 - Map Pins in description Text (Drop, Treasure, Vendor)
+- show drop chances
 
 ### More Ideas:
 - special summon animation
