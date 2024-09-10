@@ -320,6 +320,7 @@ ADDON.DB.Family = {
 [1765] = true, -- Big Battle Bear
 [1908] = true, -- Amani Battle Bear
 [1923] = true, -- Darkmoon Dancing Bear
+[2237] = true, -- Grizzly Hills Packmaster
 [2262] = true, -- Harmonious Salutations Bear
 },
 ["Foxes"] = {

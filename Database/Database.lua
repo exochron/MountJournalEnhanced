@@ -1642,6 +1642,7 @@ ADDON.DB.Type = {
         [284] = true, -- Traveler's Tundra Mammoth (Horde)
         [460] = true, -- Grand Expedition Yak
         [1039] = true, -- Mighty Caravan Brutosaur
+        [2237] = true, -- Grizzly Hills Packmaster
     },
     passenger = {
         [240] = true, -- Mechano-Hog
