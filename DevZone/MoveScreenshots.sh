@@ -17,7 +17,7 @@ mv "$(ls -dtr1 ../../../../Screenshots/* | tail -1)" 01_special.jpg
 
 magick 01_special.jpg -crop 804x735+11+121 01_special.jpg
 magick 02_sort.jpg -crop 804x735+11+121 02_sort.jpg
-magick 03_filter-source.jpg -crop 804x778+11+121 03_filter-source.jpg
+magick 03_filter-source.jpg -crop 804x802+11+121 03_filter-source.jpg
 magick 04_filter-type.jpg -crop 804x735+11+121 04_filter-type.jpg
 magick 05_filter-family.jpg -crop 804x1029+11+121 05_filter-family.jpg
 magick 06_filter-color.jpg -crop 804x735+11+121 06_filter-color.jpg
