@@ -4,20 +4,37 @@ local function generateMenu(_, root)
     root:SetTag(ADDON_NAME.."-LDB");
 
     for index = 1, C_MountJournal.GetNumDisplayedMounts() do
-        local name, _, icon, _, _, _, isFavorite, _, _, _, isCollected, mountID = C_MountJournal.GetDisplayedMountInfo(index)
+        local name, _, icon, active, _, _, isFavorite, _, _, _, isCollected, mountID = C_MountJournal.GetDisplayedMountInfo(index)
         if isCollected and isFavorite then
-            root:CreateButton("|T" .. icon .. ":0|t "..name, function()
-                local _, _, _, active = C_MountJournal.GetMountInfoByID(mountID)
-                if  active then
-                    C_MountJournal.Dismiss()
+            local clickHandler = function(_, data)
+                if data.buttonName == "RightButton" then
+                    SetCollectionsJournalShown(true, COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS)
+                    ADDON.Api:SetSelected(mountID)
                 else
-                    C_MountJournal.SummonByID(mountID)
+                    local _, _, _, active = C_MountJournal.GetMountInfoByID(mountID)
+                    if  active then
+                        C_MountJournal.Dismiss()
+                    else
+                        C_MountJournal.SummonByID(mountID)
+                    end
                 end
+            end
+
+            local element = root:CreateButton("|T" .. icon .. ":0|t "..name, clickHandler)
+            element:AddInitializer(function(button, description)
+                button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
             end)
+
+            if active then
+                element:AddInitializer(function(button)
+                    button.fontString:SetTextColor(1.0, 0.82, 0)
+                end)
+            end
         else
             break
         end
     end
+
 end
 
 local function InitializeDDMenu()
