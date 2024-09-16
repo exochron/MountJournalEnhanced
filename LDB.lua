@@ -1,7 +1,8 @@
 local ADDON_NAME, ADDON = ...
 
 local function generateMenu(_, root)
-    root:SetTag(ADDON_NAME.."-LDB");
+    root:SetTag(ADDON_NAME.."-LDB")
+    root:SetScrollMode(GetScreenHeight() - 100)
 
     for index = 1, C_MountJournal.GetNumDisplayedMounts() do
         local name, _, icon, active, _, _, isFavorite, _, _, _, isCollected, mountID = C_MountJournal.GetDisplayedMountInfo(index)
@@ -21,15 +22,12 @@ local function generateMenu(_, root)
             end
 
             local element = root:CreateButton("|T" .. icon .. ":0|t "..name, clickHandler)
-            element:AddInitializer(function(button, description)
+            element:AddInitializer(function(button)
                 button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
-            end)
-
-            if active then
-                element:AddInitializer(function(button)
+                if active then
                     button.fontString:SetTextColor(1.0, 0.82, 0)
-                end)
-            end
+                end
+            end)
         else
             break
         end
