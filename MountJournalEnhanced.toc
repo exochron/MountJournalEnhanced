@@ -62,6 +62,7 @@ UI\DisplayBackground.lua
 UI\DisplayCamera.lua
 UI\DisplayText.lua
 UI\SkyridingButtons.lua
+UI\SyncTarget.lua
 UI\Resize.lua
 UI\DisplayStatistics.lua
 UI\Hotkeys.lua

@@ -70,6 +70,7 @@ UI\MountSpecialButton.lua
 UI\SettingsDropDown.lua
 # UI\DressUpButton.lua # no mount preview possible yet
 UI\SummonRandomButton.lua
+UI\SyncTarget.lua
 UI\BlizzFixes.lua
 UI\Notes.lua
 UI\Fun.lua

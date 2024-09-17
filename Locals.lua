@@ -57,6 +57,9 @@ L["FILTER_ONLY"] = "only"
 L["COPY_POPUP"] = "press CTRL+C to copy"
 L["LINK_WOWHEAD"] = "Link to Wowhead"
 L["CLICK_TO_SHOW_LINK"] = "Click to Show Link"
+L["SYNC_TARGET_TIP_TITLE"] = "Sync Journal with Target"
+L["SYNC_TARGET_TIP_TEXT"] = "Automatically select the mount of your current target."
+L["SYNC_TARGET_TIP_FLAVOR"] = "Get ready for a mount off!"
 
 -- Families
 L["Airplanes"] = "Airplanes"
