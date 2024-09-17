@@ -19,8 +19,16 @@ end, "random-macro")
 ADDON.Events:RegisterCallback("loadUI", function()
     if not MountJournal.SummonRandomFavoriteButton then
         local button = CreateFrame("Button", nil, MountJournal, "MJE_SummonRandomFavoriteButton")
-        button.spellname:SetText(MOUNT_JOURNAL_SUMMON_RANDOM_FAVORITE_MOUNT)
         button:RegisterForDrag("LeftButton")
-        ADDON.UI:RegisterToolbarGroup("random-mount", button)
+        button:HookScript("OnEnter", function(self)
+            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+            --GameTooltip:SetMountBySpellID(150544); -- spell does not yet exist in Cataclysm
+            GameTooltip_SetTitle(GameTooltip, MOUNT_JOURNAL_SUMMON_RANDOM_FAVORITE_MOUNT)
+            GameTooltip:Show()
+        end)
+        button:HookScript("OnLeave", function()
+            GameTooltip:Hide()
+        end)
+        ADDON.UI:RegisterToolbarGroup("00-random-mount", button)
     end
 end, "summon random mount button")
