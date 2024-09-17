@@ -10,7 +10,11 @@ local function renderToolbar()
         lastButton = MountJournal.SummonRandomFavoriteButton
     end
 
-    for name, group in pairs(buttonList) do
+    local names = GetKeysArray(buttonList)
+    table.sort(names)
+
+    for _, name in ipairs(names) do
+        local group = buttonList[name]
         if #group > 0 and enabledGroup[name] then
 
             group[#group]:ClearAllPoints()

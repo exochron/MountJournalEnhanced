@@ -7,6 +7,7 @@ This addon extends the ingame mount journal with extra features.
 - [TikTok: Great Addon for Mount collectors](https://www.tiktok.com/@touchpadwarrior/video/7216081879886269739) (03/2023 by [Touchpadwarrior](https://www.twitch.tv/touchpadwarrior))
 
 ## ⭐ Features
++ __new:__ Sync the journal with your current target. (Great for mount offs. ;)) 
 + __new:__ Shows direct link to Wowhead
 + __new:__ Filter for no longer available mounts
 + __new:__ Quickly mount your favorites with the broker plugin
