@@ -149,6 +149,20 @@ local function CreateSettingsMenu(_, rootDescription)
             return MenuResponse.CloseAll
         end)
     )
+    if ACCESSIBILITY_LABEL and ACCESSIBILITY_MOUNT_LABEL then
+        ADDON.UI:CenterDropdownButton(rootDescription:CreateButton(
+            ACCESSIBILITY_LABEL,
+            function()
+                for _, category in ipairs(SettingsPanel:GetCategoryList():GetAllCategories()) do
+                    if category:GetName() == ACCESSIBILITY_MOUNT_LABEL and category:GetCategorySet() == 1 then
+                        Settings.OpenToCategory(category:GetID())
+                        break
+                    end
+                end
+                return MenuResponse.CloseAll
+            end)
+        )
+    end
     ADDON.UI:CenterDropdownButton(rootDescription:CreateButton(
         ADDON.L.RESET_WINDOW_SIZE,
         function()
