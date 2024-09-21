@@ -45,6 +45,7 @@ function ADDON.Api:GetMountInfoByID(mountId)
     -- moved api functions in 11.0
     local IsUsableSpell = C_Spell.IsSpellUsable or IsUsableSpell
     isUsable = isUsable and IsUsableSpell(spellId)
+    isSteadyFlight = isSteadyFlight and WOW_PROJECT_ID ~= WOW_PROJECT_CATACLYSM_CLASSIC
 
     return creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, isSteadyFlight, a, b, c, d, e, f, g, h
 end
