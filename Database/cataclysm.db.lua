@@ -1,7 +1,7 @@
 local _, ADDON = ...
 
 ADDON.DB.Recent = {
-    ["minID"] = 1807,
+    ["minID"] = 1902,
     ["blacklist"] = {2147},
     ["whitelist"] = {},
 }
@@ -61,7 +61,7 @@ ADDON.DB.Expansion[2][1770] = true; -- Festering Emerald Drake
 ADDON.DB.Expansion[2][1806] = true; -- Auspicious Arborwyrm
 ADDON.DB.Expansion[2][2147] = true; -- Polly Roger
 
--- in cataclysm classic all mounts git new mountIds
+-- in cataclysm classic all mounts got new mountIds
 ADDON.DB.Expansion[3].minID = 1807; -- Avatar of Flame (Cataclysm Classic)
 ADDON.DB.Expansion[GetClientDisplayExpansionLevel()].maxID = 999999999
 
