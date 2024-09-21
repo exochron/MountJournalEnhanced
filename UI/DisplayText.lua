@@ -12,6 +12,8 @@ local function replaceTextWithLinks()
     local mountId = ADDON.Api:GetSelected()
     local _, spellId, _, _, _, sourceType = C_MountJournal.GetMountInfoByID(mountId)
 
+    local isClassic = WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC
+
     local achievementIds = ADDON.DB.Source.Achievement[spellId] or ADDON.DB.FeatsOfStrength[mountId]
     if achievementIds and achievementIds ~= true then
         if type(achievementIds)=="number" then
@@ -28,15 +30,21 @@ local function replaceTextWithLinks()
                 else
                     local _, name = GetAchievementInfo(achievementId)
                     if name then
-                        name = name:gsub("([()-])", "%%%1")
-                        sourceText = sourceText:gsub(name, link, 1)
+                        if isClassic and "" == sourceText then
+                            sourceText = "|cffffd200"..BATTLE_PET_SOURCE_6..":|r "..link
+                        else
+                            name = name:gsub("([()-])", "%%%1")
+                            sourceText = sourceText:gsub(name, link, 1)
+                        end
+
                         MountJournal.MountDisplay.InfoButton.Source:SetText(sourceText)
                         break
                     end
                 end
             end
         end
-    elseif ADDON.DB.Source.Drop[spellId] and ADDON.DB.Source.Drop[spellId] ~= true then
+    elseif not isClassic and ADDON.DB.Source.Drop[spellId] and ADDON.DB.Source.Drop[spellId] ~= true then
+        -- no map pins in classic yet
         local _, _, sourceText = C_MountJournal.GetMountInfoExtraByID(mountId)
         local mapId = ADDON.DB.Source.Drop[spellId][1]
         local x = ADDON.DB.Source.Drop[spellId][2]
@@ -52,6 +60,7 @@ local function replaceTextWithLinks()
         end
 
     elseif ADDON.DB.Source.Instance[spellId] and ADDON.DB.Source.Instance[spellId] ~= true then
+        -- no encounter links in classic yet
         local _, _, sourceText = C_MountJournal.GetMountInfoExtraByID(mountId)
         local encounterId = ADDON.DB.Source.Instance[spellId][1]
         local difficultyId = ADDON.DB.Source.Instance[spellId][2]
