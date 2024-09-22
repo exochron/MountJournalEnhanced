@@ -20,6 +20,18 @@ local function CheckSetting(settings)
     return hasTrue, hasFalse
 end
 
+local function AddIcon(menuButton, family, subfamily)
+    local mountId
+    if subfamily then
+        mountId = next(ADDON.DB.Family[family][subfamily])
+    else
+        mountId = next(ADDON.DB.Family[family])
+    end
+
+    local _, _, icon = C_MountJournal.GetMountInfoByID(mountId)
+    ADDON.UI.FDD:AddIcon(menuButton, icon)
+end
+
 function ADDON.UI.FDD:AddFamilyMenu(root)
     local L = ADDON.L
 
@@ -66,6 +78,7 @@ function ADDON.UI.FDD:AddFamilyMenu(root)
                     end
                 end
             end)
+            AddIcon(subMenu, family, next(ADDON.DB.Family[family]))
             local sortedSubFamilies = {}
             for subfamily, familyIds in pairs(ADDON.DB.Family[family]) do
                 table.insert(sortedSubFamilies, subfamily)
@@ -74,11 +87,11 @@ function ADDON.UI.FDD:AddFamilyMenu(root)
                 return (L[a] or a) < (L[b] or b)
             end)
             for _, subfamily in pairs(sortedSubFamilies) do
-                ADDON.UI.FDD:CreateFilter(subMenu, L[subfamily] or subfamily, subfamily, settings[family], settings)
+                AddIcon(ADDON.UI.FDD:CreateFilter(subMenu, L[subfamily] or subfamily, subfamily, settings[family], settings), family, subfamily)
             end
 
         else
-            ADDON.UI.FDD:CreateFilter(root, L[family] or family, family, settings, true)
+            AddIcon(ADDON.UI.FDD:CreateFilter(root, L[family] or family, family, settings, true), family)
         end
     end
 end

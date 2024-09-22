@@ -82,6 +82,25 @@ function ADDON.UI.FDD:CreateFilter(root, text, filterKey, filterSettings, withOn
 
     return button
 end
+function ADDON.UI.FDD:AddIcon(menuButton, texture, width, height, left, right, top, bottom)
+    menuButton:AddInitializer(function(button)
+        width = width or 20
+        height = height or width or 20
+
+        if button.leftTexture1 and button.fontString then
+            local icon = button:AttachTexture()
+            icon:SetTexture(texture)
+            icon:SetTexCoord(left or 0, right or 1, top or 0, bottom or 1)
+            icon:SetSize(width, height)
+
+            icon:ClearAllPoints()
+            icon:SetPoint("LEFT", button.leftTexture1, "RIGHT", 3, 0)
+
+            button.fontString:ClearAllPoints()
+            button.fontString:SetPoint("LEFT", icon, "RIGHT", 3, -1)
+        end
+    end)
+end
 
 --region ALL and None
 local function AddAllAndNone(root, settings)
@@ -133,34 +152,34 @@ local function setupSourceMenu(root)
 
     AddAllAndNone(root, settings)
 
-    ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_1, "Drop", settings, true)
-    ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_2, "Quest", settings, true)
-    ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_3, "Vendor", settings, true)
-    ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_4, "Profession", settings, true)
-    ADDON.UI.FDD:CreateFilter(root, INSTANCE, "Instance", settings, true)
-    ADDON.UI.FDD:CreateFilter(root, REPUTATION, "Reputation", settings, true)
-    ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_6, "Achievement", settings, true)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_1, "Drop", settings, true), 133639)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_2, "Quest", settings, true), 236669)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_3, "Vendor", settings, true), 133784)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_4, "Profession", settings, true), 136241)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, INSTANCE, "Instance", settings, true), 254650)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, REPUTATION, "Reputation", settings, true), 236681)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_6, "Achievement", settings, true), 255347)
     if serverExpansion >= LE_EXPANSION_SHADOWLANDS then
-        ADDON.UI.FDD:CreateFilter(root, GetCategoryInfo(15441), "Covenants", settings, true)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, GetCategoryInfo(15441), "Covenants", settings, true), 3726261)
     end
     if serverExpansion >= LE_EXPANSION_BATTLE_FOR_AZEROTH then
-        ADDON.UI.FDD:CreateFilter(root, ISLANDS_HEADER, "Island Expedition", settings, true)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, ISLANDS_HEADER, "Island Expedition", settings, true), 134269)
     end
     if serverExpansion >= LE_EXPANSION_WARLORDS_OF_DRAENOR then
-        ADDON.UI.FDD:CreateFilter(root, GARRISON_LOCATION_TOOLTIP, "Garrison", settings, true)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, GARRISON_LOCATION_TOOLTIP, "Garrison", settings, true), 1005027)
     end
-    ADDON.UI.FDD:CreateFilter(root, PVP, "PVP", settings, true)
-    ADDON.UI.FDD:CreateFilter(root, CLASS, "Class", settings, true)
-    ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_7, "World Event", settings, true)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, PVP, "PVP", settings, true), 132487)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, CLASS, "Class", settings, true), 626001)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_7, "World Event", settings, true), 236552)
     if serverExpansion >= LE_EXPANSION_MISTS_OF_PANDARIA then
-        ADDON.UI.FDD:CreateFilter(root, L["Black Market"], "Black Market", settings, true)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, L["Black Market"], "Black Market", settings, true), 626190)
     end
     if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE  then
-        ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_12, "Trading Post", settings, true)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_12, "Trading Post", settings, true), 4696085)
     end
-    ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_10, "Shop", settings, true)
-    ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_8, "Promotion", settings, true)
-    ADDON.UI.FDD:CreateFilter(root, L.FILTER_RETIRED, "Unavailable", settings, true)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_10, "Shop", settings, true), 1120721)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_8, "Promotion", settings, true), 1418621)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, L.FILTER_RETIRED, "Unavailable", settings, true), 132293)
 end
 
 local function setupTypeMenu(root)
@@ -169,34 +188,46 @@ local function setupTypeMenu(root)
 
     AddAllAndNone(root, settings)
 
-    ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_FLYING, "flying", settings, true)
-    ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_GROUND, "ground", settings, true)
-    ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_AQUATIC, "underwater", settings, true)
-    if GetClientDisplayExpansionLevel() >= LE_EXPANSION_CATACLYSM then
-        ADDON.UI.FDD:CreateFilter(root, L["Transform"], "transform", settings, true)
-    end
-    ADDON.UI.FDD:CreateFilter(root, MINIMAP_TRACKING_REPAIR, "repair", settings, true)
-    ADDON.UI.FDD:CreateFilter(root, L["Passenger"], "passenger", settings, true)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_FLYING, "flying", settings, true), 294468)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_GROUND, "ground", settings, true), 132226)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_AQUATIC, "underwater", settings, true), GetClientDisplayExpansionLevel() >= LE_EXPANSION_MISTS_OF_PANDARIA and 618981 or 132112)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, L["Transform"], "transform", settings, true), 399041)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, MINIMAP_TRACKING_REPAIR, "repair", settings, true), 132281)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, L["Passenger"], "passenger", settings, true), 236238)
     if GetClientDisplayExpansionLevel() >= LE_EXPANSION_WAR_WITHIN then
-        ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_RIDEALONG, "rideAlong", settings, true)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, MOUNT_JOURNAL_FILTER_RIDEALONG, "rideAlong", settings, true), 618976)
     end
 end
 
 local function setupFactionMenu(root)
     local settings = ADDON.settings.filter[SETTING_FACTION]
-    ADDON.UI.FDD:CreateFilter(root, FACTION_ALLIANCE, "alliance", settings)
-    ADDON.UI.FDD:CreateFilter(root, FACTION_HORDE, "horde", settings)
-    ADDON.UI.FDD:CreateFilter(root, NPC_NAMES_DROPDOWN_NONE, "noFaction", settings)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, FACTION_ALLIANCE, "alliance", settings), WOW_PROJECT_ID == WOW_PROJECT_MAINLINE and 2173919 or 463450)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, FACTION_HORDE, "horde", settings), WOW_PROJECT_ID == WOW_PROJECT_MAINLINE and 2173920 or 463451)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, NPC_NAMES_DROPDOWN_NONE, "noFaction", settings), 0)
 end
 
 local function setupExpansionMenu(root)
     local settings = ADDON.settings.filter[SETTING_EXPANSION]
     AddAllAndNone(root, settings)
 
-    --todo: use expansion icons/textures
+    -- icons from: https://warcraft.wiki.gg/wiki/Expansion
+    local icons = {
+        [0] = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\expansion\\00_wow.png",
+        [1] = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\expansion\\01_bc.png",
+        [2] = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\expansion\\02_wrath.png",
+        [3] = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\expansion\\03_cata.png",
+        [4] = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\expansion\\04_mists.png",
+        [5] = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\expansion\\05_wod.png",
+        [6] = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\expansion\\06_legion.png",
+        [7] = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\expansion\\07_bfa.png",
+        [8] = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\expansion\\08_sl.png",
+        [9] = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\expansion\\09_df.png",
+        [10] = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\expansion\\10_tww.png",
+    }
     for i = GetClientDisplayExpansionLevel(), 0,-1 do
         if _G["EXPANSION_NAME" .. i] then
-            ADDON.UI.FDD:CreateFilter(root, _G["EXPANSION_NAME" .. i], i, settings, true)
+            local button = ADDON.UI.FDD:CreateFilter(root, _G["EXPANSION_NAME" .. i], i, settings, true)
+            ADDON.UI.FDD:AddIcon(button, icons[i] or 0, 50, 16, 0.109375, 0.890625, 0, 1)
         end
     end
 end
