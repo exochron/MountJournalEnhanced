@@ -172,6 +172,7 @@ ADDON.DB.Family = {
 [1904] = true, -- Pureblood Fire Hawk
 [1905] = true, -- Green Fire Hawk
 [1906] = true, -- Corrupted Fire Hawk
+[2261] = true, -- Coldflame Tempest
 },
 ["Raptora"] = {
 [1430] = true, -- Desertwing Hunter
@@ -320,6 +321,7 @@ ADDON.DB.Family = {
 [1765] = true, -- Big Battle Bear
 [1908] = true, -- Amani Battle Bear
 [1923] = true, -- Darkmoon Dancing Bear
+[2225] = true, -- Amani Hunting Bear
 [2237] = true, -- Grizzly Hills Packmaster
 [2262] = true, -- Harmonious Salutations Bear
 },
@@ -329,6 +331,7 @@ ADDON.DB.Family = {
 [946] = true, -- Vicious War Fox
 [1949] = true, -- Gilnean Prowler
 [1956] = true, -- Fur-endship Fox
+[1957] = true, -- Soaring Sky Fox
 [1958] = true, -- Twilight Sky Prowler
 },
 ["Gargon"] = {
@@ -823,6 +826,7 @@ ADDON.DB.Family = {
 [1890] = true, -- Dark Phoenix
 [1904] = true, -- Pureblood Fire Hawk
 [1906] = true, -- Corrupted Fire Hawk
+[2261] = true, -- Coldflame Tempest
 },
 ["Sabers"] = {
 [896] = true, -- Primal Flamesaber
@@ -913,6 +917,7 @@ ADDON.DB.Family = {
 [1766] = true, -- Blazing Hippogryph
 [1902] = true, -- Flameward Hippogryph
 [1922] = true, -- Corrupted Hippogryph
+[2224] = true, -- Frayfeather Hippogryph
 },
 ["Larion"] = {
 [1404] = true, -- Silverwind Larion
@@ -1128,11 +1133,9 @@ ADDON.DB.Family = {
 [762] = true, -- Coalfist Gronnling
 },
 ["Murloc"] = {
+[1312] = true, -- Gargantuan Grrloc
 [1797] = true, -- Ginormous Grrloc
 [2259] = true, -- Gigantic Grrloc
-},
-["Others"] = {
-[1312] = true, -- Gargantuan Grrloc
 },
 ["Yetis"] = {
 [654] = true, -- Challenger's War Yeti
@@ -1584,6 +1587,7 @@ ADDON.DB.Family = {
 [603] = true, -- Creeping Carpet
 [905] = true, -- Leywoven Flying Carpet
 [2023] = true, -- Noble Flying Carpet
+[2317] = true, -- Enchanted Spellweave Carpet
 },
 ["Discs"] = {
 [509] = true, -- Red Flying Cloud
@@ -1697,6 +1701,8 @@ ADDON.DB.Family = {
 [1715] = true, -- Armadillo Roller
 [1877] = true, -- Goblin Trike
 [1878] = true, -- Goblin Turbo-Trike
+[1943] = true, -- Incognitro, the Indecipherable Felcycle
+[1947] = true, -- Hateforged Blazecycle
 },
 ["Rockets"] = {
 [211] = true, -- X-51 Nether-Rocket

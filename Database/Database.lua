@@ -2,11 +2,20 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
-ADDON.DB.Recent = {
-    ["minID"] = 2116,
-    ["blacklist"] = { 2118, 2142, 2143, 2152, 2140, 2189 },
-    ["whitelist"] = { 1550, 1715 },
-}
+if select(4, GetBuildInfo()) < 110005 then
+    -- TODO: remove later
+    ADDON.DB.Recent = {
+        ["minID"] = 2116,
+        ["blacklist"] = { 2118, 2142, 2143, 2152, 2140, 2189 },
+        ["whitelist"] = { 1550, 1715 },
+    }
+else
+    ADDON.DB.Recent = {
+        ["minID"] = 2259,
+        ["blacklist"] = { },
+        ["whitelist"] = { 1943, 1947, 1957, 2224, 2225 },
+    }
+end
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -922,10 +931,8 @@ ADDON.DB.Source = {
         [417554] = 15796, -- Cliffside Wylderdrake - Cliffside Companion
         [417556] = 17779, -- Winding Slitherdrake - A Serpentine Discovery
         [418078] = 18646, -- Pattie - Whodunnit?
-        [422486] = 19011, -- Verdant Armoredon - Dragonflight Keystone Master: Season Three
         [424474] = 19349, -- Shadow Dusk Dreamsaber - Glory of the Dream Raider
         [424607] = 19458, -- Taivan - A World Awoken
-        [434462] = 19782, -- Infinite Armoredon - Dragonflight Keystone Master: Season Four
         [439138] = 19574, -- Voyaging Wilderling - Awakening the Dragonflight Raids
         [440444] = 20501, -- Zovaal's Soul Eater - Back from the Beyond
 
@@ -1110,7 +1117,6 @@ ADDON.DB.Source = {
         [148428] = true, -- Ashhide Mushan Beast
 
         -- Arena
-        [424539] = true, -- Draconic Gladiator's Drake - Gladiator: Dragonflight Season 4
         [434470] = true, -- Vicious Dreamtalon - Dragonflight: Season 4
         [434477] = true, -- Vicious Dreamtalon - Dragonflight: Season 4
         [449466] = true, -- Forged Gladiator's Fel Bat - Gladiator: War Within Season 1
@@ -1339,6 +1345,8 @@ ADDON.DB.Source = {
         [294569] = true, -- Beastlord's Warwolf
         [359013] = true, -- Val'sharah Hippogryph
         [359318] = true, -- Soaring Spelltome - A Tour of Towers
+        [452645] = true, -- Amani Hunting Bear
+        [468353] = true, -- Enchanted Spellweave Carpet
 
         -- Call of the Scarab (Micro)
         [239766] = true, -- Blue Qiraji War Tank
@@ -1348,13 +1356,18 @@ ADDON.DB.Source = {
         [418078] = true, -- Pattie - Whodunnit?
         [424082] = true, -- Mimiron's Jumpjets
 
+        -- 20th Anniversary
+        [428013] = true, -- Incognitro
+        [452643] = true, -- Frayfeather Hippogryph
+        [463133] = true, -- Coldflame Tempest
+
         -- Remix: MoP
         [138425] = true, -- Slate Primordial Direhorn
         [127170] = true, -- Astral Cloud Serpent
         [136471] = true, -- Spawn of Horridon
         [130965] = true, -- Son of Galleon
         [138423] = true, -- Cobalt Primordial Direhorn
-        [139448] = true, -- Clutch of Ji-Kun
+        [139448] = true, -- Clutch of Ji-Kuni
         [148476] = true, -- Thundering Onyx Cloud Serpent
         [127158] = true, -- Heavenly Onyx Cloud Serpent
         [139442] = true, -- Thundering Cobalt Cloud Serpent
