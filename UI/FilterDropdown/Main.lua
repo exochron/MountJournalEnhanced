@@ -58,9 +58,10 @@ function ADDON.UI.FDD:CreateFilter(root, text, filterKey, filterSettings, withOn
 
             onlyButton:SetNormalFontObject("GameFontHighlight")
             onlyButton:SetHighlightFontObject("GameFontHighlight")
-            onlyButton:SetText(ADDON.L.FILTER_ONLY)
-            onlyButton:SetSize(onlyButton:GetTextWidth(), 20)
+            onlyButton:SetText(" "..ADDON.L.FILTER_ONLY)
+            onlyButton:SetSize(onlyButton:GetTextWidth(), button.fontString:GetHeight())
             onlyButton:SetPoint("RIGHT")
+            onlyButton:SetPoint("BOTTOM", button.fontString)
 
             onlyButton:SetScript("OnClick", function(self, ...)
                 setAllSettings(onlySettings, false)
