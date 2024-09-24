@@ -89,10 +89,10 @@ ADDON.Events:RegisterCallback("OnLogin", function()
         end
     end
 
-    local ldbDataObject = ldb:NewDataObject( ADDON_NAME, {
+    local ldbDataObject = ldb:NewDataObject( ADDON_NAME.." Favorites", {
         type = "data source",
         text = count(),
-        label = C_AddOns.GetAddOnMetadata(ADDON_NAME, "Title"),
+        label = COLLECTED,
         icon = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\mje.png",
 
         OnClick = function(_, button)

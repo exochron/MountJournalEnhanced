@@ -39,7 +39,6 @@ Favorites.lua
 Tracking.lua
 SlashCommand.lua
 AddonCompartment.lua
-LDB.lua
 #@do-not-package@
 DevZone\Debug.lua
 DevZone\Screenshot.lua
@@ -74,3 +73,5 @@ UI\RarityNames.lua
 UI\BlizzFixes.lua
 UI\Notes.lua
 UI\Fun.lua
+UI\LDB-Favorites.lua
+UI\LDB-FlightMode.lua
