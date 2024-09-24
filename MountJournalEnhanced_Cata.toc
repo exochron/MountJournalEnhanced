@@ -37,7 +37,6 @@ Settings\OptionsPanel.lua
 Favorites.lua
 Tracking.lua
 SlashCommand.lua
-LDB.lua
 #@do-not-package@
 DevZone\Debug.lua
 #@end-do-not-package@
@@ -74,3 +73,4 @@ UI\SyncTarget.lua
 UI\BlizzFixes.lua
 UI\Notes.lua
 UI\Fun.lua
+UI\LDB-Favorites.lua
