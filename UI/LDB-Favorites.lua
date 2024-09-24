@@ -98,7 +98,7 @@ ADDON.Events:RegisterCallback("OnLogin", function()
         OnClick = function(_, button)
             if button == "RightButton" then
                 ADDON:OpenOptions()
-            else
+            elseif not InCombatLockdown() then
                 ToggleCollectionsJournal(COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS)
             end
         end,
