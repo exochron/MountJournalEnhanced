@@ -21,13 +21,8 @@ local function CheckSetting(settings)
 end
 
 local function AddIcon(menuButton, family, subfamily)
-    local mountId
-    if subfamily then
-        mountId = next(ADDON.DB.Family[family][subfamily])
-    else
-        mountId = next(ADDON.DB.Family[family])
-    end
-
+    local sourceDb = subfamily and ADDON.DB.Family[family][subfamily] or ADDON.DB.Family[family]
+    local mountId = TableUtil.FindMin(GetKeysArray(sourceDb), function(v) return v end)
     local _, _, icon = C_MountJournal.GetMountInfoByID(mountId)
     ADDON.UI.FDD:AddIcon(menuButton, icon)
 end
@@ -56,7 +51,7 @@ function ADDON.UI.FDD:AddFamilyMenu(root)
     for _, family in pairs(sortedFamilies) do
         if hasSubFamilies[family] then
             local subMenu = root:CreateCheckbox(L[family] or family, function()
-                local settingHasTrue, settingHasFalse = CheckSetting(settings[family])
+                local settingHasTrue = CheckSetting(settings[family])
 
                 return settingHasTrue
             end, function(...)
@@ -80,7 +75,7 @@ function ADDON.UI.FDD:AddFamilyMenu(root)
             end)
             AddIcon(subMenu, family, next(ADDON.DB.Family[family]))
             local sortedSubFamilies = {}
-            for subfamily, familyIds in pairs(ADDON.DB.Family[family]) do
+            for subfamily, _ in pairs(ADDON.DB.Family[family]) do
                 table.insert(sortedSubFamilies, subfamily)
             end
             table.sort(sortedSubFamilies, function(a, b)
