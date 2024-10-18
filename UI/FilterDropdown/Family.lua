@@ -64,12 +64,21 @@ function ADDON.UI.FDD:AddFamilyMenu(root)
                 if button.leftTexture2 then
                     local settingHasTrue, settingHasFalse = CheckSetting(settings[family])
                     if settingHasTrue and settingHasFalse then
-                        -- TODO: proper indeterminate icon. like: https://css-tricks.com/indeterminate-checkboxes/
-                        button.leftTexture2:SetAtlas("common-dropdown-icon-radialtick-yellow-classic", TextureKitConstants.UseAtlasSize)
-                        button.leftTexture2:SetAtlas("common-dropdown-icon-radialtick-yellow", TextureKitConstants.UseAtlasSize)
-                    else
-                        button.leftTexture2:SetAtlas("common-dropdown-icon-checkmark-yellow-classic", TextureKitConstants.UseAtlasSize)
-                        button.leftTexture2:SetAtlas("common-dropdown-icon-checkmark-yellow", TextureKitConstants.UseAtlasSize)
+                        local dash
+                        if button.leftTexture2 then
+                            -- mainline style
+                            dash = button.leftTexture2
+                            dash:SetPoint("CENTER", button.leftTexture1, "CENTER", 0, 1)
+                        else
+                            -- classic style
+                            dash = button:AttachTexture()
+                            dash:SetPoint("CENTER", button.leftTexture1)
+                            button.leftTexture1:SetAtlas("common-dropdown-ticksquare-classic", true)
+                        end
+
+                        dash:SetAtlas("voicechat-icon-loudnessbar-2", true)
+                        dash:SetTexCoord(1, 0, 0, 0, 1, 1, 0, 1)
+                        dash:SetSize(16, 16)
                     end
                 end
             end)
