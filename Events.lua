@@ -80,4 +80,10 @@ ADDON.Events:RegisterCallback("OnLogin", function()
             ADDON.Events:TriggerEvent("OnNewMount", param1, param2, param3)
         end)
     end, 'external events')
+
+    -- on unpacking mount
+    hooksecurefunc(C_MountJournal, "ClearFanfare", function(mountId)
+        ADDON:FilterMounts()
+        ADDON.Events:TriggerEvent("OnNewMount", mountId)
+    end)
 end, 'external events')
