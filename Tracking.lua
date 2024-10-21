@@ -75,7 +75,9 @@ end, "tracking")
 ADDON.Events:RegisterCallback("OnNewMount", function(_, mountId)
     if mountId and ADDON.settings.trackUsageStats then
         local blob = initData(mountId)
-        blob[INDEX_LEARNED_TIME] = GetServerTime()
+        if nil == blob[INDEX_LEARNED_TIME] then
+            blob[INDEX_LEARNED_TIME] = GetServerTime()
+        end
     end
 end, "tracking")
 
