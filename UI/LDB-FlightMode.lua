@@ -2,22 +2,16 @@ local ADDON_NAME, ADDON = ...
 
 
 local function updateLDB(dataObject)
-    local auraData = C_UnitAuras.GetPlayerAuraBySpellID(404468)
-    if not auraData then
-        auraData = C_UnitAuras.GetPlayerAuraBySpellID(404464)
-    end
-
-    if auraData then
-        local label, name = string.match(auraData.name, "^(.*)\s*: (.*)$")
-        dataObject.icon = auraData.icon
-        dataObject.text = name
-        dataObject.label = label
-    end
+    local spellInfo = C_Spell.GetSpellInfo(ADDON.Api:IsDynamicFlight() and 404464 or 404468 )
+    local label, name = string.match(spellInfo.name, "^(.*)\s*: (.*)$")
+    dataObject.icon = spellInfo.iconID
+    dataObject.text = name
+    dataObject.label = label
 end
 
 ADDON.Events:RegisterCallback("OnLogin", function()
     local ldb = LibStub:GetLibrary("LibDataBroker-1.1")
-    if not ldb then
+    if not ldb and C_MountJournal.IsDragonridingUnlocked() then
         return
     end
 
@@ -36,30 +30,34 @@ ADDON.Events:RegisterCallback("OnLogin", function()
     end)
     actionButton:Hide()
 
+    local tooltipProxy = CreateFrame("Frame")
+    tooltipProxy:Hide()
+    tooltipProxy:HookScript("OnShow", function()
+        local point, relativeTo, relativePoint, offsetX, offsetY = tooltipProxy:GetPoint(1)
+
+        actionButton:SetAttribute("spell", C_MountJournal.GetDynamicFlightModeSpellID())
+        actionButton:SetParent(relativeTo)
+        actionButton:SetAllPoints(relativeTo)
+        actionButton:SetFrameStrata("DIALOG")
+        actionButton:Show()
+
+        GameTooltip:SetOwner(tooltipProxy, "ANCHOR_NONE")
+        GameTooltip:SetPoint(point, relativeTo, relativePoint, offsetX, offsetY)
+        GameTooltip:ClearLines()
+        GameTooltip:SetSpellByID(C_MountJournal.GetDynamicFlightModeSpellID())
+        GameTooltip:Show()
+    end)
+    tooltipProxy:HookScript("OnHide", function()
+        GameTooltip:Hide()
+    end)
+
     local spellId = C_MountJournal.GetDynamicFlightModeSpellID()
     local icon = C_Spell.GetSpellTexture(spellId)
     dataObject = ldb:NewDataObject( ADDON_NAME.." Flight Mode", {
         type = "data source",
         text = C_Spell.GetSpellName(spellId),
         icon = icon,
-
-        OnEnter = function(frame)
-            actionButton:SetAttribute("spell", C_MountJournal.GetDynamicFlightModeSpellID())
-            actionButton:SetParent(frame)
-            actionButton:SetAllPoints(frame)
-            actionButton:SetFrameStrata("DIALOG")
-            actionButton:Show()
-
-            GameTooltip:SetOwner(frame, "ANCHOR_NONE")
-            GameTooltip:SetPoint("TOPLEFT", frame, "BOTTOMLEFT")
-            GameTooltip:ClearLines()
-            GameTooltip:SetSpellByID(C_MountJournal.GetDynamicFlightModeSpellID())
-            GameTooltip:Show()
-        end,
-
-        OnLeave = function()
-            GameTooltip:Hide()
-        end
+        tooltip = tooltipProxy,
     })
     updateLDB(dataObject)
 

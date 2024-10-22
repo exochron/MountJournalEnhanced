@@ -100,6 +100,18 @@ function ADDON.Api:GetSelected()
     return MountJournal.selectedMountID, selectedCreature
 end
 
+function ADDON.Api:IsDynamicFlight()
+    if C_MountJournal.IsDragonridingUnlocked() then
+        local description = C_Spell.GetSpellDescription(C_MountJournal.GetDynamicFlightModeSpellID())
+        local pos = string.find(description, DYNAMIC_FLIGHT,1 , true)
+        if pos then
+            return pos < 15
+        end
+    end
+
+    return false
+end
+
 
 local dataProvider
 function ADDON.Api:GetDataProvider()
