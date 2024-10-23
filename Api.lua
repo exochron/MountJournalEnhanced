@@ -85,6 +85,9 @@ function ADDON.Api:SetIsFavoriteByID(mountId, ...)
         mountIdToOriginalIndex = nil
     end
 end
+function ADDON.Api:HasFavorites()
+    return C_MountJournal.GetIsFavorite(1)
+end
 
 local selectedCreature
 function ADDON.Api:SetSelected(selectedMountID, selectedVariation)

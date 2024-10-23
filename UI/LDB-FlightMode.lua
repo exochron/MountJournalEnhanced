@@ -11,7 +11,7 @@ end
 
 ADDON.Events:RegisterCallback("OnLogin", function()
     local ldb = LibStub:GetLibrary("LibDataBroker-1.1")
-    if not ldb and C_MountJournal.IsDragonridingUnlocked() then
+    if not ldb or not C_MountJournal.IsDragonridingUnlocked() then
         return
     end
 
