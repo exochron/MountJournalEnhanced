@@ -29,12 +29,20 @@ function SlashCmdList.MOUNTJOURNALENHANCED(input)
         if setMount then
             local spellId = string.match(input, "mount:(%d+):")
             if not spellId then
-                _, _, _, _, _, _, spellId = GetSpellInfo(setMount)
+                spellId = string.match(input, "spell:(%d+):")
+            end
+            if not spellId then
+                if C_Spell and C_Spell.GetSpellIDForSpellIdentifier then
+                    spellId = C_Spell.GetSpellIDForSpellIdentifier(setMount)
+                elseif GetSpellInfo then
+                    _, _, _, _, _, _, spellId = GetSpellInfo(setMount)
+                end
             end
             if spellId then
                 local mountId = C_MountJournal.GetMountFromSpell(spellId)
                 if mountId then
                     ADDON:SetLearnedDate(mountId, setYear + 0, setMonth + 0, setDay + 0)
+                    print("learned date set.")
                     return
                 end
             end
