@@ -1,4 +1,4 @@
-## Interface: 40400,40401
+## Interface: 40401
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## Author: eXochron
@@ -50,6 +50,7 @@ UI\CompactMountList.lua
 UI\AchievementPoints.lua
 UI\MountCount.lua
 UI\DisplayDirector.lua
+UI\FavoritesMenu.lua
 UI\FilterDropdown\Main.lua
 UI\FilterDropdown\Color.lua
 UI\FilterDropdown\Family.lua

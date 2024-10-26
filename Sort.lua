@@ -121,8 +121,9 @@ local mountCache
 local function CacheMount(mountId)
     mountCache = mountCache or CreateFleetingCache()
     return mountCache:Get(mountId, function()
-        local name, _, _, _, isUsable, _, isFavorite, _, _, _, isCollected = ADDON.Api:GetMountInfoByID(mountId)
+        local name, _, _, _, isUsable, _, _, _, _, _, isCollected = ADDON.Api:GetMountInfoByID(mountId)
         local needsFanfare = isCollected and C_MountJournal.NeedsFanfare(mountId)
+        local isFavorite = isCollected and ADDON.Api:GetIsFavoriteByID(mountId)
 
         return name, isUsable, isFavorite, isCollected, needsFanfare
     end)

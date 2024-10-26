@@ -37,7 +37,6 @@ local function PrepareDefaults()
         ui = {
             debugMode = false,
             showAchievementPoints = true,
-            showShopButton = false,
             compactMountList = true,
             unlockDisplayCamera = true,
             displayStatistics = {
@@ -63,11 +62,7 @@ local function PrepareDefaults()
             displayAnimation = "stand",
         },
 
-        favoritePerChar = false,
-        autoFavor = false,
-        favoredMounts = {},
         notes = {},
-
         hiddenMounts = {},
         personalHiddenMounts = false,
 
@@ -115,6 +110,17 @@ local function PrepareDefaults()
             unusableToBottom = false,
             unownedOnBottom = true,
         },
+
+        favorites = {
+            assignments = {},
+            profiles = {
+                {
+                    name = "",
+                    autoFavor = false,
+                    mounts = {},
+                }
+            },
+        }
     }
     for categoryName, _ in pairs(ADDON.DB.Source) do
         defaultSettings.filter.source[categoryName] = true
@@ -151,10 +157,34 @@ local function CombineSettings(settings, defaultSettings)
         end
     end
 
-    -- cleanup old still existing settings
-    for key, _ in pairs(settings) do
-        if (defaultSettings[key] == nil) then
-            settings[key] = nil;
+    if type(next(settings)) ~= "number" then
+        -- cleanup old still existing settings
+        for key, _ in pairs(settings) do
+            if (defaultSettings[key] == nil) then
+                settings[key] = nil;
+            end
+        end
+    end
+end
+
+-- Later: remove after 2025-10
+local function MigrateToFavoriteProfiles(personalSettings, globalSettings)
+    if personalSettings.favoritePerChar and personalSettings.favoredMounts then
+        local playerGuid = UnitGUID("player")
+        if nil == globalSettings["favorites"]["assignments"][playerGuid] then
+            local player, realm = UnitFullName("player")
+            local profile = {
+                name = player.."-"..realm,
+                mounts = personalSettings.favoredMounts,
+                autoFavor = personalSettings.autoFavor,
+            }
+            table.insert(globalSettings["favorites"]["profiles"], profile)
+            local profileId = #globalSettings["favorites"]["profiles"]
+            globalSettings["favorites"]["assignments"][playerGuid] = profileId
+        end
+    elseif false == personalSettings.favoritePerChar then
+        if personalSettings.autoFavor then
+            globalSettings["favorites"]["profiles"][1].autoFavor=true
         end
     end
 end
@@ -165,6 +195,7 @@ ADDON.Events:RegisterCallback("OnInit", function()
     defaultFilterStates = CopyTable(defaultSettings.filter)
     defaultSortStates = CopyTable(defaultSettings.sort)
     CombineSettings(MJEGlobalSettings, defaultSettings)
+    MigrateToFavoriteProfiles(MJEPersonalSettings, MJEGlobalSettings)
     CombineSettings(MJEPersonalSettings, defaultSettings)
 
     ADDON.settings = {}
@@ -176,9 +207,7 @@ ADDON.Events:RegisterCallback("OnInit", function()
     ADDON:ApplySetting('searchInFamilyName', MJEPersonalSettings.searchInFamilyName)
     ADDON:ApplySetting('searchInNotes', MJEPersonalSettings.searchInNotes)
 
-    ADDON.settings.favoritePerChar = MJEPersonalSettings.favoritePerChar
-    ADDON.settings.autoFavor = MJEPersonalSettings.autoFavor
-    ADDON.settings.favoredMounts = MJEPersonalSettings.favoredMounts
     ADDON.settings.trackUsageStats = MJEGlobalSettings.trackUsageStats
     ADDON.settings.notes = MJEGlobalSettings.notes
+    ADDON.settings.favorites = MJEGlobalSettings.favorites
 end, "settings init")
