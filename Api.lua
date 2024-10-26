@@ -2,43 +2,19 @@ local _, ADDON = ...
 
 ADDON.Api = {}
 
---region mountIdToOriginalIndex
-local mountIdToOriginalIndex
-
-local function collectMountIds()
+function ADDON.Api:MountIdToOriginalIndex(mountId)
     ADDON:ResetIngameFilter()
 
-    local list = {}
     local count = C_MountJournal.GetNumDisplayedMounts()
     for i = 1, count do
-        local mountId = select(12, C_MountJournal.GetDisplayedMountInfo(i))
-        list[mountId] = i
-    end
-
-    return list
-end
-
-local function MountIdToOriginalIndex(mountId, recursionCounter)
-    if nil == mountIdToOriginalIndex then
-        mountIdToOriginalIndex = collectMountIds()
-    end
-
-    local index = mountIdToOriginalIndex[mountId] or nil
-
-    if index then
-        local displayedMountId = select(12, C_MountJournal.GetDisplayedMountInfo(index))
-        if displayedMountId ~= mountId then
-            mountIdToOriginalIndex = nil
-            recursionCounter = recursionCounter or 1
-            if recursionCounter < 4 then
-                return MountIdToOriginalIndex(mountId, recursionCounter + 1)
-            end
+        local displayedMountId = select(12, C_MountJournal.GetDisplayedMountInfo(i))
+        if displayedMountId == mountId then
+            return i
         end
     end
 
-    return index
+    return nil
 end
---endregion
 
 function ADDON.Api:GetMountInfoByID(mountId)
     local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, isSteadyFlight, a, b, c, d, e, f, g, h = C_MountJournal.GetMountInfoByID(mountId)
@@ -67,27 +43,110 @@ function ADDON.Api:GetMountLink(spellId)
     return link
 end
 function ADDON.Api:PickupByID(mountId, ...)
-    local index = MountIdToOriginalIndex(mountId)
+    local index = ADDON.Api:MountIdToOriginalIndex(mountId)
     if index then
         return C_MountJournal.Pickup(index, ...)
     end
 end
-function ADDON.Api:GetIsFavoriteByID(mountId, ...)
-    local index = MountIdToOriginalIndex(mountId)
-    if index then
-        return C_MountJournal.GetIsFavorite(index, ...)
-    end
-end
-function ADDON.Api:SetIsFavoriteByID(mountId, ...)
-    local index = MountIdToOriginalIndex(mountId)
-    if index then
-        C_MountJournal.SetIsFavorite(index, ...)
-        mountIdToOriginalIndex = nil
-    end
-end
+
+--region favorites
 function ADDON.Api:HasFavorites()
-    return C_MountJournal.GetIsFavorite(1)
+    local _, _, favorites = ADDON.Api:GetFavoriteProfile()
+    return #favorites > 0
 end
+function ADDON.Api:GetFavoriteProfile()
+    local playerGuid = UnitGUID("player")
+    local profileIndex = ADDON.settings.favorites.assignments[playerGuid] or 1
+    if not ADDON.settings.favorites.profiles[profileIndex] then
+        profileIndex = 1
+    end
+
+    local name = ADDON.settings.favorites.profiles[profileIndex].name
+    if profileIndex == 1 then
+        name = ADDON.L.FAVORITE_ACCOUNT_PROFILE
+    end
+
+    return profileIndex, name, ADDON.settings.favorites.profiles[profileIndex].mounts
+end
+function ADDON.Api:GetIsFavoriteByID(mountId)
+    local _, _, favorites = ADDON.Api:GetFavoriteProfile()
+    return tContains(favorites, mountId)
+end
+function ADDON.Api:SetIsFavoriteByID(mountId, value)
+    local _, _, favorites = ADDON.Api:GetFavoriteProfile()
+
+    local hasChange = false
+    if true == value and not tContains(favorites, mountId) then
+        table.insert(favorites, mountId)
+        hasChange = true
+
+    elseif false == value then
+        local i = tIndexOf(favorites, mountId)
+        if i then
+            tUnorderedRemove(favorites, i)
+            hasChange = true
+        end
+    end
+
+    if hasChange then
+        ADDON.Events:TriggerEvent("OnFavoritesChanged")
+    end
+end
+function ADDON.Api:SetBulkIsFavorites(filteredProvider)
+    local _, _, profileMounts = ADDON.Api:GetFavoriteProfile()
+
+    local mountIdsToAdd = CopyValuesAsKeys(filteredProvider)
+    local hasChange = false
+
+    local index = 1
+    while index <= #profileMounts do
+        local itemId = profileMounts[index]
+
+        if mountIdsToAdd[itemId] then
+            mountIdsToAdd[itemId] = nil
+            index = index + 1
+        else
+            tUnorderedRemove(profileMounts, index)
+            hasChange = true
+        end
+    end
+
+    for itemId, shouldAdd in pairs(mountIdsToAdd) do
+        if shouldAdd then
+            table.insert(profileMounts, itemId)
+            hasChange = true
+        end
+    end
+
+    if hasChange then
+        ADDON.Events:TriggerEvent("OnFavoritesChanged")
+    end
+end
+function ADDON.Api:SwitchFavoriteProfile(newIndex)
+    local oldIndex = ADDON.Api:GetFavoriteProfile()
+    if oldIndex ~= newIndex then
+        ADDON.settings.favorites.assignments[UnitGUID("player")] = newIndex
+        ADDON.Events:TriggerEvent("OnFavoritesChanged")
+        ADDON.Events:TriggerEvent("OnFavoriteProfileChanged")
+    end
+end
+function ADDON.Api:RemoveFavoriteProfile(index)
+    if index > 1 then
+        local profileIndex = ADDON.Api:GetFavoriteProfile()
+        if profileIndex == index then
+            ADDON.Api:SwitchFavoriteProfile(1)
+        end
+
+        ADDON.settings.favorites.profiles[index] = nil
+        -- cleanup all assignments
+        for guid, profileIndex in pairs(ADDON.settings.favorites.assignments) do
+            if profileIndex == index then
+                ADDON.settings.favorites.assignments[guid] = 1
+            end
+        end
+    end
+end
+--endregion
 
 local selectedCreature
 function ADDON.Api:SetSelected(selectedMountID, selectedVariation)

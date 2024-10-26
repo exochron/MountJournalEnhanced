@@ -90,8 +90,8 @@ local function FilterIngameHiddenMounts(shouldHideOnChar, mountId)
     return false
 end
 
-local function FilterFavoriteMounts(isFavorite)
-    return isFavorite or not ADDON.settings.filter.onlyFavorites or not ADDON.settings.filter.collected
+local function FilterFavoriteMounts(mountId)
+    return not ADDON.settings.filter.onlyFavorites or not ADDON.settings.filter.collected or ADDON.Api:GetIsFavoriteByID(mountId)
 end
 
 local function FilterUsableMounts(isUsable)
@@ -376,10 +376,10 @@ function ADDON:FilterMounts()
         local allSettingsRarity = CheckAllSettings(ADDON.settings.filter.rarity)
 
         for _, mountId in ipairs(ids) do
-            local _, spellId, _, _, isUsable, sourceType, isFavorite, isFaction, faction, shouldHideOnChar, isCollected = ADDON.Api:GetMountInfoByID(mountId)
+            local _, spellId, _, _, isUsable, sourceType, _, isFaction, faction, shouldHideOnChar, isCollected = ADDON.Api:GetMountInfoByID(mountId)
             if FilterUserHiddenMounts(spellId)
                     and FilterIngameHiddenMounts(shouldHideOnChar, mountId)
-                    and FilterFavoriteMounts(isFavorite)
+                    and FilterFavoriteMounts(mountId)
                     and FilterUsableMounts(isUsable)
                     and FilterTradableMounts(mountId)
                     and FilterRecentMounts(mountId)

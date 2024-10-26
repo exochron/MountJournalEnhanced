@@ -30,7 +30,7 @@ local CLASS_TEXTURES = {
 
 -- originally from MountJournal_InitMountButton()
 local function InitMountButton(button, elementData)
-    local creatureName, spellID, icon, active, isUsable, sourceType, isFavorite, isFactionSpecific, faction, isFiltered, isCollected, mountID, isSteadyFlight = ADDON.Api:GetMountInfoByID(elementData.mountID)
+    local creatureName, spellID, icon, active, isUsable, _, _, isFactionSpecific, faction, _, isCollected, mountID, isSteadyFlight = ADDON.Api:GetMountInfoByID(elementData.mountID)
     -- everything below this line is from the original function
     local needsFanfare = C_MountJournal.NeedsFanfare(mountID);
 
@@ -97,7 +97,7 @@ local function InitMountButton(button, elementData)
         end
     end
 
-    if (isFavorite) then
+    if ADDON.Api:GetIsFavoriteByID(mountID) then
         button.favorite:Show();
     else
         button.favorite:Hide();
