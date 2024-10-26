@@ -1,38 +1,74 @@
 local ADDON_NAME, ADDON = ...
 
-local function generateMenu(_, root)
+local function generateFavoritesMenu(_, root)
     root:SetTag(ADDON_NAME.."-LDB")
     root:SetScrollMode(GetScreenHeight() - 100)
 
-    for index = 1, C_MountJournal.GetNumDisplayedMounts() do
-        local name, _, icon, active, _, _, isFavorite, _, _, _, isCollected, mountID = C_MountJournal.GetDisplayedMountInfo(index)
-        if isCollected and isFavorite then
-            local clickHandler = function(_, data)
-                if data.buttonName == "RightButton" then
-                    SetCollectionsJournalShown(true, COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS)
-                    ADDON.Api:SetSelected(mountID)
+    local _, _, favoredMounts = ADDON.Api:GetFavoriteProfile()
+    local sortedMounts = CopyTable(favoredMounts)
+    table.sort(sortedMounts, function(a, b)
+        local nameA = C_MountJournal.GetMountInfoByID(a)
+        local nameB = C_MountJournal.GetMountInfoByID(b)
+
+        return (nameA or "") < (nameB or "")
+    end)
+
+    for _, mountID in ipairs(sortedMounts) do
+        local clickHandler = function(_, data)
+            if data.buttonName == "RightButton" then
+                SetCollectionsJournalShown(true, COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS)
+                ADDON.Api:SetSelected(mountID)
+            else
+                local _, _, _, active = C_MountJournal.GetMountInfoByID(mountID)
+                if  active then
+                    C_MountJournal.Dismiss()
                 else
-                    local _, _, _, active = C_MountJournal.GetMountInfoByID(mountID)
-                    if  active then
-                        C_MountJournal.Dismiss()
-                    else
-                        C_MountJournal.SummonByID(mountID)
-                    end
+                    C_MountJournal.SummonByID(mountID)
                 end
             end
-
-            local element = root:CreateButton("|T" .. icon .. ":0|t "..name, clickHandler)
-            element:AddInitializer(function(button)
-                button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
-                if active then
-                    button.fontString:SetTextColor(1.0, 0.82, 0)
-                end
-            end)
-        else
-            break
         end
+
+        local name, _, icon, active = C_MountJournal.GetMountInfoByID(mountID)
+        local element = root:CreateButton("|T" .. icon .. ":0|t "..name, clickHandler)
+        element:AddInitializer(function(button)
+            button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+            if active then
+                button.fontString:SetTextColor(1.0, 0.82, 0)
+            end
+        end)
+    end
+end
+
+local function generateProfileMenu(_, root)
+    root:SetTag(ADDON_NAME.."-LDB-FavoriteProfiles")
+    root:SetScrollMode(GetScreenHeight() - 100)
+
+    root:CreateTitle(ADDON.L.FAVORITE_PROFILE)
+    ADDON.UI:BuildFavoriteProfileMenu(root)
+end
+
+local function OpenMenu(anchorSource, generator)
+    if not MenuUtil then
+        return nil
     end
 
+    local menuDescription = MenuUtil.CreateRootMenuDescription(MenuVariants.GetDefaultContextMenuMixin())
+
+    local point, relativeTo, relativePoint, offsetX, offsetY = anchorSource:GetPoint(1)
+
+    Menu.PopulateDescription(generator, relativeTo, menuDescription)
+
+    local anchor = CreateAnchor(point, relativeTo, relativePoint, offsetX, offsetY)
+    local menu = Menu.GetManager():OpenMenu(relativeTo, menuDescription, anchor)
+    if menu then
+        menu:HookScript("OnLeave", function()
+            if not menu:IsMouseOver() then
+                menu:Close()
+            end
+        end) -- OnLeave gets reset every time
+    end
+
+    return menu
 end
 
 ADDON.Events:RegisterCallback("OnLogin", function()
@@ -41,22 +77,9 @@ ADDON.Events:RegisterCallback("OnLogin", function()
         return
     end
 
-    local function count()
-        local c = 0
-        local mountIDs = C_MountJournal.GetMountIDs();
-        for _, mountID in ipairs(mountIDs) do
-            local _, _, _, _, _, _, _, _, _, hideOnChar, isCollected = C_MountJournal.GetMountInfoByID(mountID);
-            if isCollected and hideOnChar ~= true then
-                c = c + 1;
-            end
-        end
-
-        return c
-    end
-
     local menu
     local closeMenu = function()
-        if menu and menu.Close and not menu:IsMouseOver() then
+        if menu and not menu:IsMouseOver() then
             menu:Close()
         end
     end
@@ -66,19 +89,16 @@ ADDON.Events:RegisterCallback("OnLogin", function()
     tooltipProxy:HookScript("OnShow", function()
         local point, relativeTo, relativePoint, offsetX, offsetY = tooltipProxy:GetPoint(1)
         if ADDON.Api:HasFavorites() then
-            local elementDescription = MenuUtil.CreateRootMenuDescription(MenuVariants.GetDefaultContextMenuMixin())
-
-            Menu.PopulateDescription(generateMenu, relativeTo, elementDescription)
-            local anchor = CreateAnchor(point, relativeTo, relativePoint, offsetX, offsetY)
-            menu = Menu.GetManager():OpenMenu(relativeTo, elementDescription, anchor)
-            if menu then
-                menu:HookScript("OnLeave", closeMenu) -- OnLeave gets reset every time
-            end
+            menu = OpenMenu(tooltipProxy, generateFavoritesMenu)
         else
+            local L = ADDON.L
             GameTooltip:SetOwner(tooltipProxy, "ANCHOR_NONE")
             GameTooltip:SetPoint(point, relativeTo, relativePoint, offsetX, offsetY)
             GameTooltip:ClearLines()
-            GameTooltip:SetText(MOUNT_JOURNAL_NO_VALID_FAVORITES, nil, nil, nil, nil, true)
+            GameTooltip_SetTitle(GameTooltip, L.LDB_TIP_NO_FAVORITES_TITLE)
+            GameTooltip_AddInstructionLine(GameTooltip, MOUNT_JOURNAL_NO_VALID_FAVORITES, true)
+            GameTooltip:AddLine(L.LDB_TIP_NO_FAVORITES_LEFT_CLICK)
+            GameTooltip:AddLine(L.LDB_TIP_NO_FAVORITES_RIGHT_CLICK)
             GameTooltip:Show()
         end
     end)
@@ -90,24 +110,27 @@ ADDON.Events:RegisterCallback("OnLogin", function()
         end
     end)
 
+    local _, profileName = ADDON.Api:GetFavoriteProfile()
     local ldbDataObject = ldb:NewDataObject( ADDON_NAME.." Favorites", {
         type = "data source",
-        text = count(),
-        label = COLLECTED,
+        text = profileName,
+        label = ADDON.L.FAVORITE_PROFILE,
         icon = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\mje.png",
         tooltip = tooltipProxy,
 
         OnClick = function(_, button)
             if button == "RightButton" then
-                ADDON:OpenOptions()
+                GameTooltip:Hide()
+                menu = OpenMenu(tooltipProxy, generateProfileMenu)
             elseif not InCombatLockdown() then
                 ToggleCollectionsJournal(COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS)
             end
         end,
     } )
 
-    ADDON.Events:RegisterCallback("OnNewMount", function()
-        ldbDataObject.text = count()
-    end, "ldb-plugin")
+    ADDON.Events:RegisterCallback("OnFavoriteProfileChanged", function()
+        local _, profileName = ADDON.Api:GetFavoriteProfile()
+        ldbDataObject.text = profileName
+    end, "ldb-favorites")
 
 end, "ldb-plugin")
