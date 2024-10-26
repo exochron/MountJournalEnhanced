@@ -13,7 +13,7 @@ local function fixInitialRiderBlend()
 end
 
 -- Rotating the display camera wildly extends the internal vector further and further.
--- At some point on very high/low values the UI bugs with an error. (https://legacy.curseforge.com/wow/addons/mount-journal-enhanced/issues/97)
+-- At some point on very high/low values, the UI bugs with an error. (https://legacy.curseforge.com/wow/addons/mount-journal-enhanced/issues/97)
 -- Although that might only happen with an unlocked Y-rotation/pitch.
 -- Also, when resetting the camera the whole rotation gets reverted. That looks a bit funny.
 --
