@@ -1,9 +1,5 @@
 local _, ADDON = ...
 
-if not MenuUtil then -- modern style filter menu does not exist. use legacy UIDropdownMenu instead
-    return
-end
-
 local function CheckSetting(settings)
     local hasTrue, hasFalse = false, false
     for _, v in pairs(settings) do

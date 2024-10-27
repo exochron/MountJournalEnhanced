@@ -1,9 +1,5 @@
 local _, ADDON = ...
 
-if not MenuUtil then -- modern style filter menu does not exist. use legacy UIDropdownMenu instead
-    return
-end
-
 local function CreateSortRadio(root, text, sortValue)
     local sortSettings = ADDON.settings.sort
 

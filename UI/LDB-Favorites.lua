@@ -61,10 +61,6 @@ local function count()
 end
 
 local function OpenMenu(anchorSource, generator)
-    if not MenuUtil then
-        return nil
-    end
-
     local menuDescription = MenuUtil.CreateRootMenuDescription(MenuVariants.GetDefaultContextMenuMixin())
 
     local point, relativeTo, relativePoint, offsetX, offsetY = anchorSource:GetPoint(1)
