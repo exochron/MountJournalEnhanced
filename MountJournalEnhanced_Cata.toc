@@ -13,7 +13,6 @@ Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
 Libs\AceGUI-3.0\AceGUI-3.0.xml
 Libs\HereBeDragons\HereBeDragons-2.0.lua
 Libs\TaintLess\TaintLess.xml
-Libs\UIFixes.lua
 
 Locals.lua
 Database\Database.lua
@@ -55,10 +54,6 @@ UI\FilterDropdown\Main.lua
 UI\FilterDropdown\Color.lua
 UI\FilterDropdown\Family.lua
 UI\FilterDropdown\Sort.lua
-UI\FilterDropdown\Legacy\Main.lua
-UI\FilterDropdown\Legacy\Color.lua
-UI\FilterDropdown\Legacy\Family.lua
-UI\FilterDropdown\Legacy\Sort.lua
 UI\DisplayBackground.lua
 UI\DisplayCamera.lua
 UI\DisplayText.lua

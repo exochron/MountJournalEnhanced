@@ -1,9 +1,5 @@
 local _, ADDON = ...
 
-if not MenuUtil then -- modern style filter menu does not exist. use legacy UIDropdownMenu instead
-    return
-end
-
 ADDON.UI.FDD = {}
 
 local SETTING_COLLECTED = "collected"

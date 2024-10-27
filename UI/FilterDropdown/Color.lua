@@ -1,9 +1,5 @@
 local _, ADDON = ...
 
-if not MenuUtil then -- modern style filter menu does not exist. use legacy UIDropdownMenu instead
-    return
-end
-
 function ADDON.UI.FDD:AddColorMenu(root)
     ADDON.UI:CenterDropdownButton(root:CreateButton(NEWBIE_TOOLTIP_STOPWATCH_RESETBUTTON, function()
         ADDON.settings.filter.color = { }
