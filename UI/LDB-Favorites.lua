@@ -47,6 +47,19 @@ local function generateProfileMenu(_, root)
     ADDON.UI:BuildFavoriteProfileMenu(root)
 end
 
+local function count()
+    local c = 0
+    local mountIDs = C_MountJournal.GetMountIDs();
+    for _, mountID in ipairs(mountIDs) do
+        local _, _, _, _, _, _, _, _, _, hideOnChar, isCollected = C_MountJournal.GetMountInfoByID(mountID);
+        if isCollected and hideOnChar ~= true then
+            c = c + 1;
+        end
+    end
+
+    return c
+end
+
 local function OpenMenu(anchorSource, generator)
     if not MenuUtil then
         return nil
@@ -115,6 +128,7 @@ ADDON.Events:RegisterCallback("OnLogin", function()
         type = "data source",
         text = profileName,
         label = ADDON.L.FAVORITE_PROFILE,
+        value = count(),
         icon = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\mje.png",
         tooltip = tooltipProxy,
 
@@ -131,6 +145,9 @@ ADDON.Events:RegisterCallback("OnLogin", function()
     ADDON.Events:RegisterCallback("OnFavoriteProfileChanged", function()
         local _, profileName = ADDON.Api:GetFavoriteProfile()
         ldbDataObject.text = profileName
+    end, "ldb-favorites")
+    ADDON.Events:RegisterCallback("OnNewMount", function()
+        ldbDataObject.value = count()
     end, "ldb-favorites")
 
 end, "ldb-plugin")
