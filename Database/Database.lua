@@ -2,20 +2,11 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
-if select(4, GetBuildInfo()) < 110005 then
-    -- TODO: remove later
-    ADDON.DB.Recent = {
-        ["minID"] = 2116,
-        ["blacklist"] = { 2118, 2142, 2143, 2152, 2140, 2189 },
-        ["whitelist"] = { 1550, 1715 },
-    }
-else
-    ADDON.DB.Recent = {
-        ["minID"] = 2259,
-        ["blacklist"] = { },
-        ["whitelist"] = { 1943, 1947, 1957, 2224, 2225 },
-    }
-end
+ADDON.DB.Recent = {
+    ["minID"] = 2259,
+    ["blacklist"] = { },
+    ["whitelist"] = { 1943, 1947, 1957, 2224, 2225, 2235 },
+}
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -1417,6 +1408,7 @@ ADDON.DB.Source = {
         sourceType = { 10 },
 
         [431360] = true, -- Twilight Sky Prowler
+        [457485] = true, -- Grizzly Hills Packmaster
     },
 
     ["Promotion"] = {
