@@ -67,6 +67,8 @@ ADDON.DB.Family = {
 [1377] = true, -- Rampart Screecher
 [1378] = true, -- Harvester's Dredwing
 [2218] = true, -- Forged Gladiator's Fel Bat
+[2307] = true, -- Chaos-Forged Dreadwing
+[2309] = true, -- Chaos-Born Dreadwing
 },
 ["Birds"] = {
 ["Albatross"] = {
@@ -440,6 +442,7 @@ ADDON.DB.Family = {
 [1577] = true, -- Ash'adar, Harbinger of Dawn
 [2193] = true, -- Vermillion Imperial Lynx
 [2194] = true, -- Dauntless Imperial Lynx
+[2235] = true, -- Startouched Furline
 },
 ["Sabers"] = {
 [26] = true, -- Striped Frostsaber
@@ -464,7 +467,7 @@ ADDON.DB.Family = {
 [1689] = true, -- Vicious Sabertooth
 [1900] = true, -- Swift Zulian Panther
 [2198] = true, -- Kor'kron Warsaber
-[2199] = true, -- [PH] Nightsaber Horde Mount Black
+[2199] = true, -- Kriegssäbler des Schwarzfelsklans
 [2200] = true, -- [PH] Nightsaber Horde Mount White
 },
 ["Stone Cats"] = {
@@ -547,6 +550,7 @@ ADDON.DB.Family = {
 ["Dinosaurs"] = {
 ["Brutosaurs"] = {
 [1039] = true, -- Mighty Caravan Brutosaur
+[2265] = true, -- Goldgeschmückter Händlerbrutosaurus
 },
 ["Direhorns"] = {
 [531] = true, -- Spawn of Horridon
@@ -690,6 +694,7 @@ ADDON.DB.Family = {
 [1917] = true, -- Ruthless Gladiator's Twilight Drake
 [1934] = true, -- Experiment 12-B
 [1936] = true, -- Feldrake
+[2260] = true, -- Lava Drake
 },
 ["Grand Drakes"] = {
 [442] = true, -- Blazing Drake
@@ -900,6 +905,8 @@ ADDON.DB.Family = {
 [1929] = true, -- Spectral Gryphon
 [2116] = true, -- Remembered Golden Gryphon
 [2176] = true, -- Alunira
+[2304] = true, -- Chaos-Forged Gryphon
+[2312] = true, -- Chaos-Born Gryphon
 },
 ["Hippogryphs"] = {
 [203] = true, -- Cenarion War Hippogryph
@@ -918,6 +925,8 @@ ADDON.DB.Family = {
 [1902] = true, -- Flameward Hippogryph
 [1922] = true, -- Corrupted Hippogryph
 [2224] = true, -- Frayfeather Hippogryph
+[2305] = true, -- Chaos-Forged Hippogryph
+[2311] = true, -- Chaos-Born Hippogryph
 },
 ["Larion"] = {
 [1404] = true, -- Silverwind Larion
@@ -946,6 +955,8 @@ ADDON.DB.Family = {
 [1674] = true, -- Temperamental Skyclaw
 [1930] = true, -- Spectral Wind Rider
 [2117] = true, -- Remembered Wind Rider
+[2308] = true, -- Chaos-Forged Wind Rider
+[2310] = true, -- Chaos-Born Wind Rider
 },
 },
 ["Fish"] = {
@@ -1764,7 +1775,7 @@ ADDON.DB.Family = {
 [1912] = true, -- Vicious War Wolf
 [2201] = true, -- Sentinel War Wolf
 [2202] = true, -- [PH] Alliance Wolf Mount
-[2203] = true, -- [PH] Alliance Wolf Mount
+[2203] = true, -- Kriegswolf der Kaldorei
 },
 ["Wilderlings"] = {
 [1484] = true, -- Ardenweald Wilderling

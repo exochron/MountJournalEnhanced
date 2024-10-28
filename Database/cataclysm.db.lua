@@ -52,6 +52,11 @@ ADDON.DB.Source.Promotion[113120] = true; -- Feldrake
 ADDON.DB.Source.Shop[348459] = true; -- Reawakened Phase-Hunter (TBC Classic)
 ADDON.DB.Source.Shop[372677] = true; -- Kalu'ak Whalebone Glider (WotLK Classic)
 ADDON.DB.Source.Shop[440915] = true; -- Auspicious Arborwyrm
+ADDON.DB.Source.Shop[463045] = true; -- Lava Drake (12 Month Sub)
+ADDON.DB.Source.Shop[466948] = true; -- Chaos-Born Dreadwing
+ADDON.DB.Source.Shop[466977] = true; -- Chaos-Born Wind Rider
+ADDON.DB.Source.Shop[466980] = true; -- Chaos-Born Hippogryph
+ADDON.DB.Source.Shop[466983] = true; -- Chaos-Born Gryphon
 
 --ADDON.DB.Expansion[0][1843] = true; -- Tiger
 ADDON.DB.Expansion[1][1761] = true; -- Reawakened Phase-Hunter (TBC Classic)
