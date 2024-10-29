@@ -30,7 +30,7 @@ local function checkAuras(auras)
     end
 end
 
-local function scanAuras(unit)
+function ADDON:ScanAuras(unit)
     local continuationToken, aura1, aura2, aura3, aura4, aura5
     repeat
         continuationToken, aura1, aura2, aura3, aura4, aura5 = C_UnitAuras.GetAuraSlots(unit, "HELPFUL|CANCELABLE", 5, continuationToken)
@@ -48,12 +48,12 @@ local function scanAuras(unit)
 end
 
 ADDON.Events:RegisterCallback("OnLogin", function()
-    triggerEvents("player", true,  scanAuras("player"))
+    triggerEvents("player", true,  ADDON:ScanAuras("player"))
 
     ADDON.Events:RegisterFrameEventAndCallback("UNIT_AURA", function(_, target, updateInfo)
         if target == "player" or target == "target" then
             if updateInfo.isFullUpdate then
-                triggerEvents(target, false,  scanAuras(target))
+                triggerEvents(target, false,  ADDON:ScanAuras(target))
             end
             if updateInfo.addedAuras then
                 triggerEvents(target, false, checkAuras(updateInfo.addedAuras))
@@ -69,7 +69,7 @@ ADDON.Events:RegisterCallback("OnLogin", function()
 
     ADDON.Events:RegisterFrameEventAndCallback("PLAYER_TARGET_CHANGED", function()
         C_Timer.After(0, function()
-            triggerEvents("target", false,  scanAuras("target"))
+            triggerEvents("target", false,  ADDON:ScanAuras("target"))
         end)
     end, 'external events')
 

@@ -13,6 +13,11 @@ local function toggleWatcher()
         ADDON.Events:RegisterCallback("OnMountUpTarget", function(_, mountId)
             ADDON.Api:SetSelected(mountId)
         end, HANDLE_NAME)
+
+        local currentMount = ADDON:ScanAuras("target")
+        if currentMount then
+            ADDON.Api:SetSelected(currentMount)
+        end
     else
         stopWatchingTarget()
     end
@@ -25,7 +30,6 @@ end
 local function BuildToggle()
     local L = ADDON.L
 
-    --local button = CreateFrame("Button", nil, MountJournal, "DynamicFlightFlyoutButtonTemplate")
     local button = CreateFrame("Button", nil, MountJournal)
 
     -- from DynamicFlightFlyoutButtonTemplate
