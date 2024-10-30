@@ -10,7 +10,7 @@ local function updateLDB(dataObject)
 end
 
 ADDON.Events:RegisterCallback("OnLogin", function()
-    local ldb = LibStub:GetLibrary("LibDataBroker-1.1")
+    local ldb = LibStub("LibDataBroker-1.1", true)
     if not ldb or not C_MountJournal.IsDragonridingUnlocked() then
         return
     end
