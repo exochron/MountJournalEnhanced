@@ -74,14 +74,18 @@ local function initialize()
         ADDON.Events:TriggerEvent("OnInit")
         ADDON.Events:TriggerEvent("OnLogin")
         ADDON.Events:UnregisterEvents({"OnInit", "OnLogin"})
+        ADDON.Events:UnregisterFrameEvent("PLAYER_ENTERING_WORLD")
     end
 end
-ADDON.Events:RegisterFrameEventAndCallback("PLAYER_LOGIN", function()
-    initialize()
-    if not MountJournal then
-        ADDON.Events:RegisterFrameEventAndCallback("ADDON_LOADED", initialize, 'init')
+
+ADDON.Events:RegisterFrameEventAndCallback("PLAYER_ENTERING_WORLD", function(_, isLogin, isReload)
+    if isLogin or isReload then
+        initialize()
+        if not MountJournal then
+            ADDON.Events:RegisterFrameEventAndCallback("ADDON_LOADED", initialize, 'init')
+        end
     end
-end, 'init')
+end, "init")
 
 EventRegistry:RegisterCallback("MountJournal.OnShow", function()
     -- MountJournal gets always initially shown before switching to the actual tab.
