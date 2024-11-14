@@ -14,6 +14,7 @@ StaticPopupDialogs["MJE_EDIT_FAVORITE_PROFILE"] = {
                 ["autoFavor"] = false,
                 ["mounts"] = {}
             })
+            ADDON.Api:SwitchFavoriteProfile(#ADDON.settings.favorites.profiles)
         elseif profileIndex > 1 then
             ADDON.settings.favorites.profiles[profileIndex].name = text
             ADDON.Events:TriggerEvent("OnFavoriteProfileChanged")
