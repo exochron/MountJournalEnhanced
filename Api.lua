@@ -92,7 +92,7 @@ function ADDON.Api:SetIsFavoriteByID(mountId, value)
         ADDON.Events:TriggerEvent("OnFavoritesChanged")
     end
 end
-function ADDON.Api:SetBulkIsFavorites(filteredProvider)
+function ADDON.Api:SetBulkIsFavorites(filteredProvider, inclusive)
     local _, _, profileMounts = ADDON.Api:GetFavoriteProfile()
 
     local mountIdsToAdd = CopyValuesAsKeys(filteredProvider)
@@ -100,10 +100,13 @@ function ADDON.Api:SetBulkIsFavorites(filteredProvider)
 
     local index = 1
     while index <= #profileMounts do
-        local itemId = profileMounts[index]
+        local mountId = profileMounts[index]
 
-        if mountIdsToAdd[itemId] then
-            mountIdsToAdd[itemId] = nil
+        if mountIdsToAdd[mountId] then
+            mountIdsToAdd[mountId] = nil
+            index = index + 1
+        elseif inclusive then
+            -- skip remove
             index = index + 1
         else
             tUnorderedRemove(profileMounts, index)
@@ -111,10 +114,13 @@ function ADDON.Api:SetBulkIsFavorites(filteredProvider)
         end
     end
 
-    for itemId, shouldAdd in pairs(mountIdsToAdd) do
+    for mountId, shouldAdd in pairs(mountIdsToAdd) do
         if shouldAdd then
-            table.insert(profileMounts, itemId)
-            hasChange = true
+            local isCollected = select(11, C_MountJournal.GetMountInfoByID(mountId))
+            if isCollected then
+                table.insert(profileMounts, mountId)
+                hasChange = true
+            end
         end
     end
 
