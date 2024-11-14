@@ -87,7 +87,12 @@ local function CreateFavoritesMenu(_, root)
     root:SetScrollMode(GetScreenHeight() - 100)
 
     root:CreateButton(ADDON.L.FAVOR_DISPLAYED, function()
-        ADDON.Api:SetBulkIsFavorites(ADDON.Api:GetDataProvider():GetCollection())
+        local list = {}
+        ADDON.Api:GetDataProvider():ForEach(function(data)
+            table.insert(list, data.mountID)
+        end)
+
+        ADDON.Api:SetBulkIsFavorites(list, true)
     end)
     root:CreateButton(UNCHECK_ALL, function()
         ADDON.Api:SetBulkIsFavorites({})
