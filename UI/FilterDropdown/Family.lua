@@ -25,6 +25,7 @@ end
 
 function ADDON.UI.FDD:AddFamilyMenu(root)
     local L = ADDON.L
+    local tInsert = table.insert
 
     local settings = ADDON.settings.filter.family
     local sortedFamilies, hasSubFamilies = {}, {}
@@ -38,7 +39,7 @@ function ADDON.UI.FDD:AddFamilyMenu(root)
                 break
             end
         end
-        table.insert(sortedFamilies, family)
+        tInsert(sortedFamilies, family)
     end
     table.sort(sortedFamilies, function(a, b)
         return (L[a] or a) < (L[b] or b)
@@ -81,7 +82,7 @@ function ADDON.UI.FDD:AddFamilyMenu(root)
             AddIcon(subMenu, family, next(ADDON.DB.Family[family]))
             local sortedSubFamilies = {}
             for subfamily, _ in pairs(ADDON.DB.Family[family]) do
-                table.insert(sortedSubFamilies, subfamily)
+                tInsert(sortedSubFamilies, subfamily)
             end
             table.sort(sortedSubFamilies, function(a, b)
                 return (L[a] or a) < (L[b] or b)
