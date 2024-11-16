@@ -43,11 +43,12 @@ StaticPopupDialogs["MJE_CONFIRM_DELETE_FAVORITE_PROFILE"] = {
 
 function ADDON.UI:BuildFavoriteProfileMenu(root, withEditOptions)
     local sortedIndex = {}
+    local tInsert = table.insert
 
     local profiles = ADDON.settings.favorites.profiles
     for index, profileData in pairs(profiles) do
         if profileData then
-            table.insert(sortedIndex, index)
+            tInsert(sortedIndex, index)
         end
     end
     table.sort(sortedIndex, function(a, b)
@@ -89,8 +90,9 @@ local function CreateFavoritesMenu(_, root)
 
     root:CreateButton(ADDON.L.FAVOR_DISPLAYED, function()
         local list = {}
+        local tInsert = table.insert
         ADDON.Api:GetDataProvider():ForEach(function(data)
-            table.insert(list, data.mountID)
+            tInsert(list, data.mountID)
         end)
 
         ADDON.Api:SetBulkIsFavorites(list, true)

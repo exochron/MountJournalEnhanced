@@ -114,11 +114,12 @@ function ADDON.Api:SetBulkIsFavorites(filteredProvider, inclusive)
         end
     end
 
+    local tInsert = table.insert
     for mountId, shouldAdd in pairs(mountIdsToAdd) do
         if shouldAdd then
             local isCollected = select(11, C_MountJournal.GetMountInfoByID(mountId))
             if isCollected then
-                table.insert(profileMounts, mountId)
+                tInsert(profileMounts, mountId)
                 hasChange = true
             end
         end

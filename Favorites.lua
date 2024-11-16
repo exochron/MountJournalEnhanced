@@ -55,12 +55,13 @@ end
 ADDON.Events:RegisterCallback("OnNewMount", function(_, mountId)
     local currentProfile = ADDON.Api:GetFavoriteProfile()
 
+    local tInsert = table.insert
     for index, profileData in pairs(ADDON.settings.favorites.profiles) do
         if profileData and profileData.autoFavor then
             if index == currentProfile then
                 ADDON.Api:SetIsFavoriteByID(mountId, true)
             elseif not tContains(profileData.mounts, mountId) then
-                table.insert(profileData.mounts, mountId)
+                tInsert(profileData.mounts, mountId)
             end
         end
     end
