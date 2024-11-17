@@ -6,11 +6,15 @@ local active = false
 
 local function stopWatchingTarget()
     ADDON.Events:UnregisterCallback("OnMountUpTarget", HANDLE_NAME)
+    ADDON.Events:UnregisterCallback("CastMountTarget", HANDLE_NAME)
 end
 
 local function toggleWatcher()
     if active then
         ADDON.Events:RegisterCallback("OnMountUpTarget", function(_, mountId)
+            ADDON.Api:SetSelected(mountId)
+        end, HANDLE_NAME)
+        ADDON.Events:RegisterCallback("CastMountTarget", function(_, mountId)
             ADDON.Api:SetSelected(mountId)
         end, HANDLE_NAME)
 

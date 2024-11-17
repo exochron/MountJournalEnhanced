@@ -81,6 +81,23 @@ ADDON.Events:RegisterCallback("OnLogin", function()
         end)
     end, 'external events')
 
+    ADDON.Events:RegisterFrameEventAndCallback("UNIT_SPELLCAST_START", function(_, unit, _, spellId)
+        if InCombatLockdown() -- no use case for now in combat
+           or (unit ~= "player" and unit ~= "target")
+        then
+            return
+        end
+
+        local mountId = C_MountJournal.GetMountFromSpell(spellId)
+        if mountId then
+            if unit == "player" then
+                ADDON.Events:TriggerEvent("CastMount", mountId)
+            elseif unit == "target" then
+                ADDON.Events:TriggerEvent("CastMountTarget", mountId)
+            end
+        end
+    end, 'external events')
+
     -- on unpacking mount
     hooksecurefunc(C_MountJournal, "ClearFanfare", function(mountId)
         ADDON:FilterMounts()
