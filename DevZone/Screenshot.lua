@@ -21,7 +21,7 @@ function ADDON:TakeScreenshots()
     ToggleCollectionsJournal(COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS)
 
     local function OpenFilterMenu()
-        MountJournal.FilterDropdown:SetMenuOpen(true)
+        MountJournal.FilterDropdown:OpenMenu()
 
         return { Menu.GetManager():GetOpenMenu():GetChildren() }
     end
@@ -64,18 +64,14 @@ function ADDON:TakeScreenshots()
                 end,
                 function(api)
                     api:BackScreen()
-                    MountJournal.FilterDropdown:SetMenuOpen(true)
-
                     api:Point(OpenFilterMenu()[13]) -- Sources
                 end,
                 function(api)
                     api:BackScreen()
-
                     api:Point(OpenFilterMenu()[14]) -- Type
                 end,
                 function(api)
                     api:BackScreen()
-
                     api:Point(OpenFilterMenu()[16]) -- Family
                 end,
                 function(api)
@@ -88,7 +84,6 @@ function ADDON:TakeScreenshots()
                 end,
                 function(api)
                     api:BackScreen()
-                    MountJournal.FilterDropdown:SetMenuOpen(false)
 
                     ADDON.Api:SetSelected(1057) -- Nazjatar Blood Serpent
                     local noteFrame = ADDON.UI:CreateNotesFrame(1057)
@@ -108,12 +103,17 @@ function ADDON:TakeScreenshots()
                 function(api)
                     api:BackScreen()
                     api:Point(ADDON.UI.FavoriteButton)
-                    ADDON.UI.FavoriteButton:SetMenuOpen(true)
+                    ADDON.UI.FavoriteButton:OpenMenu()
                 end,
                 function(api)
                     api:BackScreen()
                     api:Point(ADDON.UI.SettingsButton)
-                    ADDON.UI.SettingsButton:SetMenuOpen(true)
+                    ADDON.UI.SettingsButton:OpenMenu()
+                end,
+                function(api)
+                    api:BackScreen()
+                    api:Click(ADDON.UI.PetAssignmentToolbarButton)
+                    api:PointAndClick(ADDON.UI.PetAssignmentInfoButton)
                 end,
                 function(api)
                     ToggleCollectionsJournal()

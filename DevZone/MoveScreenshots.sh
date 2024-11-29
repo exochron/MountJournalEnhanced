@@ -2,8 +2,9 @@
 
 cd Images || return
 
-mv "$(ls -dtr1 ../../../../Screenshots/* | tail -1)" 11_options.jpg
-mv "$(ls -dtr1 ../../../../Screenshots/* | tail -1)" 12_preview.jpg
+mv "$(ls -dtr1 ../../../../Screenshots/* | tail -1)" 12_options.jpg
+mv "$(ls -dtr1 ../../../../Screenshots/* | tail -1)" 13_preview.jpg
+mv "$(ls -dtr1 ../../../../Screenshots/* | tail -1)" 11_pet-assignment.jpg
 mv "$(ls -dtr1 ../../../../Screenshots/* | tail -1)" 10_options-menu.jpg
 mv "$(ls -dtr1 ../../../../Screenshots/* | tail -1)" 09_favorites-menu.jpg
 mv "$(ls -dtr1 ../../../../Screenshots/* | tail -1)" 08_notes.jpg
@@ -25,5 +26,6 @@ magick 07_filter-rarity.jpg -crop 804x735+11+121 07_filter-rarity.jpg
 magick 08_notes.jpg -crop 804x735+11+121 08_notes.jpg
 magick 09_favorites-menu.jpg -crop 804x735+11+121 09_favorites-menu.jpg
 magick 10_options-menu.jpg -crop 435x422+745+128 10_options-menu.jpg
-magick 11_options.jpg -crop 799x820+1770+130 11_options.jpg
-magick 12_preview.jpg -crop 519x634+11+121 12_preview.jpg
+magick 11_pet-assignment.jpg -crop 762x735+360+121 11_pet-assignment.jpg
+magick 12_options.jpg -crop 799x820+1770+130 12_options.jpg
+magick 13_preview.jpg -crop 519x634+11+121 13_preview.jpg
