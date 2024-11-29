@@ -32,6 +32,7 @@ local function PrepareDefaults()
         searchInDescription = true,
         searchInFamilyName = true,
         searchInNotes = true,
+        summonPreviousPetAgain = true,
 
         personalUi = false,
         ui = {
@@ -120,6 +121,11 @@ local function PrepareDefaults()
                     mounts = {},
                 }
             },
+        },
+
+        pets = {
+            seenInfo = false,
+            assignments = {},
         }
     }
     for categoryName, _ in pairs(ADDON.DB.Source) do
@@ -206,8 +212,10 @@ ADDON.Events:RegisterCallback("OnInit", function()
     ADDON:ApplySetting('searchInDescription', MJEPersonalSettings.searchInDescription)
     ADDON:ApplySetting('searchInFamilyName', MJEPersonalSettings.searchInFamilyName)
     ADDON:ApplySetting('searchInNotes', MJEPersonalSettings.searchInNotes)
+    ADDON:ApplySetting('summonPreviousPetAgain', MJEPersonalSettings.summonPreviousPetAgain)
 
     ADDON.settings.trackUsageStats = MJEGlobalSettings.trackUsageStats
     ADDON.settings.notes = MJEGlobalSettings.notes
     ADDON.settings.favorites = MJEGlobalSettings.favorites
+    ADDON.settings.pets = MJEGlobalSettings.pets
 end, "settings init")

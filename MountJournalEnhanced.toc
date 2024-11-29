@@ -67,6 +67,7 @@ UI\DisplayStatistics.lua
 UI\Hotkeys.lua
 UI\MountListDropDown.lua
 UI\MountSpecialButton.lua
+UI\PetAssignment.lua
 UI\SettingsDropDown.lua
 UI\DressUpButton.lua
 UI\RarityNames.lua

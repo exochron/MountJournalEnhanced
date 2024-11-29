@@ -17,13 +17,14 @@ This addon extends the ingame mount journal with some cool stuff.
 - Sort mounts by: name, family, type, expansion, rarity or your mount usage statistics. (or all of it in reverse)
 
 ## ⭐ Enhanced Favorites
-- __new:__ Use multiple Profiles and quickly switch between them
+- Use multiple Profiles and quickly switch between them
 - Integrated Data broker plugin to access your favorite mounts more quickly
 - Favor all filtered mounts at once or unset them all
 - Favor new mounts automatically
 - readds Summon Random Mount Button for Cataclysm Classic
 
 ## ⚙️ Enhanced Interface
+- __new:__ Assign pets to your mounts. They will be summoned as well, when you mount up. 
 - [Display] Sync the journal with your current target. (Great for mount mania. ;))
 - [Display] Shows direct link to Wowhead
 - [Display] Freely rotate display camera around mount
