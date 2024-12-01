@@ -467,7 +467,7 @@ ADDON.DB.Family = {
 [1689] = true, -- Vicious Sabertooth
 [1900] = true, -- Swift Zulian Panther
 [2198] = true, -- Kor'kron Warsaber
-[2199] = true, -- Kriegssäbler des Schwarzfelsklans
+[2199] = true, -- Blackrock Warsaber
 [2200] = true, -- [PH] Nightsaber Horde Mount White
 },
 ["Stone Cats"] = {
@@ -550,7 +550,7 @@ ADDON.DB.Family = {
 ["Dinosaurs"] = {
 ["Brutosaurs"] = {
 [1039] = true, -- Mighty Caravan Brutosaur
-[2265] = true, -- Goldgeschmückter Händlerbrutosaurus
+[2265] = true, -- Trader's Gilded Brutosaur
 },
 ["Direhorns"] = {
 [531] = true, -- Spawn of Horridon
@@ -1775,7 +1775,7 @@ ADDON.DB.Family = {
 [1912] = true, -- Vicious War Wolf
 [2201] = true, -- Sentinel War Wolf
 [2202] = true, -- [PH] Alliance Wolf Mount
-[2203] = true, -- Kriegswolf der Kaldorei
+[2203] = true, -- Kaldorei War Wolf
 },
 ["Wilderlings"] = {
 [1484] = true, -- Ardenweald Wilderling
