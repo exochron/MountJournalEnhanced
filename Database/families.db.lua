@@ -98,6 +98,7 @@ ADDON.DB.Family = {
 [890] = true, -- Shadowblade's Baneful Omen
 [891] = true, -- Shadowblade's Crimson Omen
 [978] = true, -- Violet Spellwing
+[2322] = true, -- Thrayir, Eyes of the Siren
 },
 ["Dread Ravens"] = {
 [600] = true, -- Dread Raven
@@ -159,9 +160,11 @@ ADDON.DB.Family = {
 [1575] = true, -- Quawks
 [2090] = true, -- Polly Roger
 [2147] = true, -- Polly Roger
+[2324] = true, -- Hooktalon
 },
 ["Peafowl"] = {
 [2035] = true, -- Majestic Azure Peafowl
+[2036] = true, -- Brilliant Sunburst Peafowl
 },
 ["Phoenixes"] = {
 [183] = true, -- Ashes of Al'ar
@@ -386,6 +389,7 @@ ADDON.DB.Family = {
 [1328] = true, -- Xinlao
 [2070] = true, -- Guardian Quilen
 [2071] = true, -- Marble Quilen
+[2474] = true, -- Copper-Maned Quilen
 },
 ["Vulpin"] = {
 [1222] = true, -- Vulpine Familiar
@@ -531,6 +535,7 @@ ADDON.DB.Family = {
 },
 ["Ur'zul"] = {
 [954] = true, -- Shackled Ur'zul
+[2471] = true, -- Ur'zul Fleshripper
 },
 },
 ["Devourer"] = {
@@ -616,6 +621,7 @@ ADDON.DB.Family = {
 [1875] = true, -- Fossilized Raptor
 [1899] = true, -- Armored Razzashi Raptor
 [1907] = true, -- Savage Raptor
+[2339] = true, -- Jani's Trashpile
 },
 },
 ["Dragonhawks"] = {
@@ -695,6 +701,7 @@ ADDON.DB.Family = {
 [1934] = true, -- Experiment 12-B
 [1936] = true, -- Feldrake
 [2260] = true, -- Lava Drake
+[2473] = true, -- Broodling of Sinestra
 },
 ["Grand Drakes"] = {
 [442] = true, -- Blazing Drake
@@ -818,6 +825,7 @@ ADDON.DB.Family = {
 [1544] = true, -- Wastewarped Deathwalker
 [1807] = true, -- Avatar of Flame
 [1812] = true, -- Runebound Firelord
+[2190] = true, -- Shadow of Doubt
 [2191] = true, -- Shackled Shadow
 [2192] = true, -- Beledar's Spawn
 },
@@ -901,7 +909,6 @@ ADDON.DB.Family = {
 [1773] = true, -- Harbor Gryphon
 [1777] = true, -- Ravenous Black Gryphon
 [1792] = true, -- Algarian Stormrider
-[1823] = true, -- Swift Spectral Gryphon
 [1929] = true, -- Spectral Gryphon
 [2116] = true, -- Remembered Golden Gryphon
 [2176] = true, -- Alunira
@@ -1198,14 +1205,16 @@ ADDON.DB.Family = {
 [1361] = true, -- Duskflutter Ardenmoth
 [1428] = true, -- Amber Ardenmoth
 [1429] = true, -- Vibrant Flutterwing
+[2162] = true, -- Cyan Glowmite
 },
 ["Others"] = {
 [594] = true, -- Grinning Reaver
 [1013] = true, -- Honeyback Harvester
+[1277] = true, -- Honeyback Hivemother
 [2148] = true, -- Smoldering Cinderbee
-[2162] = true, -- Cyan Glowmite
 [2165] = true, -- Soaring Meaderbee
 [2167] = true, -- Raging Cinderbee
+[2321] = true, -- Timely Buzzbee
 },
 ["Silithids"] = {
 [116] = true, -- Black Qiraji Battle Tank
@@ -1387,6 +1396,7 @@ ADDON.DB.Family = {
 [1237] = true, -- Royal Snapdragon
 [1255] = true, -- Deepcoral Snapdragon
 [1256] = true, -- Snapdragon Kelpstalker
+[2469] = true, -- Prismatic Snapdragon
 },
 ["Thunder Lizard"] = {
 [1474] = true, -- Bestowed Thunderspine Packleader
@@ -1414,6 +1424,7 @@ ADDON.DB.Family = {
 [1582] = true, -- Savage Green Battle Turtle
 [2039] = true, -- Savage Blue Battle Turtle
 [2232] = true, -- Savage Ebony Battle Turtle
+[2347] = true, -- Savage Alabaster Battle Turtle
 },
 },
 ["Rodent"] = {
@@ -1439,6 +1450,7 @@ ADDON.DB.Family = {
 [1406] = true, -- Marrowfang
 [1407] = true, -- Callow Flayedwing
 [1408] = true, -- Gruesome Flayedwing
+[2470] = true, -- Nightfall Skyreaver
 },
 ["Ungulates"] = {
 ["Alpacas"] = {
@@ -1581,6 +1593,7 @@ ADDON.DB.Family = {
 [960] = true, -- Orgrimmar Interceptor
 [1051] = true, -- The Dreadwake
 [2144] = true, -- Delver's Dirigible
+[2332] = true, -- The Breaker's Song
 },
 ["Assault Wagons"] = {
 [1193] = true, -- Meat Wagon
@@ -1590,6 +1603,10 @@ ADDON.DB.Family = {
 },
 ["Broom"] = {
 [1799] = true, -- Eve's Ghastly Rider
+[2328] = true, -- Love Witch's Sweeper
+[2329] = true, -- Silvermoon Sweeper
+[2330] = true, -- Twilight Witch's Sweeper
+[2331] = true, -- Sky Witch's Sweeper
 },
 ["Carpets"] = {
 [279] = true, -- Magnificent Flying Carpet
@@ -1626,6 +1643,7 @@ ADDON.DB.Family = {
 ["Hover Board"] = {
 [2145] = true, -- [PH] Goblin Surfboard - Blue
 [2152] = true, -- Pearlescent Goblin Wave Shredder
+[2333] = true, -- Soweezi's Vintage Waveshredder
 },
 ["Hovercraft"] = {
 [999] = true, -- Xiwyllag ATV
@@ -1725,6 +1743,7 @@ ADDON.DB.Family = {
 [962] = true, -- Darkmoon Dirigible
 [1764] = true, -- X-51 Nether-Rocket X-TREME
 [1768] = true, -- X-51 Nether-Rocket
+[2327] = true, -- Lunar Launcher
 },
 ["Seat"] = {
 [1397] = true, -- Wildseed Cradle

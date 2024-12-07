@@ -2,11 +2,19 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
-ADDON.DB.Recent = {
-    ["minID"] = 2259,
-    ["blacklist"] = { },
-    ["whitelist"] = { 1943, 1947, 1957, 2224, 2225, 2235 },
-}
+if select(4, GetBuildInfo()) < 110007 then
+    ADDON.DB.Recent = {
+        ["minID"] = 2259,
+        ["blacklist"] = { },
+        ["whitelist"] = { 1943, 1947, 1957, 2224, 2225, 2235 },
+    }
+else
+    ADDON.DB.Recent = {
+        ["minID"] = 2321,
+        ["blacklist"] = { },
+        ["whitelist"] = { 1277, 2036, 2190 },
+    }
+end
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -77,6 +85,7 @@ ADDON.DB.Source = {
 
         -- War Within
         [448979] = true, -- Dauntless Imperial Lynx
+        [471562] = true, -- Thrayir, Eyes of the Siren (secret hunt)
     },
 
     ["Quest"] = {
@@ -144,6 +153,7 @@ ADDON.DB.Source = {
         [442358] = true, -- Stonevault Mechasuit
         [446052] = true, -- Delver's Dirigible
         [451489] = true, -- Siesbarg
+        [474086] = true, -- Prismatic Snapdragon
 
         ------------------------------
         -- Alliance ------------------
@@ -268,6 +278,7 @@ ADDON.DB.Source = {
         [448978] = true, -- Vermillion Imperial Lynx
         [449269] = true, -- Crimson Mudnose
         [449418] = true, -- Shale Ramolith
+        [473137] = true, -- Soweezi's Vintage Waveshredder
 
         ------------------------------
         -- Alliance ------------------
@@ -560,10 +571,6 @@ ADDON.DB.Source = {
         [408655] = true, -- Morsel Sniffer - Niffel Renown 18
         [423873] = true, -- Suntouched Dreamstag - Emerald Dream Renown vendor
         [423891] = true, -- Lunar Dreamstag - Emerald Dream Renown vendor
-        [437162] = true, -- Polly Roger - Keg Leg's Crew
-        [446902] = true, -- Polly Roger (classic) - Keg Leg's Crew
-        [254812] = true, -- Royal Seafeather - Keg Leg's Crew
-        [300154] = true, -- Silver Tidestallion - Keg Leg's Crew
 
         [447057] = true, -- Smoldering Cinderbee
         [447176] = true, -- Cyan Glowmite
@@ -940,6 +947,11 @@ ADDON.DB.Source = {
         [449415] = {40306, 40307}, -- Slatestone Ramolith - Allied Races: Earthen
         [452779] = 40438, -- Ivory Goliathus - Glory of the Delver
         [458335] = 20525, -- Diamond Mechsuit - WW Keystone Master S1
+        [303767] = 40956, -- Honeyback Hivemother - I'm On Island Time
+        [448934] = 41201, -- Shadow of Doubt - You Xal Not Pass
+        [471538] = 41056, -- Timely Buzzbee - Master of the Turbulent Timeways II
+        [472752] = 41133, -- The Breaker's Song - Isle Remember You
+        [473472] = 40953, -- Jani's Trashpile - A Farewell to Arms
 
         ------------------------------
         -- Alliance ------------------
@@ -1301,101 +1313,131 @@ ADDON.DB.Source = {
     ["World Event"] = {
         -- https://wow.tools/dbc/?dbc=mount#page=1&colFilter[6]=6
         --sourceType = { 7 }, -- cant use it, because some mounts are missassigned
-        -- Love is in the Air
-        [71342] = true, -- Big Love Rocket
-        [102350] = true, -- Swift Lovebird
-        [427777] = true, -- Heartseeker Mana Ray
 
-        -- Noblegarden
-        [102349] = true, -- Swift Springstrider
-        [432455] = true, -- Noble Flying Carpet
+        ["Timewalking"] = {
+            [127165] = true, -- Yu'lei, Daughter of Jade
+            [142910] = true, -- Ironbound Wraithcharger
+            [194464] = true, -- Eclipse Dragonhawk
+            [201098] = true, -- Infinite Timereaver
+            [294568] = true, -- Beastlord's Irontusk
+            [294569] = true, -- Beastlord's Warwolf
+            [359013] = true, -- Val'sharah Hippogryph
+            [359318] = true, -- Soaring Spelltome - A Tour of Towers
+            [452645] = true, -- Amani Hunting Bear
+            [468353] = true, -- Enchanted Spellweave Carpet
+            [1214920] = true, -- Nightfall Skyreaver
+            [1214940] = true, -- Ur'zul Fleshreaper
+            [1214946] = true, -- Broodling of Sinestra
+            [1214974] = true, -- Copper-Maned Quilen
+        },
 
-        -- Brewfest
-        [43900] = true, -- Swift Brewfest Ram
-        [49378] = true, -- Brewfest Riding Kodo
-        [49379] = true, -- Great Brewfest Kodo
+        ["Darkmoon Faire"] = {
+            [103081] = true, -- Darkmoon Dancing Bear
+            [102346] = true, -- Swift Forest Strider
+            [228919] = true, -- Darkwater Skate
+            [247448] = true, -- Darkmoon Dirigible
+        },
 
-        -- Hallow's End
-        [48025] = true, -- Headless Horseman's Mount
+        ["Call of the Scarab"] = {
+            [239766] = true, -- Blue Qiraji War Tank
+            [239767] = true, -- Red Qiraji War Tank
+        },
 
-        -- Winter Veil
-        [191314] = true, -- Minion of Grumpus
+        ["Lunar Festival"] = {
+            [472253] = true, -- Lunar Launcher
+        },
 
-        -- Darkmoon Faire
-        [103081] = true, -- Darkmoon Dancing Bear
-        [102346] = true, -- Swift Forest Strider
-        [228919] = true, -- Darkwater Skate
-        [247448] = true, -- Darkmoon Dirigible
+        ["Love is in the Air"] = {
+            [71342] = true, -- Big Love Rocket
+            [102350] = true, -- Swift Lovebird
+            [427777] = true, -- Heartseeker Mana Ray
+            [472479] = true, -- Love Witch's Sweeper
+        },
 
-        -- Timewalking
-        [127165] = true, -- Yu'lei, Daughter of Jade
-        [142910] = true, -- Ironbound Wraithcharger
-        [194464] = true, -- Eclipse Dragonhawk
-        [201098] = true, -- Infinite Timereaver
-        [294568] = true, -- Beastlord's Irontusk
-        [294569] = true, -- Beastlord's Warwolf
-        [359013] = true, -- Val'sharah Hippogryph
-        [359318] = true, -- Soaring Spelltome - A Tour of Towers
-        [452645] = true, -- Amani Hunting Bear
-        [468353] = true, -- Enchanted Spellweave Carpet
+        ["Noblegarden"] = {
+            [102349] = true, -- Swift Springstrider
+            [432455] = true, -- Noble Flying Carpet
+        },
 
-        -- Call of the Scarab (Micro)
-        [239766] = true, -- Blue Qiraji War Tank
-        [239767] = true, -- Red Qiraji War Tank
+        ["Secrets of Azeroth"] = {
+            [418078] = true, -- Pattie - Whodunnit?
+            [424082] = true, -- Mimiron's Jumpjets
+        },
 
-        -- Secrets of Azeroth
-        [418078] = true, -- Pattie - Whodunnit?
-        [424082] = true, -- Mimiron's Jumpjets
+        ["Brewfest"] = {
+            [43900] = true, -- Swift Brewfest Ram
+            [49378] = true, -- Brewfest Riding Kodo
+            [49379] = true, -- Great Brewfest Kodo
+        },
 
-        -- 20th Anniversary
-        [428013] = true, -- Incognitro
-        [452643] = true, -- Frayfeather Hippogryph
-        [463133] = true, -- Coldflame Tempest
+        ["Anniversary"] = {
+            [428013] = true, -- Incognitro
+            [452643] = true, -- Frayfeather Hippogryph
+            [463133] = true, -- Coldflame Tempest
+        },
 
-        -- Remix: MoP
-        [138425] = true, -- Slate Primordial Direhorn
-        [127170] = true, -- Astral Cloud Serpent
-        [136471] = true, -- Spawn of Horridon
-        [130965] = true, -- Son of Galleon
-        [138423] = true, -- Cobalt Primordial Direhorn
-        [139448] = true, -- Clutch of Ji-Kuni
-        [148476] = true, -- Thundering Onyx Cloud Serpent
-        [127158] = true, -- Heavenly Onyx Cloud Serpent
-        [139442] = true, -- Thundering Cobalt Cloud Serpent
-        [148417] = true, -- Kor'kron Juggernaut
-        [132036] = true, -- Thundering Ruby Cloud Serpent
-        [123182] = true, -- Kafa Yak
-        [127178] = true, -- Jungle Riding Crane
-        [127209] = true, -- Black Riding Yak
-        [127213] = true, -- Modest Expedition Yak
-        [435044] = true, -- Golden Discus
-        [435082] = true, -- Mogu Hazeblazer
-        [435084] = true, -- Sky Surfer
-        [435108] = true, -- Daystorm Windsteed
-        [435107] = true, -- Forest Windsteed
-        [435103] = true, -- Dashing Windsteed
-        [435109] = true, -- Feathered Windsurfer
-        [435115] = true, -- Guardian Quilen
-        [435118] = true, -- Marble Quilen
-        [435123] = true, -- Gilded Riding Crane
-        [435128] = true, -- Pale Riding Crane
-        [435127] = true, -- Rose Riding Crane
-        [435126] = true, -- Silver Riding Crane
-        [435124] = true, -- Luxurious Riding Crane
-        [435125] = true, -- Tropical Riding Crane
-        [435131] = true, -- Snowy Riding Goat
-        [435133] = true, -- Little Red Riding Goat
-        [435145] = true, -- Bloody Skyscreamer
-        [435146] = true, -- Night Pterrorwing
-        [435147] = true, -- Jade Pterrordax
-        [435149] = true, -- Cobalt Juggernaut
-        [435150] = true, -- Fel Iron Juggernaut
-        [435153] = true, -- Purple Shado-Pan Riding Tiger
-        [435160] = true, -- Riverwalker Mushan
-        [435161] = true, -- Palehide Mushan Beast
-        [441794] = true, -- Amber Pterrordax
-        [446017] = true, -- August Phoenix
-        [446022] = true, -- Astral Emperor's Serpent
+        ["Hallow's End"] = {
+            [48025] = true, -- Headless Horseman's Mount
+        },
+
+        ["Feast of Winter Veil"] = {
+            [191314] = true, -- Minion of Grumpus
+        },
+
+        ["Plunderstorm"] = {
+            [254812] = true, -- Royal Seafeather
+            [300154] = true, -- Silver Tidestallion
+            [437162] = true, -- Polly Roger
+            [446902] = true, -- Polly Roger (classic)
+            [457656] = true, -- Plunderlord's Midnight Crocolisk
+            [471696] = true, -- Hooktalon
+        },
+
+        ["Remix: Mists of Pandaria"] = {
+            [138425] = true, -- Slate Primordial Direhorn
+            [127170] = true, -- Astral Cloud Serpent
+            [136471] = true, -- Spawn of Horridon
+            [130965] = true, -- Son of Galleon
+            [138423] = true, -- Cobalt Primordial Direhorn
+            [139448] = true, -- Clutch of Ji-Kuni
+            [148476] = true, -- Thundering Onyx Cloud Serpent
+            [127158] = true, -- Heavenly Onyx Cloud Serpent
+            [139442] = true, -- Thundering Cobalt Cloud Serpent
+            [148417] = true, -- Kor'kron Juggernaut
+            [132036] = true, -- Thundering Ruby Cloud Serpent
+            [123182] = true, -- Kafa Yak
+            [127178] = true, -- Jungle Riding Crane
+            [127209] = true, -- Black Riding Yak
+            [127213] = true, -- Modest Expedition Yak
+            [435044] = true, -- Golden Discus
+            [435082] = true, -- Mogu Hazeblazer
+            [435084] = true, -- Sky Surfer
+            [435108] = true, -- Daystorm Windsteed
+            [435107] = true, -- Forest Windsteed
+            [435103] = true, -- Dashing Windsteed
+            [435109] = true, -- Feathered Windsurfer
+            [435115] = true, -- Guardian Quilen
+            [435118] = true, -- Marble Quilen
+            [435123] = true, -- Gilded Riding Crane
+            [435128] = true, -- Pale Riding Crane
+            [435127] = true, -- Rose Riding Crane
+            [435126] = true, -- Silver Riding Crane
+            [435124] = true, -- Luxurious Riding Crane
+            [435125] = true, -- Tropical Riding Crane
+            [435131] = true, -- Snowy Riding Goat
+            [435133] = true, -- Little Red Riding Goat
+            [435145] = true, -- Bloody Skyscreamer
+            [435146] = true, -- Night Pterrorwing
+            [435147] = true, -- Jade Pterrordax
+            [435149] = true, -- Cobalt Juggernaut
+            [435150] = true, -- Fel Iron Juggernaut
+            [435153] = true, -- Purple Shado-Pan Riding Tiger
+            [435160] = true, -- Riverwalker Mushan
+            [435161] = true, -- Palehide Mushan Beast
+            [441794] = true, -- Amber Pterrordax
+            [446017] = true, -- August Phoenix
+            [446022] = true, -- Astral Emperor's Serpent
+        },
     },
 
     ["Trading Post"] = {
