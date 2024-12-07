@@ -17,6 +17,21 @@ local SETTING_HIDDEN = "hidden"
 local SETTING_HIDDEN_INGAME = "hiddenIngame"
 local SETTING_RARITY = "rarity"
 
+local function CheckSetting(settings)
+    local hasTrue, hasFalse = false, false
+    for _, v in pairs(settings) do
+        if v == true then
+            hasTrue = true
+        elseif v == false then
+            hasFalse = true
+        end
+        if hasTrue and hasFalse then
+            break
+        end
+    end
+
+    return hasTrue, hasFalse
+end
 local function setAllSettings(settings, switch)
     for key, value in pairs(settings) do
         if type(value) == "table" then
@@ -79,6 +94,45 @@ function ADDON.UI.FDD:CreateFilter(root, text, filterKey, filterSettings, withOn
 
     return button
 end
+function ADDON.UI.FDD:CreateFilterSubmenu(root, text, icon, settings)
+    local subMenu = root:CreateCheckbox(text, function()
+        local settingHasTrue, settingHasFalse = CheckSetting(settings)
+
+        return settingHasTrue
+    end, function(...)
+        local _, settingHasFalse = CheckSetting(settings)
+        ADDON.UI.FDD:SetAllSubFilters(settings, settingHasFalse)
+
+        return MenuResponse.Refresh
+    end)
+    subMenu:AddInitializer(function(button)
+        if button.leftTexture2 then
+            local settingHasTrue, settingHasFalse = CheckSetting(settings)
+            if settingHasTrue and settingHasFalse then
+                local dash
+                if button.leftTexture2 then
+                    -- mainline style
+                    dash = button.leftTexture2
+                    dash:SetPoint("CENTER", button.leftTexture1, "CENTER", 0, 1)
+                else
+                    -- classic style
+                    dash = button:AttachTexture()
+                    dash:SetPoint("CENTER", button.leftTexture1)
+                    button.leftTexture1:SetAtlas("common-dropdown-ticksquare-classic", true)
+                end
+
+                dash:SetAtlas("voicechat-icon-loudnessbar-2", true)
+                dash:SetTexCoord(1, 0, 0, 0, 1, 1, 0, 1)
+                dash:SetSize(16, 16)
+            end
+        end
+    end)
+
+    ADDON.UI.FDD:AddIcon(subMenu, icon)
+
+    return subMenu
+end
+
 function ADDON.UI.FDD:AddIcon(menuButton, texture, width, height, left, right, top, bottom)
     menuButton:AddInitializer(function(button)
         width = width or 20
@@ -149,6 +203,33 @@ local function setupSourceMenu(root)
 
     AddAllAndNone(root, settings)
 
+    local eventSettings = settings["World Event"]
+    local eventRoot = ADDON.UI.FDD:CreateFilterSubmenu(root, BATTLE_PET_SOURCE_7, 236552, eventSettings)
+    AddAllAndNone(eventRoot, eventSettings)
+
+    if WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC then
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, CALENDAR_FILTER_DARKMOON, "Darkmoon Faire", eventSettings, settings), 134481)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, L.EVENT_PLUNDERSTORM, "Plunderstorm", eventSettings, settings), 133168)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, GetCategoryInfo(187), "Love is in the Air", eventSettings, settings), 368564)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, GetCategoryInfo(159), "Noblegarden", eventSettings, settings), 254858)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, GetCategoryInfo(162), "Brewfest", eventSettings, settings), 133201)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, GetCategoryInfo(158), "Hallow's End", eventSettings, settings), 236552)
+    else
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, PLAYER_DIFFICULTY_TIMEWALKER, "Timewalking", eventSettings, settings), 5228749)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, CALENDAR_FILTER_DARKMOON, "Darkmoon Faire", eventSettings, settings), 134481)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, WOW_LABS_PRESENCE_GAME_MODE_BATTLE_ROYAL, "Plunderstorm", eventSettings, settings), 133168)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, L.EVENT_SCARAB, "Call of the Scarab", eventSettings, settings), 1574965, 20, 20, 0, 0.71, 0, 0.71)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, GetCategoryInfo(160), "Lunar Festival", eventSettings, settings), 236704)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, GetCategoryInfo(187), "Love is in the Air", eventSettings, settings), 368564)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, GetCategoryInfo(159), "Noblegarden", eventSettings, settings), 254858)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, L.EVENT_SECRETS, "Secrets of Azeroth", eventSettings, settings), 237387)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, GetCategoryInfo(162), "Brewfest", eventSettings, settings), 133201)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, GetCategoryInfo(15532), "Anniversary", eventSettings, settings), 1084434, 20, 20, 0, 0.71, 0, 0.71)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, GetCategoryInfo(158), "Hallow's End", eventSettings, settings), 236552)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, GetCategoryInfo(156), "Feast of Winter Veil", eventSettings, settings), 133202)
+        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, GetCategoryInfo(15536), "Remix: Pandaria", eventSettings, settings), 572034)
+    end
+
     ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_1, "Drop", settings, true), 133639)
     ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_2, "Quest", settings, true), 236669)
     ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_3, "Vendor", settings, true), 133784)
@@ -167,7 +248,6 @@ local function setupSourceMenu(root)
     end
     ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, PVP, "PVP", settings, true), 132487)
     ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, CLASS, "Class", settings, true), 626001)
-    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_7, "World Event", settings, true), 236552)
     if serverExpansion >= LE_EXPANSION_MISTS_OF_PANDARIA then
         ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, L["Black Market"], "Black Market", settings, true), 626190)
     end

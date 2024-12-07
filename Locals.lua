@@ -74,6 +74,9 @@ L["FAVOR_AUTO"] = "Add new mounts automatically"
 L["LDB_TIP_NO_FAVORITES_TITLE"] = "You have not selected any mount as favorite yet."
 L["LDB_TIP_NO_FAVORITES_LEFT_CLICK"] = "|cffeda55fLeft click|r to open Mount Collection."
 L["LDB_TIP_NO_FAVORITES_RIGHT_CLICK"] = "|cffeda55fRight click|r to select different Favorite Profile."
+L["EVENT_PLUNDERSTORM"] = "Plunderstorm"
+L["EVENT_SCARAB"] = "Call of the Scarab"
+L["EVENT_SECRETS"] = "Secrets of Azeroth"
 
 -- Families
 L["Airplanes"] = "Airplanes"
