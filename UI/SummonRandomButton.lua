@@ -10,7 +10,7 @@ ADDON.Events:RegisterCallback("OnLogin", function()
         local existingName, existingIcon, existingBody = GetMacroInfo(MACRO_NAME)
         if not existingName and GetNumMacros() < 120 then
             CreateMacro(MACRO_NAME, MACRO_ICON, MACRO_BODY)
-        elseif existingName and (existingBody ~= MACRO_BODY or existingIcon ~= MACRO_ICON) then
+        elseif existingName and (nil == string.find(existingBody, MACRO_BODY) or existingIcon ~= MACRO_ICON) then
             EditMacro(existingName, nil, MACRO_ICON, MACRO_BODY)
         end
     end
