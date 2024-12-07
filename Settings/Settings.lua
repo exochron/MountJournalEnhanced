@@ -131,6 +131,10 @@ local function PrepareDefaults()
     for categoryName, _ in pairs(ADDON.DB.Source) do
         defaultSettings.filter.source[categoryName] = true
     end
+    defaultSettings.filter.source["World Event"] = {}
+    for categoryName, _ in pairs(ADDON.DB.Source["World Event"]) do
+        defaultSettings.filter.source["World Event"][categoryName] = true
+    end
     for categoryName, categoryConfig in pairs(ADDON.DB.Family) do
         for subCategory, subConfig in pairs(categoryConfig) do
             if type(subConfig) == "table" then

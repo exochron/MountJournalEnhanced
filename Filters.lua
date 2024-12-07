@@ -354,7 +354,7 @@ function ADDON:FilterMounts()
         end
     else
         local allSettingsSource, preparedSource = CheckAllSettings(ADDON.settings.filter.source)
-        if not preparedSource then
+        if not allSettingsSource then
             preparedSource = prepareSettings(ADDON.settings.filter.source, SourceDB)
         end
 
