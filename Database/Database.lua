@@ -1338,6 +1338,15 @@ ADDON.DB.Source = {
             [247448] = true, -- Darkmoon Dirigible
         },
 
+        ["Plunderstorm"] = {
+            [254812] = true, -- Royal Seafeather
+            [300154] = true, -- Silver Tidestallion
+            [437162] = true, -- Polly Roger
+            [446902] = true, -- Polly Roger (classic)
+            [457656] = true, -- Plunderlord's Midnight Crocolisk
+            [471696] = true, -- Hooktalon
+        },
+
         ["Call of the Scarab"] = {
             [239766] = true, -- Blue Qiraji War Tank
             [239767] = true, -- Red Qiraji War Tank
@@ -1384,16 +1393,7 @@ ADDON.DB.Source = {
             [191314] = true, -- Minion of Grumpus
         },
 
-        ["Plunderstorm"] = {
-            [254812] = true, -- Royal Seafeather
-            [300154] = true, -- Silver Tidestallion
-            [437162] = true, -- Polly Roger
-            [446902] = true, -- Polly Roger (classic)
-            [457656] = true, -- Plunderlord's Midnight Crocolisk
-            [471696] = true, -- Hooktalon
-        },
-
-        ["Remix: Mists of Pandaria"] = {
+        ["Remix: Pandaria"] = {
             [138425] = true, -- Slate Primordial Direhorn
             [127170] = true, -- Astral Cloud Serpent
             [136471] = true, -- Spawn of Horridon
