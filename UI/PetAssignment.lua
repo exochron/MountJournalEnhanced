@@ -1,6 +1,5 @@
 local _, ADDON = ...
 
---todo: initial scroll to pet
 --todo: display assigned pet model as well next to mount (?)
 --todo: preview pet in entry tooltip
 
@@ -47,6 +46,7 @@ end, "pet-assignment")
 --region pet side panel
 local sidePanel
 local savedPetApiFilters = {}
+local scrollToSelection = false
 local function saveAndResetPetApiFilters()
     savedPetApiFilters = {
         search = PetJournal.searchBox:GetText(),
@@ -111,6 +111,7 @@ local function updateDataProvider()
         searchText = searchText:lower()
     end
 
+    local selectedIndex = 1
     local payload = {
         [1] = {
             index = 0,
@@ -134,13 +135,21 @@ local function updateDataProvider()
                     selected = (assignedPet == petID),
                 }
                 lastPet = speciesId
+                if assignedPet == petID then
+                    selectedIndex = #payload
+                end
             end
         elseif lastPet == speciesId and assignedPet == petID then
             payload[#payload].selected = true
+            selectedIndex = #payload
         end
     end
 
     sidePanel.ScrollBox:SetDataProvider(CreateDataProvider(payload), ScrollBoxConstants.RetainScrollPosition)
+    if scrollToSelection then
+        sidePanel.ScrollBox:ScrollToElementDataIndex(selectedIndex)
+        scrollToSelection = false
+    end
 end
 
 local function buildSidePanel()
@@ -284,6 +293,7 @@ local function buildSidePanel()
 
     frame:Hide()
     frame:HookScript("OnShow", function ()
+        scrollToSelection = true
         saveAndResetPetApiFilters()
         if not ADDON.settings.pets.seenInfo then
             toggleInfoDescription(window.InfoButton)
@@ -423,5 +433,6 @@ ADDON.Events:RegisterCallback("OnUpdateMountDisplay", function()
         toolbarButton = buildToolbarButton()
     end
     updateToolbarButton()
+    scrollToSelection = true
     triggerUpdateDataProvider()
 end, "pet-assignment")
