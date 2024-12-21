@@ -18,26 +18,17 @@ end
 
 function ADDON.Api:GetMountInfoByID(mountId)
     local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, isSteadyFlight, a, b, c, d, e, f, g, h = C_MountJournal.GetMountInfoByID(mountId)
-    -- moved api functions in 11.0
-    local IsUsableSpell = C_Spell.IsSpellUsable or IsUsableSpell
-    isUsable = isUsable and IsUsableSpell(spellId)
-    isSteadyFlight = isSteadyFlight and WOW_PROJECT_ID ~= WOW_PROJECT_CATACLYSM_CLASSIC
+    isUsable = isUsable and C_Spell.IsSpellUsable(spellId)
+    isSteadyFlight = isSteadyFlight and WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 
     return creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, isSteadyFlight, a, b, c, d, e, f, g, h
 end
 
 function ADDON.Api:GetMountLink(spellId)
-    -- moved api functions in 11.0
-    local GetSpellLink = C_Spell.GetSpellLink or GetSpellLink
-
-    if  WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC then
-        -- classic doesn't supports mount links yet. so use spell link instead. (preview might not work though)
-        return GetSpellLink(spellId)
-    end
     local link = C_MountJournal.GetMountLink(spellId)
-    if strlen(link) > 400 then
+    if not link or strlen(link) > 400 then
         -- broken link
-        return GetSpellLink(spellId)
+        return C_Spell.GetSpellLink(spellId)
     end
 
     return link
