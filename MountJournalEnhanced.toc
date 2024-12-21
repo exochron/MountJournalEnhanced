@@ -1,4 +1,4 @@
-## Interface: 110005,110007
+## Interface: 110007
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## IconTexture: Interface\Addons\MountJournalEnhanced\UI\icons\mje.png

@@ -2,19 +2,11 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
-if select(4, GetBuildInfo()) < 110007 then
-    ADDON.DB.Recent = {
-        ["minID"] = 2259,
-        ["blacklist"] = { },
-        ["whitelist"] = { 1943, 1947, 1957, 2224, 2225, 2235 },
-    }
-else
-    ADDON.DB.Recent = {
-        ["minID"] = 2321,
-        ["blacklist"] = { },
-        ["whitelist"] = { 1277, 2036, 2190 },
-    }
-end
+ADDON.DB.Recent = {
+    ["minID"] = 2321,
+    ["blacklist"] = { },
+    ["whitelist"] = { 1277, 2036, 2190 },
+}
 
 ADDON.DB.Source = {
     ["Drop"] = {
