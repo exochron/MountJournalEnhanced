@@ -28,6 +28,18 @@ ADDON.Events:RegisterCallback("OnLogin", function()
     actionButton:SetScript("OnEvent", function()
         updateLDB(dataObject)
     end)
+    actionButton:HookScript("PreClick", function()
+        if not InCombatLockdown() and actionButton:GetParent():IsDragging() then
+            actionButton:SetAttribute("type", "")
+            actionButton:SetAttribute("typerelease", "")
+        end
+    end)
+    actionButton:HookScript("PostClick", function()
+        if not InCombatLockdown() then
+            actionButton:SetAttribute("type", "spell")
+            actionButton:SetAttribute("typerelease", "spell")
+        end
+    end)
     actionButton:Hide()
 
     local tooltipProxy = CreateFrame("Frame")
