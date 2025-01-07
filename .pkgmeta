@@ -1,5 +1,7 @@
 tools-used:
     - gallery-generator
+
+optional-dependencies:
     - libdatabroker-1-1
 
 externals:
