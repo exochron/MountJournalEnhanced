@@ -196,7 +196,9 @@ local function parseCustomization(mountData)
     if mountData["quest"] then
         total = total + #mountData["quest"]
         for _, questId in ipairs(mountData["quest"]) do
-            if C_QuestLog.IsQuestFlaggedCompleted(questId) then
+            if C_QuestLog.IsQuestFlaggedCompleted(questId)
+                or (C_QuestLog.IsQuestFlaggedCompletedOnAccount and C_QuestLog.IsQuestFlaggedCompletedOnAccount(questId))
+            then
                 count = count + 1
             end
         end
