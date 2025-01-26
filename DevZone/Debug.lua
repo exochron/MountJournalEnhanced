@@ -132,6 +132,11 @@ ADDON.Events:RegisterCallback("postloadUI", function()
     if ADDON.settings.ui.debugMode then
         testDatabase()
 
+        -- https://github.com/Stanzilla/WoWUIBugs/issues/699
+        if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE and C_MountJournal.GetMountLink(458) then
+            print("C_MountJournal.GetMountLink() got fixed! \\o\/")
+        end
+
         -- disable taint checks for now
         --checkForTaint()
         --C_Timer.NewTicker(1, checkForTaint)
