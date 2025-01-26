@@ -36,7 +36,6 @@ local function PrepareDefaults()
 
         personalUi = false,
         ui = {
-            debugMode = false,
             showAchievementPoints = true,
             compactMountList = true,
             unlockDisplayCamera = true,

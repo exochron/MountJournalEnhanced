@@ -40,7 +40,7 @@ local function runFilterTest(testName)
     for _, mountId in ipairs(ADDON:FilterMounts()) do
         local name, spellID, _, _, _, sourceType = C_MountJournal.GetMountInfoByID(mountId)
         local _, _, _, _, mountType = C_MountJournal.GetMountInfoExtraByID(mountId)
-        print("No " .. testName .. " info for mount: " .. name .. " (" .. spellID .. ", " .. mountId .. ", " .. sourceType .. ", " .. mountType .. ") ")
+        print("No " .. testName .. " info for mount: " .. name .. " (spell=" .. spellID .. ", ID=" .. mountId .. ", source=" .. sourceType .. ", type=" .. mountType .. ") ")
     end
 end
 
@@ -129,22 +129,20 @@ local function checkForTaint()
 end
 
 ADDON.Events:RegisterCallback("postloadUI", function()
-    if ADDON.settings.ui.debugMode then
-        testDatabase()
+    testDatabase()
 
-        -- https://github.com/Stanzilla/WoWUIBugs/issues/699
-        if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE and C_MountJournal.GetMountLink(458) then
-            print("C_MountJournal.GetMountLink() got fixed! \\o\/")
-        end
-
-        -- disable taint checks for now
-        --checkForTaint()
-        --C_Timer.NewTicker(1, checkForTaint)
+    -- https://github.com/Stanzilla/WoWUIBugs/issues/699
+    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE and C_MountJournal.GetMountLink(458) then
+        print("C_MountJournal.GetMountLink() got fixed! \\o\/")
     end
+
+    -- disable taint checks for now
+    --checkForTaint()
+    --C_Timer.NewTicker(1, checkForTaint)
 end, "debug")
 
 function ADDON.Debug:CheckListTaint(process)
-    if MountJournal and MountJournal.ListScrollFrame and ADDON.settings.ui.debugMode then
+    if MountJournal and MountJournal.ListScrollFrame then
         taintedList.ListScrollFrame = taintedList.ListScrollFrame or {}
 
         local isTrue = function(val)

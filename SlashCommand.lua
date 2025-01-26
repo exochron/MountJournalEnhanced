@@ -12,13 +12,7 @@ end
 function SlashCmdList.MOUNTJOURNALENHANCED(input)
     local loweredInput = input:lower():trim()
 
-    if loweredInput == "debug on" then
-        ADDON.settings.ui.debugMode = true
-        print("MountJournalEnhanced: debug mode activated.")
-    elseif loweredInput == "debug off" then
-        ADDON.settings.ui.debugMode = false
-        print("MountJournalEnhanced: debug mode deactivated.")
-    elseif ADDON.TakeScreenshots and loweredInput == "screenshot" then
+    if ADDON.TakeScreenshots and loweredInput == "screenshot" then
         ADDON:TakeScreenshots()
     elseif loweredInput == "reset size" then
         ADDON.UI:RestoreWindowSize()
