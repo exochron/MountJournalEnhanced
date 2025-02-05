@@ -60,11 +60,12 @@ local function buildStat(container, iconTexture, tooltipHead, tooltipText)
 
     item:SetHeight(12)
 
+    item.TooltipText = tooltipText
     item:HookScript("OnEnter", function(self)
         tooltip:SetOwner(self, "ANCHOR_TOP")
         tooltip:SetText(tooltipHead, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
-        if tooltipText then
-            tooltip:AddLine(tooltipText)
+        if item.TooltipText then
+            tooltip:AddLine(item.TooltipText)
         end
         tooltip:Show()
     end)
@@ -259,7 +260,13 @@ local function updateContainer(mountId, container)
 
     container.TravelTime:SetShown(trackingEnabled and settings.TravelTime and travelTime > 0)
     if container.TravelTime:IsShown() then
-        container.TravelTime.Text:SetText(SecondsToClock(travelTime, true))
+        if travelTime >= SECONDS_PER_DAY then
+            container.TravelTime.TooltipText = ADDON.L["STATS_TIP_TRAVEL_TIME_DAYS"]
+            container.TravelTime.Text:SetText(string.format("%.1fd", travelTime / SECONDS_PER_DAY))
+        else
+            container.TravelTime.TooltipText = ADDON.L["STATS_TIP_TRAVEL_TIME_TEXT"]
+            container.TravelTime.Text:SetText(SecondsToClock(travelTime, true))
+        end
     end
 
     container.TravelDistance:SetShown(trackingEnabled and settings.TravelDistance and travelDistance > 0)
