@@ -177,7 +177,9 @@ ADDON.DB.Family = {
 [1904] = true, -- Pureblood Fire Hawk
 [1905] = true, -- Green Fire Hawk
 [1906] = true, -- Corrupted Fire Hawk
+[2255] = true, -- Al'ars goldene Asche
 [2261] = true, -- Coldflame Tempest
+[2478] = true, -- Flammender Feuerfalke des Königs
 },
 ["Raptora"] = {
 [1430] = true, -- Desertwing Hunter
@@ -1380,6 +1382,7 @@ ADDON.DB.Family = {
 [1622] = true, -- Stormhide Salamanther
 [1761] = true, -- Reawakened Phase-Hunter
 [1940] = true, -- Salatrancer
+[2315] = true, -- Timbered Sky Snake
 },
 ["Sea Serpents"] = {
 [899] = true, -- Abyss Worm
