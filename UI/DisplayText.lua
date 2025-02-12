@@ -1,9 +1,12 @@
 local _, ADDON = ...
 
 local function updateSourceText(replace, sourceText)
-    local text, count = sourceText:gsub(":%s?|r%s?.+|n", ":|r "..replace.."|n", 1)
+    sourceText = sourceText:gsub("[|]n$","") -- trim trailing new line
+    sourceText = sourceText:gsub("[|]n$","") -- sometimes with added blank line
+
+    local text, count = sourceText:gsub(":%s?|r%s?[^|]+|n", ":|r "..replace.."|n", 1)
     if count == 0 then
-        text = sourceText:gsub(":%s?|r%s?.+$", ":|r "..replace, 1)
+        text = sourceText:gsub(":%s?|r%s?[^|]+$", ":|r "..replace, 1)
     end
     MountJournal.MountDisplay.InfoButton.Source:SetText(text)
 end
