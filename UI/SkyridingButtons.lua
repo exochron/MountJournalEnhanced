@@ -37,7 +37,11 @@ local function DisplayTooltip(self)
 end
 
 local function BuildTraitToggle(nodeId)
-    local button = CreateFrame("Button", nil, MountJournal, "DynamicFlightFlyoutButtonTemplate")
+    -- LATER: Template got renamed in 11.1 into DynamicFlightFlyoutPopupButtonTemplate
+    local _, button = xpcall(
+            function() return CreateFrame("Button", nil, MountJournal, "DynamicFlightFlyoutButtonTemplate") end,
+            function() return CreateFrame("Button", nil, MountJournal, "DynamicFlightFlyoutPopupButtonTemplate") end
+    )
     button.texture = button:CreateTexture(nil, "ARTWORK")
     button.texture:SetAllPoints()
 
@@ -111,16 +115,18 @@ ADDON.Events:RegisterCallback("loadUI", function()
     if C_MountJournal.IsDragonridingUnlocked() then
         checkInitialTraitSelection()
 
+        local flyout = MountJournal.DynamicFlightFlyoutPopup or MountJournal.DynamicFlightFlyout
+
         ADDON.UI:RegisterToolbarGroup(
                 '05-skyriding',
-                MountJournal.DynamicFlightFlyout.OpenDynamicFlightSkillTreeButton,
-                MountJournal.DynamicFlightFlyout.DynamicFlightModeButton,
+                flyout.OpenDynamicFlightSkillTreeButton,
+                flyout.DynamicFlightModeButton,
                 BuildTraitToggle(RIDING_ALONG_NODE_ID),
                 BuildTraitToggle(WHIRLING_SURGE_NODE_ID)
         )
-        MountJournal.DynamicFlightFlyout.OpenDynamicFlightSkillTreeButton:SetParent(MountJournal)
-        MountJournal.DynamicFlightFlyout.OpenDynamicFlightSkillTreeButton:Show()
-        MountJournal.DynamicFlightFlyout.DynamicFlightModeButton:SetParent(MountJournal)
-        MountJournal.DynamicFlightFlyout.DynamicFlightModeButton:Show()
+        flyout.OpenDynamicFlightSkillTreeButton:SetParent(MountJournal)
+        flyout.OpenDynamicFlightSkillTreeButton:Show()
+        flyout.DynamicFlightModeButton:SetParent(MountJournal)
+        flyout.DynamicFlightModeButton:Show()
     end
 end, 'skyriding' )
