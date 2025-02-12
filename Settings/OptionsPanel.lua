@@ -155,6 +155,7 @@ local function BildAbout()
     buildLabel("- The Team of " .. link("https://www.wowace.com/projects/ace3", "Ace3") .. " for their developer friendly framework.")
     buildLabel("- " .. link("https://www.wowace.com/projects/herebedragons", "HereBeDragons") .. " for providing a nice api to keep track of the player position.")
     buildLabel("- The " .. link("https://github.com/BigWigsMods/packager", "packager by BigWigsMods") .. " which makes releasing new versions as simple as possible.")
+    buildLabel("- " .. link("https://www.jetbrains.com/", "JetBrains") .. " for providing me with a licence of their great IDEs.")
 
     buildLabel("\n" .. "Last but not least I'd like to thank YOU for using Mount Journal Enhanced. If you like it, you should show it to your friends and guild mates. So they can enjoy it as well. :-)")
     buildLabel("\n\n\n") -- add some space for copybox
