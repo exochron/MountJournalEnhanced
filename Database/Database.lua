@@ -2,11 +2,21 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
-ADDON.DB.Recent = {
-    ["minID"] = 2321,
-    ["blacklist"] = { },
-    ["whitelist"] = { 1277, 2036, 2190 },
-}
+local build = select(4, GetBuildInfo())
+
+if build < 110100 then
+    ADDON.DB.Recent = {
+        ["minID"] = 2321,
+        ["blacklist"] = { },
+        ["whitelist"] = { 1277, 2036, 2190 },
+    }
+else
+    ADDON.DB.Recent = {
+        ["minID"] = 2480,
+        ["blacklist"] = { },
+        ["whitelist"] = { 2272, 2274, 2277, 2278, 2280, 2281, 2283, 2284, 2286, 2287, 2288, 2289, 2290, 2291, 2292, 2293, 2294, 2295, 2296, 2298, 2299, 2300, 2301, 2302, 2303, 2313, 2334 },
+    }
+end
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -77,6 +87,8 @@ ADDON.DB.Source = {
 
         -- War Within
         [448979] = true, -- Dauntless Imperial Lynx
+        [466020] = true, -- Personalized Goblin SCRAPER
+        [466026] = true, -- Salvaged Goblin Gazillionair's Flying Machine
         [471562] = true, -- Thrayir, Eyes of the Siren (secret hunt)
     },
 
@@ -145,6 +157,13 @@ ADDON.DB.Source = {
         [442358] = true, -- Stonevault Mechasuit
         [446052] = true, -- Delver's Dirigible
         [451489] = true, -- Siesbarg
+        [466001] = true, -- Blackwater Bonecrusher -- Trove from weekly reputation or maybe from paragon grind ?
+        [466014] = true, -- Steamwheedle Supplier -- Trove
+        [466022] = true, -- Venture co-ordinator -- Trove
+        [466024] = true, -- Bilgewater Bombadier -- Trove
+        [466027] = true, -- Darkfuse Spy-Eye -- WQ
+        [466133] = true, -- Delver's Gob-Trotter -- WQ
+        [473188] = true, -- Bronze Goblin Waveshredder -- Trove
         [474086] = true, -- Prismatic Snapdragon
 
         ------------------------------
@@ -270,6 +289,16 @@ ADDON.DB.Source = {
         [448978] = true, -- Vermillion Imperial Lynx
         [449269] = true, -- Crimson Mudnose
         [449418] = true, -- Shale Ramolith
+        [465999] = true, -- Crimson Armored Growler -- renown
+        [466002] = true, -- Violet Armored Growler -- renown
+        [466013] = true, -- Ocher Delivery Rocket -- renown
+        [466016] = true, -- The Topskimmer Special -- renown
+        [466017] = true, -- Innovation Investigator -- Mechanica vendor
+        [466018] = true, -- Darkfuse Demolisher -- ?
+        [466019] = true, -- Blackwater Shredder Deluxe Mk 2 -- renown
+        [466023] = true, -- Asset Advocator -- Mechanica vendor
+        [466025] = true, -- Margin Manipulator -- Mechanica vendor
+        [466028] = true, -- Mean Green Flying Machine -- renown
         [473137] = true, -- Soweezi's Vintage Waveshredder
 
         ------------------------------
@@ -404,8 +433,10 @@ ADDON.DB.Source = {
         [368158] = { 2464, 16 }, -- Zereth Overseer - The Jailer, Sepulcher of the First Ones
         [413922] = true, -- Valiance -- Naxxramas - Discovery
         [424484] = { 2519, 16 }, -- Anu'relos -- Amirdrassil - Fyrak Mythic
-        [451486] = { 2602, 14 }, -- Sureki Skyrazor -- Nerub-ar Palace
+        [451486] = { 2602, 17 }, -- Sureki Skyrazor -- Nerub-ar Palace
         [451491] = { 2602, 16 }, -- Ascendant Skyrazor -- Nerub-ar Palace Mythic
+        [1217760] = { 2646, 16 }, -- The Big G -- Liberation of Undermine Mythic
+        [1221155] = { 2646, 17 }, -- Prototype A.S.M.R. -- Liberation of Undermine
     },
 
     ["Reputation"] = {
@@ -575,6 +606,12 @@ ADDON.DB.Source = {
         [448978] = true, -- Vermillion Imperial Lynx
         [449269] = true, -- Crimson Mudnose
         [449418] = true, -- Shale Ramolith
+        [465999] = true, -- Crimson Armored Growler -- renown
+        [466002] = true, -- Violet Armored Growler -- renown
+        [466013] = true, -- Ocher Delivery Rocket -- renown
+        [466016] = true, -- The Topskimmer Special -- renown
+        [466019] = true, -- Blackwater Shredder Deluxe Mk 2 -- renown
+        [466028] = true, -- Mean Green Flying Machine -- renown
 
         ------------------------------
         -- Alliance ------------------
@@ -944,6 +981,8 @@ ADDON.DB.Source = {
         [471538] = 41056, -- Timely Buzzbee - Master of the Turbulent Timeways II
         [472752] = 41133, -- The Breaker's Song - Isle Remember You
         [473472] = 40953, -- Jani's Trashpile - A Farewell to Arms
+        [1217235] = 41533, -- Crimson Shreddertank - WW Keystone Master S2
+        [1221694] = 40951, -- Enterprising Shreddertank - WW Keystone Legend S2
 
         ------------------------------
         -- Alliance ------------------
@@ -1154,6 +1193,7 @@ ADDON.DB.Source = {
         [349824] = true, -- Vicious War Warstalker
         [409034] = true, -- Vicious War Snail
         [424534] = true, -- Vicious Moon Beast
+        [466145] = true, -- Vicious Electro Eel
 
         -- Achievement
         [60118] = true, -- Black War Bear - For The Alliance!
@@ -1201,6 +1241,7 @@ ADDON.DB.Source = {
         [349823] = true, -- Vicious War Warstalker
         [409032] = true, -- Vicious War Snail
         [424535] = true, -- Vicious Moon Beast
+        [466146] = true, -- Vicious Electro Eel
 
         -- Achievement
         [60119] = true, -- Black War Bear - For The Horde!
@@ -1659,7 +1700,6 @@ ADDON.DB.Expansion = {
         ["minID"] = 2116,
         ["maxID"] = 9999999999,
         [1550] = true, -- Depthstalker
-        [1715] = true, -- Armadillo Roller
         [1792] = true, -- Algarian Stormrider
     }
 }
@@ -1746,5 +1786,7 @@ ADDON.DB.Ignored = {
         [1690] = true, -- Whelpling
         [1796] = true, -- Whelpling
         [2115] = true, -- Soar
+        [2301] = true, -- Unstable Rocket
+        [2302] = true, -- Unstable Rocket
     },
 }

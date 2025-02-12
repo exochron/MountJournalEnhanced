@@ -177,9 +177,9 @@ ADDON.DB.Family = {
 [1904] = true, -- Pureblood Fire Hawk
 [1905] = true, -- Green Fire Hawk
 [1906] = true, -- Corrupted Fire Hawk
-[2255] = true, -- Al'ars goldene Asche
+[2255] = true, -- Golden Ashes of Al'ar
 [2261] = true, -- Coldflame Tempest
-[2478] = true, -- Flammender Feuerfalke des Königs
+[2478] = true, -- Blazing Royal Fire Hawk
 },
 ["Raptora"] = {
 [1430] = true, -- Desertwing Hunter
@@ -371,6 +371,9 @@ ADDON.DB.Family = {
 [926] = true, -- Alabaster Hyena
 [928] = true, -- Dune Scavenger
 [1286] = true, -- Caravan Hyena
+[2272] = true, -- Crimson Armored Growler
+[2274] = true, -- Blackwater Bonecrusher
+[2277] = true, -- Violet Armored Growler
 },
 ["Ottuk"] = {
 [1546] = true, -- Iskaara Trader's Ottuk
@@ -690,6 +693,7 @@ ADDON.DB.Family = {
 [1563] = true, -- Highland Drake
 [1588] = true, -- Winding Slitherdrake
 [1660] = true, -- Crimson Gladiator's Drake
+[1739] = true, -- Obsidian Gladiator's Slitherdrake
 [1770] = true, -- Festering Emerald Drake
 [1795] = true, -- Auspicious Arborwyrm
 [1798] = true, -- Azure Worldchiller
@@ -737,7 +741,6 @@ ADDON.DB.Family = {
 [1581] = true, -- Nether-Gorged Greatwyrm
 [1590] = true, -- Windborne Velocidrake
 [1591] = true, -- Cliffside Wylderdrake
-[1739] = true, -- Obsidian Gladiator's Slitherdrake
 [1830] = true, -- Flourishing Whimsydrake
 [1935] = true, -- Heart of the Aspects
 [1954] = true, -- Flourishing Whimsydrake
@@ -976,6 +979,8 @@ ADDON.DB.Family = {
 [2187] = true, -- Underlight Shorestalker
 [2188] = true, -- Kah, Legend of the Deep
 [2189] = true, -- Underlight Corrupted Behemoth
+[2299] = true, -- Vicious Electro Eel
+[2300] = true, -- Vicious Electro Eel
 },
 ["Seahorses"] = {
 [373] = true, -- Vashj'ir Seahorse
@@ -1021,6 +1026,10 @@ ADDON.DB.Family = {
 [1198] = true, -- Kul Tiran Charger
 [1245] = true, -- Bloodflank Charger
 [1911] = true, -- Vicious War Steed
+[2481] = true, -- Midnight Darkmoon Charger
+[2482] = true, -- Lively Darkmoon Charger
+[2483] = true, -- Violet Darkmoon Charger
+[2484] = true, -- Snowy Darkmoon Charger
 },
 ["Demonic Steeds"] = {
 [17] = true, -- Felsteed
@@ -1075,6 +1084,7 @@ ADDON.DB.Family = {
 [2065] = true, -- Daystorm Windsteed
 [2067] = true, -- Forest Windsteed
 [2068] = true, -- Dashing Windsteed
+[2488] = true, -- Shimmermist Free Runner
 },
 ["Mechanical Steeds"] = {
 [552] = true, -- Ironbound Wraithcharger
@@ -1208,6 +1218,10 @@ ADDON.DB.Family = {
 [1428] = true, -- Amber Ardenmoth
 [1429] = true, -- Vibrant Flutterwing
 [2162] = true, -- Cyan Glowmite
+[2489] = true, -- Pearlescent Butterfly
+[2491] = true, -- Ruby Butterfly
+[2492] = true, -- Spring Butterfly
+[2494] = true, -- Midnight Butterfly
 },
 ["Others"] = {
 [594] = true, -- Grinning Reaver
@@ -1280,6 +1294,7 @@ ADDON.DB.Family = {
 [1729] = true, -- Big Slick in the City
 [1740] = true, -- Vicious War Snail
 [1741] = true, -- Vicious War Snail
+[2495] = true, -- Emerald Snail
 },
 },
 ["Rays"] = {
@@ -1596,6 +1611,7 @@ ADDON.DB.Family = {
 [960] = true, -- Orgrimmar Interceptor
 [1051] = true, -- The Dreadwake
 [2144] = true, -- Delver's Dirigible
+[2296] = true, -- Delver's Gob-Trotter
 [2332] = true, -- The Breaker's Song
 },
 ["Assault Wagons"] = {
@@ -1647,6 +1663,7 @@ ADDON.DB.Family = {
 [2145] = true, -- [PH] Goblin Surfboard - Blue
 [2152] = true, -- Pearlescent Goblin Wave Shredder
 [2333] = true, -- Soweezi's Vintage Waveshredder
+[2334] = true, -- Bronze Goblin Waveshredder
 },
 ["Hovercraft"] = {
 [999] = true, -- Xiwyllag ATV
@@ -1656,6 +1673,13 @@ ADDON.DB.Family = {
 [1254] = true, -- Rustbolt Resistor
 [1587] = true, -- Zereth Overseer
 [1813] = true, -- Mimiron's Jumpjets
+[2291] = true, -- Salvaged Goblin Gazillionaire's Flying Machine
+[2292] = true, -- Margin Manipulator
+[2293] = true, -- Darkfuse Spy-Eye
+[2294] = true, -- Mean Green Flying Machine
+[2295] = true, -- Bilgewater Bombardier
+[2487] = true, -- The Big G
+[2507] = true, -- Prototype A.S.M.R.
 },
 ["Kites"] = {
 [450] = true, -- Pandaren Kite
@@ -1676,6 +1700,11 @@ ADDON.DB.Family = {
 [2158] = true, -- Crowd Pummeler 2-30
 [2159] = true, -- Machine Defense Unit 1-11
 [2244] = true, -- Diamond Mechsuit
+[2286] = true, -- Blackwater Shredder Deluxe Mk 2
+[2287] = true, -- Darkfuse Demolisher
+[2288] = true, -- Personalized Goblin S.C.R.A.Per
+[2289] = true, -- Venture Co-ordinator
+[2290] = true, -- Asset Advocator
 },
 ["Mechanical Animals"] = {
 [552] = true, -- Ironbound Wraithcharger
@@ -1730,7 +1759,6 @@ ADDON.DB.Family = {
 [842] = true, -- Vicious War Trike
 [1247] = true, -- Mechacycle Model W
 [1248] = true, -- Junkheap Drifter
-[1715] = true, -- Armadillo Roller
 [1877] = true, -- Goblin Trike
 [1878] = true, -- Goblin Turbo-Trike
 [1943] = true, -- Incognitro, the Indecipherable Felcycle
@@ -1746,6 +1774,10 @@ ADDON.DB.Family = {
 [962] = true, -- Darkmoon Dirigible
 [1764] = true, -- X-51 Nether-Rocket X-TREME
 [1768] = true, -- X-51 Nether-Rocket
+[2280] = true, -- The Topskimmer Special
+[2281] = true, -- Steamwheedle Supplier
+[2283] = true, -- Innovation Investigator
+[2284] = true, -- Ocher Delivery Rocket
 [2327] = true, -- Lunar Launcher
 },
 ["Seat"] = {
@@ -1756,6 +1788,8 @@ ADDON.DB.Family = {
 [1252] = true, -- Mechagon Peacekeeper
 [1253] = true, -- Scrapforged Mechaspider
 [1552] = true, -- Carcinized Zerethsteed
+[2480] = true, -- Crimson Shreddertank
+[2508] = true, -- Enterprising Shreddertank
 },
 },
 ["Vombata"] = {

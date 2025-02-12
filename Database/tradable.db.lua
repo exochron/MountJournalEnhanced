@@ -59,5 +59,5 @@ ADDON.DB.Tradable = {
 [1922] = true, -- Corrupted Hippogryph
 [1936] = true, -- Feldrake
 [2158] = true, -- Crowd Pummeler 2-30
-[2255] = true, -- Al'ars goldene Asche
+[2255] = true, -- Golden Ashes of Al'ar
 }
