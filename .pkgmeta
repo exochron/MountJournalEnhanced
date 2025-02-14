@@ -33,11 +33,11 @@ externals:
 
 ignore:
     - LICENSE
-    - **/*.md
+    - '**/*.md'
     - DevZone
     - Images
-    - Libs/*/LICENSE
-    - Libs/*.toc
+    - 'Libs/*/LICENSE'
+    - 'Libs/*.toc'
     - Libs/CallbackHandler-1.0/CallbackHandler-1.0.xml
     - Libs/LibStub/tests
     - Libs/HereBeDragons/HereBeDragons-Migrate.lua
