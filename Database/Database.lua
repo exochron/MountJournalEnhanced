@@ -77,8 +77,9 @@ ADDON.DB.Source = {
 
         -- War Within
         [448979] = true, -- Dauntless Imperial Lynx
-        [466020] = true, -- Personalized Goblin SCRAPER
-        [466026] = true, -- Salvaged Goblin Gazillionair's Flying Machine
+        [466020] = true, -- Personalized Goblin S.C.R.A.Per
+        [466021] = true, -- Violet Goblin Shredder
+        [466026] = true, -- Salvaged Goblin Gazillionaire's Flying Machine
         [471562] = true, -- Thrayir, Eyes of the Siren (secret hunt)
     },
 
@@ -146,13 +147,8 @@ ADDON.DB.Source = {
         [430225] = true, -- Gilnean Prowler
         [446052] = true, -- Delver's Dirigible
         [451489] = true, -- Siesbarg
-        [466001] = true, -- Blackwater Bonecrusher -- Trove from weekly reputation or maybe from paragon grind ?
-        [466014] = true, -- Steamwheedle Supplier -- Trove
-        [466022] = true, -- Venture co-ordinator -- Trove
-        [466024] = true, -- Bilgewater Bombadier -- Trove
         [466027] = true, -- Darkfuse Spy-Eye -- WQ
         [466133] = true, -- Delver's Gob-Trotter -- I Want My Hat Back
-        [473188] = true, -- Bronze Goblin Waveshredder -- Trove
         [474086] = true, -- Prismatic Snapdragon
 
         ------------------------------
@@ -279,7 +275,10 @@ ADDON.DB.Source = {
         [449269] = true, -- Crimson Mudnose
         [449418] = true, -- Shale Ramolith
         [465999] = true, -- Crimson Armored Growler -- renown
+        [466000] = true, -- Darkfuse Chompactor -- Gallagio Rewards Club 17
         [466002] = true, -- Violet Armored Growler -- renown
+        [466011] = true, -- Furious Flarendo -- Gallagio Rewards Club 20
+        [466012] = true, -- Thunderdrum Misfire -- Gallagio Rewards Club 8
         [466013] = true, -- Ocher Delivery Rocket -- renown
         [466016] = true, -- The Topskimmer Special -- renown
         [466017] = true, -- Innovation Investigator -- Mechanica vendor
@@ -597,11 +596,20 @@ ADDON.DB.Source = {
         [449269] = true, -- Crimson Mudnose
         [449418] = true, -- Shale Ramolith
         [465999] = true, -- Crimson Armored Growler -- renown
+        [466000] = true, -- Darkfuse Chompactor -- Gallagio Rewards Club 17
+        [466001] = true, -- Blackwater Bonecrusher -- Trove from weekly reputation or maybe from paragon grind ?
         [466002] = true, -- Violet Armored Growler -- renown
+        [466011] = true, -- Furious Flarendo -- Gallagio Rewards Club 20
+        [466012] = true, -- Thunderdrum Misfire -- Gallagio Rewards Club 8
         [466013] = true, -- Ocher Delivery Rocket -- renown
+        [466014] = true, -- Steamwheedle Supplier -- Trove
         [466016] = true, -- The Topskimmer Special -- renown
+        [466018] = true, -- Darkfuse Demolisher -- ?
         [466019] = true, -- Blackwater Shredder Deluxe Mk 2 -- renown
+        [466022] = true, -- Venture co-ordinator -- Trove
+        [466024] = true, -- Bilgewater Bombardier -- Trove
         [466028] = true, -- Mean Green Flying Machine -- renown
+        [473188] = true, -- Bronze Goblin Waveshredder -- Trove
 
         ------------------------------
         -- Alliance ------------------
@@ -964,7 +972,6 @@ ADDON.DB.Source = {
         [448850] = 40539, -- Kah, Legend of the Deep - The Derby Dash
         [449415] = {40306, 40307}, -- Slatestone Ramolith - Allied Races: Earthen
         [452779] = 40438, -- Ivory Goliathus - Glory of the Delver
-        [458335] = 20525, -- Diamond Mechsuit - WW Keystone Master S1
         [303767] = 40956, -- Honeyback Hivemother - I'm On Island Time
         [448934] = 41201, -- Shadow of Doubt - You Xal Not Pass
         [471538] = 41056, -- Timely Buzzbee - Master of the Turbulent Timeways II
@@ -972,6 +979,7 @@ ADDON.DB.Source = {
         [473472] = 40953, -- Jani's Trashpile - A Farewell to Arms
         [1217235] = 41533, -- Crimson Shreddertank - WW Keystone Master S2
         [1221694] = 40951, -- Enterprising Shreddertank - WW Keystone Legend S2
+        [468068] = 41286, -- Junkmaestro's Magnetomech - Glory of the Liberation of Undermine Raider
 
         ------------------------------
         -- Alliance ------------------
@@ -1142,7 +1150,6 @@ ADDON.DB.Source = {
         -- Arena
         [434470] = true, -- Vicious Dreamtalon - Dragonflight: Season 4
         [434477] = true, -- Vicious Dreamtalon - Dragonflight: Season 4
-        [449466] = true, -- Forged Gladiator's Fel Bat - Gladiator: War Within Season 1
         [447405] = true, -- Vicious Skyflayer - War Within: Season 1
         [449325] = true, -- Vicious Skyflayer - War Within: Season 1
 
@@ -1345,6 +1352,7 @@ ADDON.DB.Source = {
             [294569] = true, -- Beastlord's Warwolf
             [359013] = true, -- Val'sharah Hippogryph
             [359318] = true, -- Soaring Spelltome - A Tour of Towers
+            [408654] = true, -- Sandy Shalewing
             [452645] = true, -- Amani Hunting Bear
             [468353] = true, -- Enchanted Spellweave Carpet
             [1214920] = true, -- Nightfall Skyreaver
