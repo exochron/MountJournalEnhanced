@@ -2,21 +2,11 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
-local build = select(4, GetBuildInfo())
-
-if build < 110100 then
-    ADDON.DB.Recent = {
-        ["minID"] = 2321,
-        ["blacklist"] = { },
-        ["whitelist"] = { 1277, 2036, 2190 },
-    }
-else
-    ADDON.DB.Recent = {
-        ["minID"] = 2480,
-        ["blacklist"] = { },
-        ["whitelist"] = { 2272, 2274, 2277, 2278, 2280, 2281, 2283, 2284, 2286, 2287, 2288, 2289, 2290, 2291, 2292, 2293, 2294, 2295, 2296, 2298, 2299, 2300, 2301, 2302, 2303, 2313, 2334 },
-    }
-end
+ADDON.DB.Recent = {
+    ["minID"] = 2480,
+    ["blacklist"] = { },
+    ["whitelist"] = { 2204, 2272, 2274, 2277, 2278, 2279, 2280, 2281, 2283, 2284, 2286, 2287, 2288, 2289, 2290, 2291, 2292, 2293, 2294, 2295, 2296, 2298, 2299, 2300, 2301, 2302, 2303, 2313, 2334 },
+}
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -154,7 +144,6 @@ ADDON.DB.Source = {
         [425338] = true, -- Flourishing Whimsydrake
         [427041] = true, -- Ochre Dreamtalon
         [430225] = true, -- Gilnean Prowler
-        [442358] = true, -- Stonevault Mechasuit
         [446052] = true, -- Delver's Dirigible
         [451489] = true, -- Siesbarg
         [466001] = true, -- Blackwater Bonecrusher -- Trove from weekly reputation or maybe from paragon grind ?
@@ -162,7 +151,7 @@ ADDON.DB.Source = {
         [466022] = true, -- Venture co-ordinator -- Trove
         [466024] = true, -- Bilgewater Bombadier -- Trove
         [466027] = true, -- Darkfuse Spy-Eye -- WQ
-        [466133] = true, -- Delver's Gob-Trotter -- WQ
+        [466133] = true, -- Delver's Gob-Trotter -- I Want My Hat Back
         [473188] = true, -- Bronze Goblin Waveshredder -- Trove
         [474086] = true, -- Prismatic Snapdragon
 
@@ -389,6 +378,7 @@ ADDON.DB.Source = {
         [346141] = true, -- Slime Serpent - Plaguefall (secret)
         [353263] = { 2455, 2 }, -- Cartel Master's Gearglider - Tazavesh, the Veiled Market
         [363178] = true, -- Colossal Umbrahide Mawrat - Torghast 13+
+        [442358] = { 2582, 23 }, -- Stonevault Mechasuit -- Stonevault mythic
         [449264] = { 2561, 23 }, -- Wick - Darkflame Cleft
 
         -- Raid
@@ -951,7 +941,6 @@ ADDON.DB.Source = {
         [385260] = 19479, -- Bestowed Ohuna Spotter - Wake Me Up
         [408648] = 17785, -- Calescent Shalewing - Que Zara(lek), Zara(lek)
         [408649] = 18251, -- Shadowflame Shalewing - Glory of the Aberrus Raider
-        [408654] = 19079, -- Sandy Shalewing - Master of Troubled Timeways
         [413409] = 15797, -- Highland Drake - An Azure Ally
         [417548] = 15794, -- Renewed Proto-Drake - A New Friend
         [417552] = 15795, -- Windborne Velocidrake - Together in the Skies
@@ -1497,7 +1486,8 @@ ADDON.DB.Source = {
 }
 
 ADDON.DB.FeatsOfStrength = {
-    -- from https://wowhead.com/mount-feats-of-strength (63)
+    -- from https://wowhead.com/mount-feats-of-strength (69)
+    -- and https://www.wowhead.com/achievements/character-achievements/feats-of-strength/player-vs-player?filter=3;0;Mount#0+4+7 (14)
     -- mountId => AchievementId
     [55] = 3356, -- Winterspring Frostsaber
     [69] = 729, -- Deathcharger's Reins
@@ -1523,7 +1513,7 @@ ADDON.DB.FeatsOfStrength = {
     [313] = 3096, -- Deadly Gladiator's Frost Wyrm
     [317] = 3756, -- Furious Gladiator's Frost Wyrm
     [340] = 3757, -- Relentless Gladiator's Frost Wyrm
-    [352] = 4627, -- Big Love Rocket
+    [352] = 4627, -- X-45 Heartbreaker
     [358] = 4600, -- Wrathful Gladiator's Frost Wyrm
     [363] = 4625, -- Invincible's Reins
     [382] = 4832, -- Friends In Even Higher Places
@@ -1553,30 +1543,58 @@ ADDON.DB.FeatsOfStrength = {
     [853] = 12139, -- Dominating Gladiator's Storm Dragon
     [936] = 424, -- Why? Because It's Red
     [948] = 12140, -- Demonic Gladiator's Storm Dragon
-    [1030] = 13093, -- Dread Gladiator's Proto-Drake
-    [1031] = 13202, -- Sinister Gladiator's Proto-Drake
-    [1032] = 13632, -- Notorious Gladiator's Proto-Drake
-    [1035] = 13958, -- Corrupted Gladiator's Proto-Drake
+    [1026] = 13636, -- Vicious War Basilisk -- Notorious Combatant
+    [1027] = 13637, -- Vicious War Basilisk -- Notorious Combatant
+    [1030] = {12961, 13093}, -- Dread Gladiator's Proto-Drake -- Gladiator: Battle for Azeroth Season 1
+    [1031] = {13202, 13212}, -- Sinister Gladiator's Proto-Drake -- Gladiator: Battle for Azeroth Season 2
+    [1032] = {13632, 13647}, -- Notorious Gladiator's Proto-Drake -- Gladiator: Battle for Azeroth Season 3
+    [1035] = {13958, 13967}, -- Corrupted Gladiator's Proto-Drake -- Gladiator: Battle for Azeroth Season 4
     [1039] = 14183, -- Mighty Caravan Brutosaur
+    [1045] = 13136, -- Vicious War Clefthoof -- Dread Combatant
+    [1050] = 13137, -- Vicious War Riverbeast -- Dread Combatant
+    [1194] = 13943, -- Vicious White Warsaber -- Corrupted Combatant
+    [1195] = 13228, -- Vicious Black Warsaber -- Sinister Combatant
+    [1196] = 13227, -- Vicious Black Bonestead -- Sinister Combatant
+    [1197] = 13944, -- Vicious White Bonesteed -- Corrupted Combatant
     [1326] = 14145, -- Awakened Mindborer - Battle for Azeroth Keystone Master: Season Four
-    [1363] = 14816, -- Sinful Gladiator's Soul Eater
+    [1351] = 14612, -- Vicious War Spider -- Sinful Combatant
+    [1352] = 14611, -- Vicious War Spider -- Sinful Combatant
+    [1363] = {14816, 14689}, -- Sinful Gladiator's Soul Eater -- Gladiator: Shadowlands Season 1
     [1405] = 15690, -- Restoration Deathwalker - Shadowlands Keystone Master: Season Four
     [1419] = 14532, -- Sintouched Deathwalker - Shadowlands Keystone Master: Season One
-    [1480] = 14999, -- Unchained Gladiator's Soul Eater
+    [1451] = 15346, -- Vicious War Croaker -- Cosmic Combatant
+    [1452] = 15347, -- Vicious War Croaker -- Cosmic Combatant
+    [1459] = 14966, -- Vicious War Gorm -- Unchained Combatant
+    [1460] = 14967, -- Vicious War Gorm -- Unchained Combatant
+    [1465] = 15599, -- Vicious Warstalker -- Eternal Combatant
+    [1466] = 15598, -- Vicious Warstalker -- Eternal Combatant
+    [1480] = {14999, 14972}, -- Unchained Gladiator's Soul Eater -- Gladiator: Shadowlands Season 2
     [1520] = 15078, -- Soultwisted Deathwalker - Shadowlands Keystone Master: Season Two
     [1544] = 15499, -- Wastewarped Deathwalker - Shadowlands Keystone Master: Season Three
     [1552] = 15470, -- Carcinized Zerethsteed - Ahead of the Curve: The Jailer
-    [1572] = 15384, -- Cosmic Gladiator's Soul Eater
-    [1599] = 15612, -- Eternal Gladiator's Soul Eater
-    [1660] = 16730, -- Crimson Gladiator's Drake
+    [1572] = {15384, 15352}, -- Cosmic Gladiator's Soul Eater -- Gladiator: Shadowlands Season 3
+    [1599] = {15612, 15605}, -- Eternal Gladiator's Soul Eater -- Gladiator: Shadowlands Season 4
+    [1660] = {16730, 15957}, -- Crimson Gladiator's Drake -- Gladiator: Dragonflight Season 1
     [1681] = 16649, -- Hailstorm Armoredon - Dragonflight Keystone Master: Season One
+    [1688] = 15943, -- Vicious Sabertooth -- Crimson Combatant
+    [1689] = 15942, -- Vicious Sabertooth -- Crimson Combatant
     [1725] = 17844, -- Inferno Armoredon - Dragonflight Keystone Master: Season Two
-    [1739] = 17764, -- Obsidian Gladiator's Slitherdrake - Gladiator: Dragonflight Season 2
-    [1822] = 19490, -- Draconic Gladiator's Drake - Gladiator: Dragonflight Season 4
-    [1831] = 19091, -- Verdant Gladiator's Slitherdrake - Gladiator: Dragonflight Season 3
-    [2150] = 40397, -- Vicious Skyflayer - War Within: Season 1
-    [2211] = 40396, -- Vicious Skyflayer - War Within: Season 1
-    [2218] = 40393, -- Forged Gladiator's Fel Bat - Gladiator: War Within Season 1
+    [1737] = 19079, -- Sandy Shalewing - Master of the Turbulent Timeways
+    [1739] = {17740, 17764, 17778}, -- Obsidian Gladiator's Slitherdrake - Gladiator: Dragonflight Season 2
+    [1740] = 17727, -- Vicious War Snail -- Obsidian Combatant
+    [1741] = 17728, -- Vicious War Snail -- Obsidian Combatant
+    [1819] = 19140, -- Vicious Moonbeast -- Verdant Combatant
+    [1820] = 19141, -- Vicious Moonbeast -- Verdant Combatant
+    [1822] = {19490, 19503}, -- Draconic Gladiator's Drake - Gladiator: Dragonflight Season 4
+    [1831] = {19091, 19295}, -- Verdant Gladiator's Slitherdrake - Gladiator: Dragonflight Season 3
+    [2056] = 19501, -- Vicious Dreamtalon -- Draconic Combatant
+    [2057] = 19502, -- Vicious Dreamtalon -- Draconic Combatant
+    [2150] = 40397, -- Vicious Skyflayer - Forged Combatant -- War Within: Season 1
+    [2211] = 40396, -- Vicious Skyflayer - Forged Combatant -- War Within: Season 1
+    [2218] = {40398, 40393}, -- Forged Gladiator's Fel Bat - Gladiator: War Within Season 1
+    [2298] = {41032, 41362}, -- Prized Gladiator's Fel Bat - Gladiator: War Within Season 2
+    [2299] = 41129, -- Vicious Electro Eel - Prized Combatant
+    [2300] = 41128, -- Vicious Electro Eel - Prized Combatant
 }
 
 ADDON.DB.Expansion = {
