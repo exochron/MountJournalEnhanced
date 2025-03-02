@@ -27,7 +27,7 @@ end
 function ADDON.Api:GetMountLink(spellId)
     local link = C_MountJournal.GetMountLink(spellId)
     if not link or strlen(link) > 400 then
-        -- broken link
+        -- fallback for broken links (https://github.com/Stanzilla/WoWUIBugs/issues/699)
         return C_Spell.GetSpellLink(spellId)
     end
 

@@ -37,11 +37,7 @@ local function DisplayTooltip(self)
 end
 
 local function BuildTraitToggle(nodeId)
-    -- LATER: Template got renamed in 11.1 into DynamicFlightFlyoutPopupButtonTemplate
-    local _, button = xpcall(
-            function() return CreateFrame("Button", nil, MountJournal, "DynamicFlightFlyoutButtonTemplate") end,
-            function() return CreateFrame("Button", nil, MountJournal, "DynamicFlightFlyoutPopupButtonTemplate") end
-    )
+    local button = CreateFrame("Button", nil, MountJournal, "DynamicFlightFlyoutPopupButtonTemplate")
     button.texture = button:CreateTexture(nil, "ARTWORK")
     button.texture:SetAllPoints()
 
