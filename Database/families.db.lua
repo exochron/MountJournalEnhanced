@@ -67,6 +67,7 @@ ADDON.DB.Family = {
 [1377] = true, -- Rampart Screecher
 [1378] = true, -- Harvester's Dredwing
 [2218] = true, -- Forged Gladiator's Fel Bat
+[2298] = true, -- Prized Gladiator's Fel Bat
 [2307] = true, -- Chaos-Forged Dreadwing
 [2309] = true, -- Chaos-Born Dreadwing
 },
@@ -373,7 +374,15 @@ ADDON.DB.Family = {
 [1286] = true, -- Caravan Hyena
 [2272] = true, -- Crimson Armored Growler
 [2274] = true, -- Blackwater Bonecrusher
+[2276] = true, -- Unrator der Düsternisverschmolzenen
 [2277] = true, -- Violet Armored Growler
+},
+["Meeksi"] = {
+[2342] = true, -- Wuschelpelz der Meeksi
+[2343] = true, -- Weichtatze der Meeksi
+[2344] = true, -- Rollpfote der Meeksi
+[2345] = true, -- Teebüschel der Meeksi
+[2346] = true, -- Gebräudieb der Meeksi
 },
 ["Ottuk"] = {
 [1546] = true, -- Iskaara Trader's Ottuk
@@ -504,6 +513,8 @@ ADDON.DB.Family = {
 [1195] = true, -- Vicious Black Warsaber
 [1843] = true, -- Tiger
 [2087] = true, -- Purple Shado-Pan Riding Tiger
+[2340] = true, -- Sha-Touched Riding Tiger
+[2477] = true, -- Sha-Warped Riding Tiger
 },
 },
 ["Crabs"] = {
@@ -667,6 +678,8 @@ ADDON.DB.Family = {
 [1313] = true, -- Rajani Warserpent
 [1573] = true, -- Magenta Cloud Serpent
 [2143] = true, -- Astral Emperor's Serpent
+[2341] = true, -- Sha-Touched Cloud Serpent
+[2476] = true, -- Sha-Warped Cloud Serpent
 },
 ["Drakes"] = {
 [246] = true, -- Azure Drake
@@ -1611,7 +1624,7 @@ ADDON.DB.Family = {
 [960] = true, -- Orgrimmar Interceptor
 [1051] = true, -- The Dreadwake
 [2144] = true, -- Delver's Dirigible
-[2296] = true, -- Delver's Gob-Trotter
+[2296] = true, -- Gobtrotter des Tiefenforschers
 [2332] = true, -- The Breaker's Song
 },
 ["Assault Wagons"] = {
@@ -1702,9 +1715,11 @@ ADDON.DB.Family = {
 [2244] = true, -- Diamond Mechsuit
 [2286] = true, -- Blackwater Shredder Deluxe Mk 2
 [2287] = true, -- Darkfuse Demolisher
-[2288] = true, -- Personalized Goblin S.C.R.A.Per
+[2288] = true, -- Personalisierter Goblinverschrotter
 [2289] = true, -- Venture Co-ordinator
 [2290] = true, -- Asset Advocator
+[2303] = true, -- Violet Goblin Shredder
+[2313] = true, -- Junkmaestro's Magnetomech
 },
 ["Mechanical Animals"] = {
 [552] = true, -- Ironbound Wraithcharger
@@ -1728,6 +1743,7 @@ ADDON.DB.Family = {
 [1782] = true, -- Perfected Juggernaut
 [2085] = true, -- Cobalt Juggernaut
 [2086] = true, -- Fel Iron Juggernaut
+[2278] = true, -- Flarendo the Furious
 },
 ["Mechanostriders"] = {
 [39] = true, -- Red Mechanostrider
@@ -1774,6 +1790,7 @@ ADDON.DB.Family = {
 [962] = true, -- Darkmoon Dirigible
 [1764] = true, -- X-51 Nether-Rocket X-TREME
 [1768] = true, -- X-51 Nether-Rocket
+[2279] = true, -- Donnertrommelfehlzündung
 [2280] = true, -- The Topskimmer Special
 [2281] = true, -- Steamwheedle Supplier
 [2283] = true, -- Innovation Investigator
