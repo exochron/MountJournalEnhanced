@@ -71,6 +71,7 @@ UI\FilterDropdown\Sort.lua
 UI\DisplayBackground.lua
 UI\DisplayCamera.lua
 UI\DisplayText.lua
+UI\DRIVEButton.lua
 UI\SkyridingButtons.lua
 UI\SyncTarget.lua
 UI\Resize.lua
