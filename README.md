@@ -24,7 +24,7 @@ This addon extends the ingame mount journal with some cool stuff.
 - readds Summon Random Mount Button for Cataclysm Classic
 
 ## ⚙️ Enhanced Interface
-- __new:__ Assign pets to your mounts. They will be summoned as well, when you mount up. 
+- __new:__ Tinker on your D.R.I.V.E. setup from anywhere in the world
 - [Display] Sync the journal with your current target. (Great for mount mania. ;))
 - [Display] Shows direct link to Wowhead
 - [Display] Freely rotate display camera around mount
@@ -37,6 +37,7 @@ This addon extends the ingame mount journal with some cool stuff.
 - [List] Browse through mounts with Up/Down arrow keys
 - [List] Right Click on scroll buttons to quickly go to the top or bottom
 - [LDB] Change your flight style with the data broker plugin.
+- Assign pets to your mounts. They will be summoned as well, when you mount up.
 - Move equipment slot into display or top button bar to save some space (Retail only)
 - Display count of character specific mounts
 - Display mount related achievement points

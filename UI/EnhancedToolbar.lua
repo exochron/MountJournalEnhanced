@@ -20,7 +20,7 @@ local function renderToolbar()
             group[#group]:ClearAllPoints()
 
             if lastButton then
-                group[#group]:SetPoint("RIGHT", lastButton, "LEFT", -13, 0)
+                group[#group]:SetPoint("RIGHT", lastButton, "LEFT", -11, 0)
             else
                 group[#group]:SetPoint("CENTER", MountJournal, "TOPRIGHT", -24, -42)
             end
