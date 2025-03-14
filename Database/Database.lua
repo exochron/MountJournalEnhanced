@@ -980,6 +980,7 @@ ADDON.DB.Source = {
         [1217235] = 41533, -- Crimson Shreddertank - WW Keystone Master S2
         [1221694] = 40951, -- Enterprising Shreddertank - WW Keystone Legend S2
         [468068] = 41286, -- Junkmaestro's Magnetomech - Glory of the Liberation of Undermine Raider
+        [466144] = {41032, 41362}, -- Prized Gladiator's Fel Bat - Gladiator: War Within Season 2
 
         ------------------------------
         -- Alliance ------------------
@@ -1161,6 +1162,8 @@ ADDON.DB.Source = {
         [222240] = true, -- Prestigious Azure Courser
         [222241] = true, -- Prestigious Midnight Courser
         [281044] = true, -- Prestigious Bloodforged Courser
+
+        [466144] = true, -- Prized Gladiator's Fel Bat - Gladiator: War Within Season 2
 
         ------------------------------
         -- Alliance ------------------
