@@ -66,6 +66,8 @@ ADDON.DB.Source.Shop[466948] = true; -- Chaos-Born Dreadwing
 ADDON.DB.Source.Shop[466977] = true; -- Chaos-Born Wind Rider
 ADDON.DB.Source.Shop[466980] = true; -- Chaos-Born Hippogryph
 ADDON.DB.Source.Shop[466983] = true; -- Chaos-Born Gryphon
+ADDON.DB.Source.Shop[473478] = true; -- Sha-Touched Riding Tiger
+ADDON.DB.Source.Shop[473487] = true; -- Sha-Touched Cloud Serpent
 
 --ADDON.DB.Expansion[0][1843] = true; -- Tiger
 ADDON.DB.Expansion[1][1761] = true; -- Reawakened Phase-Hunter (TBC Classic)
