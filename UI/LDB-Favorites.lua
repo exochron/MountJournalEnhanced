@@ -93,6 +93,7 @@ ADDON.Events:RegisterCallback("OnLogin", function()
         end
     end
 
+    -- Use a proxy frame to get a proper tooltip position from the broker addon
     local tooltipProxy = CreateFrame("Frame")
     tooltipProxy:Hide()
     tooltipProxy:HookScript("OnShow", function()
@@ -118,6 +119,7 @@ ADDON.Events:RegisterCallback("OnLogin", function()
             GameTooltip:Hide()
         end
     end)
+    tooltipProxy.SetOwner = ADDON.UI.SetOwner
 
     local _, profileName = ADDON.Api:GetFavoriteProfile()
     local ldbDataObject = ldb:NewDataObject( ADDON_NAME.." Favorites", {

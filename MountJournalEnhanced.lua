@@ -73,7 +73,8 @@ local function initialize()
         ADDON:ResetIngameFilter()
         ADDON.Events:TriggerEvent("OnInit")
         ADDON.Events:TriggerEvent("OnLogin")
-        ADDON.Events:UnregisterEvents({"OnInit", "OnLogin"})
+        ADDON.Events:TriggerEvent("AfterLogin")
+        ADDON.Events:UnregisterEvents({"OnInit", "OnLogin", "AfterLogin"})
         ADDON.Events:UnregisterFrameEvent("PLAYER_ENTERING_WORLD")
     end
 end
