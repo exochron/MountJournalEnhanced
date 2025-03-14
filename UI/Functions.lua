@@ -92,6 +92,17 @@ local function hookStripTextures()
 end
 ADDON.Events:RegisterCallback("OnLogin", hookStripTextures, "ElvUI hooks")
 
+-- force initial update for ElvUI
+-- since ElvUI is loaded before MJE and it doesn't update its panels during registration. :(
+local function refreshInitialDataTexts()
+    if ElvUI then
+        local E  = unpack(ElvUI)
+        local DT = E:GetModule('DataTexts')
+        DT:LoadDataTexts()
+    end
+end
+ADDON.Events:RegisterCallback("AfterLogin", refreshInitialDataTexts, "ElvUI DataTexts")
+
 --endregion
 
 function ADDON.UI.OpenContextMenu(owner, anchor, generator, ...)
@@ -102,5 +113,31 @@ function ADDON.UI.OpenContextMenu(owner, anchor, generator, ...)
     local menu = Menu.GetManager():OpenMenu(owner, elementDescription, anchor);
     if menu then
         PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
+    end
+end
+
+-- polyfill to use a regular frame as an tooltip
+-- https://warcraft.wiki.gg/wiki/API_GameTooltip_SetOwner
+function ADDON.UI:SetOwner(owner, anchor, ofsX, ofsY)
+    ofsX = ofsX or 0
+    ofsY = ofsY or 0
+    self:ClearAllPoints()
+    self:SetParent(owner)
+    if anchor == "ANCHOR_TOP" then
+        self:SetPoint("BOTTOM", owner, "TOP", ofsX, ofsY)
+    elseif anchor == "ANCHOR_RIGHT" then
+        self:SetPoint("BOTTOMLEFT", owner, "TOPRIGHT")
+    elseif anchor == "ANCHOR_BOTTOM" then
+        self:SetPoint("TOP", owner, "BOTTOM")
+    elseif anchor == "ANCHOR_LEFT" then
+        self:SetPoint("BOTTOMRIGHT", owner, "TOPLEFT")
+    elseif anchor == "ANCHOR_TOPRIGHT" then
+        self:SetPoint("BOTTOMRIGHT", owner, "TOPRIGHT")
+    elseif anchor == "ANCHOR_BOTTOMRIGHT" then
+        self:SetPoint("TOPLEFT", owner, "BOTTOMRIGHT")
+    elseif anchor == "ANCHOR_TOPLEFT" then
+        self:SetPoint("BOTTOMLEFT", owner, "TOPLEFT")
+    elseif anchor == "ANCHOR_BOTTOMLEFT" then
+        self:SetPoint("TOPRIGHT", owner, "BOTTOMLEFT")
     end
 end

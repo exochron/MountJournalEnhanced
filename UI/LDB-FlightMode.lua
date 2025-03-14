@@ -28,40 +28,45 @@ ADDON.Events:RegisterCallback("OnLogin", function()
     actionButton:SetScript("OnEvent", function()
         updateLDB(dataObject)
     end)
-    actionButton:HookScript("PreClick", function()
-        if not InCombatLockdown() and actionButton:GetParent():IsDragging() then
-            actionButton:SetAttribute("type", "")
-            actionButton:SetAttribute("typerelease", "")
+    actionButton:HookScript("PreClick", function(self)
+        if not InCombatLockdown() and self:GetParent():IsDragging() then
+            self:SetAttribute("type", "")
+            self:SetAttribute("typerelease", "")
         end
     end)
-    actionButton:HookScript("PostClick", function()
+    actionButton:HookScript("PostClick", function(self)
         if not InCombatLockdown() then
-            actionButton:SetAttribute("type", "spell")
-            actionButton:SetAttribute("typerelease", "spell")
+            self:SetAttribute("type", "spell")
+            self:SetAttribute("typerelease", "spell")
         end
     end)
     actionButton:Hide()
 
     local tooltipProxy = CreateFrame("Frame")
     tooltipProxy:Hide()
-    tooltipProxy:HookScript("OnShow", function()
-        local point, relativeTo, relativePoint, offsetX, offsetY = tooltipProxy:GetPoint(1)
+    tooltipProxy:HookScript("OnShow", function(self)
+        local point, relativeTo, relativePoint, offsetX, offsetY = self:GetPoint(1)
 
         actionButton:SetAttribute("spell", C_MountJournal.GetDynamicFlightModeSpellID())
-        actionButton:SetParent(relativeTo)
-        actionButton:SetAllPoints(relativeTo)
+        actionButton:SetParent(self:GetParent())
+        actionButton:SetAllPoints(self:GetParent())
         actionButton:SetFrameStrata("DIALOG")
+        actionButton:Raise()
         actionButton:Show()
 
-        GameTooltip:SetOwner(tooltipProxy, "ANCHOR_NONE")
+        GameTooltip:SetOwner(self, "ANCHOR_NONE")
         GameTooltip:SetPoint(point, relativeTo, relativePoint, offsetX, offsetY)
         GameTooltip:ClearLines()
         GameTooltip:SetSpellByID(C_MountJournal.GetDynamicFlightModeSpellID())
         GameTooltip:Show()
     end)
-    tooltipProxy:HookScript("OnHide", function()
+    tooltipProxy:HookScript("OnHide", function(self)
         GameTooltip:Hide()
+        if not self:GetParent():IsMouseOver() then
+            actionButton:Hide()
+        end
     end)
+    tooltipProxy.SetOwner = ADDON.UI.SetOwner
 
     local spellId = C_MountJournal.GetDynamicFlightModeSpellID()
     local icon = C_Spell.GetSpellTexture(spellId)
