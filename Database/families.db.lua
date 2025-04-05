@@ -28,6 +28,7 @@ ADDON.DB.Family = {
 [1379] = true, -- Endmire Flyer
 [2150] = true, -- Vicious Skyflayer
 [2177] = true, -- Aquamarine Swarmite
+[2178] = true, -- Nesting Swarmite
 [2180] = true, -- Shadowed Swarmite
 [2181] = true, -- Swarmite Skyhunter
 [2211] = true, -- Vicious Skyflayer
@@ -235,6 +236,7 @@ ADDON.DB.Family = {
 [511] = true, -- Black Riding Goat
 [2078] = true, -- Snowy Riding Goat
 [2080] = true, -- Little Red Riding Goat
+[2504] = true, -- Spotted Black Riding Goat
 },
 ["Rams"] = {
 [21] = true, -- Gray Ram
@@ -366,6 +368,7 @@ ADDON.DB.Family = {
 [1477] = true, -- Undying Darkhound
 [1597] = true, -- Grimhowl
 [1781] = true, -- Sulfur Hound
+[1824] = true, -- Brown-Furred Spiky Bakar
 [1825] = true, -- Taivan
 },
 ["Hyenas"] = {
@@ -374,15 +377,15 @@ ADDON.DB.Family = {
 [1286] = true, -- Caravan Hyena
 [2272] = true, -- Crimson Armored Growler
 [2274] = true, -- Blackwater Bonecrusher
-[2276] = true, -- Unrator der Düsternisverschmolzenen
+[2276] = true, -- Darkfuse Chompactor
 [2277] = true, -- Violet Armored Growler
 },
 ["Meeksi"] = {
-[2342] = true, -- Wuschelpelz der Meeksi
-[2343] = true, -- Weichtatze der Meeksi
-[2344] = true, -- Rollpfote der Meeksi
-[2345] = true, -- Teebüschel der Meeksi
-[2346] = true, -- Gebräudieb der Meeksi
+[2342] = true, -- Meeksi Rufflefur
+[2343] = true, -- Meeksi Softpaw
+[2344] = true, -- Meeksi Rollingpaw
+[2345] = true, -- Meeksi Teatuft
+[2346] = true, -- Meeksi Brewthief
 },
 ["Ottuk"] = {
 [1546] = true, -- Iskaara Trader's Ottuk
@@ -432,6 +435,12 @@ ADDON.DB.Family = {
 [876] = true, -- Vicious War Lion
 [1892] = true, -- Golden King
 },
+["Lynx"] = {
+[2193] = true, -- Vermillion Imperial Lynx
+[2194] = true, -- Dauntless Imperial Lynx
+[2519] = true, -- Radiant Imperial Lynx
+[2535] = true, -- Void-Scarred Lynx
+},
 ["Manasabers"] = {
 [741] = true, -- Mystic Runesaber
 [881] = true, -- Arcanist's Manasaber
@@ -458,8 +467,6 @@ ADDON.DB.Family = {
 [1531] = true, -- Wen Lo, the River's Edge
 [1576] = true, -- Jigglesworth Sr.
 [1577] = true, -- Ash'adar, Harbinger of Dawn
-[2193] = true, -- Vermillion Imperial Lynx
-[2194] = true, -- Dauntless Imperial Lynx
 [2235] = true, -- Startouched Furline
 },
 ["Sabers"] = {
@@ -498,6 +505,7 @@ ADDON.DB.Family = {
 [459] = true, -- Sunstone Panther
 [1910] = true, -- Winged Guardian
 [1937] = true, -- Obsidian Nightwing
+[2502] = true, -- Void-Crystal Panther
 },
 ["Tigers"] = {
 [32] = true, -- Tiger
@@ -757,6 +765,7 @@ ADDON.DB.Family = {
 [1830] = true, -- Flourishing Whimsydrake
 [1935] = true, -- Heart of the Aspects
 [1954] = true, -- Flourishing Whimsydrake
+[2501] = true, -- Corruption of the Aspects
 },
 ["Proto-Drakes"] = {
 [262] = true, -- Red Proto-Drake
@@ -932,6 +941,7 @@ ADDON.DB.Family = {
 [2176] = true, -- Alunira
 [2304] = true, -- Chaos-Forged Gryphon
 [2312] = true, -- Chaos-Born Gryphon
+[2496] = true, -- Void-Scarred Gryphon
 },
 ["Hippogryphs"] = {
 [203] = true, -- Cenarion War Hippogryph
@@ -982,6 +992,7 @@ ADDON.DB.Family = {
 [2117] = true, -- Remembered Wind Rider
 [2308] = true, -- Chaos-Forged Wind Rider
 [2310] = true, -- Chaos-Born Wind Rider
+[2499] = true, -- Void-Scarred Windrider
 },
 },
 ["Fish"] = {
@@ -1017,6 +1028,12 @@ ADDON.DB.Family = {
 [1490] = true, -- Sinfall Gravewing
 [1491] = true, -- Pale Gravewing
 },
+["Hedgehog"] = {
+[2520] = true, -- Spring Harvesthog
+[2521] = true, -- Summer Harvesthog
+[2522] = true, -- Winter Harvesthog
+[2523] = true, -- Autumn Harvesthog
+},
 ["Horses"] = {
 ["Chargers"] = {
 [41] = true, -- Warhorse
@@ -1043,6 +1060,7 @@ ADDON.DB.Family = {
 [2482] = true, -- Lively Darkmoon Charger
 [2483] = true, -- Violet Darkmoon Charger
 [2484] = true, -- Snowy Darkmoon Charger
+[2497] = true, -- Void-Forged Stallion
 },
 ["Demonic Steeds"] = {
 [17] = true, -- Felsteed
@@ -1416,6 +1434,7 @@ ADDON.DB.Family = {
 [899] = true, -- Abyss Worm
 [947] = true, -- Riddler's Mind-Worm
 [1057] = true, -- Nazjatar Blood Serpent
+[2500] = true, -- Ny'alothan Shadow Worm
 },
 ["Shardhides"] = {
 [1455] = true, -- Beryl Shardhide
@@ -1456,6 +1475,7 @@ ADDON.DB.Family = {
 [2039] = true, -- Savage Blue Battle Turtle
 [2232] = true, -- Savage Ebony Battle Turtle
 [2347] = true, -- Savage Alabaster Battle Turtle
+[2531] = true, -- Tyrannotort
 },
 },
 ["Rodent"] = {
@@ -1482,6 +1502,10 @@ ADDON.DB.Family = {
 [1407] = true, -- Callow Flayedwing
 [1408] = true, -- Gruesome Flayedwing
 [2470] = true, -- Nightfall Skyreaver
+[2524] = true, -- Coldflame Cormaera
+[2526] = true, -- Felborn Cormaera
+[2527] = true, -- Molten Cormaera
+[2528] = true, -- Lavaborn Cormaera
 },
 ["Ungulates"] = {
 ["Alpacas"] = {
@@ -1624,7 +1648,7 @@ ADDON.DB.Family = {
 [960] = true, -- Orgrimmar Interceptor
 [1051] = true, -- The Dreadwake
 [2144] = true, -- Delver's Dirigible
-[2296] = true, -- Gobtrotter des Tiefenforschers
+[2296] = true, -- Delver's Gob-Trotter
 [2332] = true, -- The Breaker's Song
 },
 ["Assault Wagons"] = {
@@ -1715,7 +1739,7 @@ ADDON.DB.Family = {
 [2244] = true, -- Diamond Mechsuit
 [2286] = true, -- Blackwater Shredder Deluxe Mk 2
 [2287] = true, -- Darkfuse Demolisher
-[2288] = true, -- Personalisierter Goblinverschrotter
+[2288] = true, -- Personalized Goblin S.C.R.A.P.per
 [2289] = true, -- Venture Co-ordinator
 [2290] = true, -- Asset Advocator
 [2303] = true, -- Violet Goblin Shredder
@@ -1779,6 +1803,7 @@ ADDON.DB.Family = {
 [1878] = true, -- Goblin Turbo-Trike
 [1943] = true, -- Incognitro, the Indecipherable Felcycle
 [1947] = true, -- Hateforged Blazecycle
+[1948] = true, -- Voidfire Deathcycle
 },
 ["Rockets"] = {
 [211] = true, -- X-51 Nether-Rocket
@@ -1790,11 +1815,11 @@ ADDON.DB.Family = {
 [962] = true, -- Darkmoon Dirigible
 [1764] = true, -- X-51 Nether-Rocket X-TREME
 [1768] = true, -- X-51 Nether-Rocket
-[2279] = true, -- Donnertrommelfehlzündung
+[2279] = true, -- Thunderdrum Misfire
 [2280] = true, -- The Topskimmer Special
 [2281] = true, -- Steamwheedle Supplier
 [2283] = true, -- Innovation Investigator
-[2284] = true, -- Ocher Delivery Rocket
+[2284] = true, -- Ochre Delivery Rocket
 [2327] = true, -- Lunar Launcher
 },
 ["Seat"] = {
@@ -1875,6 +1900,7 @@ ADDON.DB.Family = {
 [327] = true, -- Swift Burgundy Wolf
 [342] = true, -- Swift Horde Wolf
 [1776] = true, -- White War Wolf
+[2498] = true, -- Void-Scarred Pack Mother
 },
 },
 ["Worm"] = {

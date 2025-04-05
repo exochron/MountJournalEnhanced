@@ -2,11 +2,19 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
-ADDON.DB.Recent = {
-    ["minID"] = 2480,
-    ["blacklist"] = { },
-    ["whitelist"] = { 2204, 2272, 2274, 2277, 2278, 2279, 2280, 2281, 2283, 2284, 2286, 2287, 2288, 2289, 2290, 2291, 2292, 2293, 2294, 2295, 2296, 2298, 2299, 2300, 2301, 2302, 2303, 2313, 2334 },
-}
+if select(4, GetBuildInfo()) < 110105 then
+    ADDON.DB.Recent = {
+        ["minID"] = 2480,
+        ["blacklist"] = { },
+        ["whitelist"] = { 2204, 2272, 2274, 2277, 2278, 2279, 2280, 2281, 2283, 2284, 2286, 2287, 2288, 2289, 2290, 2291, 2292, 2293, 2294, 2295, 2296, 2298, 2299, 2300, 2301, 2302, 2303, 2313, 2334 },
+    }
+else
+    ADDON.DB.Recent = {
+        ["minID"] = 2496,
+        ["blacklist"] = { 2507, 2508 },
+        ["whitelist"] = { 1824, 1948, 2178 },
+    }
+end
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -150,6 +158,7 @@ ADDON.DB.Source = {
         [466027] = true, -- Darkfuse Spy-Eye -- WQ
         [466133] = true, -- Delver's Gob-Trotter -- I Want My Hat Back
         [474086] = true, -- Prismatic Snapdragon
+        [1227076] = true, -- Tyrannotort
 
         ------------------------------
         -- Alliance ------------------
@@ -288,6 +297,8 @@ ADDON.DB.Source = {
         [466025] = true, -- Margin Manipulator -- Mechanica vendor
         [466028] = true, -- Mean Green Flying Machine -- renown
         [473137] = true, -- Soweezi's Vintage Waveshredder
+        [1218316] = true, -- Corruption of the Aspects
+        [1226421] = true, -- Radiant Imperial Lynx -- renown
 
         ------------------------------
         -- Alliance ------------------
@@ -379,6 +390,13 @@ ADDON.DB.Source = {
         [363178] = true, -- Colossal Umbrahide Mawrat - Torghast 13+
         [442358] = { 2582, 23 }, -- Stonevault Mechasuit -- Stonevault mythic
         [449264] = { 2561, 23 }, -- Wick - Darkflame Cleft
+        [428068] = true, -- Felreaver Deathcycle - Vision of Stormwind/Orgrimmar (Revisited)
+        [447189] = true, -- Nesting Swarmite - Vision of Stormwind/Orgrimmar (Revisited)
+        [1218229] = true, -- Void-Scarred Gryphon - Vision of Stormwind (Revisited)
+        [1218305] = true, -- Void-Forged Stallion - Vision of Stormwind (Revisited)
+        [1218306] = true, -- Void-Scarred Pack Mother - Vision of Orgrimmar (Revisited)
+        [1218307] = true, -- Void-Scarred Windrider - Vision of Orgrimmar (Revisited)
+        [1228865] = true, -- Void-Scarred Lynx - Vision of Stormwind/Orgrimmar (Revisited)
 
         -- Raid
         -- difficulty: 3=10Normal; 4=25Normal; 5=10Hero; 6=25Hero; 14=Normal; 15=Hero; 16=Mythic; 17=LFR
@@ -610,6 +628,7 @@ ADDON.DB.Source = {
         [466024] = true, -- Bilgewater Bombardier -- Trove
         [466028] = true, -- Mean Green Flying Machine -- renown
         [473188] = true, -- Bronze Goblin Waveshredder -- Trove
+        [1226421] = true, -- Radiant Imperial Lynx -- renown
 
         ------------------------------
         -- Alliance ------------------
@@ -974,13 +993,14 @@ ADDON.DB.Source = {
         [452779] = 40438, -- Ivory Goliathus - Glory of the Delver
         [303767] = 40956, -- Honeyback Hivemother - I'm On Island Time
         [448934] = 41201, -- Shadow of Doubt - You Xal Not Pass
+        [468068] = 41286, -- Junkmaestro's Magnetomech - Glory of the Liberation of Undermine Raider
+        [466144] = {41032, 41362}, -- Prized Gladiator's Fel Bat - Gladiator: War Within Season 2
         [471538] = 41056, -- Timely Buzzbee - Master of the Turbulent Timeways II
         [472752] = 41133, -- The Breaker's Song - Isle Remember You
         [473472] = 40953, -- Jani's Trashpile - A Farewell to Arms
         [1217235] = 41533, -- Crimson Shreddertank - WW Keystone Master S2
+        [1218314] = 41966, -- Ny'alothan Shadow Worm - Mastering the Visions
         [1221694] = 40951, -- Enterprising Shreddertank - WW Keystone Legend S2
-        [468068] = 41286, -- Junkmaestro's Magnetomech - Glory of the Liberation of Undermine Raider
-        [466144] = {41032, 41362}, -- Prized Gladiator's Fel Bat - Gladiator: War Within Season 2
 
         ------------------------------
         -- Alliance ------------------
