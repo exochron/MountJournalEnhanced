@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 local function print(...)
     _G.print("[MJE]", ...)
@@ -135,12 +135,6 @@ ADDON.Events:RegisterCallback("postloadUI", function()
     --checkForTaint()
     --C_Timer.NewTicker(1, checkForTaint)
 end, "debug")
-
-ADDON.Events:RegisterFrameEventAndCallback("PLAYER_ENTERING_WORLD", function(_, isLogin, isReload)
-    if isLogin and not isReload then
-        print("Thank you for participating in the development of "..ADDON_NAME.."! Your help is really appreciated!")
-    end
-end, 'hello dev')
 
 function ADDON.Debug:CheckListTaint(process)
     if MountJournal and MountJournal.ListScrollFrame then
