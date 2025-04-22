@@ -126,18 +126,18 @@ function ADDON.UI:SetOwner(owner, anchor, ofsX, ofsY)
     if anchor == "ANCHOR_TOP" then
         self:SetPoint("BOTTOM", owner, "TOP", ofsX, ofsY)
     elseif anchor == "ANCHOR_RIGHT" then
-        self:SetPoint("BOTTOMLEFT", owner, "TOPRIGHT")
+        self:SetPoint("BOTTOMLEFT", owner, "TOPRIGHT", ofsX, ofsY)
     elseif anchor == "ANCHOR_BOTTOM" then
-        self:SetPoint("TOP", owner, "BOTTOM")
+        self:SetPoint("TOP", owner, "BOTTOM", ofsX, ofsY)
     elseif anchor == "ANCHOR_LEFT" then
-        self:SetPoint("BOTTOMRIGHT", owner, "TOPLEFT")
+        self:SetPoint("BOTTOMRIGHT", owner, "TOPLEFT", ofsX, ofsY)
     elseif anchor == "ANCHOR_TOPRIGHT" then
-        self:SetPoint("BOTTOMRIGHT", owner, "TOPRIGHT")
+        self:SetPoint("BOTTOMRIGHT", owner, "TOPRIGHT", ofsX, ofsY)
     elseif anchor == "ANCHOR_BOTTOMRIGHT" then
-        self:SetPoint("TOPLEFT", owner, "BOTTOMRIGHT")
+        self:SetPoint("TOPLEFT", owner, "BOTTOMRIGHT", ofsX, ofsY)
     elseif anchor == "ANCHOR_TOPLEFT" then
-        self:SetPoint("BOTTOMLEFT", owner, "TOPLEFT")
+        self:SetPoint("BOTTOMLEFT", owner, "TOPLEFT", ofsX, ofsY)
     elseif anchor == "ANCHOR_BOTTOMLEFT" then
-        self:SetPoint("TOPRIGHT", owner, "BOTTOMLEFT")
+        self:SetPoint("TOPRIGHT", owner, "BOTTOMLEFT", ofsX, ofsY)
     end
 end
