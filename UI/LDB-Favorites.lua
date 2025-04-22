@@ -88,7 +88,7 @@ ADDON.Events:RegisterCallback("OnLogin", function()
 
     local menu
     local closeMenu = function()
-        if menu and not menu:IsMouseOver() then
+        if menu and not menu:IsMouseOver(10, -10, -10, 10) then
             menu:Close()
         end
     end
