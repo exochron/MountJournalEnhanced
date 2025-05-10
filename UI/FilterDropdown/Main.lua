@@ -321,7 +321,7 @@ local function setupRarityMenu(root)
     local settings = ADDON.settings.filter[SETTING_RARITY]
     AddAllAndNone(root, settings)
     local addButton = function(quality, suffix)
-        local text = "|c"..select(4, GetItemQualityColor(quality)).._G["ITEM_QUALITY"..quality.."_DESC"].."|r".." ("..suffix..")"
+        local text = "|c"..select(4, C_Item.GetItemQualityColor(quality)).._G["ITEM_QUALITY"..quality.."_DESC"].."|r".." ("..suffix..")"
         ADDON.UI.FDD:CreateFilter(root, text, quality, settings, true)
     end
     addButton(Enum.ItemQuality.Legendary, "<2%")
