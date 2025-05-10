@@ -17,13 +17,13 @@ local function DetermineQuality(rarity)
     if rarity < 2.0 then
         return Enum.ItemQuality.Legendary
     end
-    if rarity >= 2.0 and rarity < 10.0 then
+    if rarity < 10.0 then
         return Enum.ItemQuality.Epic
     end
-    if rarity >= 10.0 and rarity < 20.0 then
+    if rarity < 20.0 then
         return Enum.ItemQuality.Rare
     end
-    if rarity >= 20.0 and rarity < 50.0 then
+    if rarity < 50.0 then
         return Enum.ItemQuality.Uncommon
     end
     return Enum.ItemQuality.Common
@@ -39,7 +39,7 @@ local function ColorNames(button, elementData)
         local rarity = LibMountsRarity:GetRarityByID(mountID)
         if rarity ~= nil then
             local quality = DetermineQuality(rarity)
-            local r, g, b = GetItemQualityColor(quality)
+            local r, g, b = C_Item.GetItemQualityColor(quality)
             local a = collected and 1.0 or 0.75
             button.name:SetTextColor(r, g, b, a)
         else
