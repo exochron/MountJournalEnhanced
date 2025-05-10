@@ -2,19 +2,11 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
-if select(4, GetBuildInfo()) < 110105 then
-    ADDON.DB.Recent = {
-        ["minID"] = 2480,
-        ["blacklist"] = { },
-        ["whitelist"] = { 2204, 2272, 2274, 2277, 2278, 2279, 2280, 2281, 2283, 2284, 2286, 2287, 2288, 2289, 2290, 2291, 2292, 2293, 2294, 2295, 2296, 2298, 2299, 2300, 2301, 2302, 2303, 2313, 2334 },
-    }
-else
-    ADDON.DB.Recent = {
-        ["minID"] = 2496,
-        ["blacklist"] = { 2507, 2508 },
-        ["whitelist"] = { 1824, 1948, 2178 },
-    }
-end
+ADDON.DB.Recent = {
+    ["minID"] = 2496,
+    ["blacklist"] = { 2507, 2508 },
+    ["whitelist"] = { 1824, 1948, 2178 },
+}
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -89,6 +81,7 @@ ADDON.DB.Source = {
         [466021] = true, -- Violet Goblin Shredder
         [466026] = true, -- Salvaged Goblin Gazillionaire's Flying Machine
         [471562] = true, -- Thrayir, Eyes of the Siren (secret hunt)
+        [1228865] = true, -- Void-Scarred Lynx -- Daily Incursions in Hallowfall
     },
 
     ["Quest"] = {
@@ -396,7 +389,6 @@ ADDON.DB.Source = {
         [1218305] = true, -- Void-Forged Stallion - Vision of Stormwind (Revisited)
         [1218306] = true, -- Void-Scarred Pack Mother - Vision of Orgrimmar (Revisited)
         [1218307] = true, -- Void-Scarred Windrider - Vision of Orgrimmar (Revisited)
-        [1228865] = true, -- Void-Scarred Lynx - Vision of Stormwind/Orgrimmar (Revisited)
 
         -- Raid
         -- difficulty: 3=10Normal; 4=25Normal; 5=10Hero; 6=25Hero; 14=Normal; 15=Hero; 16=Mythic; 17=LFR
