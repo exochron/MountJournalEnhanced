@@ -102,10 +102,6 @@ ADDON.DB.Family = {
 [978] = true, -- Violet Spellwing
 [2322] = true, -- Thrayir, Eyes of the Siren
 },
-["Dread Ravens"] = {
-[600] = true, -- Dread Raven
-[753] = true, -- Corrupted Dreadwing
-},
 ["Eagle"] = {
 [1545] = true, -- Divine Kiss of Ohn'ahra
 [1669] = true, -- Bestowed Ohuna Spotter
@@ -187,6 +183,12 @@ ADDON.DB.Family = {
 [1430] = true, -- Desertwing Hunter
 [1536] = true, -- Mawdapted Raptora
 [1537] = true, -- Raptora Swooper
+},
+["Raven"] = {
+[600] = true, -- Dread Raven
+[753] = true, -- Corrupted Dreadwing
+[2525] = true, -- Prophet's Great Raven
+[2529] = true, -- Archmage's Great Raven
 },
 ["Roc"] = {
 [1350] = true, -- Colossal Slaughterclaw
