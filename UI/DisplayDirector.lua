@@ -82,7 +82,7 @@ local function GetAnimationsOfCurrentMount()
         ["fly_idle"] = 2015, -- AnimID=548
         ["fly"] = 3146, --AnimID=557
     }
-    if WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC then
+    if ADDON.isClassic then
         animations["walk_back"] = nil
         animations["fly_idle"] = nil
         animations["fly"] = 1273 -- 556

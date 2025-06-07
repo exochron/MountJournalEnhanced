@@ -19,7 +19,7 @@ end
 function ADDON.Api:GetMountInfoByID(mountId)
     local creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, isSteadyFlight, a, b, c, d, e, f, g, h = C_MountJournal.GetMountInfoByID(mountId)
     isUsable = isUsable and C_Spell.IsSpellUsable(spellId)
-    isSteadyFlight = isSteadyFlight and WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
+    isSteadyFlight = isSteadyFlight and ADDON.isRetail
 
     return creatureName, spellId, icon, active, isUsable, sourceType, isFavorite, isFaction, faction, hideOnChar, isCollected, mountID, isSteadyFlight, a, b, c, d, e, f, g, h
 end

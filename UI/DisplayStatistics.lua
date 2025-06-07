@@ -15,7 +15,7 @@ do
         Wowhead = ADDON.L["LINK_WOWHEAD"],
     }
 
-    if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+    if ADDON.isClassic then
         options.CustomizationCount = nil
         options.Rarity = nil
     end
@@ -153,6 +153,8 @@ local function setupContainer()
         end
         if  WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC then
             lang = "cata/"..lang
+        elseif  WOW_PROJECT_ID == WOW_PROJECT_MISTS_CLASSIC then
+            lang = "mop-classic/"..lang
         end
 
         StaticPopup_Show("MJE_COPY", nil, nil, "https://www.wowhead.com/"..lang.."/spell="..spellId)
@@ -281,7 +283,7 @@ local function updateContainer(mountId, container)
     end
 
     container.Rarity:Hide()
-    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE and settings.Rarity then
+    if ADDON.isRetail and settings.Rarity then
         LibMountsRarity = LibMountsRarity or LibStub("MountsRarity-2.0")
         local rarity = LibMountsRarity:GetRarityByID(mountId)
         if rarity ~= nil then

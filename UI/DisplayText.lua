@@ -15,8 +15,6 @@ local function replaceTextWithLinks()
     local mountId = ADDON.Api:GetSelected()
     local _, spellId, _, _, _, sourceType = C_MountJournal.GetMountInfoByID(mountId)
 
-    local isClassic = WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC
-
     local achievementIds = ADDON.DB.Source.Achievement[spellId] or ADDON.DB.FeatsOfStrength[mountId]
     if achievementIds and achievementIds ~= true then
         if type(achievementIds)=="number" then
@@ -33,7 +31,7 @@ local function replaceTextWithLinks()
                 else
                     local _, name = GetAchievementInfo(achievementId)
                     if name then
-                        if isClassic and "" == sourceText then
+                        if ADDON.isClassic and "" == sourceText then
                             sourceText = "|cffffd200"..BATTLE_PET_SOURCE_6..":|r "..link
                         else
                             name = name:gsub("([()-])", "%%%1")
@@ -46,7 +44,7 @@ local function replaceTextWithLinks()
                 end
             end
         end
-    elseif not isClassic and ADDON.DB.Source.Drop[spellId] and ADDON.DB.Source.Drop[spellId] ~= true then
+    elseif ADDON.isRetail and ADDON.DB.Source.Drop[spellId] and ADDON.DB.Source.Drop[spellId] ~= true then
         -- no map pins in classic yet
         local _, _, sourceText = C_MountJournal.GetMountInfoExtraByID(mountId)
         local mapId = ADDON.DB.Source.Drop[spellId][1]
@@ -68,8 +66,10 @@ local function replaceTextWithLinks()
         local encounterId = ADDON.DB.Source.Instance[spellId][1]
         local difficultyId = ADDON.DB.Source.Instance[spellId][2]
         local name = EJ_GetEncounterInfo(encounterId)
-        local link = C_EncounterJournal.GetEncounterJournalLink(1, encounterId, name, difficultyId)
-        updateSourceText(link, sourceText)
+        if name then
+            local link = C_EncounterJournal.GetEncounterJournalLink(1, encounterId, name, difficultyId)
+            updateSourceText(link, sourceText)
+        end
     elseif ADDON.DB.Source.Shop[spellId] or sourceType == 10 then
         -- https://warcraft.wiki.gg/wiki/Hyperlinks#storecategory can only open to certain categories. mounts are not among them yet. (see: SetItemRef)
         local text = "|cffffd000|Hitem:mje_openstore|h["..BATTLE_PET_SOURCE_10.."]|h|r"

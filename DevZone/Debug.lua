@@ -6,25 +6,6 @@ end
 
 ADDON.Debug = {}
 
-local lastProfileTimes = {}
-local lastProfileCounts = {}
---- to actually use this enable the cvar: scriptProfile
-function ADDON.Debug:ProfileFunction(name, func, includeSubroutines)
-    local lastTime = lastProfileTimes[name] or 0
-    local lastCount = lastProfileCounts[name] or 0
-    local totalTime, totalCount = GetFunctionCPUUsage(func, includeSubroutines)
-    if totalCount > lastCount then
-        print("*" .. name .. "*", "current_time=" .. (totalTime - lastTime), "total_time=" .. totalTime, "total_count=" .. totalCount)
-        lastProfileTimes[name] = totalTime
-        lastProfileCounts[name] = totalCount
-    end
-end
-function ADDON.Debug:WatchFunction(name, func, includeSubroutines)
-    C_Timer.NewTicker(5, function()
-        ADDON.Debug:ProfileFunction(name, func, includeSubroutines)
-    end)
-end
-
 local function runFilterTest(testName)
     ADDON:ResetFilterSettings()
     for key, value in pairs(ADDON.settings.filter[testName]) do
@@ -85,7 +66,7 @@ local function testDatabase()
         MJEGlobalSettings.filter = ADDON.settings.filter
     end
 
-    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+    if ADDON.isRetail then
         checkDBForOldMountIds(ADDON.DB.FeatsOfStrength, "FeatsOfStrength")
         checkDBForOldMountIds(ADDON.DB.Expansion, "Expansion")
         checkDBForOldMountIds(ADDON.DB.Type, "Type")

@@ -1654,6 +1654,7 @@ ADDON.DB.Expansion = {
     [4] = { -- Mists of Pandaria
         ["minID"] = 448,
         ["maxID"] = 571,
+        [467] = true, -- Cataclysmic Gladiator's Twilight Drake
     },
 
     [5] = { -- Warlords of Draenor
@@ -1747,12 +1748,12 @@ ADDON.DB.Expansion = {
 
 ADDON.DB.Type = {
     -- https://warcraft.wiki.gg/wiki/API_C_MountJournal.GetMountInfoExtraByID
-    -- https://wow.tools/dbc/?dbc=mounttype
+    -- https://wago.tools/db2/MountType
     ground = {
         typeIDs = { 225, 230, 231, 241, 269, 284, 408, 412 },
     },
     flying = {
-        typeIDs = { 229, 238, 247, 248, 398, 402, 407, 424, 426, 428, 429, 436, 437, 444, 445 },
+        typeIDs = { 229, 238, 247, 248, 263, 398, 402, 407, 424, 426, 428, 429, 436, 437, 444, 445 },
     },
     underwater = {
         typeIDs = { 231, 232, 254, 407, 412, 436},

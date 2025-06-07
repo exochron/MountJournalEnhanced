@@ -1,5 +1,8 @@
 local ADDON_NAME, ADDON = ...
 
+ADDON.isRetail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
+ADDON.isClassic = not ADDON.isRetail
+
 -- see: https://www.townlong-yak.com/framexml/live/Blizzard_SharedXML/CallbackRegistry.lua
 ADDON.Events = CreateFromMixins(EventRegistry)
 ADDON.Events:OnLoad()
