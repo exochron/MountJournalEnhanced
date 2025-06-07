@@ -154,9 +154,10 @@ local function CheckAllSettings(settings)
     for _, value in pairs(settings) do
         if type(value) == "table" then
             local subResult = CheckAllSettings(value)
-            if (subResult ~= false) then
+            if subResult ~= false then
                 allDisabled = false
-            elseif (subResult ~= true) then
+            end
+            if subResult ~= true then
                 allEnabled = false
             end
         elseif (value) then
