@@ -3,7 +3,7 @@ local _, ADDON = ...
 local build = select(4, GetBuildInfo())
 if build < 50000 then
     ADDON.DB.Recent = {
-        ["minID"] = 2313, -- some next mount
+        ["minID"] = 2313,
         ["blacklist"] = {},
         ["whitelist"] = {1931, 1932, 1933, 1934 },
     }
@@ -89,20 +89,24 @@ ADDON.DB.Source.Shop[1224645] = true; -- Meeksi Rufflemane (classic)
 ADDON.DB.Source.Shop[1224646] = true; -- Meeksi Wanderpaw (classic)
 ADDON.DB.Source.Shop[1224647] = true; -- Meeksi Brewrobber (classic)
 
+-- classics keeps mostly old mount Ids. meaning we have to add newer mounts manually
 --ADDON.DB.Expansion[0][1843] = true; -- Tiger
 ADDON.DB.Expansion[1][1761] = true; -- Reawakened Phase-Hunter (TBC Classic)
+
 ADDON.DB.Expansion[2][1762] = true; -- Kalu'ak Whalebone Glider (WotLK Classic)
 ADDON.DB.Expansion[2][1769] = true; -- Hao-Yue, River Foreseer
 ADDON.DB.Expansion[2][1770] = true; -- Festering Emerald Drake
 ADDON.DB.Expansion[2][1806] = true; -- Auspicious Arborwyrm
 ADDON.DB.Expansion[2][1832] = true; -- Nightmarish Emerald Drake
-ADDON.DB.Expansion[2][2147] = true; -- Polly Roger
 
--- in cataclysm classic all mounts got new mountIds
-ADDON.DB.Expansion[3].minID = 1807; -- Avatar of Flame (Cataclysm Classic)
-ADDON.DB.Expansion[3].maxID = 2312; -- Chaos-Born Gryphon
+ADDON.DB.Expansion[3][1807] = true; -- Avatar of Flame (Cataclysm Classic)
+ADDON.DB.Expansion[3][2147] = true; -- Polly Roger
+ADDON.DB.Expansion[3][2260] = true; -- Lava Drake
+ADDON.DB.Expansion[3][2309] = true; -- Chaos-Born Dreadwing
+ADDON.DB.Expansion[3][2310] = true; -- Chaos-Born Wind Rider
+ADDON.DB.Expansion[3][2311] = true; -- Chaos-Born Hippogryph
+ADDON.DB.Expansion[3][2312] = true; -- Chaos-Born Gryphon
 
--- mists keeps old mount Ids. meaning but we have to add newer mounts manually
 ADDON.DB.Expansion[4][2340] = true; -- Sha-Touched Riding Tiger
 ADDON.DB.Expansion[4][2341] = true; -- Sha-Touched Cloud Serpent
 ADDON.DB.Expansion[4][2342] = true; -- Meeksi
@@ -114,7 +118,8 @@ ADDON.DB.Expansion[4][2514] = true; -- Meeksi
 ADDON.DB.Expansion[4][2515] = true; -- Meeksi
 ADDON.DB.Expansion[4][2516] = true; -- Meeksi
 ADDON.DB.Expansion[4][2517] = true; -- Meeksi
---ADDON.DB.Expansion[GetClientDisplayExpansionLevel()].maxID = 999999999
+
+ADDON.DB.Expansion[GetClientDisplayExpansionLevel()].maxID = 999999999
 
 -- These are duplicate TCG mounts only existing in classic
 ADDON.DB.Ignored.ids[1763] = true; -- Magic Rooster

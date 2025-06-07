@@ -279,6 +279,38 @@ local function SortByFamily(mountIdA, mountIdB)
     return FallbackByName(mountIdA, mountIdB)
 end
 
+local expansionCache
+local function GetExpansionOfMount(mountId)
+    expansionCache = expansionCache or CreateFleetingCache()
+    return expansionCache:Get(mountId, function()
+        local matchedExpansion = 0
+        for expansion, config in pairs(ADDON.DB.Expansion) do
+            if config[mountId] then
+                return expansion
+            end
+            if mountId >= config.minID and mountId <= config.maxID then
+                matchedExpansion = expansion
+            end
+        end
+
+        if mountId == 417 then
+            print(mountId, matchedExpansion)
+        end
+
+        return matchedExpansion
+    end)
+end
+local function SortByExpansion(mountIdA, mountIdB)
+    local expansionA = GetExpansionOfMount(mountIdA)
+    local expansionB = GetExpansionOfMount(mountIdB)
+
+    if expansionA == expansionB then
+        return FallbackByName(mountIdA, mountIdB)
+    end
+
+    return CheckDescending(expansionA < expansionB)
+end
+
 function ADDON:SortHandler(mountA, mountB)
     local mountIdA, mountIdB = mountA.mountID, mountB.mountID
     if mountIdA == mountIdB then
@@ -306,7 +338,7 @@ function ADDON:SortHandler(mountA, mountB)
     if sortBy == 'type' then
         return SortByType(mountIdA, mountIdB)
     elseif sortBy == 'expansion' then
-        return CheckDescending(mountIdA < mountIdB)
+        return SortByExpansion(mountIdA, mountIdB)
     elseif sortBy == 'rarity' then
         return SortByRarity(mountIdA, mountIdB)
     elseif sortBy == 'family' then
