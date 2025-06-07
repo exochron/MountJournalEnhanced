@@ -215,7 +215,7 @@ local function setupSourceMenu(root)
     local eventRoot = ADDON.UI.FDD:CreateFilterSubmenu(root, BATTLE_PET_SOURCE_7, 236552, eventSettings)
     AddAllAndNone(eventRoot, eventSettings)
 
-    if WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC then
+    if ADDON.isClassic then
         ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, CALENDAR_FILTER_DARKMOON, "Darkmoon Faire", eventSettings, settings), 134481)
         ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, L.EVENT_PLUNDERSTORM, "Plunderstorm", eventSettings, settings), 133168)
         ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, GetCategoryInfo(187), "Love is in the Air", eventSettings, settings), 368564)
@@ -259,7 +259,7 @@ local function setupSourceMenu(root)
     if serverExpansion >= LE_EXPANSION_MISTS_OF_PANDARIA then
         ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, L["Black Market"], "Black Market", settings, true), 626190)
     end
-    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE  then
+    if ADDON.isRetail  then
         ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_12, "Trading Post", settings, true), 4696085)
     end
     ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_10, "Shop", settings, true), 1120721)
@@ -286,8 +286,8 @@ end
 
 local function setupFactionMenu(root)
     local settings = ADDON.settings.filter[SETTING_FACTION]
-    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, FACTION_ALLIANCE, "alliance", settings), WOW_PROJECT_ID == WOW_PROJECT_MAINLINE and 2173919 or 463450)
-    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, FACTION_HORDE, "horde", settings), WOW_PROJECT_ID == WOW_PROJECT_MAINLINE and 2173920 or 463451)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, FACTION_ALLIANCE, "alliance", settings), ADDON.isRetail and 2173919 or 463450)
+    ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, FACTION_HORDE, "horde", settings), ADDON.isRetail and 2173920 or 463451)
     ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, NPC_NAMES_DROPDOWN_NONE, "noFaction", settings), 0)
 end
 
@@ -376,7 +376,7 @@ local function setupFilterMenu(dropdown, root)
 
     setupExpansionMenu(root:CreateButton(EXPANSION_FILTER_TEXT))
     ADDON.UI.FDD:AddColorMenu(root:CreateButton(COLOR))
-    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+    if ADDON.isRetail then
         setupRarityMenu(root:CreateButton(RARITY))
     end
 

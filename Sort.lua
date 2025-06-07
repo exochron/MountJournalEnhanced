@@ -307,8 +307,6 @@ function ADDON:SortHandler(mountA, mountB)
         return SortByType(mountIdA, mountIdB)
     elseif sortBy == 'expansion' then
         return CheckDescending(mountIdA < mountIdB)
-    elseif sortBy == 'expansion' then
-        return CheckDescending(mountIdA < mountIdB)
     elseif sortBy == 'rarity' then
         return SortByRarity(mountIdA, mountIdB)
     elseif sortBy == 'family' then

@@ -1,11 +1,7 @@
 local ADDON_NAME, ADDON = ...
 
-local function isClassic()
-    return WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC
-end
-
 local function togglePortrait(cool)
-    if isClassic() then
+    if ADDON.isClassic then
         if cool then
             CollectionsJournal.portrait:SetTexture("Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\mje.png")
             CollectionsJournal.portrait:SetTexCoord(0, 1, 0, 1)
@@ -23,9 +19,9 @@ local function togglePortrait(cool)
 end
 
 ADDON.Events:RegisterCallback("loadUI", function()
-    local portrait = isClassic() and CollectionsJournal.portrait or CollectionsJournal:GetPortrait()
+    local portrait = ADDON.isClassic and CollectionsJournal.portrait or CollectionsJournal:GetPortrait()
 
-    if isClassic()  then
+    if ADDON.isClassic  then
         -- SetPortraitToTexture() doesn't work for own textures/pngs :(
         -- so we need to add a mask as well.
         local mask = CollectionsJournal:CreateMaskTexture()

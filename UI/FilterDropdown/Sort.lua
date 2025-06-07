@@ -33,7 +33,7 @@ function ADDON.UI.FDD:AddSortMenu(root)
     CreateSortRadio(root, TYPE, 'type')
     CreateSortRadio(root, L.SORT_BY_FAMILY, 'family')
     CreateSortRadio(root, EXPANSION_FILTER_TEXT, 'expansion')
-    if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+    if ADDON.isRetail then
         CreateSortRadio(root, RARITY, 'rarity')
     end
 
