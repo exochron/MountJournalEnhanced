@@ -1,5 +1,6 @@
 
 ### Next
+- [ ] Minimap icons for LDB plugins
 - [ ] (item info instead of tradable db)
 - opt out of profile system
 - sync dates of mount pairs, which are collected by the same trigger (alliance/horde versions)
