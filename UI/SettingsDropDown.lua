@@ -99,7 +99,8 @@ local function BuildWheelButton()
     highlight:SetBlendMode("ADD")
     highlight:SetAllPoints(icon)
 
-    if ElvUI and MountJournalSummonRandomFavoriteButton.IsSkinned then
+    -- Todo: cleanup after 11.1.7
+    if ElvUI and (MountJournalSummonRandomFavoriteButton.IsSkinned or (MountJournal.SummonRandomFavoriteSpellFrame and MountJournal.SummonRandomFavoriteSpellFrame.Button.IsSkinned)) then
         local E = unpack(ElvUI)
         E:GetModule('Skins'):HandleButton(button)
     end
