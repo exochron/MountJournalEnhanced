@@ -17,7 +17,7 @@ ADDON.Events:RegisterCallback("OnLogin", function()
 end, "random-macro")
 
 ADDON.Events:RegisterCallback("loadUI", function()
-    if not MountJournal.SummonRandomFavoriteButton then
+    if not MountJournal.SummonRandomFavoriteButton and not MountJournal.SummonRandomFavoriteSpellFrame then
         local button = CreateFrame("Button", nil, MountJournal, "MJE_SummonRandomFavoriteButton")
         button:RegisterForDrag("LeftButton")
         button:HookScript("OnEnter", function(self)
