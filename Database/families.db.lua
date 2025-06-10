@@ -388,6 +388,11 @@ ADDON.DB.Family = {
 [2344] = true, -- Meeksi Rollingpaw
 [2345] = true, -- Meeksi Teatuft
 [2346] = true, -- Meeksi Brewthief
+[2513] = true, -- Meeksi Teapuff
+[2514] = true, -- Meeksi Gentlepaw
+[2515] = true, -- Meeksi Rufflemane
+[2516] = true, -- Meeksi Wanderpaw
+[2517] = true, -- Meeksi Brewrobber
 },
 ["Ottuk"] = {
 [1546] = true, -- Iskaara Trader's Ottuk
@@ -496,6 +501,7 @@ ADDON.DB.Family = {
 [2198] = true, -- Kor'kron Warsaber
 [2199] = true, -- Blackrock Warsaber
 [2200] = true, -- [PH] Nightsaber Horde Mount White
+[2586] = true, -- Moonlit Nightsaber
 },
 ["Stone Cats"] = {
 [421] = true, -- Winged Guardian
@@ -648,6 +654,7 @@ ADDON.DB.Family = {
 [1899] = true, -- Armored Razzashi Raptor
 [1907] = true, -- Savage Raptor
 [2339] = true, -- Jani's Trashpile
+[2587] = true, -- Ivory Savagemane
 },
 },
 ["Dragonhawks"] = {
@@ -690,6 +697,7 @@ ADDON.DB.Family = {
 [2143] = true, -- Astral Emperor's Serpent
 [2341] = true, -- Sha-Touched Cloud Serpent
 [2476] = true, -- Sha-Warped Cloud Serpent
+[2582] = true, -- Shaohao's Sage Serpent
 },
 ["Drakes"] = {
 [246] = true, -- Azure Drake
@@ -731,6 +739,7 @@ ADDON.DB.Family = {
 [1936] = true, -- Feldrake
 [2260] = true, -- Lava Drake
 [2473] = true, -- Broodling of Sinestra
+[2518] = true, -- Chrono Corsair
 },
 ["Grand Drakes"] = {
 [442] = true, -- Blazing Drake
@@ -1084,6 +1093,7 @@ ADDON.DB.Family = {
 [547] = true, -- Hearthsteed
 [1168] = true, -- Fiery Hearthsteed
 [1928] = true, -- Tyrael's Charger
+[2605] = true, -- Inarius' Charger
 },
 ["Horned Steeds"] = {
 [222] = true, -- Swift Zhevra
@@ -1180,6 +1190,10 @@ ADDON.DB.Family = {
 [1502] = true, -- Fallen Charger
 [1774] = true, -- Valiance
 [1894] = true, -- Spectral Steed
+[2572] = true, -- Banshee's Chilling Charger
+[2579] = true, -- Forsaken's Grotesque Charger
+[2580] = true, -- Wailing Banshee's Charger
+[2581] = true, -- Banshee's Sickening Charger
 },
 },
 ["Humanoids"] = {
@@ -1533,6 +1547,7 @@ ADDON.DB.Family = {
 [1372] = true, -- Blisterback Bloodtusk
 [1373] = true, -- Gorespine
 [1375] = true, -- Lurid Bloodtusk
+[2600] = true, -- Unarmored Deathtusk Felboar
 },
 ["Camels"] = {
 [398] = true, -- Brown Riding Camel
@@ -1699,10 +1714,14 @@ ADDON.DB.Family = {
 [2249] = true, -- Hand of Reshkigaal
 },
 ["Hover Board"] = {
-[2145] = true, -- [PH] Goblin Surfboard - Blue
+[2145] = true, -- Kickin' Kezan Waveshredder
 [2152] = true, -- Pearlescent Goblin Wave Shredder
 [2333] = true, -- Soweezi's Vintage Waveshredder
 [2334] = true, -- Bronze Goblin Waveshredder
+[2575] = true, -- Grandmaster's Prophetic Board
+[2576] = true, -- Grandmaster's Deep Board
+[2577] = true, -- Grandmaster's Royal Board
+[2578] = true, -- Grandmaster's Smokey Board
 },
 ["Hovercraft"] = {
 [999] = true, -- Xiwyllag ATV
@@ -1746,6 +1765,7 @@ ADDON.DB.Family = {
 [2290] = true, -- Asset Advocator
 [2303] = true, -- Violet Goblin Shredder
 [2313] = true, -- Junkmaestro's Magnetomech
+[2604] = true, -- OC91 Chariot
 },
 ["Mechanical Animals"] = {
 [552] = true, -- Ironbound Wraithcharger

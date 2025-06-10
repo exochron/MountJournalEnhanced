@@ -2,11 +2,20 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
-ADDON.DB.Recent = {
-    ["minID"] = 2496,
-    ["blacklist"] = { 2507, 2508 },
-    ["whitelist"] = { 1824, 1948, 2178 },
-}
+local build = select(4, GetBuildInfo())
+if build < 110107 then
+    ADDON.DB.Recent = {
+        ["minID"] = 2496,
+        ["blacklist"] = { 2507, 2508 },
+        ["whitelist"] = { 1824, 1948, 2178 },
+    }
+else
+    ADDON.DB.Recent = {
+        ["minID"] = 2572,
+        ["blacklist"] = {  },
+        ["whitelist"] = { 2518 },
+    }
+end
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -993,6 +1002,7 @@ ADDON.DB.Source = {
         [1217235] = 41533, -- Crimson Shreddertank - WW Keystone Master S2
         [1218314] = 41966, -- Ny'alothan Shadow Worm - Mastering the Visions
         [1221694] = 40951, -- Enterprising Shreddertank - WW Keystone Legend S2
+        [1241263] = 42212, -- OC91 Chariot - Titan Console Overcharged
 
         ------------------------------
         -- Alliance ------------------
@@ -1355,7 +1365,7 @@ ADDON.DB.Source = {
     },
 
     ["World Event"] = {
-        -- https://wow.tools/dbc/?dbc=mount#page=1&colFilter[6]=6
+        -- https://wago.tools/db2/Mount?filter%5BSourceTypeEnum%5D=6&page=1
         --sourceType = { 7 }, -- cant use it, because some mounts are missassigned
 
         ["Timewalking"] = {
@@ -1374,6 +1384,9 @@ ADDON.DB.Source = {
             [1214940] = true, -- Ur'zul Fleshreaper
             [1214946] = true, -- Broodling of Sinestra
             [1214974] = true, -- Copper-Maned Quilen
+            [1226144] = true, -- Chrono Corsair
+            [1237631] = true, -- Moonlit Nightsaber
+            [1237703] = true, -- Ivory Savagemane
         },
 
         ["Darkmoon Faire"] = {
@@ -1425,6 +1438,8 @@ ADDON.DB.Source = {
         },
 
         ["Anniversary"] = {
+            [62048] = true, -- Illidari Doomhawk - 17th Anniversary
+            [294197] = true, -- Obsidian Worldbreaker - 15th Anniversary
             [428013] = true, -- Incognitro
             [452643] = true, -- Frayfeather Hippogryph
             [463133] = true, -- Coldflame Tempest
@@ -1503,8 +1518,7 @@ ADDON.DB.Source = {
         --  8 = promotion
         --  9 = TCG
 
-        [62048] = true, -- Illidari Doomhawk - 17th Anniversary
-        [294197] = true, -- Obsidian Worldbreaker - 15th Anniversary
+        [1241429] = true, -- Inarius Charger - 20th Anniversary Diable
     },
 }
 
