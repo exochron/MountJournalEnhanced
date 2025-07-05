@@ -48,16 +48,6 @@ ADDON.DB.Tradable = {
 [1287] = true, -- Explorer's Jungle Hopper
 [1288] = true, -- Explorer's Dunetrekker
 [1799] = true, -- Eve's Ghastly Rider
-[1843] = true, -- Tiger
-[1896] = true, -- Sandstone Drake
-[1897] = true, -- Mottled Drake
-[1901] = true, -- Amani Dragonhawk
-[1907] = true, -- Savage Raptor
-[1915] = true, -- Swift Shorestrider
-[1920] = true, -- Swift Lovebird
-[1921] = true, -- White Riding Camel
-[1922] = true, -- Corrupted Hippogryph
-[1936] = true, -- Feldrake
 [2158] = true, -- Crowd Pummeler 2-30
 [2255] = true, -- Golden Ashes of Al'ar
 }
