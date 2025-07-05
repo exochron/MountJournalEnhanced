@@ -1,19 +1,11 @@
 local _, ADDON = ...
 
-local build = select(4, GetBuildInfo())
-if build < 50000 then
-    ADDON.DB.Recent = {
-        ["minID"] = 2313,
-        ["blacklist"] = {},
-        ["whitelist"] = {1931, 1932, 1933, 1934 },
-    }
-else
-    ADDON.DB.Recent = {
-        ["minID"] = 2340,
-        ["blacklist"] = {},
-        ["whitelist"] = { },
-    }
-end
+--local build = select(4, GetBuildInfo())
+ADDON.DB.Recent = {
+    ["minID"] = 2340,
+    ["blacklist"] = {},
+    ["whitelist"] = { },
+}
 
 -- in classic no mount has a sourceType set. so generic filter doesn't work.
 -- => add manually for professions, shop and tcg :(
