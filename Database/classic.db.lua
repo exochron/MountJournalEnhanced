@@ -81,6 +81,11 @@ ADDON.DB.Source.Shop[1224645] = true; -- Meeksi Rufflemane (classic)
 ADDON.DB.Source.Shop[1224646] = true; -- Meeksi Wanderpaw (classic)
 ADDON.DB.Source.Shop[1224647] = true; -- Meeksi Brewrobber (classic)
 
+ADDON.DB.Source.Achievement[1247591] = 60901; -- Celestial Riding Crane
+ADDON.DB.Source.Drop[1247596] = true; -- Celestial Riding Serpent
+ADDON.DB.Source.Drop[1247597] = true; -- Celestial Riding Ox
+ADDON.DB.Source.Drop[1247598] = true; -- Celestial Riding Tiger
+
 -- classics keeps mostly old mount Ids. meaning we have to add newer mounts manually
 --ADDON.DB.Expansion[0][1843] = true; -- Tiger
 ADDON.DB.Expansion[1][1761] = true; -- Reawakened Phase-Hunter (TBC Classic)

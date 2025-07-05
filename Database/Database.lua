@@ -972,10 +972,6 @@ ADDON.DB.Source = {
         [439138] = 19574, -- Voyaging Wilderling - Awakening the Dragonflight Raids
         [440444] = 20501, -- Zovaal's Soul Eater - Back from the Beyond
 
-        -- Remix: MoP
-        [446017] = 20593, -- August Phoenix
-        [446022] = 19876, -- Astral Emperor's Serpent
-
         -- War Within
         [447160] = 40097, -- Raging Cinderbee
         [447190] = 40232, -- Shadowed Swarmite - Glory of the Nerub-ar Raider
@@ -1618,6 +1614,8 @@ ADDON.DB.FeatsOfStrength = {
     [1831] = {19091, 19295}, -- Verdant Gladiator's Slitherdrake - Gladiator: Dragonflight Season 3
     [2056] = 19501, -- Vicious Dreamtalon -- Draconic Combatant
     [2057] = 19502, -- Vicious Dreamtalon -- Draconic Combatant
+    [2142] = 20593, -- August Phoenix
+    [2143] = 19876, -- Astral Emperor's Serpent
     [2150] = 40397, -- Vicious Skyflayer - Forged Combatant -- War Within: Season 1
     [2211] = 40396, -- Vicious Skyflayer - Forged Combatant -- War Within: Season 1
     [2218] = {40398, 40393}, -- Forged Gladiator's Fel Bat - Gladiator: War Within Season 1
