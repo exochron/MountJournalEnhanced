@@ -2,6 +2,7 @@
 This addon extends the ingame mount journal with some cool stuff.
 
 ## 🎬 In Action
+- [YouTube: Addon Spotlight in Saturday WoW News](https://www.youtube.com/watch?v=epkrf0TiL9A&t=412s) (06/2025 by [HazzelNuttyGames](https://www.twitch.tv/hazelnuttygames))
 - [YouTube: Top 10 BEST Addons EVERY Collector Should Have! WoW Dragonflight](https://www.youtube.com/watch?v=c2a4NKMGimM&t=221s) (02/2024 by [AndriKatsGames](https://www.twitch.tv/andrikatsgames))
 - [YouTube: 9 Must Have Addons for Mount Collectors and Farmers](https://www.youtube.com/watch?v=O4Sb1CtPado&t=530s) (08/2023 by [Syiler](https://www.twitch.tv/syiler))
 - [TikTok: Great Addon for Mount collectors](https://www.tiktok.com/@touchpadwarrior/video/7216081879886269739) (03/2023 by [Touchpadwarrior](https://www.twitch.tv/touchpadwarrior))
