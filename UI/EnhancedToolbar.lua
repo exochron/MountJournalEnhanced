@@ -8,8 +8,6 @@ local function renderToolbar()
 
     if MountJournal.SummonRandomFavoriteSpellFrame then
         lastButton = MountJournal.SummonRandomFavoriteSpellFrame.Button
-    elseif MountJournal.SummonRandomFavoriteButton then -- Todo: remove after 11.1.7
-        lastButton = MountJournal.SummonRandomFavoriteButton
     end
 
     local names = GetKeysArray(buttonList)
@@ -39,8 +37,6 @@ local function renderToolbar()
 
     if MountJournal.SummonRandomFavoriteSpellFrame then
         MountJournal.SummonRandomFavoriteSpellFrame.Label:SetShown(not hasElements)
-    elseif MountJournal.SummonRandomFavoriteButton then -- Todo: remove after 11.1.7
-        MountJournal.SummonRandomFavoriteButton.spellname:SetShown(not hasElements)
     end
 end
 
