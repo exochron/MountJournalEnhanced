@@ -117,6 +117,7 @@ local function PrepareDefaults()
                 {
                     name = "",
                     autoFavor = false,
+                    initialScan = false,
                     mounts = {},
                 }
             },
@@ -176,7 +177,7 @@ local function CombineSettings(settings, defaultSettings)
     end
 end
 
--- Later: remove after 2025-10
+-- Later: maybe remove after 2025-10. or probably way later
 local function MigrateToFavoriteProfiles(personalSettings, globalSettings)
     if personalSettings.favoritePerChar and personalSettings.favoredMounts then
         local playerGuid = UnitGUID("player")
