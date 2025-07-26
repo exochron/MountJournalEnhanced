@@ -109,6 +109,15 @@ local function checkForTaint()
     taintedList = checkTaintedTable(MountJournal, "MountJournal", taintedList)
 end
 
+function MJE_CheckBackgroundFavorites()
+    for i = 1, 100 do
+        local name, _, _, _, _, _, isFavorite,_,_,_,_,mountId = C_MountJournal.GetDisplayedMountInfo(i)
+        if isFavorite then
+            print("Favorit:", name, mountId)
+        end
+    end
+end
+
 ADDON.Events:RegisterCallback("postloadUI", function()
     testDatabase()
 
