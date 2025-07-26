@@ -1249,6 +1249,9 @@ ADDON.DB.Family = {
 ["Water Striders"] = {
 [449] = true, -- Azure Water Strider
 [488] = true, -- Crimson Water Strider
+[489] = true, -- Orange Water Strider
+[490] = true, -- Jade Water Strider
+[491] = true, -- Golden Water Strider
 },
 },
 ["Jellyfish"] = {
@@ -1341,6 +1344,8 @@ ADDON.DB.Family = {
 [2239] = true, -- Keg Leg's Radiant Crocolisk
 [2240] = true, -- Plunderlord's Midnight Crocolisk
 [2241] = true, -- Plunderlord's Weathered Crocolisk
+[2532] = true, -- Herald of Sa'bak
+[2594] = true, -- Envoy of Sa'bak
 },
 ["Kodos"] = {
 [71] = true, -- Gray Kodo
