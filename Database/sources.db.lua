@@ -219,6 +219,12 @@ ADDON.DB.Source["Unavailable"] = {
 [466812] = true, -- Chaos-Forged Hippogryph
 [466838] = true, -- Chaos-Forged Dreadwing
 [466845] = true, -- Chaos-Forged Wind Rider
+[473739] = true, -- Meeksi Rufflefur
+[473741] = true, -- Meeksi Softpaw
+[473743] = true, -- Meeksi Rollingpaw
+[473745] = true, -- Meeksi Brewthief
+[1227076] = true, -- Tyrannotort
+[1241429] = true, -- Inarius' Charger
 }
 
 MergeTable(ADDON.DB.Source.Drop, {
