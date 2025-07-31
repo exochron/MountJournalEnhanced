@@ -1659,6 +1659,7 @@ ADDON.DB.Expansion = {
         ["minID"] = 448,
         ["maxID"] = 571,
         [467] = true, -- Cataclysmic Gladiator's Twilight Drake
+        [2582] = true, -- Shaohao's Sage Serpent (MoP Classic)
     },
 
     [5] = { -- Warlords of Draenor
