@@ -2,12 +2,20 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
---local build = select(4, GetBuildInfo())
-ADDON.DB.Recent = {
-    ["minID"] = 2572,
-    ["blacklist"] = {  },
-    ["whitelist"] = { 2518 },
-}
+local build = select(4, GetBuildInfo())
+if build < 110200 then
+    ADDON.DB.Recent = {
+        ["minID"] = 2572,
+        ["blacklist"] = {  },
+        ["whitelist"] = { 2518 },
+    }
+else
+    ADDON.DB.Recent = {
+        ["minID"] = 2601,
+        ["blacklist"] = {2604,2605  },
+        ["whitelist"] = { 1482,1483,2326,2505,2510,2511,2512,2549,2552,2555,2556,2557,2560,2561,2569,2570,2571 },
+    }
+end
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -83,6 +91,11 @@ ADDON.DB.Source = {
         [466026] = true, -- Salvaged Goblin Gazillionaire's Flying Machine
         [471562] = true, -- Thrayir, Eyes of the Siren (secret hunt)
         [1228865] = true, -- Void-Scarred Lynx -- Daily Incursions in Hallowfall
+        [1233561] = true, -- Curious Slateback
+        [1240632] = true, -- Pearlesent Krolusk
+        [1241070] = true, -- Translocated Gorger
+        [1241076] = true, -- Sthaarb's Last Lunch
+
     },
 
     ["Quest"] = {
@@ -152,7 +165,9 @@ ADDON.DB.Source = {
         [466027] = true, -- Darkfuse Spy-Eye -- WQ
         [466133] = true, -- Delver's Gob-Trotter -- I Want My Hat Back
         [474086] = true, -- Prismatic Snapdragon
-        [1227076] = true, -- Tyrannotort
+        [1221132] = true, -- Resplendent K'arroc
+        [1224048] = true, -- Delver's Manaskimmer
+        [1233559] = true, -- Blue Barry
 
         ------------------------------
         -- Alliance ------------------
@@ -293,6 +308,8 @@ ADDON.DB.Source = {
         [473137] = true, -- Soweezi's Vintage Waveshredder
         [1218316] = true, -- Corruption of the Aspects
         [1226421] = true, -- Radiant Imperial Lynx -- renown
+        [1233518] = true, -- Lavender K'arroc
+        [1233547] = true, -- Acidic Void Creeper
 
         ------------------------------
         -- Alliance ------------------
@@ -595,6 +612,7 @@ ADDON.DB.Source = {
         [423873] = true, -- Suntouched Dreamstag - Emerald Dream Renown vendor
         [423891] = true, -- Lunar Dreamstag - Emerald Dream Renown vendor
 
+        [353265] = true, -- Vandal's Gearglider -- Manaforge Vandals Renown 5
         [447057] = true, -- Smoldering Cinderbee
         [447176] = true, -- Cyan Glowmite
         [447185] = true, -- Aquamarine Swarmite
@@ -622,6 +640,9 @@ ADDON.DB.Source = {
         [466028] = true, -- Mean Green Flying Machine -- renown
         [473188] = true, -- Bronze Goblin Waveshredder -- Trove
         [1226421] = true, -- Radiant Imperial Lynx -- renown
+        [1223187] = true, -- Terror of the Wastes -- K'aresh Trust renown 19
+        [1233542] = true, -- The Bone Freezer - Manaforge Vandals renown 14
+        [1233546] = true, -- Ruby Void Creeper - K'aresh Trust 15
 
         ------------------------------
         -- Alliance ------------------
@@ -991,6 +1012,11 @@ ADDON.DB.Source = {
         [1218314] = 41966, -- Ny'alothan Shadow Worm - Mastering the Visions
         [1221694] = 40951, -- Enterprising Shreddertank - WW Keystone Legend S2
         [1241263] = 42212, -- OC91 Chariot - Titan Console Overcharged
+        [1223191] = 41980, -- Terror of the Night - Vigilante
+        [1233511] = 41597, -- Umbral K'arroc - Glory of the Omega Raider
+        [1245517] = 42172, -- Scarlet Void Flyer - WW Keystone Legend S3
+        [1246781] = 41973, -- Azure Void Flyer - WW Keystone Master S3
+        [1250578] = 61017, -- Phase-Lost Slateback - Phase-Lost-and-Found
 
         ------------------------------
         -- Alliance ------------------
@@ -1163,6 +1189,7 @@ ADDON.DB.Source = {
         [434477] = true, -- Vicious Dreamtalon - Dragonflight: Season 4
         [447405] = true, -- Vicious Skyflayer - War Within: Season 1
         [449325] = true, -- Vicious Skyflayer - War Within: Season 1
+        [472157] = true, -- Astral Gladiator's Fel Bat - Gladiator: The War Within Season 3
 
         -- Prestige Reward
         [222202] = true, -- Prestigious Bronze Courser
@@ -1200,9 +1227,11 @@ ADDON.DB.Source = {
         [348770] = true, -- Vicious War Gorm
         [347256] = true, -- Vicious War Croaker
         [349824] = true, -- Vicious War Warstalker
+        [394737] = true, -- Vicious Sabertooth
         [409034] = true, -- Vicious War Snail
         [424534] = true, -- Vicious Moon Beast
         [466145] = true, -- Vicious Electro Eel
+        [1234820] = true, -- Vicious Void Creeper
 
         -- Achievement
         [60118] = true, -- Black War Bear - For The Alliance!
@@ -1248,9 +1277,11 @@ ADDON.DB.Source = {
         [348769] = true, -- Vicious War Gorm
         [347255] = true, -- Vicious War Croaker
         [349823] = true, -- Vicious War Warstalker
+        [394738] = true, -- Vicious Sabertooth
         [409032] = true, -- Vicious War Snail
         [424535] = true, -- Vicious Moon Beast
         [466146] = true, -- Vicious Electro Eel
+        [1234821] = true, -- Vicious Void Creeper
 
         -- Achievement
         [60119] = true, -- Black War Bear - For The Horde!
@@ -1423,6 +1454,7 @@ ADDON.DB.Source = {
             [43900] = true, -- Swift Brewfest Ram
             [49378] = true, -- Brewfest Riding Kodo
             [49379] = true, -- Great Brewfest Kodo
+            [1247662] = true, -- Brefest Barrel Bomber
         },
 
         ["Anniversary"] = {
@@ -1505,8 +1537,6 @@ ADDON.DB.Source = {
         sourceType = { 8, 9 },
         --  8 = promotion
         --  9 = TCG
-
-        [1241429] = true, -- Inarius Charger - 20th Anniversary Diable
     },
 }
 
@@ -1622,6 +1652,9 @@ ADDON.DB.FeatsOfStrength = {
     [2298] = {41032, 41362}, -- Prized Gladiator's Fel Bat - Gladiator: War Within Season 2
     [2299] = 41129, -- Vicious Electro Eel - Prized Combatant
     [2300] = 41128, -- Vicious Electro Eel - Prized Combatant
+    [2326] = 41049, -- Astral Gladiator's Fel Bat - Gladiator: The War Within Season 3
+    [2570] = 42043, -- Vicious Void Creeper - Astral Combatant
+    [2571] = 42042, -- Vicious Void Creeper - Astral Combatant
 }
 
 ADDON.DB.Expansion = {

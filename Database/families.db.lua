@@ -70,6 +70,7 @@ ADDON.DB.Family = {
 [2298] = true, -- Prized Gladiator's Fel Bat
 [2307] = true, -- Chaos-Forged Dreadwing
 [2309] = true, -- Chaos-Born Dreadwing
+[2326] = true, -- Astral Gladiator's Fel Bat
 },
 ["Birds"] = {
 ["Albatross"] = {
@@ -191,6 +192,9 @@ ADDON.DB.Family = {
 [1409] = true, -- Bonesewn Fleshroc
 [1410] = true, -- Hulking Deathroc
 [1411] = true, -- Predatory Plagueroc
+[2505] = true, -- Resplendent K'arroc
+[2549] = true, -- Umbral K'arroc
+[2552] = true, -- Lavender K'arroc
 },
 ["Tallstriders"] = {
 [426] = true, -- Swift Shorestrider
@@ -268,6 +272,12 @@ ADDON.DB.Family = {
 [986] = true, -- Bleakhoof Ruinstrider
 [1567] = true, -- Lightforged Ruinstrider
 [1568] = true, -- Lightforged Ruinstrider
+[2630] = true, -- Ornery Breezestrider
+},
+["Slateback"] = {
+[2560] = true, -- Blue Barry
+[2561] = true, -- Curious Slateback
+[2655] = true, -- Phase-Lost Slateback
 },
 ["Talbuks"] = {
 [151] = true, -- Dark War Talbuk
@@ -563,10 +573,12 @@ ADDON.DB.Family = {
 ["Gorger"] = {
 [1391] = true, -- Loyal Gorger
 [1443] = true, -- Voracious Gorger
+[2602] = true, -- Translocated Gorger
 },
 ["Mauler"] = {
 [1454] = true, -- Tamed Mauler
 [1514] = true, -- Rampaging Mauler
+[2603] = true, -- Sthaarbs's Last Lunch
 },
 },
 ["Dinosaurs"] = {
@@ -717,6 +729,8 @@ ADDON.DB.Family = {
 [2260] = true, -- Lava Drake
 [2473] = true, -- Broodling of Sinestra
 [2518] = true, -- Chrono Corsair
+[2569] = true, -- Unbound Star-Eater
+[2606] = true, -- Royal Voidwing
 },
 ["Grand Drakes"] = {
 [442] = true, -- Blazing Drake
@@ -906,6 +920,10 @@ ADDON.DB.Family = {
 [2304] = true, -- Chaos-Forged Gryphon
 [2312] = true, -- Chaos-Born Gryphon
 [2496] = true, -- Void-Scarred Gryphon
+[2626] = true, -- Adorned Northeron Gryphon
+[2627] = true, -- High Shaman's Aerie Gryphon
+[2628] = true, -- Cinder-Plumed Highland Gryphon
+[2629] = true, -- Emberwing Sky Guide
 },
 ["Hippogryphs"] = {
 [203] = true, -- Cenarion War Hippogryph
@@ -1040,6 +1058,10 @@ ADDON.DB.Family = {
 [547] = true, -- Hearthsteed
 [1168] = true, -- Fiery Hearthsteed
 [2605] = true, -- Inarius' Charger
+[2622] = true, -- The Headless Horseman's Chilling Charger
+[2623] = true, -- The Headless Horseman's Ghoulish Charger
+[2624] = true, -- The Headless Horseman's Burning Charger
+[2625] = true, -- The Headless Horseman's Hallowed Charger
 },
 ["Horned Steeds"] = {
 [222] = true, -- Swift Zhevra
@@ -1201,6 +1223,7 @@ ADDON.DB.Family = {
 [1172] = true, -- Conqueror's Scythemaw
 [1214] = true, -- Azureshell Krolusk
 [1215] = true, -- Rubyshell Krolusk
+[2601] = true, -- Pearlescent Krolusk
 },
 ["Moth"] = {
 [1332] = true, -- Silky Shimmermoth
@@ -1239,6 +1262,19 @@ ADDON.DB.Family = {
 [2219] = true, -- Sureki Skyrazor
 [2222] = true, -- Siesbarg
 [2223] = true, -- Ascendant Skyrazor
+},
+["Void Creeper"] = {
+[2555] = true, -- The Bone Freezer
+[2556] = true, -- Ruby Void Creeper
+[2557] = true, -- Acidic Void Creeper
+[2570] = true, -- Vicious Void Creeper
+[2571] = true, -- Vicious Void Creeper
+},
+["Void Flyer"] = {
+[2510] = true, -- Terror of the Wastes
+[2511] = true, -- Terror of the Night
+[2631] = true, -- Scarlet Void Flyer
+[2633] = true, -- Azure Void Flyer
 },
 ["Wasp"] = {
 [1433] = true, -- Vespoid Flutterer
@@ -1531,6 +1567,10 @@ ADDON.DB.Family = {
 [985] = true, -- Avenging Felcrusher
 [1006] = true, -- Lightforged Felcrusher
 [1242] = true, -- Beastlord's Irontusk
+[2618] = true, -- Thunder-ridged Elekk
+[2619] = true, -- Cinder-seared Elekk
+[2620] = true, -- Void-Razed Elekk
+[2621] = true, -- Legion Forged Elekk
 },
 ["Mammoths"] = {
 [254] = true, -- Black War Mammoth
@@ -1607,6 +1647,7 @@ ADDON.DB.Family = {
 [2144] = true, -- Delver's Dirigible
 [2296] = true, -- Delver's Gob-Trotter
 [2332] = true, -- The Breaker's Song
+[2512] = true, -- Delver's Mana-Skimmer
 },
 ["Assault Wagons"] = {
 [1193] = true, -- Meat Wagon
@@ -1635,6 +1676,8 @@ ADDON.DB.Family = {
 [860] = true, -- Archmage's Prismatic Disc
 [1446] = true, -- Tazavesh Gearglider
 [1481] = true, -- Cartel Master's Gearglider
+[1482] = true, -- Xy Trustee's Gearglider
+[1483] = true, -- Vandal's Gearglider
 [1959] = true, -- Compass Rose
 [2060] = true, -- Golden Discus
 [2063] = true, -- Mogu Hazeblazer
@@ -1645,6 +1688,7 @@ ADDON.DB.Family = {
 [205] = true, -- Flying Machine
 [304] = true, -- Mimiron's Head
 [1028] = true, -- Mecha-Mogul Mk2
+[2640] = true, -- Brewfest Barrel Bomber
 },
 ["Hands"] = {
 [1417] = true, -- Hand of Hrestimorak

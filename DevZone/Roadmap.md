@@ -1,6 +1,8 @@
+This is a list of ideas I'd like to add at some point.
 
 ### Next
 - [ ] Minimap icons for LDB plugins
+- [ ] saved filters (4-5x)
 - [ ] (item info instead of tradable db)
 - opt out of profile system
 - sync dates of mount pairs, which are collected by the same trigger (alliance/horde versions)
