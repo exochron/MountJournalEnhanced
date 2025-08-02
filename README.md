@@ -23,9 +23,10 @@ This addon extends the ingame mount journal with some cool stuff.
 - Favor all filtered mounts at once or unset them all
 - Favor new mounts automatically
 - readds Summon Random Mount Button for Cataclysm Classic
+- [LDB] Access your favorite mounts with the data broker plugin.
 
 ## ⚙️ Enhanced Interface
-- __new:__ Tinker on your D.R.I.V.E. setup from anywhere in the world
+- Tinker on your D.R.I.V.E. setup from anywhere in the world
 - [Display] Sync the journal with your current target. (Great for mount mania. ;))
 - [Display] Shows direct link to Wowhead
 - [Display] Freely rotate display camera around mount
