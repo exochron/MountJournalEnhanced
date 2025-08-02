@@ -1692,6 +1692,8 @@ ADDON.DB.Expansion = {
         ["minID"] = 448,
         ["maxID"] = 571,
         [467] = true, -- Cataclysmic Gladiator's Twilight Drake
+        [2476] = true, -- Sha-Warped Cloud Serpent (MoP Classic)
+        [2477] = true, -- Sha-Warped Riding Tiger (MoP Classic)
         [2582] = true, -- Shaohao's Sage Serpent (MoP Classic)
     },
 
