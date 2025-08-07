@@ -119,17 +119,18 @@ end, ADDON_NAME)
 StaticPopupDialogs["MJE_COPY"] = {
     text = ADDON.L.COPY_POPUP,
     button1 = CLOSE,
-    OnShow = function(self, data)
-        local function close(editBox) editBox:GetParent():Hide() end
-        self.editBox:SetScript("OnEscapePressed", close)
-        self.editBox:SetScript("OnEnterPressed", close)
-        self.editBox:SetScript("OnKeyUp", function(editBox, key)
+    OnShow = function(popup, data)
+        local function close() popup:Hide() end
+        local editBox = popup.editBox or popup.EditBox
+        editBox:SetScript("OnEscapePressed", close)
+        editBox:SetScript("OnEnterPressed", close)
+        editBox:SetScript("OnKeyUp", function(_, key)
             if IsControlKeyDown() and key == "C" then
-                close(editBox)
+                close()
             end
         end)
-        self.editBox:SetText(data)
-        self.editBox:HighlightText()
+        editBox:SetText(data)
+        editBox:HighlightText()
     end,
     hasEditBox = true,
     editBoxWidth = 300,
