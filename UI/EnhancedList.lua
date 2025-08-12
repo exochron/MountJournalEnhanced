@@ -122,8 +122,10 @@ local function SetupExtras(button)
             if clickButton ~= "LeftButton" then
                 -- right click is handled in MountListDropDown.lua
                 ADDON.UI:HandleListDropDown(self, self)
+            elseif IsModifiedClick("CHATLINK") and not IsControlKeyDown() and MacroFrame and MacroFrame:IsShown() then
+                local spellName = C_Spell.GetSpellName(self.spellID)
+                ChatEdit_InsertLink(spellName)
             elseif IsModifiedClick("CHATLINK") then
-                -- No MacroFrame exception :>
                 local mountLink = ADDON.Api:GetMountLink(self.spellID);
                 ChatEdit_InsertLink(mountLink);
             elseif self.mountID ~= MountJournal.selectedMountID then
@@ -133,7 +135,10 @@ local function SetupExtras(button)
         button.DragButton:SetScript("OnClick", function(self, clickButton)
             local parent = self:GetParent();
             if clickButton ~= "LeftButton" then
-                ADDON.UI:HandleListDropDown(self:GetParent(), self)
+                ADDON.UI:HandleListDropDown(parent, self)
+            elseif IsModifiedClick("CHATLINK") and not IsControlKeyDown() and MacroFrame and MacroFrame:IsShown() then
+                local spellName = C_Spell.GetSpellName(parent.spellID)
+                ChatEdit_InsertLink(spellName)
             elseif IsModifiedClick("CHATLINK") then
                 local mountLink = ADDON.Api:GetMountLink(parent.spellID);
                 ChatEdit_InsertLink(mountLink);
