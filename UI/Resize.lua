@@ -61,7 +61,9 @@ local function init()
 
     ADDON.UI:SaveSize(CJ)
     CJ:SetResizeBounds(CJ:GetWidth(), CJ:GetHeight())
-    CJ:SetClampedToScreen(true)
+    if not InCombatLockdown() then
+        CJ:SetClampedToScreen(true)
+    end
 
     CJ:HookScript("OnSizeChanged", function(_, width, height)
         if CJ:IsResizable() and CJ.selectedTab == COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS then
@@ -110,6 +112,9 @@ end, ADDON_NAME .. '_Resize')
 ADDON.Events:RegisterFrameEventAndCallback("PLAYER_REGEN_ENABLED", function()
     if loaded then
         SetJournalSize()
+        if not CollectionsJournal:IsClampedToScreen() then
+            CollectionsJournal:SetClampedToScreen(true)
+        end
         CollectionsJournal:SetResizable(ADDON.settings.ui.showResizeEdge and CollectionsJournal.selectedTab == COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS)
     end
 end, ADDON_NAME .. '_Resize')
