@@ -223,7 +223,9 @@ ADDON.DB.Source["Unavailable"] = {
 [473741] = true, -- Meeksi Softpaw
 [473743] = true, -- Meeksi Rollingpaw
 [473745] = true, -- Meeksi Brewthief
+[1226144] = true, -- Chrono Corsair
 [1227076] = true, -- Tyrannotort
+[1236262] = true, -- Shaohao's Sage Serpent
 [1241429] = true, -- Inarius' Charger
 }
 
@@ -244,7 +246,7 @@ MergeTable(ADDON.DB.Source.Drop, {
 [171622] = {550, 6620, 4400, 100.00}, -- Mottled Meadowstomper
 [171636] = {525, 2240, 6600, 99.97}, -- Great Greytusk
 [171824] = {535, 5500, 8120, 100.00}, -- Sapphire Riverbeast
-[171828] = {542, 4710, 7840, 3.71}, -- Solar Spirehawk
+[171828] = {542, 4710, 7840, 3.73}, -- Solar Spirehawk
 [171830] = {539, 3860, 3700, 99.95}, -- Swift Breezestrider
 [171849] = {543, 4200, 2500, 99.84}, -- Sunhide Gronnling
 [171851] = {525, 1300, 5040, 99.99}, -- Garn Nighthowl
@@ -272,7 +274,7 @@ MergeTable(ADDON.DB.Source.Drop, {
 [288505] = {62, 5040, 3240, 4.37}, -- Kaldorei Nightsaber
 [291492] = {1462, 5220, 4160, 0.33}, -- Rusty Mechanocrawler
 [297157] = {1462, 6540, 7840, 0.49}, -- Junkheap Drifter
-[298367] = {864, 4400, 5540, 7.67}, -- Mollie
+[298367] = {864, 4400, 5540, 7.56}, -- Mollie
 [300149] = {1355, 5360, 4140, 1.37}, -- Silent Glider
 [312751] = {1530, 3040, 4100, 2.92}, -- Clutch of Ha-Li
 [312753] = {1525, 5140, 5240, 1.50}, -- Hopecrusher Gargon
@@ -281,7 +283,7 @@ MergeTable(ADDON.DB.Source.Drop, {
 [315847] = {1527, 7380, 8340, 3.01}, -- Drake of the Four Winds
 [315987] = {nil, nil, nil, 100.00}, -- Mail Muncher
 [316275] = {1527, 6800, 3140, 3.34}, -- Waste Marauder
-[316337] = {1527, 3080, 4940, 1.22}, -- Malevolent Drone
+[316337] = {1527, 3080, 4940, 1.21}, -- Malevolent Drone
 [316722] = {1530, 880, 3560, 2.99}, -- Ren's Stalwart Hound
 [316723] = {1530, 3340, 6740, 2.75}, -- Xinlao
 [332457] = {1536, 4400, 5040, 0.61}, -- Bonehoof Tauralus
@@ -310,7 +312,9 @@ MergeTable(ADDON.DB.Source.Drop, {
 [447213] = {2248, 2300, 5860, 60.40}, -- Alunira
 [448941] = {2215, 2580, 5740, 5.66}, -- Beledar's Spawn
 [449258] = {2214, 6080, 7640, 5.94}, -- Ol' Mole Rufus
-[466026] = {2346, 3200, 2140, 1.93}, -- Salvaged Goblin Gazillionaire's Flying Machine
+[466026] = {2346, 3200, 2140, 1.92}, -- Salvaged Goblin Gazillionaire's Flying Machine
 [1218305] = {2404, 6300, 3700, 99.75}, -- Void-Forged Stallion
 [1218306] = {2403, 6080, 5480, 100.00}, -- Void-Scarred Pack Mother
+[1240632] = {2371, 6940, 5000, 7.14}, -- Pearlescent Krolusk
+[1241076] = {2371, 7400, 3240, 7.69}, -- Sthaarbs's Last Lunch
 })
