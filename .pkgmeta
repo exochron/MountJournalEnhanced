@@ -27,6 +27,11 @@ externals:
         url: https://github.com/sgade/MountsRarity
         curse-slug: mountsrarity
 
+    Libs/LibCopyDialog:
+        url: https://github.com/exochron/LibCopyDialog
+        tag: latest
+        curse-slug: libcopydialog
+
     Libs/TaintLess:
         url: https://www.townlong-yak.com/addons.git/taintless
         commit: default
