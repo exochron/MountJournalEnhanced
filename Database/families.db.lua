@@ -661,6 +661,9 @@ ADDON.DB.Family = {
 [549] = true, -- Armored Blue Dragonhawk
 [778] = true, -- Eclipse Dragonhawk
 [1471] = true, -- Vengeance
+[2567] = true, -- Voidwing Dragonhawk
+[2568] = true, -- Lightwing Dragonhawk
+[2598] = true, -- Voidlight Surger
 },
 ["Drakes"] = {
 ["Cloud Serpents"] = {
