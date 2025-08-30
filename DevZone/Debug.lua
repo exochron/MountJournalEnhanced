@@ -76,6 +76,30 @@ local function testDatabase()
     end
 end
 
+local function testFavorites()
+    local _,_, favorites = ADDON.Api:GetFavoriteProfile()
+    local expectedMounts = CopyTable(favorites)
+
+    for i = 1, 100 do
+        local name, _, _, _, _, _, isFavorite, _,_,_,_, mountId = C_MountJournal.GetDisplayedMountInfo(i)
+        if isFavorite then
+            local listIndex = tIndexOf(expectedMounts,mountId)
+            if listIndex then
+                tUnorderedRemove(expectedMounts, listIndex)
+            else
+                print("Mount still favored although not in profile:", mountId, name)
+            end
+        else
+            break
+        end
+    end
+
+    for _, mountId in pairs(expectedMounts) do
+        local name = C_MountJournal.GetMountInfoByID(mountId)
+        print("Mount still not favored:", mountId, name)
+    end
+end
+
 local taintedList = {}
 local function checkTaintedTable(tbl, parentPath, currentList)
     for key, val in pairs(tbl) do
@@ -124,6 +148,9 @@ ADDON.Events:RegisterCallback("postloadUI", function()
     -- disable taint checks for now
     --checkForTaint()
     --C_Timer.NewTicker(1, checkForTaint)
+end, "debug")
+ADDON.Events:RegisterCallback("AfterLogin", function()
+    C_Timer.After(30, testFavorites)
 end, "debug")
 
 function ADDON.Debug:CheckListTaint(process)
