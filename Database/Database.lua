@@ -996,13 +996,10 @@ ADDON.DB.Source = {
         [303767] = 40956, -- Honeyback Hivemother - I'm On Island Time
         [448934] = 41201, -- Shadow of Doubt - You Xal Not Pass
         [468068] = 41286, -- Junkmaestro's Magnetomech - Glory of the Liberation of Undermine Raider
-        [466144] = {41032, 41362}, -- Prized Gladiator's Fel Bat - Gladiator: War Within Season 2
         [471538] = 41056, -- Timely Buzzbee - Master of the Turbulent Timeways II
         [472752] = 41133, -- The Breaker's Song - Isle Remember You
         [473472] = 40953, -- Jani's Trashpile - A Farewell to Arms
-        [1217235] = 41533, -- Crimson Shreddertank - WW Keystone Master S2
         [1218314] = 41966, -- Ny'alothan Shadow Worm - Mastering the Visions
-        [1221694] = 40951, -- Enterprising Shreddertank - WW Keystone Legend S2
         [1241263] = 42212, -- OC91 Chariot - Titan Console Overcharged
         [1223191] = 41980, -- Terror of the Night - Vigilante
         [1233511] = 41597, -- Umbral K'arroc - Glory of the Omega Raider
@@ -1191,8 +1188,6 @@ ADDON.DB.Source = {
         [222240] = true, -- Prestigious Azure Courser
         [222241] = true, -- Prestigious Midnight Courser
         [281044] = true, -- Prestigious Bloodforged Courser
-
-        [466144] = true, -- Prized Gladiator's Fel Bat - Gladiator: War Within Season 2
 
         ------------------------------
         -- Alliance ------------------
@@ -1645,8 +1640,12 @@ ADDON.DB.FeatsOfStrength = {
     [2299] = 41129, -- Vicious Electro Eel - Prized Combatant
     [2300] = 41128, -- Vicious Electro Eel - Prized Combatant
     [2326] = 41049, -- Astral Gladiator's Fel Bat - Gladiator: The War Within Season 3
+    [2480] = 41533, -- Crimson Shreddertank - WW Keystone Master S2
+    [2508] = 40951, -- Enterprising Shreddertank - WW Keystone Legend S2
     [2570] = 42043, -- Vicious Void Creeper - Astral Combatant
     [2571] = 42042, -- Vicious Void Creeper - Astral Combatant
+    [2631] = 42172, -- Scarlet Void Flyer - WW Keystone Legend S3
+    [2633] = 41973, -- Azure Void Flyer - WW Keystone Master S3
 }
 
 ADDON.DB.Expansion = {
