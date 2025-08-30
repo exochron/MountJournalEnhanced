@@ -37,18 +37,28 @@ local function UpdateFavoritesInBackground()
 
     if operationCount > 0 then
         backgroundTimer = C_Timer.NewTicker(0.4, function()
-            for mountId, v in pairs(flippedFavorites) do
-                if v or v == false then
-                    local index =  ADDON.Api:MountIdToOriginalIndex(mountId)
+            local toRemove = {}
+            for mountId, value in pairs(flippedFavorites) do
+                value = value ~= false
+                local _, _, _, _, _, _, isFavorite = C_MountJournal.GetMountInfoByID(mountId)
+                if isFavorite == value then
+                    toRemove[mountId] = mountId
+                else
+                    local index = ADDON.Api:MountIdToOriginalIndex(mountId)
                     if index then
-                        C_MountJournal.SetIsFavorite(index, v ~= false)
+                        C_MountJournal.SetIsFavorite(index, value)
+                        break
                     end
-
-                    flippedFavorites[mountId] = nil
-                    break
                 end
             end
-        end, operationCount)
+            for mountId, _ in pairs(toRemove) do
+                flippedFavorites[mountId] = nil
+            end
+
+            if TableIsEmpty(flippedFavorites) then
+                backgroundTimer:Cancel()
+            end
+        end)
     end
 end
 
