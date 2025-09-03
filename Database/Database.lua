@@ -158,8 +158,9 @@ ADDON.DB.Source = {
         [466133] = true, -- Delver's Gob-Trotter -- I Want My Hat Back
         [474086] = true, -- Prismatic Snapdragon
         [1221132] = true, -- Resplendent K'arroc
-        [1224048] = true, -- Delver's Manaskimmer
+        [1224048] = true, -- Delver's Mana-Skimmer
         [1233559] = true, -- Blue Barry
+        [1242272] = true, -- Royal Voidwing
 
         ------------------------------
         -- Alliance ------------------
@@ -368,6 +369,7 @@ ADDON.DB.Source = {
     ["Instance"] = {
         -- spellId => {JournalEncounterID, difficultyId}
         -- look for JournalEncounterID in JournalEncounterItem with ItemId
+        -- https://warcraft.wiki.gg/wiki/JournalEncounterID
 
         -- Dungeon
         -- difficulty: 1=Normal; 2=Heroic; 23=Mythic
@@ -446,6 +448,8 @@ ADDON.DB.Source = {
         [451491] = { 2602, 16 }, -- Ascendant Skyrazor -- Nerub-ar Palace Mythic
         [1217760] = { 2646, 16 }, -- The Big G -- Liberation of Undermine Mythic
         [1221155] = { 2646, 17 }, -- Prototype A.S.M.R. -- Liberation of Undermine
+        [1234573] = { 2691, 16 }, -- Unbound Star-Eater -- Manaforge Omega Hc
+        [1242272] = true, -- Royal Voidwing -- Manaforge Omega Hc
     },
 
     ["Reputation"] = {
@@ -604,7 +608,7 @@ ADDON.DB.Source = {
         [423873] = true, -- Suntouched Dreamstag - Emerald Dream Renown vendor
         [423891] = true, -- Lunar Dreamstag - Emerald Dream Renown vendor
 
-        [353265] = true, -- Vandal's Gearglider -- Manaforge Vandals Renown 5
+        [353265] = true, -- Vandal's Gearglider -- Manaforge Vandals Renown 8
         [447057] = true, -- Smoldering Cinderbee
         [447176] = true, -- Cyan Glowmite
         [447185] = true, -- Aquamarine Swarmite
@@ -1441,7 +1445,7 @@ ADDON.DB.Source = {
             [43900] = true, -- Swift Brewfest Ram
             [49378] = true, -- Brewfest Riding Kodo
             [49379] = true, -- Great Brewfest Kodo
-            [1247662] = true, -- Brefest Barrel Bomber
+            [1247662] = true, -- Brewfest Barrel Bomber
         },
 
         ["Anniversary"] = {
