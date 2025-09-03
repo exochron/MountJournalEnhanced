@@ -106,7 +106,7 @@ function ADDON.UI.FDD:CreateFilter(root, text, filterKey, filterSettings, withOn
 end
 function ADDON.UI.FDD:CreateFilterSubmenu(root, text, icon, settings)
     local subMenu = root:CreateCheckbox(text, function()
-        local settingHasTrue, settingHasFalse = CheckSetting(settings)
+        local settingHasTrue, _ = CheckSetting(settings)
 
         return settingHasTrue
     end, function(...)
@@ -116,26 +116,27 @@ function ADDON.UI.FDD:CreateFilterSubmenu(root, text, icon, settings)
         return MenuResponse.Refresh
     end)
     subMenu:AddInitializer(function(button)
-        if button.leftTexture2 then
-            local settingHasTrue, settingHasFalse = CheckSetting(settings)
-            if settingHasTrue and settingHasFalse then
-                local dash
-                if button.leftTexture2 then
-                    -- mainline style
-                    dash = button.leftTexture2
-                    dash:SetPoint("CENTER", button.leftTexture1, "CENTER", 0, 1)
-                else
-                    -- classic style
-                    dash = button:AttachTexture()
-                    dash:SetPoint("CENTER", button.leftTexture1)
-                    button.leftTexture1:SetAtlas("common-dropdown-ticksquare-classic", true)
-                end
-
-                dash:SetAtlas("voicechat-icon-loudnessbar-2", true)
-                dash:SetTexCoord(1, 0, 0, 0, 1, 1, 0, 1)
-                dash:SetSize(16, 16)
+        local settingHasTrue, settingHasFalse = CheckSetting(settings)
+        if settingHasTrue and settingHasFalse then
+            local dash
+            if button.leftTexture2 then
+                -- mainline style
+                dash = button.leftTexture2
+                dash:SetPoint("CENTER", button.leftTexture1, "CENTER", 0, 1)
+            else
+                -- classic style
+                dash = button:AttachTexture()
+                dash:SetPoint("CENTER", button.leftTexture1)
+                button.dash = dash
+                button.leftTexture1:SetAtlas("common-dropdown-ticksquare-classic", true)
             end
+            dash:SetAtlas("voicechat-icon-loudnessbar-2", true)
+            dash:SetTexCoord(1, 0, 0, 0, 1, 1, 0, 1)
+            dash:SetSize(16, 16)
         end
+    end)
+    subMenu:AddResetter(function(button)
+        button.dash = nil
     end)
 
     ADDON.UI.FDD:AddIcon(subMenu, icon)
