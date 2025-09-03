@@ -17,6 +17,8 @@ local SETTING_HIDDEN = "hidden"
 local SETTING_HIDDEN_INGAME = "hiddenIngame"
 local SETTING_RARITY = "rarity"
 
+ADDON:RegisterUISetting("showFilterProfilesInMenu", true, ADDON.L.SETTING_SHOW_FILTER_PROFILES_IN_MENU)
+
 local function CheckSetting(settings)
     local hasTrue, hasFalse = false, false
     for _, v in pairs(settings) do
@@ -335,6 +337,11 @@ local function setupFilterMenu(dropdown, root)
     local L = ADDON.L
 
     root:SetTag("MENU_MOUNT_COLLECTION_FILTER")
+
+    if ADDON.settings.ui.showFilterProfilesInMenu then
+        ADDON.UI.FDD:AddProfiles(root)
+        root:CreateSpacer()
+    end
 
     ADDON.UI.FDD:AddSortMenu(root:CreateButton(RAID_FRAME_SORT_LABEL))
 

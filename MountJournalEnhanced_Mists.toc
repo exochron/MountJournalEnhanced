@@ -66,6 +66,7 @@ UI\FavoritesMenu.lua
 UI\FilterDropdown\Main.lua
 UI\FilterDropdown\Color.lua
 UI\FilterDropdown\Family.lua
+UI\FilterDropdown\Profile.lua
 UI\FilterDropdown\Sort.lua
 UI\DisplayBackground.lua
 UI\DisplayCamera.lua
