@@ -16,13 +16,14 @@ This addon extends the ingame mount journal with some cool stuff.
 - Search also in mount description or your own notes
 - Manually hide unusable or unwanted mounts
 - Sort mounts by: name, family, type, expansion, rarity or your mount usage statistics. (or all of it in reverse)
+- __NEW:__ quickly save and load all your filter options with Filter Profiles 
 
 ## ⭐ Enhanced Favorites
 - Use multiple Profiles and quickly switch between them
 - Integrated Data broker plugin to access your favorite mounts more quickly
 - Favor all filtered mounts at once or unset them all
 - Favor new mounts automatically
-- readds Summon Random Mount Button for Cataclysm Classic
+- readds Summon Random Mount Button for Mists of Pandaria Classic
 
 ## ⚙️ Enhanced Interface
 - Tinker on your D.R.I.V.E. setup from anywhere in the world

@@ -60,6 +60,7 @@ local function PrepareDefaults()
             autoRotateModel = false,
             showResizeEdge = true,
             displayAnimation = "stand",
+            showFilterProfilesInMenu = true,
         },
 
         notes = {},
@@ -109,6 +110,14 @@ local function PrepareDefaults()
             favoritesOnTop = true,
             unusableToBottom = false,
             unownedOnBottom = true,
+        },
+
+        filterProfile = {
+            {filter={}, sort={}, search=""},
+            {filter={}, sort={}, search=""},
+            {filter={}, sort={}, search=""},
+            {filter={}, sort={}, search=""},
+            {filter={}, sort={}, search=""},
         },
 
         favorites = {
@@ -222,4 +231,5 @@ ADDON.Events:RegisterCallback("OnInit", function()
     ADDON.settings.notes = MJEGlobalSettings.notes
     ADDON.settings.favorites = MJEGlobalSettings.favorites
     ADDON.settings.pets = MJEGlobalSettings.pets
+    ADDON.settings.filterProfile = MJEGlobalSettings.filterProfile
 end, "settings init")

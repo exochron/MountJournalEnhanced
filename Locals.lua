@@ -12,6 +12,9 @@ L["COMPARTMENT_TOOLTIP"] = "|cffeda55fLeft-Click|r to toggle showing the mount c
 L["DRESSUP_LABEL"] = "Journal"
 L["FAVOR_DISPLAYED"] = "All Displayed"
 L["FILTER_ONLY_LATEST"] = "Only latest additions"
+L["FILTER_PROFILE"] = "Profile"
+L["FILTER_PROFILE_TOOLTIP_TITLE"] = "Filter Profiles"
+L["FILTER_PROFILE_TOOLTIP_TEXT"] = "Quickly load your predefined filter and search settings.|n|cffeda55fLeft-Click|r to load filter profile.|n|cffeda55fRight-Click|r to save filter profile."
 L["FILTER_SECRET"] = "Hidden by the game"
 L["FILTER_RETIRED"] = "No longer available"
 L["Family"] = "Family"
@@ -106,6 +109,7 @@ L["SETTING_SHOW_DATA"] = "Show mount data in display"
 L["SETTING_SUMMONPREVIOUSPET"] = "Summon previous active pet again when dismounting."
 L["SETTING_TRACK_USAGE"] = "Track mount usage behavior on all characters"
 L["SETTING_YCAMERA"] = "Unlock Y rotation with mouse in display"
+L["SETTING_SHOW_FILTER_PROFILES_IN_MENU"] = "Show filter profiles in filter menu."
 
 -- Families
 --@localization(locale="enUS", namespace="Families", format="lua_additive_table", handle-unlocalized=comment)@
