@@ -66,4 +66,18 @@ function ADDON.UI.FDD:AddColorMenu(root)
             ADDON:FilterMounts()
         end)
     end)
+
+    -- better cleanup some stuff
+    swatch:AddResetter(function(frame)
+        local swatchFrame = frame.swatch
+        swatchFrame:ClearColorWheelTexture()
+        swatchFrame.wheel=nil
+        swatchFrame.wheelThumb = nil
+        swatchFrame.valueThumb = nil
+        swatchFrame:SetScript("OnMouseDown", nil)
+        swatchFrame:SetScript("OnMouseUp", nil)
+        swatchFrame:SetScript("OnColorSelect", nil)
+
+        frame.swatch = nil
+    end)
 end
