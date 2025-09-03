@@ -25,6 +25,7 @@ This is a list of ideas I'd like to add at some point.
 - Mount Score Rating (based on rarity?)
 - disable ingame sound effects of mounts (currently no api for that)
 - customize mount from everywhere (barbershop api works only after clicking certain objects)
+- open Garage/Barbershop for customizable mounts from anywhere
 
 ### Stupid Ideas :D
 (maybe for april fool's)
