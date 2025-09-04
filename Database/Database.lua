@@ -175,6 +175,7 @@ ADDON.DB.Source = {
         [1224048] = true, -- Delver's Mana-Skimmer
         [1233559] = true, -- Blue Barry
         [1242272] = true, -- Royal Voidwing
+        [353264] = true, -- Xy Trustee's Gearglider
 
         ------------------------------
         -- Alliance ------------------
