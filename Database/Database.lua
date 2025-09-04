@@ -2,12 +2,20 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
---local build = select(4, GetBuildInfo())
-ADDON.DB.Recent = {
-    ["minID"] = 2601,
-    ["blacklist"] = {2604,2605},
-    ["whitelist"] = {1482,1483,2326,2505,2510,2511,2512,2549,2552,2555,2556,2557,2560,2561,2569,2570,2571},
-}
+local build = select(4, GetBuildInfo())
+if build < 110205 then
+    ADDON.DB.Recent = {
+        ["minID"] = 2601,
+        ["blacklist"] = {2604,2605},
+        ["whitelist"] = {1482,1483,2326,2505,2510,2511,2512,2549,2552,2555,2556,2557,2560,2561,2569,2570,2571},
+    }
+else
+    ADDON.DB.Recent = {
+        ["minID"] = 2645,
+        ["blacklist"] = {2655},
+        ["whitelist"] = {2593, 2574,2573,2542,2544,2546,1945},
+    }
+end
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -33,10 +41,16 @@ ADDON.DB.Source = {
         [223018] = true, -- Fathom Dweller - World Boss, Kosumoth the Hungering
         [235764] = true, -- Darkspore Mana Ray
         [243025] = true, -- Riddler's Mind-Worm
+        [243652] = true, -- Vile Fiend
         [247402] = true, -- Lucid Nightmare
+        [253058] = true, -- Maddened Chaosrunner
         [253106] = true, -- Vibrant Mana Ray
+        [253107] = true, -- Lambent Mana Ray
         [253108] = true, -- Felglow Mana Ray
         [253109] = true, -- Scintillating Mana Ray
+        [253660] = true, -- Biletooth Gnasher
+        [253661] = true, -- Crimson Slavermaw
+        [253662] = true, -- Acid Belcher
 
         -- Battle for Azeroth
         [261395] = true, -- The Hivemind - hidden mount
@@ -1464,50 +1478,78 @@ ADDON.DB.Source = {
             [191314] = true, -- Minion of Grumpus
         },
 
-        ["Remix: Pandaria"] = {
-            [138425] = true, -- Slate Primordial Direhorn
-            [127170] = true, -- Astral Cloud Serpent
-            [136471] = true, -- Spawn of Horridon
-            [130965] = true, -- Son of Galleon
-            [138423] = true, -- Cobalt Primordial Direhorn
-            [139448] = true, -- Clutch of Ji-Kuni
-            [148476] = true, -- Thundering Onyx Cloud Serpent
-            [127158] = true, -- Heavenly Onyx Cloud Serpent
-            [139442] = true, -- Thundering Cobalt Cloud Serpent
-            [148417] = true, -- Kor'kron Juggernaut
-            [132036] = true, -- Thundering Ruby Cloud Serpent
-            [123182] = true, -- Kafa Yak
-            [127178] = true, -- Jungle Riding Crane
-            [127209] = true, -- Black Riding Yak
-            [127213] = true, -- Modest Expedition Yak
-            [435044] = true, -- Golden Discus
-            [435082] = true, -- Mogu Hazeblazer
-            [435084] = true, -- Sky Surfer
-            [435108] = true, -- Daystorm Windsteed
-            [435107] = true, -- Forest Windsteed
-            [435103] = true, -- Dashing Windsteed
-            [435109] = true, -- Feathered Windsurfer
-            [435115] = true, -- Guardian Quilen
-            [435118] = true, -- Marble Quilen
-            [435123] = true, -- Gilded Riding Crane
-            [435128] = true, -- Pale Riding Crane
-            [435127] = true, -- Rose Riding Crane
-            [435126] = true, -- Silver Riding Crane
-            [435124] = true, -- Luxurious Riding Crane
-            [435125] = true, -- Tropical Riding Crane
-            [435131] = true, -- Snowy Riding Goat
-            [435133] = true, -- Little Red Riding Goat
-            [435145] = true, -- Bloody Skyscreamer
-            [435146] = true, -- Night Pterrorwing
-            [435147] = true, -- Jade Pterrordax
-            [435149] = true, -- Cobalt Juggernaut
-            [435150] = true, -- Fel Iron Juggernaut
-            [435153] = true, -- Purple Shado-Pan Riding Tiger
-            [435160] = true, -- Riverwalker Mushan
-            [435161] = true, -- Palehide Mushan Beast
-            [441794] = true, -- Amber Pterrordax
-            [446017] = true, -- August Phoenix
-            [446022] = true, -- Astral Emperor's Serpent
+        ["Remix: Legion"] = {
+            [171827] = true, -- Hellfire Infernal
+            [213134] = true, -- Felblaze Infernal
+            [215159] = true, -- Long-Forgotten Hippogryph
+            [223018] = true, -- Fathom Dweller
+            [227956] = true, -- Arcadian War Turtle
+            [229499] = true, -- Midnight
+            [232519] = true, -- Abyss Worm
+            [233364] = true, -- Leywoven Flying Carpet
+            [235764] = true, -- Darkspore Mana Ray
+            [242874] = true, -- Highmountain Elderhorn
+            [242875] = true, -- Wild Dreamrunner
+            [242881] = true, -- Cloudwing Hippogryph
+            [242882] = true, -- Valarjar Stormwing
+            [243651] = true, -- Shackled Ur'zul
+            [243652] = true, -- Vile Fiend
+            [253058] = true, -- Maddened Chaosrunner
+            [253088] = true, -- Antoran Charhound
+            [253106] = true, -- Vibrant Mana Ray
+            [253107] = true, -- Lambent Mana Ray
+            [253108] = true, -- Felglow Mana Ray
+            [253109] = true, -- Scintillating Mana Ray
+            [253660] = true, -- Biletooth Gnasher
+            [253661] = true, -- Crimson Slavermaw
+            [253662] = true, -- Acid Belcher
+            [254069] = true, -- Glorious Felcrusher
+            [254258] = true, -- Blessed Felcrusher
+            [254259] = true, -- Avenging Felcrusher
+            [1229276] = true, -- Bloodhunter Fel Bat
+            [1229283] = true, -- Ashplague Fel Bat
+            [1229288] = true, -- Wretched Fel Bat
+            [1235513] = true, -- Snowy Highmountain Eagle
+            [1238729] = true, -- Slag Basilisk
+            [1250482] = true, -- Ghastly Ur'zul
+            [1250879] = true, -- Leystone Basilisk
+            [1250880] = true, -- Felslate Basilisk
+            [1250881] = true, -- Aquamarine Basilisk
+            [1250882] = true, -- Illidari Dreadstalker
+            [1250884] = true, -- Illidari Blightstalker
+            [1250886] = true, -- Highland Elderhorn
+            [1251255] = true, -- Treetop Highmountain Eagle
+            [1251265] = true, -- Arcberry Manasaber
+            [1251279] = true, -- Fel-Scarred Mana Ray
+            [1251281] = true, -- Bloodtooth Mana Ray
+            [1251283] = true, -- Albino Mana Ray
+            [1251284] = true, -- Luminous Mana Ray
+            [1251295] = true, -- Twilight Courser
+            [1251297] = true, -- Golden Sunrunner
+            [1251298] = true, -- Turquoise Courser
+            [1251300] = true, -- Gloomdark Nightmare
+            [1251305] = true, -- Bonesteed of Triumph
+            [1251307] = true, -- Bonesteed of Bloodshed
+            [1251309] = true, -- Bonesteed of Plague
+            [1251311] = true, -- Bonesteed of Oblivion
+            [1251396] = true, -- Longhorned Sable Talbuk
+            [1251397] = true, -- Garnet Ruinstrider
+            [1251398] = true, -- Longhorned Bleakhoof Talbuk
+            [1251399] = true, -- Longhorned Argussian Talbuk
+            [1251400] = true, -- Longhorned Beryl Talbuk
+            [1253129] = true, -- Chestnut Courser
+            [1253130] = true, -- Brimstone Courser
+            [1255264] = true, -- Felscorned Vilebrood Vanquisher
+            [1255431] = true, -- Slayer's Felscorned Shrieker
+            [1255456] = true, -- Felscorned Wolfhawk
+            [1255463] = true, -- Archmage's Felscorned Disc
+            [1255467] = true, -- Felscorned Grandmaster's Companion
+            [1255471] = true, -- Felscorned Highlord's Charger
+            [1255475] = true, -- High Priest's Felscorned Seeker
+            [1255477] = true, -- Shadowblade's Felscorned Omen
+            [1255478] = true, -- Farseer's Felscorned Tempest
+            [1255480] = true, -- Felscorned Netherlord's Dreadsteed
+            [1255482] = true, -- Felscorned War Wyrm
         },
     },
 

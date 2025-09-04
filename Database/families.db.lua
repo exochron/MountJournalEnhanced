@@ -71,6 +71,10 @@ ADDON.DB.Family = {
 [2307] = true, -- Chaos-Forged Dreadwing
 [2309] = true, -- Chaos-Born Dreadwing
 [2326] = true, -- Astral Gladiator's Fel Bat
+[2542] = true, -- Bloodhunter Fel Bat
+[2544] = true, -- Ashplague Fel Bat
+[2546] = true, -- Wretched Fel Bat
+[2721] = true, -- Slayer's Felscorned Shrieker
 },
 ["Birds"] = {
 ["Albatross"] = {
@@ -102,12 +106,15 @@ ADDON.DB.Family = {
 [891] = true, -- Shadowblade's Crimson Omen
 [978] = true, -- Violet Spellwing
 [2322] = true, -- Thrayir, Eyes of the Siren
+[2728] = true, -- Shadowblade's Felscorned Omen
 },
 ["Eagle"] = {
 [1545] = true, -- Divine Kiss of Ohn'ahra
 [1669] = true, -- Bestowed Ohuna Spotter
 [1671] = true, -- Duskwing Ohuna
 [1672] = true, -- Zenet Hatchling
+[2574] = true, -- Snowy Highmountain Eagle
+[2666] = true, -- Treetop Highmountain Eagle
 },
 ["Hawkstriders"] = {
 [146] = true, -- Swift Pink Hawkstrider
@@ -210,6 +217,12 @@ ADDON.DB.Family = {
 [682] = true, -- Voidtalon of the Dark Star
 [1191] = true, -- Frenzied Feltalon
 },
+["Turkey"] = {
+[2696] = true, -- Highlands Gobbler
+[2697] = true, -- Quirky Turkey
+[2698] = true, -- Murky Turkey
+[2699] = true, -- Prized Turkey
+},
 ["Vultures"] = {
 [1042] = true, -- Siltwing Albatross
 [1317] = true, -- Waste Marauder
@@ -273,6 +286,11 @@ ADDON.DB.Family = {
 [1567] = true, -- Lightforged Ruinstrider
 [1568] = true, -- Lightforged Ruinstrider
 [2630] = true, -- Ornery Breezestrider
+[2686] = true, -- Longhorned Sable Talbuk
+[2688] = true, -- Garnet Ruinstrider
+[2689] = true, -- Longhorned Bleakhoof Talbuk
+[2690] = true, -- Longhorned Argussian Talbuk
+[2691] = true, -- Longhorned Beryl Talbuk
 },
 ["Slateback"] = {
 [2560] = true, -- Blue Barry
@@ -371,6 +389,8 @@ ADDON.DB.Family = {
 [1781] = true, -- Sulfur Hound
 [1824] = true, -- Brown-Furred Spiky Bakar
 [1825] = true, -- Taivan
+[2663] = true, -- Illidari Dreadstalker
+[2664] = true, -- Illidari Blightstalker
 },
 ["Hyenas"] = {
 [926] = true, -- Alabaster Hyena
@@ -450,6 +470,7 @@ ADDON.DB.Family = {
 [741] = true, -- Mystic Runesaber
 [881] = true, -- Arcanist's Manasaber
 [1008] = true, -- Nightborne Manasaber
+[2670] = true, -- Arcberry Manasaber
 },
 ["Mechanical Cats"] = {
 [1239] = true, -- X-995 Mechanocat
@@ -526,6 +547,7 @@ ADDON.DB.Family = {
 [2340] = true, -- Sha-Touched Riding Tiger
 [2477] = true, -- Sha-Warped Riding Tiger
 [2638] = true, -- Celestial Riding Tiger
+[2725] = true, -- Felscorned Grandmaster's Companion
 },
 },
 ["Crabs"] = {
@@ -542,6 +564,8 @@ ADDON.DB.Family = {
 [980] = true, -- Acid Belcher
 [981] = true, -- Biletooth Gnasher
 [1596] = true, -- Amalgam of Rage
+[2663] = true, -- Illidari Dreadstalker
+[2664] = true, -- Illidari Blightstalker
 },
 ["Demonic Steeds"] = {
 [17] = true, -- Felsteed
@@ -563,6 +587,7 @@ ADDON.DB.Family = {
 ["Ur'zul"] = {
 [954] = true, -- Shackled Ur'zul
 [2471] = true, -- Ur'zul Fleshripper
+[2653] = true, -- Ghastly Ur'zul
 },
 },
 ["Devourer"] = {
@@ -786,6 +811,7 @@ ADDON.DB.Family = {
 [1035] = true, -- Corrupted Gladiator's Proto-Drake
 [1589] = true, -- Renewed Proto-Drake
 [1679] = true, -- Frostbrood Proto-Wyrm
+[2731] = true, -- Felscorned War Wyrm
 },
 ["Stone Drakes"] = {
 [391] = true, -- Volcanic Stone Drake
@@ -808,6 +834,7 @@ ADDON.DB.Family = {
 [1599] = true, -- Eternal Gladiator's Soul Eater
 [1783] = true, -- Scourgebound Vanquisher
 [2114] = true, -- Zovaal's Soul Eater
+[2720] = true, -- Felscorned Vilebrood Vanquisher
 },
 ["Wind Drakes"] = {
 [392] = true, -- Drake of the East Wind
@@ -848,6 +875,7 @@ ADDON.DB.Family = {
 [2190] = true, -- Shadow of Doubt
 [2191] = true, -- Shackled Shadow
 [2192] = true, -- Beledar's Spawn
+[2729] = true, -- Farseer's Felscorned Tempest
 },
 ["Phoenixes"] = {
 [183] = true, -- Ashes of Al'ar
@@ -927,6 +955,7 @@ ADDON.DB.Family = {
 [2627] = true, -- High Shaman's Aerie Gryphon
 [2628] = true, -- Cinder-Plumed Highland Gryphon
 [2629] = true, -- Emberwing Sky Guide
+[2727] = true, -- High Priest's Felscorned Seeker
 },
 ["Hippogryphs"] = {
 [203] = true, -- Cenarion War Hippogryph
@@ -955,6 +984,7 @@ ADDON.DB.Family = {
 [865] = true, -- Huntmaster's Loyal Wolfhawk
 [870] = true, -- Huntmaster's Fierce Wolfhawk
 [872] = true, -- Huntmaster's Dire Wolfhawk
+[2723] = true, -- Felscorned Wolfhawk
 },
 ["Wyverns"] = {
 [133] = true, -- Tawny Wind Rider
@@ -1040,6 +1070,7 @@ ADDON.DB.Family = {
 [2483] = true, -- Violet Darkmoon Charger
 [2484] = true, -- Snowy Darkmoon Charger
 [2497] = true, -- Void-Forged Stallion
+[2726] = true, -- Felscorned Highlord's Charger
 },
 ["Demonic Steeds"] = {
 [17] = true, -- Felsteed
@@ -1099,6 +1130,12 @@ ADDON.DB.Family = {
 [2067] = true, -- Forest Windsteed
 [2068] = true, -- Dashing Windsteed
 [2488] = true, -- Shimmermist Free Runner
+[2675] = true, -- Twilight Courser
+[2676] = true, -- Golden Sunrunner
+[2677] = true, -- Turquoise Courser
+[2678] = true, -- Gloomdark Nightmare
+[2705] = true, -- Chestnut Courser
+[2706] = true, -- Brimstone Courser
 },
 ["Mechanical Steeds"] = {
 [552] = true, -- Ironbound Wraithcharger
@@ -1162,6 +1199,11 @@ ADDON.DB.Family = {
 [2579] = true, -- Forsaken's Grotesque Charger
 [2580] = true, -- Wailing Banshee's Charger
 [2581] = true, -- Banshee's Sickening Charger
+[2679] = true, -- Bonesteed of Triumph
+[2681] = true, -- Bonesteed of Bloodshed
+[2682] = true, -- Bonesteed of Plague
+[2683] = true, -- Bonesteed of Oblivion
+[2730] = true, -- Felscorned Netherlord's Dreadsteed
 },
 },
 ["Humanoids"] = {
@@ -1181,6 +1223,7 @@ ADDON.DB.Family = {
 [1312] = true, -- Gargantuan Grrloc
 [1797] = true, -- Ginormous Grrloc
 [2259] = true, -- Gigantic Grrloc
+[2573] = true, -- Grandiose Grrloc
 },
 ["Yetis"] = {
 [654] = true, -- Challenger's War Yeti
@@ -1199,6 +1242,7 @@ ADDON.DB.Family = {
 [1662] = true, -- Telix the Stormhorn
 [1942] = true, -- Jeweled Copper Scarab
 [1944] = true, -- Golden Regal Scarab
+[1945] = true, -- Jeweled Sapphire Scarab
 [2230] = true, -- Ivory Goliathus
 },
 ["Flies"] = {
@@ -1346,6 +1390,10 @@ ADDON.DB.Family = {
 [1439] = true, -- Infested Necroray
 [1440] = true, -- Pestilent Necroray
 [1941] = true, -- Heartseeker Mana Ray
+[2671] = true, -- Fel-Scarred Mana Ray
+[2672] = true, -- Bloodtooth Mana Ray
+[2673] = true, -- Albino Mana Ray
+[2674] = true, -- Luminous Mana Ray
 },
 ["Nether Rays"] = {
 [176] = true, -- Green Riding Nether Ray
@@ -1376,6 +1424,10 @@ ADDON.DB.Family = {
 [878] = true, -- Brawler's Burly Basilisk
 [1026] = true, -- Vicious War Basilisk
 [1027] = true, -- Vicious War Basilisk
+[2593] = true, -- Slag Basilisk
+[2660] = true, -- Leystone Basilisk
+[2661] = true, -- Felslate Basilisk
+[2662] = true, -- Aquamarine Basilisk
 },
 ["Crocolisks"] = {
 [1220] = true, -- Bruce
@@ -1429,6 +1481,7 @@ ADDON.DB.Family = {
 [1761] = true, -- Reawakened Phase-Hunter
 [1940] = true, -- Salatrancer
 [2315] = true, -- Timbered Sky Snake
+[2732] = true, -- Cerulean Phase-Hunter
 },
 ["Sea Serpents"] = {
 [899] = true, -- Abyss Worm
@@ -1607,6 +1660,11 @@ ADDON.DB.Family = {
 [1209] = true, -- Stonehide Elderhorn
 [1467] = true, -- Noble Bruffalon
 [1614] = true, -- Stormtouched Bruffalon
+[2645] = true, -- Kalu'ak Crest-Horn
+[2649] = true, -- Sharktested Crest-Horn
+[2650] = true, -- Floestrider Crest-Horn
+[2651] = true, -- Cragstepper Crest-Horn
+[2665] = true, -- Highland Elderhorn
 },
 ["Ox"] = {
 [1291] = true, -- Lucky Yun
@@ -1685,6 +1743,7 @@ ADDON.DB.Family = {
 [2060] = true, -- Golden Discus
 [2063] = true, -- Mogu Hazeblazer
 [2064] = true, -- Sky Surfer
+[2724] = true, -- Archmage's Felscorned Disc
 },
 ["Gyrocopters"] = {
 [204] = true, -- Turbo-Charged Flying Machine
@@ -1725,6 +1784,7 @@ ADDON.DB.Family = {
 [2295] = true, -- Bilgewater Bombardier
 [2487] = true, -- The Big G
 [2507] = true, -- Prototype A.S.M.R.
+[2612] = true, -- Void-Forged Overseer
 },
 ["Kites"] = {
 [450] = true, -- Pandaren Kite
