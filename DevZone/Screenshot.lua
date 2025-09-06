@@ -5,6 +5,7 @@ function ADDON:TakeScreenshots()
     -- hide UI elements
     local UIElementsToHide={
         ChatFrame1,
+        ChatFrame1EditBox,
         MainMenuBar,
         PlayerFrame,
         BuffFrame,
@@ -20,12 +21,6 @@ function ADDON:TakeScreenshots()
     end
     ToggleCollectionsJournal(COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS)
 
-    local function OpenFilterMenu()
-        MountJournal.FilterDropdown:OpenMenu()
-
-        return { Menu.GetManager():GetOpenMenu():GetChildren() }
-    end
-
     -- give time to load properly
     C_Timer.After(0.5, function()
         local gg = LibStub("GalleryGenerator")
@@ -35,8 +30,6 @@ function ADDON:TakeScreenshots()
                 function(api)
                     api:BackScreen()
                     api:Click(MountJournal.FilterDropdown.ResetButton)
-
-                    C_CVar.SetCVar("mountJournalShowPlayer", 0) -- hide rider
 
                     ADDON.Api:SetSelected(1727) --select Tarecgosa's Visage
                     -- adjust camera
@@ -60,27 +53,53 @@ function ADDON:TakeScreenshots()
                     ADDON.Api:SetSelected(764) --select Grove Warden
                     MountJournal.MountDisplay.ModelScene:Reset()
 
-                    api:Point(OpenFilterMenu()[3]) -- sort
+                    MountJournal.FilterDropdown:OpenMenu()
+                    api:WaitAndPointOnMenuElement(1,1,function(element)
+                        local profiles = {element:GetChildren()}
+                        api:Point(profiles[3]) -- filter profiles
+                        api:Continue()
+                    end)
                 end,
                 function(api)
                     api:BackScreen()
-                    api:Point(OpenFilterMenu()[13]) -- Sources
+
+                    MountJournal.FilterDropdown:OpenMenu()
+                    api:WaitAndPointOnMenuElement(1,3,function() -- sort
+                        api:WaitAndPointOnMenuElement(2,5) -- rarity
+                    end)
                 end,
                 function(api)
                     api:BackScreen()
-                    api:Point(OpenFilterMenu()[14]) -- Type
+
+                    MountJournal.FilterDropdown:OpenMenu()
+                    api:WaitAndPointOnMenuElement(1,13, function() -- sources
+                        api:WaitAndPointOnMenuElement(2,4, -- world events
+                        function()
+                            api:WaitAndPointOnMenuElement(3,4, nil, 10) -- timewalking
+                        end)
+                    end)
                 end,
                 function(api)
                     api:BackScreen()
-                    api:Point(OpenFilterMenu()[16]) -- Family
+                    MountJournal.FilterDropdown:OpenMenu()
+                    api:WaitAndPointOnMenuElement(1,14) -- Type
                 end,
                 function(api)
                     api:BackScreen()
-                    api:Point(OpenFilterMenu()[18]) -- Color
+                    MountJournal.FilterDropdown:OpenMenu()
+                    api:WaitAndPointOnMenuElement(1,16, function() -- family
+                        api:WaitAndPointOnMenuElement(2,7) -- Birds
+                    end)
                 end,
                 function(api)
                     api:BackScreen()
-                    api:Point(OpenFilterMenu()[19]) -- Rarity
+                    MountJournal.FilterDropdown:OpenMenu()
+                    api:WaitAndPointOnMenuElement(1,18) -- Color
+                end,
+                function(api)
+                    api:BackScreen()
+                    MountJournal.FilterDropdown:OpenMenu()
+                    api:WaitAndPointOnMenuElement(1,19) -- Rarity
                 end,
                 function(api)
                     api:BackScreen()
