@@ -361,10 +361,7 @@ local function setupFilterMenu(dropdown, root)
     setLeftPadding(onlyUsable)
 
     ADDON.UI.FDD:CreateFilter(root, NOT_COLLECTED, SETTING_NOT_COLLECTED)
-    local hiddenIngame = ADDON.UI.FDD:CreateFilter(root, L.FILTER_SECRET, SETTING_HIDDEN_INGAME)
-    hiddenIngame:SetEnabled(function()
-        return ADDON.settings.filter.notCollected
-    end)
+    ADDON.UI.FDD:CreateFilter(root, L.FILTER_SECRET, SETTING_HIDDEN_INGAME)
 
     ADDON.UI.FDD:CreateFilter(root, L.FILTER_ONLY_LATEST, SETTING_ONLY_RECENT)
     ADDON.UI.FDD:CreateFilter(root, L["Only tradable"], SETTING_ONLY_TRADABLE)
