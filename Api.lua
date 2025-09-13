@@ -7,7 +7,7 @@ function ADDON.Api:MountIdToOriginalIndex(mountId)
 
     local count = C_MountJournal.GetNumDisplayedMounts()
     for i = 1, count do
-        local displayedMountId = select(12, C_MountJournal.GetDisplayedMountInfo(i))
+        local displayedMountId = C_MountJournal.GetDisplayedMountID(i)
         if displayedMountId == mountId then
             return i
         end

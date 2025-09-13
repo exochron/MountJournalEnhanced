@@ -78,9 +78,12 @@ end
 
 local function testFavorites()
     local _,_, favorites = ADDON.Api:GetFavoriteProfile()
-    local expectedMounts = CopyTable(favorites)
+    local expectedMounts = tFilter(favorites, function(mountId)
+        local _, _, _, _, _, _, _, _, _, shouldHideOnChar = C_MountJournal.GetMountInfoByID(mountId)
+        return not shouldHideOnChar
+    end)
 
-    for i = 1, 100 do
+    for i = 1, 10000 do
         local name, _, _, _, _, _, isFavorite, _,_,_,_, mountId = C_MountJournal.GetDisplayedMountInfo(i)
         if isFavorite then
             local listIndex = tIndexOf(expectedMounts,mountId)
