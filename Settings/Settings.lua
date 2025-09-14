@@ -1,4 +1,4 @@
-local _, ADDON = ...
+local ADDON_NAME, ADDON = ...
 
 MJEPersonalSettings = MJEPersonalSettings or {}
 MJEGlobalSettings = MJEGlobalSettings or {}
@@ -121,6 +121,7 @@ local function PrepareDefaults()
         },
 
         favorites = {
+            migratedBug138 = false,
             assignments = {},
             profiles = {
                 {
@@ -208,6 +209,25 @@ local function MigrateToFavoriteProfiles(personalSettings, globalSettings)
     end
 end
 
+-- https://github.com/exochron/MountJournalEnhanced/issues/165#issuecomment-3289402892
+-- Intially Favoring displayed did directly use the filter dataprovider, which contained a complex element data structure.
+-- So that could get mixed into the favorite profile settings. That data never worked anyway, so we just remove them here.
+local function CleanupFavoriteProfiles(favorites)
+    if not favorites.migratedBug138 then
+        for profileId, profile in pairs(favorites.profiles) do
+            local mounts, index = profile.mounts, 1
+            while index <= #mounts do
+                if type(mounts[index]) == "number" then
+                    index = index + 1
+                else
+                    tUnorderedRemove(mounts, index)
+                end
+            end
+        end
+        favorites.migratedBug138 = true
+    end
+end
+
 -- Settings have to be loaded during PLAYER_LOGIN
 ADDON.Events:RegisterCallback("OnInit", function()
     local defaultSettings = PrepareDefaults()
@@ -215,6 +235,7 @@ ADDON.Events:RegisterCallback("OnInit", function()
     defaultSortStates = CopyTable(defaultSettings.sort)
     CombineSettings(MJEGlobalSettings, defaultSettings)
     MigrateToFavoriteProfiles(MJEPersonalSettings, MJEGlobalSettings)
+    CleanupFavoriteProfiles(MJEGlobalSettings.favorites)
     CombineSettings(MJEPersonalSettings, defaultSettings)
 
     ADDON.settings = {}
