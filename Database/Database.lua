@@ -938,7 +938,7 @@ ADDON.DB.Source = {
         -- Battle for Azeroth
         [213350] = { 12931, 12932 }, -- Frostshard Infernal - No Stable Big Enough
         [280729] = { 12933, 12934 }, -- Frenzied Feltalon - A Horde of Hoofbeats
-        [263707] = 13206, -- Zandalari Direhorn - Allied Races: Zandalari Troll
+        [263707] = 13161, -- Zandalari Direhorn - Allied Races: Zandalari Troll
         [267274] = 12518, -- Mag'har Direwolf - Allied Races: Mag'har Orc
         [271646] = 12515, -- Dark Iron Core Hound - Allied Races: Dark Iron Dwarf
         [239049] = 12812, -- Obsidian Krolusk - Glory of the Wartorn Hero
@@ -954,7 +954,7 @@ ADDON.DB.Source = {
         [294197] = 13931, -- Obsidian Worldbreaker - Memories of Fel, Frost and Fire
         [305182] = { 13994, 41929 }, -- Black Serpent of N'Zoth - Through the Depths of Visions
         [305592] = 14013, -- Mechagon Mechanostrider - Allied Races: Mechagnome
-        [306423] = 13161, -- Caravan Hyena - Allied Races: Vulpera
+        [306423] = 13206, -- Caravan Hyena - Allied Races: Vulpera
         [316343] = 14146, -- Wriggling Parasite - Glory of the Ny'alotha Raider
         [405623] = 13541, -- Armadillo Roller - Mecha-Done
 
@@ -1010,7 +1010,7 @@ ADDON.DB.Source = {
         [447195] = 40702, -- Swarmite Skyhunter - Swarmite Skyhunter
         [448188] = 40662, -- Machine Defense Unit 1-11 - It's not much
         [448850] = 40539, -- Kah, Legend of the Deep - The Derby Dash
-        [449415] = {40306, 40307}, -- Slatestone Ramolith - Allied Races: Earthen
+        [449415] = 40307, -- Slatestone Ramolith - Allied Races: Earthen
         [452779] = 40438, -- Ivory Goliathus - Glory of the Delver
         [303767] = 40956, -- Honeyback Hivemother - I'm On Island Time
         [448934] = 41201, -- Shadow of Doubt - You Xal Not Pass
