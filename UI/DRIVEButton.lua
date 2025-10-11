@@ -44,7 +44,7 @@ local function BuildButton()
 end
 
 ADDON.Events:RegisterCallback("loadUI", function()
-    if IsSpellKnown(MOUNT_SPELL) then
+    if C_SpellBook.IsSpellInSpellBook(MOUNT_SPELL) then
         ADDON.UI:RegisterToolbarGroup('05-drive-G99', BuildButton())
     end
 end, 'drive' )
