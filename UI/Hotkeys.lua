@@ -17,7 +17,7 @@ end
 
 local function JumpTo(index)
     MountJournal.ScrollBox:ScrollToElementDataIndex(index)
-    local frame = MountJournal.ScrollBox:FindFrame(MountJournal.ScrollBox:Find(index))
+    local frame = MountJournal.ScrollBox:FindFrame(MountJournal.ScrollBox:FindElementData(index))
     if frame then
         frame:Click()
     end
