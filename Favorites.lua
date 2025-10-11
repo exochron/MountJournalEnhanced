@@ -29,7 +29,7 @@ local function UpdateFavoritesInBackground()
     favorites = tFilter(favorites, function(mountId)
         local _, _, _, _, _, _, _, _, _, shouldHideOnChar = C_MountJournal.GetMountInfoByID(mountId)
         return not shouldHideOnChar
-    end)
+    end, true)
 
     local flippedFavorites = {}
     for _, v in pairs(favorites) do -- CopyValuesAsKeys() somehow created faulty list

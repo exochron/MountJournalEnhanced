@@ -81,7 +81,7 @@ local function testFavorites()
     local expectedMounts = tFilter(favorites, function(mountId)
         local _, _, _, _, _, _, _, _, _, shouldHideOnChar = C_MountJournal.GetMountInfoByID(mountId)
         return not shouldHideOnChar
-    end)
+    end, true)
 
     for i = 1, 10000 do
         local name, _, _, _, _, _, isFavorite, _,_,_,_, mountId = C_MountJournal.GetDisplayedMountInfo(i)
