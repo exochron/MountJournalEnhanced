@@ -1,7 +1,5 @@
 local _, ADDON = ...
 
-local isRemixEventActive = false
-
 local eventProfile = {
     filter = {
         source = {
@@ -53,7 +51,7 @@ function ADDON.UI.FDD:AddProfiles(root)
         456040, -- raidtarget_x
         456042, -- raidtarget_star
     }
-    if isRemixEventActive then
+    if ADDON.isRetail and time() < 1768896000 then -- 2026-01-20 08:00
         icons["remix"] = 1380366 -- ability_demonhunter_eyeofleotheras
     end
 
@@ -133,36 +131,6 @@ function ADDON.UI.FDD:AddProfiles(root)
 
 end
 
-local function detectRemixHoliday()
-    local locale = GetLocale()
-    local remixName = "Remix"
-    if locale == "koKR" then
-        remixName = "리믹스"
-    elseif locale == "zhCN" then
-        remixName = "幻境新生"
-    elseif locale == "zhTW" then
-        remixName = "混搭再造"
-    end
-
-    local year = date("%Y")
-    local month = date("%m")
-    local dayOfMonth = date("%d")
-    local monthInfo = C_Calendar.GetMonthInfo()
-    local monthOffset = (month-monthInfo.month - ((monthInfo.year-year)*12))/10
-
-    for i = 1, 10 do
-        local event = C_Calendar.GetHolidayInfo(monthOffset, dayOfMonth, i)
-        if not event then
-            break;
-        elseif nil ~= strfind(event.name, remixName, 1, true) then
-            isRemixEventActive = true
-            break
-        end
-    end
-
-    return isRemixEventActive
-end
-
 local function prepareEventProfile()
     for categoryName, _ in pairs(ADDON.DB.Source) do
         if nil == eventProfile.filter.source[categoryName] then
@@ -181,13 +149,4 @@ end
 
 ADDON.Events:RegisterCallback("loadUI", function(self)
     prepareEventProfile()
-    if not detectRemixHoliday() then
-        ADDON.Events:RegisterFrameEventAndCallback("CALENDAR_UPDATE_EVENT_LIST", function(self)
-            detectRemixHoliday()
-            C_Timer.After(0, function()
-                ADDON.Events:UnregisterFrameEventAndCallback("CALENDAR_UPDATE_EVENT_LIST", self)
-            end)
-        end, self)
-        C_Calendar.OpenCalendar() -- updates event list; does not open the actual calender
-    end
 end, "detect remix")
