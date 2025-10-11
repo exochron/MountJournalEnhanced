@@ -9,6 +9,28 @@ local function updateLDB(dataObject)
     dataObject.label = label
 end
 
+local actionButton = CreateFrame("Button", nil, nil, "InsecureActionButtonTemplate")
+actionButton:SetAttribute("pressAndHoldAction", 1)
+actionButton:SetAttribute("type", "spell")
+actionButton:SetAttribute("typerelease", "spell")
+actionButton:RegisterForClicks("AnyUp")
+actionButton:SetPropagateMouseClicks(true)
+actionButton:SetPropagateMouseMotion(true)
+actionButton:RegisterUnitEvent("UNIT_AURA", "player")
+actionButton:HookScript("PreClick", function(self)
+    if not InCombatLockdown() and self:GetParent():IsDragging() then
+        self:SetAttribute("type", "")
+        self:SetAttribute("typerelease", "")
+    end
+end)
+actionButton:HookScript("PostClick", function(self)
+    if not InCombatLockdown() then
+        self:SetAttribute("type", "spell")
+        self:SetAttribute("typerelease", "spell")
+    end
+end)
+actionButton:Hide()
+
 ADDON.Events:RegisterCallback("OnLogin", function()
     local ldb = LibStub("LibDataBroker-1.1", true)
     if not ldb or not C_MountJournal.IsDragonridingUnlocked() then
@@ -17,30 +39,9 @@ ADDON.Events:RegisterCallback("OnLogin", function()
 
     local dataObject
 
-    local actionButton = CreateFrame("Button", nil, nil, "InsecureActionButtonTemplate")
-    actionButton:SetAttribute("pressAndHoldAction", 1)
-    actionButton:SetAttribute("type", "spell")
-    actionButton:SetAttribute("typerelease", "spell")
-    actionButton:RegisterForClicks("AnyUp")
-    actionButton:SetPropagateMouseClicks(true)
-    actionButton:SetPropagateMouseMotion(true)
-    actionButton:RegisterUnitEvent("UNIT_AURA", "player")
     actionButton:SetScript("OnEvent", function()
         updateLDB(dataObject)
     end)
-    actionButton:HookScript("PreClick", function(self)
-        if not InCombatLockdown() and self:GetParent():IsDragging() then
-            self:SetAttribute("type", "")
-            self:SetAttribute("typerelease", "")
-        end
-    end)
-    actionButton:HookScript("PostClick", function(self)
-        if not InCombatLockdown() then
-            self:SetAttribute("type", "spell")
-            self:SetAttribute("typerelease", "spell")
-        end
-    end)
-    actionButton:Hide()
 
     local tooltipProxy = CreateFrame("Frame")
     tooltipProxy:Hide()
