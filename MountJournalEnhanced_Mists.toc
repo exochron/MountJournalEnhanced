@@ -1,4 +1,4 @@
-## Interface: 50500
+## Interface: 50501
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## IconTexture: Interface\Addons\MountJournalEnhanced\UI\icons\mje.png
