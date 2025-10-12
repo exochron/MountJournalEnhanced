@@ -193,6 +193,8 @@ ADDON.DB.Family = {
 [753] = true, -- Corrupted Dreadwing
 [2525] = true, -- Prophet's Great Raven
 [2529] = true, -- Archmage's Great Raven
+[2547] = true, -- Prophet's Great Crow
+[2548] = true, -- Archmage's Great Crow
 },
 ["Roc"] = {
 [1350] = true, -- Colossal Slaughterclaw
@@ -733,6 +735,9 @@ ADDON.DB.Family = {
 [408] = true, -- Mottled Drake
 [424] = true, -- Vicious Gladiator's Twilight Drake
 [428] = true, -- Ruthless Gladiator's Twilight Drake
+[442] = true, -- Blazing Drake
+[443] = true, -- Twilight Harbinger
+[444] = true, -- Life-Binder's Handmaiden
 [445] = true, -- Experiment 12-B
 [447] = true, -- Feldrake
 [467] = true, -- Cataclysmic Gladiator's Twilight Drake
@@ -759,11 +764,9 @@ ADDON.DB.Family = {
 [2518] = true, -- Chrono Corsair
 [2569] = true, -- Unbound Star-Eater
 [2606] = true, -- Royal Voidwing
+[2646] = true, -- Sha-scarred Drake
 },
 ["Grand Drakes"] = {
-[442] = true, -- Blazing Drake
-[443] = true, -- Twilight Harbinger
-[444] = true, -- Life-Binder's Handmaiden
 [1727] = true, -- Tarecgosa's Visage
 },
 ["Nether Drakes"] = {
@@ -875,6 +878,7 @@ ADDON.DB.Family = {
 [2190] = true, -- Shadow of Doubt
 [2191] = true, -- Shackled Shadow
 [2192] = true, -- Beledar's Spawn
+[2566] = true, -- Lana'thels blutrote Kaskade
 [2729] = true, -- Farseer's Felscorned Tempest
 },
 ["Phoenixes"] = {
@@ -1011,7 +1015,7 @@ ADDON.DB.Family = {
 ["Fish"] = {
 [800] = true, -- Brinedeep Bottom-Feeder
 [1692] = true, -- Wondrous Wavewhisker
-[2186] = true, -- [PH] Blue Old God Fish Mount
+[2186] = true, -- Blue Old God Fish Mount
 [2187] = true, -- Underlight Shorestalker
 [2188] = true, -- Kah, Legend of the Deep
 [2189] = true, -- Underlight Corrupted Behemoth
@@ -1668,6 +1672,7 @@ ADDON.DB.Family = {
 },
 ["Ox"] = {
 [1291] = true, -- Lucky Yun
+[2632] = true, -- Astral Aurochs
 [2637] = true, -- Celestial Riding Ox
 },
 ["Rhinos"] = {
@@ -1750,7 +1755,7 @@ ADDON.DB.Family = {
 [205] = true, -- Flying Machine
 [304] = true, -- Mimiron's Head
 [1028] = true, -- Mecha-Mogul Mk2
-[2640] = true, -- Brewfest Barrel Bomber
+[2640] = true, -- Bomber des Braufests
 },
 ["Hands"] = {
 [1417] = true, -- Hand of Hrestimorak

@@ -80,7 +80,10 @@ ADDON.DB.Source.Shop[1224643] = true; -- Meeksi Gentlepaw (classic)
 ADDON.DB.Source.Shop[1224645] = true; -- Meeksi Rufflemane (classic)
 ADDON.DB.Source.Shop[1224646] = true; -- Meeksi Wanderpaw (classic)
 ADDON.DB.Source.Shop[1224647] = true; -- Meeksi Brewrobber (classic)
+ADDON.DB.Source.Shop[1229670] = true; -- Prophet's Great Crow (classic)
+ADDON.DB.Source.Shop[1229672] = true; -- Archmage's Great Crow (classic)
 ADDON.DB.Source.Shop[1238816] = true; -- Envoy of Sa'bak (classic)
+ADDON.DB.Source.Shop[1249659] = true; -- Sha-Scarred Drake
 
 ADDON.DB.Source.Achievement[1247591] = 60901; -- Celestial Riding Crane
 ADDON.DB.Source.Drop[1247596] = true; -- Celestial Riding Serpent
