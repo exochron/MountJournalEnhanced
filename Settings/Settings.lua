@@ -61,6 +61,7 @@ local function PrepareDefaults()
             showResizeEdge = true,
             displayAnimation = "stand",
             showFilterProfilesInMenu = true,
+            syncTarget = false,
         },
 
         notes = {},
