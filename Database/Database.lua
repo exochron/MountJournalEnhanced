@@ -1854,6 +1854,7 @@ ADDON.DB.Type = {
         [1039] = true, -- Mighty Caravan Brutosaur
         [1287] = true, -- Explorer's Jungle Hopper
         [1288] = true, -- Explorer's Dunetrekker
+        [1698] = true, -- Rocket Shredder 9001
     },
     rideAlong = {
         typeIDs = { 402, 445},
