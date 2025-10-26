@@ -47,6 +47,8 @@ function ADDON.UI:BuildFavoriteProfileMenu(root, withEditOptions)
     local sortedIndex = {}
     local tInsert = table.insert
 
+    root:SetScrollMode(GetScreenHeight() - 100)
+
     local profiles = ADDON.settings.favorites.profiles
     for index, profileData in pairs(profiles) do
         if profileData then

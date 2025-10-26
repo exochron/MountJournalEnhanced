@@ -41,7 +41,6 @@ end
 
 local function generateProfileMenu(_, root)
     root:SetTag(ADDON_NAME.."-LDB-FavoriteProfiles")
-    root:SetScrollMode(GetScreenHeight() - 100)
 
     root:CreateTitle(ADDON.L.FAVORITE_PROFILE)
     ADDON.UI:BuildFavoriteProfileMenu(root)
