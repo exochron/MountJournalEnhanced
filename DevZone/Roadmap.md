@@ -3,7 +3,8 @@ This is a list of ideas I'd like to add at some point.
 ### Next
 - [ ] Minimap icons for LDB plugins
 - [ ] (item info instead of tradable db)
-- opt out of profile system
+- opt out of favorite profile system
+- automatically unwrap
 - sync dates of mount pairs, which are collected by the same trigger (alliance/horde versions)
 - quick filters in display
 - black filter inaccurate

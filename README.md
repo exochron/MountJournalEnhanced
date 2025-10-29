@@ -51,6 +51,7 @@ This addon extends the ingame mount journal with some cool stuff.
 ## 🩹 Fixes also
 - the ridiculous fly in animation of the rider
 - broken mount links on some clients
+- constantly resetting of display model
 
 ## 🙋 Help wanted
 - Have you found any bug or do you have some suggestions? Please let me know in the issue tracker on [GitHub](https://github.com/exochron/MountJournalEnhanced/issues) or [Curseforge](https://www.curseforge.com/wow/addons/mount-journal-enhanced/issues).
