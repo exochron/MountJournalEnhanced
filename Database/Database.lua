@@ -1465,6 +1465,7 @@ ADDON.DB.Source = {
 
         ["Hallow's End"] = {
             [48025] = true, -- Headless Horseman's Mount
+            [1245198] = true, -- The Headless Horseman's Ghoulish Charger
         },
 
         ["Feast of Winter Veil"] = {
