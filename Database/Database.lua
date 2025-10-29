@@ -1902,5 +1902,6 @@ ADDON.DB.Ignored = {
         [2115] = true, -- Soar
         [2301] = true, -- Unstable Rocket
         [2302] = true, -- Unstable Rocket
+        [2716] = true, -- (PH) Legion Remix Mount
     },
 }
