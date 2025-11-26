@@ -179,9 +179,11 @@ ADDON.DB.Family = {
 [416] = true, -- Felfire Hawk
 [417] = true, -- Corrupted Fire Hawk
 [1456] = true, -- Sapphire Skyblazer
+[2250] = true, -- Golden Ashes of Al'ar
 [2255] = true, -- Golden Ashes of Al'ar
 [2261] = true, -- Coldflame Tempest
 [2478] = true, -- Blazing Royal Fire Hawk
+[2485] = true, -- Flaming Royal Fire Hawk
 },
 ["Raptora"] = {
 [1430] = true, -- Desertwing Hunter
@@ -354,6 +356,7 @@ ADDON.DB.Family = {
 [1765] = true, -- Big Battle Bear
 [2225] = true, -- Amani Hunting Bear
 [2237] = true, -- Grizzly Hills Packmaster
+[2251] = true, -- Harmonious Greetings Bear
 [2262] = true, -- Harmonious Salutations Bear
 },
 ["Foxes"] = {
@@ -484,6 +487,8 @@ ADDON.DB.Family = {
 [1400] = true, -- Eternal Phalynx of Courage
 [1401] = true, -- Eternal Phalynx of Loyalty
 [1402] = true, -- Eternal Phalynx of Humility
+[2717] = true, -- Mechanical Prototype Panther MK-0
+[2718] = true, -- Steel Prototype Panther MK-0
 },
 ["Others"] = {
 [196] = true, -- Spectral Tiger
@@ -546,6 +551,7 @@ ADDON.DB.Family = {
 [1194] = true, -- Vicious White Warsaber
 [1195] = true, -- Vicious Black Warsaber
 [2087] = true, -- Purple Shado-Pan Riding Tiger
+[2319] = true, -- Skybound Spectral Tiger
 [2340] = true, -- Sha-Touched Riding Tiger
 [2477] = true, -- Sha-Warped Riding Tiger
 [2638] = true, -- Celestial Riding Tiger
@@ -765,6 +771,7 @@ ADDON.DB.Family = {
 [2569] = true, -- Unbound Star-Eater
 [2606] = true, -- Royal Voidwing
 [2646] = true, -- Sha-scarred Drake
+[2647] = true, -- Ashened Cataclysm
 },
 ["Grand Drakes"] = {
 [1727] = true, -- Tarecgosa's Visage
@@ -783,6 +790,8 @@ ADDON.DB.Family = {
 [241] = true, -- Brutal Nether Drake
 [1744] = true, -- Grotto Netherwing Drake
 [1953] = true, -- Grotto Netherwing Drake
+[2719] = true, -- Sternfunkelnder Netherdrache
+[2830] = true, -- Reins of the Starshard Netherdrake
 },
 ["Others"] = {
 [446] = true, -- Heart of the Aspects
@@ -1095,11 +1104,13 @@ ADDON.DB.Family = {
 [532] = true, -- Ghastly Charger
 [547] = true, -- Hearthsteed
 [1168] = true, -- Fiery Hearthsteed
+[2599] = true, -- Celestial Steed
 [2605] = true, -- Inarius' Charger
 [2622] = true, -- The Headless Horseman's Chilling Charger
 [2623] = true, -- The Headless Horseman's Ghoulish Charger
 [2624] = true, -- The Headless Horseman's Burning Charger
 [2625] = true, -- The Headless Horseman's Hallowed Charger
+[2916] = true, -- Inarius' Charger
 },
 ["Horned Steeds"] = {
 [222] = true, -- Swift Zhevra
@@ -1485,7 +1496,8 @@ ADDON.DB.Family = {
 [1761] = true, -- Reawakened Phase-Hunter
 [1940] = true, -- Salatrancer
 [2315] = true, -- Timbered Sky Snake
-[2732] = true, -- Cerulean Phase-Hunter
+[2732] = true, -- Kobaltfarbener Phasenjäger
+[2844] = true, -- Cerulean Phase-Hunter
 },
 ["Sea Serpents"] = {
 [899] = true, -- Abyss Worm
@@ -1714,6 +1726,8 @@ ADDON.DB.Family = {
 [2296] = true, -- Delver's Gob-Trotter
 [2332] = true, -- The Breaker's Song
 [2512] = true, -- Delver's Mana-Skimmer
+[2596] = true, -- Stormwind Skyseeker
+[2597] = true, -- Orgrimmar Sentinel
 },
 ["Assault Wagons"] = {
 [1193] = true, -- Meat Wagon

@@ -114,7 +114,6 @@ ADDON.DB.Source = {
         [213165] = true, -- Viridian Sharptalon - Sharptalon Reunion
         [215159] = true, -- Long-Forgotten Hippogryph - Ephemeral Crystal x5
         [230987] = true, -- Arcanist's Manasaber - Fate of the Nightborne
-        [289639] = true, -- Bruce - Complete the Brawler's Guild Questline
         [299159] = true, -- Scrapforged Mechaspider - Drive It Away Today
         [312754] = true, -- Battle Gargon Vrednic - venthyr campaign quest
         [312759] = true, -- Dreamlight Runestag - night fae campaign quest

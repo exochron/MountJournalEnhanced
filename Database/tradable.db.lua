@@ -47,7 +47,10 @@ ADDON.DB.Tradable = {
 [1166] = true, -- Great Sea Ray
 [1287] = true, -- Explorer's Jungle Hopper
 [1288] = true, -- Explorer's Dunetrekker
+[1764] = true, -- X-51 Nether-Rocket X-TREME
+[1768] = true, -- X-51 Nether-Rocket
 [1799] = true, -- Eve's Ghastly Rider
 [2158] = true, -- Crowd Pummeler 2-30
+[2250] = true, -- Golden Ashes of Al'ar
 [2255] = true, -- Golden Ashes of Al'ar
 }
