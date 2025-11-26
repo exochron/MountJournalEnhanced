@@ -2,12 +2,20 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
---local build = select(4, GetBuildInfo())
-ADDON.DB.Recent = {
-    ["minID"] = 2645,
-    ["blacklist"] = {2655},
-    ["whitelist"] = {2566,2593, 2574,2573,2542,2544,2546,1945, 2632},
-}
+local build = select(4, GetBuildInfo())
+if build < 11207 then
+    ADDON.DB.Recent = {
+        ["minID"] = 2645,
+        ["blacklist"] = {2655},
+        ["whitelist"] = {2566,2593, 2574,2573,2542,2544,2546,1945, 2632},
+    }
+else
+    ADDON.DB.Recent = {
+        ["minID"] = 2795,
+        ["blacklist"] = {},
+        ["whitelist"] = {1374, 2550},
+    }
+end
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -167,6 +175,7 @@ ADDON.DB.Source = {
         [1233559] = true, -- Blue Barry
         [1242272] = true, -- Royal Voidwing
         [353264] = true, -- Xy Trustee's Gearglider
+        [1233516] = true, -- K'arroc Swiftwing
 
         ------------------------------
         -- Alliance ------------------
@@ -645,6 +654,8 @@ ADDON.DB.Source = {
         [1223187] = true, -- Terror of the Wastes -- K'aresh Trust renown 19
         [1233542] = true, -- The Bone Freezer - Manaforge Vandals renown 14
         [1233546] = true, -- Ruby Void Creeper - K'aresh Trust 15
+        [1264621] = true, -- Brawlin' Bruno -- Brawlers Guild
+        [1264643] = true, -- Ballistic Bronco -- Brawlers Guild
 
         ------------------------------
         -- Alliance ------------------
@@ -1016,6 +1027,7 @@ ADDON.DB.Source = {
         [1245517] = 42172, -- Scarlet Void Flyer - WW Keystone Legend S3
         [1246781] = 41973, -- Azure Void Flyer - WW Keystone Master S3
         [1250578] = 61017, -- Phase-Lost Slateback - Phase-Lost-and-Found
+        [1262886] = 61451, -- Geargrinder MK. 11 - Worldsoul-Searching
 
         ------------------------------
         -- Alliance ------------------
@@ -1391,6 +1403,7 @@ ADDON.DB.Source = {
             [201098] = true, -- Infinite Timereaver
             [294568] = true, -- Beastlord's Irontusk
             [294569] = true, -- Beastlord's Warwolf
+            [332482] = true, -- Bonecleaver's Skullboar
             [359013] = true, -- Val'sharah Hippogryph
             [359318] = true, -- Soaring Spelltome - A Tour of Towers
             [408654] = true, -- Sandy Shalewing
@@ -1403,6 +1416,13 @@ ADDON.DB.Source = {
             [1226144] = true, -- Chrono Corsair
             [1237631] = true, -- Moonlit Nightsaber
             [1237703] = true, -- Ivory Savagemane
+            [1261668] = true, -- Bronze Wilderling
+            [1261671] = true, -- Bronze Aquilon
+            [1261677] = true, -- Bronze Corpsefly
+            [1261681] = true, -- Bronze Gravewing
+            [1263369] = true, -- Skypaw Glimmerfur
+            [1263387] = true, -- Crimson Lupine
+            [1264988] = true, -- Snowpaw Glimmerfur Prowler
         },
 
         ["Darkmoon Faire"] = {
