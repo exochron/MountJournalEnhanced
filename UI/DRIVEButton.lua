@@ -46,6 +46,8 @@ local function BuildButton()
         GameTooltip:Hide()
     end)
 
+    button:SetAttribute("MJE_ToolbarIndex", "Drive")
+
     return button
 end
 

@@ -11,5 +11,6 @@ ADDON.Events:RegisterCallback("loadUI", function()
     MountJournal.LeftInset:SetPoint("BOTTOMLEFT", 4, 26)
     MountJournal.RightInset:SetPoint("BOTTOMLEFT", MountJournal.LeftInset, "BOTTOMRIGHT", 20, 0)
 
-    ADDON.UI:RegisterToolbarGroup("09-equipment", MountJournal.SlotButton)
+    button:SetAttribute("MJE_ToolbarIndex", "Equiment")
+    ADDON.UI:RegisterToolbarGroup("09-equipment", button)
 end, "equipment slot")

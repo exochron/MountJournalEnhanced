@@ -61,6 +61,17 @@ local function PrepareDefaults()
             displayAnimation = "stand",
             showFilterProfilesInMenu = true,
             syncTarget = false,
+            toolbarButtons = {
+                Equiment = true,
+                SyncTarget = true,
+                Skills = true,
+                ToggleDynamicFlight = true,
+                ToggleRideAlong = true,
+                ToggleWhirlingSurge = true,
+                Drive = true,
+                PetSlot = true,
+                RandomFavorite = true,
+            }
         },
 
         notes = {},

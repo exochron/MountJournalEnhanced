@@ -82,6 +82,8 @@ local function BuildToggle()
         GameTooltip:Hide()
     end)
 
+    button:SetAttribute("MJE_ToolbarIndex", "SyncTarget")
+
     return button
 end
 
