@@ -1,6 +1,7 @@
 This is a list of ideas I'd like to add at some point.
 
 ### Next
+- [ ] setting to customize toolbar
 - [ ] Minimap icons for LDB plugins
 - [ ] (item info instead of tradable db)
 - opt out of favorite profile system

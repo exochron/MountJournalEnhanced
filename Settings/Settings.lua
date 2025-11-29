@@ -50,7 +50,6 @@ local function PrepareDefaults()
                 Wowhead = true,
             },
             enableCursorKeys = true,
-            slotPosition = "top",
             previewButton = true,
             showPersonalCount = true,
             windowSize = { 0, 0 },

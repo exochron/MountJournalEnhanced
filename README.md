@@ -40,7 +40,7 @@ This addon extends the ingame mount journal with some cool stuff.
 - [List] Right Click on scroll buttons to quickly go to the top or bottom
 - [LDB] Change your flight style with the data broker plugin.
 - Assign pets to your mounts. They will be summoned as well, when you mount up.
-- Move equipment slot into display or top button bar to save some space (Retail only)
+- Moves equipment slot into top button bar to save some space (Retail only)
 - Display count of character specific mounts
 - Display mount related achievement points
 - Trigger /mountspecial of your mount or within the display
