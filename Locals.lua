@@ -165,3 +165,6 @@ elseif locale == "zhTW" then
     --@localization(locale="zhTW", namespace="Settings", format="lua_additive_table", handle-unlocalized=comment)@
     --@localization(locale="zhTW", namespace="Families", format="lua_additive_table", handle-unlocalized=comment)@
 end
+
+-- update labels for keyboard bindings (see: Bindings.xml)
+BINDING_NAME_MJE_RANDOM_MOUNT = MOUNT_JOURNAL_SUMMON_RANDOM_FAVORITE_MOUNT
