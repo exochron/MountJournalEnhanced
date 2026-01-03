@@ -2,20 +2,12 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
-local build = select(4, GetBuildInfo())
-if build < 11207 then
-    ADDON.DB.Recent = {
-        ["minID"] = 2645,
-        ["blacklist"] = {2655},
-        ["whitelist"] = {2566,2593, 2574,2573,2542,2544,2546,1945, 2632},
-    }
-else
-    ADDON.DB.Recent = {
-        ["minID"] = 2795,
-        ["blacklist"] = {},
-        ["whitelist"] = {1374, 2550},
-    }
-end
+-- local build = select(4, GetBuildInfo())
+ADDON.DB.Recent = {
+    ["minID"] = 2795,
+    ["blacklist"] = {},
+    ["whitelist"] = {1374, 2550},
+}
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -711,7 +703,7 @@ ADDON.DB.Source = {
         -- Wintersaber Trainers
         [17229] = true, -- Winterspring Frostsaber
 
-        -- Kurenai
+        -- Kurenai & Mag'har
         [34896] = true, -- Cobalt War Talbuk
         [34897] = true, -- White War Talbuk
         [34898] = true, -- Silver War Talbuk
@@ -821,16 +813,6 @@ ADDON.DB.Source = {
 
         -- Darkspear Trolls in Un'Goro Crater
         [64659] = true, -- Venomhide Ravasaur
-
-        -- The Mag'har
-        [34896] = true, -- Cobalt War Talbuk
-        [34897] = true, -- White War Talbuk
-        [34898] = true, -- Silver War Talbuk
-        [34899] = true, -- Tan War Talbuk
-        [39315] = true, -- Cobalt Riding Talbuk
-        [39317] = true, -- Silver Riding Talbuk
-        [39318] = true, -- Tan Riding Talbuk
-        [39319] = true, -- White Riding Talbuk
 
         -- The Sons of Hodir
         [59797] = true, -- Ice Mammoth - Horde
@@ -1830,9 +1812,14 @@ ADDON.DB.Expansion = {
 
     [10] = { -- War Within
         ["minID"] = 2116,
-        ["maxID"] = 9999999999,
+        ["maxID"] = 2825,
         [1550] = true, -- Depthstalker
         [1792] = true, -- Algarian Stormrider
+    },
+
+    [11] = { -- Midnight
+        ["minID"] = 2826,
+        ["maxID"] = 9999999999,
     }
 }
 

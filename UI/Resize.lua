@@ -49,7 +49,10 @@ local function init()
     -- That breaks/prevents resizing of the WardrobeCollection and therefore the whole CollectionsJournal.
     -- see TransmogFrameMixin:OnLoad()
     -- (since 9.1.5)
-    WardrobeTransmogFrame.ToggleSecondaryAppearanceCheckbox.Label:SetPoint("RIGHT", WardrobeTransmogFrame.ToggleSecondaryAppearanceCheckbox, "RIGHT", 140, 0)
+    -- TODO: remove after 12.0 launch
+    if WardrobeTransmogFrame then
+        WardrobeTransmogFrame.ToggleSecondaryAppearanceCheckbox.Label:SetPoint("RIGHT", WardrobeTransmogFrame.ToggleSecondaryAppearanceCheckbox, "RIGHT", 140, 0)
+    end
 
     CJ:HookScript("OnSizeChanged", function(_, width, height)
         if CJ:IsResizable() and CJ.selectedTab == COLLECTIONS_JOURNAL_TAB_INDEX_MOUNTS then

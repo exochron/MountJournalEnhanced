@@ -311,6 +311,7 @@ local function setupExpansionMenu(root)
         [8] = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\expansion\\08_sl.png",
         [9] = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\expansion\\09_df.png",
         [10] = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\expansion\\10_tww.png",
+        [11] = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\expansion\\11_mn.png",
     }
     for i = GetClientDisplayExpansionLevel(), 0,-1 do
         if _G["EXPANSION_NAME" .. i] then

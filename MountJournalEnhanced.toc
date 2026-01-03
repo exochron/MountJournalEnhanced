@@ -1,4 +1,4 @@
-## Interface: 50503,110207
+## Interface: 50503,110207,120000
 ## Title: Mount Journal Enhanced
 ## Notes: Extends the default Mount Journal
 ## IconTexture: Interface\Addons\MountJournalEnhanced\UI\icons\mje.png
@@ -86,8 +86,8 @@ UI\MountSpecialButton.lua
 UI\PetAssignment.lua
 UI\SettingsDropDown.lua
 # no mount preview possible yet in classic
-UI\DressUpButton.lua [AllowLoadGameType mainline]
-UI\RarityNames.lua [AllowLoadGameType mainline]
+UI\DressUpButton.lua  [AllowLoadGameType mainline]
+UI\RarityNames.lua  [AllowLoadGameType mainline]
 UI\SummonRandomButton.lua [AllowLoadGameType classic]
 UI\BlizzFixes.lua
 UI\Notes.lua
