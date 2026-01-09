@@ -94,6 +94,7 @@ ADDON.DB.Source.Shop[1239204] = true; -- Stormwind Skyseeker
 ADDON.DB.Source.Shop[1239240] = true; -- Orgrimmar Sentinel
 ADDON.DB.Source.Shop[1239372] = true; -- Celestial Steed
 ADDON.DB.Source.Shop[1249659] = true; -- Sha-Scarred Drake
+ADDON.DB.Source.Shop[1280068] = true; -- Scorching Courage
 
 ADDON.DB.Source.Achievement[1247591] = 60901; -- Celestial Riding Crane
 ADDON.DB.Source.Drop[1247596] = true; -- Celestial Riding Serpent

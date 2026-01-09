@@ -901,7 +901,11 @@ ADDON.DB.Family = {
 [416] = true, -- Felfire Hawk
 [417] = true, -- Corrupted Fire Hawk
 [1456] = true, -- Sapphire Skyblazer
+[2250] = true, -- Golden Ashes of Al'ar
+[2255] = true, -- Golden Ashes of Al'ar
 [2261] = true, -- Coldflame Tempest
+[2478] = true, -- Blazing Royal Fire Hawk
+[2485] = true, -- Flaming Royal Fire Hawk
 },
 ["Sabers"] = {
 [896] = true, -- Primal Flamesaber
@@ -1099,6 +1103,7 @@ ADDON.DB.Family = {
 [898] = true, -- Netherlord's Chaotic Wrathsteed
 [930] = true, -- Netherlord's Brimstone Wrathsteed
 [931] = true, -- Netherlord's Accursed Wrathsteed
+[2730] = true, -- Felscorned Netherlord's Dreadsteed
 },
 ["Flying Steeds"] = {
 [219] = true, -- Headless Horseman's Mount
@@ -1115,6 +1120,7 @@ ADDON.DB.Family = {
 [2623] = true, -- The Headless Horseman's Ghoulish Charger
 [2624] = true, -- The Headless Horseman's Burning Charger
 [2625] = true, -- The Headless Horseman's Hallowed Charger
+[2634] = true, -- Scorching Valor
 [2916] = true, -- Inarius' Charger
 },
 ["Horned Steeds"] = {
@@ -1223,13 +1229,13 @@ ADDON.DB.Family = {
 [2681] = true, -- Bonesteed of Bloodshed
 [2682] = true, -- Bonesteed of Plague
 [2683] = true, -- Bonesteed of Oblivion
-[2730] = true, -- Felscorned Netherlord's Dreadsteed
 },
 },
 ["Humanoids"] = {
 ["Gorger"] = {
 [1391] = true, -- Loyal Gorger
 [1443] = true, -- Voracious Gorger
+[2602] = true, -- Translocated Gorger
 },
 ["Gronnlings"] = {
 [607] = true, -- Gorestrider Gronnling
@@ -1727,6 +1733,7 @@ ADDON.DB.Family = {
 ["Vehicles"] = {
 ["Airplanes"] = {
 [1287] = true, -- Explorer's Jungle Hopper
+[2512] = true, -- Delver's Mana-Skimmer
 },
 ["Airships"] = {
 [959] = true, -- Stormwind Skychaser
@@ -1735,15 +1742,8 @@ ADDON.DB.Family = {
 [2144] = true, -- Delver's Dirigible
 [2296] = true, -- Delver's Gob-Trotter
 [2332] = true, -- The Breaker's Song
-[2512] = true, -- Delver's Mana-Skimmer
 [2596] = true, -- Stormwind Skyseeker
 [2597] = true, -- Orgrimmar Sentinel
-},
-["Assault Wagons"] = {
-[1193] = true, -- Meat Wagon
-},
-["Book"] = {
-[1532] = true, -- Soaring Spelltome
 },
 ["Broom"] = {
 [1799] = true, -- Eve's Ghastly Rider
@@ -1797,9 +1797,6 @@ ADDON.DB.Family = {
 [2576] = true, -- Grandmaster's Deep Board
 [2577] = true, -- Grandmaster's Royal Board
 [2578] = true, -- Grandmaster's Smokey Board
-},
-["Hovercraft"] = {
-[999] = true, -- Xiwyllag ATV
 },
 ["Jet Aerial Units"] = {
 [1227] = true, -- Aerial Unit R-21/X
@@ -1866,6 +1863,8 @@ ADDON.DB.Family = {
 [2085] = true, -- Cobalt Juggernaut
 [2086] = true, -- Fel Iron Juggernaut
 [2278] = true, -- Flarendo the Furious
+[2717] = true, -- Mechanical Prototype Panther MK-0
+[2718] = true, -- Steel Prototype Panther MK-0
 [2796] = true, -- Bronze Aquilon
 },
 ["Mechanostriders"] = {
@@ -1902,7 +1901,11 @@ ADDON.DB.Family = {
 [1947] = true, -- Hateforged Blazecycle
 [1948] = true, -- Voidfire Deathcycle
 },
-["Other"] = {
+["Others"] = {
+[999] = true, -- Xiwyllag ATV
+[1193] = true, -- Meat Wagon
+[1397] = true, -- Wildseed Cradle
+[1532] = true, -- Soaring Spelltome
 [2802] = true, -- Geargrinder Mk. 11
 },
 ["Rockets"] = {
@@ -1922,9 +1925,6 @@ ADDON.DB.Family = {
 [2284] = true, -- Ochre Delivery Rocket
 [2327] = true, -- Lunar Launcher
 [2808] = true, -- Ballistic Bronco
-},
-["Seat"] = {
-[1397] = true, -- Wildseed Cradle
 },
 ["Spider Tanks"] = {
 [1229] = true, -- Rusty Mechanocrawler

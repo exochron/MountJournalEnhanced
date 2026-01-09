@@ -53,4 +53,5 @@ ADDON.DB.Tradable = {
 [2158] = true, -- Crowd Pummeler 2-30
 [2250] = true, -- Golden Ashes of Al'ar
 [2255] = true, -- Golden Ashes of Al'ar
+[2634] = true, -- Scorching Valor
 }

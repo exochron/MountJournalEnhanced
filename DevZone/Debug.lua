@@ -76,6 +76,28 @@ local function testDatabase()
     end
 end
 
+local function checkMissingFamilyLocalisations()
+
+-- manual english export
+local L = {
+	["Families"] = {
+-- fill me
+	}
+}
+
+    for outerIndex, outerList in pairs(ADDON.DB.Family) do
+        if not L.Families[outerIndex] then
+            print("Missing Localisation for", outerIndex)
+        end
+
+        for innerIndex, innerValue in pairs(outerList) do
+            if innerValue ~= true and not L.Families[innerIndex] then
+                print("Missing Localisation for", innerIndex)
+            end
+        end
+    end
+end
+
 local function testFavorites()
     local _,_, favorites = ADDON.Api:GetFavoriteProfile()
     local expectedMounts = tFilter(favorites, function(mountId)
@@ -147,6 +169,7 @@ end
 
 ADDON.Events:RegisterCallback("postloadUI", function()
     testDatabase()
+    -- checkMissingFamilyLocalisations()
 
     -- disable taint checks for now
     --checkForTaint()
