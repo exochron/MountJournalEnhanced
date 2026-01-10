@@ -2,12 +2,21 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
--- local build = select(4, GetBuildInfo())
-ADDON.DB.Recent = {
-    ["minID"] = 2795,
-    ["blacklist"] = {},
-    ["whitelist"] = {1374, 2550},
-}
+local build = select(4, GetBuildInfo())
+if build < 120000 then
+    ADDON.DB.Recent = {
+        ["minID"] = 2795,
+        ["blacklist"] = {},
+        ["whitelist"] = {1374, 2550},
+    }
+else
+    ADDON.DB.Recent = {
+        ["minID"] = 2733,
+        ["blacklist"] = {2795,2796,2797,2798,2802,2803,2804,2807,2808,2815,2823,2825 },
+        ["whitelist"] = {16,1946,2161,2220,2492,2595,2607,2608,2614,2615,2693,2694,2708,2710,2713},
+    }
+end
+
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -93,6 +102,22 @@ ADDON.DB.Source = {
         [1240632] = true, -- Pearlesent Krolusk
         [1241070] = true, -- Translocated Gorger
         [1241076] = true, -- Sthaarb's Last Lunch
+        
+        -- Midnight
+        [1243597] = true, -- Rootstalker Grimlynx
+        [1253927] = true, -- Vibrant Petalwing
+        [1253938] = true, -- Ruddy Sporeglider -- Treasure
+        [1260354] = true, -- Untainted Grove Crawler -- Treasure
+        [1260356] = true, -- Echo of Aln'sharan
+        [1261155] = true, -- Augmented Stormray
+        [1261302] = true, -- Cobalt Dragonhawk
+        [1261316] = true, -- Amani Sharptalon
+        [1261323] = true, -- Cerulian Hawkstrider
+        [1261332] = true, -- Duskbrute Harrower
+        [1261351] = true, -- Witherbark Pango
+        [1261360] = true, -- Ancestral War Bear -- Treasure
+        [1261576] = true, -- Hexed Vilefeather Eagle -- Treasure
+        [1266700] = true, -- Sanguine Harrower
 
     },
 
@@ -168,6 +193,7 @@ ADDON.DB.Source = {
         [1242272] = true, -- Royal Voidwing
         [353264] = true, -- Xy Trustee's Gearglider
         [1233516] = true, -- K'arroc Swiftwing
+        [1261391] = true, -- Relinquished Scarlet Charger
 
         ------------------------------
         -- Alliance ------------------
@@ -311,6 +337,25 @@ ADDON.DB.Source = {
         [1233518] = true, -- Lavender K'arroc
         [1233547] = true, -- Acidic Void Creeper
 
+        -- Midnight
+        [447173] = true, -- Elder Glowmite
+        [451487] = true, -- Retrained Skyrazor
+        [1243593] = true, -- Fierce Grimlynx
+        [1251433] = true, -- Amani Sunfeather
+        [1251630] = true, -- Amani Windcaller
+        [1253929] = true, -- Cerulean Sporeglider
+        [1261291] = true, -- Fiery Dragonhawk
+        [1261322] = true, -- Crimson Silvermoon Hawkstrider
+        [1261336] = true, -- Preyseeker's Hubris
+        [1261337] = true, -- Preyseeker's Wrath
+        [1261348] = true, -- Blessed Amani Burrower
+        [1261357] = true, -- Amani Blessed Bear
+        [1261584] = true, -- Prowling Shredclaw
+        [1261585] = true, -- Frenzied Shredclaw
+        [1268924] = true, -- Silvermoon's Arcane Defender
+        [1268926] = true, -- Elven Arcane Guardian
+        [1270675] = true, -- Vivid Chloroceros
+
         ------------------------------
         -- Alliance ------------------
         ------------------------------
@@ -408,6 +453,7 @@ ADDON.DB.Source = {
         [1218305] = true, -- Void-Forged Stallion - Vision of Stormwind (Revisited)
         [1218306] = true, -- Void-Scarred Pack Mother - Vision of Orgrimmar (Revisited)
         [1218307] = true, -- Void-Scarred Windrider - Vision of Orgrimmar (Revisited)
+        [1265784] = true, -- Lucent Hawkstrider - Magister's Terrace (?)
 
         -- Raid
         -- difficulty: 3=10Normal; 4=25Normal; 5=10Hero; 6=25Hero; 14=Normal; 15=Hero; 16=Mythic; 17=LFR
@@ -457,6 +503,7 @@ ADDON.DB.Source = {
         [1221155] = { 2646, 17 }, -- Prototype A.S.M.R. -- Liberation of Undermine
         [1234573] = { 2691, 16 }, -- Unbound Star-Eater -- Manaforge Omega Hc
         [1242272] = true, -- Royal Voidwing -- Manaforge Omega Hc
+        [1242904] = { 2740, 16 }, -- Ashes of Belo'ren -- March on Quel Danas Mythic
     },
 
     ["Reputation"] = {
@@ -1011,6 +1058,15 @@ ADDON.DB.Source = {
         [1250578] = 61017, -- Phase-Lost Slateback - Phase-Lost-and-Found
         [1262886] = 61451, -- Geargrinder MK. 11 - Worldsoul-Searching
 
+        -- Midnight
+        [1243003] = 42300, -- Light-Forged Mechsuit - Two Minutes to Midnight
+        [1257058] = 61256, -- Calamitous Carrion - Midnight Keystone Master: Season One
+        [1257081] = 61258, -- Convalescent Carrion - Midnight Keystone Legend: Season One
+        [1261338] = 42703, -- Preyseeker's Nightmare - Prey: Nightmare Mode III
+        [1266980] = 61380, -- Tenebrous Harrower - Glory of the Midnight Raider
+        [1268949] = 61799, -- Arcanovoid Construct - Let Me Solo Him: Nullaeus
+        [1276650] = {62103,62096}, -- Anu'shalla, Shadow's Guidance -  Insurmountable Collection
+
         ------------------------------
         -- Alliance ------------------
         ------------------------------
@@ -1183,6 +1239,7 @@ ADDON.DB.Source = {
         [447405] = true, -- Vicious Skyflayer - War Within: Season 1
         [449325] = true, -- Vicious Skyflayer - War Within: Season 1
         [472157] = true, -- Astral Gladiator's Fel Bat - Gladiator: The War Within Season 3
+        [1262840] = true, -- Galactic Gladiator's Goredrake - Gladiator: Midnight Season One
 
         -- Prestige Reward
         [222202] = true, -- Prestigious Bronze Courser
@@ -1230,6 +1287,7 @@ ADDON.DB.Source = {
         [146615] = true, -- Vicious Warsaber - Grievous Combatant
         [171834] = true, -- Vicious War Ram - Primal Combatant
         [193695] = true, -- Prestigious War Steed - Free For All, More For Me
+        [1261648] = true, -- Vicious Snaplizard - Galactic Combatant
 
         -- Stormpike Guard
         [23510] = true, -- Stormpike Battle Charger
@@ -1280,6 +1338,7 @@ ADDON.DB.Source = {
         [146622] = true, -- Vicious Skeletal Warhorse - Grievous Combatant
         [171835] = true, -- Vicious War Raptor - Primal Combatant
         [204166] = true, -- Prestigious War Wolf - Free For All, More For Me
+        [1261629] = true, -- Vicious Snaplizard - Galactic Combatant
 
         -- Frostwolf Clan
         [23509] = true, -- Frostwolf Howler
@@ -1437,6 +1496,7 @@ ADDON.DB.Source = {
             [102350] = true, -- Swift Lovebird
             [427777] = true, -- Heartseeker Mana Ray
             [472479] = true, -- Love Witch's Sweeper
+            [1218013] = true, -- Spring Butterfly
         },
 
         ["Noblegarden"] = {
@@ -1687,6 +1747,12 @@ ADDON.DB.FeatsOfStrength = {
     [2571] = 42042, -- Vicious Void Creeper - Astral Combatant
     [2631] = 42172, -- Scarlet Void Flyer - WW Keystone Legend S3
     [2633] = 41973, -- Azure Void Flyer - WW Keystone Master S3
+    [2733] = 61256, -- Calamitous Carrion - Midnight Keystone Master: Season One
+    [2734] = 61258, -- Convalescent Carrion - Midnight Keystone Legend: Season One
+    [2793] = 61403, -- Vicious Snaplizard - Galactic Combatant
+    [2794] = 61405, -- Vicious Snaplizard - Galactic Combatant
+    [2801] = 61188, -- Galactic Gladiator's Goredrake - Gladiator: Midnight Season One
+    [2842] = 61799, -- Arcanovoid Construct - Let Me Solo Him: Nullaeus
 }
 
 ADDON.DB.Expansion = {
@@ -1812,14 +1878,41 @@ ADDON.DB.Expansion = {
 
     [10] = { -- War Within
         ["minID"] = 2116,
-        ["maxID"] = 2825,
+        ["maxID"] = 2732,
         [1550] = true, -- Depthstalker
         [1792] = true, -- Algarian Stormrider
+        [2795] = true, -- Bronze Wilderling
+        [2796] = true, -- Bronze Aquilon
+        [2797] = true, -- Bronze Corpsefly
+        [2798] = true, -- Bronze Gravewing
+        [2802] = true, -- Geargrinder Mk. 11
+        [2803] = true, -- Skypaw Glimmerfur
+        [2804] = true, -- Crimson Lupine
+        [2807] = true, -- Brawlin' Bruno
+        [2808] = true, -- Ballistic Bronco
+        [2815] = true, -- Snowpaw Glimmerfur Prowler
+        [2823] = true, -- Savage Crimson Battle Turtle
+        [2825] = true, -- Cloudborn Razorwing
     },
 
     [11] = { -- Midnight
-        ["minID"] = 2826,
+        ["minID"] = 2733,
         ["maxID"] = 9999999999,
+        [16] = true, -- Lost Nether Drake
+        [1946] = true, -- Jeweled Jade Scarab
+        [2161] = true, -- Elder Glowmite
+        [2220] = true, -- Retrained Skyrazor
+        [2492] = true, -- Spring Butterfly
+        [2595] = true, -- Swift Spectral Dragonhawk
+        [2607] = true, -- Ashens of Belo'ren
+        [2608] = true, -- Light-Forged Mechsuit
+        [2614] = true, -- Fierce Grimlynx
+        [2615] = true, -- Rootstalker Grimlynx
+        [2693] = true, -- Amani Sunfeather
+        [2694] = true, -- Amani Windcaller
+        [2708] = true, -- Vibrant Petalwing
+        [2710] = true, -- Cerulean Sporeglider
+        [2713] = true, -- Ruddy Sporeglider
     }
 }
 
