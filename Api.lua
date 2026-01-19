@@ -163,7 +163,7 @@ end
 function ADDON.Api:IsDynamicFlight()
     if C_MountJournal.IsDragonridingUnlocked() then
         local description = C_Spell.GetSpellDescription(C_MountJournal.GetDynamicFlightModeSpellID())
-        local pos = string.find(description, DYNAMIC_FLIGHT,1 , true)
+        local pos = string.find(description, ACCESSIBILITY_ADV_FLY_LABEL,1 , true)
         if pos then
             return pos < 15
         end
