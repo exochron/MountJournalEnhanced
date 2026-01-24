@@ -51,9 +51,9 @@ function ADDON.UI.FDD:AddProfiles(root)
         456040, -- raidtarget_x
         456042, -- raidtarget_star
     }
-    if ADDON.isRetail and time() < 1768896000 then -- 2026-01-20 08:00
-        icons["remix"] = 1380366 -- ability_demonhunter_eyeofleotheras
-    end
+    --if ADDON.isRetail and time() < 1768896000 then -- 2026-01-20 08:00
+    --    icons["remix"] = 1380366 -- ability_demonhunter_eyeofleotheras
+    --end
 
     local profileButtons = {}
     local element = root:CreateTitle(ADDON.L.FILTER_PROFILE, WHITE_FONT_COLOR)
@@ -92,7 +92,7 @@ function ADDON.UI.FDD:AddProfiles(root)
                 GameTooltip:SetPoint("LEFT", button, "RIGHT")
                 GameTooltip:ClearLines()
                 GameTooltip_SetTitle(GameTooltip, ADDON.L.FILTER_PROFILE_TOOLTIP_TITLE)
-                GameTooltip:AddLine( type(id) == "number"and ADDON.L.FILTER_PROFILE_TOOLTIP_TEXT or ADDON.L.FILTER_PROFILE_TOOLTIP_REMIX_LEGION)
+                GameTooltip:AddLine(ADDON.L.FILTER_PROFILE_TOOLTIP_TEXT)
                 GameTooltip:Show()
             end)
             profileButton:SetScript("OnLeave", function()
@@ -147,6 +147,6 @@ local function prepareEventProfile()
     end
 end
 
-ADDON.Events:RegisterCallback("loadUI", function(self)
-    prepareEventProfile()
-end, "detect remix")
+--ADDON.Events:RegisterCallback("loadUI", function(self)
+--    prepareEventProfile()
+--end, "detect remix")

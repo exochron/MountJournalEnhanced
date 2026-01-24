@@ -238,7 +238,6 @@ local function setupSourceMenu(root)
         ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, GetCategoryInfo(15532), "Anniversary", eventSettings, settings), 1084434, 20, 20, 0, 0.71, 0, 0.71)
         ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, GetCategoryInfo(158), "Hallow's End", eventSettings, settings), 236552)
         ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, GetCategoryInfo(156), "Feast of Winter Veil", eventSettings, settings), 133202)
-        ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(eventRoot, GetCategoryInfo(15562) or "Legion: Remix", "Remix: Legion", eventSettings, settings), 1380366)
     end
 
     ADDON.UI.FDD:AddIcon(ADDON.UI.FDD:CreateFilter(root, BATTLE_PET_SOURCE_1, "Drop", settings, true), 133639)
