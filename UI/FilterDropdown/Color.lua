@@ -13,7 +13,7 @@ function ADDON.UI.FDD:AddColorMenu(root)
         local swatchFrame = frame:AttachFrame("ColorSelect")
         swatchFrame:SetAllPoints()
         swatchFrame:SetPropagateMouseMotion(true);
-        swatchFrame:SetFrameStrata("TOOLTIP")
+        swatchFrame:SetFrameStrata(frame:GetFrameStrata())
 
         swatchFrame.Wheel = swatchFrame:AttachTexture()
         swatchFrame.Wheel:SetTexture("WheelTexture")

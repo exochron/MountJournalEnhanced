@@ -68,6 +68,7 @@ function ADDON.UI.FDD:AddProfiles(root)
             local profileButton = button:AttachTemplate("WowMenuAutoHideButtonTemplate")
             profileButton.Texture:SetTexture(icon)
             profileButton:SetSize(fontHeight-2, fontHeight-2)
+            profileButton:SetFrameStrata(button:GetFrameStrata())
 
             profileButton:RegisterForClicks("AnyUp")
 
