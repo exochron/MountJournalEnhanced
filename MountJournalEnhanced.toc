@@ -76,7 +76,7 @@ UI\DisplayBackground.lua
 UI\DisplayCamera.lua
 UI\DisplayText.lua
 UI\DRIVEButton.lua
-UI\SkyridingButtons.lua
+UI\SkyridingButtons.lua [AllowLoadGameType mainline]
 UI\SyncTarget.lua
 UI\Resize.lua
 UI\DisplayStatistics.lua
