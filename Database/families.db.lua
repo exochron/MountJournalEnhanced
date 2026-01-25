@@ -78,9 +78,6 @@ ADDON.DB.Family = {
 [2544] = true, -- Ashplague Fel Bat
 [2546] = true, -- Wretched Fel Bat
 [2721] = true, -- Slayer's Felscorned Shrieker
-[2764] = true, -- Duskbrute Harrower
-[2827] = true, -- Sanguine Harrower
-[2831] = true, -- Tenebrous Harrower
 },
 },
 ["Birds"] = {
@@ -118,6 +115,7 @@ ADDON.DB.Family = {
 [978] = true, -- Violet Spellwing
 [2322] = true, -- Thrayir, Eyes of the Siren
 [2728] = true, -- Shadowblade's Felscorned Omen
+[2914] = true, -- Fel Spirehawk
 },
 ["Eagle"] = {
 [1545] = true, -- Divine Kiss of Ohn'ahra
@@ -129,6 +127,7 @@ ADDON.DB.Family = {
 [2693] = true, -- Amani Sunfeather
 [2694] = true, -- Amani Windcaller
 [2760] = true, -- Amani Sharptalon
+[2786] = true, -- Hexed Vilefeather Eagle
 },
 ["Hawkstriders"] = {
 [146] = true, -- Swift Pink Hawkstrider
@@ -423,6 +422,10 @@ ADDON.DB.Family = {
 [1825] = true, -- Taivan
 [2663] = true, -- Illidari Dreadstalker
 [2664] = true, -- Illidari Blightstalker
+[2789] = true, -- Ravenous Shredclaw
+[2790] = true, -- Insatiable Shredclaw
+[2791] = true, -- Prowling Shredclaw
+[2792] = true, -- Frenzied Shredclaw
 },
 ["Hyenas"] = {
 [926] = true, -- Alabaster Hyena
@@ -605,6 +608,10 @@ ADDON.DB.Family = {
 [1596] = true, -- Amalgam of Rage
 [2663] = true, -- Illidari Dreadstalker
 [2664] = true, -- Illidari Blightstalker
+[2789] = true, -- Ravenous Shredclaw
+[2790] = true, -- Insatiable Shredclaw
+[2791] = true, -- Prowling Shredclaw
+[2792] = true, -- Frenzied Shredclaw
 },
 ["Demonic Steeds"] = {
 [17] = true, -- Felsteed
@@ -925,6 +932,7 @@ ADDON.DB.Family = {
 [2192] = true, -- Beledar's Spawn
 [2566] = true, -- Lana'thel's Crimson Cascade
 [2729] = true, -- Farseer's Felscorned Tempest
+[2735] = true, -- Lana'thel's Sanguine Cascade
 },
 ["Phoenixes"] = {
 [183] = true, -- Ashes of Al'ar
@@ -1155,6 +1163,8 @@ ADDON.DB.Family = {
 [2624] = true, -- The Headless Horseman's Burning Charger
 [2625] = true, -- The Headless Horseman's Hallowed Charger
 [2634] = true, -- Scorching Valor
+[2742] = true, -- Donnerhufhimmelsross
+[2743] = true, -- Stormgilded Celestial
 [2916] = true, -- Inarius' Charger
 [2924] = true, -- Scorching Courage
 },
@@ -1430,10 +1440,12 @@ ADDON.DB.Family = {
 [1740] = true, -- Vicious War Snail
 [1741] = true, -- Vicious War Snail
 [2495] = true, -- Emerald Snail
+[2843] = true, -- Ghastropod
 },
 },
 ["Pangolin"] = {
 [2772] = true, -- Blessed Amani Burrower
+[2773] = true, -- Giganto Manis
 [2775] = true, -- Witherbark Pango
 },
 ["Plant"] = {
@@ -1529,6 +1541,12 @@ ADDON.DB.Family = {
 [2594] = true, -- Envoy of Sa'bak
 [2807] = true, -- Brawlin' Bruno
 },
+["Harrower"] = {
+[2764] = true, -- Duskbrute Harrower
+[2767] = true, -- Contained Stormarion Defender
+[2827] = true, -- Sanguine Harrower
+[2831] = true, -- Tenebrous Harrower
+},
 ["Kodos"] = {
 [71] = true, -- Gray Kodo
 [72] = true, -- Brown Kodo
@@ -1579,7 +1597,7 @@ ADDON.DB.Family = {
 [1940] = true, -- Salatrancer
 [2315] = true, -- Timbered Sky Snake
 [2732] = true, -- Cobalt Phase-Hunter
-[2747] = true, -- Untainted Grove Crawler
+[2747] = true, -- Untained Grove Crawler
 [2793] = true, -- Vicious Snaplizard
 [2794] = true, -- Vicious Snaplizard
 [2844] = true, -- Cerulean Phase-Hunter
@@ -1881,6 +1899,7 @@ ADDON.DB.Family = {
 [2576] = true, -- Grandmaster's Deep Board
 [2577] = true, -- Grandmaster's Royal Board
 [2578] = true, -- Grandmaster's Smokey Board
+[2838] = true, -- Fantastical Goblin Waveshredder
 },
 ["Jet Aerial Units"] = {
 [1227] = true, -- Aerial Unit R-21/X
@@ -1988,6 +2007,7 @@ ADDON.DB.Family = {
 [1943] = true, -- Incognitro, the Indecipherable Felcycle
 [1947] = true, -- Hateforged Blazecycle
 [1948] = true, -- Voidfire Deathcycle
+[2849] = true, -- Hypo-Speed X6000
 },
 ["Others"] = {
 [999] = true, -- Xiwyllag ATV
