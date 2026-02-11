@@ -2,21 +2,12 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
-local build = select(4, GetBuildInfo())
-if build < 120000 then
-    ADDON.DB.Recent = {
-        ["minID"] = 2795,
-        ["blacklist"] = {},
-        ["whitelist"] = {1374, 2550},
-    }
-else
-    ADDON.DB.Recent = {
-        ["minID"] = 2733,
-        ["blacklist"] = {2795,2796,2797,2798,2802,2803,2804,2807,2808,2815,2823,2825 },
-        ["whitelist"] = {16,1946,2161,2220,2492,2595,2607,2608,2614,2615,2693,2694,2708,2710,2713},
-    }
-end
-
+--local build = select(4, GetBuildInfo())
+ADDON.DB.Recent = {
+    ["minID"] = 2733,
+    ["blacklist"] = {2795,2796,2797,2798,2802,2803,2804,2807,2808,2815,2823,2825 },
+    ["whitelist"] = {16,1946,2161,2220,2492,2595,2607,2608,2614,2615,2693,2694,2708,2710,2713},
+}
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -117,6 +108,7 @@ ADDON.DB.Source = {
         [1261351] = true, -- Witherbark Pango
         [1261360] = true, -- Ancestral War Bear -- Treasure
         [1261576] = true, -- Hexed Vilefeather Eagle -- Treasure
+        [1261583] = true, -- Insatiable Shredclaw -- Treasure
         [1266700] = true, -- Sanguine Harrower
 
     },
@@ -1060,8 +1052,11 @@ ADDON.DB.Source = {
 
         -- Midnight
         [1243003] = 42300, -- Light-Forged Mechsuit - Two Minutes to Midnight
+        [1243598] = 61506, -- Ivory Grimlynx - Allied Races: Haranir
         [1257058] = 61256, -- Calamitous Carrion - Midnight Keystone Master: Season One
         [1257081] = 61258, -- Convalescent Carrion - Midnight Keystone Legend: Season One
+        [1261296] = 62190, -- Umbral Dragonhawk - Life of the Party
+        [1261298] = 61584, -- Crimson Dragonhawk - Midnight Glyph Hunter
         [1261338] = 42703, -- Preyseeker's Nightmare - Prey: Nightmare Mode III
         [1266980] = 61380, -- Tenebrous Harrower - Glory of the Midnight Raider
         [1268949] = 61799, -- Arcanovoid Construct - Let Me Solo Him: Nullaeus

@@ -468,6 +468,7 @@ ADDON.DB.Family = {
 [2070] = true, -- Guardian Quilen
 [2071] = true, -- Marble Quilen
 [2474] = true, -- Copper-Maned Quilen
+[2946] = true, -- Scorching Imperial Quilen
 },
 ["Vulpin"] = {
 [1222] = true, -- Vulpine Familiar
@@ -504,6 +505,7 @@ ADDON.DB.Family = {
 [2535] = true, -- Void-Scarred Lynx
 [2614] = true, -- Fierce Grimlynx
 [2615] = true, -- Rootstalker Grimlynx
+[2616] = true, -- Ivory Grimlynx
 },
 ["Manasabers"] = {
 [741] = true, -- Mystic Runesaber
@@ -669,6 +671,7 @@ ADDON.DB.Family = {
 [1179] = true, -- Palehide Direhorn
 [1225] = true, -- Crusader's Direhorn
 [1249] = true, -- Child of Torcali
+[2912] = true, -- Vivacious Chloroceros
 [2913] = true, -- Vivid Chloroceros
 },
 ["Falcosaurs"] = {
@@ -737,6 +740,8 @@ ADDON.DB.Family = {
 [2568] = true, -- Lightwing Dragonhawk
 [2598] = true, -- Voidlight Surger
 [2753] = true, -- Fiery Dragonhawk
+[2755] = true, -- Umbral Dragonhawk
+[2756] = true, -- Crimson Dragonhawk
 [2758] = true, -- Cobalt Dragonhawk
 },
 ["Drakes"] = {
@@ -814,12 +819,13 @@ ADDON.DB.Family = {
 [2606] = true, -- Royal Voidwing
 [2646] = true, -- Sha-scarred Drake
 [2647] = true, -- Ashened Cataclysm
+[2936] = true, -- Golden Ashened Cataclysm
 },
 ["Grand Drakes"] = {
 [1727] = true, -- Tarecgosa's Visage
 },
 ["Nether Drakes"] = {
-[16] = true, -- Lost Nether Drake
+[16] = true, -- Nether-Warped Drake
 [169] = true, -- Swift Nether Drake
 [186] = true, -- Onyx Netherwing Drake
 [187] = true, -- Azure Netherwing Drake
@@ -1163,7 +1169,7 @@ ADDON.DB.Family = {
 [2624] = true, -- The Headless Horseman's Burning Charger
 [2625] = true, -- The Headless Horseman's Hallowed Charger
 [2634] = true, -- Scorching Valor
-[2742] = true, -- Donnerhufhimmelsross
+[2742] = true, -- Thunderhoof Celestial
 [2743] = true, -- Stormgilded Celestial
 [2916] = true, -- Inarius' Charger
 [2924] = true, -- Scorching Courage
@@ -1597,7 +1603,7 @@ ADDON.DB.Family = {
 [1940] = true, -- Salatrancer
 [2315] = true, -- Timbered Sky Snake
 [2732] = true, -- Cobalt Phase-Hunter
-[2747] = true, -- Untained Grove Crawler
+[2747] = true, -- Untainted Grove Crawler
 [2793] = true, -- Vicious Snaplizard
 [2794] = true, -- Vicious Snaplizard
 [2844] = true, -- Cerulean Phase-Hunter
