@@ -279,7 +279,7 @@ ADDON.DB.Source["Unavailable"] = {
 }
 
 MergeTable(ADDON.DB.Source.Drop, {
-[60002] = {120, 2800, 6540, 98.89}, -- Time-Lost Proto-Drake
+[60002] = {120, 2800, 6540, 98.78}, -- Time-Lost Proto-Drake
 [88718] = {207, 3120, 4260, 100.00}, -- Phosphorescent Stone Drake
 [88750] = {69, 6940, 7320, 99.91}, -- Grey Riding Camel
 [98718] = {205, 3780, 6680, 99.50}, -- Subdued Seahorse
@@ -287,8 +287,8 @@ MergeTable(ADDON.DB.Source.Drop, {
 [130965] = {376, 7160, 6440, 0.26}, -- Son of Galleon
 [138423] = {507, 4990, 5400, 0.39}, -- Cobalt Primordial Direhorn
 [138424] = {371, 4320, 1720, 0.01}, -- Amber Primordial Direhorn
-[138425] = {371, 5240, 1880, 4.03}, -- Slate Primordial Direhorn
-[138426] = {371, 5240, 1880, 3.93}, -- Jade Primordial Direhorn
+[138425] = {371, 5240, 1880, 4.02}, -- Slate Primordial Direhorn
+[138426] = {371, 5240, 1880, 3.94}, -- Jade Primordial Direhorn
 [139442] = {504, 6050, 3730, 0.33}, -- Thundering Cobalt Cloud Serpent
 [148476] = {554, 5740, 5780, 0.89}, -- Thundering Onyx Cloud Serpent
 [171620] = {550, 5000, 3420, 100.00}, -- Bloodhoof Bull
@@ -301,13 +301,13 @@ MergeTable(ADDON.DB.Source.Drop, {
 [171851] = {525, 1300, 5040, 99.99}, -- Garn Nighthowl
 [237286] = {864, 4940, 3220, 0.01}, -- Dune Scavenger
 [238454] = {646, 4440, 5240, 57.14}, -- Netherlord's Accursed Wrathsteed
-[243652] = {885, 6320, 2360, 3.49}, -- Vile Fiend
+[243652] = {885, 6320, 2360, 3.48}, -- Vile Fiend
 [243795] = {863, 6180, 2520, 0.00}, -- Leaping Veinseeker
 [253058] = {882, 5440, 5940, 3.65}, -- Maddened Chaosrunner
 [253107] = {882, 3320, 4740, 3.22}, -- Lambent Mana Ray
 [253660] = {885, 6400, 2080, 3.84}, -- Biletooth Gnasher
 [253661] = {885, 6140, 3680, 2.89}, -- Crimson Slavermaw
-[253662] = {882, 4740, 900, 2.71}, -- Acid Belcher
+[253662] = {882, 4740, 900, 2.72}, -- Acid Belcher
 [260174] = {896, 6320, 4060, 0.00}, -- Terrified Pack Mule
 [260175] = {942, 4740, 6520, 0.01}, -- Goldenmane
 [275623] = {nil, nil, nil, 56.53}, -- Nazjatar Blood Serpent
@@ -316,7 +316,7 @@ MergeTable(ADDON.DB.Source.Drop, {
 [279569] = {14, 6480, 7160, 5.67}, -- Swift Albino Raptor
 [279608] = {14, 2700, 5640, 6.64}, -- Lil' Donkey
 [279611] = {14, 5620, 4660, 6.22}, -- Skullripper
-[279868] = {14, 6700, 6160, 5.55}, -- Witherbark Direwing
+[279868] = {14, 6700, 6160, 5.56}, -- Witherbark Direwing
 [288438] = {62, 4940, 2480, 4.40}, -- Blackpaw
 [288495] = {62, 5640, 3080, 5.57}, -- Ashenvale Chimaera
 [288503] = {62, 4040, 7320, 4.98}, -- Umber Nightsaber

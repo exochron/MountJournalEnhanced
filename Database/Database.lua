@@ -108,6 +108,7 @@ ADDON.DB.Source = {
         [1261351] = true, -- Witherbark Pango
         [1261360] = true, -- Ancestral War Bear -- Treasure
         [1261576] = true, -- Hexed Vilefeather Eagle -- Treasure
+        [1261334] = true, -- Contained Stormarion Defender
         [1261583] = true, -- Insatiable Shredclaw -- Treasure
         [1266700] = true, -- Sanguine Harrower
 
@@ -342,6 +343,7 @@ ADDON.DB.Source = {
         [1261337] = true, -- Preyseeker's Wrath
         [1261348] = true, -- Blessed Amani Burrower
         [1261357] = true, -- Amani Blessed Bear
+        [1261579] = true, -- Ravenous Shredclaw - Voidstorm Renown
         [1261584] = true, -- Prowling Shredclaw
         [1261585] = true, -- Frenzied Shredclaw
         [1268924] = true, -- Silvermoon's Arcane Defender
@@ -445,6 +447,7 @@ ADDON.DB.Source = {
         [1218305] = true, -- Void-Forged Stallion - Vision of Stormwind (Revisited)
         [1218306] = true, -- Void-Scarred Pack Mother - Vision of Orgrimmar (Revisited)
         [1218307] = true, -- Void-Scarred Windrider - Vision of Orgrimmar (Revisited)
+        [1263635] = true, -- Spectral Hawkstrider - Windrunner Spire (?)
         [1265784] = true, -- Lucent Hawkstrider - Magister's Terrace (?)
 
         -- Raid
@@ -687,6 +690,9 @@ ADDON.DB.Source = {
         [1233546] = true, -- Ruby Void Creeper - K'aresh Trust 15
         [1264621] = true, -- Brawlin' Bruno -- Brawlers Guild
         [1264643] = true, -- Ballistic Bronco -- Brawlers Guild
+
+        [1261579] = true, -- Ravenous Shredclaw - Voidstorm Renown
+        [1266702] = true, -- Voidbound Stormray - Voidstorm Renown
 
         ------------------------------
         -- Alliance ------------------
@@ -1053,14 +1059,18 @@ ADDON.DB.Source = {
         -- Midnight
         [1243003] = 42300, -- Light-Forged Mechsuit - Two Minutes to Midnight
         [1243598] = 61506, -- Ivory Grimlynx - Allied Races: Haranir
+        [1253924] = 62386, -- Brilliant Petalwing - Light Up the Night
         [1257058] = 61256, -- Calamitous Carrion - Midnight Keystone Master: Season One
         [1257081] = 61258, -- Convalescent Carrion - Midnight Keystone Legend: Season One
         [1261296] = 62190, -- Umbral Dragonhawk - Life of the Party
         [1261298] = 61584, -- Crimson Dragonhawk - Midnight Glyph Hunter
         [1261338] = 42703, -- Preyseeker's Nightmare - Prey: Nightmare Mode III
+        [1261349] = 61906, -- Giganto Manis - Glory of the Midnight Delver
+        [1266703] = 62385, -- Lab-grown Stormray - Staring Into The Void
         [1266980] = 61380, -- Tenebrous Harrower - Glory of the Midnight Raider
         [1268949] = 61799, -- Arcanovoid Construct - Let Me Solo Him: Nullaeus
-        [1276650] = {62103,62096}, -- Anu'shalla, Shadow's Guidance -  Insurmountable Collection
+        [1270673] = 61263, -- Vivacious Chloroceros - Treasures of Harandar
+        [1276650] = {62103,62096}, -- Anu'shalla, Shadow's Guidance - Insurmountable Collection
 
         ------------------------------
         -- Alliance ------------------
