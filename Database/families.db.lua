@@ -148,6 +148,7 @@ ADDON.DB.Family = {
 [1600] = true, -- Elusive Emerald Hawkstrider
 [2761] = true, -- Crimson Silvermoon Hawkstrider
 [2762] = true, -- Cerulean Hawkstrider
+[2805] = true, -- Spectral Hawkstrider
 [2817] = true, -- Lucent Hawkstrider
 },
 ["Mechanical Birds"] = {
@@ -740,6 +741,7 @@ ADDON.DB.Family = {
 [2568] = true, -- Lightwing Dragonhawk
 [2598] = true, -- Voidlight Surger
 [2753] = true, -- Fiery Dragonhawk
+[2754] = true, -- Peridot Dragonhawk
 [2755] = true, -- Umbral Dragonhawk
 [2756] = true, -- Crimson Dragonhawk
 [2758] = true, -- Cobalt Dragonhawk
@@ -938,7 +940,6 @@ ADDON.DB.Family = {
 [2192] = true, -- Beledar's Spawn
 [2566] = true, -- Lana'thel's Crimson Cascade
 [2729] = true, -- Farseer's Felscorned Tempest
-[2735] = true, -- Lana'thel's Sanguine Cascade
 },
 ["Phoenixes"] = {
 [183] = true, -- Ashes of Al'ar
@@ -1676,6 +1677,12 @@ ADDON.DB.Family = {
 [1566] = true, -- Colossal Ebonclaw Mawrat
 [1584] = true, -- Colossal Plaguespew Mawrat
 [1585] = true, -- Colossal Wraithbound Mawrat
+},
+["Squirrel"] = {
+[2700] = true, -- Frostfall Groveglider
+[2701] = true, -- Cindertuft Groveglider
+[2702] = true, -- Gloombough Groveglider
+[2703] = true, -- Blossombranch Groveglider
 },
 },
 ["Rylaks"] = {
