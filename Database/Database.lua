@@ -2,12 +2,20 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
---local build = select(4, GetBuildInfo())
-ADDON.DB.Recent = {
-    ["minID"] = 2733,
-    ["blacklist"] = {2795,2796,2797,2798,2802,2803,2804,2807,2808,2815,2823,2825 },
-    ["whitelist"] = {16,1946,2161,2220,2492,2595,2607,2608,2614,2615,2693,2694,2708,2710,2713},
-}
+local build = select(4, GetBuildInfo())
+if build < 120005 then
+    ADDON.DB.Recent = {
+        ["minID"] = 2733,
+        ["blacklist"] = {2795,2796,2797,2798,2802,2803,2804,2807,2808,2815,2823,2825 },
+        ["whitelist"] = {16,1946,2161,2220,2492,2595,2607,2608,2614,2615,2693,2694,2708,2710,2713},
+    }
+else
+    ADDON.DB.Recent = {
+        ["minID"] = 2926,
+        ["blacklist"] = {},
+        ["whitelist"] = {2915, 2779},
+    }
+end
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -79,7 +87,6 @@ ADDON.DB.Source = {
         [374278] = true, -- Renewed Magmammoth
         [385266] = true, -- Zenet Hatchling - Ohn'ahran Plains - Zenet Egg
         [408651] = true, -- Cataloged Shalewing
-        [420097] = true, -- Azure Worldchiller
         [424476] = true, -- Winter Night Dreamsaber
 
         -- War Within
@@ -96,21 +103,18 @@ ADDON.DB.Source = {
         
         -- Midnight
         [1243597] = true, -- Rootstalker Grimlynx
-        [1253927] = true, -- Vibrant Petalwing
         [1253938] = true, -- Ruddy Sporeglider -- Treasure
         [1260354] = true, -- Untainted Grove Crawler -- Treasure
         [1260356] = true, -- Echo of Aln'sharan
-        [1261155] = true, -- Augmented Stormray
-        [1261302] = true, -- Cobalt Dragonhawk
-        [1261316] = true, -- Amani Sharptalon
-        [1261323] = true, -- Cerulian Hawkstrider
         [1261332] = true, -- Duskbrute Harrower
-        [1261351] = true, -- Witherbark Pango
         [1261360] = true, -- Ancestral War Bear -- Treasure
         [1261576] = true, -- Hexed Vilefeather Eagle -- Treasure
         [1261334] = true, -- Contained Stormarion Defender
         [1261583] = true, -- Insatiable Shredclaw -- Treasure
-        [1266700] = true, -- Sanguine Harrower
+        [1261362] = true, -- Witherbark Warbear Mother
+        [1286606] = true, -- Void-Corrupted Hex Eagle
+        [1287359] = true, -- Void-Corrupted Lynx
+        [1287357] = true, -- Void-Touched Snapdragon
 
     },
 
@@ -186,7 +190,9 @@ ADDON.DB.Source = {
         [1242272] = true, -- Royal Voidwing
         [353264] = true, -- Xy Trustee's Gearglider
         [1233516] = true, -- K'arroc Swiftwing
+        [1261293] = true, -- Peridot Dragonhawk
         [1261391] = true, -- Relinquished Scarlet Charger
+        [1265785] = true, -- Emerald Hawkstrider
 
         ------------------------------
         -- Alliance ------------------
@@ -349,6 +355,9 @@ ADDON.DB.Source = {
         [1268924] = true, -- Silvermoon's Arcane Defender
         [1268926] = true, -- Elven Arcane Guardian
         [1270675] = true, -- Vivid Chloroceros
+        [1271698] = true, -- Unbound Manawyrm
+        [1282471] = true, -- Magister's Spell Bee
+        [1282936] = true, -- Void-Corrupted Hawkstrider
 
         ------------------------------
         -- Alliance ------------------
@@ -1550,6 +1559,8 @@ ADDON.DB.Source = {
 
         [431360] = true, -- Twilight Sky Prowler
         [457485] = true, -- Grizzly Hills Packmaster
+        [1255159] = true, -- Mechanical Prototype Panther MK-0
+        [1255179] = true, -- Steel Prototype Panther MK-0
     },
 
     ["Promotion"] = {

@@ -58,4 +58,6 @@ ADDON.DB.Tradable = {
 [2701] = true, -- Cindertuft Groveglider
 [2702] = true, -- Gloombough Groveglider
 [2703] = true, -- Blossombranch Groveglider
+[2743] = true, -- Stormgilded Celestial
+[2948] = true, -- Golden Ashened Cataclysm
 }
