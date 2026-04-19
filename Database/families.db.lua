@@ -950,6 +950,7 @@ ADDON.DB.Family = {
 [2192] = true, -- Beledar's Spawn
 [2566] = true, -- Lana'thel's Crimson Cascade
 [2729] = true, -- Farseer's Felscorned Tempest
+[2735] = true, -- Lana'thel's Sanguine Cascade
 },
 ["Phoenixes"] = {
 [183] = true, -- Ashes of Al'ar
@@ -1706,6 +1707,10 @@ ADDON.DB.Family = {
 [2701] = true, -- Cindertuft Groveglider
 [2702] = true, -- Gloombough Groveglider
 [2703] = true, -- Blossombranch Groveglider
+[2738] = true, -- Snowfall Groveglider
+[2739] = true, -- Embertuft Groveglider
+[2740] = true, -- Petalbranch Groveglider
+[2741] = true, -- Shadowbough Groveglider
 },
 },
 ["Rylaks"] = {
