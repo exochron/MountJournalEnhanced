@@ -358,6 +358,14 @@ ADDON.DB.Source = {
         [1271698] = true, -- Unbound Manawyrm
         [1282471] = true, -- Magister's Spell Bee
         [1282936] = true, -- Void-Corrupted Hawkstrider
+        [1296731] = true, -- Cerulean Deathwalker - Lindormi
+        [1296734] = true, -- Amethyst Mechsuit - Lindormi
+        [1296756] = true, -- Blue-Chip Shreddertank - Lindormi
+        [1296758] = true, -- Profit-Green Shreddertank - Lindormi
+        [1296759] = true, -- High-Yield Shreddertank - Lindormi
+        [1296760] = true, -- Speculative Shreddertank - Lindormi
+        [359407] = true, -- Wastewarped Deathwalker - Lindormi
+        [334482] = true, -- Restoration Deathwalker - Lindormi
 
         ------------------------------
         -- Alliance ------------------
