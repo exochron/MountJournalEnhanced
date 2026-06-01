@@ -951,6 +951,7 @@ ADDON.DB.Family = {
 [2566] = true, -- Lana'thel's Crimson Cascade
 [2729] = true, -- Farseer's Felscorned Tempest
 [2735] = true, -- Lana'thel's Sanguine Cascade
+[3005] = true, -- Cerulean Deathwalker
 },
 ["Phoenixes"] = {
 [183] = true, -- Ashes of Al'ar
@@ -1987,6 +1988,7 @@ ADDON.DB.Family = {
 [2840] = true, -- Silvermoon's Arcane Defender
 [2841] = true, -- Elven Arcane Guardian
 [2842] = true, -- Arcanovoid Construct
+[3006] = true, -- Amethyst Mechsuit
 },
 ["Mechanical Animals"] = {
 [552] = true, -- Ironbound Wraithcharger
@@ -2082,6 +2084,10 @@ ADDON.DB.Family = {
 [1552] = true, -- Carcinized Zerethsteed
 [2480] = true, -- Crimson Shreddertank
 [2508] = true, -- Enterprising Shreddertank
+[3007] = true, -- Blue-Chip Shreddertank
+[3008] = true, -- Profit-Green Shreddertank
+[3009] = true, -- Speculative Shreddertank
+[3010] = true, -- High-Yield Shreddertank
 },
 },
 ["Vombata"] = {
