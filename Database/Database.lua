@@ -358,14 +358,26 @@ ADDON.DB.Source = {
         [1271698] = true, -- Unbound Manawyrm
         [1282471] = true, -- Magister's Spell Bee
         [1282936] = true, -- Void-Corrupted Hawkstrider
+        [1217235] = true, -- Chrimson Shreddertank - Lindormi
+        [1221694] = true, -- Enterprising Shreddertank - Lindormi
+        [1245517] = true, -- Scarlet Void Flyer - Lindormi
+        [1246781] = true, -- Azure Void Flyer - Lindormi
         [1296731] = true, -- Cerulean Deathwalker - Lindormi
         [1296734] = true, -- Amethyst Mechsuit - Lindormi
         [1296756] = true, -- Blue-Chip Shreddertank - Lindormi
         [1296758] = true, -- Profit-Green Shreddertank - Lindormi
         [1296759] = true, -- High-Yield Shreddertank - Lindormi
         [1296760] = true, -- Speculative Shreddertank - Lindormi
-        [359407] = true, -- Wastewarped Deathwalker - Lindormi
+        [316637] = true, -- Awakened Mindborer - Lindormi
         [334482] = true, -- Restoration Deathwalker - Lindormi
+        [340068] = true, -- Sintouched Deathwalker - Lindormi
+        [358319] = true, -- Soultwisted Deathwalker - Lindormi
+        [359407] = true, -- Wastewarped Deathwalker - Lindormi
+        [387231] = true, -- Hailstorm Armoredon - Lindormi
+        [406637] = true, -- Inferno Armoredon - Lindormi
+        [422486] = true, -- Verdant Armoredon - Lindormi
+        [434462] = true, -- Infinite Armoredon - Lindormi
+        [458335] = true, -- Diamond Mechsuit - Lindormi
 
         ------------------------------
         -- Alliance ------------------
@@ -1068,8 +1080,6 @@ ADDON.DB.Source = {
         [1241263] = 42212, -- OC91 Chariot - Titan Console Overcharged
         [1223191] = 41980, -- Terror of the Night - Vigilante
         [1233511] = 41597, -- Umbral K'arroc - Glory of the Omega Raider
-        [1245517] = 42172, -- Scarlet Void Flyer - WW Keystone Legend S3
-        [1246781] = 41973, -- Azure Void Flyer - WW Keystone Master S3
         [1250578] = 61017, -- Phase-Lost Slateback - Phase-Lost-and-Found
         [1262886] = 61451, -- Geargrinder MK. 11 - Worldsoul-Searching
 
