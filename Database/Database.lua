@@ -2,20 +2,12 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
-local build = select(4, GetBuildInfo())
-if build < 120005 then
-    ADDON.DB.Recent = {
-        ["minID"] = 2733,
-        ["blacklist"] = {2795,2796,2797,2798,2802,2803,2804,2807,2808,2815,2823,2825 },
-        ["whitelist"] = {16,1946,2161,2220,2492,2595,2607,2608,2614,2615,2693,2694,2708,2710,2713},
-    }
-else
-    ADDON.DB.Recent = {
-        ["minID"] = 2926,
-        ["blacklist"] = {},
-        ["whitelist"] = {2915, 2779},
-    }
-end
+--local build = select(4, GetBuildInfo())
+ADDON.DB.Recent = {
+    ["minID"] = 3033,
+    ["blacklist"] = {},
+    ["whitelist"] = {1470,1710,2611,2781,2806,2832,2837,2949,2950,2951,2973,2974,2975,2976,2988,2990,2992,2994},
+}
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -193,6 +185,7 @@ ADDON.DB.Source = {
         [1261293] = true, -- Peridot Dragonhawk
         [1261391] = true, -- Relinquished Scarlet Charger
         [1265785] = true, -- Emerald Hawkstrider
+        [1243582] = true, -- Dusk Grimlynx
 
         ------------------------------
         -- Alliance ------------------
@@ -358,6 +351,9 @@ ADDON.DB.Source = {
         [1271698] = true, -- Unbound Manawyrm
         [1282471] = true, -- Magister's Spell Bee
         [1282936] = true, -- Void-Corrupted Hawkstrider
+        [1294648] = true, -- Voidmancer's Starcarver - Val Renown
+        [1294663] = true, -- Netherforged Nullframe - Naigtal Renown
+        [1297427] = true, -- Tortured Gorger - Val & Naigtal Renown
         [1217235] = true, -- Chrimson Shreddertank - Lindormi
         [1221694] = true, -- Enterprising Shreddertank - Lindormi
         [1245517] = true, -- Scarlet Void Flyer - Lindormi
@@ -445,6 +441,8 @@ ADDON.DB.Source = {
         -- spellId => {JournalEncounterID, difficultyId}
         -- look for JournalEncounterID in JournalEncounterItem with ItemId
         -- https://warcraft.wiki.gg/wiki/JournalEncounterID
+        -- or after opening Encounter Journal:
+        -- /dump EncounterJournal.encounterID
 
         -- Dungeon
         -- difficulty: 1=Normal; 2=Heroic; 23=Mythic
@@ -528,6 +526,7 @@ ADDON.DB.Source = {
         [1234573] = { 2691, 16 }, -- Unbound Star-Eater -- Manaforge Omega Hc
         [1242272] = true, -- Royal Voidwing -- Manaforge Omega Hc
         [1242904] = { 2740, 16 }, -- Ashes of Belo'ren -- March on Quel Danas Mythic
+        [1284973] = { 2711, 17 }, -- Luminous Sporeglider -- Sporefall
     },
 
     ["Reputation"] = {
@@ -722,6 +721,9 @@ ADDON.DB.Source = {
 
         [1261579] = true, -- Ravenous Shredclaw - Voidstorm Renown
         [1266702] = true, -- Voidbound Stormray - Voidstorm Renown
+        [1294648] = true, -- Voidmancer's Starcarver - Val Renown
+        [1294663] = true, -- Netherforged Nullframe - Naigtal Renown
+        [1297427] = true, -- Tortured Gorger - Val & Naigtal Renown
 
         ------------------------------
         -- Alliance ------------------
@@ -1073,7 +1075,6 @@ ADDON.DB.Source = {
         [303767] = 40956, -- Honeyback Hivemother - I'm On Island Time
         [448934] = 41201, -- Shadow of Doubt - You Xal Not Pass
         [468068] = 41286, -- Junkmaestro's Magnetomech - Glory of the Liberation of Undermine Raider
-        [471538] = 41056, -- Timely Buzzbee - Master of the Turbulent Timeways II
         [472752] = 41133, -- The Breaker's Song - Isle Remember You
         [473472] = 40953, -- Jani's Trashpile - A Farewell to Arms
         [1218314] = 41966, -- Ny'alothan Shadow Worm - Mastering the Visions
@@ -1093,6 +1094,7 @@ ADDON.DB.Source = {
         [1261298] = 61584, -- Crimson Dragonhawk - Midnight Glyph Hunter
         [1261338] = 42703, -- Preyseeker's Nightmare - Prey: Nightmare Mode III
         [1261349] = 61906, -- Giganto Manis - Glory of the Midnight Delver
+        [1264184] = 61463, -- Spawn of Vyranoth - Master of the Turbulent Timeways V
         [1266703] = 62385, -- Lab-grown Stormray - Staring Into The Void
         [1266980] = 61380, -- Tenebrous Harrower - Glory of the Midnight Raider
         [1268949] = 61799, -- Arcanovoid Construct - Let Me Solo Him: Nullaeus
@@ -1477,11 +1479,14 @@ ADDON.DB.Source = {
             [294568] = true, -- Beastlord's Irontusk
             [294569] = true, -- Beastlord's Warwolf
             [332482] = true, -- Bonecleaver's Skullboar
+            [350220] = true, -- Liquid Hot Magma Slug
             [359013] = true, -- Val'sharah Hippogryph
             [359318] = true, -- Soaring Spelltome - A Tour of Towers
+            [404018] = true, -- Black-Furred Bakar
             [408654] = true, -- Sandy Shalewing
             [452645] = true, -- Amani Hunting Bear
             [468353] = true, -- Enchanted Spellweave Carpet
+            [471538] = true, -- Timely Buzzbee
             [1214920] = true, -- Nightfall Skyreaver
             [1214940] = true, -- Ur'zul Fleshreaper
             [1214946] = true, -- Broodling of Sinestra
@@ -1534,6 +1539,10 @@ ADDON.DB.Source = {
         ["Noblegarden"] = {
             [102349] = true, -- Swift Springstrider
             [432455] = true, -- Noble Flying Carpet
+        },
+
+        ["Midsummer"] = {
+            [1298439] = true, -- Sun Festival's Painted Roc
         },
 
         ["Secrets of Azeroth"] = {
@@ -1700,6 +1709,7 @@ ADDON.DB.FeatsOfStrength = {
     [2298] = {41032, 41362}, -- Prized Gladiator's Fel Bat - Gladiator: War Within Season 2
     [2299] = 41129, -- Vicious Electro Eel - Prized Combatant
     [2300] = 41128, -- Vicious Electro Eel - Prized Combatant
+    [2321] = 41056, -- Timely Buzzbee - Master of the Turbulent Timeways II
     [2326] = 41049, -- Astral Gladiator's Fel Bat - Gladiator: The War Within Season 3
     [2480] = 41533, -- Crimson Shreddertank - WW Keystone Master S2
     [2508] = 40951, -- Enterprising Shreddertank - WW Keystone Legend S2
@@ -1713,6 +1723,7 @@ ADDON.DB.FeatsOfStrength = {
     [2794] = 61405, -- Vicious Snaplizard - Galactic Combatant
     [2801] = 61188, -- Galactic Gladiator's Goredrake - Gladiator: Midnight Season One
     [2842] = 61799, -- Arcanovoid Construct - Let Me Solo Him: Nullaeus
+    [2806] = 61463, -- Spawn of Vyranoth - Master of the Turbulent Timeways V
 }
 
 ADDON.DB.Expansion = {
