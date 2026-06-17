@@ -111,6 +111,10 @@ ADDON.DB.Source.Drop[1247598] = true; -- Celestial Riding Tiger
 ADDON.DB.Source.Reputation[127272] = true; -- Orange Water Strider
 ADDON.DB.Source.Reputation[127274] = true; -- Jade Water Strider
 ADDON.DB.Source.Reputation[127278] = true; -- Golden Water Strider
+ADDON.DB.Source.Vendor[1298512] = true; -- Stormcrow
+ADDON.DB.Source.Vendor[1298515] = true; -- Spectral Gryphon
+ADDON.DB.Source.Vendor[1298516] = true; -- Spectral Wind Rider
+ADDON.DB.Source.Vendor[1302506] = true; -- Frostwyrm
 
 -- classics keeps mostly old mount Ids. meaning we have to add newer mounts manually
 --ADDON.DB.Expansion[0][1843] = true; -- Tiger
