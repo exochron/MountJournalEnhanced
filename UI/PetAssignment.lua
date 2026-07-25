@@ -413,7 +413,7 @@ local function buildToolbarButton()
     end
 
     button:Show()
-    button:SetAttribute("MJE_ToolbarIndex", "PetSlot")
+    button:SetAttributeNoHandler("MJE_ToolbarIndex", "PetSlot")
     ADDON.UI.PetAssignmentToolbarButton = button
 
     return button

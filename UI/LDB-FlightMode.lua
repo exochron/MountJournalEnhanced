@@ -10,23 +10,23 @@ local function updateLDB(dataObject)
 end
 
 local actionButton = CreateFrame("Button", nil, nil, "InsecureActionButtonTemplate")
-actionButton:SetAttribute("pressAndHoldAction", 1)
-actionButton:SetAttribute("type", "spell")
-actionButton:SetAttribute("typerelease", "spell")
+actionButton:SetAttributeNoHandler("pressAndHoldAction", 1)
+actionButton:SetAttributeNoHandler("type", "spell")
+actionButton:SetAttributeNoHandler("typerelease", "spell")
 actionButton:RegisterForClicks("AnyUp")
 actionButton:SetPropagateMouseClicks(true)
 actionButton:SetPropagateMouseMotion(true)
 actionButton:RegisterUnitEvent("UNIT_AURA", "player")
 actionButton:HookScript("PreClick", function(self)
     if not InCombatLockdown() and self:GetParent():IsDragging() then
-        self:SetAttribute("type", "")
-        self:SetAttribute("typerelease", "")
+        self:SetAttributeNoHandler("type", "")
+        self:SetAttributeNoHandler("typerelease", "")
     end
 end)
 actionButton:HookScript("PostClick", function(self)
     if not InCombatLockdown() then
-        self:SetAttribute("type", "spell")
-        self:SetAttribute("typerelease", "spell")
+        self:SetAttributeNoHandler("type", "spell")
+        self:SetAttributeNoHandler("typerelease", "spell")
     end
 end)
 actionButton:Hide()
@@ -48,7 +48,7 @@ ADDON.Events:RegisterCallback("OnLogin", function()
     tooltipProxy:HookScript("OnShow", function(self)
         local point, relativeTo, relativePoint, offsetX, offsetY = self:GetPoint(1)
 
-        actionButton:SetAttribute("spell", C_MountJournal.GetDynamicFlightModeSpellID())
+        actionButton:SetAttributeNoHandler("spell", C_MountJournal.GetDynamicFlightModeSpellID())
         local actionHookTarget = self:GetParent() or relativeTo
         actionButton:SetParent(actionHookTarget)
         actionButton:SetAllPoints(actionHookTarget)

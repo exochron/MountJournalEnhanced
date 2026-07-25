@@ -49,7 +49,7 @@ ADDON:RegisterUISetting('previewButton', true, ADDON.L.SETTING_PREVIEW_LINK, fun
 
         hooksecurefunc("DressUpMount", function(mountId)
             if mountId then
-                DressUpFrame:SetAttribute("mountID", mountId)
+                DressUpFrame:SetAttributeNoHandler("mountID", mountId)
             end
         end)
 
