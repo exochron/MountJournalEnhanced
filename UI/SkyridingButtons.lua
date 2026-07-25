@@ -111,17 +111,17 @@ ADDON.Events:RegisterCallback("loadUI", function()
 
         local flyout = MountJournal.DynamicFlightFlyoutPopup or MountJournal.DynamicFlightFlyout
 
-        flyout.OpenDynamicFlightSkillTreeButton:SetAttribute("MJE_ToolbarIndex", "Skills")
+        flyout.OpenDynamicFlightSkillTreeButton:SetAttributeNoHandler("MJE_ToolbarIndex", "Skills")
         flyout.OpenDynamicFlightSkillTreeButton:SetParent(MountJournal)
         flyout.OpenDynamicFlightSkillTreeButton:Show()
-        flyout.DynamicFlightModeButton:SetAttribute("MJE_ToolbarIndex", "ToggleDynamicFlight")
+        flyout.DynamicFlightModeButton:SetAttributeNoHandler("MJE_ToolbarIndex", "ToggleDynamicFlight")
         flyout.DynamicFlightModeButton:SetParent(MountJournal)
         flyout.DynamicFlightModeButton:Show()
 
         local toggleRideAlong = BuildTraitToggle(RIDING_ALONG_NODE_ID)
-        toggleRideAlong:SetAttribute("MJE_ToolbarIndex", "ToggleRideAlong")
+        toggleRideAlong:SetAttributeNoHandler("MJE_ToolbarIndex", "ToggleRideAlong")
         local toggleWhirlingSurge = BuildTraitToggle(WHIRLING_SURGE_NODE_ID)
-        toggleWhirlingSurge:SetAttribute("MJE_ToolbarIndex", "ToggleWhirlingSurge")
+        toggleWhirlingSurge:SetAttributeNoHandler("MJE_ToolbarIndex", "ToggleWhirlingSurge")
 
         ADDON.UI:RegisterToolbarGroup(
                 '05-skyriding',

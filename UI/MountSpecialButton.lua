@@ -28,10 +28,10 @@ local function BuildButton()
     frame:GetFontString():SetJustifyV("MIDDLE")
     frame:SetWidth(frame:GetFontString():GetStringWidth() + 30)
     frame:SetPoint("LEFT", MountJournalMountButton, "RIGHT", 3, 0)
-    frame:SetAttribute("type", "macro")
-    frame:SetAttribute("typerelease", "macro")
-    frame:SetAttribute("macrotext", "/mountspecial");
-    frame:SetAttribute("pressAndHoldAction", "1");
+    frame:SetAttributeNoHandler("type", "macro")
+    frame:SetAttributeNoHandler("typerelease", "macro")
+    frame:SetAttributeNoHandler("macrotext", "/mountspecial");
+    frame:SetAttributeNoHandler("pressAndHoldAction", "1");
 
     frame:RegisterEvent("PLAYER_REGEN_DISABLED")
     frame:RegisterEvent("PLAYER_REGEN_ENABLED")

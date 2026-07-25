@@ -97,7 +97,7 @@ end
 
 ADDON.Events:RegisterCallback("loadUI", function()
     if MountJournal.SummonRandomFavoriteSpellFrame then
-        MountJournal.SummonRandomFavoriteSpellFrame.Button:SetAttribute("MJE_ToolbarIndex", "RandomFavorite")
+        MountJournal.SummonRandomFavoriteSpellFrame.Button:SetAttributeNoHandler("MJE_ToolbarIndex", "RandomFavorite")
         ADDON.UI:RegisterToolbarGroup("00-random-mount", MountJournal.SummonRandomFavoriteSpellFrame.Button)
     else
         renderToolbar()
