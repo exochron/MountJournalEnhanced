@@ -315,9 +315,8 @@ local function buildSidePanel()
         frame:Hide()
     end)
 
-    if ElvUI then
-        local E = unpack(ElvUI)
-        local ElvSkin = E:GetModule('Skins')
+    local ElvSkin = ADDON.UI:GetElvUI('Skins')
+    if ElvSkin then
         ElvSkin:HandleEditBox(frame.SearchBox)
         ElvSkin:HandleTrimScrollBar(frame.ScrollBar)
         window.InfoButton:Hide()
@@ -401,15 +400,13 @@ local function buildToolbarButton()
         GameTooltip:Hide()
     end)
 
-    if ElvUI then
-        local E = unpack(ElvUI)
-        local ElvSkin = E:GetModule('Skins')
-
+    local ElvSkin = ADDON.UI:GetElvUI('Skins')
+    if ElvSkin then
         -- from Collectables.lua HandleDynamicFlightButton
         button:SetPushedTexture(0)
         button:GetHighlightTexture():SetColorTexture(1, 1, 1, .25)
         button:SetNormalTexture(0)
-        button:SetCheckedTexture(E.media.normTex)
+        button:SetCheckedTexture(ADDON.UI:GetElvUI().media.normTex)
         button:GetCheckedTexture():SetColorTexture(1, 1, 1, .25)
 
         ElvSkin:HandleIcon(button.Icon)

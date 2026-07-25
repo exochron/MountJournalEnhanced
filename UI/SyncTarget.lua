@@ -54,10 +54,8 @@ local function BuildToggle()
     button.texture:SetTexture(132177) -- ability_hunter_mastermarksman
     UpdateTexture(button)
 
-    if ElvUI then
-        local E = unpack(ElvUI)
-        local ElvSkin = E:GetModule('Skins')
-
+    local ElvSkin = ADDON.UI:GetElvUI('Skins')
+    if ElvSkin then
         -- from Collectables.lua HandleDynamicFlightButton
         button:SetPushedTexture(0)
         button:GetHighlightTexture():SetColorTexture(1, 1, 1, .25)

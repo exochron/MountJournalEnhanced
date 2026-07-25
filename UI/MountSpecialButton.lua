@@ -46,10 +46,9 @@ local function BuildButton()
         frame:Disable()
     end
 
-    if doStrip and ElvUI then
-        local E = unpack(ElvUI)
-        local S = E:GetModule('Skins')
-        S:HandleButton(frame)
+    local ElvSkin = ADDON.UI:GetElvUI('Skins')
+    if doStrip and ElvSkin then
+        ElvSkin:HandleButton(frame)
     end
 
     return frame
