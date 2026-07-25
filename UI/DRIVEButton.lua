@@ -10,10 +10,8 @@ local function BuildButton()
     button.texture:SetTexture(6383564) -- inv_111_wheel_blue
     button.texture:SetAllPoints()
 
-    if ElvUI then
-        local E = unpack(ElvUI)
-        local ElvSkin = E:GetModule('Skins')
-
+    local ElvSkin = ADDON.UI:GetElvUI('Skins')
+    if ElvSkin then
         -- from Collectables.lua HandleDynamicFlightButton
         button:SetPushedTexture(0)
         button:GetHighlightTexture():SetColorTexture(1, 1, 1, .25)

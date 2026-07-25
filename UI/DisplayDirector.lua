@@ -28,11 +28,7 @@ local function UpdateContainer()
     local hPadding = controlFrame.buttonHorizontalPadding or 0
     local buttonWidth = 0
 
-    local ElvSkin
-    if ElvUI then
-        local E = unpack(ElvUI)
-        ElvSkin = E:GetModule('Skins')
-    end
+    local ElvSkin = ADDON.UI:GetElvUI('Skins')
     if controlFrame.IsSkinned then
         hPadding = 1
     end

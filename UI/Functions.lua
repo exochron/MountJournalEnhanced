@@ -92,14 +92,23 @@ local function hookStripTextures()
 end
 ADDON.Events:RegisterCallback("OnLogin", hookStripTextures, "ElvUI hooks")
 
+function ADDON.UI:GetElvUI(module)
+    if ElvUI then
+        local E  = unpack(ElvUI)
+        if E and E.GetModule then
+            if module then
+                return E:GetModule(module)
+            end
+            return E
+        end
+    end
+end
+
 -- force initial update for ElvUI
 -- since ElvUI is loaded before MJE and it doesn't update its panels during registration. :(
 local function refreshInitialDataTexts()
-    if ElvUI then
-        local E  = unpack(ElvUI)
-        local DT = E:GetModule('DataTexts')
-        DT:LoadDataTexts()
-    end
+    local DT = ADDON.UI:GetElvUI('DataTexts')
+    local _ = DT and DT:LoadDataTexts()
 end
 ADDON.Events:RegisterCallback("AfterLogin", refreshInitialDataTexts, "ElvUI DataTexts")
 
