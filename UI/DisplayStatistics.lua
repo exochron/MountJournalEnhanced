@@ -306,7 +306,7 @@ local function updateContainer(mountId, container)
         end
     end
 
-    container.Wowhead:SetShown(trackingEnabled and settings.Wowhead)
+    container.Wowhead:SetShown(settings.Wowhead)
 
     local maxWidth = MountJournal.MountDisplay:GetWidth() - 52
     local rowWidth = 0
