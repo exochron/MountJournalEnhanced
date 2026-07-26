@@ -167,6 +167,7 @@ ADDON.DB.Family = {
 [1493] = true, -- Forsworn Aquilon
 [1494] = true, -- Ascendant's Aquilon
 [2796] = true, -- Bronze Aquilon
+[2922] = true, -- Stoneforged Sentinel
 },
 ["Owl"] = {
 [1818] = true, -- Anu'relos, Flame's Guidance
@@ -408,6 +409,7 @@ ADDON.DB.Family = {
 [1956] = true, -- Fur-endship Fox
 [1957] = true, -- Soaring Sky Fox
 [1958] = true, -- Twilight Sky Prowler
+[2803] = true, -- Skypaw Glimmerfur
 },
 ["Gargon"] = {
 [1298] = true, -- Hopecrusher Gargon
@@ -490,7 +492,6 @@ ADDON.DB.Family = {
 [1222] = true, -- Vulpine Familiar
 [1393] = true, -- Wild Glimmerfur Prowler
 [1841] = true, -- Crimson Glimmerfur
-[2803] = true, -- Skypaw Glimmerfur
 [2815] = true, -- Snowpaw Glimmerfur Prowler
 },
 },
@@ -665,7 +666,7 @@ ADDON.DB.Family = {
 [1391] = true, -- Loyal Gorger
 [1443] = true, -- Voracious Gorger
 [2602] = true, -- Translocated Gorger
-[3033] = true, -- Tortured Gorger
+[3033] = true, -- Gequälter Fresser
 },
 ["Mauler"] = {
 [1454] = true, -- Tamed Mauler
@@ -1320,7 +1321,7 @@ ADDON.DB.Family = {
 [1391] = true, -- Loyal Gorger
 [1443] = true, -- Voracious Gorger
 [2602] = true, -- Translocated Gorger
-[3033] = true, -- Tortured Gorger
+[3033] = true, -- Gequälter Fresser
 },
 ["Gronnlings"] = {
 [607] = true, -- Gorestrider Gronnling
@@ -1409,6 +1410,8 @@ ADDON.DB.Family = {
 [2491] = true, -- Ruby Butterfly
 [2492] = true, -- Spring Butterfly
 [2494] = true, -- Midnight Butterfly
+[2977] = true, -- Sunflare Driftmoth
+[3068] = true, -- Sunflash Driftmoth
 },
 ["Others"] = {
 [594] = true, -- Grinning Reaver
@@ -1714,6 +1717,7 @@ ADDON.DB.Family = {
 ["Rabbit"] = {
 [1594] = true, -- Jade, Bright Foreseer
 [1769] = true, -- Hao-Yue, River Foreseer
+[2984] = true, -- Rabbit'ath
 },
 ["Rats"] = {
 [804] = true, -- Ratstallion
@@ -1965,7 +1969,7 @@ ADDON.DB.Family = {
 [2577] = true, -- Grandmaster's Royal Board
 [2578] = true, -- Grandmaster's Smokey Board
 [2838] = true, -- Fantastical Goblin Waveshredder
-[2988] = true, -- Voidmancer's Starcarver
+[2988] = true, -- Sternenschnitzer des Leerenwirkers
 },
 ["Jet Aerial Units"] = {
 [1227] = true, -- Aerial Unit R-21/X
@@ -2012,7 +2016,7 @@ ADDON.DB.Family = {
 [2840] = true, -- Silvermoon's Arcane Defender
 [2841] = true, -- Elven Arcane Guardian
 [2842] = true, -- Arcanovoid Construct
-[2990] = true, -- Netherforged Nullframe
+[2990] = true, -- Nethergeschmiedete Nullpanzerung
 [3006] = true, -- Amethyst Mechsuit
 },
 ["Mechanical Animals"] = {
@@ -2041,6 +2045,7 @@ ADDON.DB.Family = {
 [2717] = true, -- Mechanical Prototype Panther MK-0
 [2718] = true, -- Steel Prototype Panther MK-0
 [2796] = true, -- Bronze Aquilon
+[2922] = true, -- Stoneforged Sentinel
 },
 ["Mechanostriders"] = {
 [39] = true, -- Red Mechanostrider
@@ -2104,7 +2109,7 @@ ADDON.DB.Family = {
 [2808] = true, -- Ballistic Bronco
 [2973] = true, -- Blackwater X-TREME Firework Rocket
 [2974] = true, -- Green Rocket Mount [PH]
-[2975] = true, -- Bilgewater X-TREME Firework Rocket
+[2975] = true, -- X-TREM Feuerwerkrakete des Bilgewasserkartells
 [2976] = true, -- Pink Rocket Mount [PH]
 },
 ["Spider Tanks"] = {
