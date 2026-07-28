@@ -167,8 +167,23 @@ function MJE_CheckBackgroundFavorites()
     end
 end
 
+local function addDbCopyClick()
+    local icon = MountJournal.MountDisplay.InfoButton.Icon
+
+    icon:HookScript("OnMouseUp", function()
+        local mountId = ADDON.Api:GetSelected()
+        local name, spellId = C_MountJournal.GetMountInfoByID(mountId)
+        if IsShiftKeyDown() then
+            spellId = mountId
+        end
+        local text = "["..spellId.."] = true, -- "..name
+        LibStub("LibCopyDialog"):Open(text)
+    end)
+end
+
 ADDON.Events:RegisterCallback("postloadUI", function()
     testDatabase()
+    addDbCopyClick()
     -- checkMissingFamilyLocalisations()
 
     -- disable taint checks for now
