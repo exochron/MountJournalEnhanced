@@ -265,6 +265,7 @@ ADDON.DB.Source["Unavailable"] = {
 [1255480] = true, -- Felscorned Netherlord's Dreadsteed
 [1255482] = true, -- Felscorned War Wyrm
 [1272988] = true, -- Inarius' Charger
+[1301775] = true, -- Umbral Ashes
 }
 
 MergeTable(ADDON.DB.Source.Drop, {
@@ -276,7 +277,7 @@ MergeTable(ADDON.DB.Source.Drop, {
 [127158] = {379, 5440, 6320, 0.28}, -- Heavenly Onyx Cloud Serpent
 [130965] = {376, 7160, 6440, 0.26}, -- Son of Galleon
 [138423] = {507, 4990, 5400, 0.39}, -- Cobalt Primordial Direhorn
-[138424] = {371, 5240, 1880, 4.83}, -- Amber Primordial Direhorn
+[138424] = {371, 5240, 1880, 4.84}, -- Amber Primordial Direhorn
 [138425] = {371, 5240, 1880, 4.03}, -- Slate Primordial Direhorn
 [138426] = {371, 5240, 1880, 3.94}, -- Jade Primordial Direhorn
 [139442] = {504, 6050, 3730, 0.33}, -- Thundering Cobalt Cloud Serpent
@@ -316,10 +317,10 @@ MergeTable(ADDON.DB.Source.Drop, {
 [291492] = {1462, 5220, 4160, 0.33}, -- Rusty Mechanocrawler
 [297157] = {1462, 6500, 7740, 0.49}, -- Junkheap Drifter
 [298367] = {864, 4400, 5540, 6.51}, -- Mollie
-[300149] = {1355, 5360, 4140, 1.46}, -- Silent Glider
+[300149] = {1355, 5360, 4140, 1.44}, -- Silent Glider
 [312751] = {1530, 3040, 4100, 2.89}, -- Clutch of Ha-Li
 [312753] = {1525, 5140, 5240, 1.49}, -- Hopecrusher Gargon
-[312762] = {1543, 5340, 7920, 1.83}, -- Mawsworn Soulhunter
+[312762] = {1543, 5340, 7920, 1.84}, -- Mawsworn Soulhunter
 [312767] = {1565, 5740, 5020, 85.58}, -- Swift Gloomhoof
 [315847] = {1527, 7380, 8340, 2.99}, -- Drake of the Four Winds
 [315987] = {nil, nil, nil, 100.00}, -- Mail Muncher
@@ -332,7 +333,7 @@ MergeTable(ADDON.DB.Source.Drop, {
 [332478] = {1536, 3360, 8000, 2.45}, -- Blisterback Bloodtusk
 [332480] = {1536, 6540, 3520, 2.18}, -- Gorespine
 [332882] = {1525, 4540, 7820, 2.12}, -- Horrid Dredwing
-[332905] = {1525, 6240, 4680, 0.88}, -- Endmire Flyer
+[332905] = {1525, 6240, 4680, 0.87}, -- Endmire Flyer
 [334364] = {1565, 2660, 5520, 64.20}, -- Spinemaw Gladechewer
 [334366] = {1565, 2940, 5580, 1.07}, -- Wild Glimmerfur Prowler
 [336042] = {1536, 5840, 7420, 3.72}, -- Hulking Deathroc
@@ -345,7 +346,7 @@ MergeTable(ADDON.DB.Source.Drop, {
 [354357] = {1961, 4440, 2940, 2.00}, -- Crimson Shardhide
 [354360] = {1961, 5540, 6740, 2.62}, -- Garnet Razorwing
 [356501] = {1961, 4440, 2940, 2.37}, -- Rampaging Mauler
-[359622] = {2024, 2580, 4600, 2.03}, -- Liberated Slyvern
+[359622] = {2024, 2580, 4600, 2.04}, -- Liberated Slyvern
 [374090] = {1978, 7000, 1040, 0.75}, -- Ancient Salamanther
 [408647] = {2133, 4220, 6540, 0.82}, -- Cobalt Shalewing
 [420097] = {71, 6270, 5000, 1.42}, -- Azure Worldchiller
@@ -359,13 +360,13 @@ MergeTable(ADDON.DB.Source.Drop, {
 [1218305] = {2404, 6300, 3700, 99.77}, -- Void-Forged Stallion
 [1218306] = {2403, 6040, 5500, 100.00}, -- Void-Scarred Pack Mother
 [1218307] = {2403, 4820, 5320, 99.64}, -- Void-Scarred Windrider
-[1240632] = {2371, 6940, 5000, 8.02}, -- Pearlescent Krolusk
+[1240632] = {2371, 6940, 5000, 8.03}, -- Pearlescent Krolusk
 [1241076] = {2371, 7400, 3240, 6.84}, -- Sthaarbs's Last Lunch
-[1243597] = {2413, 4720, 5000, 0.04}, -- Rootstalker Grimlynx
-[1253927] = {2413, 4720, 5000, 0.05}, -- Vibrant Petalwing
-[1261155] = {2405, 4360, 5140, 0.11}, -- Augmented Stormray
-[1261302] = {2395, 4840, 8800, 0.13}, -- Cobalt Dragonhawk
-[1261316] = {2437, 3420, 3300, 0.06}, -- Amani Sharptalon
+[1243597] = {2413, 5120, 4440, 0.04}, -- Rootstalker Grimlynx
+[1253927] = {2413, 5540, 3140, 0.05}, -- Vibrant Petalwing
+[1261155] = {2405, 4360, 5140, 0.12}, -- Augmented Stormray
+[1261302] = {2395, 4020, 8520, 0.10}, -- Cobalt Dragonhawk
+[1261316] = {2437, 3340, 8840, 0.09}, -- Amani Sharptalon
 [1261323] = {2395, 5460, 6020, 0.06}, -- Cerulean Hawkstrider
 [1261351] = {2437, 4640, 4340, 0.03}, -- Witherbark Pango
 [1266700] = {2444, 4040, 8880, 0.05}, -- Sanguine Harrower

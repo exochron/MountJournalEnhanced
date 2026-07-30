@@ -2,12 +2,20 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
---local build = select(4, GetBuildInfo())
-ADDON.DB.Recent = {
-    ["minID"] = 3033,
-    ["blacklist"] = {},
-    ["whitelist"] = {1470,1710,2611,2781,2806,2832,2837,2949,2950,2951,2973,2974,2975,2976,2988,2990,2992,2994},
-}
+local build = select(4, GetBuildInfo())
+if build < 120100 then
+    ADDON.DB.Recent = {
+        ["minID"] = 3033,
+        ["blacklist"] = {},
+        ["whitelist"] = {1470,1710,2611,2806,2832,2837,2949,2950,2951,2973,2974,2975,2976,2988,2990,2992,2994},
+    }
+else
+    ADDON.DB.Recent = {
+        ["minID"] = 3011,
+        ["blacklist"] = {3033,3036},
+        ["whitelist"] = {2652,2781,2821,2839,2980,3002,3003,3004},
+    }
+end
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -104,9 +112,13 @@ ADDON.DB.Source = {
         [1261334] = true, -- Contained Stormarion Defender
         [1261583] = true, -- Insatiable Shredclaw -- Treasure
         [1261362] = true, -- Witherbark Warbear Mother
+        [1268919] = true, -- Delver's Arcane Golem -- Treasure
         [1286606] = true, -- Void-Corrupted Hex Eagle
         [1287359] = true, -- Void-Corrupted Lynx
         [1287357] = true, -- Void-Touched Snapdragon
+        [1297407] = true, -- Hexflame Reaver -- Ral'kala
+        [1299961] = true, -- Topaz Skyfang -- Rares
+        [1300779] = true, -- Ruby Writhe -- Rares
 
     },
 
@@ -186,6 +198,7 @@ ADDON.DB.Source = {
         [1261391] = true, -- Relinquished Scarlet Charger
         [1265785] = true, -- Emerald Hawkstrider
         [1243582] = true, -- Dusk Grimlynx
+        [1292668] = true, -- Spirit of Tok'jara
 
         ------------------------------
         -- Alliance ------------------
@@ -374,6 +387,12 @@ ADDON.DB.Source = {
         [422486] = true, -- Verdant Armoredon - Lindormi
         [434462] = true, -- Infinite Armoredon - Lindormi
         [458335] = true, -- Diamond Mechsuit - Lindormi
+        [1297216] = true, -- Sea Dwelling Isle Serpent - Captain Tokka Renown
+        [1297217] = true, -- Caustic Venomfang - Skull of Er'inye
+        [1297408] = true, -- Preyhunter's Fury - Construct V'anore
+        [1298808] = true, -- Corroded Soul Crusher - Telemancer Astrandis
+        [1299963] = true, -- Violet-Backed Skyfang - Zu'Jara Forces Renown
+        [1300778] = true, -- Indigo Coiled Horror - Zu'Jara Forces Renown
 
         ------------------------------
         -- Alliance ------------------
@@ -474,8 +493,9 @@ ADDON.DB.Source = {
         [1218305] = true, -- Void-Forged Stallion - Vision of Stormwind (Revisited)
         [1218306] = true, -- Void-Scarred Pack Mother - Vision of Orgrimmar (Revisited)
         [1218307] = true, -- Void-Scarred Windrider - Vision of Orgrimmar (Revisited)
-        [1263635] = true, -- Spectral Hawkstrider - Windrunner Spire (?)
-        [1265784] = true, -- Lucent Hawkstrider - Magister's Terrace (?)
+        [1263635] = { 2658, 23 }, -- Spectral Hawkstrider - Windrunner Spire (Mythic)
+        [1265784] = { 2662, 23 }, -- Lucent Hawkstrider - Magister's Terrace (Mythic)
+        [1300776] = { 2880, 1 }, -- The Writhing Brood -- Altar of Fangs
 
         -- Raid
         -- difficulty: 3=10Normal; 4=25Normal; 5=10Hero; 6=25Hero; 14=Normal; 15=Hero; 16=Mythic; 17=LFR
@@ -527,6 +547,7 @@ ADDON.DB.Source = {
         [1242272] = true, -- Royal Voidwing -- Manaforge Omega Hc
         [1242904] = { 2740, 16 }, -- Ashes of Belo'ren -- March on Quel Danas Mythic
         [1284973] = { 2711, 17 }, -- Luminous Sporeglider -- Sporefall
+        [1297405] = { 2896, 16 }, -- Primeval Skyfriend -- Ula'tek (Mythic)
     },
 
     ["Reputation"] = {
@@ -723,7 +744,10 @@ ADDON.DB.Source = {
         [1266702] = true, -- Voidbound Stormray - Voidstorm Renown
         [1294648] = true, -- Voidmancer's Starcarver - Val Renown
         [1294663] = true, -- Netherforged Nullframe - Naigtal Renown
+        [1297216] = true, -- Sea Dwelling Isle Serpent - Captain Tokka Renown
         [1297427] = true, -- Tortured Gorger - Val & Naigtal Renown
+        [1299963] = true, -- Violet-Backed Skyfang - Zu'Jara Forces Renown
+        [1300778] = true, -- Indigo Coiled Horror - Zu'Jara Forces Renown
 
         ------------------------------
         -- Alliance ------------------
@@ -1100,6 +1124,13 @@ ADDON.DB.Source = {
         [1268949] = 61799, -- Arcanovoid Construct - Let Me Solo Him: Nullaeus
         [1270673] = 61263, -- Vivacious Chloroceros - Treasures of Harandar
         [1276650] = {62103,62096}, -- Anu'shalla, Shadow's Guidance - Insurmountable Collection
+        [1297220] = 63254, -- Crimson Venomfang - Glory of the Venomous Raider
+        [1297224] = 63359, -- Auriferous Venomfang - Treasures of the Coiled Isle
+        [1297404] = 63333, -- Apophic Soul Crusher - Let Me Solo Him: Azta'rec
+        [1301070] = 62447, -- Breath of Blight - Midnight Keystone Master: Season Two
+        [1301074] = 62449, -- Breath of Ruin - Midnight Keystone Legend: Season Two
+        [1299965] = 63653, -- Emerald Skyfang - Pro Poison Patroller
+        [1300777] = 63630, -- Venomous Coiler - Assault the Vault
 
         ------------------------------
         -- Alliance ------------------
@@ -1273,7 +1304,8 @@ ADDON.DB.Source = {
         [447405] = true, -- Vicious Skyflayer - War Within: Season 1
         [449325] = true, -- Vicious Skyflayer - War Within: Season 1
         [472157] = true, -- Astral Gladiator's Fel Bat - Gladiator: The War Within Season 3
-        [1262840] = true, -- Galactic Gladiator's Goredrake - Gladiator: Midnight Season One
+        [1262840] = true, -- Galactic Gladiator's Goredrake - Gladiator: Midnight Season 1
+        [1266211] = true, -- Venomous Gladiator's Goredrake - Gladiator: Midnight Season 2
 
         -- Prestige Reward
         [222202] = true, -- Prestigious Bronze Courser
@@ -1314,6 +1346,7 @@ ADDON.DB.Source = {
         [424534] = true, -- Vicious Moon Beast
         [466145] = true, -- Vicious Electro Eel
         [1234820] = true, -- Vicious Void Creeper
+        [1296670] = true, -- Vicious Lightbloom Boar - Midnight Season 2
 
         -- Achievement
         [60118] = true, -- Black War Bear - For The Alliance!
@@ -1365,6 +1398,7 @@ ADDON.DB.Source = {
         [424535] = true, -- Vicious Moon Beast
         [466146] = true, -- Vicious Electro Eel
         [1234821] = true, -- Vicious Void Creeper
+        [1296672] = true, -- Vicious Lightbloom Boar - Midnight Season 2
 
         -- Achievement
         [60119] = true, -- Black War Bear - For The Horde!
@@ -1724,6 +1758,7 @@ ADDON.DB.FeatsOfStrength = {
     [2801] = 61188, -- Galactic Gladiator's Goredrake - Gladiator: Midnight Season One
     [2842] = 61799, -- Arcanovoid Construct - Let Me Solo Him: Nullaeus
     [2806] = 61463, -- Spawn of Vyranoth - Master of the Turbulent Timeways V
+    [3069] = 63104, -- Umbral Ashes - Umbral Champion: Midnight Season 1
 }
 
 ADDON.DB.Expansion = {
