@@ -162,11 +162,8 @@ end
 
 function ADDON.Api:IsDynamicFlight()
     if C_MountJournal.IsDragonridingUnlocked() then
-        local description = C_Spell.GetSpellDescription(C_MountJournal.GetDynamicFlightModeSpellID())
-        local pos = string.find(description, ACCESSIBILITY_ADV_FLY_LABEL,1 , true)
-        if pos then
-            return pos < 15
-        end
+        local iconId = C_Spell.GetSpellTexture(C_MountJournal.GetDynamicFlightModeSpellID())
+        return iconId == 5142725 -- ability_dragonriding_dynamicflight01
     end
 
     return false
