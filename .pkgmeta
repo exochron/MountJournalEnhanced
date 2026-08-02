@@ -20,7 +20,7 @@ externals:
 
     Libs/AceGUI-3.0:
         url: https://repos.wowace.com/wow/ace3/trunk/AceGUI-3.0/
-        tag: latest
+        # tag: latest # temporarily use alpha for 12.1
         curse-slug: ace3
 
     Libs/MountsRarity-2.0:
