@@ -74,7 +74,7 @@ ADDON.Events:RegisterCallback("loadUI", function()
     if InCombatLockdown() then
         ADDON.Events:RegisterFrameEventAndCallback("PLAYER_REGEN_ENABLED", function()
             registerHandler()
-            ADDON.Events:UnregisterCallback("PLAYER_REGEN_ENABLED", '')
+            ADDON.Events:UnregisterCallback("PLAYER_REGEN_ENABLED", 'hotkeys')
         end, 'hotkeys')
     else
         registerHandler()

@@ -54,6 +54,7 @@ renderToolbar = function()
         group = tFilter(group, function(button)
             local index = button:GetAttribute("MJE_ToolbarIndex") or "none"
             local shouldShow = ADDON.settings.ui.toolbarButtons[index]
+            shouldShow = shouldShow or nil == shouldShow
             button:SetShown(shouldShow)
             return shouldShow
         end, true)
@@ -65,7 +66,7 @@ renderToolbar = function()
             if lastButton then
                 group[#group]:SetPoint("RIGHT", lastButton, "LEFT", -10, 0)
             else
-                group[#group]:SetPoint("CENTER", MountJournal, "TOPRIGHT", -24, -42)
+                group[#group]:SetPoint("TOPRIGHT", MountJournal, "TOPRIGHT", -8, -25)
             end
 
             for i = #group-1, 1, -1 do
@@ -97,8 +98,22 @@ end
 
 ADDON.Events:RegisterCallback("loadUI", function()
     if MountJournal.SummonRandomFavoriteSpellFrame then
-        MountJournal.SummonRandomFavoriteSpellFrame.Button:SetAttributeNoHandler("MJE_ToolbarIndex", "RandomFavorite")
-        ADDON.UI:RegisterToolbarGroup("00-random-mount", MountJournal.SummonRandomFavoriteSpellFrame.Button)
+        if InCombatLockdown() then
+            -- can't adjust SummonRandomFavoriteSpellFrame.Button directly since it's a secure frame
+            local placeholder = CreateFrame("Frame", nil, MountJournal)
+            placeholder:SetSize(33.000026,33.000026)
+            ADDON.UI:RegisterToolbarGroup("00-random-mount", placeholder)
+
+            ADDON.Events:RegisterFrameEventAndCallback("PLAYER_REGEN_ENABLED", function()
+                ADDON.Events:UnregisterCallback("PLAYER_REGEN_ENABLED", 'toolbar')
+                placeholder:Hide()
+                MountJournal.SummonRandomFavoriteSpellFrame.Button:SetAttributeNoHandler("MJE_ToolbarIndex", "RandomFavorite")
+                ADDON.UI:RegisterToolbarGroup("00-random-mount", MountJournal.SummonRandomFavoriteSpellFrame.Button)
+            end, 'toolbar')
+        else
+            MountJournal.SummonRandomFavoriteSpellFrame.Button:SetAttributeNoHandler("MJE_ToolbarIndex", "RandomFavorite")
+            ADDON.UI:RegisterToolbarGroup("00-random-mount", MountJournal.SummonRandomFavoriteSpellFrame.Button)
+        end
     else
         renderToolbar()
     end
