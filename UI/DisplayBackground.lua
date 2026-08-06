@@ -4,7 +4,8 @@ local doStrip = false -- for ElvUI
 
 ADDON:RegisterUISetting('displayBackground', "original", ADDON.L.SETTING_DISPLAY_BACKGROUND, function(value)
     if ADDON.initialized then
-        if "original" == value and doStrip then
+        MountJournal.MountDisplay.YesMountsTex:Show()
+        if "original" == value and doStrip and MountJournal.MountDisplay.StripTextures then
             MountJournal.MountDisplay:StripTextures()
         elseif "original" == value then
             MountJournal.MountDisplay.YesMountsTex:SetTexture("Interface\\PetBattles\\MountJournal-BG")
@@ -12,16 +13,23 @@ ADDON:RegisterUISetting('displayBackground', "original", ADDON.L.SETTING_DISPLAY
             MountJournal.MountDisplay.YesMountsTex:SetColorTexture(0, 1, 0)
         elseif "blue" == value then
             MountJournal.MountDisplay.YesMountsTex:SetColorTexture(0, 0, 1)
+        elseif "hidden" == value then
+            MountJournal.MountDisplay.YesMountsTex:Hide()
         end
     end
 end, {
     ["original"] = CHAT_DEFAULT,
     ["green"] = ICON_TAG_RAID_TARGET_TRIANGLE3:gsub("^%l", string.upper),
     ["blue"] = ICON_TAG_RAID_TARGET_SQUARE3:gsub("^%l", string.upper),
+    ["hidden"] = HUD_EDIT_MODE_SETTING_ACTION_BAR_VISIBLE_SETTING_HIDDEN,
 })
 
 ADDON.Events:RegisterCallback("loadUI", function()
     ADDON:ApplySetting('displayBackground', ADDON.settings.ui.displayBackground)
+
+    hooksecurefunc("MountJournal_UpdateMountDisplay", function()
+        ADDON:ApplySetting('displayBackground', ADDON.settings.ui.displayBackground)
+    end)
 end)
 
 ADDON.UI:RegisterUIOverhaulCallback(function(frame)
