@@ -15,6 +15,7 @@ This is a list of ideas I'd like to add at some point.
 
 ### More Ideas:
 - special summon animation
+- compare collection (similar to achievements)
 - preview manuscripts
 - activate sound effects in display (with global setting)
 - more animation control in display (start/pause, movements)
