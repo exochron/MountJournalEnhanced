@@ -31,7 +31,7 @@ local function checkAuras(auras)
 end
 
 function ADDON:ScanAuras(unit)
-    if InCombatLockdown() then
+    if InCombatLockdown() or C_Secrets.ShouldAurasBeSecret() then
         return
     end
 
