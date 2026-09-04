@@ -32,10 +32,6 @@ externals:
         tag: latest
         curse-slug: libcopydialog
 
-    Libs/TaintLess:
-        url: https://www.townlong-yak.com/addons.git/taintless
-        commit: default
-
 ignore:
     - LICENSE
     - '**/*.md'

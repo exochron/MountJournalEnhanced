@@ -26,7 +26,6 @@ Libs\AceGUI-3.0\AceGUI-3.0.xml
 Libs\HereBeDragons\HereBeDragons-2.0.lua
 Libs\LibCopyDialog\LibCopyDialog.lua
 Libs\MountsRarity-2.0\MountsRarity-2.0.xml [AllowLoadGameType mainline]
-Libs\TaintLess\TaintLess.xml
 
 Locals.lua
 Database\Database.lua
