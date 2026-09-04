@@ -1,4 +1,5 @@
 <Bindings>
     <Binding name="MJE_RANDOM_MOUNT" category="Mount Journal Enhanced">C_MountJournal.SummonByID(0)</Binding>
     <Binding name="CLICK MJEMountSpecialButton:LeftButton" category="Mount Journal Enhanced"/>
+    <Binding name="CLICK MountJournalMountButton:LeftButton" category="Mount Journal Enhanced"/>
 </Bindings>
