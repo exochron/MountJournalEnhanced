@@ -354,7 +354,6 @@ ADDON.DB.Source = {
         [1268926] = true, -- Elven Arcane Guardian
         [1270675] = true, -- Vivid Chloroceros
         [1271698] = true, -- Unbound Manawyrm
-        [1282471] = true, -- Magister's Spell Bee
         [1282936] = true, -- Void-Corrupted Hawkstrider
         [1294648] = true, -- Voidmancer's Starcarver - Val Renown
         [1294663] = true, -- Netherforged Nullframe - Naigtal Renown
@@ -1123,6 +1122,7 @@ ADDON.DB.Source = {
         [1301074] = 62449, -- Breath of Ruin - Midnight Keystone Legend: Season Two
         [1299965] = 63653, -- Emerald Skyfang - Pro Poison Patroller
         [1300777] = 63630, -- Venomous Coiler - Assault the Vault
+        [1301775] = 63104, -- Umbral Ashes - Umbral Champion: Midnight Season 1
 
         ------------------------------
         -- Alliance ------------------
@@ -1295,8 +1295,6 @@ ADDON.DB.Source = {
         [434477] = true, -- Vicious Dreamtalon - Dragonflight: Season 4
         [447405] = true, -- Vicious Skyflayer - War Within: Season 1
         [449325] = true, -- Vicious Skyflayer - War Within: Season 1
-        [472157] = true, -- Astral Gladiator's Fel Bat - Gladiator: The War Within Season 3
-        [1262840] = true, -- Galactic Gladiator's Goredrake - Gladiator: Midnight Season 1
         [1266211] = true, -- Venomous Gladiator's Goredrake - Gladiator: Midnight Season 2
 
         -- Prestige Reward

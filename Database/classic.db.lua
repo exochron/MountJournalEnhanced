@@ -103,8 +103,11 @@ ADDON.DB.Source.Shop[1257674] = true; -- Embertuft Groveglider
 ADDON.DB.Source.Shop[1257676] = true; -- Petalbranch Groveglider
 ADDON.DB.Source.Shop[1257677] = true; -- Shadowbough Groveglider
 ADDON.DB.Source.Shop[1283471] = true; -- Golden Ashened Cataclysm
+ADDON.DB.Source.Shop[1291315] = true; -- Spring Panda
+ADDON.DB.Source.Shop[1301737] = true; -- Sunflash Driftmoth
 
 ADDON.DB.Source.Achievement[1247591] = 60901; -- Celestial Riding Crane
+ADDON.DB.Source.Achievement[1298510] = 62059; -- Reins of the Fire Drake
 ADDON.DB.Source.Drop[1247596] = true; -- Celestial Riding Serpent
 ADDON.DB.Source.Drop[1247597] = true; -- Celestial Riding Ox
 ADDON.DB.Source.Drop[1247598] = true; -- Celestial Riding Tiger
