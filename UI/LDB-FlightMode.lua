@@ -37,12 +37,6 @@ ADDON.Events:RegisterCallback("OnLogin", function()
         return
     end
 
-    local dataObject
-
-    actionButton:SetScript("OnEvent", function()
-        updateLDB(dataObject)
-    end)
-
     local tooltipProxy = CreateFrame("Frame")
     tooltipProxy:Hide()
     tooltipProxy:HookScript("OnShow", function(self)
@@ -75,9 +69,13 @@ ADDON.Events:RegisterCallback("OnLogin", function()
     updateLDB(ldbData)
     local label = ldbData.label -- Titan Panel uses label as entry name in its plugin list.
     ldbData.label = ldbName
-    dataObject = ldb:NewDataObject( ldbName, ldbData)
+    local dataObject = ldb:NewDataObject( ldbName, ldbData)
     C_Timer.After(0, function()
         dataObject.label = label
+    end)
+
+    actionButton:SetScript("OnEvent", function()
+        updateLDB(dataObject)
     end)
 
 end, "ldb-flightmode")
