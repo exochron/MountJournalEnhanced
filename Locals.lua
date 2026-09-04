@@ -81,6 +81,7 @@ L["EVENT_PLUNDERSTORM"] = "Plunderstorm"
 L["EVENT_SCARAB"] = "Call of the Scarab"
 L["EVENT_SECRETS"] = "Secrets of Azeroth"
 L["KEYBINDING_MOUNT_SPECIAL"] = PERKS_PROGRAM_MOUNT_SPECIAL_ANIM or "Mount Special Animation"
+L["KEYBINDING_MOUNT_SELECTED"] = "Summon your selected mount"
 
 -- Settings
 L["DISPLAY_ALL_SETTINGS"] = "Display all settings"
@@ -167,3 +168,4 @@ end
 -- update labels for keyboard bindings (see: Bindings.xml)
 BINDING_NAME_MJE_RANDOM_MOUNT = MOUNT_JOURNAL_SUMMON_RANDOM_FAVORITE_MOUNT
 _G["BINDING_NAME_CLICK MJEMountSpecialButton:LeftButton"] = L["KEYBINDING_MOUNT_SPECIAL"]
+_G["BINDING_NAME_CLICK MountJournalMountButton:LeftButton"] = L["KEYBINDING_MOUNT_SELECTED"]
