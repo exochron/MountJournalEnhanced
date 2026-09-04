@@ -22,10 +22,13 @@ end
 local function mergeRecursive(source, target)
     for k, v in pairs(source) do
         if target[k] ~= nil then
-            if type(target[k]) == "table" and type(v) == "table" then
-                mergeRecursive(v, target[k])
-            else
-                target[k] = v
+            local targetType = type(target[k])
+            if targetType == type(v) then
+                if targetType == "table" then
+                    mergeRecursive(v, target[k])
+                else
+                    target[k] = v
+                end
             end
         end
     end
