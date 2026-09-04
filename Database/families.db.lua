@@ -117,6 +117,7 @@ ADDON.DB.Family = {
 [2728] = true, -- Shadowblade's Felscorned Omen
 [2914] = true, -- Fel Spirehawk
 [3040] = true, -- Stormcrow
+[3044] = true, -- Shadow Spirehawk
 },
 ["Eagle"] = {
 [1545] = true, -- Divine Kiss of Ohn'ahra
@@ -657,8 +658,8 @@ ADDON.DB.Family = {
 ["Ur'zul"] = {
 [954] = true, -- Shackled Ur'zul
 [2471] = true, -- Ur'zul Fleshripper
-[2653] = true, -- Ghastly Ur'zul
 [2652] = true, -- Bilebound Ur'zul
+[2653] = true, -- Ghastly Ur'zul
 },
 },
 ["Devourer"] = {
@@ -695,8 +696,6 @@ ADDON.DB.Family = {
 [1179] = true, -- Palehide Direhorn
 [1225] = true, -- Crusader's Direhorn
 [1249] = true, -- Child of Torcali
-[2912] = true, -- Vivacious Chloroceros
-[2913] = true, -- Vivid Chloroceros
 },
 ["Falcosaurs"] = {
 [793] = true, -- Predatory Bloodgazer
@@ -1504,8 +1503,6 @@ ADDON.DB.Family = {
 [2772] = true, -- Blessed Amani Burrower
 [2773] = true, -- Giganto Manis
 [2775] = true, -- Witherbark Pango
-[3002] = true, -- Vicious Lightbloom Boar
-[3003] = true, -- Vicious Lightbloom Boar
 },
 ["Plant"] = {
 [1458] = true, -- Wandering Ancient
@@ -1517,6 +1514,10 @@ ADDON.DB.Family = {
 [2846] = true, -- Ferocious Snapvine
 [2847] = true, -- Blooded Snapvine
 [2848] = true, -- Savage Snapvine
+[2912] = true, -- Vivacious Chloroceros
+[2913] = true, -- Vivid Chloroceros
+[3002] = true, -- Vicious Lightbloom Boar
+[3003] = true, -- Vicious Lightbloom Boar
 },
 ["Rays"] = {
 ["Fathom Rays"] = {
@@ -1667,6 +1668,7 @@ ADDON.DB.Family = {
 [1622] = true, -- Stormhide Salamanther
 [1761] = true, -- Reawakened Phase-Hunter
 [1940] = true, -- Salatrancer
+[2315] = true, -- Timbered Sky Snake
 [2732] = true, -- Cobalt Phase-Hunter
 [2747] = true, -- Untainted Grove Crawler
 [2793] = true, -- Vicious Snaplizard
@@ -1687,12 +1689,12 @@ ADDON.DB.Family = {
 },
 ["Snake"] = {
 [2315] = true, -- Timbered Sky Snake
+[3019] = true, -- Sea-Dwelling Isle Serpent
 [3020] = true, -- Caustic Venomfang
 [3021] = true, -- Crimson Venomfang
 [3023] = true, -- Auriferous Venomfang
 [3060] = true, -- Indigo Coiled Horror
 [3061] = true, -- Ruby Writhe
-[3019] = true, -- Sea-Dwelling Isle Serpent
 [3058] = true, -- The Writhing Brood
 [3062] = true, -- Venomous Coiler
 },
@@ -1903,6 +1905,7 @@ ADDON.DB.Family = {
 [1291] = true, -- Lucky Yun
 [2632] = true, -- Astral Aurochs
 [2637] = true, -- Celestial Riding Ox
+[2982] = true, -- Hearthkeeper's Wandering Caravan
 },
 ["Rhinos"] = {
 [372] = true, -- Wooly White Rhino
@@ -1953,11 +1956,11 @@ ADDON.DB.Family = {
 [2330] = true, -- Twilight Witch's Sweeper
 [2331] = true, -- Sky Witch's Sweeper
 [3004] = true, -- Autumnal Witchwick's Rider
+[3014] = true, -- Mossy Witchwick's Rider
+[3015] = true, -- Moonlit Witchwick's Rider
+[3016] = true, -- Scarlet Witchwick's Rider
 [3017] = true, -- Blushing Witchwick's Rider
 [3018] = true, -- Carmine Witchwick's Rider
-[3015] = true, -- Moonlit Witchwick's Rider
-[3014] = true, -- Mossy Witchwick's Rider
-[3016] = true, -- Scarlet Witchwick's Rider
 [3119] = true, -- Wintry Witchwick's Rider
 },
 ["Carpets"] = {

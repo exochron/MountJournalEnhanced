@@ -59,6 +59,5 @@ ADDON.DB.Tradable = {
 [2703] = true, -- Blossombranch Groveglider
 [2743] = true, -- Stormgilded Celestial
 [2948] = true, -- Golden Ashened Cataclysm
-[2972] = true, -- Spring Panda
 [3044] = true, -- Shadow Spirehawk
 }
