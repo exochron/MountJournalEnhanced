@@ -1,6 +1,6 @@
 local _, ADDON = ...
 
-local button, doStrip
+local button, tooltip, doStrip
 
 ADDON.UI:RegisterUIOverhaulCallback(function(frame)
     if frame ==  MountJournal then
@@ -11,13 +11,17 @@ end)
 local function BuildButton()
 
     local frame = CreateFrame("Button", "MJEMountSpecialButton", nil, "InsecureActionButtonTemplate,UIPanelButtonNoTooltipTemplate")
-    local tooltip = CreateFrame("GameTooltip", "MJEMountSpecialButtonToolTip", frame, "SharedTooltipTemplate")
     frame:SetText("!")
 
     frame:HookScript("OnEnter", function()
+        if not tooltip then
+            tooltip = CreateFrame("GameTooltip", "MJEMountSpecialButtonToolTip", MountJournal, "SharedTooltipTemplate")
+        end
+
         tooltip:SetOwner(frame, "ANCHOR_RIGHT")
-        tooltip:SetText("/mountspecial", HIGHLIGHT_FONT_COLOR:GetRGB());
+        GameTooltip_SetTitle(tooltip, "/mountspecial")
         GameTooltip_AddNormalLine(tooltip, ADDON.L.SPECIAL_TIP)
+        GameTooltip_AddInstructionLine(tooltip, ADDON.Api:GetKeyBindingString("CLICK MJEMountSpecialButton:LeftButton"))
         tooltip:Show()
     end)
     frame:HookScript("OnLeave", function()

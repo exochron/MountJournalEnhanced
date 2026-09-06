@@ -169,6 +169,21 @@ function ADDON.Api:IsDynamicFlight()
     return false
 end
 
+function ADDON.Api:GetKeyBindingString(command)
+    local key1, key2 = GetBindingKey(command)
+    local keys = NONE
+    if key1 then
+        if key2 then
+            keys = key1 .. ", ".. key2
+        else
+            keys = key1
+        end
+    elseif key2 then
+        keys = key2
+    end
+
+    return SETTINGS_KEYBINDINGS_LABEL..": "..keys
+end
 
 local dataProvider
 function ADDON.Api:GetDataProvider()

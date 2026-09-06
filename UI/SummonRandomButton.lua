@@ -24,6 +24,7 @@ ADDON.Events:RegisterCallback("loadUI", function()
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
             --GameTooltip:SetMountBySpellID(150544); -- spell does not yet exist in Cataclysm
             GameTooltip_SetTitle(GameTooltip, MOUNT_JOURNAL_SUMMON_RANDOM_FAVORITE_MOUNT)
+            GameTooltip_AddInstructionLine(GameTooltip, ADDON.Api:GetKeyBindingString("MJE_RANDOM_MOUNT"))
             GameTooltip:Show()
         end)
         button:HookScript("OnLeave", function()

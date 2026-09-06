@@ -70,6 +70,22 @@ local function registerHandler()
    end)
 end
 
+local function injectKeybindingTooltips()
+    if MountJournal.SummonRandomFavoriteSpellFrame then
+        hooksecurefunc(MountJournal.SummonRandomFavoriteSpellFrame, "OnSetTooltip", function()
+            GameTooltip_AddInstructionLine(GameTooltip, ADDON.Api:GetKeyBindingString("MJE_RANDOM_MOUNT"))
+        end)
+        MountJournal.SummonRandomFavoriteSpellFrame.Button:HookScript("OnEnter", function()
+            GameTooltip_AddInstructionLine(GameTooltip, ADDON.Api:GetKeyBindingString("MJE_RANDOM_MOUNT"))
+        end)
+    end
+
+    MountJournal.MountButton:HookScript("OnEnter", function()
+        GameTooltip_AddInstructionLine(GameTooltip, ADDON.Api:GetKeyBindingString("CLICK MountJournalMountButton:LeftButton"))
+        GameTooltip:Show()
+    end)
+end
+
 ADDON.Events:RegisterCallback("loadUI", function()
     if InCombatLockdown() then
         ADDON.Events:RegisterFrameEventAndCallback("PLAYER_REGEN_ENABLED", function()
@@ -79,4 +95,5 @@ ADDON.Events:RegisterCallback("loadUI", function()
     else
         registerHandler()
     end
+    injectKeybindingTooltips()
 end, "hotkeys")
