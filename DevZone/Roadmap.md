@@ -1,9 +1,9 @@
 This is a list of ideas I'd like to add at some point.
 
 ### Next
-- [ ] Minimap icons for LDB plugins
-- [ ] (item info instead of tradable db)
-- [ ] Move DRIVE toolbar button as dropdown under settings
+- Minimap icons for LDB plugins
+- (item info instead of tradable db)
+- Move DRIVE toolbar button as dropdown under settings
 - opt out of favorite profile system
 - automatically unwrap shop/tradingpost mounts
 - sync dates of mount pairs, which are collected by the same trigger (alliance/horde versions)
@@ -12,6 +12,8 @@ This is a list of ideas I'd like to add at some point.
 - Map Pins in description Text (Drop, Treasure, Vendor)
 - show drop chances
 - autolearn mount items? (only soulbound & not tradeable)
+- new sidetab for assigned pets
+- add sidetab for settings
 
 ### More Ideas:
 - special summon animation
