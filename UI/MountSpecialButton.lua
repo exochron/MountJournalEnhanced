@@ -1,6 +1,6 @@
 local _, ADDON = ...
 
-local button, doStrip
+local button, tooltip, doStrip
 
 ADDON.UI:RegisterUIOverhaulCallback(function(frame)
     if frame ==  MountJournal then
@@ -9,15 +9,19 @@ ADDON.UI:RegisterUIOverhaulCallback(function(frame)
 end)
 
 local function BuildButton()
-    local tooltip = CreateFrame("GameTooltip", "MJEMountSpecialButtonToolTip", MountJournal, "SharedTooltipTemplate")
 
-    local frame = CreateFrame("Button", nil, MountJournal, "InsecureActionButtonTemplate,UIPanelButtonNoTooltipTemplate")
+    local frame = CreateFrame("Button", "MJEMountSpecialButton", nil, "InsecureActionButtonTemplate,UIPanelButtonNoTooltipTemplate")
     frame:SetText("!")
 
     frame:HookScript("OnEnter", function()
+        if not tooltip then
+            tooltip = CreateFrame("GameTooltip", "MJEMountSpecialButtonToolTip", MountJournal, "SharedTooltipTemplate")
+        end
+
         tooltip:SetOwner(frame, "ANCHOR_RIGHT")
-        tooltip:SetText("/mountspecial", HIGHLIGHT_FONT_COLOR:GetRGB());
+        GameTooltip_SetTitle(tooltip, "/mountspecial")
         GameTooltip_AddNormalLine(tooltip, ADDON.L.SPECIAL_TIP)
+        GameTooltip_AddInstructionLine(tooltip, ADDON.Api:GetKeyBindingString("CLICK MJEMountSpecialButton:LeftButton"))
         tooltip:Show()
     end)
     frame:HookScript("OnLeave", function()
@@ -27,7 +31,6 @@ local function BuildButton()
 
     frame:GetFontString():SetJustifyV("MIDDLE")
     frame:SetWidth(frame:GetFontString():GetStringWidth() + 30)
-    frame:SetPoint("LEFT", MountJournalMountButton, "RIGHT", 3, 0)
     frame:SetAttributeNoHandler("type", "macro")
     frame:SetAttributeNoHandler("typerelease", "macro")
     frame:SetAttributeNoHandler("macrotext", "/mountspecial");
@@ -46,24 +49,29 @@ local function BuildButton()
         frame:Disable()
     end
 
-    local ElvSkin = ADDON.UI:GetElvUI('Skins')
-    if doStrip and ElvSkin then
-        ElvSkin:HandleButton(frame)
-    end
+    frame:Hide()
 
     return frame
 end
 
 ADDON:RegisterUISetting('showMountspecialButton', true, ADDON.L.SETTING_MOUNTSPECIAL_BUTTON, function(flag)
-    if flag and not button and ADDON.initialized then
-        button = BuildButton()
-    end
-    if button then
-        button:SetShown(flag)
-    end
+    button:SetShown(flag)
 end)
 
+ADDON.Events:RegisterCallback("OnLogin", function()
+    button = BuildButton()
+    -- need that button for keybinding as well
+end, "mountspecial button")
+
 ADDON.Events:RegisterCallback("loadUI", function()
+    button:SetParent(MountJournal)
+    button:SetPoint("LEFT", MountJournalMountButton, "RIGHT", 3, 0)
+
+    local ElvSkin = ADDON.UI:GetElvUI('Skins')
+    if doStrip and ElvSkin then
+        ElvSkin:HandleButton(frame)
+    end
+
     ADDON:ApplySetting('showMountspecialButton', ADDON.settings.ui.showMountspecialButton)
 end, "mountspecial button")
 

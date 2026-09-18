@@ -2,6 +2,7 @@
 This addon extends the ingame mount journal with some cool stuff.
 
 ## 🎬 In Action
+- [YouTube: Must Have WoW Midnight Settings and Addons to Use](https://www.youtube.com/watch?v=8lRo8JvsvNA&t=408s) (06/2026 by [ConCon](https://www.youtube.com/@ConCon))
 - [YouTube: Addon Spotlight in Saturday WoW News](https://www.youtube.com/watch?v=epkrf0TiL9A&t=412s) (06/2025 by [HazzelNuttyGames](https://www.twitch.tv/hazelnuttygames))
 - [YouTube: Top 10 BEST Addons EVERY Collector Should Have! WoW Dragonflight](https://www.youtube.com/watch?v=c2a4NKMGimM&t=221s) (02/2024 by [AndriKatsGames](https://www.twitch.tv/andrikatsgames))
 - [YouTube: 9 Must Have Addons for Mount Collectors and Farmers](https://www.youtube.com/watch?v=O4Sb1CtPado&t=530s) (08/2023 by [Syiler](https://www.twitch.tv/syiler))
@@ -16,7 +17,7 @@ This addon extends the ingame mount journal with some cool stuff.
 - Search also in mount description or your own notes
 - Manually hide unusable or unwanted mounts
 - Sort mounts by: name, family, type, expansion, rarity or your mount usage statistics. (or all of it in reverse)
-- __NEW:__ quickly save and load all your filter options with Filter Profiles 
+- Quickly save and load all your filter options with Filter Profiles 
 
 ## ⭐ Enhanced Favorites
 - Use multiple Profiles and quickly switch between them
@@ -49,9 +50,8 @@ This addon extends the ingame mount journal with some cool stuff.
 - Works with ElvUI
 
 ## 🩹 Fixes also
-- the ridiculous fly in animation of the rider
+- the silly initial jump on animation of the rider
 - broken mount links on some clients
-- constantly resetting of display model
 
 ## 🙋 Help wanted
 - Have you found any bug or do you have some suggestions? Please let me know in the issue tracker on [GitHub](https://github.com/exochron/MountJournalEnhanced/issues) or [Curseforge](https://www.curseforge.com/wow/addons/mount-journal-enhanced/issues).
