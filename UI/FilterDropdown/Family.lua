@@ -1,21 +1,5 @@
 local _, ADDON = ...
 
-local function CheckSetting(settings)
-    local hasTrue, hasFalse = false, false
-    for _, v in pairs(settings) do
-        if v == true then
-            hasTrue = true
-        elseif v == false then
-            hasFalse = true
-        end
-        if hasTrue and hasFalse then
-            break
-        end
-    end
-
-    return hasTrue, hasFalse
-end
-
 local function GetIcon(family, subfamily)
     local sourceDb = subfamily and ADDON.DB.Family[family][subfamily] or ADDON.DB.Family[family]
     local mountId = TableUtil.FindMin(GetKeysArray(sourceDb), function(v) return v end)

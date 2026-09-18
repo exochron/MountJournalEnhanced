@@ -386,7 +386,9 @@ local function setupFilterMenu(dropdown, root)
     ADDON.UI.FDD:CreateFilter(root, NOT_COLLECTED, SETTING_NOT_COLLECTED)
     ADDON.UI.FDD:CreateFilter(root, L.FILTER_SECRET, SETTING_HIDDEN_INGAME)
 
-    ADDON.UI.FDD:CreateFilter(root, L.FILTER_ONLY_LATEST, SETTING_ONLY_RECENT)
+    if ADDON.isRetail then
+        ADDON.UI.FDD:CreateFilter(root, L.FILTER_ONLY_LATEST, SETTING_ONLY_RECENT)
+    end
     ADDON.UI.FDD:CreateFilter(root, L["Only tradable"], SETTING_ONLY_TRADABLE)
     if ADDON.settings.filter[SETTING_HIDDEN] or TableHasAnyEntries(ADDON.settings.hiddenMounts) then
         ADDON.UI.FDD:CreateFilter(root, L["Hidden"], SETTING_HIDDEN)
@@ -402,7 +404,9 @@ local function setupFilterMenu(dropdown, root)
     AddAllAndNone(familyRoot, ADDON.settings.filter[SETTING_FAMILY])
     ADDON.UI.FDD:AddFamilyMenu(familyRoot)
 
-    setupExpansionMenu(root:CreateButton(EXPANSION_FILTER_TEXT))
+    if GetClientDisplayExpansionLevel() > 0 then
+        setupExpansionMenu(root:CreateButton(EXPANSION_FILTER_TEXT))
+    end
     ADDON.UI.FDD:AddColorMenu(root:CreateButton(COLOR))
     if ADDON.isRetail then
         setupRarityMenu(root:CreateButton(RARITY))
