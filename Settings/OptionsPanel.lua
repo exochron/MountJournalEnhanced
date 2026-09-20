@@ -9,6 +9,19 @@ function ADDON:OpenOptions()
     Settings.OpenToCategory(mainCategory.ID)
 end
 
+function ADDON:OpenKeybindings()
+    local categoryName = C_AddOns.GetAddOnMetadata(ADDON_NAME, "Title")
+    local keybindsCategory = SettingsPanel:GetCategory(Settings.KEYBINDINGS_CATEGORY_ID)
+    local keybindsLayout = SettingsPanel:GetLayout(keybindsCategory)
+    for _, initializer in keybindsLayout:EnumerateInitializers() do
+        if initializer.data.name == categoryName then
+            initializer.data.expanded = true
+            Settings.OpenToCategory(Settings.KEYBINDINGS_CATEGORY_ID, categoryName)
+            return
+        end
+    end
+end
+
 local function BuildCheckBox(parent, text)
     local button = AceGUI:Create("CheckBox")
     button:SetLabel(text)
@@ -48,6 +61,14 @@ local function BuildHeading(parent, text)
 
     return head
 end
+local function BuildKeybindingButton(parent)
+    local button = AceGUI:Create("Button")
+    button:SetText(SETTINGS_KEYBINDINGS_LABEL)
+    button:SetCallback("OnClick", ADDON.OpenKeybindings)
+    parent:AddChild(button)
+
+    return button
+end
 
 local function BuildMainFrame(uiLabels, behaviourLabels)
     local title = C_AddOns.GetAddOnMetadata(ADDON_NAME, "Title")
@@ -60,6 +81,8 @@ local function BuildMainFrame(uiLabels, behaviourLabels)
     frame:AddChild(scroll)
 
     frame.checks = {}
+
+    BuildKeybindingButton(scroll)
 
     BuildHeading(scroll, UIOPTIONS_MENU)
 
