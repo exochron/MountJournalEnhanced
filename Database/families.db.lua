@@ -183,6 +183,12 @@ ADDON.DB.Family = {
 [1819] = true, -- Vicious Moonbeast
 [1820] = true, -- Vicious Moonbeast
 },
+["Owlcat"] = {
+[3107] = true, -- Himmelblaue Stolzklaue
+[3108] = true, -- [PH] Purple Cat Mount
+[3109] = true, -- [PH] Brown Cat Mount
+[3110] = true, -- [PH] White Blue Cat Mount
+},
 ["Pandaren Phoenixes"] = {
 [503] = true, -- Crimson Pandaren Phoenix
 [518] = true, -- Ashen Pandaren Phoenix
@@ -404,6 +410,7 @@ ADDON.DB.Family = {
 [2779] = true, -- Witherbark Warbear Mother
 [2781] = true, -- Amani Hex Bear
 [2972] = true, -- Spring Panda
+[3125] = true, -- Veteran Adventurer's Loyal Companion
 },
 ["Foxes"] = {
 [656] = true, -- Llothien Prowler
@@ -1693,9 +1700,9 @@ ADDON.DB.Family = {
 [3020] = true, -- Caustic Venomfang
 [3021] = true, -- Crimson Venomfang
 [3023] = true, -- Auriferous Venomfang
+[3058] = true, -- Die windende Brut
 [3060] = true, -- Indigo Coiled Horror
 [3061] = true, -- Ruby Writhe
-[3058] = true, -- The Writhing Brood
 [3062] = true, -- Venomous Coiler
 },
 ["Snapdragons"] = {

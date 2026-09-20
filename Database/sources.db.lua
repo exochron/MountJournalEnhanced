@@ -274,7 +274,7 @@ MergeTable(ADDON.DB.Source.Drop, {
 [62048] = {71, 6270, 5000, 11.54}, -- Illidari Doomhawk
 [88718] = {207, 3120, 4260, 100.00}, -- Phosphorescent Stone Drake
 [88750] = {69, 6940, 7320, 99.91}, -- Grey Riding Camel
-[98718] = {205, 3780, 6680, 98.97}, -- Subdued Seahorse
+[98718] = {205, 3780, 6680, 98.98}, -- Subdued Seahorse
 [127158] = {379, 5440, 6320, 0.28}, -- Heavenly Onyx Cloud Serpent
 [130965] = {376, 7160, 6440, 0.26}, -- Son of Galleon
 [138423] = {507, 4990, 5400, 0.39}, -- Cobalt Primordial Direhorn
@@ -343,7 +343,7 @@ MergeTable(ADDON.DB.Source.Drop, {
 [342680] = {1970, 5140, 7420, 4.59}, -- Deepstar Aurelid
 [344228] = {1536, 5020, 4740, 0.50}, -- Battle-Bound Warhound
 [352309] = {1543, 2240, 3520, 0.16}, -- Hand of Bahmethra
-[354353] = {1543, 1640, 4960, 10.65}, -- Fallen Charger
+[354353] = {1543, 1640, 4960, 10.64}, -- Fallen Charger
 [354357] = {1961, 4440, 2940, 2.00}, -- Crimson Shardhide
 [354360] = {1961, 5540, 6740, 2.61}, -- Garnet Razorwing
 [356501] = {1961, 4440, 2940, 2.37}, -- Rampaging Mauler
@@ -353,7 +353,7 @@ MergeTable(ADDON.DB.Source.Drop, {
 [420097] = {71, 6270, 5000, 1.42}, -- Azure Worldchiller
 [432610] = {2024, 2780, 4600, 0.69}, -- Clayscale Hornstrider
 [447189] = {2404, 5120, 7740, 100.00}, -- Nesting Swarmite
-[447213] = {2248, 2300, 5860, 64.41}, -- Alunira
+[447213] = {2248, 2300, 5860, 64.47}, -- Alunira
 [448941] = {2215, 2580, 5740, 5.52}, -- Beledar's Spawn
 [449258] = {2214, 5680, 7660, 5.98}, -- Ol' Mole Rufus
 [466026] = {2346, 3200, 2140, 1.59}, -- Salvaged Goblin Gazillionaire's Flying Machine
@@ -368,9 +368,9 @@ MergeTable(ADDON.DB.Source.Drop, {
 [1261155] = {2405, 4020, 4140, 0.06}, -- Augmented Stormray
 [1261302] = {2395, 4020, 8520, 0.09}, -- Cobalt Dragonhawk
 [1261316] = {2437, 3340, 8840, 0.11}, -- Amani Sharptalon
-[1261323] = {2395, 6240, 4940, 0.06}, -- Cerulean Hawkstrider
+[1261323] = {2395, 6240, 4960, 0.06}, -- Cerulean Hawkstrider
 [1261351] = {2437, 4640, 4340, 0.02}, -- Witherbark Pango
 [1266700] = {2405, 4020, 4140, 0.04}, -- Sanguine Harrower
-[1299961] = {2512, 4520, 2840, 0.05}, -- Topaz Skyfang
-[1300779] = {2512, 4690, 6220, 0.62}, -- Ruby Writhe
+[1299961] = {2512, 4520, 2840, 0.04}, -- Topaz Skyfang
+[1300779] = {2512, 4690, 6220, 0.56}, -- Ruby Writhe
 })
