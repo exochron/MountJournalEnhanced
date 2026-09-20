@@ -1,4 +1,9 @@
 # ![Logo](https://raw.githubusercontent.com/exochron/MountJournalEnhanced/master/UI/icons/mje.png) Mount Journal Enhanced
+[![GitHub Release](https://img.shields.io/github/v/release/exochron/MountJournalEnhanced?style=flat-square&logo=github)](https://github.com/exochron/MountJournalEnhanced/releases/latest)
+![Supported Versions](https://img.shields.io/badge/Supported%20Versions-Retail%20+%20MoP%20Classic-gold?style=flat-square)
+[![CurseForge Downloads](https://img.shields.io/curseforge/dt/86372?style=flat-square&logo=curseforge&label=CurseForge&color=orange)](https://www.curseforge.com/wow/addons/mount-journal-enhanced)
+[![Wago downloads](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fexochron%2FMountJournalEnhanced%2Frefs%2Fheads%2Fbuild%2Fbadges%2Fwago.json&query=%24.downloads&style=flat-square&label=Wago&color=c1272d&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABa0lEQVQ4y8WTMUtCURTHf7eIMjCXRHhPKFpCKHCoQXBqeC5B8XD0K6gtTkJEfQJXRcRJ9EMI4er6cHivD5DZcpYMldNQvVoSyqEDB+5wfpf/73IuwCXwCOgv+/GD/RMcXmI+Dn+uNVasdeBm2UA8HqdarZJIJDgbP2NtbOJPX8LYSxPYts1gMKBYLJJMJkltbXOVsLiz9zDf5n58pGazqSKi3W5XLcvSo8i2dg8O9f7wWM+iMQV0qUI2m8X3fUqlEpPJhPF8xsPrFAM8zecEr9N3hXw+T71eJ5fLhXAkEiEWi2GMwZivwDunJ+zfXrN7cf6l4DiOioj6vq+O42gqldJ2u60ioiKivV5PbdvWTCajnuepiKjrup+q776NRiMEPjsIAh2NRioiWqlUtN/vq4hop9NRY4wCGi6SMYZCoYDrukSjUYbDIbVajdlsRrlcxvM80uk0QRDQarVYLBYA/P8mrgHjFfgxq37nN50k3Wpb4+z1AAAAAElFTkSuQmCC)](https://addons.wago.io/addons/mount-journal-enhanced)
+
 This addon extends the ingame mount journal with some cool stuff.
 
 ## 🎬 In Action
