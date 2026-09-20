@@ -165,7 +165,7 @@ elseif locale == "zhTW" then
     --@localization(locale="zhTW", namespace="Families", format="lua_additive_table", handle-unlocalized=comment)@
 end
 
--- update labels for keyboard bindings (see: Bindings_Mainline.xml)
+-- update labels for keyboard bindings (see: Bindings_Standard.xml)
 _G["BINDING_NAME_MJE_RANDOM_MOUNT"] = MOUNT_JOURNAL_SUMMON_RANDOM_FAVORITE_MOUNT
 _G["BINDING_NAME_CLICK MJESwapFlightStyleButton:LeftButton"] = C_Spell.GetSpellName(460003)
 _G["BINDING_NAME_CLICK MJEMountSpecialButton:LeftButton"] = L["KEYBINDING_MOUNT_SPECIAL"]
