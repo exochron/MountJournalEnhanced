@@ -1,0 +1,21 @@
+name: Build Badges
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Run every 12 hours
+    - cron: '0 */12 * * *'
+
+jobs:
+  build_badge_data:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v7
+        with:
+          ref: 'build/badges'
+          fetch-depth: 1
+
+      - run: ./wago_downloads.sh
+
+      - uses: EndBug/add-and-commit@v10
