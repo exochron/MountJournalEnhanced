@@ -1,6 +1,15 @@
 This is a list of ideas I'd like to add at some point.
 
-### Next
+### Road to Forever
+- disable filter and sort for:
+  - expansion
+  - rarity
+  - recent additions
+  - various sources/world events
+- check keybinding
+- gamepad support
+
+### Todos
 - Minimap icons for LDB plugins
 - (item info instead of tradable db)
 - Move DRIVE toolbar button as dropdown under settings
@@ -23,7 +32,6 @@ This is a list of ideas I'd like to add at some point.
 - more animation control in display (start/pause, movements)
 - gallery mode (like wardrobe)
 - cover flow mode
-- gamepad support (?)
 - variation filter (undead, mech, elemental, magic...)
 - proper favorite profiles with one global profile
 - favorite groups / custom filter groups

@@ -54,6 +54,12 @@ This addon extends the ingame mount journal with some cool stuff.
 - Toggle the mount journal via the addon compartment (Retail only)
 - Works with ElvUI
 
+## ⌨️ More Keybindings
+- Summon Random Mount
+- Switch Flight Style (retail only)
+- Trigger /mountspecial animation
+- Summon selected mount from journal
+
 ## 🩹 Fixes also
 - the silly initial jump on animation of the rider
 - broken mount links on some clients
