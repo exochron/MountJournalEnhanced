@@ -50,6 +50,13 @@ local function CreateSettingsMenu(_, rootDescription)
             return MenuResponse.CloseAll
         end)
     )
+    ADDON.UI:CenterDropdownButton(rootDescription:CreateButton(
+        SETTINGS_KEYBINDINGS_LABEL,
+        function()
+            ADDON:OpenKeybindings()
+            return MenuResponse.CloseAll
+        end)
+    )
     if ACCESSIBILITY_LABEL and ACCESSIBILITY_MOUNT_LABEL then
         ADDON.UI:CenterDropdownButton(rootDescription:CreateButton(
             ACCESSIBILITY_LABEL,
