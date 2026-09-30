@@ -69,7 +69,7 @@ ADDON.Events:RegisterCallback("loadUI", function()
 
     local ElvSkin = ADDON.UI:GetElvUI('Skins')
     if doStrip and ElvSkin then
-        ElvSkin:HandleButton(frame)
+        ElvSkin:HandleButton(button)
     end
 
     ADDON:ApplySetting('showMountspecialButton', ADDON.settings.ui.showMountspecialButton)
