@@ -2,11 +2,11 @@
 ..\FrameXML\UI_shared.xsd">
 
     <!-- Polyfill of original SummonRandomFavoriteButton -->
-    <Button name="MJE_SummonRandomFavoriteButton" virtual="true" inherits="SecureHandlerDragTemplate,InsecureActionButtonTemplate">
+    <Button name="MJE_SummonRandomFavoriteButton" virtual="true" inherits="InsecureActionButtonTemplate">
         <Attributes>
-            <Attribute name="type1" value="macro"/>
-            <Attribute name="macro" value="MJE: Random Mount"/>
-            <Attribute name="_ondragstart" value='return "clear", "macro", "MJE: Random Mount"'/>
+            <Attribute name="type" value="macro"/>
+            <Attribute name="typerelease" value="macro"/>
+            <Attribute name="pressAndHoldAction" value="1"/>
         </Attributes>
 
         <Size x="33" y="33"/>
