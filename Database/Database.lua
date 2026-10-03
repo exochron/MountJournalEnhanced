@@ -2,12 +2,20 @@ local _, ADDON = ...
 
 ADDON.DB = {}
 
---local build = select(4, GetBuildInfo())
-ADDON.DB.Recent = {
-    ["minID"] = 3011,
-    ["blacklist"] = {3033,3036},
-    ["whitelist"] = {2652,2781,2821,2839,2980,3002,3003,3004},
-}
+local build = select(4, GetBuildInfo())
+if build < 120105 then
+    ADDON.DB.Recent = {
+        ["minID"] = 3011,
+        ["blacklist"] = {3033,3036,2781},
+        ["whitelist"] = {2652,2781,2821,2839,2980,3002,3003,3004},
+    }
+else
+    ADDON.DB.Recent = {
+        ["minID"] = 3137,
+        ["blacklist"] = {},
+        ["whitelist"] = {2649, 2698, 2981,3034, 3066, 2781},
+    }
+end
 
 ADDON.DB.Source = {
     ["Drop"] = {
@@ -384,6 +392,8 @@ ADDON.DB.Source = {
         [1298808] = true, -- Corroded Soul Crusher - Telemancer Astrandis
         [1299963] = true, -- Violet-Backed Skyfang - Zu'Jara Forces Renown
         [1300778] = true, -- Indigo Coiled Horror - Zu'Jara Forces Renown
+        [1301331] = true, -- Corrupted Swarmer
+        [1313788] = true, -- Sporebearer Fungal Strider
 
         ------------------------------
         -- Alliance ------------------
@@ -1123,6 +1133,7 @@ ADDON.DB.Source = {
         [1299965] = 63653, -- Emerald Skyfang - Pro Poison Patroller
         [1300777] = 63630, -- Venomous Coiler - Assault the Vault
         [1301775] = 63104, -- Umbral Ashes - Umbral Champion: Midnight Season 1
+        [1314715] = 63715, -- Loa-Blessed Wayfarer - Let Me Solo Him: Kindo'jan
 
         ------------------------------
         -- Alliance ------------------
