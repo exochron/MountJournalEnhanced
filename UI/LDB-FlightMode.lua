@@ -19,7 +19,11 @@ actionButton:SetPropagateMouseClicks(true)
 actionButton:SetPropagateMouseMotion(true)
 actionButton:RegisterUnitEvent("UNIT_AURA", "player")
 actionButton:HookScript("PreClick", function(self)
-    if not InCombatLockdown() and self:GetParent() and self:GetParent():IsDragging() then
+    if not InCombatLockdown() and self:GetParent() and (
+            self:GetParent():IsDragging()
+            or not self:GetParent():IsShown()
+            or 0 == self:GetParent():GetEffectiveAlpha()
+    ) then
         self:SetAttributeNoHandler("type", "")
         self:SetAttributeNoHandler("typerelease", "")
     end
@@ -49,6 +53,10 @@ ADDON.Events:RegisterCallback("OnLogin", function()
         actionButton:SetFrameStrata("FULLSCREEN")
         actionButton:Raise()
         actionButton:Show()
+
+        if (not relativeTo:IsShown() or 0 == relativeTo:GetEffectiveAlpha()) then
+            return
+        end
 
         GameTooltip:SetOwner(self, "ANCHOR_NONE")
         GameTooltip:SetPoint(point, relativeTo, relativePoint, offsetX, offsetY)

@@ -97,6 +97,10 @@ ADDON.Events:RegisterCallback("OnLogin", function()
     tooltipProxy:Hide()
     tooltipProxy:HookScript("OnShow", function()
         local point, relativeTo, relativePoint, offsetX, offsetY = tooltipProxy:GetPoint(1)
+        if (not relativeTo:IsShown() or 0 == relativeTo:GetEffectiveAlpha()) then
+            return
+        end
+
         if ADDON.Api:HasFavorites() then
             menu = OpenMenu(tooltipProxy, generateFavoritesMenu)
         else
@@ -130,7 +134,11 @@ ADDON.Events:RegisterCallback("OnLogin", function()
         icon = "Interface\\Addons\\MountJournalEnhanced\\UI\\icons\\mje.png",
         tooltip = tooltipProxy,
 
-        OnClick = function(_, button)
+        OnClick = function(self, button)
+            if (not self:IsShown() or 0 == self:GetEffectiveAlpha()) then
+                return
+            end
+
             if button == "RightButton" then
                 GameTooltip:Hide()
                 menu = OpenMenu(tooltipProxy, generateProfileMenu)
