@@ -107,15 +107,17 @@ local function testFavorites()
 
     for i = 1, 10000 do
         local name, _, _, _, _, _, isFavorite, _,_,_,_, mountId = C_MountJournal.GetDisplayedMountInfo(i)
-        if isFavorite then
-            local listIndex = tIndexOf(expectedMounts,mountId)
-            if listIndex then
-                tUnorderedRemove(expectedMounts, listIndex)
+        if not C_MountJournal.NeedsFanfare(mountId) then
+            if isFavorite then
+                local listIndex = tIndexOf(expectedMounts,mountId)
+                if listIndex then
+                    tUnorderedRemove(expectedMounts, listIndex)
+                else
+                    print("Mount still favored although not in profile:", mountId, name)
+                end
             else
-                print("Mount still favored although not in profile:", mountId, name)
+                break
             end
-        else
-            break
         end
     end
 
