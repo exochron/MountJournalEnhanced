@@ -1,5 +1,11 @@
 local ADDON_NAME, ADDON = ...
 
+-- For debugging purpose. When users post errors, this should get included in the dump.
+ADDON.AddonVersion = C_AddOns.GetAddOnMetadata(ADDON_NAME, "Version")
+ADDON.ClientVersion = GetBuildInfo()
+ADDON.ClientLocale = GetLocale()
+ADDON.ClientRegion = GetCurrentRegionName()
+
 ADDON.isRetail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 ADDON.isClassic = not ADDON.isRetail
 
@@ -7,23 +13,20 @@ ADDON.isClassic = not ADDON.isRetail
 ADDON.Events = CreateFromMixins(EventRegistry)
 ADDON.Events:OnLoad()
 ADDON.Events:SetUndefinedEventsAllowed(true)
--- Polyfill for split Unregister behaviour in 12.0
--- Later: remove after classic has it
-if not ADDON.Events.UnregisterEventsByEventTable then
-    ADDON.Events.UnregisterEventsByEventTable = ADDON.Events.UnregisterEvents
-end
 
 local function InitUI()
     local updateUI = function ()
-        if CollectionsJournal:IsShown() then
+        if MountJournal:IsShown() then
             ADDON:FilterMounts()
         end
     end
+    EventRegistry:RegisterCallback("MountJournal.OnShow", updateUI, ADDON_NAME.."-show.update")
     ADDON.Events:RegisterFrameEventAndCallback("ZONE_CHANGED", updateUI, 'init')
     ADDON.Events:RegisterFrameEventAndCallback("ZONE_CHANGED_INDOORS", updateUI, 'init')
     ADDON.Events:RegisterFrameEventAndCallback("MOUNT_JOURNAL_USABILITY_CHANGED", updateUI, 'init')
-    ADDON.Events:RegisterFrameEventAndCallback("MOUNT_JOURNAL_SEARCH_UPDATED", updateUI, 'init')
 
+    -- MOUNT_JOURNAL_SEARCH_UPDATED is also triggered with favorite updates. Lags heavy when MJ is shown and profiles are switched.
+    MountJournal:UnregisterEvent("MOUNT_JOURNAL_SEARCH_UPDATED")
     MountJournal.searchBox:SetScript("OnTextChanged", function()
         SearchBoxTemplate_OnTextChanged(MountJournal.searchBox)
         ADDON:FilterMounts()
