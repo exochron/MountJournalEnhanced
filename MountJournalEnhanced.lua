@@ -1,5 +1,11 @@
 local ADDON_NAME, ADDON = ...
 
+-- For debugging purpose. When users post errors, this should get included in the dump.
+ADDON.AddonVersion = C_AddOns.GetAddOnMetadata(ADDON_NAME, "Version")
+ADDON.ClientVersion = GetBuildInfo()
+ADDON.ClientLocale = GetLocale()
+ADDON.ClientRegion = GetCurrentRegionName()
+
 ADDON.isRetail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 ADDON.isClassic = not ADDON.isRetail
 
