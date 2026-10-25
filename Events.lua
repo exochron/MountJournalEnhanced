@@ -88,6 +88,9 @@ ADDON.Events:RegisterCallback("OnLogin", function()
     end, 'external events')
 
     ADDON.Events:RegisterFrameEventAndCallback("UNIT_SPELLCAST_SUCCEEDED", function(_, target, _, spellId)
+        if InCombatLockdown() then
+            return
+        end
         if target == "player" then
             local mountId = C_MountJournal.GetMountFromSpell(spellId)
             if mountId then
@@ -106,6 +109,9 @@ ADDON.Events:RegisterCallback("OnLogin", function()
     end, 'external events')
 
     ADDON.Events:RegisterFrameEventAndCallback("PLAYER_TARGET_CHANGED", function()
+        if InCombatLockdown() then
+            return
+        end
         C_Timer.After(0, function()
             local mountId = ADDON:ScanAuras("target")
             if mountId then
