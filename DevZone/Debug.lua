@@ -18,11 +18,13 @@ local function runFilterTest(testName)
         end
     end
     ADDON.settings.filter.hiddenIngame = true
-    for _, mountId in ipairs(ADDON:FilterMounts()) do
+    ADDON:FilterMounts()
+    ADDON.Api:GetDataProvider():ForEach(function(data)
+        local mountId = data.mountID
         local name, spellID, _, _, _, sourceType = C_MountJournal.GetMountInfoByID(mountId)
         local _, _, _, _, mountType = C_MountJournal.GetMountInfoExtraByID(mountId)
         print("No " .. testName .. " info for mount: " .. name .. " (spell=" .. spellID .. ", ID=" .. mountId .. ", source=" .. sourceType .. ", type=" .. mountType .. ") ")
-    end
+    end)
 end
 
 local function checkDBForOldMountIds(tbl, index)
@@ -70,7 +72,7 @@ local function testDatabase()
         checkDBForOldMountIds(ADDON.DB.FeatsOfStrength, "FeatsOfStrength")
         checkDBForOldMountIds(ADDON.DB.Expansion, "Expansion")
         checkDBForOldMountIds(ADDON.DB.Type, "Type")
-        checkDBForOldMountIds(ADDON.DB.Ignored.ids, "Ignored")
+        checkDBForOldMountIds(ADDON.DB.Ignored, "Ignored")
 
         searchRetiredMountsInCurrentSources()
     end

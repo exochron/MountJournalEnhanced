@@ -1,6 +1,6 @@
 local _, ADDON = ...
 
-local function CreateFleetingCache()
+local function CreateFleetingCache(loadFunc)
     local cache = {}
     local setTimer = false
 
@@ -8,9 +8,9 @@ local function CreateFleetingCache()
         Has = function(_, cacheKey)
             return cache[cacheKey] ~= nil
         end,
-        Get = function(self, cacheKey, initializerFunc)
-            if initializerFunc and not self:Has(cacheKey) then
-                self:Set(cacheKey, initializerFunc())
+        Get = function(self, cacheKey)
+            if loadFunc and not self:Has(cacheKey) then
+                self:Set(cacheKey, loadFunc(cacheKey))
             end
 
             if cache[cacheKey] then
@@ -20,7 +20,7 @@ local function CreateFleetingCache()
         Set = function(_, cacheKey, ...)
             cache[cacheKey] = {...}
             if not setTimer then
-                C_Timer.After(0.1, function()
+                C_Timer.After(0.2, function()
                     cache = {}
                     setTimer = false
                 end)
@@ -104,9 +104,17 @@ end
 local nameCache
 local function CacheAndTransliterateName(name, cacheKey)
     nameCache = nameCache or CreateFleetingCache()
-    return nameCache:Get(cacheKey, function()
-        return TransliterateName(name)
-    end)
+    if not nameCache:Has(cacheKey) then
+        local transliteratedName = TransliterateName(name)
+        if transliteratedName == name then
+            nameCache:Set(cacheKey, true)
+        else
+            nameCache:Set(cacheKey, transliteratedName)
+        end
+    end
+
+    local loadedName = nameCache:Get(cacheKey)
+    return true == loadedName and name or loadedName
 end
 
 local TrackingIndex = {
@@ -119,18 +127,16 @@ local TrackingIndex = {
 
 local mountCache
 local function CacheMount(mountId)
-    mountCache = mountCache or CreateFleetingCache()
-    return mountCache:Get(mountId, function()
-        local name, _, _, _, isUsable, _, _, _, _, _, isCollected = ADDON.Api:GetMountInfoByID(mountId)
-        local needsFanfare = isCollected and C_MountJournal.NeedsFanfare(mountId)
-        local isFavorite = isCollected and ADDON.Api:GetIsFavoriteByID(mountId)
+    mountCache = mountCache or CreateFleetingCache(function(cacheKey)
+        local name, _, _, _, isUsable, _, _, _, _, _, isCollected = ADDON.Api:GetMountInfoByID(cacheKey)
+        local needsFanfare = isCollected and C_MountJournal.NeedsFanfare(cacheKey)
+        local isFavorite = isCollected and ADDON.Api:GetIsFavoriteByID(cacheKey)
 
         return name, isUsable, isFavorite, isCollected, needsFanfare
     end)
+    return mountCache:Get(mountId)
 end
-local function FallbackByName(mountIdA, mountIdB)
-    local nameA = CacheMount(mountIdA)
-    local nameB = CacheMount(mountIdB)
+local function FallbackByName(mountIdA, mountIdB, nameA, nameB)
     return CacheAndTransliterateName(nameA, mountIdA) < CacheAndTransliterateName(nameB, mountIdB)
 end
 
@@ -156,19 +162,19 @@ local function RemapTypeIds()
     return result
 end
 local function GetMountTypeId(mountId)
-    typeCache = typeCache or CreateFleetingCache()
-    return typeCache:Get(mountId, function()
-        return select(5, C_MountJournal.GetMountInfoExtraByID(mountId))
+    typeCache = typeCache or CreateFleetingCache(function(cacheKey)
+        return select(5, C_MountJournal.GetMountInfoExtraByID(cacheKey))
     end)
+    return typeCache:Get(mountId)
 end
-local function SortByType(mountIdA, mountIdB)
+local function SortByType(mountIdA, mountIdB, nameA, nameB)
     RemappedTypes = RemappedTypes or RemapTypeIds()
     local mountTypeA = RemappedTypes[GetMountTypeId(mountIdA)] or nil
     local mountTypeB = RemappedTypes[GetMountTypeId(mountIdB)] or nil
 
     local result = false
     if mountTypeA == mountTypeB then
-        return FallbackByName(mountIdA, mountIdB)
+        return FallbackByName(mountIdA, mountIdB, nameA, nameB)
     elseif mountTypeA == "flying" then
         result = true
     elseif mountTypeA == "ground" then
@@ -181,13 +187,13 @@ local function SortByType(mountIdA, mountIdB)
 end
 --endregion
 
-local function SortByTracking(mountIdA, mountIdB)
+local function SortByTracking(mountIdA, mountIdB, nameA, nameB)
     local sortBy = ADDON.settings.sort.by
     local result = false
     local valueA = select(TrackingIndex[sortBy], ADDON:GetMountStatistics(mountIdA)) or 0
     local valueB = select(TrackingIndex[sortBy], ADDON:GetMountStatistics(mountIdB)) or 0
     if valueA == valueB then
-        return FallbackByName(mountIdA, mountIdB)
+        return FallbackByName(mountIdA, mountIdB, nameA, nameB)
     elseif sortBy == 'learned_date' or sortBy == 'last_usage' then
         result = valueA > valueB
     else
@@ -198,7 +204,7 @@ local function SortByTracking(mountIdA, mountIdB)
 end
 
 local LibMountsRarity
-local function SortByRarity(mountIdA, mountIdB)
+local function SortByRarity(mountIdA, mountIdB, nameA, nameB)
     LibMountsRarity = LibMountsRarity or LibStub("MountsRarity-2.0")
     local rarityA = LibMountsRarity:GetRarityByID(mountIdA)
     local rarityB = LibMountsRarity:GetRarityByID(mountIdB)
@@ -210,7 +216,7 @@ local function SortByRarity(mountIdA, mountIdB)
         return false
     end
 
-    return FallbackByName(mountIdA, mountIdB)
+    return FallbackByName(mountIdA, mountIdB, nameA, nameB)
 end
 
 local sortedFamilies
@@ -242,25 +248,25 @@ local function LoadAndSortFamilies()
     return sortedResult
 end
 local function GetFamilyByMount(mountId)
-    familyCache = familyCache or CreateFleetingCache()
-    return familyCache:Get(mountId, function()
+    familyCache = familyCache or CreateFleetingCache(function(cacheKey)
         local filterSettings = ADDON.settings.filter.family
         for topFamily, topValues in pairs(ADDON.DB.Family) do
-            if topValues[mountId] and filterSettings[topFamily] then
+            if topValues[cacheKey] and filterSettings[topFamily] then
                 return topFamily
             end
 
             if type(select(2, next(topValues))) == "table" then
                 for subFamily, subValues in pairs(topValues) do
-                    if subValues[mountId] and filterSettings[topFamily][subFamily] then
+                    if subValues[cacheKey] and filterSettings[topFamily][subFamily] then
                         return topFamily.."--"..subFamily
                     end
                 end
             end
         end
     end)
+    return familyCache:Get(mountId)
 end
-local function SortByFamily(mountIdA, mountIdB)
+local function SortByFamily(mountIdA, mountIdB, nameA, nameB)
     sortedFamilies = sortedFamilies or LoadAndSortFamilies()
 
     local familyA = GetFamilyByMount(mountIdA) or ""
@@ -276,36 +282,51 @@ local function SortByFamily(mountIdA, mountIdB)
         return false
     end
 
-    return FallbackByName(mountIdA, mountIdB)
+    return FallbackByName(mountIdA, mountIdB, nameA, nameB)
 end
 
 local expansionCache
 local function GetExpansionOfMount(mountId)
-    expansionCache = expansionCache or CreateFleetingCache()
-    return expansionCache:Get(mountId, function()
+    expansionCache = expansionCache or CreateFleetingCache(function(cacheKey)
         local matchedExpansion = 0
         for expansion, config in pairs(ADDON.DB.Expansion) do
-            if config[mountId] then
+            if config[cacheKey] then
                 return expansion
             end
-            if mountId >= config.minID and mountId <= config.maxID then
+            if cacheKey >= config.minID and cacheKey <= config.maxID then
                 matchedExpansion = expansion
             end
         end
 
         return matchedExpansion
     end)
+    return expansionCache:Get(mountId)
 end
-local function SortByExpansion(mountIdA, mountIdB)
+local function SortByExpansion(mountIdA, mountIdB, nameA, nameB)
     local expansionA = GetExpansionOfMount(mountIdA)
     local expansionB = GetExpansionOfMount(mountIdB)
 
     if expansionA == expansionB then
-        return FallbackByName(mountIdA, mountIdB)
+        return FallbackByName(mountIdA, mountIdB, nameA, nameB)
     end
 
     return CheckDescending(expansionA < expansionB)
 end
+
+local handlerMap = {
+    name = function(...)
+        return CheckDescending(FallbackByName(...))
+    end,
+    type = SortByType,
+    expansion = SortByExpansion,
+    rarity = SortByRarity,
+    family = SortByFamily,
+    usage_count = SortByTracking,
+    last_usage = SortByTracking,
+    travel_duration = SortByTracking,
+    travel_distance = SortByTracking,
+    learned_date = SortByTracking,
+}
 
 function ADDON:SortHandler(mountA, mountB)
     local mountIdA, mountIdB = mountA.mountID, mountB.mountID
@@ -313,8 +334,8 @@ function ADDON:SortHandler(mountA, mountB)
         return false
     end
 
-    local _, isUsableA, isFavoriteA, isCollectedA, needsFanfareA = CacheMount(mountIdA)
-    local _, isUsableB, isFavoriteB, isCollectedB, needsFanfareB = CacheMount(mountIdB)
+    local nameA, isUsableA, isFavoriteA, isCollectedA, needsFanfareA = CacheMount(mountIdA)
+    local nameB, isUsableB, isFavoriteB, isCollectedB, needsFanfareB = CacheMount(mountIdB)
 
     if needsFanfareA ~= needsFanfareB then
         return needsFanfareA and not needsFanfareB
@@ -330,18 +351,6 @@ function ADDON:SortHandler(mountA, mountB)
         return isCollectedA and not isCollectedB
     end
 
-    local sortBy = ADDON.settings.sort.by
-    if sortBy == 'type' then
-        return SortByType(mountIdA, mountIdB)
-    elseif sortBy == 'expansion' then
-        return SortByExpansion(mountIdA, mountIdB)
-    elseif sortBy == 'rarity' then
-        return SortByRarity(mountIdA, mountIdB)
-    elseif sortBy == 'family' then
-        return SortByFamily(mountIdA, mountIdB)
-    elseif TrackingIndex[sortBy] then
-        return SortByTracking(mountIdA, mountIdB)
-    else
-        return CheckDescending(FallbackByName(mountIdA, mountIdB))
-    end
+    local handler = handlerMap[ADDON.settings.sort.by] or handlerMap.name
+    return handler(mountIdA, mountIdB, nameA, nameB)
 end

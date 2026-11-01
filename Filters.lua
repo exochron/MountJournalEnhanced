@@ -76,18 +76,7 @@ local function FilterUserHiddenMounts(spellId)
     return ADDON.settings.filter.hidden or not ADDON.settings.hiddenMounts[spellId]
 end
 local function FilterIngameHiddenMounts(shouldHideOnChar, mountId)
-    if not shouldHideOnChar then
-        return true
-    end
-
-    if ADDON.settings.filter.hiddenIngame and not IgnoredDB.ids[mountId] then
-        local _, _, _, _, mountType = C_MountJournal.GetMountInfoExtraByID(mountId)
-        if not IgnoredDB.types[mountType] then
-            return true
-        end
-    end
-
-    return false
+    return not shouldHideOnChar or (ADDON.settings.filter.hiddenIngame and not IgnoredDB[mountId])
 end
 
 local function FilterFavoriteMounts(mountId)
@@ -335,6 +324,7 @@ end
 
 function ADDON:FilterMounts()
     local result = {}
+    local resultCounter = 0
     local ids = C_MountJournal.GetMountIDs()
 
     local searchText = MountJournal and MountJournal.searchBox:GetText() or ""
@@ -351,7 +341,8 @@ function ADDON:FilterMounts()
                                 or FilterByNote(searchText, mountId)
                     )
             then
-                result[#result + 1] = mountId
+                resultCounter = resultCounter + 1
+                result[mountId] = true
             end
         end
     else
@@ -394,41 +385,42 @@ function ADDON:FilterMounts()
                     and (allSettingsRarity or FilterByRarity(mountId, allSettingsRarity))
                     and FilterByColor(mountId)
             then
-                result[#result + 1] = mountId
+                resultCounter = resultCounter + 1
+                result[mountId] = true
             end
         end
     end
 
     -- update data provider
     local dataProvider = ADDON.Api:GetDataProvider()
-    if #result == 0 then
+    if resultCounter == 0 then
         dataProvider:Flush()
     else
-        local flippedResult = CopyValuesAsKeys(result)
         local skipAdd = {}
         local toRemove = {}
+        local removeCounter = 0
         dataProvider:ForEach(function(data)
-            local resultPosition = flippedResult[data.mountID]
-            if resultPosition then
+            if result[data.mountID] then
                 -- already in provider
                 skipAdd[data.mountID] = true
             else
-                toRemove[#toRemove + 1] = data
+                removeCounter = removeCounter + 1
+                toRemove[removeCounter] = data
             end
         end)
-        if #toRemove > 0 then
+        if removeCounter > 0 then
             dataProvider:Remove(unpack(toRemove))
         end
-        local toAdd = tFilter(result, function(mountId)
-            return not skipAdd[mountId]
-        end, true)
-        if #toAdd > 0 then
-            for i, mountId in ipairs(toAdd) do
-                toAdd[i] = { index = mountId, mountID = mountId }
+        local toAdd = {}
+        local addCounter = 0
+        for mountId, _ in pairs(result) do
+            if not skipAdd[mountId] then
+                addCounter = addCounter + 1
+                toAdd[addCounter] = { index = mountId, mountID = mountId }
             end
+        end
+        if addCounter > 0 then
             dataProvider:InsertTable(toAdd)
         end
     end
-
-    return result
 end
