@@ -98,6 +98,7 @@ ADDON.DB.Source.Shop[1257677] = true; -- Shadowbough Groveglider
 ADDON.DB.Source.Shop[1283471] = true; -- Golden Ashened Cataclysm
 ADDON.DB.Source.Shop[1291315] = true; -- Spring Panda
 ADDON.DB.Source.Shop[1301737] = true; -- Sunflash Driftmoth
+ADDON.DB.Source.Shop[1318279] = true; -- Cerulean Drake
 
 ADDON.DB.Source.Achievement[1247591] = 60901; -- Celestial Riding Crane
 ADDON.DB.Source.Achievement[1298510] = 62059; -- Reins of the Fire Drake
@@ -146,11 +147,11 @@ ADDON.DB.Expansion[4][2594] = true; -- Envoy of Sa'bak
 ADDON.DB.Expansion[GetClientDisplayExpansionLevel()].maxID = 999999999
 
 -- These are duplicate TCG mounts only existing in classic
-ADDON.DB.Ignored.ids[1763] = true; -- Magic Rooster
-ADDON.DB.Ignored.ids[1764] = true; -- X-51 Nether-Rocket X-TREME
-ADDON.DB.Ignored.ids[1765] = true; -- Big Battle Bear
-ADDON.DB.Ignored.ids[1766] = true; -- Blazing Hippogryph
-ADDON.DB.Ignored.ids[1767] = true; -- Wooly White Rhino
-ADDON.DB.Ignored.ids[1768] = true; -- X-51 Nether-Rocket
+ADDON.DB.Ignored[1763] = true; -- Magic Rooster
+ADDON.DB.Ignored[1764] = true; -- X-51 Nether-Rocket X-TREME
+ADDON.DB.Ignored[1765] = true; -- Big Battle Bear
+ADDON.DB.Ignored[1766] = true; -- Blazing Hippogryph
+ADDON.DB.Ignored[1767] = true; -- Wooly White Rhino
+ADDON.DB.Ignored[1768] = true; -- X-51 Nether-Rocket
 
-ADDON.DB.Ignored.ids[1843] = true; -- Tiger
+ADDON.DB.Ignored[1843] = true; -- Tiger
