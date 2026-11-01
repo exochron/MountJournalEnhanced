@@ -50,7 +50,6 @@ ADDON.DB.Tradable = {
 [1768] = true, -- X-51 Nether-Rocket
 [1799] = true, -- Eve's Ghastly Rider
 [2158] = true, -- Crowd Pummeler 2-30
-[2250] = true, -- Golden Ashes of Al'ar
 [2255] = true, -- Golden Ashes of Al'ar
 [2634] = true, -- Scorching Valor
 [2700] = true, -- Frostfall Groveglider
@@ -60,4 +59,5 @@ ADDON.DB.Tradable = {
 [2743] = true, -- Stormgilded Celestial
 [2948] = true, -- Golden Ashened Cataclysm
 [3044] = true, -- Shadow Spirehawk
+[3143] = true, -- Ashen Dreadglider
 }

@@ -627,7 +627,7 @@ ADDON.DB.Family = {
 ["Crabs"] = {
 [1238] = true, -- Snapback Scuttler
 [1574] = true, -- Crusty Crawler
-[2981] = true, -- Tuskarr Hermit Crab
+[3131] = true, -- Tuskarr Hermit Crab
 },
 ["Demons"] = {
 ["Demonic Hounds"] = {
@@ -853,6 +853,7 @@ ADDON.DB.Family = {
 [2647] = true, -- Ashened Cataclysm
 [2936] = true, -- Golden Ashened Cataclysm
 [2948] = true, -- Golden Ashened Cataclysm
+[3152] = true, -- Cerulean Drake
 },
 ["Grand Drakes"] = {
 [1727] = true, -- Tarecgosa's Visage
@@ -1114,6 +1115,7 @@ ADDON.DB.Family = {
 [2310] = true, -- Chaos-Born Wind Rider
 [2499] = true, -- Void-Scarred Windrider
 [3042] = true, -- Spectral Wind Rider
+[3143] = true, -- Ashen Dreadglider
 },
 },
 ["Fish"] = {
@@ -1349,6 +1351,7 @@ ADDON.DB.Family = {
 [1797] = true, -- Ginormous Grrloc
 [2259] = true, -- Gigantic Grrloc
 [2573] = true, -- Grandiose Grrloc
+[3106] = true, -- Giant Grrloc
 },
 ["Primate"] = {
 [2930] = true, -- Blossomback Arboon
