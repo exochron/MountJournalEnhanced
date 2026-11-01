@@ -53,6 +53,7 @@ AddonCompartment.lua
 #@do-not-package@
 DevZone\Debug.lua
 DevZone\Screenshot.lua
+DevZone\Profiling.lua
 #@end-do-not-package@
 
 UI\Templates.xml [AllowLoadGameType classic]
