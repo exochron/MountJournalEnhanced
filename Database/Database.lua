@@ -548,7 +548,7 @@ ADDON.DB.Source = {
         [1242272] = true, -- Royal Voidwing -- Manaforge Omega Hc
         [1242904] = { 2740, 16 }, -- Ashes of Belo'ren -- March on Quel Danas Mythic
         [1284973] = { 2711, 17 }, -- Luminous Sporeglider -- Sporefall
-        [1297405] = { 2896, 16 }, -- Primeval Skyfriend -- Ula'tek (Mythic)
+        [1297405] = { 2895, 16 }, -- Primeval Skyfriend -- Ula'tek (Mythic)
     },
 
     ["Reputation"] = {
